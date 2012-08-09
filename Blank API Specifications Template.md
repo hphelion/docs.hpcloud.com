@@ -1,0 +1,64 @@
+# API Specifications for Block Storage**Author(s):** *[Put in Author Names]*  **Date:**  *[Date]*  **Document Version:** *[Put in the current document version]*
+
+---
+# 1. Overview*[Brief introduction and overview of the service and its intended use.]*
+## 1.1 API Maturity Level*[State the maturity level in which the API is in currently, based on the pre-defined stages i.e. Experimental (early Alpha, available internally only), Exploratory (Private-beta ready), Public (Public-beta ready), GA (Release to General Availability, SLAs defined.  The versions schema, status field, supports an enumeration of ALPHA, BETA, CURRENT and DEPRECATED. The versions->status field should correspond to the Maturity Level for the API, i.e. ALPHA for Experimental, BETA for Exploratory, CURRENT for Public and GA, DEPRECATED for all other versions of the API that are not supported anymore.]***Maturity Level**: *[Experimental/Exploratory/Public/GA]*
+**Version API Status**: *[ALPHA/BETA/CURRENT/DEPRECATED]*
+---
+# 2. Architecture View## 2.1 Overview*[References to architectural details of the service.]*
+## 2.2 Conceptual/Logical Architecture View*[Describe the logical components of the system and their responsibilities]*
+## 2.3 Infrastructure Architecture View*[Describe how the API fits into the overall HPCS Infrastructure]*
+## 2.4 Entity Relationship Diagram*[Describe the relationships between the various entities (resources) involved in the API]*
+
+
+---
+
+# 3. Account-level View*[Describe the relationship of the API with respect to the accounts, groups, tenants, regions, availability zones etc.]*
+## 3.1 Accounts*[Describe the structure of the user accounts, groups and tenants. Currently this might be described separately in context of Control Services, but in future each service API needs to state their usage. In future CS might support complex group hierarchies, enterprise account structures while there maybe a phased adoption by individual service APIs]*## 3.2 Regions and Availability Zones*[Describe the availability of the service API in different regions and availability zones. State plans for future expansion as well.]***Region(s)**: region-a**Availability Zone(s)**: az-1, az-2, az-3 **Future Expansion**: region-b
+## 3.3 Service Catalog*[Describe if the service API is exposed via the service catalog. Reference the fragment of the service catalog showing the structure.]*
+The service is exposed in the service catalog, as shown in the following fragment:
+
+```
+{
+   service catalog fragment here
+}```---
+
+# 4. REST API Specifications*[Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.]*
+## 4.1 Service API Operations**Host**: https://az-1.region-a.geo-1.compute.hpcloudsvc.com
+**Base URI**: [Host]/v1.1/<tenant_id>**Admin URI**: N/A
+| Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
+| :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
+| R1       | [Short desc. of the call] | [GET/POST/DELETE/PUT] | [BaseUri/path] | [Y/N] |  |
+## 4.2 Common Request Headers*[List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.]*
+## 4.3 Common Response Headers*[List the common response headers i.e. Content-Type, Content-Length, Connection, Date, ETag, Server, etc. ]*
+## 4.4 Service API Operation Details*[The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.]*### 4.4.1 [Resource]*[Describe the resource and what information they provide. Then enumerate all the API method calls below.]***Status Lifecycle**N/A
+**Rate Limits**N/A**Quota Limits**N/A**Business Rules**None.
+
+#### 4.4.1.1 [Short description of the method call]##### [HTTP Verb] [path]*[Description about the method call]***Status Codes**200 - OK**Request Formats***[Either put 'This call does not require a request body' or include JSON/XML request data structure]*JSON
+
+```
+{json data structure here}
+```XML
+
+```
+<xml data structure here>
+```**Response Formats***[Either put 'This call does not require a request body' or include JSON/XML response data structure]*
+JSON
+
+```
+{json data structure here}
+```XML
+
+```
+<xml data structure here>
+```**Curl Example**```
+curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]```##### Additional Details**Optional Request Data**None.
+**Query String Parameters***[Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.]*None. **Error Conditions**None.
+---
+
+# 5. Additional References## 5.1 Resources**Wiki Page**: [Link to Wiki page]**Code Repo**:  [Link to the internal Github repo]**API Lead Contact**: [Name of contact]
+
+---
+# 6. Glossary
+[Put down definitions of terms and items that need explanation.]---
+
