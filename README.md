@@ -1,6 +1,6 @@
 # API Strategy - listing, standards and verification
 
-Please visit the Wiki page at https://wiki.hpcloud.net/display/iaas/API+Strategy+-+Listing%2C+Standards+and+Verification to see details.
+Please visit the [Wiki page](https://wiki.hpcloud.net/display/iaas/API+Strategy+-+Listing%2C+Standards+and+Verification) to see details.
 
 # Markdown Editors
 
@@ -12,3 +12,8 @@ The following free editors are recommended and use Live Preview:
 The following paid editors are good as well:
 
 * [Marked](http://markedapp.com) for MacOSX Only. Supports tables.
+
+# Markdown Resources
+
+* [Mastering Markdown](http://designshack.net/articles/html/mastering-markdown-30-resources-apps-and-tutorials-to-get-you-started/) - Tutorials and Resources
+* [Markdown Syntax](http://daringfireball.net/projects/markdown/syntax)
