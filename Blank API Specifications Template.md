@@ -34,7 +34,21 @@
 ## 4.4 Service API Operation Details*[The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.]*### 4.4.1 [Resource]*[Describe the resource and what information they provide. Then enumerate all the API method calls below.]***Status Lifecycle**N/A
 **Rate Limits**N/A**Quota Limits**N/A**Business Rules**None.
 
-#### 4.4.1.1 [Short description of the method call]##### [HTTP Verb] [path]*[Description about the method call]***Status Codes**200 - OK**Request Formats***[Either put 'This call does not require a request body' or include JSON/XML request data structure]*JSON
+#### 4.4.1.1 [Short description of the method call]#### [HTTP Verb: GET, POST, DELETE, PUT] [path only, no root path]*[Description about the method call]***Request Data***[Specify all the required/optional url and data parameters for the given method call.]***URL Parameters**
+
+*[Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.]*
+
+Required:
+
+* id=[integer]
+
+Optional:
+
+* marker=[string]
+* limit=[integer]
+* count=[integer]**Data Parameters***[Either put 'This call does not require a request body' or include JSON/XML request data structure]*Required:
+
+JSON
 
 ```
 {json data structure here}
@@ -42,7 +56,17 @@
 
 ```
 <xml data structure here>
-```**Response Formats***[Either put 'This call does not require a request body' or include JSON/XML response data structure]*
+```Optional:JSON
+
+```
+{json data structure here}
+```XML
+
+```
+<xml data structure here>
+```**Success Response***[Specify the status code and any content that is returned.]*
+**Status Code**200 - OK
+**Response Data***[Either put 'This call does not require a request body' or include JSON/XML response data structure]*
 JSON
 
 ```
@@ -51,10 +75,26 @@
 
 ```
 <xml data structure here>
+```**Error Response***[Enumerate all the possible error status codes and any content that is returned.]*
+
+**Status Code**
+
+500 - Internal Server Error
+
+**Response Data**
+
+JSON
+
+```
+{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
+```
+
+XML
+
+```
+<xml data structure here>
 ```**Curl Example**```
-curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]```##### Additional Details**Optional Request Data**None.
-**Query String Parameters***[Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.]*None. **Error Conditions**None.
----
+curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]```**Additional Notes***[Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.]*---
 
 # 5. Additional References## 5.1 Resources**Wiki Page**: [Link to Wiki page]**Code Repo**:  [Link to the internal Github repo]**API Lead Contact**: [Name of contact]
 
