@@ -38,16 +38,14 @@
 
 *[Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.]*
 
-Required:
+* *[name_of_attribute]* - [data type] - [description of the attribute]
+* *[name_of_attribute]* - [data type] - [description of the attribute]
+* *[name_of_attribute]* (Optional) - [data type] - [description of the attribute]
+**Data Parameters***[List all the attributes that comprises the data structure]** *[name_of_attribute]* - [data type] - [description of the attribute]
+* *[name_of_attribute]* - [data type] - [description of the attribute]
+* *[name_of_attribute]* (Optional) - [data type] - [description of the attribute]
 
-* id=[integer]
-
-Optional:
-
-* marker=[string]
-* limit=[integer]
-* count=[integer]**Data Parameters***[Either put 'This call does not require a request body' or include JSON/XML request data structure]*Required:
-
+*[Either put 'This call does not require a request body' or include JSON/XML request data structure]*
 JSON
 
 ```
