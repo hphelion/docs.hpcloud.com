@@ -35,10 +35,8 @@ and planned to be made available in the Beastie Boys release
 ## 2.1 Overview
 
 An overview of the backups service is available in [HP Volume Backups (overview)](https://wiki.hpcloud.net/display/iaas/HP+Volume+Backups+%28BOCK-1756%29#HPVolumeBackups%28BOCK-1756%29-Overview)
-*References to architectural details of the service.*
 
 ## 2.2 Conceptual/Logical Architecture View
-*Describe the logical components of the system and their responsibilities*
 The backups service consists of an extension to the Nova API and an additional 
 Nova service which runs on volume nodes. The API extension is responsible for processing 
 client requests and despatching them to the appropriate component in Nova. Information
@@ -46,11 +44,11 @@ requests (show backup, list backups, list backup details) retrieve information
 directly from the Nova database. Requests which require operations on volumes or Swift
 are routed to one of the Backup services. Requests on a specific volume are routed 
 directly to the appropriate volume node (create backup, restore backup) while
-requests that do nott involve a specific volume are routed via the Nova scheduler
+requests that do not involve a specific volume are routed via the Nova scheduler
 (delete backup).
 
 ## 2.3 Infrastructure Architecture View
-This API is implemented as an extension to the Nova API and leverages the existing
+This API is implemented as a Nova API Resource Extension and leverages the existing
 infrastructure to deliver the service.
 
 ## 2.4 Entity Relationship Diagram
@@ -63,9 +61,9 @@ See the Overview above for details of the entities involved in the API.
 
 ## 3.1 Accounts
 
-The backups service sits on top and uses the existing Volumes and Swift APIs. Users can perform
+The backups service sits on top of and uses the existing Volumes and Swift APIs. Users can perform
 backup operations on volumes they already have access to and can only perform
-backup operations on Swift which their existing Swift permissions allow. The backup service does
+backup operations to Swift which their existing Swift permissions allow. The backup service does
 not add any additional relationships and relies on the underlying Volumes and Swift APIs to
 control access.
 
@@ -99,7 +97,6 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 
 # 4. REST API Specifications
-*Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
 ## 4.1 Service API Operations
 
@@ -112,7 +109,7 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 | Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| backups  | List backups         | GET         | {BaseURI}              | Y/**N**           |                 |
+| **backups**  | List backups         | GET         | {BaseURI}              | Y/**N**           |                 |
 |          | List backups details | GET         | {BaseURI}/detail       | Y/**N**           |                 |
 |          | Show backup details  | GET         | {BaseURI}/{backup_id}  | Y/**N**           |                 |
 |          | Create backup        | POST        | {BaseURI}              | Y/**N**           |                 |
@@ -126,12 +123,10 @@ The service is exposed in the service catalog, as shown in the following fragmen
 Same as parent API
 
 ## 4.3 Common Response Headers
-*List the common response headers i.e. Content-Type, Content-Length, Connection, Date, ETag, Server, etc. *
 
 Same as parent API
 
 ## 4.4 Service API Operation Details
-*The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
 ### 4.4.1 Backups
 
@@ -139,7 +134,6 @@ Backups are point in time dumps of the contents of Nova volumes to Swift. They c
 at any time to an available Nova volume (either the same volume original used for the backup
 or a different one).
 
-*Describe the resource and what information they provide. Then enumerate all the API method calls below.*
 
 **Status Lifecycle**
 
@@ -178,8 +172,6 @@ None.
 This call does not require a request body. 
 
 **Success Response**
-
-*Specify the status code and any content that is returned.*
 
 **Status Code**
 
@@ -256,8 +248,6 @@ None.
 This call does not require a request body.
 
 **Success Response**
-
-*Specify the status code and any content that is returned.*
 
 **Status Code**
 
@@ -352,8 +342,6 @@ This call does not require a request body.
 
 **Success Response**
 
-*Specify the status code and any content that is returned.*
-
 **Status Code**
 
 200 - OK
@@ -432,7 +420,7 @@ curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri]/[backup_id]
 
 **Additional Notes**
 
-*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
+None.
 
 #### 4.4.1.4 Create backup
 #### POST /hp-volume-backups
@@ -472,8 +460,6 @@ Not supported.
 ```
 
 **Success Response**
-
-*Specify the status code and any content that is returned.*
 
 **Status Code**
 
@@ -656,11 +642,13 @@ Not supported.
 JSON
 
 ```
-{"itemNotFound": {"message": "The resource could not be found.", "code": 404}}
+{"itemNotFound": {"message": "Backup [backup_id] could not be found.", "code": 404}}
 ```
 
 XML
 
+```
+Not supported.
 ```
 
 **Curl Example**
@@ -674,8 +662,6 @@ curl -i -X DELETE -H "X-Auth-Token: <Auth_Token>" [BaseUri]/[backup_id]
 This operation is asynchronous. You must list backups repeatedly to determine whether the backup was deleted.
 
 
-Restore backup
-
 #### 4.4.1.6 Restore backup
 #### POST /hp-volume-backups/[backup_id]/restore
 
@@ -685,11 +671,11 @@ Restore specified backup to a volume.
 
 **URL Parameters**
 
-* *backup_id* - integer - Id of the backup to be deleted.
+* *backup_id* - integer - Id of the backup to be restored.
 
 **Data Parameters**
 
-* *volume_id* - integer - Id of the volume to be backed up.
+* *volume_id* - integer - Id of the volume to which the backup should be restored.
 
 JSON
 
@@ -708,8 +694,6 @@ Not supported.
 ```
 
 **Success Response**
-
-*Specify the status code and any content that is returned.*
 
 **Status Code**
 
@@ -811,7 +795,7 @@ JSON
 JSON
 
 ```
-{"badRequest": {"message": "Volume quota exceeded. You cannot create a volume of size nnG", "code": 400}}
+{"badRequest": {"message": "Volume quota exceeded. You cannot create a volume of size [backup_size]G", "code": 400}}
 ```
 
 XML
@@ -859,7 +843,7 @@ curl -i -H "X-Auth-Token: <Auth_Token>" -d'{"restore": { "volume_id": "9" }}' [B
 
 **Additional Notes**
 
-If the volume is not specified, this operation will create a new volume for the restore. This operation is asynchronous. To check the status of the restore operation, the user should show volume for the volume_id returned in the response (status will be set to restoring while the the restore operation runs, error_restoring if the restore operation fails and available if the restore operation succeeds).
+If the volume is not specified, this operation will create a new volume for the restore. This operation is asynchronous. To check the status of the restore operation, the user should *show volume* for the [volume_id] returned in the response (status will be set to *restoring* while the the restore operation runs, *error_restoring* if the restore operation fails and *available* if the restore operation succeeds).
 
 ---
 
