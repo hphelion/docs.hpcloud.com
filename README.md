@@ -2,6 +2,11 @@
 
 Please visit the [Wiki page](https://wiki.hpcloud.net/display/iaas/API+Strategy+-+Listing%2C+Standards+and+Verification) to see details.
 
+# Publishing 
+
+Please visit [api-publish](https://git.hpcloud.net/API-Specs/api-publish) project that showcases the publishing workflow for the API Specifications. 
+This is a work in progress and currently experimental in nature. 
+
 # Markdown Editors
 
 The following free editors are recommended and use Live Preview:
