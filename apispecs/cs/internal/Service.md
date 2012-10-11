@@ -20,7 +20,8 @@ None.
 
 
 ## {getservicebyid}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -144,7 +145,8 @@ Curl Example
 
 
 ## {listregisteredservices}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -268,7 +270,8 @@ Curl Example
 
 
 ## {registernewservice}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -392,7 +395,8 @@ Curl Example
 
 
 ## {updateservice}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 

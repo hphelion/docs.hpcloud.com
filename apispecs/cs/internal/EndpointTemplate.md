@@ -20,7 +20,8 @@ None.
 
 
 ## {addendpointtemplate}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -144,7 +145,8 @@ Curl Example
 
 
 ## {deleteendpointtemplate}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -268,7 +270,8 @@ Curl Example
 
 
 ## {getenabledendpointtemplates}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -392,7 +395,8 @@ Curl Example
 
 
 ## {getendpointtemplatebyid}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -516,7 +520,8 @@ Curl Example
 
 
 ## {getendpointtemplates}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -640,7 +645,8 @@ Curl Example
 
 
 ## {updateendpointtemplate}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 

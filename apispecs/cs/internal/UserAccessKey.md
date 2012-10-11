@@ -20,7 +20,8 @@ None.
 
 
 ## {createaccesskey}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -144,7 +145,8 @@ Curl Example
 
 
 ## {deleteaccesskey}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -268,7 +270,8 @@ Curl Example
 
 
 ## {getaccesskey}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -392,7 +395,8 @@ Curl Example
 
 
 ## {importaccesskey}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -516,7 +520,8 @@ Curl Example
 
 
 ## {updateaccesskey}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 

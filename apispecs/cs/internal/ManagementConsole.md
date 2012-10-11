@@ -20,7 +20,8 @@ None.
 
 
 ## {userdetails}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 
@@ -144,7 +145,8 @@ Curl Example
 
 
 ## {userpreferences}
-### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+*Privilege Level: {Privilege Level}*
 
 {Description about the method call}
 

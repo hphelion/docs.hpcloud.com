@@ -20,7 +20,8 @@ None.
 
 
 ## Authenticate
-### POST /tokens
+#### POST /tokens
+*Privilege Level: Anon*
 
 This API is used to authenticate a user to be able to use an OpenStack service. The result of a successful authentication is a token to be used with service requests. A username and password or access/secret key credentials are given as input to this interface. If authentication succeeds, the response will include an authentication token and service catalog ( list of available services for that user ). Tokens are valid for 12 hours. Issued tokens can become invalid in two cases:
 
@@ -375,6 +376,7 @@ curl -X POST -H "Content-Type: application/json"
 
 ## Rescope Token
 #### POST /tokens
+*Privilege Level: SS*
 
 This API provides the ability to re-scope a valid token with another tenant. An existing unexpired token, regardless of its currently scoped or not, can be scoped to another tenant as long as the user has valid association with that tenant.
 
@@ -580,6 +582,7 @@ curl -k -H "Content-Type: application/json" -d '{"auth":{"tenantName":"HP Swift 
 
 ## Revoke Token
 #### DELETE /HP-IDM/v1.0/tokens/<tokenId>
+*Privilege Level: SA,DA,SS*
 
 This API is used to revoke an authentication token. This operation does not require a request body. Once a token has been revoked, attempts to validate the token via GET /tokens/tokenId will fail with a 404 (item not found) as the token no longer exists. Trying revoke a non existing token, including one which has expired will also return a 404 (item not found).
 
@@ -639,10 +642,17 @@ curl -k -XDELETE https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/
 
 
 ## Swift Legacy Authentication
-### GET /v1.0
-### GET /v1.1
-### GET /auth/v1.0
-### GET /auth/v1.1
+#### GET /v1.0
+*Privilege Level: Anon*
+
+#### GET /v1.1
+*Privilege Level: Anon*
+
+#### GET /auth/v1.0
+*Privilege Level: Anon*
+
+#### GET /auth/v1.1
+*Privilege Level: Anon*
 
 Pre-Keystone (aka auth v2.0), Openstack services rely on disparate authentication mechanisms to authenticate their services.  For example, Swift uses swauth, while Nova uses novaauth.  The v1/v1.1 style of authentication relies on custom HTTP headers (specific to each service) to communicate authentication data, rather than relying on well-defined XML/JSON documents that can be validated via XSDs.  With the release of Diablo, most Openstack services have switched to using Keystone API completely, with the exception of the Swift CLI tool.  To provide backward-compatibility for this particular tool, CS (as well as the FOSS Keystone) provides this API. 
 

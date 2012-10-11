@@ -20,7 +20,8 @@ None.
 
 
 ## List Tenants
-### GET /tenants?limit=pagesize&marker=tenantId
+#### GET /tenants?limit=pagesize&marker=tenantId
+*Privilege Level: SS*
 
 This API returns a listing of all tenants for which the holder of the provided token has a role assignment. If the user is not a valid, an error is returned.
 

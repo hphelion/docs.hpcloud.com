@@ -1,8 +1,8 @@
 ---
 layout: page
-title: 
-title_section: 
-description: 
+title:
+title_section:
+description:
 group: apispec
 
 ---
@@ -56,9 +56,9 @@ group: apispec
 
 **Region(s)**: region-a, region-b
 
-**Availability Zone(s)**: az-1, az-2, az-3 
+**Availability Zone(s)**: az-1, az-2, az-3
 
-**Future Expansion**: 
+**Future Expansion**:
 
 
 ## 3.3 Service Catalog
@@ -105,11 +105,14 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 | Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| Token      | Authenticate | POST | {BaseURI}/tokens | Y/Y    |                 |
-| Token      | Rescope Token | POST | {BaseURI}/tokens | Y/Y    |                 |
-| Tenant     | List Tenants | GET | {BaseURI}/tenants | Y/Y    |                 |
-| Token      | Revoke | DELETE | {BaseURI}/HP-IDM/v1.0/tokens/<tokenId> | Y/Y    |                 |
-
+| Tenant | List Tenants | GET | /tenants?limit=pagesize&marker=tenantId | Y/Y | SS |
+| Token | Authenticate | POST | /tokens | Y/Y | Anon |
+| Token | Rescope Token | POST | /tokens | Y/Y | SS |
+| Token | Revoke Token | DELETE | /HP-IDM/v1.0/tokens/<tokenId> | Y/Y | SA,DA,SS |
+| Token | Swift Legacy Authentication | GET | /v1.0 | Y/Y | Anon |
+| Token | Swift Legacy Authentication | GET | /v1.1 | Y/Y | Anon |
+| Token | Swift Legacy Authentication | GET | /auth/v1.0 | Y/Y | Anon |
+| Token | Swift Legacy Authentication | GET | /auth/v1.1 | Y/Y | Anon |
 
 ## 4.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
@@ -120,8 +123,10 @@ The service is exposed in the service catalog, as shown in the following fragmen
 ## 4.4 Service API Operation Details
 *The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
-### 4.4.1 Token
-*Describe the resource and what information they provide. Then enumerate all the API method calls below.*
+
+### 4.4.1 Tenant
+
+Tenant is a collection of services, and associated with zero or more users who have access to these services via role references.
 
 **Status Lifecycle**
 
@@ -139,10 +144,238 @@ N/A
 
 None.
 
-#### 4.4.1.1 Authenticate
-#### POST /tokens
 
-This API is used to authenticate a user to be able to use an OpenStack service. The result of a successful authentication is a token to be used with service requests. A username and password or access/secret key credentials are given as input to this interface. If authentication succeeds, the response will include an authentication token and service catalog ( list of available services for that user ). Tokens are valid for 12 hours. Issued tokens can become invalid in two cases: 1) the token has expired and 2) the token has been revoked.
+#### 4.4.1.1 List Tenants
+#### GET /tenants?limit=pagesize&marker=tenantId
+*Privilege Level: SS*
+
+This API returns a listing of all tenants for which the holder of the provided token has a role assignment. If the user is not a valid, an error is returned.
+
+**Request Data**
+
+This API supports pagination. See Pagination for more details.
+
+This API also supports an optional *name* filter for get-by-name. Pagination and *name* filter are mutually exclusive.
+
+**URL Parameters**
+
+* *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker* (Optional)} - string - the resource Id of the last item in the previous list
+* *name* (Optional) - string - name of the tenant to be returned
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+This call does not require a request body.
+
+JSON
+
+```
+GET /v2.0/tenants HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+```
+
+XML
+
+```
+GET /v2.0/tenants/ HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+```
+
+Optional:
+
+JSON
+
+With *name* filter.
+
+```
+GET /v2.0/tenants?name=tenantName HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+```
+
+With pagination.
+
+```
+GET /v2.0/tenants?limit=10 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+``` 
+
+XML
+
+With pagination.
+
+```
+GET /v2.0/tenants?limit=100&marker=S4DFJ123SF HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+```
+
+**Success Response**
+
+*Specify the status code and any content that is returned.*
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+A list of tenants in the specified format is returned.
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 240
+Date: Tue, 29 Nov 2011 17:17:50 GMT
+
+{
+  "tenants": [
+    {
+      "id": "39595655514446",
+      "name": "Banking Tenant Services",
+      "description": "Banking Tenant Services for TimeWarner",
+      "enabled": true,
+      "created": "2011-11-29T16:59:52.635Z",
+      "updated": "2011-11-29T16:59:52.635Z"
+    }
+  ]
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 380
+Date: Thu, 25 Aug 2011 23:33:19 GMT
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tenants xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.w3.org/2005/Atom">
+  <tenant id="541212460710" name="Time Warner Tenant Services" enabled="false" display-name="Time Warner Tenant Services">
+    <description>Tenant for hosting Time Warner Applications & services</description>
+  </tenant>
+</tenants>
+```
+
+**Error Response**
+
+*Enumerate all the possible error status codes and any content that is returned.*
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+*** List Tenants ***
+
+```
+curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/tenants"
+```
+
+*** Get Tenant By Name ***
+
+```
+curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/tenants?name=MyTenant"
+```
+
+**Additional Notes**
+
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+
+### 4.4.2 Token
+
+A yummy cookie one uses to bribe the authorization monster.
+
+**Status Lifecycle**
+
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
+
+
+#### 4.4.2.1 Authenticate
+#### POST /tokens
+*Privilege Level: Anon*
+
+This API is used to authenticate a user to be able to use an OpenStack service. The result of a successful authentication is a token to be used with service requests. A username and password or access/secret key credentials are given as input to this interface. If authentication succeeds, the response will include an authentication token and service catalog ( list of available services for that user ). Tokens are valid for 12 hours. Issued tokens can become invalid in two cases:
+
+1. the token has expired
+2. the token has been revoked.
 
 Besides using a username and password, another way to authenticate is using symmetric keys. Symmetric keys are user access key and secret key pairs provisioned for user account. In this type of credential data, request body is expected to contain an access key and a secret key information belonging to the user. Once those keys are verified, a new token is created. In this type of authentication, the only change is in expected request body data (please see related example below). There is no difference in response format/content whether authentication is done using password credential data or access key credential data.
 
@@ -156,33 +389,44 @@ A token scoped to a tenant can be obtained by providing either a tenantName or a
 
 **Request Data**
 
-*Specify all the required/optional url and data parameters for the given method call.*
+See examples below.
 
 **URL Parameters**
 
-*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
-
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* (Optional) - {data type} - {description of the attribute}
+None
 
 **Data Parameters**
 
-*List all the attributes that comprises the data structure*
+See schema file for more details on the request and response data structure.
 
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* (Optional) - {data type} - {description of the attribute}
+JSON
 
-
-JSON Authenticate, Username/Password Style Request
+Authenticate using password credential for an unscoped token.
 
 ```
 Accept-Encoding: gzip,deflate
 Accept: application/json
 Content-Type: application/json
 Content-Length: 171
- 
+
+{
+    "auth":{
+        "passwordCredentials":{
+            "username":"arunkant",
+            "password":"changeme"
+        }
+    }
+}
+```
+
+Authenticate using password credential for a scoped token.
+
+```
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+Content-Length: 171
+
 {
     "auth":{
         "passwordCredentials":{
@@ -194,25 +438,15 @@ Content-Length: 171
 }
 ```
 
-XML Authenticate, Username/Password Style Request
+Authenticate using access key credential.
 
 ```
-Accept-Encoding: gzip,deflate
-Accept: application/xml
-Content-Type: application/xml
-Content-Length: 211
- 
-<auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://docs.openstack.org/identity/api/v2.0" tenantName="HP5 Tenant Services">
-  <passwordCredentials username="arunkant" password="changeme"/>
-</auth>
-```
-
-JSON Authenticate, Access Key Style Request
-
-```  
+POST https://localhost:8443/v2.0/tokens HTTP/1.1
 Accept-Encoding: gzip,deflate
 Accept: application/json
 Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 Content-Length: 176
  
 {
@@ -225,24 +459,37 @@ Content-Length: 176
 }
 ```
 
-XML Authenticate, Access Key Style Request
+XML
+
+Authenticate using password credential for a scoped token.
+
+```
+ccept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+Content-Length: 211
+
+<auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://docs.openstack.org/identity/api/v2.0" tenantName="HP5 Tenant Services">
+  <passwordCredentials username="arunkant" password="changeme"/>
+</auth>
+```
+
+Authenticate using access key credential.
 
 ```
 Accept-Encoding: gzip,deflate
 Accept: application/xml
 Content-Type: application/xml
 Content-Length: 219
- 
+
 <auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
   <apiAccessKeyCredentials secretKey="vpGCFNzFZ8BMP1g8r3J6Cy7/ACOQUYyS9mXJDlxc" accessKey="9N488ACAF3859DW9AFS9"/>
 </auth>
 ```
 
-
-
 **Success Response**
 
-*Specify the status code and any content that is returned.*
+{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -307,9 +554,9 @@ Date: Fri, 14 Oct 2011 21:17:14 GMT
          "name": "storage5063096349006363528",
          "type": "compute",
          "endpoints": [         {
-            "adminURL": "https://region-a.geo-1.comnpute.hpcloudsvc.com:8443/api/v1.0/admin/0",
-            "internalURL": "https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/internal/0",
-            "publicURL": "https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/public/0",
+            "adminURL": "https://localhost:8443/identity/api/v2.0/admin/0",
+            "internalURL": "https://localhost:8443/identity/api/v2.0/internal/0",
+            "publicURL": "https://localhost:8443/identity/api/v2.0/public/0",
             "region": "SFO"
          }]
       },
@@ -344,9 +591,9 @@ Date: Fri, 14 Oct 2011 21:17:14 GMT
          "name": "storage5065129211418544729",
          "type": "compute",
          "endpoints": [         {
-            "adminURL": "https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/admin/0",
-            "internalURL": "https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/internal/0",
-            "publicURL": "https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/public/0",
+            "adminURL": "https://localhost:8443/identity/api/v2.0/admin/0",
+            "internalURL": "https://localhost:8443/identity/api/v2.0/internal/0",
+            "publicURL": "https://localhost:8443/identity/api/v2.0/public/0",
             "region": "SFO"
          }]
       },
@@ -354,9 +601,9 @@ Date: Fri, 14 Oct 2011 21:17:14 GMT
          "name": "storage5042344434157721570",
          "type": "compute",
          "endpoints": [         {
-            "adminURL": "https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/admin/0",
-            "internalURL": "https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/internal/0",
-            "publicURL": "https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/public/0",
+            "adminURL": "https://localhost:8443/identity/api/v2.0/admin/0",
+            "internalURL": "https://localhost:8443/identity/api/v2.0/internal/0",
+            "publicURL": "https://localhost:8443/identity/api/v2.0/public/0",
             "region": "SFO"
          }]
       }
@@ -390,7 +637,7 @@ Date: Fri, 14 Oct 2011 21:18:40 GMT
    </user>
    <serviceCatalog>
       <service type="compute" name="storage5063096349006363528">
-         <endpoint region="SFO" publicURL="https://region-a.geo-1.compute.hpcloudsvc.com/api/v1.0/public/0" internalURL="https://region-a.geo-1.compute.com:8443/api/v1.0/internal/0" adminURL="hhttps://region-a.geo-1.compute.com:8443/api/v1.0/admin/0">
+         <endpoint region="SFO" publicURL="https://localhost:8443/identity/api/v2.0/public/0" internalURL="https://localhost:8443/identity/api/v2.0/internal/0" adminURL="https://localhost:8443/identity/api/v2.0/admin/0">
             <version/>
          </endpoint>
       </service>
@@ -400,17 +647,17 @@ Date: Fri, 14 Oct 2011 21:18:40 GMT
          </endpoint>
       </service>
       <service type="identity" name="Identity">
-         <endpoint region="region-a.geo-1" publicURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0" internalURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0" adminURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0">
+         <endpoint region="region-a.geo-1" publicURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0" internalURL="hhttps://region-a.geo-1.identity.hpcloudsvc.com/v2.0" adminURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0">
             <version id="2.0" info="https://region-a.geo-1.identity.hpcloudsvc.com/info/v2.0" list="https://region-a.geo-1.identity.hpcloudsvc.com/allVersions"/>
          </endpoint>
       </service>
       <service type="compute" name="storage5065129211418544729">
-         <endpoint region="SFO" publicURL="https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/public/0" internalURL="https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/internal/0" adminURL="https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/admin/0">
+         <endpoint region="SFO" publicURL="https://localhost:8443/identity/api/v2.0/public/0" internalURL="https://localhost:8443/identity/api/v2.0/internal/0" adminURL="https://localhost:8443/identity/api/v2.0/admin/0">
             <version/>
          </endpoint>
       </service>
       <service type="compute" name="storage5042344434157721570">
-         <endpoint region="SFO" publicURL="https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/public/0" internalURL="https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/internal/0" adminURL="https://region-a.geo-1.compute.hpcloudsvc.com:8443/api/v1.0/admin/0">
+         <endpoint region="SFO" publicURL="https://localhost:8443/identity/api/v2.0/public/0" internalURL="https://localhost:8443/identity/api/v2.0/internal/0" adminURL="https://localhost:8443/identity/api/v2.0/admin/0">
             <version/>
          </endpoint>
       </service>
@@ -420,13 +667,12 @@ Date: Fri, 14 Oct 2011 21:18:40 GMT
 
 **Error Response**
 
-
 **Status Code**
 
-400 - Bad Request  
-401 - Unauthorized  
-403 - Forbidden  
-500 - Internal Server Error  
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
 
 **Response Data**
 
@@ -448,36 +694,38 @@ XML
 <?xml version="1.0" encoding="UTF-8"?>
 <identityFault xmlns="http://docs.openstack.org/identity/api/v2.0"
           code="500">
-	<message>Fault</message>
-	<details>Error Details...</details>
+        <message>Fault</message>
+        <details>Error Details...</details>
 </identityFault>
 ```
 
-**Curl Examples**
+Curl Example
 
-***Authenticate with Username/Password and Tenant ID*** 
+***Authenticate with Username/Password and Tenant ID***
 
 ```
-curl -X POST -H "Content-Type: application/json" 
-     https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens 
+curl -X POST -H "Content-Type: application/json"
+     https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens
      -d '{"auth":{"passwordCredentials":{"username":"falken@wg.com",          "password":"J0shua!"}, "tenantId":"72020596871800"}}'
-				  				  
+
 ```
 
 ***Authenticate with Access Keys and Tenant ID***
 
 ```
-curl -X POST -H "Content-Type: application/json" 
-	https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens
+curl -X POST -H "Content-Type: application/json"
+        https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens
     -d '{"auth":{"apiAccessKeyCredentials":{"accessKey":"B5VKMNLEZ7YUN9BTFDZC", "secretKey":"CQSp+KsLQGFz6+V/S1s4XXpE42q472pD9VhIBFsn"}, "tenantId":"72020596871800"}}'
 ```
-		
+
 **Additional Notes**
 
-*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.1.2 Rescope Token
+
+#### 4.4.2.2 Rescope Token
 #### POST /tokens
+*Privilege Level: SS*
 
 This API provides the ability to re-scope a valid token with another tenant. An existing unexpired token, regardless of its currently scoped or not, can be scoped to another tenant as long as the user has valid association with that tenant.
 
@@ -489,35 +737,23 @@ In case of un-scoped token request, the service catalog is going to include glob
 
 **Request Data**
 
-*Specify all the required/optional url and data parameters for the given method call.*
 
 **URL Parameters**
 
-*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
-
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* (Optional) - {data type} - {description of the attribute}
+None
 
 **Data Parameters**
 
-*List all the attributes that comprises the data structure*
+See schema file for more details on the request and response data structure.
 
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* (Optional) - {data type} - {description of the attribute}
+JSON
 
-*Either put 'This call does not require a request body' or include JSON/XML request data structure*
-
-JSON Rescope Token Request  
-
-g
-```  
+```
 Accept-Encoding: gzip,deflate
 Accept: application/json
 Content-Type: application/json
 Content-Length: 154
- 
+
 {
     "auth": {
         "tenantName": "HP Swift Tenant Services",
@@ -525,26 +761,24 @@ Content-Length: 154
             "id": "HPAuth_4ea80da3b0be73fc0385eceb"
         }
     }
-}  
+}
 ```
 
-XML Rescope Token Request 
+XML
 
 ```
 Accept-Encoding: gzip,deflate
 Accept: application/xml
 Content-Type: application/xml
 Content-Length: 195
- 
+
 <auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://docs.openstack.org/identity/api/v2.0" tenantId="19694547081948">
   <token id="HPAuth_4e934043b0be09f52fb4c29d" />
 </auth>
 ```
 
-
 **Success Response**
 
-*Specify the status code and any content that is returned.*
 
 **Status Code**
 
@@ -552,7 +786,6 @@ Content-Length: 195
 
 **Response Data**
 
-*Either put 'This call does not require a request body' or include JSON/XML response data structure*
 
 JSON
 
@@ -565,7 +798,7 @@ Expires: -1
 Content-Type: application/json
 Content-Length: 1283
 Date: Wed, 26 Oct 2011 13:43:14 GMT
- 
+
 {"access": {
   "token": {
     "expires": "2011-10-26T14:13:14.311Z",
@@ -626,8 +859,8 @@ Expires: -1
 Content-Type: application/xml
 Content-Length: 1166
 Date: Wed, 26 Oct 2011 13:46:53 GMT
- 
- 
+
+
 <access xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://docs.openstack.org/common/api/v1.0" xmlns:ns3="http://www.w3.org/2005/Atom">
    <token id="HPAuth_4ea80e72b0be73fc0385ecef" expires="2011-10-26T14:13:14.311Z">
       <tenant id="90260810095453" name="HP Swift Tenant Services"/>
@@ -651,13 +884,12 @@ Date: Wed, 26 Oct 2011 13:46:53 GMT
 
 **Error Response**
 
-*Enumerate all the possible error status codes and any content that is returned.*
 
 **Status Code**
 
-400 - Bad Request  
-401 - Unauthorized  
-403 - Forbidden  
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
 500 - Internal Server Error
 503 - Service Unavailable
 
@@ -681,45 +913,125 @@ XML
 <?xml version="1.0" encoding="UTF-8"?>
 <identityFault xmlns="http://docs.openstack.org/identity/api/v2.0"
           code="500">
-	<message>Fault</message>
-	<details>Error Details...</details>
+        <message>Fault</message>
+        <details>Error Details...</details>
 </identityFault>
 ```
 
-**Curl Example**
+Curl Example
 
 ```
-curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]
+curl -k -H "Content-Type: application/json" -d '{"auth":{"tenantName":"HP Swift Tenant Services","token":{"id":"HPAuth_4ea80da3b0be73fc0385eceb"}}}' -XPOST https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens
 ```
 
 **Additional Notes**
 
-*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.1.2 List Tenants
-#### GET /tenants
 
-This API returns a listing of all tenants for which the holder of the provided token has a role assignment. If the user is not a valid, an error is returned.
+#### 4.4.2.3 Revoke Token
+#### DELETE /HP-IDM/v1.0/tokens/<tokenId>
+*Privilege Level: SA,DA,SS*
+
+This API is used to revoke an authentication token. This operation does not require a request body. Once a token has been revoked, attempts to validate the token via GET /tokens/tokenId will fail with a 404 (item not found) as the token no longer exists. Trying revoke a non existing token, including one which has expired will also return a 404 (item not found).
 
 **Request Data**
 
+
 **URL Parameters**
 
-| Parameter Name | Default Value | Description |  
-| :------------- | :------------ | :---------- |  
-| limit | If not specified, a cloud service will default the page size to some safe value. |  The *limit* value represents the maximum number of elements which will be returned in the request. |
-| marker | If not specified, the marker value is null to denote start at the beginning of the collection. | The marker parameter is the resource Id of the last item in the previous list. |  
+None
 
+**Data Parameters**
+
+This call does not require a request body.
 
 **Success Response**
 
-*Specify the status code and any content that is returned.*
 
 **Status Code**
 
 200 - OK
 
 **Response Data**
+
+
+**Error Response**
+
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+
+**Response Data**
+
+JSON
+
+```
+{"forbidden":{"message":"Full authentication is required to access this resource","code":403}}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8"?><forbidden xmlns="http://docs.openstack.org/identity/api/v2.0" code="403"><message>Full authentication is required to access this resource</message></forbidden>
+```
+
+Curl Example
+
+```
+curl -k -XDELETE https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/HPAuth_123456789
+```
+
+**Additional Notes**
+
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+
+
+#### 4.4.2.4 Swift Legacy Authentication
+#### GET /v1.0
+*Privilege Level: Anon*
+
+#### GET /v1.1
+*Privilege Level: Anon*
+
+#### GET /auth/v1.0
+*Privilege Level: Anon*
+
+#### GET /auth/v1.1
+*Privilege Level: Anon*
+
+Pre-Keystone (aka auth v2.0), Openstack services rely on disparate authentication mechanisms to authenticate their services.  For example, Swift uses swauth, while Nova uses novaauth.  The v1/v1.1 style of authentication relies on custom HTTP headers (specific to each service) to communicate authentication data, rather than relying on well-defined XML/JSON documents that can be validated via XSDs.  With the release of Diablo, most Openstack services have switched to using Keystone API completely, with the exception of the Swift CLI tool.  To provide backward-compatibility for this particular tool, CS (as well as the FOSS Keystone) provides this API. 
+
+**Request Data**
+
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+The following HTTP headers must be specified.
+
+* *X-Auth-User* - containing the <tenantId:username> for a scoped token for Swift
+* *X-Auth-Key* - containing the password for the given user
+
+**Success Response**
+
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+In addition to the token access response, the following response HTTP headers are populated by the server.
+
+* *X-Auth-Token* - token ID
+* *X-Storage-URL* - containing a list of public endpoints for Swift
 
 JSON
 
@@ -729,22 +1041,82 @@ Server: Apache-Coyote/1.1
 Cache-Control: no-cache
 Pragma: no-cache
 Expires: -1
+X-Auth-Token: HPAuth_4f03696fe4b071e9f15c0550
+X-Storage-Url: https://az1-sw-proxy-ext-0001.rndd.aw1.hpcloud.net:443/v1.0/14565730729748
 Content-Type: application/json
-Content-Length: 240
-Date: Tue, 29 Nov 2011 17:17:50 GMT
+Content-Length: 1583
+Date: Tue, 03 Jan 2012 20:47:43 GMT
  
-{
-  "tenants": [
-    {
-      "id": "39595655514446",
-      "name": "Banking Tenant Services",
-      "description": "Banking Tenant Services for TimeWarner",
-      "enabled": true,
-      "created": "2011-11-29T16:59:52.635Z",
-      "updated": "2011-11-29T16:59:52.635Z"
+{"access": {
+  "token": {
+    "expires": "2012-01-03T21:17:43.087Z",
+    "id": "HPAuth_4f03696fe4b071e9f15c0550",
+    "tenant": {
+      "id": "14565730729748",
+      "name": "Swift SSL"
     }
-  ]
-}
+  },
+  "user": {
+    "id": "70970596121812",
+    "name": "joeuserA@timewarner.com",
+    "roles": [
+      {
+        "id": "00000000004022",
+        "serviceId": "110",
+        "name": "Admin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004013",
+        "serviceId": "130",
+        "name": "block-admin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004025",
+        "serviceId": "120",
+        "name": "sysadmin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004016",
+        "serviceId": "120",
+        "name": "netadmin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004024",
+        "serviceId": "140",
+        "name": "user",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004003",
+        "serviceId": "100",
+        "name": "domainadmin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004014",
+        "serviceId": "150",
+        "name": "cdn-admin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004004",
+        "serviceId": "100",
+        "name": "domainuser",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004014",
+        "serviceId": "150",
+        "name": "cdn-admin",
+        "tenantId": "14565730729748"
+      }
+    ]
+  }
+}}
 ```
 
 XML
@@ -755,27 +1127,22 @@ Server: Apache-Coyote/1.1
 Cache-Control: no-cache
 Pragma: no-cache
 Expires: -1
+X-Auth-Token: HPAuth_4f03696fe4b071e9f15c0550
+X-Storage-Url: https://az1-sw-proxy-ext-0001.rndd.aw1.hpcloud.net:443/v1.0/14565730729748
 Content-Type: application/xml
-Content-Length: 380
-Date: Thu, 25 Aug 2011 23:33:19 GMT
- 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<tenants xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.w3.org/2005/Atom">
-  <tenant id="541212460710" name="Time Warner Tenant Services" enabled="false" display-name="Time Warner Tenant Services">
-    <description>Tenant for hosting Time Warner Applications & services</description>
-  </tenant>
-</tenants>
+Content-Length: 730
+Date: Tue, 03 Jan 2012 20:47:43 GMT
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><access xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:hpext="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom"><token id="HPAuth_767eaf4d50bee574eefb8e3b1081bde75edf31c59f806e35a8793296247aa7f9" expires="2012-10-10T11:09:38.813Z"><tenant id="62424047631429" name="conser4301_swift"/></token><user id="97539030347757" name="conser4301"><roles><role id="00000000004004" name="domainuser" serviceId="100"/><role id="00000000004022" name="Admin" serviceId="110" tenantId="62424047631429"/><role id="00000000004003" name="domainadmin" serviceId="100"/></roles></user></access>
 ```
 
 **Error Response**
 
-*Enumerate all the possible error status codes and any content that is returned.*
-
 **Status Code**
 
-400 - Bad Request  
-401 - Unauthorized  
-403 - Forbidden  
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
 500 - Internal Server Error
 503 - Service Unavailable
 
@@ -784,258 +1151,32 @@ Date: Thu, 25 Aug 2011 23:33:19 GMT
 JSON
 
 ```
-{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
-```
-
-XML
-
-```
-<xml data structure here>
-```
-
-**Curl Example**
-
-```
-curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]
-```
-
-**Additional Notes**
-
-*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
-
-#### 4.4.1.2 Revoke Token
-#### DELETE /HP-IDM/v1.0/tokens/<tokenId>
-
-This API is used to revoke an authentication token. This operation does not require a request body. Once a token has been revoked, attempts to validate the token via GET /tokens/tokenId will fail with a 404 (item not found) as the token no longer exists. Trying revoke a non existing token, including one which has expired will also return a 404 (item not found).
-
-
-
-**Request Data**
-
-*Specify all the required/optional url and data parameters for the given method call.*
-
-**URL Parameters**
-
-*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
-
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* (Optional) - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-*List all the attributes that comprises the data structure*
-
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* (Optional) - {data type} - {description of the attribute}
-
-This call does not require a request body.
-
-
-
-**Success Response**
-
-*Specify the status code and any content that is returned.*
-
-**Status Code**
-
-204 - OK
-
-**Response Data**
-
-
-
-**Error Response**
-
-*Enumerate all the possible error status codes and any content that is returned.*
-
-**Status Code**
-
-400 - Bad Request  
-401 - Unauthorized  
-403 - Forbidden
-
-**Response Data**
-
-JSON
-
-```
-{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
-```
-
-XML
-
-```
-<xml data structure here>
-```
-
-**Curl Example**
-
-```
-curl -X POST -H "Content-Type: application/json" 
-	https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens  
-    -d '{"auth":{"apiAccessKeyCredentials":{"accessKey":"B5VKMNLEZ7YUN9BTFDZC", "secretKey":"CQSp+KsLQGFz6+V/S1s4XXpE42q472pD9VhIBFsn"}, "tenantId":"72020596871800"}}'
-				  
-```
-
-**Additional Notes**
-
-*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
-
-### 4.4.2 Tenant
-*Describe the resource and what information they provide. Then enumerate all the API method calls below.*
-
-**Status Lifecycle**
-
-N/A
-
-**Rate Limits**
-
-N/A
-
-**Quota Limits**
-
-N/A
-
-**Business Rules**
-
-None.
-
-#### 4.4.2.1 List Tenants
-#### GET /tenants?limit=pagesize&marker=tenantId
-
-This API returns a listing of all tenants for which the holder of the provided token has a role assignment. If the user is not a valid, an error is returned.
-**Request Data**
-
-*Specify all the required/optional url and data parameters for the given method call.*
-
-**URL Parameters**
-
-*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
-
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* (Optional) - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-*List all the attributes that comprises the data structure*
-
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* - {data type} - {description of the attribute}
-* *name_of_attribute* (Optional) - {data type} - {description of the attribute}
-
-*Either put 'This call does not require a request body' or include JSON/XML request data structure*
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-<xml data structure here>
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-<xml data structure here>
-```
-
-**Success Response**
-
-*Specify the status code and any content that is returned.*
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-JSON
-
-```
-HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-Cache-Control: no-cache
-Pragma: no-cache
-Expires: -1
-Content-Type: application/json
-Content-Length: 240
-Date: Tue, 29 Nov 2011 17:17:50 GMT
- 
 {
-  "tenants": [
-    {
-      "id": "39595655514446",
-      "name": "Banking Tenant Services",
-      "description": "Banking Tenant Services for TimeWarner",
-      "enabled": true,
-      "created": "2011-11-29T16:59:52.635Z",
-      "updated": "2011-11-29T16:59:52.635Z"
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
     }
-  ]
+  }
 }
 ```
 
 XML
 
 ```
-HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-Cache-Control: no-cache
-Pragma: no-cache
-Expires: -1
-Content-Type: application/xml
-Content-Length: 380
-Date: Thu, 25 Aug 2011 23:33:19 GMT
- 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<tenants xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.w3.org/2005/Atom">
-  <tenant id="541212460710" name="Time Warner Tenant Services" enabled="false" display-name="Time Warner Tenant Services">
-    <description>Tenant for hosting Time Warner Applications & services</description>
-  </tenant>
-</tenants>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
 ```
 
-**Error Response**
-
-*Enumerate all the possible error status codes and any content that is returned.*
-
-**Status Code**
-
-400 - Bad Request  
-401 - Unauthorized  
-403 - Forbidden
-500 - Internal Server Error  
-503 - Service Unavailable  
-
-**Response Data**
-
-
-
-**Curl Example**
+Curl Example
 
 ```
-curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]
+curl -s -k -H "X-Auth-User: 62424047631429:jdoe" -H "X-Auth-Key: secrete" -H "Accept: application/xml" -D /tmp/headers.txt https://region-a.geo-1.identity.hpcloudsvc.com:35357/v1.0
 ```
 
 **Additional Notes**
 
-*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
----
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 # 5. Additional References
 
