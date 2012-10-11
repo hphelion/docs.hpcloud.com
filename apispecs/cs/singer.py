@@ -14,7 +14,7 @@ PROGRAM_NAME = 'singer'
 __version__ = '1.0'
 VERBOSE = False
 DEFAULT_CS_API_MD = 'cs-api.md'
-DEFAULT_CS_API_INTERNAL_MD = 'cs-api-internal.md'
+DEFAULT_CS_API_INTERNAL_MD = 'cs-api-private.md'
 
 
 class OptionParser(optparse.OptionParser):
@@ -71,12 +71,12 @@ def parse_args(args):
                  help="output file [default: %default]")
     p.add_option("-p", "--public", dest="public", action="store_true",
                  help="generate public API markdown")
-    p.add_option("-i", "--internal", dest="internal", action="store_true",
-                 help="generate internal API markdown")
+    p.add_option("-r", "--private", dest="private", action="store_true",
+                 help="generate private API markdown")
     p.add_option("-w", "--wiki", dest="wiki", action="store_true",
                  help="generate and publish CS APIs to wiki")
     p.add_option("-U", "--user", dest="wiki_user",
-                 help="wiki user name")
+                 help="wiki user name. i.e. joe.doe@hp.com")
     p.add_option("-P", "--password", dest="wiki_password",
                  help="wiki user password")
     p.add_option("-m", "--mdfile", dest="wiki_file", metavar="FILE",
@@ -181,8 +181,8 @@ def create_cs_api_public_md(opt):
     create_cs_api_md(opt, DEFAULT_CS_API_MD, 'public')
 
 
-def create_cs_api_internal_md(opt):
-    create_cs_api_md(opt, DEFAULT_CS_API_INTERNAL_MD, 'internal')
+def create_cs_api_private_md(opt):
+    create_cs_api_md(opt, DEFAULT_CS_API_INTERNAL_MD, 'private')
 
 
 def convert_api_to_wiki_content(opt):
@@ -225,15 +225,15 @@ def main(argv=None):
     # parse CLI arguments, config and instantiate our helper classes
     opt, cli_labels = parse_args(argv[1:])
 
-    if not opt.public and not opt.internal and not opt.wiki:
+    if not opt.public and not opt.private and not opt.wiki:
         bail("Error: -p, -i, or -w must be specified")
 
     VERBOSE = opt.verbose
 
     if opt.public:
         create_cs_api_public_md(opt)
-    elif opt.internal:
-        create_cs_api_internal_md(opt)
+    elif opt.private:
+        create_cs_api_private_md(opt)
     else:
         # make sure username and password are specified
         if not opt.wiki_user and not opt.wiki_password:
