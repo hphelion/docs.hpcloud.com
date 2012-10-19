@@ -205,13 +205,13 @@ XML
 
 Curl Example
 
-*** List Tenants ***
+***List Tenants***
 
 ```
 curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/tenants"
 ```
 
-*** Get Tenant By Name ***
+***Get Tenant By Name***
 
 ```
 curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/tenants?name=MyTenant"
