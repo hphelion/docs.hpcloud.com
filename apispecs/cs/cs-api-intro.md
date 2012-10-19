@@ -103,13 +103,7 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 **Admin URI**: N/A
 
-| Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
-| :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| Token      | Authenticate | POST | {BaseURI}/tokens | Y/Y    |                 |
-| Token      | Rescope Token | POST | {BaseURI}/tokens | Y/Y    |                 |
-| Tenant     | List Tenants | GET | {BaseURI}/tenants | Y/Y    |                 |
-| Token      | Revoke | DELETE | {BaseURI}/HP-IDM/v1.0/tokens/<tokenId> | Y/Y    |                 |
-
+{API_INDEX_TABLE_PLACE_HOLDER}
 
 ## 4.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*

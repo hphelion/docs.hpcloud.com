@@ -105,11 +105,14 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 | Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| Token      | Authenticate | POST | {BaseURI}/tokens | Y/Y    |                 |
-| Token      | Rescope Token | POST | {BaseURI}/tokens | Y/Y    |                 |
-| Tenant     | List Tenants | GET | {BaseURI}/tenants | Y/Y    |                 |
-| Token      | Revoke | DELETE | {BaseURI}/HP-IDM/v1.0/tokens/<tokenId> | Y/Y    |                 |
-
+| Tenant | List Tenants | GET | /tenants?limit=pagesize&marker=tenantId | Y/Y | SS |
+| Token | Authenticate | POST | /tokens | Y/Y | Anon |
+| Token | Rescope Token | POST | /tokens | Y/Y | SS |
+| Token | Revoke Token | DELETE | /HP-IDM/v1.0/tokens/<tokenId> | Y/Y | SA,DA,SS |
+| Token | Swift Legacy Authentication | GET | /v1.0 | Y/Y | Anon |
+| Token | Swift Legacy Authentication | GET | /v1.1 | Y/Y | Anon |
+| Token | Swift Legacy Authentication | GET | /auth/v1.0 | Y/Y | Anon |
+| Token | Swift Legacy Authentication | GET | /auth/v1.1 | Y/Y | Anon |
 
 ## 4.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
