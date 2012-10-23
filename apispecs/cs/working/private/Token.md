@@ -20,7 +20,7 @@ None.
 
 
 ## Validate Token
-#### GET [KeystoneBaseURI]/tokens/<tokenId>?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111
+#### GET [KeystoneBaseURI]/tokens/\<tokenId\>?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111
 *Privilege Level: Anon*
 
 This API is used to validate a token. Validation includes checking that
@@ -31,7 +31,7 @@ call will check the corresponding TenantId to ensure that token belongs
 to that tenant. If there is no tenantId then it is globally scoped. In
 the event a token is not valid, a 404 (item not found) will be returned.
 
-#### Filter Roles
+Filter Roles:
 
 For scoped token validation, optional query parameter **HP-IDM-serviceId
 and/or **HP-IDM-endpointTemplateId** can be used to include only
@@ -261,7 +261,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Accep
 
 
 ## Quick Token Validation
-#### HEAD [KeystoneBaseURI]/tokens/<tokenId>?belongsTo=tenantId
+#### HEAD [KeystoneBaseURI]/tokens/\<tokenId\>?belongsTo=tenantId
 *Privilege Level: Anon*
 
 This API is used to do a quick token validation. Validation includes checking that the token belongs to a particular user and it has not expired.   If the query parameter, belongTo, is provided the call will check the corresponding tenantId to ensure membership in that tenant. If there is no tenantId then it is globally scoped. In the event a token is not valid, a 404 (item not found) will be returned.  This call won't return any roles associated with the token.
@@ -377,7 +377,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -XHEAD "h
 
 
 ## Refresh Token
-#### [HPKeystoneExtensionBaseURI]/tokens/<tokenId>
+#### [HPKeystoneExtensionBaseURI]/tokens/\<tokenId\>
 *Privilege Level: SS*
 
 This API is used to refresh the expiration time by generating new token. Before expiration time can be modified, validation is done to check token is not expired, user and its domain is currently enabled (similar to what is done in token validation). Once all validation checks are successful, the new token is generated with expiration time is increased to next 720 minutes (token default expiration duration). The expiration time is increased by 12 hours from current time and not from token (passed in request) expiration time. The newly generated will also get refreshed response data from system.

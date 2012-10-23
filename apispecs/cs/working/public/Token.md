@@ -581,7 +581,7 @@ curl -k -H "Content-Type: application/json" -d '{"auth":{"tenantName":"HP Swift 
 
 
 ## Revoke Token
-#### DELETE /HP-IDM/v1.0/tokens/<tokenId>
+#### DELETE /HP-IDM/v1.0/tokens/\<tokenId\>
 *Privilege Level: SA,DA,SS*
 
 This API is used to revoke an authentication token. This operation does not require a request body. Once a token has been revoked, attempts to validate the token via GET /tokens/tokenId will fail with a 404 (item not found) as the token no longer exists. Trying revoke a non existing token, including one which has expired will also return a 404 (item not found).
