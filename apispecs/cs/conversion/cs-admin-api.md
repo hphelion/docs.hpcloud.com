@@ -1,4 +1,36 @@
----layout: page  title: CS Admin API  title_section:   description:  group: apispec  ---{% include JB/setup %}# 1. Overview*Brief introduction and overview of the service and its intended use.*## 1.1 API Maturity Level**Maturity Level**: Experimental**Version API Status**: CURRENT---# 2. Architecture View## 2.1 OverviewControl services provide a variety of APIs for the control and
+---
+layout: page
+title: CS Admin API
+title_section:
+description:
+group: apispec
+
+---
+{% include JB/setup %}
+
+
+# 1. Overview
+
+*Brief introduction and overview of the service and its intended use.*
+
+
+
+## 1.1 API Maturity Level
+
+
+**Maturity Level**: Experimental
+
+**Version API Status**: CURRENT
+
+
+---
+
+
+# 2. Architecture View
+
+
+## 2.1 Overview
+Control services provide a variety of APIs for the control and
 management of various aspects of the HPCS OpenStack solution. Control
 services APIs are defined using specific guidelines to ensure that they
 are correct and fit into the OpenStack ecosystem. APIs
@@ -12,7 +44,38 @@ on RESTful interfaces which have much in common with other cloud RESTful
 design patterns. The intent is for control services to design and
 deliver top notch APIs which will have the capability to become public
 APIs in the future.
-## 2.2 Conceptual/Logical Architecture View*Describe the logical components of the system and their responsibilities*## 2.3 Infrastructure Architecture View*Describe how the API fits into the overall HPCS Infrastructure*## 2.4 Entity Relationship Diagram*Describe the relationships between the various entities (resources) involved in the API*---# 3. Account-level View*Describe the relationship of the API with respect to the accounts, groups, tenants, regions, availability zones etc.*## 3.1 Accounts*Describe the structure of the user accounts, groups and tenants. Currently this might be described separately in context of Control Services, but in future each service API needs to state their usage. In future CS might support complex group hierarchies, enterprise account structures while there maybe a phased adoption by individual service APIs*## 3.2 Regions and Availability Zones*Describe the availability of the service API in different regions and availability zones. State plans for future expansion as well.***Region(s)**: region-a, region**Availability Zone(s)**: az-1, az-2, az-3 **Future Expansion**: Expanded to all regions## 3.3 Service CatalogThe service is exposed in the service catalog, as shown in the following fragment:
+## 2.2 Conceptual/Logical Architecture View
+*Describe the logical components of the system and their responsibilities*
+
+## 2.3 Infrastructure Architecture View
+*Describe how the API fits into the overall HPCS Infrastructure*
+
+## 2.4 Entity Relationship Diagram
+*Describe the relationships between the various entities (resources) involved in the API*
+
+
+---
+
+# 3. Account-level View
+*Describe the relationship of the API with respect to the accounts, groups, tenants, regions, availability zones etc.*
+
+
+## 3.1 Accounts
+*Describe the structure of the user accounts, groups and tenants. Currently this might be described separately in context of Control Services, but in future each service API needs to state their usage. In future CS might support complex group hierarchies, enterprise account structures while there maybe a phased adoption by individual service APIs*
+
+## 3.2 Regions and Availability Zones
+*Describe the availability of the service API in different regions and availability zones. State plans for future expansion as well.*
+
+**Region(s)**: region-a, region
+
+**Availability Zone(s)**: az-1, az-2, az-3
+
+**Future Expansion**: Expanded to all regions
+
+
+## 3.3 Service Catalog
+
+The service is exposed in the service catalog, as shown in the following fragment:
 
 ```
 {
@@ -34,7 +97,19 @@ APIs in the future.
             "versionList": "https://region-a.geo-1.identity.hpcloudsvc.com:35357"
         }
     ]
-}```---# 4. REST API Specifications*Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.*## 4.1 Action API Operations**Host**: https://az-1.region-a.geo-1.compute.hpcloudsvc.com
+}
+```
+
+---
+
+
+# 4. REST API Specifications
+*Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.*
+
+## 4.1 Action API Operations
+
+
+**Host**: https://az-1.region-a.geo-1.compute.hpcloudsvc.com
 
 **Base URI**: {Host}/v2.0
 
@@ -49,9 +124,149 @@ APIs in the future.
 |            | Rescope Token | POST | {BaseURI}/tokens | Y/Y    |                 |
 |            | Revoke | DELETE | {BaseURI}/HP-IDM/v1.0/tokens/<tokenId> | Y/Y    |                 |
 | **Tenant** | List Tenants | GET | {BaseURI}/tenants | Y/Y    |                 |
-## 4.2 Common Request HeadersX-Auth-Token
-Content-Type## 4.3 Common Response Headers*List the common response headers i.e. Content-Type, Content-Length, Connection, Date, ETag, Server, etc. *## 4.4 Service API Operation Details*The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*### 4.4.1 Action*Describe the resource and what information they provide. Then enumerate all the API method calls below.***Status Lifecycle**N/A**Rate Limits**N/A**Quota Limits**N/A**Business Rules**None.#### 4.4.1.1 {Short description of the method call}#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}*Description about the method call***Request Data***Specify all the required/optional url and data parameters for the given method call.***URL Parameters***Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.** *name_of_attribute* - {data type} - {description of the attribute}* *name_of_attribute* - {data type} - {description of the attribute}* *name_of_attribute* (Optional) - {data type} - {description of the attribute}**Data Parameters***List all the attributes that comprises the data structure** *name_of_attribute* - {data type} - {description of the attribute}* *name_of_attribute* - {data type} - {description of the attribute}* *name_of_attribute* (Optional) - {data type} - {description of the attribute}*Either put 'This call does not require a request body' or include JSON/XML request data structure*JSON```{json data structure here}```XML```<xml data structure here>```Optional:JSON```{json data structure here}```XML```<xml data structure here>```**Success Response***Specify the status code and any content that is returned.***Status Code**200 - OK**Response Data***Either put 'This call does not require a request body' or include JSON/XML response data structure*JSON```{json data structure here}```XML```<xml data structure here>```**Error Response***Enumerate all the possible error status codes and any content that is returned.***Status Code**500 - Internal Server Error**Response Data**JSON```{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}```XML```<xml data structure here>```**Curl Example**```curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]```**Additional Notes***Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*---
-## Content Types
+
+## 4.2 Common Request Headers
+X-Auth-Token
+Content-Type
+
+## 4.3 Common Response Headers
+*List the common response headers i.e. Content-Type, Content-Length, Connection, Date, ETag, Server, etc. *
+
+## 4.4 Service API Operation Details
+*The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
+
+### 4.4.1 Action
+*Describe the resource and what information they provide. Then enumerate all the API method calls below.*
+
+**Status Lifecycle**
+
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
+
+#### 4.4.1.1 {Short description of the method call}
+#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
+
+*Description about the method call*
+
+**Request Data**
+
+*Specify all the required/optional url and data parameters for the given method call.*
+
+**URL Parameters**
+
+*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
+
+* *name_of_attribute* - {data type} - {description of the attribute}
+* *name_of_attribute* - {data type} - {description of the attribute}
+* *name_of_attribute* (Optional) - {data type} - {description of the attribute}
+
+**Data Parameters**
+
+*List all the attributes that comprises the data structure*
+
+* *name_of_attribute* - {data type} - {description of the attribute}
+* *name_of_attribute* - {data type} - {description of the attribute}
+* *name_of_attribute* (Optional) - {data type} - {description of the attribute}
+
+*Either put 'This call does not require a request body' or include JSON/XML request data structure*
+
+JSON
+
+```
+{json data structure here}
+```
+
+XML
+
+```
+<xml data structure here>
+```
+
+Optional:
+
+JSON
+
+```
+{json data structure here}
+```
+
+XML
+
+```
+<xml data structure here>
+```
+
+**Success Response**
+
+*Specify the status code and any content that is returned.*
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+*Either put 'This call does not require a request body' or include JSON/XML response data structure*
+
+JSON
+
+```
+{json data structure here}
+```
+
+XML
+
+```
+<xml data structure here>
+```
+
+**Error Response**
+
+*Enumerate all the possible error status codes and any content that is returned.*
+
+**Status Code**
+
+500 - Internal Server Error
+
+**Response Data**
+
+JSON
+
+```
+{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
+```
+
+XML
+
+```
+<xml data structure here>
+```
+
+**Curl Example**
+
+```
+curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]
+```
+
+**Additional Notes**
+
+*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
+
+
+---
+
+## Content Types
 
 The Control Services API supports both the JSON and XML data serialization formats. The request format is specified using the Content-Type header and is *required* for operations that have a request body. The response format can be specified in requests using either the `Accept` header or adding an *.xml* or *.json* extension to any request URI. Note, it is possible for a response to be serialized using a format different from the request but ***this is not a supported feature of Control Services.*** If no response format is specified, JSON is the default. If conflicting formats are specified using both an Accept header and a query extension, the query extension takes precedence.
 
@@ -966,6 +1181,23 @@ for more details.
 
 A service may validate a signature with the resource described
 in [Generic Signature Operations](Generic%20Signature%20Operations.html "Generic Signature Operations")
+---
 
+# 5. Additional References
 
----# 5. Additional References## 5.1 Resources**Wiki Page**: {Link to Wiki page}**Code Repo**:  {Link to the internal Github repo}**API Lead Contact**: {Name of contact}---# 6. Glossary{Put down definitions of terms and items that need explanation.}---
+## 5.1 Resources
+
+**Wiki Page**: {Link to Wiki page}
+
+**Code Repo**:  {Link to the internal Github repo}
+
+**API Lead Contact**: {Name of contact}
+
+---
+
+# 6. Glossary
+
+{Put down definitions of terms and items that need explanation.}
+
+---
+
