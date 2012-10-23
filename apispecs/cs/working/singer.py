@@ -13,8 +13,8 @@ import xmlrpclib
 PROGRAM_NAME = 'singer'
 __version__ = '1.0'
 VERBOSE = False
-DEFAULT_CS_API_MD = 'cs-api.md'
-DEFAULT_CS_API_INTERNAL_MD = 'cs-api-private.md'
+DEFAULT_CS_API_MD = '../cs-api.md'
+DEFAULT_CS_API_INTERNAL_MD = '../private/cs-admin-api.md'
 
 
 class OptionParser(optparse.OptionParser):
