@@ -108,7 +108,7 @@ The service is exposed in the service catalog, as shown in the following fragmen
 | Tenant | List Tenants | GET | /tenants?limit=pagesize&marker=tenantId | Y/Y | SS |
 | Token | Authenticate | POST | /tokens | Y/Y | Anon |
 | Token | Rescope Token | POST | /tokens | Y/Y | SS |
-| Token | Revoke Token | DELETE | /HP-IDM/v1.0/tokens/<tokenId> | Y/Y | SA,DA,SS |
+| Token | Revoke Token | DELETE | /HP-IDM/v1.0/tokens/\<tokenId\> | Y/Y | SA,DA,SS |
 | Token | Swift Legacy Authentication | GET | /v1.0 | Y/Y | Anon |
 | Token | Swift Legacy Authentication | GET | /v1.1 | Y/Y | Anon |
 | Token | Swift Legacy Authentication | GET | /auth/v1.0 | Y/Y | Anon |
@@ -930,7 +930,7 @@ curl -k -H "Content-Type: application/json" -d '{"auth":{"tenantName":"HP Swift 
 
 
 #### 4.4.2.3 Revoke Token
-#### DELETE /HP-IDM/v1.0/tokens/<tokenId>
+#### DELETE /HP-IDM/v1.0/tokens/\<tokenId\>
 *Privilege Level: SA,DA,SS*
 
 This API is used to revoke an authentication token. This operation does not require a request body. Once a token has been revoked, attempts to validate the token via GET /tokens/tokenId will fail with a 404 (item not found) as the token no longer exists. Trying revoke a non existing token, including one which has expired will also return a 404 (item not found).
