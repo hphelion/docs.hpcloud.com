@@ -11,9 +11,9 @@ product:
 The HP Cloud CDN enables objects with public access in HP Cloud Object Storage to be available over a [Content Delivery Network (CDN)](https://en.wikipedia.org/wiki/Content_delivery_network "Wikipedia: Content delivery network"). This article provides an introduction into how the CDN works with object storage and some basic ways you can use it.
 
 ## Making Objects Available To The CDN
-Containers within object storage are private by default meaning that only those with API, [CLI](https://docs.hpcloud.com/cli), or [console](https://console.hpcloud.com) access to the containers can read or write the objects within them. A container can be configured to be public allowing all objects within the container to be openly available. When this happens the container and each object within the container get a URL that can be shared.
+Containers within object storage are private by default, meaning that only those with API, [CLI](https://docs.hpcloud.com/cli), or [console](https://console.hpcloud.com) access to the containers can read or write to the objects within them. A container can be toggled to be public, allowing all objects within the container to be openly available. When this happens, the container and each object within the container gets a URL that can be shared.
 
-Once a container is public there is a new option available to make the objects in a container available over the CDN. By enabling this the container and the objects within a container will have two additional public URLs. The additional URLs are to the object via a CDN in [SSL](https://en.wikipedia.org/wiki/HTTPS "Wikipedia: HTTP Secure") and non-SSL forms.
+Once a container is public, there is a new option available to make the objects in a container available over the CDN. By enabling this the container and the objects within a container will have two additional public URLs. The additional URLs are to the object via a CDN in [SSL](https://en.wikipedia.org/wiki/HTTPS "Wikipedia: HTTP Secure") and non-SSL forms.
 
 All of these URLs are available through the console and the API.
 
