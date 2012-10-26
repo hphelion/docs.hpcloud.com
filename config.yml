@@ -1,0 +1,6 @@
+url: docs.hpcloud.com
+exclude:
+	- README.md
+	- Makefile
+	- _posts/README.md
+	- content/README.md

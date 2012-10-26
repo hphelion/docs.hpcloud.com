@@ -1,0 +1,1 @@
+Jekyll requires posts to start with a date but pages do not need to start with a date. All content handled through git-subtree should happen from the content directory directory and be managed in separate repos. Please do not add any content to this directory.
