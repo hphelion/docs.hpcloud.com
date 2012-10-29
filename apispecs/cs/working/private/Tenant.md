@@ -1,6 +1,6 @@
 # Tenant
 
-{Describe the resource and what information they provide. Then enumerate all the API method calls below.}
+Tenant is a collection of services, users, and roles.
 
 **Status Lifecycle**
 
@@ -19,65 +19,82 @@ N/A
 None.
 
 
-## {addendpointtotenant}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+## Get All Tenants
+#### GET [HPKeystoneExtensionBaseURI]/tenants?name=tenantName&limit=pagesize&marker=tenantId
+*Privilege Level: SA*
 
-{Description about the method call}
+Allows reading a list of all tenants across domains. This API supports pagination through 'limit' and 'marker' usage. The returned list may be filtered to allow only those tenants which the caller has access to. The operation does not require a request body.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker* (Optional)} - string - the resource Id of the last item in the previous list
+* *name* (Optional) - string - name of the tenant to be returned
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
+This call does not require a request body.
 
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+GET /v2.0/HP-IDM/v1.0/tenants/ HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4ed5120a2cdc1f6ab057b22d
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 XML
 
 ```
-{xml data structure here}
+GET /v2.0/HP-IDM/v1.0/tenants/ HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 Optional:
 
+Request With Name Filter:
+
 JSON
 
 ```
-{json data structure here}
+GET /v2.0/HP-IDM/v1.0/tenants?name=ABC HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4ed5120a2cdc1f6ab057b22d
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 XML
 
 ```
-{xml data structure here}
+GET /v2.0/HP-IDM/v1.0/tenants?name=Panda HTTP/1.1
+Accept: application/json
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4ed5120a2cdc1f6ab057b22d
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -85,31 +102,70 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 240
+Date: Tue, 29 Nov 2011 17:17:50 GMT
+ 
+{
+  "tenants": {
+    "anies": null,
+    "otherAttributes": {
+ 
+    },
+    "tenant": [
+      {
+        "description": "Tenant for hosting Time Warner Applications and services",
+        "anies" : null,
+        "domainId": "26349998090400",
+        "name": "Time Warner Tenant Services",
+        "otherAttributes": {
+ 
+        },
+        "status": "enabled",
+        "tenantId": "541212460710"
+      }
+    ]
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 380
+Date: Thu, 25 Aug 2011 23:33:19 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tenants xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.w3.org/2005/Atom">
+   <tenant name="Time Warner Tenant Services" tenantId="541212460710" domainId="26349998090400" status="enabled">
+      <description>Tenant for hosting Time Warner Applications and services</description>
+   </tenant>
+</tenant>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+* 400 - Bad Request
+* 401 - Unauthorized
+* 403 - Forbidden
+* 500 - Internal Server Error
+* 503 - Service Unavailable
 
 **Response Data**
 
@@ -136,12 +192,10 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants"
 ```
 
 **Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ## {checktenantnameexistence}
