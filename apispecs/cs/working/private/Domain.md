@@ -1085,7 +1085,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 
 ## Get Groups For a Domain 
 #### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&excludeRoles=r1,r2}
-*Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU) *
+*Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API is used to get list of groups for a given domain. Api results can be filtered by using parameters. Query parameters "marker" and "limit" can be used for pagination
 
@@ -1119,21 +1119,26 @@ JSON
 
 Request with filters
 ```
-GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP-IDM/v1.0/domains/641564254582/groups&groupName=haneefGroup&excludeRoles=roleId1,roleId2 HTTP/1.1
-Connection: close
-Accept: application/json
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: haneef-desktop.americas.hpqcorp.net:8080
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/groups HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
 ```
 
 XML
 
+Request with marker and groupName
+
 ```
-GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups HTTP/1.1
-Connection: close
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/groups?marker=20249143710988&groupName=Domain%20Administrators HTTP/1.1
+Accept-Encoding: gzip,deflate
 Accept: application/xml
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: haneef-desktop.americas.hpqcorp.net:8080
+X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
 ```
 
 Optional:
@@ -1152,7 +1157,7 @@ Host: haneef-desktop.americas.hpqcorp.net:8080
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
+List groups for domain for given filter criteria and marker if there with http status code 200.
 
 **Status Code**
 
@@ -1160,29 +1165,61 @@ Host: haneef-desktop.americas.hpqcorp.net:8080
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
 HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=8DD402CDD89EF3A61D73B915F4B8BE42; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 474
+Date: Wed, 31 Oct 2012 15:42:34 GMT
+
+{
+  "groups" : {
+    "group" : [ {
+      "description" : "Sees Candies   3 Domain Administrators",
+      "domainId" : "66751536630361",
+      "id" : "20249143710988",
+      "name" : "Domain Administrators",
+      "otherAttributes" : {
+      }
+    }, {
+      "description" : "Sees Candies   3 Users",
+      "domainId" : "66751536630361",
+      "id" : "80305392769921",
+      "name" : "Users",
+      "otherAttributes" : {
+      }
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
 ```
 
 XML
 
+Request with marker and groupName
+
 ```
 HTTP/1.1 200 OK
 Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=10C0D5531A322E76410588242947F78D; Path=/; Secure
 Cache-Control: no-cache
 Pragma: no-cache
 Expires: -1
 Content-Type: application/xml
-Content-Length: 294
-Date: Mon, 01 Aug 2011 18:25:10 GMT
-Connection: close
- 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><groups xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0"><group id="583891759678" name="HaneefGroup3"><description>A Description of the group1</description></group></groups>
-```
+Content-Length: 332
+Date: Wed, 31 Oct 2012 16:44:21 GMT
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><groups xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom"/>
+```  
+
 
 **Error Response**
 
@@ -1195,13 +1232,25 @@ Please refer to error response body for additional details.
 | 400 | Bad Request | Malformed request in URI   |  
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.    |  
 | 403 | Forbidden | Disabled or suspended user making the request |  
-| 404 | Not Found | The specified domainId or groupId within the marker was not found.   |  
+| 404 | Not Found | The specified domainId or groupId within the marker was not found. Or both groupId and groupName is specified   |  
 | 500 | Internal Server Error | The server encountered a problem while processing the request|  
 | 503 | Service Unavailable | The server is unavailable to process the request |  
 
 **Response Data**
 
 JSON
+
+```
+{
+  "badRequest" : {
+    "code" : 400,
+    "details" : "Bad input request : Filters groupId and groupName are mutually exclusive.  You can't use both at the same time",
+    "message" : "Bad request",
+    "otherAttributes" : {
+    }
+  }
+}
+```
 
 ```
 {
@@ -1230,66 +1279,72 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 **Additional Notes**
 
 
+## Get Subscribe able Services for a Domain 
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/subscribeableServices?serviceName={serviceName}&endpointTemplateId={templateId}
+*Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
-## {getservicesforadomain}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
+This API returns all subscribe able services that are available for the given {domainId} . It can also filter the result based on service name or endpoint template id. In request, either 'serviceName' filter or 'serviceEndpointId' filter is to be used. If both of filter values are provided, then error is returned back. This is essentially endpoint template data with some additional subscription specific attributes.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *serviceName (Optional)* - string - Use service name if need to get subscrible data for all endpoints within that service.
+
+* *endpointTemplateId (Optional)* - string - User endpoint template Id to get specific endpoint subscrible able data
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+See schema file for more details on the response data structure.
 
-{List all the attributes that comprises the data structure}
+This call does not require a request body.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/subscribeableServices HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
 ```
 
 XML
 
 ```
-{xml data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/domains/64521341789596/subscribeableServices HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4f46a309b0bebb59e36f663f
+Accept: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 Optional:
 
 JSON
 
+With serviceName filter
 ```
-{json data structure here}
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/subscribeableServices?serviceName=Compute HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
 ```
 
-XML
-
-```
-{xml data structure here}
-```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
+The response is a list of subscribe able services for the domain. Results are filtered by serviceName if serviceName is provided. Result will include single subscribe able service as identified endpoint template id if its provided in query.
 
 **Status Code**
 
@@ -1297,31 +1352,1323 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+{"subscribeableServices": {
+   "otherAttributes": {},
+   "subscribeableService":    [
+            {
+         "adminURL": "https://nv-aw2az1-manage0009.uswest.hpcloud.net/v1.1/",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "100",
+         "name": "Compute",
+         "otherAttributes": {},
+         "publicURL": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+         "publicURL2": "https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+         "region": "az-1.region-a.geo-1",
+         "releaseState": "public",
+         "type": "compute",
+         "version":          {
+            "id": "1.1",
+            "list": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://nv-aw2az2-manage0009.uswest.hpcloud.net/v1.1/",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "110",
+         "name": "Compute",
+         "otherAttributes": {},
+         "publicURL": "https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+         "publicURL2": "https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+         "region": "az-2.region-a.geo-1",
+         "releaseState": "public",
+         "type": "compute",
+         "version":          {
+            "id": "1.1",
+            "list": "https://az-2.region-a.geo-1.compute.hpcloudsvc.com",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "111",
+         "name": "Compute",
+         "otherAttributes": {},
+         "publicURL": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+         "publicURL2": "https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+         "region": "az-3.region-a.geo-1",
+         "releaseState": "public",
+         "type": "compute",
+         "version":          {
+            "id": "1.1",
+            "list": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "120",
+         "name": "Object Storage",
+         "otherAttributes": {},
+         "publicURL": "https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/%tenant_id%",
+         "region": "region-a.geo-1",
+         "releaseState": "public",
+         "type": "object-store",
+         "version":          {
+            "id": "1.0",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://region-a.geo-1.identity.hpcloudsvc.com/v2.0/",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": true,
+         "id": "130",
+         "internalURL": "https://region-a.geo-1.identity-internal.hpcloudsvc.com/v2.0/",
+         "name": "Identity",
+         "otherAttributes": {},
+         "publicURL": "https://region-a.geo-1.identity.hpcloudsvc.com/v2.0/",
+         "region": "region-a.geo-1",
+         "releaseState": "public",
+         "type": "identity",
+         "version":          {
+            "id": "2.0",
+            "list": "https://region-a.geo-1.identity.hpcloudsvc.com/extension",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://nv-aw2az1-manage0009.uswest.hpcloud.net/v1.1/",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "140",
+         "name": "Block Storage",
+         "otherAttributes": {},
+         "publicURL": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+         "region": "az-1.region-a.geo-1",
+         "releaseState": "public",
+         "type": "volume",
+         "version":          {
+            "id": "1.1",
+            "list": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://nv-aw2az2-manage0009.uswest.hpcloud.net/v1.1/",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "141",
+         "name": "Block Storage",
+         "otherAttributes": {},
+         "publicURL": "https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+         "region": "az-2.region-a.geo-1",
+         "releaseState": "public",
+         "type": "volume",
+         "version":          {
+            "id": "1.1",
+            "list": "https://az-2.region-a.geo-1.compute.hpcloudsvc.com",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "142",
+         "name": "Block Storage",
+         "otherAttributes": {},
+         "publicURL": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+         "region": "az-3.region-a.geo-1",
+         "releaseState": "public",
+         "type": "volume",
+         "version":          {
+            "id": "1.1",
+            "list": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "150",
+         "name": "CDN",
+         "otherAttributes": {},
+         "publicURL": "https://region-a.geo-1.cdnmgmt.hpcloudsvc.com/v1.0/",
+         "region": "region-a.geo-1",
+         "releaseState": "public",
+         "type": "hpext:cdn",
+         "version":          {
+            "id": "1.0",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://glance1.uswest.hpcloud.net:9292/v1.0",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "160",
+         "name": "Image Management",
+         "otherAttributes": {},
+         "region": "az-1.region-a.geo-1",
+         "releaseState": "public",
+         "type": "image",
+         "version":          {
+            "id": "1.0",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://glance2.uswest.hpcloud.net:9292/v1.0",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "170",
+         "name": "Image Management",
+         "otherAttributes": {},
+         "region": "az-2.region-a.geo-1",
+         "releaseState": "public",
+         "type": "image",
+         "version":          {
+            "id": "1.0",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://glance3.uswest.hpcloud.net:9292/v1.0",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "180",
+         "name": "Image Management",
+         "otherAttributes": {},
+         "region": "az-3.region-a.geo-1",
+         "releaseState": "public",
+         "type": "image",
+         "version":          {
+            "id": "1.0",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "190",
+         "name": "Relational DB MySQL",
+         "otherAttributes": {},
+         "publicURL": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com",
+         "region": "region-a.geo-1",
+         "releaseState": "beta",
+         "type": "hpext:dbaas",
+         "version":          {
+            "id": "1.0",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://nv-aw2az1-manage0009.uswest.hpcloud.net/v1.1/",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "112",
+         "name": "EC2",
+         "otherAttributes": {},
+         "publicURL": "https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+         "region": "az-1.region-a.geo-1",
+         "releaseState": "public",
+         "type": "ec2",
+         "version":          {
+            "id": "1.1",
+            "list": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://nv-aw2az2-manage0009.uswest.hpcloud.net/v1.1/",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "113",
+         "name": "EC2",
+         "otherAttributes": {},
+         "publicURL": "https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+         "region": "az-2.region-a.geo-1",
+         "releaseState": "public",
+         "type": "ec2",
+         "version":          {
+            "id": "1.1",
+            "list": "https://az-2.region-a.geo-1.compute.hpcloudsvc.com",
+            "otherAttributes": {}
+         }
+      },
+            {
+         "adminURL": "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
+         "canSubscribe": true,
+         "enabled": true,
+         "endpointReleaseState": "public",
+         "global": false,
+         "id": "114",
+         "name": "EC2",
+         "otherAttributes": {},
+         "publicURL": "https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+         "region": "az-3.region-a.geo-1",
+         "releaseState": "public",
+         "type": "ec2",
+         "version":          {
+            "id": "1.1",
+            "list": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
+            "otherAttributes": {}
+         }
+      }
+   ]
+}}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=4ADA3703B5E45F3C198E4E4F0CC9A4D8; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 5128
+Date: Thu, 23 Feb 2012 20:37:58 GMT
+ 
+<subscribeableServices xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
+   <subscribeableService releaseState="public" endpointReleaseState="public" canSubscribe="true" id="100" type="compute" name="Compute" region="az-1.region-a.geo-1" publicURL="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" publicURL2="https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" adminURL="https://nv-aw2az1-manage0009.uswest.hpcloud.net/v1.1/" global="false" enabled="true">
+      <version id="1.1" list="https://az-1.region-a.geo-1.compute.hpcloudsvc.com"/>
+      <subscribedInfo subscribedOn="2011-10-21T22:04:11.000Z" tenantId="36733265821255" status="deleted"/>
+      <subscribedInfo subscribedOn="2011-10-21T22:05:43.000Z" tenantId="79402136023481" status="enabled"/>
+   </subscribeableService>
+   <subscribeableService releaseState="public" endpointReleaseState="public" canSubscribe="true" id="110" type="compute" name="Compute" region="az-2.region-a.geo-1" publicURL="https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" publicURL2="https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" adminURL="https://nv-aw2az2-manage0009.uswest.hpcloud.net/v1.1/" global="false" enabled="true">
+      <version id="1.1" list="https://az-2.region-a.geo-1.compute.hpcloudsvc.com"/>
+   </subscribeableService>
+   <subscribeableService releaseState="public" endpointReleaseState="public" canSubscribe="true" id="111" type="compute" name="Compute" region="az-3.region-a.geo-1" publicURL="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" publicURL2="https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" adminURL="https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/" global="false" enabled="true">
+      <version id="1.1" list="https://az-3.region-a.geo-1.compute.hpcloudsvc.com"/>
+   </subscribeableService>
+   <subscribeableService releaseState="public" endpointReleaseState="public" id="120" type="object-store" name="Object Storage" region="region-a.geo-1" publicURL="https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/%tenant_id%" adminURL="https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/" global="false" enabled="true">
+      <version id="1.0"/>
+      <subscribedInfo subscribedOn="2011-10-25T20:51:49.000Z" tenantId="72290583996765"/>
+   </subscribeableService>
+   <subscribeableService releaseState="public" endpointReleaseState="public" canSubscribe="true" id="130" type="identity" name="Identity" region="region-a.geo-1" publicURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0/" internalURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0/" adminURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0/" global="true" enabled="true">
+      <version id="2.0" list="https://region-a.geo-1.identity.hpcloudsvc.com/extension"/>
+   </subscribeableService>
+   <subscribeableService releaseState="public" endpointReleaseState="public" canSubscribe="true" id="140" type="hpext:block-store" name="Block Storage" region="az-1.region-a.geo-1" publicURL="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" adminURL="https://nv-aw2az1-manage0009.uswest.hpcloud.net/v1.1/" global="false" enabled="true">
+      <version id="1.1" list="https://az-1.region-a.geo-1.compute.hpcloudsvc.com"/>
+   </subscribeableService>
+   <subscribeableService releaseState="public" endpointReleaseState="public" canSubscribe="true" id="141" type="hpext:block-store" name="Block Storage" region="az-2.region-a.geo-1" publicURL="https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" adminURL="https://nv-aw2az2-manage0009.uswest.hpcloud.net/v1.1/" global="false" enabled="true">
+      <version id="1.1" list="https://az-2.region-a.geo-1.compute.hpcloudsvc.com"/>
+   </subscribeableService>
+   <subscribeableService releaseState="public" endpointReleaseState="public" canSubscribe="true" id="142" type="hpext:block-store" name="Block Storage" region="az-3.region-a.geo-1" publicURL="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" adminURL="https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/" global="false" enabled="true">
+      <version id="1.1" list="https://az-3.region-a.geo-1.compute.hpcloudsvc.com"/>
+   </subscribeableService>
+   <subscribeableService releaseState="preview" endpointReleaseState="public" canSubscribe="false" id="150" type="hpext:cdn" name="CDN" region="region-a.geo-1" publicURL="https://region-a.geo-1.cdnmgmt.hpcloudsvc.com/v1.0/" global="false" enabled="true">
+      <version id="1.0"/>
+   </subscribeableService>
+   <subscribeableService releaseState="public" endpointReleaseState="public" canSubscribe="true" id="160" type="image" name="Image Management" region="az-1.region-a.geo-1" adminURL="https://glance1.uswest.hpcloud.net:9292/v1.0" global="false" enabled="true">
+      <version id="1.0"/>
+   </subscribeableService>
+   <subscribeableService releaseState="public" endpointReleaseState="public" canSubscribe="true" id="170" type="image" name="Image Management" region="az-2.region-a.geo-1" adminURL="https://glance2.uswest.hpcloud.net:9292/v1.0" global="false" enabled="true">
+      <version id="1.0"/>
+   </subscribeableService>
+   <subscribeableService releaseState="public" endpointReleaseState="public" canSubscribe="true" id="180" type="image" name="Image Management" region="az-3.region-a.geo-1" adminURL="https://glance3.uswest.hpcloud.net:9292/v1.0" global="false" enabled="true">
+      <version id="1.0"/>
+   </subscribeableService>
+</subscribeableServices>
+```
+
+Optional
+
+JSON
+
+With serviceName filter
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=57031777BBA23809F2B7B172E342A8F9; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 2265
+Date: Wed, 31 Oct 2012 18:13:14 GMT
+
+{
+  "subscribeableServices" : {
+    "otherAttributes" : {
+    },
+    "subscribeableService" : [ {
+      "adminURL" : "https://nv-aw2az1-manage0009.uswest.hpcloud.net/v1.1/",
+      "canSubscribe" : true,
+      "enabled" : true,
+      "endpointReleaseState" : "public",
+      "global" : false,
+      "id" : "100",
+      "name" : "Compute",
+      "otherAttributes" : {
+      },
+      "publicURL" : "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+      "publicURL2" : "https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+      "region" : "az-1.region-a.geo-1",
+      "releaseState" : "public",
+      "type" : "compute",
+      "version" : {
+        "id" : "1.1",
+        "list" : "https://az-1.region-a.geo-1.compute.hpcloudsvc.com",
+        "otherAttributes" : {
+        }
+      }
+    }, {
+      "adminURL" : "https://nv-aw2az2-manage0009.uswest.hpcloud.net/v1.1/",
+      "canSubscribe" : true,
+      "enabled" : true,
+      "endpointReleaseState" : "public",
+      "global" : false,
+      "id" : "110",
+      "name" : "Compute",
+      "otherAttributes" : {
+      },
+      "publicURL" : "https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+      "publicURL2" : "https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+      "region" : "az-2.region-a.geo-1",
+      "releaseState" : "public",
+      "type" : "compute",
+      "version" : {
+        "id" : "1.1",
+        "list" : "https://az-2.region-a.geo-1.compute.hpcloudsvc.com",
+        "otherAttributes" : {
+        }
+      }
+    }, {
+      "adminURL" : "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
+      "canSubscribe" : true,
+      "enabled" : true,
+      "endpointReleaseState" : "public",
+      "global" : false,
+      "id" : "111",
+      "name" : "Compute",
+      "otherAttributes" : {
+      },
+      "publicURL" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+      "publicURL2" : "https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+      "region" : "az-3.region-a.geo-1",
+      "releaseState" : "public",
+      "type" : "compute",
+      "version" : {
+        "id" : "1.1",
+        "list" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
+        "otherAttributes" : {
+        }
+      }
+    } ]
+  }
+}
+```
+
+
+**Error Response**
+
+Please refer to error response body for additional details.
+
+**Status Code**
+
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI   |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.    |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Not Found | The specified domainId or tenantId filter is not found   |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request|  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 400 Bad Request
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=670399F2C2059BD56F33D988AE8A2712; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 181
+Date: Wed, 31 Oct 2012 18:16:24 GMT
+Connection: close
+
+{
+  "badRequest" : {
+    "code" : 400,
+    "details" : "Invalid service name specified, serviceName = Computer",
+    "message" : "BAD_REQUEST",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+```
+HTTP/1.1 404 Not Found
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=274CFEB4593E9BB8D00C8DED21E3E75B; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 193
+Date: Wed, 31 Oct 2012 18:15:44 GMT
+
+{
+  "itemNotFound" : {
+    "code" : 404,
+    "details" : "Domain with domainId : 66751536630362 does not exist in the System",
+    "message" : "NOT_FOUND",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/subscribeableServices?serviceName=Compute 
+```
+
+**Additional Notes**
+
+
+
+## Get Service Activations for a Domain 
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/services?tenantId={tenantId}
+*Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
+
+This API returns all services that have been activated for the given {domainId} . It can also filter the result based on tenantId. 
+
+**Request Data**
+
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+**URL Parameters**
+
+
+* *tenantId (Optional)* - string - tenantId to list service activation for that tenant
+
+**Data Parameters**
+
+See schema file for more details on the response data structure.
+
+This call does not require a request body.
+
+
+JSON
+
+```
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/domains/23268133247776/services?tenantId=35871429575842 HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4ea802a5b0be7e989230032e
+Accept: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+```
+
+XML
+
+```
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/domains/23268133247776/services HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4ea802a5b0be7e989230032e
+Accept: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+```
+
+Optional:
+
+JSON
+
+When no activated services are there for a domain
+```
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/services HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
+```
+
+
+
+**Success Response**
+
+The response is a list of activated services for the domain (filtered by tenantId if tenantId is provided)
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 686
+Date: Wed, 26 Oct 2011 13:14:07 GMT
+ 
+{
+  "activatedServices" : {
+    "anies" : null,
+    "activatedService" : [ {
+      "id" : null,
+      "otherAttributes" : {
+      },
+      "region" : "az-1.region-a.geo-1",
+      "serviceName" : "Compute",
+      "serviceType" : "compute",
+      "status" : "enabled",
+      "subscribedOn" : "2011-10-25T20:50:13.000Z",
+      "tenantId" : "35871429575842",
+      "endpointTemplateId" : "100"
+    }, {
+      "id" : null,
+      "otherAttributes" : {
+      },
+      "region" : "az-2.region-a.geo-1",
+      "serviceName" : "Compute",
+      "serviceType" : "compute",
+      "status" : "enabled",
+      "subscribedOn" : "2011-10-25T20:50:28.000Z",
+      "tenantId" : "35871429575842",
+      "endpointTemplateId" : "110"
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=12934DBA01E8E9F9A3E783F34C75F700; Path=/; Secure
+Content-Type: application/xml
+Content-Length: 894
+Date: Wed, 26 Oct 2011 13:20:14 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<activatedServices xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" 
+xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" 
+xmlns:ns4="http://docs.openstack.org/common/api/v1.0" 
+xmlns:ns5="http://www.w3.org/2005/Atom">
+<activatedService serviceName="Compute" serviceType="compute" region="az-1.region-a.geo-1" subscribedOn="2011-10-25T20:50:13.000Z" tenantId="35871429575842" status="enabled" endpointTemplateId="100"/>
+<activatedService serviceName="Compute" serviceType="compute" region="az-2.region-a.geo-1" subscribedOn="2011-10-25T20:50:28.000Z" tenantId="35871429575842" status="enabled" endpointTemplateId="110"/>
+<activatedService serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2011-10-25T20:51:49.000Z" tenantId="90260810095453" status="enabled" endpointTemplateId="120"/>
+</activatedServices>
+```
+
+Optional
+
+JSON
+
+When no activated services are there for a domain
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=F7E5F28138F5A7337CA8434B4FEA17BE; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 65
+Date: Wed, 31 Oct 2012 16:06:04 GMT
+
+{
+  "activatedServices" : {
+    "otherAttributes" : {
+    }
+  }
+}
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
+Please refer to error response body for additional details.
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI   |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.    |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Not Found | The specified domainId or tenantId filter is not found   |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request|  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
+
+**Response Data**
+
+JSON
+
+```
+{
+  "itemNotFound" : {
+    "code" : 404,
+    "details" : "Domain with domainId : 66751536630362 does not exist in the System",
+    "message" : "NOT_FOUND",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/services
+```
+
+**Additional Notes**
+
+
+
+## Get Tenants for a Domain
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants?limit=pagesize&marker=tenantId
+*Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
+
+This REST API returns all tenants of a {domainId} and takes a "marker" and "limit" parameter to limit the number of Tenants in the response.
+
+**Request Data**
+
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+**URL Parameters**
+
+* *limit (Optional)* - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker (Optional)* - string - the resource Id of the last item in the previous list
+
+**Data Parameters**
+
+See schema file for more details on the response data structure.  
+
+This call does not require a request body
+
+JSON
+
+```
+GET /v2.0/HP-IDM/v1.0/domains/29649421790262/tenants HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e8f7d182cdcb96406c8c61b
+Host: localhost:9999
+Connection: keep-alive
+```
+
+XML
+
+```
+GET /V2.0/HP-IDM/v1.0/domains/798477662343/tenants HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
+```
+
+Optional:
+
+
+**Success Response**
+
+The response is a list of tenant resources for the domain. 
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 367
+Date: Fri, 07 Oct 2011 22:45:44 GMT
+ 
+{
+  "tenants": {
+    "anies": null,
+    "otherAttributes": {
+ 
+    },
+    "tenant": [
+      {
+        "description": "Tenant for hosting Time Warner Applications & services",
+        "domainId": "29649421790262",
+        "name": "Time Warner Tenant Services",
+        "otherAttributes": {
+ 
+        },
+        "status": "enabled",
+        "tenantId": "96488406679080"
+      }
+    ]
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 525
+Date: Tue, 16 Aug 2011 21:24:54 GMT
+ 
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<tenants xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"
+xmlns:ns2="http://www.w3.org/2005/Atom"
+xmlns:ns3="http://docs.openstack.org/identity/api/v2.0">
+  <tenant status="enabled" domainId="798477662343"
+  tenantId="842515505915"
+  description="Tenant for Sales service"
+  name="Forecasting Tenant" />
+  <tenant status="enabled" domainId="798477662343"
+  tenantId="225260164476"
+  description="Tenant for Forecasting service"
+  name="Sales Tenant" />
+</tenants>
+```
+
+**Error Response**
+
+Please refer to error response body for additional details.
+
+**Status Code**
+
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI   |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.    |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Not Found | The specified domainId or marker is not found   |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request|  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
+
+**Response Data**
+
+JSON
+
+```
+{
+  "itemNotFound" : {
+    "code" : 404,
+    "details" : "Domain does not exist",
+    "message" : "Not found",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630362/tenants
+```
+
+**Additional Notes**
+
+
+
+## Get Users for a Domain
+#### {HTTP Verb: GET, POST, DELETE, PUT} [HPKeystoneExtensionBaseURI]/domains/{domainId}/users?limit=pagesize&marker=userId&excludeGroups=groupid1,groupdid2&excludeRoles=roleId1,roleId2&userId=userId&userName=userName&excludeTenantId=tenantid1,tenantId2
+*Privilege Level: System Adminstrator (SA), Domain Admin (DA)*
+
+This API returns all users of a {domainId} .  The Api results can be filtered using filters which are specified as query parameters.
+
+**Request Data**
+
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+**URL Parameters**
+
+* *limit (Optional)* - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker (Optional)* - string - the resource Id of the last item in the previous list
+
+Following filters can be used to filter the response data.
+
+*Inclusion-Filters*
+* *userId (Optional)* - string - include results for given userId. Filters userId and userName are mutually exclusive. You can filter either using userId or using userName.
+* *userName (Optional)* - string - include results for given userName. Filters userId and userName are mutually exclusive. You can filter either using userId or using userName.  
+
+*Exclusion Filters*
+* *excludeRoles (Optional)* - string - comma separated roleId to exclude 
+* *excludeGroups (Optional)* - string - comma separated groupId to exclude 
+* *excludeTenantId (Optional)* - string - tenantId to exclude
+
+
+**Data Parameters**
+
+See schema file for more details on the response data structure.
+
+This call does not require a request body
+
+JSON
+
+```
+GET /v2.0/HP-IDM/v1.0/domains/53615830984009/users HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e8ccde52cdc999e9328f761
+Host: localhost:9999
+Connection: keep-alive
+```
+
+XML
+
+```
+GET /v2.0/HP-IDM/v1.0/domains/798477662343/users HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
+```
+
+Optional:
+
+JSON
+
+Request with excludeRoles
+```
+GET /v2.0/HP-IDM/v1.0/domains/53615830984009/users?excludeRoles=RoleId1,RoleId2 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e8ccde52cdc999e9328f761
+Host: localhost:9999
+Connection: keep-alive
+```
+
+Request with excludeGroups
+```
+GET /v2.0/HP-IDM/v1.0/domains/53615830984009/users?excludeGroups=GroupId1,GroupId22 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e8ccde52cdc999e9328f761
+Host: localhost:9999
+Connection: keep-alive
+```
+
+XML
+
+Request with exclusion filter
+```
+GET /v2.0/HP-IDM/v1.0/domains/798477662343/users?excludeGroups=000002002,000002001 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
+```
+
+
+Request with userId filter
+```
+GET /v2.0/HP-IDM/v1.0/domains/798477662343/users?userId=12345 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
+```
+
+**Success Response**
+
+List of users returned for given input criteria with http status code 200.
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 716
+Date: Wed, 05 Oct 2011 21:37:04 GMT
+ 
+{
+  "users" : {
+    "anies" : null,
+    "otherAttributes" : {
+    },
+    "user" : [ {
+      "roles" : null,
+      "addressLine1" : "128, Hollywood Blvd",
+      "addressLine2" : null,
+      "city" : "Los Angeles",
+      "company" : null,
+      "country" : "USA",
+      "domainId" : "53615830984009",
+      "emailAddress" : "larryking@timewarner.com",
+      "firstName" : "Larry",
+      "lastName" : "King",
+      "otherAttributes" : {
+      },
+      "password" : null,
+      "phone" : "1-800-555-1212",
+      "state" : "CA",
+      "status" : "enabled",
+      "userId" : "27000063617046",
+      "username" : "larryking@timewarner.com",
+      "website" : "http://www.timewarner.com",
+      "zip" : "90210"
+    } ]
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 822
+Date: Wed, 10 Aug 2011 19:35:24 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+  <user domainId="798477662343" status="enabled" isDomainOwner="true" emailAddress="johndoe@papsi.com" website="http://www.pepsi.com" phone="1-800-555-1212" zip="89072" country="USA" state="GA" city="Atlanta" addressLine1="1, Pepsi Way" accountId="627893056455" username="johndoe@papsi.com" name="John Doe"/>
+  <user domainId="798477662343" status="enabled" emailAddress="amymiller@papsi.com" website="http://www.pepsi.com" phone="1-800-555-1212" zip="89072" country="USA" state="GA" city="Atlanta" addressLine1="1, Pepsi Way" accountId="968754602297" username="amymiller@papsi.com" name="Amy Miller"/>
+</users>
+```
+
+**Error Response**
+
+Please refer to error response body for additional details.
+
+**Status Code**
+
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI   |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.    |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Not Found | The specified domainId or marker is not found   |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request|  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
+
+**Response Data**
+
+JSON
+
+```
+{
+  "itemNotFound" : {
+    "code" : 404,
+    "details" : "Domain does not exist",
+    "message" : "Not found",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/798477662343/users?userId=12345
+```
+
+**Additional Notes**
+
+
+
+## List Role Definitions (Deprecated)
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/roles?limit=pagesize&marker=roleId
+*Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
+
+This API is used to list all the roles defined in the domain and takes a "marker" and "limit" parameter to limit the number of roles in the response.
+
+**Request Data**
+
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+**URL Parameters**
+
+* *limit (Optional)* - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker (Optional)* - string - the resource Id of the last item in the previous list
+
+**Data Parameters**
+
+See schema file for more details on the response data structure.
+
+This call does not require a request body
+
+JSON
+
+```
+GET /v2.0/HP-IDM/v1.0/domains/641564254582/roles HTTP/1.1
+Connection: close
+Accept: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
+```
+
+XML
+
+```
+GET /v2.0/HP-IDM/v1.0/domains/641564254582/roles HTTP/1.1
+Connection: close
+Accept: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
+```
+
+Optional:
+
+
+
+**Success Response**
+
+List of roles with http status code 200.
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+
+JSON
+
+```
+{"roles": {"role": [
+      {
+      "roleId": "xxxxxxxxxxxxxx",
+      "roleName": "role01",
+      "description": "role01- description",
+      "serviceId" : "xxxxxxxxxxxxxx",
+      "domainId": "xxxxxxxxxxxxxx",
+      "tenantId": "12345678909876"
+   }, {
+      "roleId": "xxxxxxxxxxxxxx",
+      "roleName": "role02",
+      "description": "role02- description",
+      "serviceId" : "xxxxxxxxxxxxxx",
+      "domainId": "xxxxxxxxxxxxxx",
+      "tenantId": "12345678909876"
+   }, {
+      "roleId": "xxxxxxxxxxxxxx",
+      "roleName": "role03",
+      "description": "role03- description",
+      "serviceId" : "xxxxxxxxxxxxxx",
+      "domainId": "xxxxxxxxxxxxxx",
+      "tenantId": "12345678909876"
+   },
+]}
+```
+
+XML
+
+```
+<roles xmlns="http://hpcloud.hp.com/identity/api/ext/hp/v1.0">
+   <role>
+      <roleId>xxxxxxxxxxxxxx</roleId>
+      <roleName>role01</roleName>
+      <description>role01- description</description>
+      <serviceId>xxxxxxxxxxxxxx</serviceId>
+      <domainId>xxxxxxxxxxxxxx</domainId>
+      <tenantId>12345678909876</tenantId>
+   </role>
+   <role>
+      <roleId>xxxxxxxxxxxxxx</roleId>
+      <roleName>role02</roleName>
+      <description>role02- description</description>
+      <serviceId>xxxxxxxxxxxxxx</serviceId>
+      <domainId>xxxxxxxxxxxxxx</domainId>
+      <tenantId>12345678909876</tenantId>
+   </role>
+   <role>
+      <roleId>xxxxxxxxxxxxxx</roleId>
+      <roleName>role03</roleName>
+      <description>role03- description</description>
+      <serviceId>xxxxxxxxxxxxxx</serviceId>
+      <domainId>xxxxxxxxxxxxxx</domainId>
+      <tenantId>12345678909876</tenantId>
+   </role>
+</roles>
+```
+
+**Error Response**
+
+Please refer to error response body for additional details.
+
+**Status Code**
+
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI   |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.    |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Not Found | The specified domainId or marker is not found   |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request|  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
 
 **Response Data**
 
@@ -1348,73 +2695,67 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roles
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-## {gettenantsforadomain}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+## Transfer Ownership of a Domain
+#### PUT [HPKeystoneExtensionBaseURI]/domains/{domainId}/owner/{userId}	
+*Privilege Level: System Adminstrator (SA)*
 
-{Description about the method call}
+A Domain has a owner, it is usually the first user of the Domain or the self registered user during the self registration process. This REST API transfers the domain ownership from one valid User of that Domain to another valid User of the Domain. 
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+* *domanId* - string - {domanId} of the Domain for which the ownership transfer should happen.
+* *userId* - string - {userId} of the new owner of the Domain.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+See schema file for more details on the response data structure.
 
-{List all the attributes that comprises the data structure}
+This call does not require a request body
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+PUT /v2.0/HP-IDM/v1.0/domains/29649421790262/owner/60414337132139 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e8f7d182cdcb96406c8c61b
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 XML
 
 ```
-{xml data structure here}
+PUT /v2.0/HP-IDM/v1.0/domains/662648896689/owner/129024620458 HTTP/1.1
+Accept: application/xml
+account_id: 000000003001
+Content-Type: application/xml
+domain_id: 000000001001
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 Optional:
 
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
+Transfer ownership of a Domain with http status code 200
 
 **Status Code**
 
@@ -1422,31 +2763,76 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 603
+Date: Fri, 07 Oct 2011 22:55:55 GMT
+ 
+{
+  "user": {
+    "roles": null,
+    "addressLine1": "128, Hollywood Blvd",
+    "addressLine2": null,
+    "city": "Los Angeles",
+    "company": null,
+    "country": "USA",
+    "domainId": "29649421790262",
+    "emailAddress": "larryking3@timewarner.com",
+    "firstName": "Larry",
+    "lastName": "King III",
+    "otherAttributes": {
+ 
+    },
+    "password": null,
+    "phone": "1-800-555-1212",
+    "state": "CA",
+    "status": "enabled",
+    "userId": "60414337132139",
+    "username": "larryking3@timewarner.com",
+    "website": "http://www.timewarner.com",
+    "zip": "90210"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 437
+Date: Tue, 30 Aug 2011 00:06:02 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" name="Tom Riddle" username="tomriddle@timewarner.com" userId="129024620458" addressLine1="128, Hollywood Blvd" city="Los Angeles" state="CA" country="USA" zip="90210" phone="1-800-555-1212" website="http://www.timewarner.com" emailAddress="tomriddle@timewarner.com" status="enabled" domainId="662648896689"/>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
+Please refer to error response body for additional details.
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI   |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.    |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Not Found | The specified domainId or userId is not found   |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request|  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
 
 **Response Data**
 
@@ -1473,73 +2859,77 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/662648896689/owner/129024620458 
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
+## Update a Domain 
+#### PUT [HPKeystoneExtensionBaseURI]/domains/{domainId}
+*Privilege Level: System Adminstrator (SA), Domain Admin (DA\*)*
 
-## {getusersforadomain}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+Allows update of an existing domain using the {domainId} and request body. Does not allow update or change of domainID.
 
-{Description about the method call}
+DA* indicates that only attributes returned on the list operation as defined by Domain-Tenant-User-Group Model can be edited
+
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+The request requires the updated Domain resource.  
+The response is the updated Domain resource.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+PUT /v2.0/HP-IDM/v1.0/domains/91177319722637 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e83a4532cdcb4bf5faa76ce
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 40
+ 
+{
+  "domain": {
+    "phone": "1-800-NO-DISNEY"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+PUT /v2.0/HP-IDM/v1.0/domains/26856794720485 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4ef385b32cdc64f2eead137c
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 384
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<domain xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" phone="1-800-NO-DISNEY" addressLine2="Studio Lanes"/>
 ```
 
 Optional:
 
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
+Updated domain resource is returned with http status code 200
 
 **Status Code**
 
@@ -1547,35 +2937,102 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
+
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 461
+Date: Wed, 28 Sep 2011 22:49:56 GMT
+ 
+ 
+{
+  "domain" : {
+    "anies" : null,
+    "addressLine1" : "128, Hollywood Blvd",
+    "addressLine2" : null,
+    "city" : "Los Angeles",
+    "company" : null,
+    "country" : "USA",
+    "domainId" : "91177319722637",
+    "emailAddress" : "owner@timewarner.com",
+    "name" : "Time Warner Inc",
+    "otherAttributes" : {
+    },
+    "phone" : "1-800-NO-DISNEY",
+    "state" : "CA",
+    "status" : "enabled",
+    "website" : "Time Warner",
+    "zip" : "90210"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 508
+Date: Thu, 22 Dec 2011 19:51:00 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<domain xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" domainId="26856794720485" name="action-king-DOMAIN" emailAddress="actionking@hp.com" addressLine2="Studio Lanes" company="action-king" phone="1-800-NO-DISNEY" status="enabled"/>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
+Please refer to error response body for additional details.
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI   |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.    |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Not Found | The specified {domainId} in request URI is not found   |  
+| 409 | Conflict | The updated domain name already exists in the system   |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request|  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
 
 **Response Data**
 
 JSON
+
+```
+{
+  "IdentityFault" : {
+    "message" : "Conflict",
+    "details" : "Domain already exists",
+    "code" : 409,
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+```
+{
+  "itemNotFound" : {
+    "code" : 404,
+    "details" : "Domain does not exist",
+    "message" : "Not found",
+    "otherAttributes" : {
+    }
+  }
+}
+```
 
 ```
 {
@@ -1598,386 +3055,10 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cert dev_hpmiddleware.pem  -XPUT -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" -H "Content-type: application/json" -d '{  "domain" : {  "name" : "Sees Candies 61", "phone": "1-800-NO-DISNEY"} }' https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-## {listroles}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-## {transferownershipofadomain}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-## {updateadomain}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
