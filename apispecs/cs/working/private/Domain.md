@@ -168,6 +168,7 @@ curl -k  --cert dev_hpmiddleware.pem  -I -H "Accept: application/json" "https://
 
 
 
+
 ## Create a Domain 
 #### GET [HPKeystoneExtensionBaseURI]/domains 
 *Privilege Level: System Adminstrator (SA)*
@@ -176,7 +177,7 @@ Creates a domain using the specified request body. A response body is also retur
 
 **Request Data**
 
-This API does require http header X-Auth-Token
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
 **URL Parameters**
 
@@ -404,7 +405,7 @@ Deletes the specified domain by its {domainID}. This API deletes the Users, Tena
 
 **Request Data**
 
-This API does require http header X-Auth-Token
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
 **URL Parameters**
 
