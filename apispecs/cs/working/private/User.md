@@ -269,11 +269,13 @@ Date: Tue, 09 Aug 2011 20:53:54 GMT
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 500 - Internal Server Error
-* 503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | <reason> |
+| 401 | Unauthorized | <reason> |
+| 403 | Forbidden | <reason> |
+| 500 | Internal Server Error | <reason> |
+| 503 | Service Unavailable | <reason> |
 
 **Response Data**
 
