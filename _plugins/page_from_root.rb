@@ -9,7 +9,6 @@ module Jekyll
     result = proceed.call
     result = File.join(args, CGI.unescape(page_instance.url))
     result = File.join(result, "index.html") if page_instance.url =~ /\/$/
-    puts result
     result
   end
 end
