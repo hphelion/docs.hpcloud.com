@@ -13,4 +13,20 @@ update-docs:
 server:
 	@ejekyll --server --auto
 
-.PHONY: add-tutorials update-tutorials
+prepare:
+	@echo "Building the site..."
+	@ejekyll --no-future
+
+optimize:
+	@echo "Minifying the CSS..."
+	@java -jar _build/yuicompressor.jar --verbose --type css -o _site/css/application.css _site/css/application.css
+	@echo "Minifying the HTML..."
+	@java -jar _build/htmlcompressor.jar -r --type html -o _site _site
+
+build: prepare optimize
+
+clean:
+	@echo "Removing _site directory"
+	@rm -rf _site
+
+.PHONY: add-tutorials update-tutorials add-docs update-docs server prepare optimize build clean
