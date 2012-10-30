@@ -10,4 +10,7 @@ add-docs:
 update-docs:
 	git subtree pull -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git master
 
+server:
+	@ejekyll --server --auto
+
 .PHONY: add-tutorials update-tutorials

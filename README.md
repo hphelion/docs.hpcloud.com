@@ -19,7 +19,10 @@ _Note: this project uses git flow with the addition of a QA branch._
 
 ## Dependencies
 
-_Coming soon_
+Before using this project you need the following dependencies.
+
+* [Jekyll](jekyllrb.com)
+* [jekyll_ext (a.k.a ejekyll)](https://github.com/rfelix/jekyll_ext)
 
 ## Usage
 
