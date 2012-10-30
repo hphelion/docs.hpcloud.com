@@ -29,8 +29,8 @@ Allows reading a list of all tenants across domains. This API supports paginatio
 **URL Parameters**
 
 * *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
-* *marker* (Optional)} - string - the resource Id of the last item in the previous list
-* *name* (Optional) - string - name of the tenant to be returned
+* *marker* (Optional) - string - the resource Id of the last item in the previous list.
+* *name* (Optional) - string - name of the tenant to be returned.
 
 **Data Parameters**
 
@@ -319,97 +319,149 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X HEAD -
 
 There is no response body returned in API response data. This API does not require http header X-Auth-Token and is protected by client certificate authentication.
 
-## {createatenant}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+## Create a Tenant
+#### POST [HPKeystoneExtensionBaseURI]/tenants 
+*Privilege Level: SA, DA*
 
-{Description about the method call}
+Creates a tenant using the specified request body. The provided tenant name MUST be unique in the system.  A response body is also returned with the new tenant information with a service generated tenantId.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+None.
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+* *description* - string - Description of the tenant being created.
+* *domainId* - string - The Id of the domain this tenant is a member of.
+* *name* - string - The name of the tenant being created.
+* *status* - string (Optional) - String to describe the initial status of this tenant (enabled/disabled).
 
 JSON
 
 ```
-{json data structure here}
+POST /v2.0/HP-IDM/v1.0/tenants HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e9767412cdcb18069188479
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 165
+ 
+{
+  "tenant": {
+    "description": "Payroll Tenant Services for TimeWarner",
+    "domainId": "47826457774667",
+    "name": "Payroll Tenant Services",
+    "status": "enabled"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+POST /v2.0/HP-IDM/v1.0/tenants HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 254
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" name="Time Warner Salesforce Services" domainId="27960688482075" status="enabled">
+  <description>Tenant for hosting Time Warner Salesforce Applications</description>
+</tenant>
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+* 200 - Created
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 252
+Date: Thu, 13 Oct 2011 22:51:31 GMT
+ 
+{
+  "tenant": {
+    "description": "Payroll Tenant Services for TimeWarner",
+    "domainId": "47826457774667",
+    "name": "Payroll Tenant Services",
+    "otherAttributes": {
+ 
+    },
+    "status": "enabled",
+    "tenantId": "34159634776038"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=709FDF3145EB4A85A2253B00AE39CD18; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 319
+Date: Wed, 28 Sep 2011 21:43:24 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" 
+name="HP Swift Tenant Services" 
+description="Tenant for hosting HR Applications &amp; services" 
+tenantId="76063089090850" 
+domainId="77759980331221" 
+status="enabled" 
+swiftAccountHash="1234bcdefgh"/>
+```
+
+XML response with swift account hash
+
+```
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 278
+Date: Fri, 19 Aug 2011 20:37:03 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" name="HR Tenant Services" description="Tenant for hosting HR Applications &amp; services" tenantId="309492202938" domainId="798477662343" status="enabled"/>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+* 400 - Bad Request
+* 401 - Unauthorized
+* 403 - Forbidden
+* 409 - Conflict
+* 500 - Internal Server Error
+* 503 - Service Unavailable
 
 **Response Data**
 
@@ -436,13 +488,8 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants" -d '{"tenant":{"description":"Payroll Tenant Services for TimeWarner","domainId":"47826457774667","name":"Payroll Tenant Services","status":"enabled"}}'
 ```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
 
 ## {deleteatenant}
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
