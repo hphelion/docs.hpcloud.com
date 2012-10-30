@@ -18,7 +18,6 @@ N/A
 
 None.
 
-
 ## Get All Tenants
 #### GET [HPKeystoneExtensionBaseURI]/tenants?name=tenantName&limit=pagesize&marker=tenantId
 *Privilege Level: SA*
@@ -198,130 +197,127 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-## {checktenantnameexistence}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+## Check for existence of tenant name
+#### HEAD [HPKeystoneExtensionBaseURI]/tenants?name=tenantName
+*Privilege Level: SA*
 
-{Description about the method call}
+Returns http status code indicating the result of tenantName existence check.
+
+This API does case sensitive tenantName lookup in system. It returns http status code 200 (Ok) when provided tenantName exists and returns 404 (not found) when provided tenantName is not found in the system. If provided tenantName is blank or missing, then it returns 204 (No content). The tenant name with extra spaces is converted to single space in-between words and then look up is done for its existence. So tenant name " Abc Image Service " and "ABC    Image service" are treated as same and will be found if entry is there in system. In system, the corresponding name is going to be stored as "abc image service" in a separate field.
+As this API just checks for existence of provided tenantName, it does not do look into status (or any other entity attribute) for case when matching tenant is found.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *name* - string - name of the tenant to check for existence of
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+This call does not require a request body.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
+XML/JSON Request and Response
 
 ```
-{json data structure here}
+HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/tenants?name=HP%20Cloud%20System%20Domain's-Tenant01 HTTP/1.1
+Accept-Encoding: gzip,deflate
+ 
+ 
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Length: 0
+Date: Tue, 21 Aug 2012 19:29:46 GMT
 ```
 
-XML
+XML/JSON Request and Response (case-insensitive lookup of above tenantName)
 
 ```
-{xml data structure here}
+HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/tenants?name=hP%20ClOUD%20SYstem%20Domain's-Tenant01 HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+ 
+ 
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Length: 0
+Date: Tue, 21 Aug 2012 19:30:54 GMT
 ```
 
-Optional:
-
-JSON
+XML/JSON Request and Response (provided tenantName not found)
 
 ```
-{json data structure here}
+HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/tenants HTTP/1.1HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/tenants HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+ 
+ 
+HTTP/1.1 404 Not Found
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: \-1
+Content-Type: text/html;charset=utf-8
+Content-Length: 952
+Date: Tue, 21 Aug 2012 19:31:40 GMT
 ```
 
-XML
+XML/JSON Request Response (missing tenantName in request)
 
 ```
-{xml data structure here}
+HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/tenants HTTP/1.1
+Accept-Encoding: gzip,deflate
+ 
+ 
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Date: Tue, 21 Aug 2012 19:32:10 GMT
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+* 200 - OK
+* 404 - NOT FOUND
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
+This call does not return a response body.
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+* 204 - No Content *(when tenantName is missing or blank)*
+* 401 - Unauthorized
+* 403 - Forbidden
+* 500 - Internal Server Error
+* 503 - Service Unavailable
 
 **Response Data**
 
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
+This call does not return a response body.
 
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X HEAD -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants?name=tenantName"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
+There is no response body returned in API response data. This API does not require http header X-Auth-Token and is protected by client certificate authentication.
 
 ## {createatenant}
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
