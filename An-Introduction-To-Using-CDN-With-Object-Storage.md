@@ -1,7 +1,7 @@
 ---
 layout: default
 title: An Introduction To Using CDN With Object Storage
-permalink: /object-storage/tutorial/introduction
+permalink: /object-storage/tutorial/introduction/
 product:
   - cdn
   - object-storage

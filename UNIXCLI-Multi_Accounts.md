@@ -1,4 +1,13 @@
-## Unix CLI: Using multiple accounts to navigate availability zones ##
+---
+layout: default
+title: Using multiple accounts to navigate availability zones
+permalink: /cli/unix/tutorial/multiple-accounts-navigate-availability-zones/
+product:
+  - unix-cli
+
+---
+
+# Unix CLI: Using multiple accounts to navigate availability zones
 
 Although the UNIX CLi has the ability to modify your credentials directly to switch availability zones or by using the `-z` switch to specify a zone for a single operation, using the multiple accounts feature in UNIX CLI can allow you to pre-create account profiles to make switching availability zones and regions all that easier.
 

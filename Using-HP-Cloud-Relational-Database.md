@@ -1,13 +1,11 @@
 ---
 layout: default
 title: Using HP Cloud Relational Database
-permalink: /dbaas/tutorial/introduction
+permalink: /dbaas/tutorial/introduction/
 product:
   - dbaas
-  - relationaldatabase
 
 ---
-
 # Using HP Cloud Relational Database
 
 HP Cloud Relational Database (sometimes called Database as a Service, or DBaaS) provides highly optimized MySQL databases inside of the HP Cloud.

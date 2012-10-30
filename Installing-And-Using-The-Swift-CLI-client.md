@@ -1,3 +1,13 @@
+---
+layout: default
+title: Installing And Usint The Swift CLI Client
+permalink: /object-storage/tutorial/installing-and-using-swift-cli-client/
+product:
+  - object-storage
+
+---
+# Installing And Usint The Swift CLI Client
+
 This article describes the steps you'll need to follow in order to download files from and upload files to your HP Cloud object storage containers from your *nix command-line.
 
 Specifically, it describes how to do the following:
