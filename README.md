@@ -23,6 +23,9 @@ Before using this project you need the following dependencies.
 
 * [Jekyll](jekyllrb.com)
 * [jekyll_ext (a.k.a ejekyll)](https://github.com/rfelix/jekyll_ext)
+* rdiscount
+* Git
+* Git Subtree
 
 ## Usage
 
