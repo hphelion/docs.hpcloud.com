@@ -560,7 +560,7 @@ curl -k --cert dev_hpmiddleware.pem  -XDELETE -H "X-Auth-Token: HPAuth_769bcc02e
 
 ## Get a Domain 
 #### GET [HPKeystoneExtensionBaseURI]/domains/{domainId} 
-*Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU) *
+*Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 Get a domain based on the {domainId} specified. DomainId's are opaque values returned with get domain list operations. 
 
@@ -1476,44 +1476,7 @@ JSON
             "otherAttributes": {}
          }
       },
-            {
-         "adminURL": "https://nv-aw2az2-manage0009.uswest.hpcloud.net/v1.1/",
-         "canSubscribe": true,
-         "enabled": true,
-         "endpointReleaseState": "public",
-         "global": false,
-         "id": "141",
-         "name": "Block Storage",
-         "otherAttributes": {},
-         "publicURL": "https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
-         "region": "az-2.region-a.geo-1",
-         "releaseState": "public",
-         "type": "volume",
-         "version":          {
-            "id": "1.1",
-            "list": "https://az-2.region-a.geo-1.compute.hpcloudsvc.com",
-            "otherAttributes": {}
-         }
-      },
-            {
-         "adminURL": "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
-         "canSubscribe": true,
-         "enabled": true,
-         "endpointReleaseState": "public",
-         "global": false,
-         "id": "142",
-         "name": "Block Storage",
-         "otherAttributes": {},
-         "publicURL": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
-         "region": "az-3.region-a.geo-1",
-         "releaseState": "public",
-         "type": "volume",
-         "version":          {
-            "id": "1.1",
-            "list": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
-            "otherAttributes": {}
-         }
-      },
+ 
             {
          "canSubscribe": true,
          "enabled": true,
@@ -1562,59 +1525,6 @@ JSON
          "type": "image",
          "version":          {
             "id": "1.0",
-            "otherAttributes": {}
-         }
-      },
-            {
-         "adminURL": "https://glance3.uswest.hpcloud.net:9292/v1.0",
-         "canSubscribe": true,
-         "enabled": true,
-         "endpointReleaseState": "public",
-         "global": false,
-         "id": "180",
-         "name": "Image Management",
-         "otherAttributes": {},
-         "region": "az-3.region-a.geo-1",
-         "releaseState": "public",
-         "type": "image",
-         "version":          {
-            "id": "1.0",
-            "otherAttributes": {}
-         }
-      },
-            {
-         "canSubscribe": true,
-         "enabled": true,
-         "endpointReleaseState": "public",
-         "global": false,
-         "id": "190",
-         "name": "Relational DB MySQL",
-         "otherAttributes": {},
-         "publicURL": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com",
-         "region": "region-a.geo-1",
-         "releaseState": "beta",
-         "type": "hpext:dbaas",
-         "version":          {
-            "id": "1.0",
-            "otherAttributes": {}
-         }
-      },
-            {
-         "adminURL": "https://nv-aw2az1-manage0009.uswest.hpcloud.net/v1.1/",
-         "canSubscribe": true,
-         "enabled": true,
-         "endpointReleaseState": "public",
-         "global": false,
-         "id": "112",
-         "name": "EC2",
-         "otherAttributes": {},
-         "publicURL": "https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
-         "region": "az-1.region-a.geo-1",
-         "releaseState": "public",
-         "type": "ec2",
-         "version":          {
-            "id": "1.1",
-            "list": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com",
             "otherAttributes": {}
          }
       },
@@ -1814,7 +1724,11 @@ Please refer to error response body for additional details.
 
 | Status Code | Description | Reasons |  
 | :-----------| :-----------| :-------|  
-| 400 | Bad Request | Malformed request in URI   |  
+| 400 | Bad Request | Malformed request in URI  
+If present, non-numeric endpoint template id is provided.   
+If present, invalid endpoint template id is provided.   
+If present, invalid service name is provided.   
+If both serviceName and endpointTemplateId values are provided. |  
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.    |  
 | 403 | Forbidden | Disabled or suspended user making the request |  
 | 404 | Not Found | The specified domainId or tenantId filter is not found   |  
@@ -2867,7 +2781,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 ## Update a Domain 
 #### PUT [HPKeystoneExtensionBaseURI]/domains/{domainId}
-*Privilege Level: System Adminstrator (SA), Domain Admin (DA\*)*
+*Privilege Level: System Adminstrator (SA), Domain Admin (DA**)
 
 Allows update of an existing domain using the {domainId} and request body. Does not allow update or change of domainID.
 
