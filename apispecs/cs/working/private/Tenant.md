@@ -497,7 +497,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -
 ```
 
 ## Delete a Tenant
-#### DELETE [HPKeystoneExtensionBaseURI]/tenants/{tenantID}
+#### DELETE [HPKeystoneExtensionBaseURI]/tenants/{tenantId}
 *Privilege Level: SA, DA*
 
 Deletes the specified tenant by its tenantId. This API also deletes the Roles and Endpoints associated with the Tenant.
@@ -506,7 +506,7 @@ Deletes the specified tenant by its tenantId. This API also deletes the Roles an
 
 **URL Parameters**
 
-* *tenantID* - string - Unique ID of the tenant to be deleted.
+* *tenantId* - string - Unique ID of the tenant to be deleted.
 
 **Data Parameters**
 
@@ -602,7 +602,7 @@ XML
 Curl Example
 
 ```
-curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/<tenantID>" 
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 ```
 
 ## Get a List of Tenants
@@ -766,97 +766,110 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants"
 ```
 
-## {getatenant}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+## Get a Tenant
+#### GET [HPKeystoneExtensionBaseURI]/tenants/{tenantId} 
+*Privilege Level: SA, DA, DU*
 
-{Description about the method call}
+Get a tenant based on the {tenantId} specified. tenantId's are opaque values returned with get tenant list operations. This operation does not require a request body.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - Unique ID of the tenant to be retrieved.
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+This call does not require a request body.
 
 JSON
 
 ```
-{json data structure here}
+GET /v2.0/HP-IDM/v1.0/tenants/48164969660120 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e9767412cdcb18069188479
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+GET /v2.0/HP-IDM/v1.0/tenants/270316896886 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e9767412cdcb18069188479
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+* 200 - OK
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 286
+Date: Thu, 13 Oct 2011 22:36:13 GMT
+ 
+{
+  "tenant" : {
+    "description" : "Tenant for hosting Time Warner Oracle Applications & services",
+    "domainId" : "47826457774667",
+    "name" : "Time Warner Oracle Tenant Services",
+    "otherAttributes" : {
+    },
+    "status" : "enabled",
+    "tenantId" : "48164969660120"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 254
+Date: Wed, 10 Aug 2011 22:36:32 GMT
+ 
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"
+enabled="true" status="enabled" domainId="798477662343"
+tenantId="270316896886"
+description="Tenant for Sales Forecasting service" />
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The Tenant for this tenantId does not exist. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -883,13 +896,8 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 ```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
 
 ## {getendpointsfortenant}
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
