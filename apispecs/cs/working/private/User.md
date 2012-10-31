@@ -271,11 +271,11 @@ Date: Tue, 09 Aug 2011 20:53:54 GMT
 
 | Status Code | Description | Reasons |
 | :-----------| :-----------| :-------|
-| 400 | Bad Request | <reason> |
-| 401 | Unauthorized | <reason> |
-| 403 | Forbidden | <reason> |
-| 500 | Internal Server Error | <reason> |
-| 503 | Service Unavailable | <reason> |
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -435,11 +435,14 @@ Date: Tue, 09 Aug 2011 20:59:31 GMT
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 500 - Internal Server Error
-* 503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The specified userId was not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -513,8 +516,10 @@ Accept-Encoding: gzip,deflate
 
 **Status Code**
 
-* 200 - OK
-* 404 - Not Found
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 200 | OK | Given user exist |
+| 404 | Not Found | Given user does not exist. |
 
 **Response Data**
 
@@ -546,11 +551,13 @@ Date: Tue, 21 Aug 2012 18:49:33 GMT
 
 **Status Code**
 
-* 204 - No Content
-* 401 - Unauthorized
-* 403 - Forbidden
-* 500 - Internal Server Error
-* 503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 204 | No Content | When username is missing or blank. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -716,13 +723,15 @@ Date: Mon, 26 Sep 2011 20:40:01 GMT
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 409 - Conflict
-* 500 - Internal Server Error
-* 503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The specified domain was not found. |
+| 409 | Conflict | An User with the required parameters already exist in the system |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -896,13 +905,17 @@ Date: Tue, 09 Aug 2011 21:07:33 GMT
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbiddena
-* 404 - Not Found
-* 409 - Conflict
-* 500 - Internal Server Error
-* 503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The specified user was not found. |
+| 409 | Conflict | An User with the required parameters already exist in the sys
+tem |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
 
 **Response Data**
 
@@ -1026,13 +1039,16 @@ Date: Thu, 22 Sep 2011 20:10:44 GMT
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 409 - Conflict
-* 500 - Internal Server Error
-* 503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The specified user was not found. |
+| 409 | Conflict | An User with the required parameters already exist in the sys
+tem |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -1180,12 +1196,15 @@ xmlns:ns3="http://docs.openstack.org/identity/api/v2.0">
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 500 - Internal Server Error
-* 503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The specified userId or groupId was not found. |
+tem |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -1317,12 +1336,15 @@ Date: Fri, 18 Nov 2011 17:58:24 GMT
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 500 - Internal Server Error
-* 503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The specified user was not found. |
+tem |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -1445,13 +1467,14 @@ Date: Mon, 22 Aug 2011 04:55:08 GMT
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 409 - Conflict
-* 500 - Internal Server Error
-* 503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+tem |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -1597,13 +1620,14 @@ Date: Tue, 29 Nov 2011 17:42:30 GMT
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbiddena
-* 404 - Not Found
-* 409 - Conflict
-* 500 - Internal Server Error
-* 503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | When provided nonce is not found and hence user cannot be determined. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -1646,65 +1670,102 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Conte
 **Additional Notes**
 
 
-## {validatnonce}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+## List A User's Non Tenant Role Assignments
+#### GET [HPKeystoneExtensionBaseURI]/users/\<userId\>/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId
+*Privilege Level: SA, DA, DU*
 
-{Description about the method call}
+This API would return all the non tenant role assignments for a user in his domain filtered by serviceId.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100. 
+* *marker* (Optional)} - string - the resource Id of the last item in the previous list
+* *serviceId* (Optional) - string - filter by serviceId
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+This call does not require a request body.
 
 JSON
 
 ```
-{json data structure here}
+GET /v2.0/HP-IDM/v1.0/users/345678902345/roles HTTP/1.1
+Accept: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 XML
 
 ```
-{xml data structure here}
+GET /v2.0/HP-IDM/v1.0/users/345678902345/roles HTTP/1.1
+Accept: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 Optional:
 
 JSON
 
+Filtered by service ID:
+
 ```
-{json data structure here}
+GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?serviceId=100 HTTP/1.1
+Accept: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+```
+
+Return maximum of 10 roles at a time, starting with role ID `123456`:
+
+```
+GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?limit=10&marker=123456 HTTP/1.1
+Accept: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 XML
 
+Filtered by service ID:
+
 ```
-{xml data structure here}
+GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?serviceId=100 HTTP/1.1
+Accept: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
 ```
+
+Return maximum of 10 roles at a time, starting with role ID `123456`:
+
+```
+GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?limit=10&marker=123456 HTTP/1.1
+Accept: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+```
+
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -1712,31 +1773,97 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 380
+Date: Thu, 25 Aug 2011 23:33:19 GMT
+ 
+{"roles": {"role": [
+      {
+      "roleAssignmentId": "PA8C8XYF9ftQuuZoUB66mt8ypEEWzgMFpGxpz8dvZ7U=",
+      "roleId": "00000000004004",
+      "roleName": "domainuser",
+      "subjectId": "777700000003",
+      "subjectName": "atiwari-1",
+      "subjectType": "User",
+      "description": "Non Tenant Role Assignment : User atiwari-1, id 777700000003, role domainuser on domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "100",
+      "isCrossDomain": false
+   },
+      {
+      "roleAssignmentId": "hKQIXLCqaK74kvbTrQQ6LRn1WXzSqlB+JrgO4FSaE8s=",
+      "roleId": "00000000004003",
+      "roleName": "domainadmin",
+      "subjectId": "777700000003",
+      "subjectName": "atiwari-1",
+      "subjectType": "User",
+      "description": "Non Tenant Role Assignment : User atiwari-1, id 777700000003, role domainadmin on domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "100",
+      "isCrossDomain": false
+   }
+]}}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 380
+Date: Thu, 25 Aug 2011 23:33:19 GMT
+ 
+<roles xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+   <role>
+      <roleAssignmentId>PA8C8XYF9ftQuuZoUB66mt8ypEEWzgMFpGxpz8dvZ7U=</roleAssignmentId>
+      <roleId>00000000004004</roleId>
+      <roleName>domainuser</roleName>
+      <subjectId>777700000003</subjectId>
+      <subjectName>atiwari-1</subjectName>
+      <subjectType>User</subjectType>
+      <description>Non Tenant Role Assignment : User atiwari-1, id 777700000003, role domainuser on domain 777700000000</description>
+      <domainId>777700000000</domainId>
+      <serviceId>100</serviceId>
+      <isCrossDomain>false</isCrossDomain>
+   </role>
+   <role>
+      <roleAssignmentId>hKQIXLCqaK74kvbTrQQ6LRn1WXzSqlB+JrgO4FSaE8s=</roleAssignmentId>
+      <roleId>00000000004003</roleId>
+      <roleName>domainadmin</roleName>
+      <subjectId>777700000003</subjectId>
+      <subjectName>atiwari-1</subjectName>
+      <subjectType>User</subjectType>
+      <description>Non Tenant Role Assignment : User atiwari-1, id 777700000003, role domainadmin on domain 777700000000</description>
+      <domainId>777700000000</domainId>
+      <serviceId>100</serviceId>
+      <isCrossDomain>false</isCrossDomain>
+   </role>
+</roles>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -1763,107 +1890,109 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/345678902345/roles?serviceId=100"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+## Check User's Non Tenant Role Assignment
+#### HEAD [HPKeystoneExtensionBaseURI]/users/\<userId\>/roles/\<roleId\> 
+*Privilege Level: SA, DA, DU*
 
+This API check to see if the give user has the given role assignment.
 
-## {validatsecret}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+**Constraints**
 
-{Description about the method call}
+* This is not a privileged operation so far.
+* All the id's should represent a valid entity (userId, roleId)
+* non tenant role assignments are not associated with a tenant.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+None
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+This call does not require a request body.
 
 JSON
 
 ```
-{json data structure here}
+GET /v2.0/HP-IDM/v1.0/users/345678902345/roles/00000000004003 HTTP/1.1
+Accept: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+HEAD /v2.0/HP-IDM/v1.0/users/345678902345/roles/00000000004003 HTTP/1.1
+Accept: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 200 | OK | User's non tenant role exist. |
+| 404 | Not Found | User's non tenant role does not exist. |
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=20DD4F9E1E3D2B0485DC81D93609DE30; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Length: 0
+Date: Wed, 26 Sep 2012 17:58:59 GMT
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=20DD4F9E1E3D2B0485DC81D93609DE30; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Length: 0
+Date: Wed, 26 Sep 2012 17:58:59 GMT
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
 
-**Response Data**
+tatus Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
 
 JSON
 
@@ -1888,11 +2017,8 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" -XHEAD "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/345678902345/roles/00000000004003"
 ```
 
 **Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
 
