@@ -220,8 +220,8 @@ N/A
 
 None.
 
-#### 4.4.1.1 Post Action [post_action]####
-#### POST [HPKeystoneExtensionBaseURI]/action/\<action\>?timeOut=60000
+#### 4.4.1.1 <a id="post_action"></a>Post Action####
+#### POST [HPKeystoneExtensionBaseURI]/action/{action}?timeOut=60000
 Privilege Level: {Privilege Level}*
 
 Submit an action to be executed. Each action takes a specific set of execution parameters within the content of the Post. (For an exact list of parameters for each Action, click the link below.) In the absence of any query parameters, the Action will be submitted and the call will immediately return a Job Ticket. The Job Ticket contains information about the executing Job, and can be refreshed through the job API call.
@@ -331,7 +331,7 @@ Curl Example
 curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X POST -H 'User-Agent: Jakarta Commons-HttpClient/3.1' -H 'Content-Type: application/json' --cert <cert-path> --cacert <ca-cert-path> --data '{"JobTicket": {"actionParams":{"status": "SUSPENDED_3", "domainId": "92636548281306"}}}' -H 'X-Auth-Token: <auth-token>' [HPKeystoneExtensionBaseURI]/action/UpdateDomain?timeOut=20000
 ```
 
-#### 4.4.1.2 Get Jobs By Account [get_jobs_by_account]####
+#### 4.4.1.2 <a id="get_jobs_by_account"></a>Get Jobs By Account####
 #### GET [HPKeystoneExtensionBaseURI]/job?accountId=12345
 *Privilege Level: {Privilege Level}*
 
@@ -431,8 +431,8 @@ Curl Example
 curl -k -s -S --connect-timeout 2 --noproxy 127.0.0.1,localhost,hpcloud.net -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job?accountId=60809900579962
 ```
 
-#### 4.4.1.3 Get A Job Ticket [get_a_job_ticket]####
-#### GET [HPKeystoneExtensionBaseURI]/job/\<ticketId\>
+#### 4.4.1.3 <a id="get_a_job_ticket"></a>Get A Job Ticket####
+#### GET [HPKeystoneExtensionBaseURI]/job/{ticketId}
 *Privilege Level: {Privilege Level}*
 
 This call will return the specified Job Ticket, and will optionally block the caller until the Job Ticket is marked as complete.
@@ -684,8 +684,8 @@ Curl Example
 curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/{ticketId}
 ```
 
-#### 4.4.1.4 Restart A TIMEDOUT Job [restart_a_timedout_job]####
-#### PUT [HPKeystoneExtensionBaseURI]/job/\<ticketId\>
+#### 4.4.1.4 <a id="restart_a_timedout_job"></a>Restart A TIMEDOUT Job####
+#### PUT [HPKeystoneExtensionBaseURI]/job/{ticketId}
 *Privilege Level: {Privilege Level}*
 
 Some Actions contain Steps that are retryable. Examples are calls to Zuora or Salesforce, which might fail due to internet connectivity issues. These steps contain a retry count the determines how many times they should re-attempt execution. Once all retries have been used up the Step and the Action are tagged with the TIMEDOUT status.
@@ -761,7 +761,7 @@ Curl Example
 curl -k -s -S --connect-timeout 2 --noproxy 127.0.0.1,localhost,hpcloud.net -m 30 -X PUT -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: HPAuth_07ea10efcbcd4a16441f45c7b4bc7aad0a657688576ec67a55ee6e2f00eea8b8" [HPKeystoneExtensionBaseURI]/job/508fa9bce4b0c294a11da398
 ```
 
-#### 4.4.1.5 Delete A Job [delete_a_job]####
+#### 4.4.1.5 <a id="delete_a_job"></a>Delete A Job####
 #### DELETE HPKeystoneExtensionBaseURI/job/{ticketId}
 *Privilege Level: {Privilege Level}*
 
@@ -816,7 +816,7 @@ Date: Wed, 05 Oct 2011 15:31:25 GMT
 curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X DELETE -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/{ticketId}
 ```
 
-#### 4.4.1.6 Get Error Jobs [get_error_jobs]####
+#### 4.4.1.6 <a id="get_error_jobs"></a>Get Error Jobs####
 #### GET [HPKeystoneExtensionBaseURI]/job/error
 *Privilege Level: {Privilege Level}*
 
@@ -1246,7 +1246,7 @@ Curl Example
 curl -k -s -S --connect-timeout 2 --noproxy <proxy-excpetions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/error
 ```
 
-#### 4.4.1.7 Get A Count Of Error Jobs [get_a_count_of_error_jobs]####
+#### 4.4.1.7 <a id="get_a_count_of_error_jobs"></a>Get A Count Of Error Jobs####
 #### GET [HPKeystoneExtensionBaseURI]/job/error/count
 *Privilege Level: {Privilege Level}*
 
@@ -1308,8 +1308,8 @@ Date: Thu, 06 Oct 2011 16:12:00 GMT
 ```
 curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/error/count
 ```
-#### 4.4.1.8 Get Error Jobs By Category [get_error_jobs_by_category]####
-#### GET [HPKeystoneExtensionBaseURI]/job/error/\<category\>
+#### 4.4.1.8 <a id="get_error_jobs_by_category"></a>Get Error Jobs By Category####
+#### GET [HPKeystoneExtensionBaseURI]/job/error/{category}
 *Privilege Level: {Privilege Level}*
 
 Job Tickets that are in the ERROR state will have an Action Exception attached to them. Action Exceptions are categorize, and can be retrieved or delete in bulk by category. This API is used to retreive all ERROR action jobs whose Action Exceptions are of a specified category. The list of all categories is found on the Action Exception page.
@@ -1732,7 +1732,7 @@ Curl Example
 curl -k -s -S --connect-timeout 2 --noproxy <proxy-excpetions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/error/USER_INPUT
 ```
 
-#### 4.4.1.9 Delete Error Jobs By Category [delete_error_jobs_by_category]####
+#### 4.4.1.9 <a id="delete_error_jobs_by_category"></a>Delete Error Jobs By Category####
 #### DELETE HPKeystoneExtensionBaseURI/job/error/{category}
 *Privilege Level: {Privilege Level}*
 
@@ -1790,8 +1790,8 @@ Date: Wed, 05 Oct 2011 15:31:25 GMT
 {curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
 ```
 
-#### 4.4.1.10 Get Jobs By Status [get_jobs_by_status]####
-#### GET [HPKeystoneExtensionBaseURI]/job/status/\<status\>
+#### 4.4.1.10 <a id="get_jobs_by_status"></a>Get Jobs By Status####
+#### GET [HPKeystoneExtensionBaseURI]/job/status/{status}
 *Privilege Level: {Privilege Level}*
 
 Return all Job Tickets from the database which have the given status value. The Action Page provides a list of all possible status values.
@@ -1937,8 +1937,8 @@ Curl Example
 curl -k -s -S --connect-timeout 2 --noproxy <proxy-exceptions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/status/COMPLETE
 ```
 
-#### 4.4.1.11 Get Job Count By Status [get_job_count_by_status]####
-#### GET [HPKeystoneExtensionBaseURI]/job/status/\<status\>/count
+#### 4.4.1.11 <a id="get_job_count_by_status"></a>Get Job Count By Status####
+#### GET [HPKeystoneExtensionBaseURI]/job/status/{status}/count
 *Privilege Level: {Privilege Level}*
 
 Return a count of all Job Tickets from the database which have the given status value. The Action Page provides a list of all possible status values.
@@ -2027,7 +2027,7 @@ N/A
 None.
 
 
-#### 4.4.2.1 {addtrust} [{addtrust}]####
+#### 4.4.2.1 <a id="{addtrust}"></a>{addtrust}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -2152,7 +2152,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.2 {authorizationresult} [{authorizationresult}]####
+#### 4.4.2.2 <a id="{authorizationresult}"></a>{authorizationresult}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -2277,7 +2277,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.3 {gettrusts} [{gettrusts}]####
+#### 4.4.2.3 <a id="{gettrusts}"></a>{gettrusts}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -2402,7 +2402,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.4 {removetrust} [{removetrust}]####
+#### 4.4.2.4 <a id="{removetrust}"></a>{removetrust}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -2548,7 +2548,7 @@ N/A
 None.
 
 
-#### 4.4.3.1 Check For Existence Of Domain Name [check_for_existence_of_domain_name]####
+#### 4.4.3.1 <a id="check_for_existence_of_domain_name"></a>Check For Existence Of Domain Name####
 #### HEAD [HPKeystoneExtensionBaseURI]/domains?name=domainName 
 *Privilege Level: Anonymous*
 
@@ -2698,7 +2698,7 @@ curl -k  --cert dev_hpmiddleware.pem  -I -H "Accept: application/json" "https://
 
 
 
-#### 4.4.3.2 Create A Domain [create_a_domain]####
+#### 4.4.3.2 <a id="create_a_domain"></a>Create A Domain####
 #### GET [HPKeystoneExtensionBaseURI]/domains 
 *Privilege Level: System Adminstrator (SA)*
 
@@ -2926,8 +2926,8 @@ curl -k --cert dev_hpmiddleware.pem  -XPOST -H "X-Auth-Token: HPAuth_769bcc02e0b
 
 
 
-#### 4.4.3.3 Delete A Domain [delete_a_domain]####
-#### DELETE [HPKeystoneExtensionBaseURI]/domains/\<domainId\> 
+#### 4.4.3.3 <a id="delete_a_domain"></a>Delete A Domain####
+#### DELETE [HPKeystoneExtensionBaseURI]/domains/{domainId} 
 *Privilege Level: System Adminstrator (SA)*
 
 Deletes the specified domain by its {domainID}. This API deletes the Users, Tenants, Groups, Roles, RoleRefs and Grants associated to the Domain.
@@ -3087,8 +3087,8 @@ curl -k --cert dev_hpmiddleware.pem  -XDELETE -H "X-Auth-Token: HPAuth_769bcc02e
 
 
 
-#### 4.4.3.4 Get A Domain [get_a_domain]####
-#### GET [HPKeystoneExtensionBaseURI]/domains/\<domainId\> 
+#### 4.4.3.4 <a id="get_a_domain"></a>Get A Domain####
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId} 
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 Get a domain based on the {domainId} specified. DomainId's are opaque values returned with get domain list operations. 
@@ -3265,7 +3265,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 **Additional Notes**
 
 
-#### 4.4.3.5 Get All Domains [get_all_domains]####
+#### 4.4.3.5 <a id="get_all_domains"></a>Get All Domains####
 #### GET [HPKeystoneExtensionBaseURI]/domains?limit=pagesize&marker=domainId  
 *Privilege Level: System Adminstrator (SA)*
 
@@ -3612,8 +3612,8 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 **Additional Notes**
 
 
-#### 4.4.3.6 Get Groups For A Domain [get_groups_for_a_domain]####
-#### GET [HPKeystoneExtensionBaseURI]/domains/\<domainId\>/groups?\<groupId=groupId&groupName=groupName&excludeRoles=r1,r2\>
+#### 4.4.3.6 <a id="get_groups_for_a_domain"></a>Get Groups For A Domain####
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&excludeRoles=r1,r2}
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API is used to get list of groups for a given domain. Api results can be filtered by using parameters. Query parameters "marker" and "limit" can be used for pagination
@@ -3808,8 +3808,8 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 **Additional Notes**
 
 
-#### 4.4.3.7 Get Subscribe Able Services For A Domain [get_subscribe_able_services_for_a_domain]####
-#### GET [HPKeystoneExtensionBaseURI]/domains/\<domainId\>/subscribeableServices?serviceName=\<serviceName\>&endpointTemplateId=\<templateId\>
+#### 4.4.3.7 <a id="get_subscribe_able_services_for_a_domain"></a>Get Subscribe Able Services For A Domain####
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/subscribeableServices?serviceName={serviceName}&endpointTemplateId={templateId}
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API returns all subscribe able services that are available for the given {domainId} . It can also filter the result based on service name or endpoint template id. In request, either 'serviceName' filter or 'serviceEndpointId' filter is to be used. If both of filter values are provided, then error is returned back. This is essentially endpoint template data with some additional subscription specific attributes.
@@ -4338,8 +4338,8 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 
-#### 4.4.3.8 Get Service Activations For A Domain [get_service_activations_for_a_domain]####
-#### GET [HPKeystoneExtensionBaseURI]/domains/\<domainId\>/services?tenantId=\<tenantId\>
+#### 4.4.3.8 <a id="get_service_activations_for_a_domain"></a>Get Service Activations For A Domain####
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/services?tenantId={tenantId}
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API returns all services that have been activated for the given {domainId} . It can also filter the result based on tenantId. 
@@ -4562,8 +4562,8 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 
-#### 4.4.3.9 Get Tenants For A Domain [get_tenants_for_a_domain]####
-#### GET [HPKeystoneExtensionBaseURI]/domains/\<domainId\>/tenants?limit=pagesize&marker=tenantId
+#### 4.4.3.9 <a id="get_tenants_for_a_domain"></a>Get Tenants For A Domain####
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants?limit=pagesize&marker=tenantId
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This REST API returns all tenants of a {domainId} and takes a "marker" and "limit" parameter to limit the number of Tenants in the response.
@@ -4741,7 +4741,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 
-#### 4.4.3.10 Get Users For A Domain [get_users_for_a_domain]####
+#### 4.4.3.10 <a id="get_users_for_a_domain"></a>Get Users For A Domain####
 #### {HTTP Verb: GET, POST, DELETE, PUT} [HPKeystoneExtensionBaseURI]/domains/{domainId}/users?limit=pagesize&marker=userId&excludeGroups=groupid1,groupdid2&excludeRoles=roleId1,roleId2&userId=userId&userName=userName&excludeTenantId=tenantid1,tenantId2
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA)*
 
@@ -4978,8 +4978,8 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 
-#### 4.4.3.11 List Role Definitions (Deprecated) [list_role_definitions_(deprecated)]####
-#### GET [HPKeystoneExtensionBaseURI]/domains/\<domainId\>/roles?limit=pagesize&marker=roleId
+#### 4.4.3.11 <a id="list_role_definitions_(deprecated)"></a>List Role Definitions (Deprecated)####
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/roles?limit=pagesize&marker=roleId
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API is used to list all the roles defined in the domain and takes a "marker" and "limit" parameter to limit the number of roles in the response.
@@ -5141,8 +5141,8 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 
-#### 4.4.3.12 Transfer Ownership Of A Domain [transfer_ownership_of_a_domain]####
-#### PUT [HPKeystoneExtensionBaseURI]/domains/\<domainId\>/owner/\<userId\>	
+#### 4.4.3.12 <a id="transfer_ownership_of_a_domain"></a>Transfer Ownership Of A Domain####
+#### PUT [HPKeystoneExtensionBaseURI]/domains/{domainId}/owner/{userId}	
 *Privilege Level: System Adminstrator (SA)*
 
 A Domain has a owner, it is usually the first user of the Domain or the self registered user during the self registration process. This REST API transfers the domain ownership from one valid User of that Domain to another valid User of the Domain. 
@@ -5304,8 +5304,8 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 **Additional Notes**
 
 
-#### 4.4.3.13 Update A Domain [update_a_domain]####
-#### PUT [HPKeystoneExtensionBaseURI]/domains/\<domainId\>
+#### 4.4.3.13 <a id="update_a_domain"></a>Update A Domain####
+#### PUT [HPKeystoneExtensionBaseURI]/domains/{domainId}
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA**)
 
 Allows update of an existing domain using the {domainId} and request body. Does not allow update or change of domainID.
@@ -5522,7 +5522,7 @@ N/A
 None.
 
 
-#### 4.4.4.1 {addendpointtemplate} [{addendpointtemplate}]####
+#### 4.4.4.1 <a id="{addendpointtemplate}"></a>{addendpointtemplate}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -5647,7 +5647,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.4.2 {deleteendpointtemplate} [{deleteendpointtemplate}]####
+#### 4.4.4.2 <a id="{deleteendpointtemplate}"></a>{deleteendpointtemplate}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -5772,7 +5772,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.4.3 {getenabledendpointtemplates} [{getenabledendpointtemplates}]####
+#### 4.4.4.3 <a id="{getenabledendpointtemplates}"></a>{getenabledendpointtemplates}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -5897,7 +5897,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.4.4 {getendpointtemplatebyid} [{getendpointtemplatebyid}]####
+#### 4.4.4.4 <a id="{getendpointtemplatebyid}"></a>{getendpointtemplatebyid}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -6022,7 +6022,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.4.5 {getendpointtemplates} [{getendpointtemplates}]####
+#### 4.4.4.5 <a id="{getendpointtemplates}"></a>{getendpointtemplates}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -6147,7 +6147,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.4.6 {updateendpointtemplate} [{updateendpointtemplate}]####
+#### 4.4.4.6 <a id="{updateendpointtemplate}"></a>{updateendpointtemplate}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -6293,7 +6293,7 @@ N/A
 None.
 
 
-#### 4.4.5.1 {addusertospecificgroup} [{addusertospecificgroup}]####
+#### 4.4.5.1 <a id="{addusertospecificgroup}"></a>{addusertospecificgroup}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -6418,7 +6418,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.5.2 {creategroups} [{creategroups}]####
+#### 4.4.5.2 <a id="{creategroups}"></a>{creategroups}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -6543,7 +6543,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.5.3 {deletegroup} [{deletegroup}]####
+#### 4.4.5.3 <a id="{deletegroup}"></a>{deletegroup}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -6668,7 +6668,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.5.4 {getspecificgroup} [{getspecificgroup}]####
+#### 4.4.5.4 <a id="{getspecificgroup}"></a>{getspecificgroup}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -6793,7 +6793,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.5.5 {listusersforgroup} [{listusersforgroup}]####
+#### 4.4.5.5 <a id="{listusersforgroup}"></a>{listusersforgroup}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -6918,7 +6918,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.5.6 {removeuserfromgroup} [{removeuserfromgroup}]####
+#### 4.4.5.6 <a id="{removeuserfromgroup}"></a>{removeuserfromgroup}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -7043,7 +7043,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.5.7 {updategroup} [{updategroup}]####
+#### 4.4.5.7 <a id="{updategroup}"></a>{updategroup}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -7189,7 +7189,7 @@ N/A
 None.
 
 
-#### 4.4.6.1 {userdetails} [{userdetails}]####
+#### 4.4.6.1 <a id="{userdetails}"></a>{userdetails}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -7314,7 +7314,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.6.2 {userpreferences} [{userpreferences}]####
+#### 4.4.6.2 <a id="{userpreferences}"></a>{userpreferences}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -7460,7 +7460,7 @@ N/A
 None.
 
 
-#### 4.4.7.1 {getservicebyid} [{getservicebyid}]####
+#### 4.4.7.1 <a id="{getservicebyid}"></a>{getservicebyid}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -7585,7 +7585,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.7.2 {listregisteredservices} [{listregisteredservices}]####
+#### 4.4.7.2 <a id="{listregisteredservices}"></a>{listregisteredservices}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -7710,7 +7710,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.7.3 {registernewservice} [{registernewservice}]####
+#### 4.4.7.3 <a id="{registernewservice}"></a>{registernewservice}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -7835,7 +7835,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.7.4 {updateservice} [{updateservice}]####
+#### 4.4.7.4 <a id="{updateservice}"></a>{updateservice}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -7981,7 +7981,7 @@ N/A
 None.
 
 
-#### 4.4.8.1 {checktenantroleassignmentforuser} [{checktenantroleassignmentforuser}]####
+#### 4.4.8.1 <a id="{checktenantroleassignmentforuser}"></a>{checktenantroleassignmentforuser}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -8106,7 +8106,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.2 {creategroupsglobalroleassignment} [{creategroupsglobalroleassignment}]####
+#### 4.4.8.2 <a id="{creategroupsglobalroleassignment}"></a>{creategroupsglobalroleassignment}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -8231,7 +8231,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.3 {createtenantroleassignmentforgroup} [{createtenantroleassignmentforgroup}]####
+#### 4.4.8.3 <a id="{createtenantroleassignmentforgroup}"></a>{createtenantroleassignmentforgroup}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -8356,7 +8356,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.4 {createtenantroleassignmentforuser} [{createtenantroleassignmentforuser}]####
+#### 4.4.8.4 <a id="{createtenantroleassignmentforuser}"></a>{createtenantroleassignmentforuser}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -8481,7 +8481,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.5 {createusersglobalroleassignment} [{createusersglobalroleassignment}]####
+#### 4.4.8.5 <a id="{createusersglobalroleassignment}"></a>{createusersglobalroleassignment}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -8606,7 +8606,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.6 {deletegroupsglobalroleassignment} [{deletegroupsglobalroleassignment}]####
+#### 4.4.8.6 <a id="{deletegroupsglobalroleassignment}"></a>{deletegroupsglobalroleassignment}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -8731,7 +8731,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.7 {deletetenantroleassignmentforgroup} [{deletetenantroleassignmentforgroup}]####
+#### 4.4.8.7 <a id="{deletetenantroleassignmentforgroup}"></a>{deletetenantroleassignmentforgroup}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -8856,7 +8856,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.8 {deletetenantroleassignmentforuser} [{deletetenantroleassignmentforuser}]####
+#### 4.4.8.8 <a id="{deletetenantroleassignmentforuser}"></a>{deletetenantroleassignmentforuser}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -8981,7 +8981,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.9 {deleteusersglobalroleassignment} [{deleteusersglobalroleassignment}]####
+#### 4.4.8.9 <a id="{deleteusersglobalroleassignment}"></a>{deleteusersglobalroleassignment}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -9106,7 +9106,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.10 {getnontenantrasdomain} [{getnontenantrasdomain}]####
+#### 4.4.8.10 <a id="{getnontenantrasdomain}"></a>{getnontenantrasdomain}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -9231,7 +9231,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.11 {getusersglobalrole} [{getusersglobalrole}]####
+#### 4.4.8.11 <a id="{getusersglobalrole}"></a>{getusersglobalrole}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -9356,7 +9356,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.12 {listgroupsglobalroles} [{listgroupsglobalroles}]####
+#### 4.4.8.12 <a id="{listgroupsglobalroles}"></a>{listgroupsglobalroles}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -9481,7 +9481,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.13 {listtenantroleassignment} [{listtenantroleassignment}]####
+#### 4.4.8.13 <a id="{listtenantroleassignment}"></a>{listtenantroleassignment}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -9606,7 +9606,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.14 {listtenantroleassignmentforgroup} [{listtenantroleassignmentforgroup}]####
+#### 4.4.8.14 <a id="{listtenantroleassignmentforgroup}"></a>{listtenantroleassignmentforgroup}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -9731,7 +9731,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.15 {listtenantroleassignmentforuser} [{listtenantroleassignmentforuser}]####
+#### 4.4.8.15 <a id="{listtenantroleassignmentforuser}"></a>{listtenantroleassignmentforuser}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -9856,7 +9856,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.8.16 {listusersglobalroles} [{listusersglobalroles}]####
+#### 4.4.8.16 <a id="{listusersglobalroles}"></a>{listusersglobalroles}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -10002,7 +10002,7 @@ N/A
 None.
 
 
-#### 4.4.9.1 {createroledef} [{createroledef}]####
+#### 4.4.9.1 <a id="{createroledef}"></a>{createroledef}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -10127,7 +10127,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.9.2 {deleteroledef} [{deleteroledef}]####
+#### 4.4.9.2 <a id="{deleteroledef}"></a>{deleteroledef}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -10252,7 +10252,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.9.3 {getdomainsroledefs} [{getdomainsroledefs}]####
+#### 4.4.9.3 <a id="{getdomainsroledefs}"></a>{getdomainsroledefs}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -10377,7 +10377,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.9.4 {getroleadef} [{getroleadef}]####
+#### 4.4.9.4 <a id="{getroleadef}"></a>{getroleadef}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -10502,7 +10502,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.9.5 {listroledefs} [{listroledefs}]####
+#### 4.4.9.5 <a id="{listroledefs}"></a>{listroledefs}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -10627,7 +10627,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.9.6 {updateroledef} [{updateroledef}]####
+#### 4.4.9.6 <a id="{updateroledef}"></a>{updateroledef}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -10752,7 +10752,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.9.7 {updateroledefscope} [{updateroledefscope}]####
+#### 4.4.9.7 <a id="{updateroledefscope}"></a>{updateroledefscope}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -10898,7 +10898,7 @@ N/A
 None.
 
 
-#### 4.4.10.1 {getservicebyid} [{getservicebyid}]####
+#### 4.4.10.1 <a id="{getservicebyid}"></a>{getservicebyid}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -11023,7 +11023,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.10.2 {listregisteredservices} [{listregisteredservices}]####
+#### 4.4.10.2 <a id="{listregisteredservices}"></a>{listregisteredservices}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -11148,7 +11148,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.10.3 {registernewservice} [{registernewservice}]####
+#### 4.4.10.3 <a id="{registernewservice}"></a>{registernewservice}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -11273,7 +11273,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.10.4 {updateservice} [{updateservice}]####
+#### 4.4.10.4 <a id="{updateservice}"></a>{updateservice}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -11419,7 +11419,7 @@ N/A
 None.
 
 
-#### 4.4.11.1 {ec2signature} [{ec2signature}]####
+#### 4.4.11.1 <a id="{ec2signature}"></a>{ec2signature}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -11544,7 +11544,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.11.2 {genericsignature} [{genericsignature}]####
+#### 4.4.11.2 <a id="{genericsignature}"></a>{genericsignature}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -11689,7 +11689,7 @@ N/A
 
 None.
 
-#### 4.4.12.1 Get All Tenants [get_all_tenants]####
+#### 4.4.12.1 <a id="get_all_tenants"></a>Get All Tenants####
 #### GET [HPKeystoneExtensionBaseURI]/tenants?name=tenantName&limit=pagesize&marker=tenantId
 *Privilege Level: SA*
 
@@ -11867,8 +11867,8 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants"
 ```
 
-#### 4.4.12.2 Get A Tenant [get_a_tenant]####
-#### GET [HPKeystoneExtensionBaseURI]/tenants/\<tenantId\> 
+#### 4.4.12.2 <a id="get_a_tenant"></a>Get A Tenant####
+#### GET [HPKeystoneExtensionBaseURI]/tenants/{tenantId} 
 *Privilege Level: SA, DA, DU*
 
 Get a tenant based on the {tenantId} specified. tenantId's are opaque values returned with get tenant list operations. This operation does not require a request body.
@@ -12000,7 +12000,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 ```
 
-#### 4.4.12.3 Check For Existence Of Tenant Name [check_for_existence_of_tenant_name]####
+#### 4.4.12.3 <a id="check_for_existence_of_tenant_name"></a>Check For Existence Of Tenant Name####
 #### HEAD [HPKeystoneExtensionBaseURI]/tenants?name=tenantName
 *Privilege Level: Anon*
 
@@ -12122,8 +12122,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X HEAD -
 
 There is no response body returned in API response data. This API does not require http header X-Auth-Token and is protected by client certificate authentication.
 
-#### 4.4.12.4 Get A List Of Users For A Tenant (includes Role Assignments) [get_a_list_of_users_for_a_tenant_(includes_role_assignments)]####
-#### GET [HPKeystoneExtensionBaseURI]/tenants/\<tenantId\>/users?limit=pagesize&marker=roleId
+#### 4.4.12.4 <a id="get_a_list_of_users_for_a_tenant_(includes_role_assignments)"></a>Get A List Of Users For A Tenant (includes Role Assignments)####
+#### GET [HPKeystoneExtensionBaseURI]/tenants/{tenantId}/users?limit=pagesize&marker=roleId
 *Privilege Level: SA, DA*
 
 This API returns all Users for a given Tenant, Roles associated for each User is also returned. If the user is not a valid, an error is returned.
@@ -12314,7 +12314,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/users"
 ```
 
-#### 4.4.12.5 Create A Tenant [create_a_tenant]####
+#### 4.4.12.5 <a id="create_a_tenant"></a>Create A Tenant####
 #### POST [HPKeystoneExtensionBaseURI]/tenants 
 *Privilege Level: SA, DA*
 
@@ -12488,8 +12488,8 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants" -d '{"tenant":{"description":"Payroll Tenant Services for TimeWarner","domainId":"47826457774667","name":"Payroll Tenant Services","status":"enabled"}}'
 ```
 
-#### 4.4.12.6 Update A Tenant [update_a_tenant]####
-#### PUT [HPKeystoneExtensionBaseURI]/tenants/\<tenantID\> 
+#### 4.4.12.6 <a id="update_a_tenant"></a>Update A Tenant####
+#### PUT [HPKeystoneExtensionBaseURI]/tenants/{tenantID} 
 *Privilege Level: SA, DA*
 
 Allows updating an existing tenant using the tenantId and request body. Does not allow update or change of tenantId and domainId ('domainId' cannot be updated, passing that in request body will result in failure).
@@ -12677,8 +12677,8 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/37942731773710" -d '{"tenant":{"description":"Tenant for Market forecasting service","otherAttributes":{"swiftAccountHash":"abcd23456"}}}'
 ```
 
-#### 4.4.12.7 Delete A Tenant [delete_a_tenant]####
-#### DELETE [HPKeystoneExtensionBaseURI]/tenants/\<tenantId\>
+#### 4.4.12.7 <a id="delete_a_tenant"></a>Delete A Tenant####
+#### DELETE [HPKeystoneExtensionBaseURI]/tenants/{tenantId}
 *Privilege Level: SA, DA*
 
 Deletes the specified tenant by its tenantId. This API also deletes the Roles and Endpoints associated with the Tenant.
@@ -12776,8 +12776,8 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 ```
 
-#### 4.4.12.8 Get Endpoints For A Tenant [get_endpoints_for_a_tenant]####
-#### GET [csbu:HPKeystoneExtensionBaseURI]/tenants/\<tenantId\>/endpoints?limit=pagesize&marker=endpointId
+#### 4.4.12.8 <a id="get_endpoints_for_a_tenant"></a>Get Endpoints For A Tenant####
+#### GET [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints?limit=pagesize&marker=endpointId
 *Privilege Level: SA, DA, DU*
 
 Get a list of endpoints for a tenant. Each endpoint data in the returned list has reference URL which can be used to query specific endpointTemplate (i.e. in format /endpointTemplates/{endpointTemplateId}) . This list will include disabled endpoint templates id. The operation does not require a request body.
@@ -12972,8 +12972,8 @@ Current Impl: We don't filter by enabled flag so include all of them.
 1. Do we need to include global endpoints (endpoint templates with global flag as true) in this call? In keystone reference code base, it does not include them.  Current Impl: We don't include global endpoint templates in the response.
 
 
-#### 4.4.12.9 Add Endpoint To A Tenant [add_endpoint_to_a_tenant]####
-#### POST [csbu:HPKeystoneExtensionBaseURI]/tenants/\<tenantId]\>/endpoints
+#### 4.4.12.9 <a id="add_endpoint_to_a_tenant"></a>Add Endpoint To A Tenant####
+#### POST [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId]}/endpoints
 *Privilege Level: SA, DA*
 
 Add endpoint template association with a tenant. 
@@ -13140,8 +13140,8 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints" -d '{"endpointTemplate":{"id":120}}'
 ```
 
-#### 4.4.12.10 Remove Endpoints From A Tenant [remove_endpoints_from_a_tenant]####
-#### DELETE [csbu:HPKeystoneExtensionBaseURI]/tenants/\<tenantId\>/endpoints/\<endpointId\>
+#### 4.4.12.10 <a id="remove_endpoints_from_a_tenant"></a>Remove Endpoints From A Tenant####
+#### DELETE [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints/{endpointId}
 *Privilege Level: DA, SA*
 
 Remove tenant's endpoint template association for given endpoint id. The operation does not require a request body.
@@ -13260,8 +13260,8 @@ N/A
 None.
 
 
-#### 4.4.13.1 Validate Token [validate_token]####
-#### GET [KeystoneBaseURI]/tokens/\<tokenId\>?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111
+#### 4.4.13.1 <a id="validate_token"></a>Validate Token####
+#### GET [KeystoneBaseURI]/tokens/{tokenId}?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111
 *Privilege Level: Anon*
 
 This API is used to validate a token. Validation includes checking that
@@ -13501,7 +13501,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Accep
 **Additional Notes**
 
 
-#### 4.4.13.2 Quick Token Validation [quick_token_validation]####
+#### 4.4.13.2 <a id="quick_token_validation"></a>Quick Token Validation####
 #### HEAD [KeystoneBaseURI]/tokens/\<tokenId\>?belongsTo=tenantId
 *Privilege Level: Anon*
 
@@ -13617,7 +13617,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -XHEAD "h
 **Additional Notes**
 
 
-#### 4.4.13.3 Refresh Token [refresh_token]####
+#### 4.4.13.3 <a id="refresh_token"></a>Refresh Token####
 #### [HPKeystoneExtensionBaseURI]/tokens/\<tokenId\>
 *Privilege Level: SS*
 
@@ -13785,7 +13785,7 @@ N/A
 None.
 
 
-#### 4.4.14.1 List Users [list_users]####
+#### 4.4.14.1 <a id="list_users"></a>List Users####
 #### GET [HPKeystoneExtensionBaseURI]/users?name=username&emailAddress=email&limit=pagesize&marker=userId
 *Privilege Level: SA, DA, SS*
 
@@ -14088,8 +14088,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.14.2 Get A User [get_a_user]####
-#### GET [HPKeystoneExtensionBaseURI]/users/\<userId\> 
+#### 4.4.14.2 <a id="get_a_user"></a>Get A User####
+#### GET [HPKeystoneExtensionBaseURI]/users/{userId} 
 *Privilege Level: SA, DA, SS*
 
 
@@ -14241,7 +14241,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.14.3 Check For Existence Of User [check_for_existence_of_user]####
+#### 4.4.14.3 <a id="check_for_existence_of_user"></a>Check For Existence Of User####
 #### HEAD [HPKeystoneExtensionBaseURI]/users?name=username
 *Privilege Level: Anon*
 
@@ -14368,7 +14368,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem "https://
 
 **Additional Notes**
 
-#### 4.4.14.4 Create A New User [create_a_new_user]####
+#### 4.4.14.4 <a id="create_a_new_user"></a>Create A New User####
 #### POST [HPKeystoneExtensionBaseURI/users
 *Privilege Level: SA, DA, SR*
 
@@ -14573,8 +14573,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.14.5 Update A User [update_a_user]####
-#### PUT [HPKeystoneExtensionBaseURI]/users/\<userId\> 
+#### 4.4.14.5 <a id="update_a_user"></a>Update A User####
+#### PUT [HPKeystoneExtensionBaseURI]/users/{userId} 
 *Privilege Level: SA, DA\*, SS*
 
 Updates a user for the specified userId.
@@ -14754,8 +14754,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.14.6 Delete A User [delete_a_user]####
-#### DELETE [HPKeystoneExtensionBaseURI]/users/\<userId\>
+#### 4.4.14.6 <a id="delete_a_user"></a>Delete A User####
+#### DELETE [HPKeystoneExtensionBaseURI]/users/{userId}
 *Privilege Level: SA, DA*
 
 Deletes a user for the specified userId. If the User is an owner of the Domain, this API checks if the caller has privileges to delete a owner of the Domain.
@@ -14887,8 +14887,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.14.7 Get All Groups For A User [get_all_groups_for_a_user]####
-#### GET [HPKeystoneExtensionBaseURI]/users/\<userId\>/groups?limit=pagesize&marker=groupId
+#### 4.4.14.7 <a id="get_all_groups_for_a_user"></a>Get All Groups For A User####
+#### GET [HPKeystoneExtensionBaseURI]/users/{userId}/groups?limit=pagesize&marker=groupId
 *Privilege Level: SA, DA, SS*
 
 Returns all groups for the user specified within the userId.
@@ -15062,8 +15062,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.14.8 Update Password For A User [update_password_for_a_user]####
-#### PUT [HPKeystoneExtensionBaseURI]/users/\<userId\>/password
+#### 4.4.14.8 <a id="update_password_for_a_user"></a>Update Password For A User####
+#### PUT [HPKeystoneExtensionBaseURI]/users/{userId}/password
 *Privilege Level: SA, DA, SS*
 
 Update a user's password specified by the userId.
@@ -15217,7 +15217,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.14.9 Initial Password Reset [initial_password_reset]####
+#### 4.4.14.9 <a id="initial_password_reset"></a>Initial Password Reset####
 #### POST [HPKeystoneExtensionBaseURI]/users/password/reset?userName=username
 *Privilege Level: SA, DA, Anon*
 
@@ -15346,8 +15346,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.14.10 Validate Password ResetId And Update Password [validate_password_resetid_and_update_password]####
-#### PUT [HPKeystoneExtensionBaseURI]/users/password/reset/\<resetId\>
+#### 4.4.14.10 <a id="validate_password_resetid_and_update_password"></a>Validate Password ResetId And Update Password####
+#### PUT [HPKeystoneExtensionBaseURI]/users/password/reset/{resetId}
 *Privilege Level: Anon*
 
 This API is used to validate the password resetId (nonce), if validated, then the user's password will be updated based on the new password passed in the body of the  call.  Updated user object is returned as response.
@@ -15527,8 +15527,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Conte
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.14.11 List A User's Non Tenant Role Assignments [list_a_users_non_tenant_role_assignments]####
-#### GET [HPKeystoneExtensionBaseURI]/users/\<userId\>/username\>/roles?serviceId=xxx&limit=pagesize&marker=roleId
+#### 4.4.14.11 <a id="list_a_users_non_tenant_role_assignments"></a>List A User's Non Tenant Role Assignments####
+#### GET [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId
 *Privilege Level: SA, DA, DU*
 
 This API would return all the non tenant role assignments for a user in his domain filtered by serviceId.
@@ -15752,7 +15752,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.14.12 Check User's Non Tenant Role Assignment [check_users_non_tenant_role_assignment]####
+#### 4.4.14.12 <a id="check_users_non_tenant_role_assignment"></a>Check User's Non Tenant Role Assignment####
 #### HEAD [HPKeystoneExtensionBaseURI]/users/\<userId\>/roles/\<roleId\> 
 *Privilege Level: SA, DA, DU*
 
@@ -15900,7 +15900,7 @@ N/A
 None.
 
 
-#### 4.4.15.1 {createaccesskey} [{createaccesskey}]####
+#### 4.4.15.1 <a id="{createaccesskey}"></a>{createaccesskey}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -16025,7 +16025,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.15.2 {deleteaccesskey} [{deleteaccesskey}]####
+#### 4.4.15.2 <a id="{deleteaccesskey}"></a>{deleteaccesskey}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -16150,7 +16150,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.15.3 {getaccesskey} [{getaccesskey}]####
+#### 4.4.15.3 <a id="{getaccesskey}"></a>{getaccesskey}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -16275,7 +16275,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.15.4 {importaccesskey} [{importaccesskey}]####
+#### 4.4.15.4 <a id="{importaccesskey}"></a>{importaccesskey}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -16400,7 +16400,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.15.5 {updateaccesskey} [{updateaccesskey}]####
+#### 4.4.15.5 <a id="{updateaccesskey}"></a>{updateaccesskey}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -16546,7 +16546,7 @@ N/A
 None.
 
 
-#### 4.4.16.1 Get User Certificates [get_user_certificates]####
+#### 4.4.16.1 <a id="get_user_certificates"></a>Get User Certificates####
 #### GET [HPKeystoneExtensionBaseURI]/certificates
 *Privilege Level: SA, DA, SS* 
 
@@ -16774,8 +16774,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.16.2 Delete User Certificate [delete_user_certificate]####
-#### DELETE [HPKeystoneExtensionBaseURI]/certificates/\<issuerName\>/\<serialNumber\> 	D
+#### 4.4.16.2 <a id="delete_user_certificate"></a>Delete User Certificate####
+#### DELETE [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	D
 *Privilege Level: SA, DA, SS*
 
 Delete a user certificate.The issuer name {issuerName} and serial number {serialNumber} are required in the URI.
@@ -16896,8 +16896,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.16.3 Get User Certificate [get_user_certificate]####
-#### GET [HPKeystoneExtensionBaseURI]/certificates/\<issuerName\>/\<serialNumber\>
+#### 4.4.16.3 <a id="get_user_certificate"></a>Get User Certificate####
+#### GET [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber}
 *Privilege Level: SA, DA, SS*
 
 Get a specified user certificate. The issuer name {issuerName} and serial number {serialNumber} are required in the URI.
@@ -17079,7 +17079,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.16.4 Create A User Certificate [create_a_user_certificate]####
+#### 4.4.16.4 <a id="create_a_user_certificate"></a>Create A User Certificate####
 #### POST [HPKeystoneExtensionBaseURI]/certificates
 *Privilege Level: SA, DA, SS*
 
@@ -17284,7 +17284,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.16.5 Import User Certificate(s) [import_user_certificate(s)]####
+#### 4.4.16.5 <a id="import_user_certificate(s)"></a>Import User Certificate(s)####
 #### PUT [HPKeystoneExtensionBaseURI]/certificates
 *Privilege Level: SA, DA, SS*
 
@@ -17515,8 +17515,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.16.6 Update User Certificate [update_user_certificate]####
-#### PUT [HPKeystoneExtensionBaseURI]/certificates/\<issuerName\>/\<serialNumber\> 	
+#### 4.4.16.6 <a id="update_user_certificate"></a>Update User Certificate####
+#### PUT [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	
 *Privilege Level: SA,DA,SS*
 
 Update a user certificate. This method requires a request body containing the status element of the certificate. The issuer name {issuerName} and serial number {serialNumber} are required in the URI.
@@ -17703,7 +17703,7 @@ N/A
 None.
 
 
-#### 4.4.17.1 {createkeypair} [{createkeypair}]####
+#### 4.4.17.1 <a id="{createkeypair}"></a>{createkeypair}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -17828,7 +17828,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.17.2 {deletekeypair} [{deletekeypair}]####
+#### 4.4.17.2 <a id="{deletekeypair}"></a>{deletekeypair}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -17953,7 +17953,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.17.3 {getkeypair} [{getkeypair}]####
+#### 4.4.17.3 <a id="{getkeypair}"></a>{getkeypair}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -18078,7 +18078,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.17.4 {getkeypairs} [{getkeypairs}]####
+#### 4.4.17.4 <a id="{getkeypairs}"></a>{getkeypairs}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -18203,7 +18203,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.17.5 {importkeypair} [{importkeypair}]####
+#### 4.4.17.5 <a id="{importkeypair}"></a>{importkeypair}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
@@ -18328,7 +18328,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.17.6 {updatekeypair} [{updatekeypair}]####
+#### 4.4.17.6 <a id="{updatekeypair}"></a>{updatekeypair}####
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
 *Privilege Level: {Privilege Level}*
 
