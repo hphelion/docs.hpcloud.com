@@ -105,14 +105,14 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 | Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| Tenant | List Tenants | GET | /tenants?limit=pagesize&marker=tenantId | Y/Y | SS |
-| Token | Authenticate | POST | /tokens | Y/Y | Anon |
-| Token | Rescope Token | POST | /tokens | Y/Y | SS |
-| Token | Revoke Token | DELETE | /HP-IDM/v1.0/tokens/\<tokenId\> | Y/Y | SA,DA,SS |
-| Token | Swift Legacy Authentication | GET | /v1.0 | Y/Y | Anon |
-| Token | Swift Legacy Authentication | GET | /v1.1 | Y/Y | Anon |
-| Token | Swift Legacy Authentication | GET | /auth/v1.0 | Y/Y | Anon |
-| Token | Swift Legacy Authentication | GET | /auth/v1.1 | Y/Y | Anon |
+| Tenant | [List Tenants](#list_tenants) | GET | /tenants?limit=pagesize&marker=tenantId | Y/Y | SS |
+| Token | [Authenticate](#authenticate) | POST | /tokens | Y/Y | Anon |
+| Token | [Rescope Token](#rescope_token) | POST | /tokens | Y/Y | SS |
+| Token | [Revoke Token](#revoke_token) | DELETE | /HP-IDM/v1.0/tokens/\<tokenId\> | Y/Y | SA,DA,SS |
+| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.0 | Y/Y | Anon |
+| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.1 | Y/Y | Anon |
+| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.0 | Y/Y | Anon |
+| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.1 | Y/Y | Anon |
 
 ## 4.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
@@ -145,7 +145,7 @@ N/A
 None.
 
 
-#### 4.4.1.1 List Tenants
+#### 4.4.1.1 List Tenants #### {#list_tenants}
 #### GET /tenants?limit=pagesize&marker=tenantId
 *Privilege Level: SS*
 
@@ -368,7 +368,7 @@ N/A
 None.
 
 
-#### 4.4.2.1 Authenticate
+#### 4.4.2.1 Authenticate #### {#authenticate}
 #### POST /tokens
 *Privilege Level: Anon*
 
@@ -723,7 +723,7 @@ curl -X POST -H "Content-Type: application/json"
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.2 Rescope Token
+#### 4.4.2.2 Rescope Token #### {#rescope_token}
 #### POST /tokens
 *Privilege Level: SS*
 
@@ -929,7 +929,7 @@ curl -k -H "Content-Type: application/json" -d '{"auth":{"tenantName":"HP Swift 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.3 Revoke Token
+#### 4.4.2.3 Revoke Token #### {#revoke_token}
 #### DELETE /HP-IDM/v1.0/tokens/\<tokenId\>
 *Privilege Level: SA,DA,SS*
 
@@ -990,7 +990,7 @@ curl -k -XDELETE https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.4 Swift Legacy Authentication
+#### 4.4.2.4 Swift Legacy Authentication #### {#swift_legacy_authentication}
 #### GET /v1.0
 *Privilege Level: Anon*
 

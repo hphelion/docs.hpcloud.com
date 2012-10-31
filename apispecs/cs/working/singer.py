@@ -123,16 +123,39 @@ def grep_all_mds(dirname=None):
 def get_api_index_table(api_table):
     table = ['| Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |']
     table.append('| :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |')
-    for (group, operation, verb, path, jx, priv) in api_table:
-        table.append('| %s | %s | %s | %s | %s | %s |' % (
-            group, operation, verb, path, jx, priv))
+    for (group, operation, operation_tag, verb, path, jx, priv) in api_table:
+        table.append('| %s | [%s](#%s) | %s | %s | %s | %s |' % (
+            group, operation, operation_tag, verb, path, jx, priv))
     return string.join(table, '\n')
 
 
-def create_cs_api_md(opt, outfile, dirname, chapter='4.4'):
+def first_letter_cap(s):
+    word_list = s.split(' ')
+    cap_word_list = []
+    for word in word_list:
+        if len(word) > 0:
+            word = word[0].upper() + word[1:]
+            cap_word_list.append(word)
+    return string.join(cap_word_list, ' ')
+
+
+def create_anchor_tag(s):
+    word_list = s.split(' ')
+    lower_word_list = []
+    for word in word_list:
+        if len(word) > 0:
+            word = word.lower()
+            word = word.replace("'", "")
+            lower_word_list.append(word)
+    return string.join(lower_word_list, '_')
+
+
+def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
     if opt.outfile:
         outfile = opt.outfile
     intro_md = read_file('cs-api-intro.md')
+    if private_api:
+        intro_md = read_file('cs-private-api-intro.md')
     end_md = read_file('cs-api-end.md')
     contents = grep_all_mds(dirname)
     group_count = 0
@@ -140,9 +163,10 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4'):
     api_table = []
     group_name = None
     action_name = None
+    action_name_tag = None
     verb = None
     path = None
-    pattern = '^####\s+(?P<verb>[GPD][A-Z]+)\s+(?P<path>/.+)'
+    pattern = '^####\s+(?P<verb>[GPD][A-Z]+)\s+(?P<path>[\[/].+)'
     re_http = re.compile(pattern)
     priv_pattern = '^\*Privilege Level:\s*(?P<privilege>[^\*]+)\*$'
     re_priv = re.compile(priv_pattern)
@@ -151,22 +175,36 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4'):
         if line.startswith('# '):
             group_count = group_count + 1
             action_count = 0
-            group_name = line[2:]
+            group_name = first_letter_cap(line[2:])
             api_content.append("### %s.%s %s" % (chapter,
-                group_count, line[2:]))
+                group_count, group_name))
         elif line.startswith('## '):
             action_count = action_count + 1
-            action_name = line[3:]
-            api_content.append("#### %s.%s.%s %s" % (
-                chapter, group_count, action_count, line[3:]))
+            action_name = first_letter_cap(line[3:])
+            action_name_tag = create_anchor_tag(action_name)
+            api_content.append("#### %s.%s.%s %s #### {#%s}" % (
+                chapter, group_count, action_count, action_name, action_name_tag))
         else:
+            # remove private tag/content, depending on API type
+            if line.startswith('{{PRIVATE}}'):
+                if private_api:
+                    # remove the tag
+                    line = line[11:]
+                    line = line.strip()
+                else:
+                    # public API, do not add private content
+                    continue
+            
             m = re_http.match(line)
             if m:
                 verb = m.group('verb')
                 path = m.group('path')
+                line = line.replace('{', '\<')
+                line = line.replace('}', '\>')
+                print line
             pm = re_priv.match(line)
             if pm:
-                api_table.append((group_name, action_name, verb, path, 'Y/Y',
+                api_table.append((group_name, action_name, action_name_tag, verb, path, 'Y/Y',
                     pm.group('privilege')))
             api_content.append("%s" % (line))
     intro_md = intro_md.replace('{API_INDEX_TABLE_PLACE_HOLDER}', get_api_index_table(api_table))
@@ -182,7 +220,7 @@ def create_cs_api_public_md(opt):
 
 
 def create_cs_api_private_md(opt):
-    create_cs_api_md(opt, DEFAULT_CS_API_INTERNAL_MD, 'private')
+    create_cs_api_md(opt, DEFAULT_CS_API_INTERNAL_MD, 'private', private_api=True)
 
 
 def convert_api_to_wiki_content(opt):
