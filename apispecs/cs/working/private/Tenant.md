@@ -1286,102 +1286,145 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/users"
 ```
 
-**Additional Notes**
+## Add Endpoint to a Tenant
+#### POST [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId]}/endpoints
+*Privilege Level: SA, DA*
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-## {getusersforatenant}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
+Add endpoint template association with a tenant. 
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - Unique ID of the tenant to return users for.
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+* *endpointTemplate id* - string - Unique ID of the endpoint template being associated to this tenant.
 
 JSON
 
 ```
-{json data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4e9605ffb0be70f2f7118b6a
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 51
+ 
+{
+    "endpointTemplate":{
+        "id":120
+    }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4e9605ffb0be70f2f7118b6a
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 183
+ 
+<endpointTemplate
+  xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:type="EndpointTemplateWithOnlyId"
+  id="110"/>
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+* 201 - Created
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 201 CreatedHTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 589
+Date: Wed, 12 Oct 2011 21:38:10 GMT
+ 
+{
+  "endpoint" : {
+    "version" : {
+      "id" : "1.0",
+      "info" : "http://127.0.0.1:8080//info/v1.0",
+      "list" : "http://127.0.0.1:8080/allVersions",
+      "otherAttributes" : {
+      }
+    },
+    "anies" : null,
+    "adminURL" : "http://127.0.0.1:8080/v1/AUTH_%tenant_id%",
+    "id" : 541,
+    "internalURL" : "http://127.0.0.1:8080/v1/AUTH_%tenant_id%",
+    "name" : "Object Storage",
+    "otherAttributes" : {
+    },
+    "publicURL" : "http://127.0.0.1:8080/v1/AUTH_%tenant_id%",
+    "region" : "RegionOne",
+    "tenantId" : "95096564413950",
+    "type" : "object-store"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=CDB8CBA09CE01A8160BAC1D4A2EE01A4; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 574
+Date: Wed, 12 Oct 2011 21:44:26 GMT
+ 
+<endpoint id="542" type="image-service" name="Image Management" 
+region="RegionOne" 
+publicURL="http://127.0.0.1:9292/v1.1/%tenant_id%" 
+internalURL="http://127.0.0.1:9292/v1.1/%tenant_id%" 
+adminURL="http://127.0.0.1:9292/v1.1/%tenant_id%" 
+tenantId="95096564413950" 
+xmlns="http://docs.openstack.org/identity/api/v2.0" 
+xmlns:ns2="http://docs.openstack.org/common/api/v1.0" 
+xmlns:ns3="http://www.w3.org/2005/Atom">
+   <version id="1.1" info="http://127.0.0.1:9292/info/v1.1" 
+        list="http://127.0.0.1:9292/allVersions"/>
+</endpoint>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The Tenant for this tenantId does not exist. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -1408,13 +1451,8 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints" -d '{"endpointTemplate":{"id":120}}'
 ```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
 
 ## {removeendpointfromtenant}
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
