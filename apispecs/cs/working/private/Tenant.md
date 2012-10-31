@@ -196,8 +196,6 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants"
 ```
 
-**Additional Notes**
-
 ## Check for existence of tenant name
 #### HEAD [HPKeystoneExtensionBaseURI]/tenants?name=tenantName
 *Privilege Level: SA*
@@ -517,7 +515,6 @@ XML
 ```
 DELETE /v2.0/HP-IDM/v1.0/tenants/270316896886 HTTP/1.1
 Accept: application/xml
-Content-Type: application/xml
 User-Agent: Wink Client v1.1.2
 Host: localhost:9999
 Connection: keep-alive
@@ -528,7 +525,6 @@ JSON
 ```
 DELETE /v2.0/HP-IDM/v1.0/tenants/270316896886 HTTP/1.1
 Accept: application/json
-Content-Type: application/json
 User-Agent: Wink Client v1.1.2
 Host: localhost:9999
 Connection: keep-alive
@@ -542,26 +538,18 @@ Connection: keep-alive
 
 **Response Data**
 
-JSON
+This call does not return a response body.
+
+(No JSON/XML format differences)
 
 ```
-DELETE /v2.0/HP-IDM/v1.0/tenants/270316896886 HTTP/1.1
-Accept: application/json
-Content-Type: application/json
-User-Agent: Wink Client v1.1.2
-Host: localhost:9999
-Connection: keep-alive
-```
-
-XML
-
-```
-DELETE /v2.0/HP-IDM/v1.0/tenants/270316896886 HTTP/1.1
-Accept: application/xml
-Content-Type: application/xml
-User-Agent: Wink Client v1.1.2
-Host: localhost:9999
-Connection: keep-alive
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=74ADEBA6F2523478A1700D664FD70C75; Path=/v2.0; Secure
+Date: Wed, 12 Oct 2011 22:02:16 GMT
 ```
 
 **Error Response**
@@ -1454,97 +1442,77 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints" -d '{"endpointTemplate":{"id":120}}'
 ```
 
-## {removeendpointfromtenant}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+## Remove Endpoints from a Tenant
+#### DELETE [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints/{endpointId}
+*Privilege Level: DA, SA*
 
-{Description about the method call}
+Remove tenant's endpoint template association for given endpoint id. The operation does not require a request body.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - Unique ID of the tenant to delete the endpoint from.
+* *endpointId* - string - Unique ID of the endpoint being deleted from this tenant.
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
+This call does not require a request body.
 
 XML
 
 ```
-{xml data structure here}
+DELETE https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints/543 HTTP/1.1
+Accept: application/xml
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
 ```
-
-Optional:
 
 JSON
 
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+DELETE https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints/543 HTTP/1.1
+Accept: application/json
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+* 204 (No Content), Deletion of the endpoint template association was successful.
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
+This call does not return a response body.
 
-JSON
-
-```
-{json data structure here}
-```
-
-XML
+(No JSON/XML format differences)
 
 ```
-{xml data structure here}
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=74ADEBA6F2523478A1700D664FD70C75; Path=/v2.0; Secure
+Date: Wed, 12 Oct 2011 22:02:16 GMT
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | Either the Tenant for this tenantId or the Endpoint for the endpointId doesn't exist. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -1571,13 +1539,8 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints/543"
 ```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
 
 ## {updateatenant}
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
