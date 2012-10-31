@@ -1094,97 +1094,169 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 Current Impl: We don't filter by enabled flag so include all of them.
 1. Do we need to include global endpoints (endpoint templates with global flag as true) in this call? In keystone reference code base, it does not include them.  Current Impl: We don't include global endpoint templates in the response.
 
-## {gettenantsforuser}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+## Get a List of Users for a Tenant (includes role assignments)
+#### GET [HPKeystoneExtensionBaseURI]/tenants/{tenantId}/users?limit=pagesize&marker=roleId
+*Privilege Level: SA, DA*
 
-{Description about the method call}
+This API returns all Users for a given Tenant, Roles associated for each User is also returned. If the user is not a valid, an error is returned.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - Unique ID of the tenant to return users for.
+* *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker* (Optional) - string - the resource Id of the last item in the previous list.
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+This call does not require a request body.
 
 JSON
 
 ```
-{json data structure here}
+GET /v2.0/HP-IDM/v1.0/tenants/96488406679080/users HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e8b5dea2cdc3d29c14604d5
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+GET /v2.0/HP-IDM/v1.0/tenants/96488406679080/users HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e8b6e4c2cdc999e9328f727
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+* 200 - OK
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 1484
+Date: Tue, 04 Oct 2011 19:44:31 GMT
+ 
+{
+  "users": {
+    "anies": null,
+    "otherAttributes": {
+ 
+    },
+    "user": [
+      {
+        "roles": [
+          {
+            "anies": null,
+            "description": "Group 26155043473055 has role domainadmin in 29649421790262 domain",
+            "id": "00000000004003",
+            "otherAttributes": {
+ 
+            },
+            "serviceId": null,
+            "tenantId": null
+          },
+          {
+            "anies": null,
+            "description": "User 31190669223287 has role null in 29649421790262 domain",
+            "id": "82420955976896",
+            "otherAttributes": {
+ 
+            },
+            "serviceId": null,
+            "tenantId": "96488406679080"
+          },
+          {
+            "anies": null,
+            "description": "Group 55207359871951 has role null in 29649421790262 domain",
+            "id": "00000000004004",
+            "otherAttributes": {
+ 
+            },
+            "serviceId": null,
+            "tenantId": null
+          }
+        ],
+        "addressLine1": "128, Hollywood Blvd",
+        "addressLine2": null,
+        "city": "Los Angeles",
+        "company": null,
+        "country": "USA",
+        "domainId": "29649421790262",
+        "emailAddress": "Xml?User8&@timewarner.com",
+        "firstName": "First",
+        "lastName": "Last",
+        "otherAttributes": {
+ 
+        },
+        "password": null,
+        "phone": "1-800-555-1212",
+        "state": "CA",
+        "status": "enabled",
+        "userId": "31190669223287",
+        "username": "Xml?User8&@timewarner.com",
+        "website": "http://www.timewarner.com",
+        "zip": "90210"
+      }
+    ]
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=98D892BBE6A3F1093562567297E334B9; Path=/v2.0
+Content-Type: application/xml
+Content-Length: 913
+Date: Tue, 04 Oct 2011 20:36:51 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+  <user firstName="First" lastName="Last" username="Xml?User8&amp;@timewarner.com" userId="31190669223287" addressLine1="128, Hollywood Blvd" city="Los Angeles" state="CA" country="USA" zip="90210" phone="1-800-555-1212" website="http://www.timewarner.com" emailAddress="Xml?User8&amp;@timewarner.com" status="enabled" domainId="29649421790262">
+    <roles id="00000000004003" description="Group 26155043473055 has role domainadmin in 29649421790262 domain"/>
+    <roles id="82420955976896" description="User 31190669223287 has role null in 29649421790262 domain" tenantId="96488406679080"/>
+    <roles id="00000000004004" description="Group 55207359871951 has role null in 29649421790262 domain"/>
+  </user>
+</users>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The Tenant for this tenantId does not exist. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -1211,7 +1283,7 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/users"
 ```
 
 **Additional Notes**
