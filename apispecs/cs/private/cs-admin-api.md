@@ -57,6 +57,7 @@ group: apispec
 **Host**: https://az-1.region-a.geo-1.compute.hpcloudsvc.com
 
 **BaseUri**: {Host}/v2.0
+
 **HPKeystoneExtensionBaseURI**: {BaseUri}/HP-IDM/v1.0
 
 **Admin URI**: N/A
