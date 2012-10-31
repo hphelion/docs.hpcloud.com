@@ -899,97 +899,164 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 ```
 
-## {getendpointsfortenant}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+## Get Endpoints for a Tenant
+#### GET [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints?limit=pagesize&marker=endpointId
+*Privilege Level: SA, DA, DU*
 
-{Description about the method call}
+Get a list of endpoints for a tenant. Each endpoint data in the returned list has reference URL which can be used to query specific endpointTemplate (i.e. in format /endpointTemplates/{endpointTemplateId}) . This list will include disabled endpoint templates id. The operation does not require a request body.
+
+TenantId is required and must be enabled in the system. This will not include global endpoints which are available to all tenants in all domains.
+
+This API supports pagination through 'limit' and 'marker' usage. Marker is endpointId and should be valid otherwise 404 (not found) error is going to be returned.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - Unique ID of the tenant to return endpoints for.
+* *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker* (Optional) - string - the resource Id of the last item in the previous list.
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+This call does not require a request body.
 
 JSON
 
 ```
-{json data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4e9605ffb0be70f2f7118b6a
+Accept: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4e9605ffb0be70f2f7118b6a
+Accept: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+* 200 - OK
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 1311
+Date: Wed, 12 Oct 2011 21:55:43 GMT
+ 
+{
+  "endpoints" : {
+    "anies" : null,
+    "endpoint" : [ {
+      "version" : {
+        "id" : "1.0",
+        "info" : "http://127.0.0.1:8080//info/v1.0",
+        "list" : "http://127.0.0.1:8080/allVersions",
+        "otherAttributes" : {
+        }
+      },
+      "anies" : null,
+      "adminURL" : "http://127.0.0.1:8080/v1/AUTH_%tenant_id%",
+      "id" : 541,
+      "internalURL" : "http://127.0.0.1:8080/v1/AUTH_%tenant_id%",
+      "name" : "Object Storage",
+      "otherAttributes" : {
+      },
+      "publicURL" : "http://127.0.0.1:8080/v1/AUTH_%tenant_id%",
+      "region" : "RegionOne",
+      "tenantId" : "95096564413950",
+      "type" : "object-store"
+    }, {
+      "version" : {
+        "id" : "1.1",
+        "info" : "http://127.0.0.1:9292/info/v1.1",
+        "list" : "http://127.0.0.1:9292/allVersions",
+        "otherAttributes" : {
+        }
+      },
+      "anies" : null,
+      "adminURL" : "http://127.0.0.1:9292/v1.1/%tenant_id%",
+      "id" : 542,
+      "internalURL" : "http://127.0.0.1:9292/v1.1/%tenant_id%",
+      "name" : "Image Management",
+      "otherAttributes" : {
+      },
+      "publicURL" : "http://127.0.0.1:9292/v1.1/%tenant_id%",
+      "region" : "RegionOne",
+      "tenantId" : "95096564413950",
+      "type" : "image-service"
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints HTTP/1.1HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=CDB7DDF03251286D930B9FEAE11F5128; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 977
+Date: Wed, 12 Oct 2011 21:52:02 GMT
+ 
+<endpoints xmlns="http://docs.openstack.org/identity/api/v2.0" 
+xmlns:ns2="http://docs.openstack.org/common/api/v1.0" 
+xmlns:ns3="http://www.w3.org/2005/Atom">
+   <endpoint id="541" type="object-store" name="Object Storage"
+            region="RegionOne" publicURL="http://127.0.0.1:8080/v1/AUTH_%tenant_id%" 
+            internalURL="http://127.0.0.1:8080/v1/AUTH_%tenant_id%" 
+            adminURL="http://127.0.0.1:8080/v1/AUTH_%tenant_id%" 
+            tenantId="95096564413950">
+      <version id="1.0" info="http://127.0.0.1:8080//info/v1.0" list="http://127.0.0.1:8080/allVersions"/>
+   </endpoint>
+   <endpoint id="542" type="image-service" name="Image Management"
+            region="RegionOne" publicURL="http://127.0.0.1:9292/v1.1/%tenant_id%"
+            internalURL="http://127.0.0.1:9292/v1.1/%tenant_id%"
+            adminURL="http://127.0.0.1:9292/v1.1/%tenant_id%" 
+            tenantId="95096564413950">
+      <version id="1.1" info="http://127.0.0.1:9292/info/v1.1" list="http://127.0.0.1:9292/allVersions"/>
+   </endpoint>
+</endpoints>
+Accept-Encoding: gzip,deflate
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | Either the tenantId specified is not found or invalid marker is provided (matching marker id not found in database). |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -1016,13 +1083,16 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+*Open Issues*
 
+1. Do we just include enabled endpoints or all of them? In keystone reference code base, it does not filter by enabled flag (i.e. includes all of them).
+Current Impl: We don't filter by enabled flag so include all of them.
+1. Do we need to include global endpoints (endpoint templates with global flag as true) in this call? In keystone reference code base, it does not include them.  Current Impl: We don't include global endpoint templates in the response.
 
 ## {gettenantsforuser}
 #### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
