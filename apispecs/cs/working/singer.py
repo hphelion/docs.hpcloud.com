@@ -182,8 +182,8 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
             action_count = action_count + 1
             action_name = first_letter_cap(line[3:])
             action_name_tag = create_anchor_tag(action_name)
-            api_content.append("#### %s.%s.%s %s [%s]####" % (
-                chapter, group_count, action_count, action_name, action_name_tag))
+            api_content.append('#### %s.%s.%s <a id="%s"></a>%s####' % (
+                chapter, group_count, action_count, action_name_tag, action_name))
         else:
             # remove private tag/content, depending on API type
             if line.startswith('{{PRIVATE}}'):
@@ -199,8 +199,10 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
             if m:
                 verb = m.group('verb')
                 path = m.group('path')
-                line = line.replace('{', '\<')
-                line = line.replace('}', '\>')
+                #line = line.replace('{', '\<')
+                #line = line.replace('}', '\>')
+                line = line.replace('\<', '{')
+                line = line.replace('\>', '}')
             pm = re_priv.match(line)
             if pm:
                 api_table.append((group_name, action_name, action_name_tag, verb, path, 'Y/Y',

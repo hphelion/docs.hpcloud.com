@@ -145,7 +145,7 @@ N/A
 None.
 
 
-#### 4.4.1.1 List Tenants [list_tenants]####
+#### 4.4.1.1 <a id="list_tenants"></a>List Tenants####
 #### GET /tenants?limit=pagesize&marker=tenantId
 *Privilege Level: SS*
 
@@ -368,7 +368,7 @@ N/A
 None.
 
 
-#### 4.4.2.1 Authenticate [authenticate]####
+#### 4.4.2.1 <a id="authenticate"></a>Authenticate####
 #### POST /tokens
 *Privilege Level: Anon*
 
@@ -723,7 +723,7 @@ curl -X POST -H "Content-Type: application/json"
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.2 Rescope Token [rescope_token]####
+#### 4.4.2.2 <a id="rescope_token"></a>Rescope Token####
 #### POST /tokens
 *Privilege Level: SS*
 
@@ -929,8 +929,8 @@ curl -k -H "Content-Type: application/json" -d '{"auth":{"tenantName":"HP Swift 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.3 Revoke Token [revoke_token]####
-#### DELETE /HP-IDM/v1.0/tokens/\<tokenId\>
+#### 4.4.2.3 <a id="revoke_token"></a>Revoke Token####
+#### DELETE /HP-IDM/v1.0/tokens/{tokenId}
 *Privilege Level: SA,DA,SS*
 
 This API is used to revoke an authentication token. This operation does not require a request body. Once a token has been revoked, attempts to validate the token via GET /tokens/tokenId will fail with a 404 (item not found) as the token no longer exists. Trying revoke a non existing token, including one which has expired will also return a 404 (item not found).
@@ -990,7 +990,7 @@ curl -k -XDELETE https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.4 Swift Legacy Authentication [swift_legacy_authentication]####
+#### 4.4.2.4 <a id="swift_legacy_authentication"></a>Swift Legacy Authentication####
 #### GET /v1.0
 *Privilege Level: Anon*
 
