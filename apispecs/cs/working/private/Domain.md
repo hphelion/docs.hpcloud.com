@@ -1724,11 +1724,7 @@ Please refer to error response body for additional details.
 
 | Status Code | Description | Reasons |  
 | :-----------| :-----------| :-------|  
-| 400 | Bad Request | Malformed request in URI  
-If present, non-numeric endpoint template id is provided.   
-If present, invalid endpoint template id is provided.   
-If present, invalid service name is provided.   
-If both serviceName and endpointTemplateId values are provided. |  
+| 400 | Bad Request | Malformed request in URI; If present, non-numeric endpoint template id is provided; If present, invalid endpoint template id is provided.; If present, invalid service name is provided.; If both serviceName and endpointTemplateId values are provided. |  
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.    |  
 | 403 | Forbidden | Disabled or suspended user making the request |  
 | 404 | Not Found | The specified domainId or tenantId filter is not found   |  
