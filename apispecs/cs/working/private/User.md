@@ -486,6 +486,8 @@ There is no response body returned in API response data. This API does not requi
 
 **Request Data**
 
+{Specify all the required/optional url and data parameters for the given method call.}
+
 **URL Parameters**
 
 * *name* (Optional) - string - username
@@ -496,6 +498,11 @@ See schema file for more details on the request and response data structure.
 
 This call does not require a request body.
 
+* *{name_of_attribute}* - {data type} - {description of the attribute}
+* *{name_of_attribute}* - {data type} - {description of the attribute}
+* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
+
+{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
@@ -514,6 +521,8 @@ Accept-Encoding: gzip,deflate
 
 **Success Response**
 
+{Specify the status code and any content that is returned.}
+
 **Status Code**
 
 | Status Code | Description | Reasons |
@@ -522,6 +531,8 @@ Accept-Encoding: gzip,deflate
 | 404 | Not Found | Given user does not exist. |
 
 **Response Data**
+
+{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
@@ -548,6 +559,8 @@ Date: Tue, 21 Aug 2012 18:49:33 GMT
 ```
 
 **Error Response**
+
+{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
@@ -598,6 +611,8 @@ Creates a new user within a specific domain with a service generated userId for 
 When a Domain Administrator creates a new User, the User object created will have the "passwordResetRequired" flag set to "true". In this case, the caller should force the User to reset the password for the User.
 
 **Request Data**
+
+{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
@@ -657,11 +672,15 @@ Content-Length: 399
 
 **Success Response**
 
+{Specify the status code and any content that is returned.}
+
 **Status Code**
 
 200 - OK
 
 **Response Data**
+
+{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
@@ -720,6 +739,8 @@ Date: Mon, 26 Sep 2011 20:40:01 GMT
 ```
 
 **Error Response**
+
+{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
@@ -784,6 +805,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 ## Update A User
 #### PUT [HPKeystoneExtensionBaseURI]/users/\<userId\> 
@@ -792,6 +814,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 Updates a user for the specified userId.
 
 **Request Data**
+
+{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
@@ -839,12 +863,15 @@ Content-Length: 177
 
 **Success Response**
 
+{Specify the status code and any content that is returned.}
 
 **Status Code**
 
 200 - OK
 
 **Response Data**
+
+{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
@@ -903,6 +930,8 @@ Date: Tue, 09 Aug 2011 21:07:33 GMT
 
 **Error Response**
 
+{Enumerate all the possible error status codes and any content that is returned.}
+
 **Status Code**
 
 | Status Code | Description | Reasons |
@@ -957,6 +986,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 ## Delete A User
 #### DELETE [HPKeystoneExtensionBaseURI]/users/\<userId\>
@@ -966,6 +996,8 @@ Deletes a user for the specified userId. If the User is an owner of the Domain, 
 
 **Request Data**
 
+{Specify all the required/optional url and data parameters for the given method call.}
+
 **URL Parameters**
 
 None
@@ -974,6 +1006,7 @@ None
 
 See schema file for more details on the request and response data structure.
 
+{List all the attributes that comprises the data structure}
 
 A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
@@ -1005,11 +1038,15 @@ Connection: keep-alive
 
 **Success Response**
 
+{Specify the status code and any content that is returned.}
+
 **Status Code**
 
 204 - No Content
 
 **Response Data**
+
+{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
@@ -1036,6 +1073,8 @@ Date: Thu, 22 Sep 2011 20:10:44 GMT
 ```
 
 **Error Response**
+
+{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
@@ -1080,6 +1119,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 ## Get All Groups For A User
 #### GET [HPKeystoneExtensionBaseURI]/users/\<userId\>/groups?limit=pagesize&marker=groupId
@@ -1088,6 +1128,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 Returns all groups for the user specified within the userId.
 
 **Request Data**
+
+{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
@@ -1102,6 +1144,7 @@ A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 
 
 This call does not require a request body.
 
+{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
@@ -1129,11 +1172,15 @@ Connection: keep-alive
 
 **Success Response**
 
+{Specify the status code and any content that is returned.}
+
 **Status Code**
 
 200 - OK
 
 **Response Data**
+
+{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
@@ -1194,6 +1241,8 @@ xmlns:ns3="http://docs.openstack.org/identity/api/v2.0">
 
 **Error Response**
 
+{Enumerate all the possible error status codes and any content that is returned.}
+
 **Status Code**
 
 | Status Code | Description | Reasons |
@@ -1245,6 +1294,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 ## Update Password For A User
 #### PUT [HPKeystoneExtensionBaseURI]/users/\<userId\>/password
@@ -1253,6 +1303,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 Update a user's password specified by the userId.
 
 **Request Data**
+
+{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
@@ -1264,6 +1316,11 @@ See schema file for more details on the request and response data structure.
 
 A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
+* *{name_of_attribute}* - {data type} - {description of the attribute}
+* *{name_of_attribute}* - {data type} - {description of the attribute}
+* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
+
+{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
@@ -1302,11 +1359,15 @@ Content-Length: 157
 
 **Success Response**
 
+{Specify the status code and any content that is returned.}
+
 **Status Code**
 
 204 - No Content
 
 **Response Data**
+
+{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
@@ -1333,6 +1394,8 @@ Date: Fri, 18 Nov 2011 17:58:24 GMT
 ```
 
 **Error Response**
+
+{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
@@ -1386,6 +1449,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 ## Initial Password Reset
 #### POST [HPKeystoneExtensionBaseURI]/users/password/reset?userName=username
@@ -1394,6 +1458,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 This API is used to initiate a forgot password reset for a given username.  If the username is validated, an email will be sent to the user (based on the email attribute of the user object) containing a URL link with an embedded resetId.  The user is expected to then click on the link which will send them to a location on the HP Services web management console where the console will then pickup the resetId and validate it.
 
 **Request Data**
+
+{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
@@ -1435,11 +1501,15 @@ Content-Length: 0
 
 **Success Response**
 
+{Specify the status code and any content that is returned.}
+
 **Status Code**
 
 204 - No Content
 
 **Response Data**
+
+{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
@@ -1464,6 +1534,8 @@ Date: Mon, 22 Aug 2011 04:55:08 GMT
 ```
 
 **Error Response**
+
+{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
@@ -1506,6 +1578,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 ## Validate Password ResetId And Update Password
 #### PUT [HPKeystoneExtensionBaseURI]/users/password/reset/\<resetId\>
@@ -1515,6 +1588,8 @@ This API is used to validate the password resetId (nonce), if validated, then th
 
 **Request Data**
 
+{Specify all the required/optional url and data parameters for the given method call.}
+
 **URL Parameters**
 
 None
@@ -1522,6 +1597,14 @@ None
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
+
+{List all the attributes that comprises the data structure}
+
+* *{name_of_attribute}* - {data type} - {description of the attribute}
+* *{name_of_attribute}* - {data type} - {description of the attribute}
+* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
+
+{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
@@ -1555,11 +1638,15 @@ Content-Length: 155
 
 **Success Response**
 
+{Specify the status code and any content that is returned.}
+
 **Status Code**
 
 200 - OK
 
 **Response Data**
+
+{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
@@ -1618,6 +1705,8 @@ Date: Tue, 29 Nov 2011 17:42:30 GMT
 
 **Error Response**
 
+{Enumerate all the possible error status codes and any content that is returned.}
+
 **Status Code**
 
 | Status Code | Description | Reasons |
@@ -1668,6 +1757,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Conte
 ```
 
 **Additional Notes**
+
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ## List A User's Non Tenant Role Assignments
