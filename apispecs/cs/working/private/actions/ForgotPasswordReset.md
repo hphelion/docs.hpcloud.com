@@ -17,9 +17,9 @@ None
 
 **Data Parameters**
 
-|Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
-|username|xs:string|true|
+| Parameter Name	| Parameter Type	| Is Required	|
+| :-	| :-	| :-	|
+| username	| xs:string	| true	|
 
 XML
 
@@ -74,17 +74,35 @@ TBD
 
 **Action Steps**
 
-|Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
-|ForgotPasswordResetOnUmsUser|Set a nonce in the UMS User and set passwordResetTime to the current time|true|
-|SendForgotPasswordResetEmail|Send the nonce to the user in a templated email.|true|
+| Step Name	| Step Description	| Is Retryable	|
+| :-	| :-	| :-	|
+| ForgotPasswordResetOnUmsUser	| Set a nonce in the UMS User and set passwordResetTime to the current time	| true	|
+| SendForgotPasswordResetEmail	| Send the nonce to the user in a templated email.	| true	|
 
-**Notes**
+##Email Integration##
 
-Email messages are stored in the database. The forgot password email is stored under the identifier _PASSWORD_RESET_EMAIL_ID_. Before being sent each email is processed by replacing text of the for ```%<keyword>%``` with a specific value. Replacement values available in the email are listed in the following table.
+After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
 
-|Email Text|Replaced With|
-|:-|:-|
-|%ResetToken%|user.nonce|
+| Templates Used	| CtrlSvcsContactActivity Type 	|
+| -- 	| -- 	|
+| PASSWORD_RESET_EMAIL_ID 	| PasswordRecoveryEmail	|
 
-After submission of a Verification email, a _CtrlServicesContactActivity_ Salesforce object is created with *ActvityType*="PasswordRecoveryEmail"
+Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
+
+| Email Text 	| Replaced With 	|
+| -- 	| --	|
+| %accountId% 	| user.accountId 	|
+| %username% 	| user.username 	|
+| %firstName% 	| user.firstName 	|
+| %lastName% 	| user.lastName 	|
+| %addressLine1% 	| user.addressLine1 	|
+| %addressLine2% 	| user.addressLine2 	|
+| %city% 	| user.city 	|
+| %state% 	| user.state 	|
+| %zip% 	| user.zip 	|
+| %country% 	| user.country 	|
+| %phone% 	| user.phone 	|
+| %company% 	| user.company 	|
+| %website% 	| user.website 	|
+| %emailAddress% 	| user.emailAddress 	|
+| %ResetToken%	| user.nonce	|

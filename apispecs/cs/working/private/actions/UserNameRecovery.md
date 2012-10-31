@@ -43,12 +43,33 @@ Anonymous
 
 1. No parameters are returned since the username list is in the email.
 
-## User Name Recovery Email ##
+## Email Integration ##
 
-Email messages are stored in the database. The forgot password email is stored under the identifier **"USERNAME_RECOVERY_EMAIL_ID"**. Before being sent each email is processed by replacing text of the for **%<keyword>%** with a specific value. Replacement values available in the email are listed in the following table.
+After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
+
+| Templates Used	| CtrlSvcsContactActivity Type 	|
+| -- 	| -- 	|
+| USERNAME_RECOVERY_EMAIL_ID 	| UserNameRecoveryEmail	|
+
+Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
 
 | Email Text 	| Replaced With 	|
 | -- 	| -- 	|
+| %accountId% 	| user.accountId 	|
+| %username% 	| user.username 	|
+| %firstName% 	| user.firstName 	|
+| %lastName% 	| user.lastName 	|
+| %addressLine1% 	| user.addressLine1 	|
+| %addressLine2% 	| user.addressLine2 	|
+| %city% 	| user.city 	|
+| %state% 	| user.state 	|
+| %zip% 	| user.zip 	|
+| %country% 	| user.country 	|
+| %phone% 	| user.phone 	|
+| %company% 	| user.company 	|
+| %website% 	| user.website 	|
+| %emailAddress% 	| user.emailAddress 	|
+| %ResetToken% 	| nonce value if required 	|
 | %UsersForEmailAddress% 	| The HTML formatted list of usernames (see below) 	|
 | %firstName% 	| The users first name (see below)	|
 
@@ -65,5 +86,3 @@ This will expand to:
 	<ul>
 	<li>username1</li><li>username2</li>...
 	</ul>
-
-After submission of a Verification email, a **CtrlServicesContactActivity** Salesforce object is created with **ActvityType**="UsernameRecoveryEmail"

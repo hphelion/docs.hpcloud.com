@@ -4,11 +4,17 @@
 
 This action sets up a new Domain and User using minimal parameters. Keys are created for the user, and Accounts are created in both Salesforce and Zuora. In order to support MC IP address validation there are two additional parameters. ipCheckSucceeded store a boolean value indicating whether or not the IP address of the client is not blocked. ipAddress contains the actual address.
 
-The selfRegistration action operates in following two modes
+## Validation Modes ##
 
-**Default Mode**: In this mode all the required entities (user, domain, etc....) are created in the mongodb and the Sales Force and they are set to \*enabled\* state. Welcome email will be sent to customer immediately after successful registration process.
+**No Validation**: In this mode all the required entities (user, domain, etc....) are created in the mongodb and the Sales Force and they are set to \*enabled\* state. Welcome email will be sent to customer immediately after successful registration process.
+
+In this mode the user is activated immediately. If **sendWelcomeEmail**=true the email is sent immediately.
 
 **Email Validation Mode**: In this mode all the required entities (user, domain, etc....) are created in the mongodb and the Sales Force and they set to \*suspended\* state. Email verification email along with email verification nonce will be sent to customer, customer has to follow the direction given in the email to validate their email address. To support this work flow we have added "statusReason" field to the Domain Collections and "emailVerificationStatus" to the User collection, same fields are added to the Account and Contact object of SF and they should be in sync.
+
+If **sendWelcomeEmail**=true and **emailValidationRequired**==true then the welcome email is sent on successful validation.
+
+Note that the **EmailVerification** action must handle validations from this action.
 
 **See: Self Registration & Email Validation Work Flow**
 
@@ -37,45 +43,46 @@ The selfRegistration action operates in following two modes
 
 ## Action Parameters ##
 
-| Parameter Name	| Parameter Type 	| Is Required 	|
-| :--	| :--	| :- 	|
-| state 	| xs:string 	| false 	|
-| password 	| xs:string 	| **true** 	|
-| addressLine1 	| xs:string 	| false 	|
-| addressLine2 	| xs:string 	| false 	|
-| city 	| xs:string 	| false 	|
-| zip 	| xs:string 	| false 	|
-| country 	| xs:string 	| false 	|
-| phone 	| xs:string 	| false 	|
-| company 	| xs:string 	| false 	|
-| website 	| xs:string 	| false 	|
-| emailAddress 	| xs:string 	| **true** 	|
-| username 	| xs:string 	| **true** 	|
-| firstName 	| xs:string 	| false 	|
-| lastName 	| xs:string 	| false 	|
-| ipAddress 	| xs:string 	| false 	|
-| promoCode 	| xs:string 	| false	|
-| partnerCode 	| xs:string 	| false 	|
-| riskScore 	| xs:int 	| false 	|
-| phoneInBillingLocation 	| xs:string 	| false 	|
-| ipBillingDistance	| xs:int 	| false 	|
-| ipCity 	| xs:string 	| false 	|
-| ipRegion 	| xs:string 	| false 	|
-| ipCountry 	| xs:string 	| false 	|
-| anonymousProxy 	| xs:boolean 	| false 	|
-| proxyScore 	| xs:int 	| false 	|
-| transparentProxy 	| xs:boolean 	| false 	|
-| corporateProxy 	| xs:boolean 	| false 	|
-| highRiskCountry 	| xs:boolean 	| false 	|
-| highRiskEmail 	| xs:boolean 	| false 	|
-| emailValidationRequired 	| xs:boolean 	| false 	|
-| referringUrl 	| xs:string 	| false 	|
-| useCase	| xs:string 	| false 	|
+| Parameter Name	| Parameter Type 	| Is Required 	| Default 	|
+| :--	| :--	| :- 	| :- 	|
+| state 	| xs:string 	| false 	| 	|
+| password 	| xs:string 	| **true** 	| 	|
+| addressLine1 	| xs:string 	| false 	| 	|
+| addressLine2 	| xs:string 	| false 	| 	|
+| city 	| xs:string 	| false 	| 	|
+| zip 	| xs:string 	| false 	| 	|
+| country 	| xs:string 	| false 	| 	|
+| phone 	| xs:string 	| false 	| 	|
+| company 	| xs:string 	| false 	| 	|
+| website 	| xs:string 	| false 	| 	|
+| emailAddress 	| xs:string 	| **true** 	| 	|
+| username 	| xs:string 	| **true** 	| 	|
+| firstName 	| xs:string 	| false 	| 	|
+| lastName 	| xs:string 	| false 	| 	|
+| ipAddress 	| xs:string 	| false 	| 	|
+| promoCode 	| xs:string 	| false	| 	|
+| partnerCode 	| xs:string 	| false 	| 	|
+| riskScore 	| xs:int 	| false 	| 	|
+| phoneInBillingLocation 	| xs:string 	| false 	| 	|
+| ipBillingDistance	| xs:int 	| false 	| 	|
+| ipCity 	| xs:string 	| false 	| 	|
+| ipRegion 	| xs:string 	| false 	| 	|
+| ipCountry 	| xs:string 	| false 	| 	|
+| anonymousProxy 	| xs:boolean 	| false 	| 	|
+| proxyScore 	| xs:int 	| false 	| 	|
+| transparentProxy 	| xs:boolean 	| false 	| 	|
+| corporateProxy 	| xs:boolean 	| false 	| 	|
+| highRiskCountry 	| xs:boolean 	| false 	| 	|
+| highRiskEmail 	| xs:boolean 	| false 	| 	|
+| emailValidationRequired 	| xs:boolean 	| false 	| 	|
+| referringUrl 	| xs:string 	| false 	| 	|
+| useCase	| xs:string 	| false 	| 	|
+| sendWelcomeEmail 	| xs:boolean 	| false 	| false	|
 
 ## Action Steps ##
 
 | Step Name 	| Step Description	| Is Retryable 	|
-| -----------	| ------------------	| -------------	|
+| -----------	| -----------------	| --------------	|
 | CreateUmsUserAndDomain 	| Create a new UMS User and Domain. The User will be configured as the Administrator for the new Domain. 	| false 	|
 | CreateKmsDomain 	| Create a new KMS Tenant corresponding to a UMS Domain. 	| false 	|
 | CreateKmsUser 	| Create a new KMS User Account corresponding to a UMS User. 	| false 	|
@@ -99,13 +106,19 @@ The selfRegistration action operates in following two modes
 1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _(CreateSalesforceContact)_
 1. ZUORA_DOMAIN_ACCOUNT will contain the Zuora Account ID. _(CreateZuoraDomainAndContact)_
 
-## Welcome Email ##
+##Email Integration##
 
-If the "emailValidationRequired" parameter is not set in the request, the final step in Self Registration is to send an Welcome Email to the new user. Email messages are stored in the database. The welcome email is stored under the identifier **"WELCOME_TO_CLOUD_EMAIL_ID"**. Before being sent each email is processed by replacing text of the for %<keyword>% with a specific value. Replacement values available in the welcome email are listed in the following table.
+After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
 
+| Templates Used	| CtrlSvcsContactActivity Type 	|
+| -- 	| -- 	|
+| WELCOME_TO_CLOUD_EMAIL_ID 	| WelcomeEmailSent	|
+| EMAIL_VERIFICATION_EMAIL_ID 	| VerificationEmailSent	|
+
+Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
 
 | Email Text 	| Replaced With 	|
-| -- 	| -- 	|
+| -- 	| --	|
 | %accountId% 	| user.accountId 	|
 | %username% 	| user.username 	|
 | %firstName% 	| user.firstName 	|
@@ -120,6 +133,4 @@ If the "emailValidationRequired" parameter is not set in the request, the final 
 | %company% 	| user.company 	|
 | %website% 	| user.website 	|
 | %emailAddress% 	| user.emailAddress 	|
-
-
-After submission of a Welcome email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType**="WelcomeEmailSent"
+| %ResetToken%	| user.nonce	|
