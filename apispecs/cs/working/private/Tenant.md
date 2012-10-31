@@ -491,7 +491,7 @@ XML
 Curl Example
 
 ```
-curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants" -d '{"tenant":{"description":"Payroll Tenant Services for TimeWarner","domainId":"47826457774667","name":"Payroll Tenant Services","status":"enabled"}}'
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants" -d '{"tenant":{"description":"Payroll Tenant Services for TimeWarner","domainId":"47826457774667","name":"Payroll Tenant Services","status":"enabled"}}'
 ```
 
 ## Delete a Tenant
@@ -1439,7 +1439,7 @@ XML
 Curl Example
 
 ```
-curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints" -d '{"endpointTemplate":{"id":120}}'
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints" -d '{"endpointTemplate":{"id":120}}'
 ```
 
 ## Remove Endpoints from a Tenant
@@ -1542,97 +1542,166 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints/543"
 ```
 
-## {updateatenant}
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+## Update a Tenant
+#### PUT [HPKeystoneExtensionBaseURI]/tenants/{tenantID} 
+*Privilege Level: SA, DA*
 
-{Description about the method call}
+Allows updating an existing tenant using the tenantId and request body. Does not allow update or change of tenantId and domainId ('domainId' cannot be updated, passing that in request body will result in failure).
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - Unique ID of the tenant to be updated.
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+See tenant schema file for more details on the request and response data structure.
 
 JSON
 
 ```
-{json data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/37942731773710 HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4ecab298b0be470b008da2ab
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 132
+ 
+{"tenant": {
+   "description": "Tenant for Market forecasting service",
+   "otherAttributes": {"swiftAccountHash": "abcd23456"}
+}}
 ```
 
 XML
 
 ```
-{xml data structure here}
+PUT /v2.0/HP-IDM/v1.0/tenants/33841725750480 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4eb4288e2cdca60d5a48e9a1
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 350
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" status="disabled"/>
 ```
 
-Optional:
-
-JSON
+XML (with swift account hash)
 
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/76063089090850 HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4e8397c5b0bedc2f5c932a15
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 267
+ 
+<tenant name="HP Swift Tenant Services" 
+description="Tenant for hosting HR Applications &amp; services" 
+status="enabled" 
+swiftAccountHash="abcdefgh123456" 
+xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"/>
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+* 200 - OK
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=C869D386993E9F92B3E2FC1935B00154; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 313
+Date: Mon, 21 Nov 2011 20:20:53 GMT
+ 
+{
+  "tenant" : {
+    "description" : "Tenant for Market forecasting service",
+    "anies" : null,
+    "domainId" : "32046002839662",
+    "name" : "HP Swift Tenant 2 Services",
+    "otherAttributes" : {
+      "swiftAccountHash" : "abcd23456"
+    },
+    "status" : "enabled",
+    "tenantId" : "37942731773710"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=3E1203905FC35B1519A6107B936173B5; Path=/
+Content-Type: application/xml
+Content-Length: 491
+Date: Fri, 04 Nov 2011 18:02:42 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" name="EMail Service" tenantId="33841725750480" domainId="36528361097134" status="disabled">
+  <description>Tenant for Email and Chat Service</description>
+</tenant>
+```
+
+XML (with swift account hash)
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=86D76B52AABD080B77ED24F0722DF175; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 322
+Date: Wed, 28 Sep 2011 21:59:05 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" 
+name="HP Swift Tenant Services" 
+description="Tenant for hosting HR Applications &amp; services" 
+tenantId="76063089090850" 
+domainId="77759980331221" 
+status="enabled" 
+swiftAccountHash="abcdefgh123456"/>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The Tenant for this tenantId does not exist. |
+| 409 | Conflict | Will be returned if a Tenant with the name already exists in the system or if a Tenant with swift account hash already exists in the system. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -1659,11 +1728,5 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/37942731773710" -d '{"tenant":{"description":"Tenant for Market forecasting service","otherAttributes":{"swiftAccountHash":"abcd23456"}}}'
 ```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
