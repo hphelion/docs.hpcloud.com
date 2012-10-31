@@ -108,7 +108,7 @@ The service is exposed in the service catalog, as shown in the following fragmen
 | Tenant | [List Tenants](#list_tenants) | GET | /tenants?limit=pagesize&marker=tenantId | Y/Y | SS |
 | Token | [Authenticate](#authenticate) | POST | /tokens | Y/Y | Anon |
 | Token | [Rescope Token](#rescope_token) | POST | /tokens | Y/Y | SS |
-| Token | [Revoke Token](#revoke_token) | DELETE | /HP-IDM/v1.0/tokens/\<tokenId\> | Y/Y | SA,DA,SS |
+| Token | [Revoke Token](#revoke_token) | DELETE | /HP-IDM/v1.0/tokens/{tokenId} | Y/Y | SA,DA,SS |
 | Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.0 | Y/Y | Anon |
 | Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.1 | Y/Y | Anon |
 | Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.0 | Y/Y | Anon |

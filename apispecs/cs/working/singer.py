@@ -203,6 +203,8 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
                 #line = line.replace('}', '\>')
                 line = line.replace('\<', '{')
                 line = line.replace('\>', '}')
+                path = path.replace('\<', '{')
+                path = path.replace('\>', '}')
             pm = re_priv.match(line)
             if pm:
                 api_table.append((group_name, action_name, action_name_tag, verb, path, 'Y/Y',

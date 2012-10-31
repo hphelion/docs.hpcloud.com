@@ -147,25 +147,25 @@ group: apispec
 | Tenant | [Get Endpoints For A Tenant](#get_endpoints_for_a_tenant) | GET | [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints?limit=pagesize&marker=endpointId | Y/Y | SA, DA, DU |
 | Tenant | [Add Endpoint To A Tenant](#add_endpoint_to_a_tenant) | POST | [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId]}/endpoints | Y/Y | SA, DA |
 | Tenant | [Remove Endpoints From A Tenant](#remove_endpoints_from_a_tenant) | DELETE | [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints/{endpointId} | Y/Y | DA, SA |
-| Token | [Validate Token](#validate_token) | GET | [KeystoneBaseURI]/tokens/\<tokenId\>?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | Anon |
-| Token | [Quick Token Validation](#quick_token_validation) | GET | [KeystoneBaseURI]/tokens/\<tokenId\>?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | Anon |
-| Token | [Refresh Token](#refresh_token) | GET | [KeystoneBaseURI]/tokens/\<tokenId\>?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | SS |
+| Token | [Validate Token](#validate_token) | GET | [KeystoneBaseURI]/tokens/{tokenId}?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | Anon |
+| Token | [Quick Token Validation](#quick_token_validation) | GET | [KeystoneBaseURI]/tokens/{tokenId}?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | Anon |
+| Token | [Refresh Token](#refresh_token) | GET | [KeystoneBaseURI]/tokens/{tokenId}?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | SS |
 | User | [List Users](#list_users) | GET | [HPKeystoneExtensionBaseURI]/users?name=username&emailAddress=email&limit=pagesize&marker=userId | Y/Y | SA, DA, SS |
-| User | [Get A User](#get_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/\<userId\>  | Y/Y | SA, DA, SS |
-| User | [Check For Existence Of User](#check_for_existence_of_user) | GET | [HPKeystoneExtensionBaseURI]/users/\<userId\>  | Y/Y | Anon |
+| User | [Get A User](#get_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}  | Y/Y | SA, DA, SS |
+| User | [Check For Existence Of User](#check_for_existence_of_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}  | Y/Y | Anon |
 | User | [Create A New User](#create_a_new_user) | POST | [HPKeystoneExtensionBaseURI/users | Y/Y | SA, DA, SR |
-| User | [Delete A User](#delete_a_user) | DELETE | [HPKeystoneExtensionBaseURI]/users/\<userId\> | Y/Y | SA, DA |
-| User | [Get All Groups For A User](#get_all_groups_for_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/\<userId\>/groups?limit=pagesize&marker=groupId | Y/Y | SA, DA, SS |
-| User | [Update Password For A User](#update_password_for_a_user) | PUT | [HPKeystoneExtensionBaseURI]/users/\<userId\>/password | Y/Y | SA, DA, SS |
+| User | [Delete A User](#delete_a_user) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId} | Y/Y | SA, DA |
+| User | [Get All Groups For A User](#get_all_groups_for_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/groups?limit=pagesize&marker=groupId | Y/Y | SA, DA, SS |
+| User | [Update Password For A User](#update_password_for_a_user) | PUT | [HPKeystoneExtensionBaseURI]/users/{userId}/password | Y/Y | SA, DA, SS |
 | User | [Initial Password Reset](#initial_password_reset) | POST | [HPKeystoneExtensionBaseURI]/users/password/reset?userName=username | Y/Y | SA, DA, Anon |
-| User | [Validate Password ResetId And Update Password](#validate_password_resetid_and_update_password) | PUT | [HPKeystoneExtensionBaseURI]/users/password/reset/\<resetId\> | Y/Y | Anon |
-| User | [List A User's Non Tenant Role Assignments](#list_a_users_non_tenant_role_assignments) | GET | [HPKeystoneExtensionBaseURI]/users/\<userId\>/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
-| User | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | [HPKeystoneExtensionBaseURI]/users/\<userId\>/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
-| User Access Key | [{createaccesskey}](#{createaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/\<userId\>/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
-| User Access Key | [{deleteaccesskey}](#{deleteaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/\<userId\>/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
-| User Access Key | [{getaccesskey}](#{getaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/\<userId\>/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
-| User Access Key | [{importaccesskey}](#{importaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/\<userId\>/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
-| User Access Key | [{updateaccesskey}](#{updateaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/\<userId\>/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
+| User | [Validate Password ResetId And Update Password](#validate_password_resetid_and_update_password) | PUT | [HPKeystoneExtensionBaseURI]/users/password/reset/{resetId} | Y/Y | Anon |
+| User | [List A User's Non Tenant Role Assignments](#list_a_users_non_tenant_role_assignments) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
+| User | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
+| User Access Key | [{createaccesskey}](#{createaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
+| User Access Key | [{deleteaccesskey}](#{deleteaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
+| User Access Key | [{getaccesskey}](#{getaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
+| User Access Key | [{importaccesskey}](#{importaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
+| User Access Key | [{updateaccesskey}](#{updateaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
 | User Certificate | [Delete User Certificate](#delete_user_certificate) | DELETE | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	D | Y/Y | SA, DA, SS |
 | User Certificate | [Get User Certificate](#get_user_certificate) | GET | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} | Y/Y | SA, DA, SS |
 | User Certificate | [Create A User Certificate](#create_a_user_certificate) | POST | [HPKeystoneExtensionBaseURI]/certificates | Y/Y | SA, DA, SS |
