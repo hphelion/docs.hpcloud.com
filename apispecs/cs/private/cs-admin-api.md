@@ -162,11 +162,11 @@ group: apispec
 | Users | [Validate Password ResetId And Update Password](#validate_password_resetid_and_update_password) | PUT | [HPKeystoneExtensionBaseURI]/users/password/reset/{resetId} | Y/Y | Anon |
 | Users | [List A User's Non Tenant Role Assignments](#list_a_users_non_tenant_role_assignments) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
 | Users | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
-| User Access Key | [{createaccesskey}](#{createaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
-| User Access Key | [{deleteaccesskey}](#{deleteaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
-| User Access Key | [{getaccesskey}](#{getaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
-| User Access Key | [{importaccesskey}](#{importaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
-| User Access Key | [{updateaccesskey}](#{updateaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
+| User Access Key | [{createaccesskey}](#{createaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
+| User Access Key | [{deleteaccesskey}](#{deleteaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
+| User Access Key | [{getaccesskey}](#{getaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
+| User Access Key | [{importaccesskey}](#{importaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
+| User Access Key | [{updateaccesskey}](#{updateaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
 | User Certificate | [Delete User Certificate](#delete_user_certificate) | DELETE | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	D | Y/Y | SA, DA, SS |
 | User Certificate | [Get User Certificate](#get_user_certificate) | GET | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} | Y/Y | SA, DA, SS |
 | User Certificate | [Create A User Certificate](#create_a_user_certificate) | POST | [HPKeystoneExtensionBaseURI]/certificates | Y/Y | SA, DA, SS |
@@ -15876,6 +15876,245 @@ Curl Example
 
 ```
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" -XHEAD "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/345678902345/roles/00000000004003"
+```
+
+**Additional Notes**
+
+#### 4.4.14.13 <a id="create_a_users_non_tenant_role_assignment"></a>Create A User's Non Tenant Role Assignment####
+#### PUT [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId}
+*Privilege Level: SA, DA**
+
+This API is used to create a non tenant role assignment for user in his domain.
+
+##### Constraints
+
+* This is a privileged operation, only superadmin or domainadmin can create a role assignment.
+* Only super admin is allowed to make a role assignment for "System" scoped roles.
+* All the id's should represent a valid entity (userId, roleId)
+* Role assignment should be made on users domain.
+* Tenant role assignment is not allowed.
+* Cross domain role assignment is not supported for non tenant role.
+
+**Request Data**
+
+**URL Parameters** 
+
+None
+
+**Data Parameters** 
+    
+See schema file for more details on the request and response data structure.
+
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+This call does not require a request body.
+
+JSON
+
+```
+PUT /v2.0/HP-IDM/v1.0/users/12345678909876/roles/334343434 HTTP/1.1
+Accept: application/json
+X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
+```
+
+XML
+
+```
+PUT /v2.0/HP-IDM/v1.0/users/12345678909876/roles/334343434 HTTP/1.1
+Accept: application/xml
+X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
+```
+
+**Success Response**
+
+**Status Code**
+
+201 - Created
+
+**Response Data**
+
+
+JSON
+
+```
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+```
+
+XML
+
+```
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 200 | OK | Role assignment is policy and here we can safely return OK in case of duplicate role assignment. |
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The specified user or role was not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" -XPUT "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/12345678909876/roles/334343434"
+```
+
+**Additional Notes**
+
+#### 4.4.14.14 <a id="delete_a_users_non_tenant_role_assignment"></a>Delete A User's Non Tenant Role Assignment####
+#### DELETE [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId}
+*Privilege Level: SA, DA**
+
+This API is used to delete a non tenant role assignment for a user. 
+
+##### Constraints
+* This is a privileged operation.
+* All the id's should represent a valid entity (userId, roleId)
+* Delete a tenant role are not allowed.
+
+**Request Data**
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+This call does not require a request body.
+
+JSON
+
+```
+DELETE /v2.0/HP-IDM/v1.0/users/559855934411/roles/07568653986543 HTTP/1.1
+Accept: application/json
+X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
+```
+
+XML
+
+```
+DELETE /v2.0/HP-IDM/v1.0/users/559855934411/roles/07568653986543 HTTP/1.1
+Accept: application/json
+X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
+```
+
+**Success Response**
+
+**Status Code**
+
+204 - No Content
+
+**Response Data**
+
+
+JSON
+
+```
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Date: Tue, 09 Aug 2011 22:20:25 GMT
+```
+
+XML
+
+```
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Date: Tue, 09 Aug 2011 22:20:25 GMT
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The specified user was not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" -XDELETE "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/12345678909876/roles/334343434"
 ```
 
 **Additional Notes**
