@@ -78,18 +78,18 @@ group: apispec
 | Authorization | [{authorizationresult}](#{authorizationresult}) | GET | [HPKeystoneExtensionBaseURI]/job/status/{status}/count | Y/Y | {Privilege Level} |
 | Authorization | [{gettrusts}](#{gettrusts}) | GET | [HPKeystoneExtensionBaseURI]/job/status/{status}/count | Y/Y | {Privilege Level} |
 | Authorization | [{removetrust}](#{removetrust}) | GET | [HPKeystoneExtensionBaseURI]/job/status/{status}/count | Y/Y | {Privilege Level} |
-| Domain | [Check For Existence Of Domain Name](#check_for_existence_of_domain_name) | GET | [HPKeystoneExtensionBaseURI]/job/status/{status}/count | Y/Y | Anonymous |
-| Domain | [Create A Domain](#create_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains  | Y/Y | System Adminstrator (SA) |
-| Domain | [Delete A Domain](#delete_a_domain) | DELETE | [HPKeystoneExtensionBaseURI]/domains/{domainId}  | Y/Y | System Adminstrator (SA) |
-| Domain | [Get A Domain](#get_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}  | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domain | [Get All Domains](#get_all_domains) | GET | [HPKeystoneExtensionBaseURI]/domains?limit=pagesize&marker=domainId   | Y/Y | System Adminstrator (SA) |
-| Domain | [Get Groups For A Domain](#get_groups_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&excludeRoles=r1,r2} | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domain | [Get Subscribe Able Services For A Domain](#get_subscribe_able_services_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/subscribeableServices?serviceName={serviceName}&endpointTemplateId={templateId} | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domain | [Get Service Activations For A Domain](#get_service_activations_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/services?tenantId={tenantId} | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domain | [Get Tenants For A Domain](#get_tenants_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants?limit=pagesize&marker=tenantId | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domain | [Get Users For A Domain](#get_users_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants?limit=pagesize&marker=tenantId | Y/Y | System Adminstrator (SA), Domain Admin (DA) |
-| Domain | [List Role Definitions (Deprecated)](#list_role_definitions_(deprecated)) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/roles?limit=pagesize&marker=roleId | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domain | [Transfer Ownership Of A Domain](#transfer_ownership_of_a_domain) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId}/owner/{userId}	 | Y/Y | System Adminstrator (SA) |
+| Domains | [Check For Existence Of Domain Name](#check_for_existence_of_domain_name) | GET | [HPKeystoneExtensionBaseURI]/job/status/{status}/count | Y/Y | Anonymous |
+| Domains | [Create A Domain](#create_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains  | Y/Y | System Adminstrator (SA) |
+| Domains | [Delete A Domain](#delete_a_domain) | DELETE | [HPKeystoneExtensionBaseURI]/domains/{domainId}  | Y/Y | System Adminstrator (SA) |
+| Domains | [Get A Domain](#get_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}  | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get All Domains](#get_all_domains) | GET | [HPKeystoneExtensionBaseURI]/domains?limit=pagesize&marker=domainId   | Y/Y | System Adminstrator (SA) |
+| Domains | [Get Groups For A Domain](#get_groups_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&excludeRoles=r1,r2} | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Subscribe Able Services For A Domain](#get_subscribe_able_services_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/subscribeableServices?serviceName={serviceName}&endpointTemplateId={templateId} | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Service Activations For A Domain](#get_service_activations_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/services?tenantId={tenantId} | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Tenants For A Domain](#get_tenants_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants?limit=pagesize&marker=tenantId | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Users For A Domain](#get_users_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants?limit=pagesize&marker=tenantId | Y/Y | System Adminstrator (SA), Domain Admin (DA) |
+| Domains | [List Role Definitions (Deprecated)](#list_role_definitions_(deprecated)) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/roles?limit=pagesize&marker=roleId | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Transfer Ownership Of A Domain](#transfer_ownership_of_a_domain) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId}/owner/{userId}	 | Y/Y | System Adminstrator (SA) |
 | Endpoint Template | [{addendpointtemplate}](#{addendpointtemplate}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
 | Endpoint Template | [{deleteendpointtemplate}](#{deleteendpointtemplate}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
 | Endpoint Template | [{getenabledendpointtemplates}](#{getenabledendpointtemplates}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
@@ -151,17 +151,17 @@ group: apispec
 | Token | [Validate Token](#validate_token) | GET | [KeystoneBaseURI]/tokens/{tokenId}?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | Anon |
 | Token | [Quick Token Validation](#quick_token_validation) | GET | [KeystoneBaseURI]/tokens/{tokenId}?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | Anon |
 | Token | [Refresh Token](#refresh_token) | GET | [KeystoneBaseURI]/tokens/{tokenId}?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | SS |
-| User | [List Users](#list_users) | GET | [HPKeystoneExtensionBaseURI]/users?name=username&emailAddress=email&limit=pagesize&marker=userId | Y/Y | SA, DA, SS |
-| User | [Get A User](#get_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}  | Y/Y | SA, DA, SS |
-| User | [Check For Existence Of User](#check_for_existence_of_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}  | Y/Y | Anon |
-| User | [Create A New User](#create_a_new_user) | POST | [HPKeystoneExtensionBaseURI/users | Y/Y | SA, DA, SR |
-| User | [Delete A User](#delete_a_user) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId} | Y/Y | SA, DA |
-| User | [Get All Groups For A User](#get_all_groups_for_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/groups?limit=pagesize&marker=groupId | Y/Y | SA, DA, SS |
-| User | [Update Password For A User](#update_password_for_a_user) | PUT | [HPKeystoneExtensionBaseURI]/users/{userId}/password | Y/Y | SA, DA, SS |
-| User | [Initial Password Reset](#initial_password_reset) | POST | [HPKeystoneExtensionBaseURI]/users/password/reset?userName=username | Y/Y | SA, DA, Anon |
-| User | [Validate Password ResetId And Update Password](#validate_password_resetid_and_update_password) | PUT | [HPKeystoneExtensionBaseURI]/users/password/reset/{resetId} | Y/Y | Anon |
-| User | [List A User's Non Tenant Role Assignments](#list_a_users_non_tenant_role_assignments) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
-| User | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
+| Users | [List Users](#list_users) | GET | [HPKeystoneExtensionBaseURI]/users?name=username&emailAddress=email&limit=pagesize&marker=userId | Y/Y | SA, DA, SS |
+| Users | [Get A User](#get_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}  | Y/Y | SA, DA, SS |
+| Users | [Check For Existence Of User](#check_for_existence_of_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}  | Y/Y | Anon |
+| Users | [Create A New User](#create_a_new_user) | POST | [HPKeystoneExtensionBaseURI/users | Y/Y | SA, DA, SR |
+| Users | [Delete A User](#delete_a_user) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId} | Y/Y | SA, DA |
+| Users | [Get All Groups For A User](#get_all_groups_for_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/groups?limit=pagesize&marker=groupId | Y/Y | SA, DA, SS |
+| Users | [Update Password For A User](#update_password_for_a_user) | PUT | [HPKeystoneExtensionBaseURI]/users/{userId}/password | Y/Y | SA, DA, SS |
+| Users | [Initial Password Reset](#initial_password_reset) | POST | [HPKeystoneExtensionBaseURI]/users/password/reset?userName=username | Y/Y | SA, DA, Anon |
+| Users | [Validate Password ResetId And Update Password](#validate_password_resetid_and_update_password) | PUT | [HPKeystoneExtensionBaseURI]/users/password/reset/{resetId} | Y/Y | Anon |
+| Users | [List A User's Non Tenant Role Assignments](#list_a_users_non_tenant_role_assignments) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
+| Users | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
 | User Access Key | [{createaccesskey}](#{createaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
 | User Access Key | [{deleteaccesskey}](#{deleteaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
 | User Access Key | [{getaccesskey}](#{getaccesskey}) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | {Privilege Level} |
@@ -2528,7 +2528,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-### 4.4.3 Domain
+### 4.4.3 Domains
 
 The entity that serves as a collection of users, groups, roles, and tenants. It represents the primary relationship between the customer and HP.  A Domain can be an individual or company.
 
@@ -13765,7 +13765,7 @@ curl -k -XPOST --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H
 
 **Additional Notes**
 
-### 4.4.14 User
+### 4.4.14 Users
 
 Cloud users.
 

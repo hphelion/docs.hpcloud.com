@@ -1,4 +1,4 @@
-# Domain
+# Domains
 
 The entity that serves as a collection of users, groups, roles, and tenants. It represents the primary relationship between the customer and HP.  A Domain can be an individual or company.
 

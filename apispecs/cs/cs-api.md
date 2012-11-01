@@ -105,7 +105,7 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 | Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| Tenant | [List Tenants](#list_tenants) | GET | /tenants?limit=pagesize&marker=tenantId | Y/Y | SS |
+| Tenants | [List Tenants](#list_tenants) | GET | /tenants?limit=pagesize&marker=tenantId | Y/Y | SS |
 | Token | [Authenticate](#authenticate) | POST | /tokens | Y/Y | Anon |
 | Token | [Rescope Token](#rescope_token) | POST | /tokens | Y/Y | SS |
 | Token | [Revoke Token](#revoke_token) | DELETE | /HP-IDM/v1.0/tokens/{tokenId} | Y/Y | SA,DA,SS |
@@ -124,7 +124,7 @@ The service is exposed in the service catalog, as shown in the following fragmen
 *The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
 
-### 4.4.1 Tenant
+### 4.4.1 Tenants
 
 Tenant is a collection of services, and associated with zero or more users who have access to these services via role references.
 
@@ -297,15 +297,16 @@ Date: Thu, 25 Aug 2011 23:33:19 GMT
 
 **Error Response**
 
-*Enumerate all the possible error status codes and any content that is returned.*
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
 
 **Response Data**
 
@@ -345,8 +346,6 @@ curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a9295
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
 ### 4.4.2 Token
 
 A yummy cookie one uses to bribe the authorization monster.
@@ -379,11 +378,11 @@ This API is used to authenticate a user to be able to use an OpenStack service. 
 
 Besides using a username and password, another way to authenticate is using symmetric keys. Symmetric keys are user access key and secret key pairs provisioned for user account. In this type of credential data, request body is expected to contain an access key and a secret key information belonging to the user. Once those keys are verified, a new token is created. In this type of authentication, the only change is in expected request body data (please see related example below). There is no difference in response format/content whether authentication is done using password credential data or access key credential data.
 
-Service Catalog:
+##### Service Catalog:
 
 In case of un-scoped token request, the service catalog is going to include global active endpoint templates as endpoints in its data. In case of scoped token request, the service catalog is going to include tenant specific endpoints as well as global active endpoint templates as endpoints.
 
-Scoped Tokens:
+##### Scoped Tokens:
 
 A token scoped to a tenant can be obtained by providing either a tenantName or a tenantId. This will also return service endpoints for other services associated with the tenant in question. An unscoped token will likely not contain service endpoints except for those for the Identity Service. Note that if tenant information is unknown, an unscoped token can be obtained and then a list of tenants obtained. Tenant information can also be found in the Management Console.
 
@@ -488,8 +487,6 @@ Content-Length: 219
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -669,10 +666,12 @@ Date: Fri, 14 Oct 2011 21:18:40 GMT
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Response Data**
 
@@ -720,8 +719,6 @@ curl -X POST -H "Content-Type: application/json"
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
 
 #### 4.4.2.2 <a id="rescope_token"></a>Rescope Token####
 #### POST /tokens
@@ -731,7 +728,7 @@ This API provides the ability to re-scope a valid token with another tenant. An 
 
 Re-scoping of token can be done from 1) unscoped token to a scoped token for specific tenant 2) scoped token from one tenant to another tenant 3) scoped token to unscoped token (with no tenantId and tenantName specified in request). Re-scoping of token does not alter the token expiration time and same token id is returned in response.
 
-Service Catalog:
+##### Service Catalog:
 
 In case of un-scoped token request, the service catalog is going to include global active endpoint templates as endpoints in its data. In case of scoped token request, the service catalog is going to include tenant specific endpoints as well as global active endpoint templates as endpoints.
 
@@ -884,14 +881,15 @@ Date: Wed, 26 Oct 2011 13:46:53 GMT
 
 **Error Response**
 
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -926,8 +924,6 @@ curl -k -H "Content-Type: application/json" -d '{"auth":{"tenantName":"HP Swift 
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
 
 #### 4.4.2.3 <a id="revoke_token"></a>Revoke Token####
 #### DELETE /HP-IDM/v1.0/tokens/{tokenId}
@@ -961,9 +957,12 @@ This call does not require a request body.
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+
 
 **Response Data**
 
@@ -1140,11 +1139,14 @@ Date: Tue, 03 Jan 2012 20:47:43 GMT
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
 
 **Response Data**
 
@@ -1175,8 +1177,6 @@ curl -s -k -H "X-Auth-User: 62424047631429:jdoe" -H "X-Auth-Key: secrete" -H "Ac
 ```
 
 **Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 # 5. Additional References
 
