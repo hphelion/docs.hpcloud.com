@@ -15882,7 +15882,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 #### 4.4.14.13 <a id="create_a_users_non_tenant_role_assignment"></a>Create A User's Non Tenant Role Assignment####
 #### PUT [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId}
-*Privilege Level: SA, DA**
+**Privilege Level: SA, DA**
 
 This API is used to create a non tenant role assignment for user in his domain.
 
@@ -16000,7 +16000,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 #### 4.4.14.14 <a id="delete_a_users_non_tenant_role_assignment"></a>Delete A User's Non Tenant Role Assignment####
 #### DELETE [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId}
-*Privilege Level: SA, DA**
+**Privilege Level: SA, DA**
 
 This API is used to delete a non tenant role assignment for a user. 
 
