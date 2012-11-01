@@ -1,3 +1,4 @@
 url: docs.hpcloud.com
 markdown: rdiscount
 exclude: README.md, Makefile
+metrics: false

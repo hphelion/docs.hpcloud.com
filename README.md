@@ -17,16 +17,18 @@ The branch structure for this project is:
 
 _Note: this project uses git flow with the addition of a QA branch._
 
+## Usage
+
+_Coming soon_
+
 ## Dependencies
 
-Before using this project you need the following dependencies.
+Before using this project you need the following dependencies installed.
 
 * [Jekyll](jekyllrb.com)
 * [jekyll_ext (a.k.a ejekyll)](https://github.com/rfelix/jekyll_ext)
 * rdiscount
 * Git
 * Git Subtree
-
-## Usage
-
-_Coming soon_
+* Docutils - Note, with pip or with easy_install. On linux don't use the apt version.
+* [RbST](http://rubygems.org/gems/RbST)
