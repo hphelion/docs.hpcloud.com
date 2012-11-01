@@ -19,7 +19,20 @@ _Note: this project uses git flow with the addition of a QA branch._
 
 ## Usage
 
-_Coming soon_
+This setup has a number of commands using Make to operate.
+
+* `make server` - Use this to launch a local version of the site at http://0.0.0.0:4000
+* `make build` - Places the output site in the _site folder and optimizes the files (e.g., minifies html)
+* `make clear` - Cleans up a build.
+* `make update-docs` - Updates the docs to the latest.
+* `make update-tutorials` - Updates the tutorials to the latest.
+
+Additionally there are some commands that should rarely be used if at all:
+
+* `make prepare` - Sets up the site in the `_site` folder. This is used by the `build` step.
+* `make optimize` - Optimizes the contents of `_site`. This is used by the `build` step.
+* `make add-docs` - Adds the docs project to the site (via subtree).
+* `make add-tutorials` - Adds the tutorials project to the site (via subtree).
 
 ## Dependencies
 
