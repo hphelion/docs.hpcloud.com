@@ -1,4 +1,4 @@
-# Tenant
+# Tenants
 
 Tenant is a collection of services, and associated with zero or more users who have access to these services via role references.
 
@@ -171,15 +171,16 @@ Date: Thu, 25 Aug 2011 23:33:19 GMT
 
 **Error Response**
 
-*Enumerate all the possible error status codes and any content that is returned.*
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
 
 **Response Data**
 
@@ -218,6 +219,4 @@ curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a9295
 ```
 
 **Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
