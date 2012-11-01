@@ -39,7 +39,7 @@ See **CreateUser** action for email integration information.
 
 ## Constraints ##
 
-1. The verification mode chosen in CreateUser dictates whether the password parameter is required, t is an error to omit the password if it's use was indicated.
+1. The verification mode chosen in CreateUser dictates whether the password parameter is required, it is an error to omit the password if it's use was indicated.
 
 ## JobTicket Results ##
 

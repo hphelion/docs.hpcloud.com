@@ -12,7 +12,7 @@ In this mode the user is activated immediately. If **sendWelcomeEmail**=true the
 
 **Email Validation Mode**: In this mode all the required entities (user, domain, etc....) are created in the mongodb and the Sales Force and they set to \*suspended\* state. Email verification email along with email verification nonce will be sent to customer, customer has to follow the direction given in the email to validate their email address. To support this work flow we have added "statusReason" field to the Domain Collections and "emailVerificationStatus" to the User collection, same fields are added to the Account and Contact object of SF and they should be in sync.
 
-If **sendWelcomeEmail**=true and **emailValidationRequired**==true then the welcome email is sent on successful validation.
+If **sendWelcomeEmail**=true and **emailValidationRequired**=true then the welcome email is sent on successful validation.
 
 Note that the **EmailVerification** action must handle validations from this action.
 
