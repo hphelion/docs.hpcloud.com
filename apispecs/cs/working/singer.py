@@ -168,7 +168,7 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
     path = None
     pattern = '^####\s+(?P<verb>[GPD][A-Z]+)\s+(?P<path>[\[/].+)'
     re_http = re.compile(pattern)
-    priv_pattern = '^\*Privilege Level:\s*(?P<privilege>[^\*]+)\*$'
+    priv_pattern = '^\**Privilege Level:\s*(?P<privilege>[^\*]+)\**$'
     re_priv = re.compile(priv_pattern)
     api_content = []
     for line in contents.split('\n'):
@@ -199,12 +199,26 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
             if m:
                 verb = m.group('verb')
                 path = m.group('path')
+                # loose more junk
+                if path.startswith('[csbu:'):
+                    path = path[6:]
+                # strip query string part since we are already describing
+                # them in the URL section
+                qs = path.find('?')
+                if qs != -1:
+                    path = path[:qs]
                 #line = line.replace('{', '\<')
                 #line = line.replace('}', '\>')
                 line = line.replace('\<', '{')
                 line = line.replace('\>', '}')
+                # loose more junk
+                line = line.replace('[csbu:', '')
+                qs = line.find('?')
+                if qs != -1:
+                    line = line[:qs]
                 path = path.replace('\<', '{')
                 path = path.replace('\>', '}')
+                print line
             pm = re_priv.match(line)
             if pm:
                 api_table.append((group_name, action_name, action_name_tag, verb, path, 'Y/Y',

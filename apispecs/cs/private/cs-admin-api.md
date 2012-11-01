@@ -64,7 +64,8 @@ group: apispec
 
 | Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| Action | [Get Jobs By Account](#get_jobs_by_account) | GET | [HPKeystoneExtensionBaseURI]/job?accountId=12345 | Y/Y | {Privilege Level} |
+| Action | [Post Action](#post_action) | POST | [HPKeystoneExtensionBaseURI]/action/{action} | Y/Y | {Privilege Level} |
+| Action | [Get Jobs By Account](#get_jobs_by_account) | GET | [HPKeystoneExtensionBaseURI]/job | Y/Y | {Privilege Level} |
 | Action | [Get A Job Ticket](#get_a_job_ticket) | GET | [HPKeystoneExtensionBaseURI]/job/{ticketId} | Y/Y | {Privilege Level} |
 | Action | [Restart A TIMEDOUT Job](#restart_a_timedout_job) | PUT | [HPKeystoneExtensionBaseURI]/job/{ticketId} | Y/Y | {Privilege Level} |
 | Action | [Delete A Job](#delete_a_job) | PUT | [HPKeystoneExtensionBaseURI]/job/{ticketId} | Y/Y | {Privilege Level} |
@@ -82,13 +83,13 @@ group: apispec
 | Domains | [Create A Domain](#create_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains  | Y/Y | System Adminstrator (SA) |
 | Domains | [Delete A Domain](#delete_a_domain) | DELETE | [HPKeystoneExtensionBaseURI]/domains/{domainId}  | Y/Y | System Adminstrator (SA) |
 | Domains | [Get A Domain](#get_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}  | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domains | [Get All Domains](#get_all_domains) | GET | [HPKeystoneExtensionBaseURI]/domains?limit=pagesize&marker=domainId   | Y/Y | System Adminstrator (SA) |
-| Domains | [Get Groups For A Domain](#get_groups_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&excludeRoles=r1,r2} | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domains | [Get Subscribe Able Services For A Domain](#get_subscribe_able_services_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/subscribeableServices?serviceName={serviceName}&endpointTemplateId={templateId} | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domains | [Get Service Activations For A Domain](#get_service_activations_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/services?tenantId={tenantId} | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domains | [Get Tenants For A Domain](#get_tenants_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants?limit=pagesize&marker=tenantId | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domains | [Get Users For A Domain](#get_users_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants?limit=pagesize&marker=tenantId | Y/Y | System Adminstrator (SA), Domain Admin (DA) |
-| Domains | [List Role Definitions (Deprecated)](#list_role_definitions_(deprecated)) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/roles?limit=pagesize&marker=roleId | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get All Domains](#get_all_domains) | GET | [HPKeystoneExtensionBaseURI]/domains | Y/Y | System Adminstrator (SA) |
+| Domains | [Get Groups For A Domain](#get_groups_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Subscribe Able Services For A Domain](#get_subscribe_able_services_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/subscribeableServices | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Service Activations For A Domain](#get_service_activations_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/services | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Tenants For A Domain](#get_tenants_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Users For A Domain](#get_users_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants | Y/Y | System Adminstrator (SA), Domain Admin (DA) |
+| Domains | [List Role Definitions (Deprecated)](#list_role_definitions_(deprecated)) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/roles | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
 | Domains | [Transfer Ownership Of A Domain](#transfer_ownership_of_a_domain) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId}/owner/{userId}	 | Y/Y | System Adminstrator (SA) |
 | Endpoint Template | [{addendpointtemplate}](#{addendpointtemplate}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
 | Endpoint Template | [{deleteendpointtemplate}](#{deleteendpointtemplate}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
@@ -138,30 +139,32 @@ group: apispec
 | Service | [{updateservice}](#{updateservice}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
 | Signature | [{ec2signature}](#{ec2signature}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
 | Signature | [{genericsignature}](#{genericsignature}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
-| Tenant | [Get All Tenants](#get_all_tenants) | GET | [HPKeystoneExtensionBaseURI]/tenants?name=tenantName&limit=pagesize&marker=tenantId | Y/Y | SA |
+| Tenant | [Get All Tenants](#get_all_tenants) | GET | [HPKeystoneExtensionBaseURI]/tenants | Y/Y | SA |
 | Tenant | [Get A Tenant](#get_a_tenant) | GET | [HPKeystoneExtensionBaseURI]/tenants/{tenantId}  | Y/Y | SA, DA, DU |
 | Tenant | [Check For Existence Of Tenant Name](#check_for_existence_of_tenant_name) | GET | [HPKeystoneExtensionBaseURI]/tenants/{tenantId}  | Y/Y | Anon |
-| Tenant | [Get A List Of Users For A Tenant (includes Role Assignments)](#get_a_list_of_users_for_a_tenant_(includes_role_assignments)) | GET | [HPKeystoneExtensionBaseURI]/tenants/{tenantId}/users?limit=pagesize&marker=roleId | Y/Y | SA, DA |
+| Tenant | [Get A List Of Users For A Tenant (includes Role Assignments)](#get_a_list_of_users_for_a_tenant_(includes_role_assignments)) | GET | [HPKeystoneExtensionBaseURI]/tenants/{tenantId}/users | Y/Y | SA, DA |
 | Tenant | [Create A Tenant](#create_a_tenant) | POST | [HPKeystoneExtensionBaseURI]/tenants  | Y/Y | SA, DA |
 | Tenant | [Update A Tenant](#update_a_tenant) | PUT | [HPKeystoneExtensionBaseURI]/tenants/{tenantID}  | Y/Y | SA, DA |
 | Tenant | [Delete A Tenant](#delete_a_tenant) | DELETE | [HPKeystoneExtensionBaseURI]/tenants/{tenantId} | Y/Y | SA, DA |
-| Tenant | [Get Endpoints For A Tenant](#get_endpoints_for_a_tenant) | GET | [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints?limit=pagesize&marker=endpointId | Y/Y | SA, DA, DU |
-| Tenant | [Add Endpoint To A Tenant](#add_endpoint_to_a_tenant) | POST | [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId]}/endpoints | Y/Y | SA, DA |
-| Tenant | [Remove Endpoints From A Tenant](#remove_endpoints_from_a_tenant) | DELETE | [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints/{endpointId} | Y/Y | DA, SA |
-| Token | [Validate Token](#validate_token) | GET | [KeystoneBaseURI]/tokens/{tokenId}?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | Anon |
-| Token | [Quick Token Validation](#quick_token_validation) | GET | [KeystoneBaseURI]/tokens/{tokenId}?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | Anon |
-| Token | [Refresh Token](#refresh_token) | GET | [KeystoneBaseURI]/tokens/{tokenId}?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111 | Y/Y | SS |
-| Users | [List Users](#list_users) | GET | [HPKeystoneExtensionBaseURI]/users?name=username&emailAddress=email&limit=pagesize&marker=userId | Y/Y | SA, DA, SS |
+| Tenant | [Get Endpoints For A Tenant](#get_endpoints_for_a_tenant) | GET | HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints | Y/Y | SA, DA, DU |
+| Tenant | [Add Endpoint To A Tenant](#add_endpoint_to_a_tenant) | POST | HPKeystoneExtensionBaseURI]/tenants/{tenantId]}/endpoints | Y/Y | SA, DA |
+| Tenant | [Remove Endpoints From A Tenant](#remove_endpoints_from_a_tenant) | DELETE | HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints/{endpointId} | Y/Y | DA, SA |
+| Token | [Validate Token](#validate_token) | GET | [KeystoneBaseURI]/tokens/{tokenId} | Y/Y | Anon |
+| Token | [Quick Token Validation](#quick_token_validation) | GET | [KeystoneBaseURI]/tokens/{tokenId} | Y/Y | Anon |
+| Token | [Refresh Token](#refresh_token) | GET | [KeystoneBaseURI]/tokens/{tokenId} | Y/Y | SS |
+| Users | [List Users](#list_users) | GET | [HPKeystoneExtensionBaseURI]/users | Y/Y | SA, DA, SS |
 | Users | [Get A User](#get_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}  | Y/Y | SA, DA, SS |
 | Users | [Check For Existence Of User](#check_for_existence_of_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}  | Y/Y | Anon |
 | Users | [Create A New User](#create_a_new_user) | POST | [HPKeystoneExtensionBaseURI/users | Y/Y | SA, DA, SR |
 | Users | [Delete A User](#delete_a_user) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId} | Y/Y | SA, DA |
-| Users | [Get All Groups For A User](#get_all_groups_for_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/groups?limit=pagesize&marker=groupId | Y/Y | SA, DA, SS |
+| Users | [Get All Groups For A User](#get_all_groups_for_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/groups | Y/Y | SA, DA, SS |
 | Users | [Update Password For A User](#update_password_for_a_user) | PUT | [HPKeystoneExtensionBaseURI]/users/{userId}/password | Y/Y | SA, DA, SS |
-| Users | [Initial Password Reset](#initial_password_reset) | POST | [HPKeystoneExtensionBaseURI]/users/password/reset?userName=username | Y/Y | SA, DA, Anon |
+| Users | [Initial Password Reset](#initial_password_reset) | POST | [HPKeystoneExtensionBaseURI]/users/password/reset | Y/Y | SA, DA, Anon |
 | Users | [Validate Password ResetId And Update Password](#validate_password_resetid_and_update_password) | PUT | [HPKeystoneExtensionBaseURI]/users/password/reset/{resetId} | Y/Y | Anon |
-| Users | [List A User's Non Tenant Role Assignments](#list_a_users_non_tenant_role_assignments) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
-| Users | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId | Y/Y | SA, DA, DU |
+| Users | [List A User's Non Tenant Role Assignments](#list_a_users_non_tenant_role_assignments) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
+| Users | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
+| Users | [Create A User's Non Tenant Role Assignment](#create_a_users_non_tenant_role_assignment) | PUT | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
+| Users | [Delete A User's Non Tenant Role Assignment](#delete_a_users_non_tenant_role_assignment) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
 | User Access Key | [{createaccesskey}](#{createaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
 | User Access Key | [{deleteaccesskey}](#{deleteaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
 | User Access Key | [{getaccesskey}](#{getaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
@@ -222,7 +225,7 @@ N/A
 None.
 
 #### 4.4.1.1 <a id="post_action"></a>Post Action####
-#### POST [HPKeystoneExtensionBaseURI]/action/{action}?timeOut=60000
+#### POST [HPKeystoneExtensionBaseURI]/action/{action}
 Privilege Level: {Privilege Level}*
 
 Submit an action to be executed. Each action takes a specific set of execution parameters within the content of the Post. (For an exact list of parameters for each Action, click the link below.) In the absence of any query parameters, the Action will be submitted and the call will immediately return a Job Ticket. The Job Ticket contains information about the executing Job, and can be refreshed through the job API call.
@@ -333,7 +336,7 @@ curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X POST -H 
 ```
 
 #### 4.4.1.2 <a id="get_jobs_by_account"></a>Get Jobs By Account####
-#### GET [HPKeystoneExtensionBaseURI]/job?accountId=12345
+#### GET [HPKeystoneExtensionBaseURI]/job
 *Privilege Level: {Privilege Level}*
 
 Return a list of all Job Tickets submitted by the specified Account ID. 
@@ -3267,7 +3270,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 
 
 #### 4.4.3.5 <a id="get_all_domains"></a>Get All Domains####
-#### GET [HPKeystoneExtensionBaseURI]/domains?limit=pagesize&marker=domainId  
+#### GET [HPKeystoneExtensionBaseURI]/domains
 *Privilege Level: System Adminstrator (SA)*
 
 Allows reading a list of all domains. This API supports pagination through 'limit' and 'marker' usage. The returned list may be filtered to allow only those domains which the caller has access to. 
@@ -3614,7 +3617,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 
 
 #### 4.4.3.6 <a id="get_groups_for_a_domain"></a>Get Groups For A Domain####
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&excludeRoles=r1,r2}
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API is used to get list of groups for a given domain. Api results can be filtered by using parameters. Query parameters "marker" and "limit" can be used for pagination
@@ -3810,7 +3813,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 
 
 #### 4.4.3.7 <a id="get_subscribe_able_services_for_a_domain"></a>Get Subscribe Able Services For A Domain####
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/subscribeableServices?serviceName={serviceName}&endpointTemplateId={templateId}
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/subscribeableServices
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API returns all subscribe able services that are available for the given {domainId} . It can also filter the result based on service name or endpoint template id. In request, either 'serviceName' filter or 'serviceEndpointId' filter is to be used. If both of filter values are provided, then error is returned back. This is essentially endpoint template data with some additional subscription specific attributes.
@@ -4340,7 +4343,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 #### 4.4.3.8 <a id="get_service_activations_for_a_domain"></a>Get Service Activations For A Domain####
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/services?tenantId={tenantId}
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/services
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API returns all services that have been activated for the given {domainId} . It can also filter the result based on tenantId. 
@@ -4564,7 +4567,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 #### 4.4.3.9 <a id="get_tenants_for_a_domain"></a>Get Tenants For A Domain####
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants?limit=pagesize&marker=tenantId
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This REST API returns all tenants of a {domainId} and takes a "marker" and "limit" parameter to limit the number of Tenants in the response.
@@ -4980,7 +4983,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 #### 4.4.3.11 <a id="list_role_definitions_(deprecated)"></a>List Role Definitions (Deprecated)####
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/roles?limit=pagesize&marker=roleId
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/roles
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API is used to list all the roles defined in the domain and takes a "marker" and "limit" parameter to limit the number of roles in the response.
@@ -11691,7 +11694,7 @@ N/A
 None.
 
 #### 4.4.12.1 <a id="get_all_tenants"></a>Get All Tenants####
-#### GET [HPKeystoneExtensionBaseURI]/tenants?name=tenantName&limit=pagesize&marker=tenantId
+#### GET [HPKeystoneExtensionBaseURI]/tenants
 *Privilege Level: SA*
 
 Allows reading a list of all tenants across domains. This API supports pagination through 'limit' and 'marker' usage. The returned list may be filtered to allow only those tenants which the caller has access to. The operation does not require a request body.
@@ -12124,7 +12127,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X HEAD -
 There is no response body returned in API response data. This API does not require http header X-Auth-Token and is protected by client certificate authentication.
 
 #### 4.4.12.4 <a id="get_a_list_of_users_for_a_tenant_(includes_role_assignments)"></a>Get A List Of Users For A Tenant (includes Role Assignments)####
-#### GET [HPKeystoneExtensionBaseURI]/tenants/{tenantId}/users?limit=pagesize&marker=roleId
+#### GET [HPKeystoneExtensionBaseURI]/tenants/{tenantId}/users
 *Privilege Level: SA, DA*
 
 This API returns all Users for a given Tenant, Roles associated for each User is also returned. If the user is not a valid, an error is returned.
@@ -12778,7 +12781,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE
 ```
 
 #### 4.4.12.8 <a id="get_endpoints_for_a_tenant"></a>Get Endpoints For A Tenant####
-#### GET [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints?limit=pagesize&marker=endpointId
+#### GET HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints
 *Privilege Level: SA, DA, DU*
 
 Get a list of endpoints for a tenant. Each endpoint data in the returned list has reference URL which can be used to query specific endpointTemplate (i.e. in format /endpointTemplates/{endpointTemplateId}) . This list will include disabled endpoint templates id. The operation does not require a request body.
@@ -12974,7 +12977,7 @@ Current Impl: We don't filter by enabled flag so include all of them.
 
 
 #### 4.4.12.9 <a id="add_endpoint_to_a_tenant"></a>Add Endpoint To A Tenant####
-#### POST [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId]}/endpoints
+#### POST HPKeystoneExtensionBaseURI]/tenants/{tenantId]}/endpoints
 *Privilege Level: SA, DA*
 
 Add endpoint template association with a tenant. 
@@ -13142,7 +13145,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -
 ```
 
 #### 4.4.12.10 <a id="remove_endpoints_from_a_tenant"></a>Remove Endpoints From A Tenant####
-#### DELETE [csbu:HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints/{endpointId}
+#### DELETE HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints/{endpointId}
 *Privilege Level: DA, SA*
 
 Remove tenant's endpoint template association for given endpoint id. The operation does not require a request body.
@@ -13262,7 +13265,7 @@ None.
 
 
 #### 4.4.13.1 <a id="validate_token"></a>Validate Token####
-#### GET [KeystoneBaseURI]/tokens/{tokenId}?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111
+#### GET [KeystoneBaseURI]/tokens/{tokenId}
 *Privilege Level: Anon*
 
 This API is used to validate a token. Validation includes checking that
@@ -13787,7 +13790,7 @@ None.
 
 
 #### 4.4.14.1 <a id="list_users"></a>List Users####
-#### GET [HPKeystoneExtensionBaseURI]/users?name=username&emailAddress=email&limit=pagesize&marker=userId
+#### GET [HPKeystoneExtensionBaseURI]/users
 *Privilege Level: SA, DA, SS*
 
 Returns all users of all tenants and takes a "marker" and "limit" parameter to limit the number of Users in the response. Can also be used to lookup users by `name` or `emailAddress`.
@@ -14889,7 +14892,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 #### 4.4.14.7 <a id="get_all_groups_for_a_user"></a>Get All Groups For A User####
-#### GET [HPKeystoneExtensionBaseURI]/users/{userId}/groups?limit=pagesize&marker=groupId
+#### GET [HPKeystoneExtensionBaseURI]/users/{userId}/groups
 *Privilege Level: SA, DA, SS*
 
 Returns all groups for the user specified within the userId.
@@ -15219,7 +15222,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 #### 4.4.14.9 <a id="initial_password_reset"></a>Initial Password Reset####
-#### POST [HPKeystoneExtensionBaseURI]/users/password/reset?userName=username
+#### POST [HPKeystoneExtensionBaseURI]/users/password/reset
 *Privilege Level: SA, DA, Anon*
 
 This API is used to initiate a forgot password reset for a given username.  If the username is validated, an email will be sent to the user (based on the email attribute of the user object) containing a URL link with an embedded resetId.  The user is expected to then click on the link which will send them to a location on the HP Services web management console where the console will then pickup the resetId and validate it.
@@ -15529,7 +15532,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Conte
 
 
 #### 4.4.14.11 <a id="list_a_users_non_tenant_role_assignments"></a>List A User's Non Tenant Role Assignments####
-#### GET [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles?serviceId=xxx&limit=pagesize&marker=roleId
+#### GET [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles
 *Privilege Level: SA, DA, DU*
 
 This API would return all the non tenant role assignments for a user in his domain filtered by serviceId.
@@ -15882,7 +15885,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 #### 4.4.14.13 <a id="create_a_users_non_tenant_role_assignment"></a>Create A User's Non Tenant Role Assignment####
 #### PUT [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId}
-**Privilege Level: SA, DA**
+*Privilege Level: SA, DA*
 
 This API is used to create a non tenant role assignment for user in his domain.
 
@@ -16000,7 +16003,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 #### 4.4.14.14 <a id="delete_a_users_non_tenant_role_assignment"></a>Delete A User's Non Tenant Role Assignment####
 #### DELETE [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId}
-**Privilege Level: SA, DA**
+*Privilege Level: SA, DA*
 
 This API is used to delete a non tenant role assignment for a user. 
 
