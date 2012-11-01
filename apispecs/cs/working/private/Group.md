@@ -4,15 +4,9 @@ Group is a collection of users. The primary purpose of group is to provide multi
 
 **Status Lifecycle**
 
-N/A
-
 **Rate Limits**
 
-N/A
-
 **Quota Limits**
-
-N/A
 
 **Business Rules**
 
@@ -28,10 +22,9 @@ This API is used to add an existing user to a specified group of the given domai
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
-N/A
+
 
 **Data Parameters**
 
@@ -108,12 +101,15 @@ Connection: close
 
 **Status Code**
 
-400 (Bad Request)      		Malformed request in URI or request body    
-401 (Unauthorized)	     		The caller does not have the privilege required to perform the operation.   
-403 (Forbidden)        		Disabled or suspended user making the request
-404 (Not Found) 	     		The specified groupId or userId is not found.
-500 (Internal Server Error)		The server encountered a problem while processing the request.   
-503 (Service Unavailable)    	The server is unavailable to process the request.    
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body  |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 404 | Not Found | The specified groupId or userId is not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request|
+ 
 
 **Response Data**
 
@@ -271,12 +267,15 @@ Date: Thu, 23 Feb 2012 21:36:07 GMT
 
 **Status Code**
 
-400 (Bad Request)      		Malformed request in URI or request body    
-401 (Unauthorized)	     		The caller does not have the privilege required to perform the operation.   
-403 (Forbidden)        		Disabled or suspended user making the request
-404 (Not Found) 	     		The specified domainId is not found.
-500 (Internal Server Error)		The server encountered a problem while processing the request.   
-503 (Service Unavailable)    	The server is unavailable to process the request.    
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body  |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 404 | Not Found | The specified domainId is not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request| 
 
 **Response Data**
 
@@ -319,15 +318,9 @@ Curl Example
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
@@ -415,11 +408,14 @@ Date: Wed, 28 Dec 2011 19:14:46 GMT
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body  |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 404 | Not Found | The specified groupId is not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request| 
 
 **Response Data**
 
@@ -462,15 +458,9 @@ Curl Example
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
@@ -579,11 +569,14 @@ Connection: close
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body  |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 404 | Not Found | The specified groupId is not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request| 
 
 **Response Data**
 
@@ -763,11 +756,14 @@ Connection: close
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body  |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 404 | Not Found | The specified groupId is not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request| 
 
 **Response Data**
 
@@ -802,7 +798,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-## {removeuserfromgroup}
+## Delete user from the group
 #### DELETE 	[HPKeystoneExtensionBaseURI]/groups/{groupId}/users/{userId}
 *Privilege Level: SA,DA*
 
@@ -810,15 +806,9 @@ Curl Example
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
@@ -935,15 +925,9 @@ Curl Example
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
@@ -1013,11 +997,14 @@ XML
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body  |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 404 | Not Found | The specified groupId is not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request| 
 
 **Response Data**
 
