@@ -22,9 +22,7 @@ This API is used to add an existing user to a specified group of the given domai
 
 **Request Data**
 
-
 **URL Parameters**
-
 
 **Data Parameters**
 
@@ -59,6 +57,9 @@ Content-Length: 0
 
 
 **Success Response**
+
+The response body contains location of newly created group with http status code of 303.
+
 
 **Status Code**
 
@@ -97,7 +98,7 @@ Connection: close
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
+Please refer to error response body for additional details.
 
 **Status Code**
 
@@ -136,12 +137,10 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" -X PUT "https://localhost:35357/v2.0/HP-IDM/v1.0/groups/583891759678/users/993639569203"
+curl -i -H "X-Auth-Token:HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -X PUT "https://localhost:35357/v2.0/HP-IDM/v1.0/groups/583891759678/users/993639569203"
 ```
 
 **Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ## Create a Group
@@ -152,23 +151,12 @@ Curl Example
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
-
-N/A
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
@@ -197,6 +185,7 @@ XML
 POST /v2.0/HP-IDM/v1.0/groups HTTP/1.1
 Accept: application/xml
 Content-Type: application/xml
+Accept: application/xml
 User-Agent: Wink Client v1.1.2
 X-Auth-Token: HPAuth_4f46b1162cdc8b1c3905dbc3
 Host: localhost:9999
@@ -212,27 +201,27 @@ Content-Length: 487
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
+The response body contains data for newly created group with http status code of 201.
+
 
 **Status Code**
 
-200 - OK
+201 - OK
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-POST /v2.0/HP-IDM/v1.0/groups HTTP/1.1
-Accept: application/json
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
 Content-Type: application/json
-User-Agent: Wink Client v1.1.2
-X-Auth-Token: HPAuth_4f46ba6b2cdc8b1c3905dbca
-Host: localhost:9999
-Connection: keep-alive
-Content-Length: 108
+Content-Length: 507
+Date: Thu, 23 Feb 2012 21:36:07 GMT
  
 {
   "group": {
@@ -263,7 +252,8 @@ Date: Thu, 23 Feb 2012 21:36:07 GMT
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
+Please refer to error response body for additional details.
+
 
 **Status Code**
 
@@ -302,37 +292,26 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k  -XPOST -H "X-Auth-Token: HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -H "Content-type: application/json" -d '{  "group": {   "description": "HP Software Group",    "domainId":"69409986171623",    "name": "HP Software"  }}'  https://localhost:35357/v2.0/HP-IDM/v1.0/groups
 ```
 
 **Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ## Delates a group
 ####  DELETE [HPKeystoneExtensionBaseURI]/groups/{groupId}
 *Privilege Level: SA ,DA*
 
-{Description about the method call}
+Delete a group specified by the groupId. This operation also deletes the associated Roles associated to the Group. This operation does not delete User objects associated with the Group.
 
 **Request Data**
 
-
 **URL Parameters**
-
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
@@ -352,31 +331,18 @@ Accept: application/xml
 User-Agent: Jakarta Commons-HttpClient/3.1
 ```
 
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
+The response doesn't have any body. It has  http status code  204.
 
 **Status Code**
 
-200 - OK
+204 - OK
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
+This call doesn't have response body. It returns http code 204 
 
 JSON
 
@@ -404,7 +370,8 @@ Date: Wed, 28 Dec 2011 19:14:46 GMT
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
+Please refer to error response body for additional details.
+
 
 **Status Code**
 
@@ -442,12 +409,11 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -i -H "X-Auth-Token:HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -X DELETE "https://localhost:35357/v2.0/HP-IDM/v1.0/groups/583891759678/"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ## Get a specific group
@@ -464,15 +430,7 @@ Curl Example
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+This call does not require a request body
 
 JSON
 
@@ -495,23 +453,9 @@ User-Agent: Jakarta Commons-HttpClient/3.1
 Host: haneef-desktop.americas.hpqcorp.net:8080
 ```
 
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
 **Success Response**
 
-{Specify the status code and any content that is returned.}
+This call returns the corresponding group. 
 
 **Status Code**
 
@@ -519,7 +463,7 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
+
 
 JSON
 
@@ -603,48 +547,38 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -H "X-Auth-Token:HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3"  "https://localhost:35357/v2.0/HP-IDM/v1.0/groups/583891759678/"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ## List users for the group
 ####  GET [HPKeystoneExtensionBaseURI]/groups/{groupId}/users?{username=userName&userId=userId}
 *Privilege Level: SA,DA*
 
-{Description about the method call}
+This API is used to list the users for a specified group and takes a "marker" and "limit" parameter to limit the number of Users in the response. Results can also be filtered by using optional filters
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+* *limit (Optional)*  - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker (Optional)* - string - the resource Id of the last item in the previous list
+* *username* (Optional)}  - string - filter by user name
+* *userId* (Optional)}  - string - filter by user Id
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+This call does not require a request body 
 
 JSON
 
 ```
-GET https://localhost:35357/v2.0/HP-IDM/hp/v1.0/groups/245398746613/users?userName=username HTTP/1.1
+GET https://localhost:35357/v2.0/HP-IDM/hp/v1.0/groups/245398746613/users HTTP/1.1
 Connection: close
 Accept: application/json
 User-Agent: Jakarta Commons-HttpClient/3.1
@@ -655,6 +589,18 @@ Host: haneef-desktop.americas.hpqcorp.net:8080
 XML
 
 ```
+GET https://localhost:35357/v2.0/HP-IDM/hp/v1.0/groups/245398746613/users HTTP/1.1
+Connection: close
+Accept: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
+```
+
+Optional: Sample requests using query parameters and filters 
+
+JSON :
+
+```
 GET https://localhost:35357/v2.0/HP-IDM/hp/v1.0/groups/245398746613/users?userName=username HTTP/1.1
 Connection: close
 Accept: application/json
@@ -662,23 +608,29 @@ User-Agent: Jakarta Commons-HttpClient/3.1
 Host: haneef-desktop.americas.hpqcorp.net:8080
 ```
 
-Optional:
-
-JSON
+XML
 
 ```
-{json data structure here}
+GET https://localhost:35357/v2.0/HP-IDM/hp/v1.0/groups/245398746613/users?userId=412367 HTTP/1.1
+Connection: close
+Accept: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
 ```
 
 XML
 
 ```
-{xml data structure here}
+GET https://localhost:35357/v2.0/HP-IDM/hp/v1.0/groups/245398746613/users?limit=50?maker=34353535& HTTP/1.1
+Connection: close
+Accept: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
+This call retuns list of users 
 
 **Status Code**
 
@@ -686,7 +638,6 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
@@ -701,29 +652,35 @@ Content-Length: 277
 Date: Mon, 01 Aug 2011 18:26:30 GMT
 Connection: close
 
-{"groups": {{"groups": {
-   "anies": null,
-   "group":    [
-            {
-         "description": "HP System domain users group",
-         "anies": null,
-         "domainId": null,
-         "id": "00000000002002",
-         "name": "Users",
-         "otherAttributes": {}
+{
+  "users" : {
+    "otherAttributes" : {
+    },
+    "user" : [ {
+      "domainId" : "00000000001001",
+      "emailAddress" : "haneef.ali@hp.com",
+      "firstName" : "haneef",
+      "otherAttributes" : {
       },
-            {
-         "description": "A Description of the group1",
-         "anies": null,
-         "domainId": null,
-         "id": "39559496895932",
-         "name": "HaneefGroup3",
-         "otherAttributes": {}
-      }
-   ],
-   "otherAttributes": {}
-}
-}
+      "passwordResetRequired" : "true",
+      "status" : "enabled",
+      "userId" : "59587095111744",
+      "username" : "haneef"
+    },
+   {
+      "domainId" : "00000000001001",
+      "emailAddress" : "haneef.ali1@hp.com",
+      "firstName" : "haneef1",
+      "otherAttributes" : {
+      },
+      "passwordResetRequired" : "true",
+      "status" : "enabled",
+      "userId" : "59587095111745",
+      "username" : "haneef1"
+    }
+ ]
+ }
+
 ```
 
 XML
@@ -740,19 +697,47 @@ Content-Length: 277
 Date: Mon, 01 Aug 2011 18:26:30 GMT
 Connection: close
 
-<groups xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
-   <group id="00000000002002" name="Users">
-      <description>HP System domain users group</description>
-   </group>
-   <group id="39559496895932" name="HaneefGroup3">
-      <description>A Description of the group1</description>
-   </group>
-</groups>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><users xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom"><user firstName="haneef" username="haneef" userId="59587095111744" emailAddress="haneef.ali@hp.com" status="enabled" domainId="00000000001001" passwordResetRequired="true"/></users>
 ```
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 277
+Date: Mon, 01 Aug 2011 18:26:30 GMT
+Connection: close
+
+{
+  "users" : {
+    "otherAttributes" : {
+    },
+    "user" : [ {
+      "domainId" : "00000000001001",
+      "emailAddress" : "haneef.ali@hp.com",
+      "firstName" : "haneef",
+      "otherAttributes" : {
+      },
+      "passwordResetRequired" : "true",
+      "status" : "enabled",
+      "userId" : "59587095111744",
+      "username" : "haneef"
+    }
+ ]
+ }
+
+```
+
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
+Please refer to error response body for additional details.
+
 
 **Status Code**
 
@@ -761,7 +746,7 @@ Connection: close
 | 400 | Bad Request | Malformed request in URI or request body  |
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
 | 403 | Forbidden | Disabled or suspended user making the request |
-| 404 | Not Found | The specified groupId is not found. |
+| 404 | Not Found | The specified groupId is not found or userid is not found. |
 | 500 | Internal Server Error | The server encountered a problem while processing the request |
 | 503 | Service Unavailable | The server is unavailable to process the request| 
 
@@ -790,19 +775,19 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -v -k -H "X-Auth-Token: HPAuth_b0846199b9d7c4aa0c7c86169ef693e6298da25c564adff6e002bea84f0b337f"   -H "Accept: application/json" https://csnode.ndd.aw1.hpcloud.net:35357/v2.0/HP-IDM/v1.0/groups/00000000002002/users?userName=haneef
+
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ## Delete user from the group
 #### DELETE 	[HPKeystoneExtensionBaseURI]/groups/{groupId}/users/{userId}
 *Privilege Level: SA,DA*
 
-{Description about the method call}
+Remove a user from a group   
 
 **Request Data**
 
@@ -812,69 +797,68 @@ Curl Example
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+DELETE http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP-IDM/v1.0/groups/583891759678/users/993639569203 HTTP/1.1
+Connection: close
+Accept: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
 ```
 
 XML
 
 ```
-{xml data structure here}
+DELETE http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP-IDM/v1.0/groups/583891759678/users/993639569203 HTTP/1.1
+Connection: close
+Accept: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
 ```
 
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
+The response doesn't have any content. 
 
 **Status Code**
 
-200 - OK
+204 - OK
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
+The response doesn't have any content
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Date: Mon, 01 Aug 2011 18:31:40 GMT
+Connection: close
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Date: Mon, 01 Aug 2011 18:31:40 GMT
+Connection: close
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
+Please refer to error response body for additional details.
+
 
 **Status Code**
 
@@ -909,19 +893,17 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -v -k -H "X-Auth-Token: HPAuth_b0846199b9d7c4aa0c7c86169ef693e6298da25c564adff6e002bea84f0b337f" -X DELETE  -H "Accept: application/json" https://csnode.ndd.aw1.hpcloud.net:35357/v2.0/HP-IDM/v1.0/groups/00000000002002/993639569203
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
 
 ## Update Group
 ####  PUT 	[HPKeystoneExtensionBaseURI]/groups/{groupId}
-*Privilege Level: {Privilege Level}*
+*Privilege Level: SA, DA*
 
-{Description about the method call}
+Update a group resource for the specified groupId.   Only description and name can  be updated in this operation.
 
 **Request Data**
 
@@ -931,41 +913,48 @@ Curl Example
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+PUT /v2.0/HP-IDM/v1.0/groups/68906974845076 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4f46b1162cdc8b1c3905dbc3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 108
+ 
+{
+  "group": {
+    "description": "HP Software Group",
+    "domainId": "69409986171623",
+    "name": "HP Software"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+PUT /v2.0/HP-IDM/v1.0/groups/68906974845076 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4f46b1162cdc8b1c3905dbc3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 487
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<group xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" domainId="69409986171623" name="HP Software">
+  <description>HP Software Group</description>
+</group>
 ```
 
-Optional:
 
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
 
 **Success Response**
 
@@ -982,18 +971,50 @@ XML
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 206
+Date: Thu, 23 Feb 2012 22:16:06 GMT
+ 
+{
+  "group": {
+    "description": "HP Software Group",
+    "anies": null,
+    "domainId": "69409986171623",
+    "id": "68906974845076",
+    "name": "HP Software",
+    "otherAttributes": {
+ 
+    }
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 507
+Date: Thu, 23 Feb 2012 21:36:07 GMT
+ 
+<group id="68906974845076" name="HP Software" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
+   <description>HP Software Group</description>
+</group>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
+Please refer to error response body for additional details.
+
 
 **Status Code**
 
@@ -1031,11 +1052,11 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k  -X PUT -H "X-Auth-Token: HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -H "Content-type: application/json" -d '{  "group": {   "description": "HP Software Group",      "name": "HP Software"  }}'  https://localhost:35357/v2.0/HP-IDM/v1.0/groups/68906974845076
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+
 
 
