@@ -14,8 +14,7 @@ None.
 
 
 ## Add a User to a group
-####  PUT
-[HPKeystoneExtensionBaseURI]/groups/{groupId}/users/{userId}
+####  PUT [HPKeystoneExtensionBaseURI]/groups/{groupId}/users/{userId}
 *Privilege Level: SA, DA*
 
 This API is used to add an existing user to a specified group of the given domain. This interface requires the groupId and userId.
@@ -58,7 +57,7 @@ Content-Length: 0
 
 **Success Response**
 
-The response body contains location of newly created group with http status code of 303.
+The response body contains location of newly created group with http status code  303.
 
 
 **Status Code**
@@ -131,7 +130,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -286,7 +293,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -403,7 +418,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -504,7 +527,12 @@ Content-Length: 277
 Date: Mon, 01 Aug 2011 18:26:30 GMT
 Connection: close
  
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><group xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" id="583891759678" name="HaneefGroup3"><description>A Description of the group1</description></group>
+<?xml version="1.0" ?>
+<group id="583891759678" name="HaneefGroup3" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0">
+  <description>
+    A Description of the group1
+  </description>
+</group>
 ```
 
 **Error Response**
@@ -541,7 +569,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -697,7 +733,10 @@ Content-Length: 277
 Date: Mon, 01 Aug 2011 18:26:30 GMT
 Connection: close
 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><users xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom"><user firstName="haneef" username="haneef" userId="59587095111744" emailAddress="haneef.ali@hp.com" status="enabled" domainId="00000000001001" passwordResetRequired="true"/></users>
+<?xml version="1.0" ?>
+<users xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
+  <user domainId="00000000001001" emailAddress="haneef.ali@hp.com" firstName="haneef" passwordResetRequired="true" status="enabled" userId="59587095111744" username="haneef"/>
+</users>
 ```
 
 JSON
@@ -769,7 +808,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -887,7 +934,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -1046,7 +1101,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
