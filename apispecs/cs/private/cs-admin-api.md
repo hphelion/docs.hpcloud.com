@@ -93,7 +93,7 @@ group: apispec
 | Endpoint Template | [{getendpointtemplatebyid}](#{getendpointtemplatebyid}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
 | Endpoint Template | [{getendpointtemplates}](#{getendpointtemplates}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
 | Endpoint Template | [{updateendpointtemplate}](#{updateendpointtemplate}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
-| Group | [Add A User To A Group](#add_a_user_to_a_group) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | SA, DA |
+| Group | [Add A User To A Group](#add_a_user_to_a_group) | PUT | [HPKeystoneExtensionBaseURI]/groups/{groupId}/users/{userId} | Y/Y | SA, DA |
 | Group | [Create A Group](#create_a_group) | POST | [HPKeystoneExtensionBaseURI]/groups | Y/Y | SA,DA |
 | Group | [Delates A Group](#delates_a_group) | DELETE | [HPKeystoneExtensionBaseURI]/groups/{groupId} | Y/Y | SA ,DA |
 | Group | [Get A Specific Group](#get_a_specific_group) | GET | [HPKeystoneExtensionBaseURI]/groups/{groupId} | Y/Y | SA,DA, DU  |
@@ -107,35 +107,26 @@ group: apispec
 | Region | [{listregisteredservices}](#{listregisteredservices}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
 | Region | [{registernewservice}](#{registernewservice}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
 | Region | [{updateservice}](#{updateservice}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{checktenantroleassignmentforuser}](#{checktenantroleassignmentforuser}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{creategroupsglobalroleassignment}](#{creategroupsglobalroleassignment}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{createtenantroleassignmentforgroup}](#{createtenantroleassignmentforgroup}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{createtenantroleassignmentforuser}](#{createtenantroleassignmentforuser}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{createusersglobalroleassignment}](#{createusersglobalroleassignment}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{deletegroupsglobalroleassignment}](#{deletegroupsglobalroleassignment}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{deletetenantroleassignmentforgroup}](#{deletetenantroleassignmentforgroup}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{deletetenantroleassignmentforuser}](#{deletetenantroleassignmentforuser}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{deleteusersglobalroleassignment}](#{deleteusersglobalroleassignment}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{getnontenantrasdomain}](#{getnontenantrasdomain}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{getusersglobalrole}](#{getusersglobalrole}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{listgroupsglobalroles}](#{listgroupsglobalroles}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{listtenantroleassignment}](#{listtenantroleassignment}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{listtenantroleassignmentforgroup}](#{listtenantroleassignmentforgroup}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{listtenantroleassignmentforuser}](#{listtenantroleassignmentforuser}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Assignment | [{listusersglobalroles}](#{listusersglobalroles}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Defs | [{createroledef}](#{createroledef}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Defs | [{deleteroledef}](#{deleteroledef}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Defs | [{getdomainsroledefs}](#{getdomainsroledefs}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Defs | [{getroleadef}](#{getroleadef}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Defs | [{listroledefs}](#{listroledefs}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Defs | [{updateroledef}](#{updateroledef}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Role Defs | [{updateroledefscope}](#{updateroledefscope}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Service | [{getservicebyid}](#{getservicebyid}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Service | [{listregisteredservices}](#{listregisteredservices}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Service | [{registernewservice}](#{registernewservice}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Service | [{updateservice}](#{updateservice}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Signature | [{ec2signature}](#{ec2signature}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Signature | [{genericsignature}](#{genericsignature}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
+| Role Assignment | [List Role Assignments Made On A Tenant](#list_role_assignments_made_on_a_tenant) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
+| Role Assignment | [List Tenant Role Assignments For A User](#list_tenant_role_assignments_for_a_user) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
+| Role Assignment | [Check Tenant Role Assignment For A User](#check_tenant_role_assignment_for_a_user) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
+| Role Assignment | [Create Tenant Role Assignments For A User](#create_tenant_role_assignments_for_a_user) | PUT | /tenants/{tenantId}/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
+| Role Assignment | [Delete Tenant Role Assignment For A User](#delete_tenant_role_assignment_for_a_user) | DELETE | /tenants/{tenantId}/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
+| Role Assignment | [List Tenant Role Assignments For A Group](#list_tenant_role_assignments_for_a_group) | GET | /tenants/{tenantId}/groups/{groupId}/roles | Y/Y | SA, DA, DU |
+| Role Assignment | [Create Tenant Role Assignments For A Group](#create_tenant_role_assignments_for_a_group) | PUT | /tenants/{tenantId}/groups/{groupId}/roles/{roleId} | Y/Y | SA, DA |
+| Role Assignment | [Delete Tenant Role Assignment For A Group](#delete_tenant_role_assignment_for_a_group) | DELETE | /tenants/{tenantId}/groups/{userId}/roles/{roleId} | Y/Y | SA, DA |
+| Role Defs | [Create Role Definition](#create_role_definition) | POST | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | SA, SVC, DA |
+| Role Defs | [Delete Role Definition](#delete_role_definition) | DELETE | [HPKeystoneExtensionBaseURI]/roleDefs/{roleId} | Y/Y | SA, SVC, DA |
+| Role Defs | [Update Role Definition](#update_role_definition) | PUT | [HPKeystoneExtensionBaseURI]/roleDefs/{roleId} | Y/Y | SA, SVC, DA |
+| Role Defs | [Update Role Scope](#update_role_scope) | PUT | [HPKeystoneExtensionBaseURI]/roleDefs/{roleId}/scope | Y/Y | SA, SVC |
+| Role Defs | [Get A Role Definition](#get_a_role_definition) | GET | [HPKeystoneExtensionBaseURI]/roleDefs/{roleId} | Y/Y | SA, SVC, DA, DU |
+| Role Defs | [List Role Definitions](#list_role_definitions) | GET | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | SA, SVC |
+| Service | [{getservicebyid}](#{getservicebyid}) | GET | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | {Privilege Level} |
+| Service | [{listregisteredservices}](#{listregisteredservices}) | GET | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | {Privilege Level} |
+| Service | [{registernewservice}](#{registernewservice}) | GET | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | {Privilege Level} |
+| Service | [{updateservice}](#{updateservice}) | GET | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | {Privilege Level} |
+| Signature | [EC2 Signature](#ec2_signature) | POST | [HPKeystoneExtensionBaseURI]/ec2Tokens | Y/Y | Anon |
+| Signature | [Generic Signature](#generic_signature) | POST | [HPKeystoneExtensionBaseURI]/gstokens | Y/Y | Anon |
 | Tenant | [Get All Tenants](#get_all_tenants) | GET | [HPKeystoneExtensionBaseURI]/tenants | Y/Y | SA |
 | Tenant | [Get A Tenant](#get_a_tenant) | GET | [HPKeystoneExtensionBaseURI]/tenants/{tenantId}  | Y/Y | SA, DA, DU |
 | Tenant | [Check For Existence Of Tenant Name](#check_for_existence_of_tenant_name) | GET | [HPKeystoneExtensionBaseURI]/tenants/{tenantId}  | Y/Y | Anon |
@@ -162,22 +153,23 @@ group: apispec
 | Users | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
 | Users | [Create A User's Non Tenant Role Assignment](#create_a_users_non_tenant_role_assignment) | PUT | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
 | Users | [Delete A User's Non Tenant Role Assignment](#delete_a_users_non_tenant_role_assignment) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
-| User Access Key | [{createaccesskey}](#{createaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
-| User Access Key | [{deleteaccesskey}](#{deleteaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
-| User Access Key | [{getaccesskey}](#{getaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
-| User Access Key | [{importaccesskey}](#{importaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
-| User Access Key | [{updateaccesskey}](#{updateaccesskey}) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | {Privilege Level} |
+| User Access Key | [Create User Access Key](#create_user_access_key) | POST | [HPKeystoneExtensionBaseURI]/accesskeys | Y/Y | SA, DA, SS |
+| User Access Key | [Delete User Access Key](#delete_user_access_key) | DELETE | [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId}  | Y/Y | SA, DA, SS |
+| User Access Key | [Get Access Keys](#get_access_keys) | GET | [HPKeystoneExtensionBaseURI]/accesskeys | Y/Y | SA,DA, SS |
+| User Access Key | [Get An Access Key](#get_an_access_key) | GET | [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId} | Y/Y | SA,DA,SS |
+| User Access Key | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | [HPKeystoneExtensionBaseURI]/accesskeys | Y/Y | SA, DA, SS |
+| User Access Key | [Update User Access Key](#update_user_access_key) | PUT | [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId} | Y/Y | SA, DA, SS |
 | User Certificate | [Delete User Certificate](#delete_user_certificate) | DELETE | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	D | Y/Y | SA, DA, SS |
 | User Certificate | [Get User Certificate](#get_user_certificate) | GET | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} | Y/Y | SA, DA, SS |
 | User Certificate | [Create A User Certificate](#create_a_user_certificate) | POST | [HPKeystoneExtensionBaseURI]/certificates | Y/Y | SA, DA, SS |
 | User Certificate | [Import User Certificate(s)](#import_user_certificate(s)) | PUT | [HPKeystoneExtensionBaseURI]/certificates | Y/Y | SA, DA, SS |
 | User Certificate | [Update User Certificate](#update_user_certificate) | PUT | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	 | Y/Y | SA,DA,SS |
-| User Key Pair | [{createkeypair}](#{createkeypair}) | PUT | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	 | Y/Y | {Privilege Level} |
-| User Key Pair | [{deletekeypair}](#{deletekeypair}) | PUT | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	 | Y/Y | {Privilege Level} |
-| User Key Pair | [{getkeypair}](#{getkeypair}) | PUT | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	 | Y/Y | {Privilege Level} |
-| User Key Pair | [{getkeypairs}](#{getkeypairs}) | PUT | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	 | Y/Y | {Privilege Level} |
-| User Key Pair | [{importkeypair}](#{importkeypair}) | PUT | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	 | Y/Y | {Privilege Level} |
-| User Key Pair | [{updatekeypair}](#{updatekeypair}) | PUT | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	 | Y/Y | {Privilege Level} |
+| User Key Pair | [Create User Key Pair](#create_user_key_pair) | POST | [HPKeystoneExtensionBaseURI]/keypairs | Y/Y | SA, DA, SS |
+| User Key Pair | [Delete User Key Pair](#delete_user_key_pair) | DELETE | [HPKeystoneExtensionBaseURI]/keypairs/{keypairId} | Y/Y | SA, DA, SS |
+| User Key Pair | [Get User Key Pair](#get_user_key_pair) | GET | [HPKeystoneExtensionBaseURI]/keypairs/{keypairId} | Y/Y | SA, DA, SS |
+| User Key Pair | [Get User Key Pairs](#get_user_key_pairs) | GET | [HPKeystoneExtensionBaseURI]/keypairs | Y/Y | SA, DA, SS |
+| User Key Pair | [Import User Key Pair(s)](#import_user_key_pair(s)) | PUT | [HPKeystoneExtensionBaseURI]/keypairs | Y/Y | SA, DA, SS |
+| User Key Pair | [Update User Key Pair](#update_user_key_pair) | PUT | [HPKeystoneExtensionBaseURI]/keypairs/{keypairId} | Y/Y | SA, DA, SS |
 
 ## 4.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
@@ -5773,8 +5765,7 @@ None.
 
 
 #### 4.4.4.1 <a id="add_a_user_to_a_group"></a>Add A User To A Group####
-####  PUT
-[HPKeystoneExtensionBaseURI]/groups/{groupId}/users/{userId}
+####  PUT [HPKeystoneExtensionBaseURI]/groups/{groupId}/users/{userId}
 *Privilege Level: SA, DA*
 
 This API is used to add an existing user to a specified group of the given domain. This interface requires the groupId and userId.
@@ -5817,7 +5808,7 @@ Content-Length: 0
 
 **Success Response**
 
-The response body contains location of newly created group with http status code of 303.
+The response body contains location of newly created group with http status code  303.
 
 
 **Status Code**
@@ -5890,7 +5881,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -6045,7 +6044,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -6162,7 +6169,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -6263,7 +6278,12 @@ Content-Length: 277
 Date: Mon, 01 Aug 2011 18:26:30 GMT
 Connection: close
  
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><group xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" id="583891759678" name="HaneefGroup3"><description>A Description of the group1</description></group>
+<?xml version="1.0" ?>
+<group id="583891759678" name="HaneefGroup3" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0">
+  <description>
+    A Description of the group1
+  </description>
+</group>
 ```
 
 **Error Response**
@@ -6300,7 +6320,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -6456,7 +6484,10 @@ Content-Length: 277
 Date: Mon, 01 Aug 2011 18:26:30 GMT
 Connection: close
 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><users xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom"><user firstName="haneef" username="haneef" userId="59587095111744" emailAddress="haneef.ali@hp.com" status="enabled" domainId="00000000001001" passwordResetRequired="true"/></users>
+<?xml version="1.0" ?>
+<users xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
+  <user domainId="00000000001001" emailAddress="haneef.ali@hp.com" firstName="haneef" passwordResetRequired="true" status="enabled" userId="59587095111744" username="haneef"/>
+</users>
 ```
 
 JSON
@@ -6528,7 +6559,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -6646,7 +6685,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -6805,7 +6852,15 @@ JSON
 XML
 
 ```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+<?xml version="1.0" ?>
+<unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+  <message>
+    UNAUTHORIZED
+  </message>
+  <details>
+    Invalid credentials
+  </details>
+</unauthorized>
 ```
 
 Curl Example
@@ -7892,7 +7947,7 @@ Curl Example
 
 ### 4.4.7 Role Assignment
 
-{Describe the resource and what information they provide. Then enumerate all the API method calls below.}
+API to create, update, list and delete CS role assignments
 
 **Status Lifecycle**
 
@@ -7911,97 +7966,210 @@ N/A
 None.
 
 
-#### 4.4.7.1 <a id="{checktenantroleassignmentforuser}"></a>{checktenantroleassignmentforuser}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.7.1 <a id="list_role_assignments_made_on_a_tenant"></a>List Role Assignments Made On A Tenant####
+#### GET /tenants/{tenantId}/roles
+*Privilege Level: SA, DA, DU*
 
-{Description about the method call}
+This API would return all the role assignments made on a tenant in its domain filtered by serviceId. Tenant role assignments are always associated with a tenant.
+
+Constraints:
+
+List tenant role assignments is not a privileged operation so far.
+ServiceId is not a mandatory field, if provided response should be filtered.
+SubjectType is required if subjectId filter is used
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+See examples below.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+The following parameters need to be specified in the resource path
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - the unique id of the tenant
+
+The following are the supported list of query parameters to filter the results
+
+* *serviceId* (Optional) - string - list roles specific to the service identified by this id
+* *roleId* (Optional) - string - filter by roles having this id
+* *subjectType* (Optional) - string - could be one of User/Group
+* *subjectId* (Optional)} - string - id of the User/Group specified above
+* *limit* (Optional)} - number - limit the results by the specified page size
+* *marker* (Optional)} - string - continue returning results after the specified marker
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+The following HTTP headers must be specified.
 
-{List all the attributes that comprises the data structure}
+* *X-Auth-Token* - token ID
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
+This call does not require a request body
 
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+GET /v2.0/HP-IDM/v1.0/tenants/11111111/roles?serviceId=120 HTTP/1.1
+Accept: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
 200 - OK
+204 - No content
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 380
+Date: Thu, 25 Aug 2011 23:33:19 GMT
+{"roles": {"role": [
+      {
+      "roleAssignmentId": "CmVSz8s9o1ds4Pw25S0Mwk8SBgA63FXWMxRIx4Ix9DQ=",
+      "roleId": "00000000004023",
+      "roleName": "Admin",
+      "subjectId": "777700000004",
+      "subjectName": "testGroupId01",
+      "subjectType": "Group",
+      "description": "Tenant Role Assignment : Group testGroupId01, id 777700000004, domain 777700000000, role Admin, service 120 on tenant 777700000001 domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "120",
+      "tenantId": "777700000001",
+      "isCrossDomain": false
+   },
+      {
+      "roleAssignmentId": "az1UVA2ngsdEGgLgOm9kXRbt3FcN3TqaJLO0zN9Aww=",
+      "roleId": "00000000004023",
+      "roleName": "Admin",
+      "subjectId": "777700000003",
+      "subjectName": "atiwari-1",
+      "subjectType": "User",
+      "description": "Tenant Role Assignment : User atiwari-1, id 777700000003, domain 777700000000, role Admin, service 120 on tenant 777700000001 domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "120",
+      "tenantId": "777700000001",
+      "isCrossDomain": false
+   },
+      {
+      "roleAssignmentId": "oYYbwF2RKU5YRURKRAlJnKvNGbqaeEaenvr0YFFr5s=",
+      "roleId": "00000000004016",
+      "roleName": "netadmin",
+      "subjectId": "777700000004",
+      "subjectName": "testGroupId01",
+      "subjectType": "Group",
+      "description": "Tenant Role Assignment : Group testGroupId01, id 777700000004, domain 777700000000, role netadmin, service 120 on tenant 777700000001 domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "120",
+      "tenantId": "777700000001",
+      "isCrossDomain": false
+   },
+      {
+      "roleAssignmentId": "znWxft23Ncf3GIWbTJQhlL7jnzLkW5jFLXmRWPh2vIg=",
+      "roleId": "00000000004016",
+      "roleName": "netadmin",
+      "subjectId": "777700000003",
+      "subjectName": "atiwari-1",
+      "subjectType": "User",
+      "description": "Tenant Role Assignment : User atiwari-1, id 777700000003, domain 777700000000, role netadmin, service 120 on tenant 777700000001 domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "120",
+      "tenantId": "777700000001",
+      "isCrossDomain": false
+   }
+]}}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 380
+Date: Thu, 25 Aug 2011 23:33:19 GMT
+ 
+<roles xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+   <role>
+      <roleAssignmentId>CmVSz8s9o1ds4Pw25S0Mwk8SBgA63FXWMxRIx4Ix9DQ=</roleAssignmentId>
+      <roleId>00000000004023</roleId>
+      <roleName>Admin</roleName>
+      <subjectId>777700000004</subjectId>
+      <subjectName>testGroupId01</subjectName>
+      <subjectType>Group</subjectType>
+      <description>Tenant Role Assignment : Group testGroupId01, id 777700000004, domain 777700000000, role Admin, service 120 on tenant 777700000001 domain 777700000000</description>
+      <domainId>777700000000</domainId>
+      <serviceId>120</serviceId>
+      <tenantId>777700000001</tenantId>
+      <isCrossDomain>false</isCrossDomain>
+   </role>
+   <role>
+      <roleAssignmentId>az1UVA2ngsdEGgLgOm9kXRbt3FcN3TqaJLO0zN9Aww=</roleAssignmentId>
+      <roleId>00000000004023</roleId>
+      <roleName>Admin</roleName>
+      <subjectId>777700000003</subjectId>
+      <subjectName>atiwari-1</subjectName>
+      <subjectType>User</subjectType>
+      <description>Tenant Role Assignment : User atiwari-1, id 777700000003, domain 777700000000, role Admin, service 120 on tenant 777700000001 domain 777700000000</description>
+      <domainId>777700000000</domainId>
+      <serviceId>120</serviceId>
+      <tenantId>777700000001</tenantId>
+      <isCrossDomain>false</isCrossDomain>
+   </role>
+   <role>
+      <roleAssignmentId>oYYbwF2RKU5YRURKRAlJnKvNGbqaeEaenvr0YFFr5s=</roleAssignmentId>
+      <roleId>00000000004016</roleId>
+      <roleName>netadmin</roleName>
+      <subjectId>777700000004</subjectId>
+      <subjectName>testGroupId01</subjectName>
+      <subjectType>Group</subjectType>
+      <description>Tenant Role Assignment : Group testGroupId01, id 777700000004, domain 777700000000, role netadmin, service 120 on tenant 777700000001 domain 777700000000</description>
+      <domainId>777700000000</domainId>
+      <serviceId>120</serviceId>
+      <tenantId>777700000001</tenantId>
+      <isCrossDomain>false</isCrossDomain>
+   </role>
+   <role>
+      <roleAssignmentId>znWxft23Ncf3GIWbTJQhlL7jnzLkW5jFLXmRWPh2vIg=</roleAssignmentId>
+      <roleId>00000000004016</roleId>
+      <roleName>netadmin</roleName>
+      <subjectId>777700000003</subjectId>
+      <subjectName>atiwari-1</subjectName>
+      <subjectType>User</subjectType>
+      <description>Tenant Role Assignment : User atiwari-1, id 777700000003, domain 777700000000, role netadmin, service 120 on tenant 777700000001 domain 777700000000</description>
+      <domainId>777700000000</domainId>
+      <serviceId>120</serviceId>
+      <tenantId>777700000001</tenantId>
+      <isCrossDomain>false</isCrossDomain>
+   </role>
+</roles>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body | 
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |   
+| 403 | Forbidden | Disabled or suspended tenant making the request |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
 
 **Response Data**
 
@@ -8028,105 +8196,163 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -sk --cacert $CACERT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/98765733650021/roles?serviceId=xxx\&domainId=yyy\&limit=10\&marker=zzz
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+None
 
 
-#### 4.4.7.2 <a id="{creategroupsglobalroleassignment}"></a>{creategroupsglobalroleassignment}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.7.2 <a id="list_tenant_role_assignments_for_a_user"></a>List Tenant Role Assignments For A User####
+#### GET {path only, no root path} tenants/{tenantId}/users/{userId}/roles?serviceId=xxx&limit=pagesize&marker=roleId
+*Privilege Level: SA, DA, DU*
 
-{Description about the method call}
+This API would return all the role assignments made on a particular tenant for a user filtered by serviceId.
+
+Constraints:
+
+List a users tenant role assignments is not a privileged operation so far.
+ServiceId is not a mandatory field, if provided response should be filtered.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+See examples below.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+The following parameters need to be specified in the resource path
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - the unique id of the tenant
+* *userId* - string - the unique id of the user
+
+The following are the supported list of query parameters to filter the results
+
+* *serviceId* (Optional) - string - list roles specific to the service identified by this id
+* *limit* (Optional)} - number - limit the results by the specified page size
+* *marker* (Optional)} - string - continue returning results after the specified marker
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+The following HTTP headers must be specified.
 
-{List all the attributes that comprises the data structure}
+* *X-Auth-Token* - token ID
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
+This call does not require a request body
 
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+GET /v2.0/HP-IDM/v1.0/tenants/11111111/users/345678902345/roles?serviceId=120 HTTP/1.1
+Accept: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
 200 - OK
+204 - No content
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 380
+Date: Thu, 25 Aug 2011 23:33:19 GMT
+ 
+{"roles": {"role": [
+      {
+      "roleAssignmentId": "az1UVA2ngsdEGgLgOm9kXRbt3FcN3TqaJLO0zN9Aww=",
+      "roleId": "00000000004023",
+      "roleName": "Admin",
+      "subjectId": "777700000003",
+      "subjectName": "atiwari-1",
+      "subjectType": "User",
+      "description": "Tenant Role Assignment : User atiwari-1, id 777700000003, domain 777700000000, role Admin, service 120 on tenant 777700000001 domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "120",
+      "tenantId": "777700000001",
+      "isCrossDomain": false
+   },
+      {
+      "roleAssignmentId": "znWxft23Ncf3GIWbTJQhlL7jnzLkW5jFLXmRWPh2vIg=",
+      "roleId": "00000000004016",
+      "roleName": "netadmin",
+      "subjectId": "777700000003",
+      "subjectName": "atiwari-1",
+      "subjectType": "User",
+      "description": "Tenant Role Assignment : User atiwari-1, id 777700000003, domain 777700000000, role netadmin, service 120 on tenant 777700000001 domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "120",
+      "tenantId": "777700000001",
+      "isCrossDomain": false
+   }
+]}}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 380
+Date: Thu, 25 Aug 2011 23:33:19 GMT
+ 
+<roles xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+   <role>
+      <roleAssignmentId>az1UVA2ngsdEGgLgOm9kXRbt3FcN3TqaJLO0zN9Aww=</roleAssignmentId>
+      <roleId>00000000004023</roleId>
+      <roleName>Admin</roleName>
+      <subjectId>777700000003</subjectId>
+      <subjectName>atiwari-1</subjectName>
+      <subjectType>User</subjectType>
+      <description>Tenant Role Assignment : User atiwari-1, id 777700000003, domain 777700000000, role Admin, service 120 on tenant 777700000001 domain 777700000000</description>
+      <domainId>777700000000</domainId>
+      <serviceId>120</serviceId>
+      <tenantId>777700000001</tenantId>
+      <isCrossDomain>false</isCrossDomain>
+   </role>
+   <role>
+      <roleAssignmentId>znWxft23Ncf3GIWbTJQhlL7jnzLkW5jFLXmRWPh2vIg=</roleAssignmentId>
+      <roleId>00000000004016</roleId>
+      <roleName>netadmin</roleName>
+      <subjectId>777700000003</subjectId>
+      <subjectName>atiwari-1</subjectName>
+      <subjectType>User</subjectType>
+      <description>Tenant Role Assignment : User atiwari-1, id 777700000003, domain 777700000000, role netadmin, service 120 on tenant 777700000001 domain 777700000000</description>
+      <domainId>777700000000</domainId>
+      <serviceId>120</serviceId>
+      <tenantId>777700000001</tenantId>
+      <isCrossDomain>false</isCrossDomain>
+   </role>
+</roles>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body | 
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |   
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
 
 **Response Data**
 
@@ -8153,105 +8379,107 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -sk --cacert $CACERT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/11111111/roles?serviceId=120
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+None
 
 
-#### 4.4.7.3 <a id="{createtenantroleassignmentforgroup}"></a>{createtenantroleassignmentforgroup}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.7.3 <a id="check_tenant_role_assignment_for_a_user"></a>Check Tenant Role Assignment For A User####
+#### HEAD /tenants/{tenantId}/users/{userId}/roles/{roleId}
+*Privilege Level: SA, DA, DU*
 
-{Description about the method call}
+This API would not return any content.
+
+Constraints:
+
+This is not a privileged operation so far.
+All the id's should represent a valid entity (userId, roleId)
+non tenant role assignments are not associated with a tenant.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+See examples below.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+The following parameters need to be specified in the resource path
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - the unique id of the tenant
+* *userId* - string - the unique id of the user
+* *roleId* - string - the unique id of the role
+
+The following are the supported list of query parameters to filter the results
+
+* *limit* (Optional)} - number - limit the results by the specified page size
+* *marker* (Optional)} - string - continue returning results after the specified marker
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+The following HTTP headers must be specified.
 
-{List all the attributes that comprises the data structure}
+* *X-Auth-Token* - token ID
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
+This call does not require a request body
 
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+HEAD /v2.0/HP-IDM/v1.0/tenants/777700000001/users/777700000003/roles/00000000004026 HTTP/1.1
+Accept: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
 200 - OK
+204 - No content
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=20DD4F9E1E3D2B0485DC81D93609DE30; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Length: 0
+Date: Wed, 26 Sep 2012 17:58:59 GMT
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=20DD4F9E1E3D2B0485DC81D93609DE30; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Length: 0
+Date: Wed, 26 Sep 2012 17:58:59 GMT
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body | 
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |   
+| 403 | Forbidden | Disabled or suspended tenant making the request |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
 
 **Response Data**
 
@@ -8278,105 +8506,86 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -sk --cacert $CACERT -XHEAD -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/98765733650021/users/1234/roles/4567
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+None
 
 
-#### 4.4.7.4 <a id="{createtenantroleassignmentforuser}"></a>{createtenantroleassignmentforuser}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.7.4 <a id="create_tenant_role_assignments_for_a_user"></a>Create Tenant Role Assignments For A User####
+#### PUT /tenants/{tenantId}/users/{userId}/roles/{roleId}
+*Privilege Level: SA, DA*
 
-{Description about the method call}
+This API is used to create a tenant role assignment for user.
+
+Constraints:
+
+This is a privileged operation, only superadmin or domainadmin can create a role assignment.
+Only super admin is allowed to make a role assignment for "System" scoped roles.
+All the entities in the context should be valid (User, Domain, Role)
+non tenant role assignment is not allowed.
+Cross domain role assignment is supported for non tenant role.
+Role assignment should be made on tenant's domain.
+Service must be activated on the tenant.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+See examples below.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+The following parameters need to be specified in the resource path
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - the unique id of the tenant
+* *userId* - string - the unique id of the user
+* *roleId* - string - the unique id of the role
+
+No query parameters are required for this call
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+The following HTTP headers must be specified.
 
-{List all the attributes that comprises the data structure}
+* *X-Auth-Token* - token ID
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
+This call does not require a request body
 
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+PUT /v2.0/HP-IDM/v1.0/tenants/11111111/users/12345678909876/roles/00000000004023 HTTP/1.1
+Accept: application/xml
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+200 - OK (if role already exists)
+201 - Created
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body | 
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |   
+| 403 | Forbidden | Disabled or suspended tenant making the request |
+| 404 | Not Found | The specified tenant, user or role was not found |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
 
 **Response Data**
 
@@ -8403,73 +8612,55 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -sk --cacert $CACERT -XPUT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/98765733650021/users/1234/roles/4567
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+None
 
 
-#### 4.4.7.5 <a id="{createusersglobalroleassignment}"></a>{createusersglobalroleassignment}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.7.5 <a id="delete_tenant_role_assignment_for_a_user"></a>Delete Tenant Role Assignment For A User####
+#### DELETE /tenants/{tenantId}/users/{userId}/roles/{roleId}
+*Privilege Level: SA, DA*
 
-{Description about the method call}
+This API is used to delete a tenant role assignment for a user. 
+
+Constraints:
+
+This is a privileged operation.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+See examples below.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+The following parameters need to be specified in the resource path
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - the unique id of the tenant
+* *userId* - string - the unique id of the user
+* *roleId* - string - the unique id of the role
+
+No query parameters are required for this call
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+The following HTTP headers must be specified.
 
-{List all the attributes that comprises the data structure}
+* *X-Auth-Token* - token ID
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
+This call does not require a request body
 
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+DELETE /v2.0/HP-IDM/v1.0/tenants/11111111/users/12345678909876/roles/00000000004023 HTTP/1.1
+Accept: application/json
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -8477,31 +8668,25 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Date: Tue, 09 Aug 2011 22:20:25 GMT
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body | 
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |   
+| 403 | Forbidden | Disabled or suspended tenant making the request |
+| 404 | Not Found | The specified tenant, user or role was not found |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
 
 **Response Data**
 
@@ -8528,105 +8713,160 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -sk --cacert $CACERT -XDELETE -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/11111111/users/12345678909876/roles/00000000004023
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+None
 
 
-#### 4.4.7.6 <a id="{deletegroupsglobalroleassignment}"></a>{deletegroupsglobalroleassignment}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.7.6 <a id="list_tenant_role_assignments_for_a_group"></a>List Tenant Role Assignments For A Group####
+#### GET /tenants/{tenantId}/groups/{groupId}/roles
+*Privilege Level: SA, DA, DU*
 
-{Description about the method call}
+This API would return all the tenant role assignments for a group filtered by serviceId. 
+
+Constraints:
+
+List a group's tenant role assignments is not a privileged operation so far.
+ServiceId is not a mandatory field, if provided response should be filtered.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+See examples below.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+The following parameters need to be specified in the resource path
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - the unique id of the tenant
+* *groupId* - string - the unique group id 
+
+The following are the supported list of query parameters to filter the results
+
+* *serviceId* (Optional) - string - list roles specific to the service identified by this id
+* *limit* (Optional)} - number - limit the results by the specified page size
+* *marker* (Optional)} - string - continue returning results after the specified marker
+
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+The following HTTP headers must be specified.
 
-{List all the attributes that comprises the data structure}
+* *X-Auth-Token* - token ID
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
+This call does not require a request body
 
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+GET /v2.0/HP-IDM/v1.0/tenants/11111111/groups/345678902345/roles?serviceId=120 HTTP/1.1
+Accept: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
 200 - OK
+204 - No Content
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 380
+Date: Thu, 25 Aug 2011 23:33:19 GMT
+{"roles": {"role": [
+      {
+      "roleAssignmentId": "CmVSz8s9o1ds4Pw25S0Mwk8SBgA63FXWMxRIx4Ix9DQ=",
+      "roleId": "00000000004023",
+      "roleName": "Admin",
+      "subjectId": "777700000004",
+      "subjectName": "testGroupId01",
+      "subjectType": "Group",
+      "description": "Tenant Role Assignment : Group testGroupId01, id 777700000004, domain 777700000000, role Admin, service 120 on tenant 777700000001 domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "120",
+      "tenantId": "777700000001",
+      "isCrossDomain": false
+   },
+      {
+      "roleAssignmentId": "oYYbwF2RKU5YRURKRAlJnKvNGbqaeEaenvr0YFFr5s=",
+      "roleId": "00000000004016",
+      "roleName": "netadmin",
+      "subjectId": "777700000004",
+      "subjectName": "testGroupId01",
+      "subjectType": "Group",
+      "description": "Tenant Role Assignment : Group testGroupId01, id 777700000004, domain 777700000000, role netadmin, service 120 on tenant 777700000001 domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "120",
+      "tenantId": "777700000001",
+      "isCrossDomain": false
+   }
+]}}
 ```
 
-XML
+XML 
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 380
+Date: Thu, 25 Aug 2011 23:33:19 GMT
+{"roles": {"role": [
+      {
+      "roleAssignmentId": "CmVSz8s9o1ds4Pw25S0Mwk8SBgA63FXWMxRIx4Ix9DQ=",
+      "roleId": "00000000004023",
+      "roleName": "Admin",
+      "subjectId": "777700000004",
+      "subjectName": "testGroupId01",
+      "subjectType": "Group",
+      "description": "Tenant Role Assignment : Group testGroupId01, id 777700000004, domain 777700000000, role Admin, service 120 on tenant 777700000001 domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "120",
+      "tenantId": "777700000001",
+      "isCrossDomain": false
+   },
+      {
+      "roleAssignmentId": "oYYbwF2RKU5YRURKRAlJnKvNGbqaeEaenvr0YFFr5s=",
+      "roleId": "00000000004016",
+      "roleName": "netadmin",
+      "subjectId": "777700000004",
+      "subjectName": "testGroupId01",
+      "subjectType": "Group",
+      "description": "Tenant Role Assignment : Group testGroupId01, id 777700000004, domain 777700000000, role netadmin, service 120 on tenant 777700000001 domain 777700000000",
+      "domainId": "777700000000",
+      "serviceId": "120",
+      "tenantId": "777700000001",
+      "isCrossDomain": false
+   }
+]}}
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body | 
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |   
+| 403 | Forbidden | Disabled or suspended group making the request |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
 
 **Response Data**
 
@@ -8653,105 +8893,86 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -sk --cacert $CACERT -XDELETE -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/11111111/groups/12345678909876/roles?serviceId=120\&limit=10\&marker=1234
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+None
 
 
-#### 4.4.7.7 <a id="{deletetenantroleassignmentforgroup}"></a>{deletetenantroleassignmentforgroup}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.7.7 <a id="create_tenant_role_assignments_for_a_group"></a>Create Tenant Role Assignments For A Group####
+#### PUT /tenants/{tenantId}/groups/{groupId}/roles/{roleId}
+*Privilege Level: SA, DA*
 
-{Description about the method call}
+This API is used to create a tenant role assignment for group.
+
+Constraints:
+
+This is a privileged operation, only superadmin or domainadmin can create a role assignment.
+Only super admin is allowed to make a role assignment for "System" scoped roles.
+All the entities in the context should be valid (Group, Domain, Role)
+non tenant role assignment is not allowed.
+Role assignment should be made on tenant's domain.
+Cross domain role assignment is supported for non tenant role.
+Service must be activated on the tenant.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+See examples below.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+The following parameters need to be specified in the resource path
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - the unique id of the tenant
+* *groupId* - string - the unique id of the group
+* *roleId* - string - the unique id of the role
+
+No query parameters are required for this call
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+The following HTTP headers must be specified.
 
-{List all the attributes that comprises the data structure}
+* *X-Auth-Token* - token ID
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
+This call does not require a request body
 
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+PUT /v2.0/HP-IDM/v1.0/tenants/11111111/groups/12345678909876/roles/00000000004023 HTTP/1.1
+Accept: application/xml
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+200 - OK (if role already exists)
+201 - Created
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body | 
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |   
+| 403 | Forbidden | Disabled or suspended group making the request |
+| 404 | Not Found | The specified tenant, user or role was not found |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
 
 **Response Data**
 
@@ -8778,105 +8999,82 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -sk --cacert $CACERT -XPUT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/98765733650021/groups/1234/roles/4567
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+None
 
 
-#### 4.4.7.8 <a id="{deletetenantroleassignmentforuser}"></a>{deletetenantroleassignmentforuser}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.7.8 <a id="delete_tenant_role_assignment_for_a_group"></a>Delete Tenant Role Assignment For A Group####
+#### DELETE /tenants/{tenantId}/groups/{userId}/roles/{roleId}
+*Privilege Level: SA, DA*
 
-{Description about the method call}
+This API is used to delete a tenant role assignment for a group. 
+
+Constraints:
+
+This is a privileged operation.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+See examples below.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+The following parameters need to be specified in the resource path
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *tenantId* - string - the unique id of the tenant
+* *groupId* - string - the unique id of the group
+* *roleId* - string - the unique id of the role
+
+No query parameters are required for this call
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+The following HTTP headers must be specified.
 
-{List all the attributes that comprises the data structure}
+* *X-Auth-Token* - token ID
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
+This call does not require a request body
 
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+DELETE /v2.0/HP-IDM/v1.0/tenants/11111111/groups/12345678909876/roles/00000000004023 HTTP/1.1
+Accept: application/json
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
 200 - OK
+204 - No Content
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Date: Tue, 09 Aug 2011 22:20:25 GMT
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body | 
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |   
+| 403 | Forbidden | Disabled or suspended group making the request |
+| 404 | Not Found | The specified tenant, user or role was not found |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
 
 **Response Data**
 
@@ -8903,1017 +9101,91 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -sk --cacert $CACERT -XDELETE -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/11111111/groups/12345678909876/roles/00000000004023
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.7.9 <a id="{deleteusersglobalroleassignment}"></a>{deleteusersglobalroleassignment}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.7.10 <a id="{getnontenantrasdomain}"></a>{getnontenantrasdomain}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.7.11 <a id="{getusersglobalrole}"></a>{getusersglobalrole}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.7.12 <a id="{listgroupsglobalroles}"></a>{listgroupsglobalroles}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.7.13 <a id="{listtenantroleassignment}"></a>{listtenantroleassignment}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.7.14 <a id="{listtenantroleassignmentforgroup}"></a>{listtenantroleassignmentforgroup}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.7.15 <a id="{listtenantroleassignmentforuser}"></a>{listtenantroleassignmentforuser}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.7.16 <a id="{listusersglobalroles}"></a>{listusersglobalroles}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
+None
 
 ### 4.4.8 Role Defs
 
-{Describe the resource and what information they provide. Then enumerate all the API method calls below.}
+Roles are entities defined in system to support notion of capability (e.g. SuperAdmin, block-admin, projectmanager etc...), subjects (users/groups) are associated with role to form a logical grouping, subjects with same role have similar capabilities in system. Roles are associated with security policies which provides capability to a role on a particular target as defined in the policy.
+
+There are mainly following two types of role definition supported in CS.
+
+###Global Role Definition###
+Global roles are defined in system so that they can be used by any domain across the system for purpose of role assignment. Based on the role scope (explained later) of a global role definition, superadmin or a domainadmin can create role assignments with global role. The domainId field of a global role definition is wild carded (domainId=*) that makes the role definition global. 
+
+There are following two categories of global role definition
+
+* *Non Tenant Role Definition:* A non tenant role definition should not be used for tenant role assignment, which means one can not create a tenant role assignment with such role definitions. Global non tenant role definitions should always have tenantId field empty/null (tenantId=null).
+* *Tenant Role Definition:* A tenant role definition is used to associate a subject (user/group) with a tenant, that means non tenant role assignment is not possible with such role definitions. Global tenant role definitions should always have tenantId field wild carded (tenantId=*).
+
+###Domain Role Definition###
+Role can be defined for specific domain, such roles can not be used for the purpose of role assignments outside the domain, the domainId field of the role definition should point to a specific domain in the system. Superadmin or domainAdmin are allowed to create such roles.  
+
+There is following one category of domain role definition supported
+
+* *Non Tenant Role Definition:* Domain non tenant role should not be used for role assignment with the context of a tenant, in other words the policy associated with the domain non tenant role definition should not mapped to a target in tenant. Domain non tenant role definition should always have tenantId field empty/null (tenantId=null). This is the only kind of role definition a domain admin is allowed to create in his/her domain.
+
+###Role Definition Attributes###
+
+####roleId:
+RoleId to uniquely identify a role definition in system. 
+
+#####Constraints:#####
+* Should be 14 digit system generated number.  
+* RoleId must be uniques in system.
+
+####roleName:
+Human readable name of the role definition(e.g. novaadmin, domainadmin). 
+
+#####Constraints:#####  
+* Role name must be unique within a domain.  
+* Role Name should not have special character, except (-).  
+* One can update the roleName of a role definition even if the role assignment exists for that role definition.  
+
+####description:
+Description of the role definition. 
+
+####domainId:
+Domain id for which this role definition is valid.
+
+#####Constraints:#####  
+* If domainId=*, This makes the role definition global, a global role definition can be used for role assignment in any domain.  
+* If domainId=xxxx, This makes the role definition domain specific, these role can only be used for role assignment within that domain.  
+* SA or service on boarding users can create a global role definition with domainId=*.  
+* SA can create role definition for a specific domain domainId=xxx.  
+* DA can create role definition with in his domain domainId=xxxx.  
+
+####tenantId:
+The tenantId filed of role definition governs whether role can be associated with a tenant. If the tenantId field is null or empty that means tenant role assignment is not possible with that role definition.
+
+#####Constraints:#####  
+* If tenantId=Null/Empty, This means that the role assignment with this role definition cannot be possible with any tenant.  
+* If tenantId=*, This means that the role assignment with role definition cannot be possible without a tenant and applicable to all tenants in domain.   
+* SA or service on boarding user can create a global role definition with tenantId=*.  
+* DA can *not* create role definition in his domain with tenantId=xxxx, for DA it will be tenantId=Null/Empty.  
+
+####serviceId:
+ServiceId field is used to scope role definition to a specific service. 
+
+#####Constraints:#####  
+*  SA or service on boarding user are allowed to create role definition with serviceId=xxx for a valid service.  
+*  DA is not allowed to create role definition for a specific service except identity management service (serviceId=100).  
+
+####roleScope:
+roleScope impose visibility to the role definition.
+Default= Public 
+
+#####Constraints:#####  
+* Public : Roles with "Public" scope are visible to customer and can be used by customer for role assignment (e.g. domainadmin, domainuser).  
+* Public_SAR : Roles with "Public_SAR" scope are service activation ready. (e.g. Object Storage admin). These roles are automatically assigned to the domain's admin group at the time of service activation, customer domain admin can also make role assignment for these roles.  
+* System : "System" scoped roles are not visible to customer and are reserved for system use only (e.g. superadmin). Special privilege (SA) will be required to create role assignment for these roles.  
+* This attribute should only be visible to SA but not be visible to customer.  
+* Roles are created with the default scope “Public” and only way to change the scope to update the scope.  
+* Only SA or service on boarding user can scope a role definition.  
 
 **Status Lifecycle**
 
@@ -9932,97 +9204,129 @@ N/A
 None.
 
 
-#### 4.4.8.1 <a id="{createroledef}"></a>{createroledef}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.8.1 <a id="create_role_definition"></a>Create Role Definition####
+#### POST [HPKeystoneExtensionBaseURI]/roleDefs
+*Privilege Level: SA, SVC, DA*
 
-{Description about the method call}
+This API is used to create a new role definition in system.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+A valid token must be presented in the X-Auth-Token HTTP header. Otherwise, a 401 will be returned.
 
 **URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
+* *roleName* - String - Human readable name of the role definition.
+* *domainId* - String - Domain id for which this role definition is valid.
+* *tenantId* (Optional) - String - Tenant id for which this role definition is valid.
+* *serviceId* (Optional) - String - Service id for which this role definition is valid.
+* *description* (Optional) - String - description of the role definition.
 
 {Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4ee243692b88f9f72b19c1a3
+Accept: application/xml
+Content-Type: application/json
+Host: localhost:8443
+Content-Length: 50
+{
+  "role": {
+    "roleName": "db-admin",
+    "tenantId": "222",
+    "domainId": "123",
+    "serviceId": "140"
+    "description": "db-admin for xyz tenant"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4ee243692b88f9f72b19c1a3
+Accept: application/xml
+Content-Type: application/xml
+Host: localhost:8443
+Content-Length: 50
+ 
+<role xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+   <roleName>db-admin</roleName>
+   <description>db-admin for xyz tenant</description>
+   <domainId>123</domainId>
+   <serviceId>140</serviceId>
+   <tenantId>222</tenantId>
+</role>
 ```
 
 Optional:
 
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
 **Success Response**
 
-{Specify the status code and any content that is returned.}
+The response body contains data for newly created role definition with http status code of 201.
 
 **Status Code**
 
-200 - OK
+201 - CREATED
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
+Response data should look as below
 
 JSON
 
 ```
-{json data structure here}
+{
+  "role": {
+    "roleId": "12121"
+    "roleName": "db-admin",
+    "tenantId": "222",
+    "domainId": "123",
+    "serviceId": "140"
+    "description": "db-admin for xyz tenant"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+<role xmlns=" http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+   <roleId>12121</roleId>
+   <roleName>db-admin</roleName>
+   <description>db-admin for xyz tenant</description>
+   <domainId>123</domainId>
+   <serviceId>140</serviceId>
+   <tenantId>222</tenantId>
+</role>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
+Please refer to error response body for additional details.
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI or request body |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Item not found | Token is not valid |  
+| 409 | Conflict  | Duplicate role definition |   
+| 500 | Internal Server Error | The server encountered a problem while processing the request |  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
 
 **Response Data**
 
@@ -10049,68 +9353,193 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPOST -H "X-Auth-Token: HPAuth_TOCKEN" -H "Content-type: application/json" -d '{"role":{"roleName":"db-admin","tenantId":"58046189288043","domainId":"40527047618047","serviceId":"120","description":"role for db admin"}}'  https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs
+
 ```
 
 **Additional Notes**
+   * Role creation is a privileged operation. 
+   * Only superadmin can create global role where the domainId=*.
+   * Only superadmin can create role on behalf of any domain.
+   * Domain Admin are allowed to create role definitions within their own domain, which means domainId filed should be set to their own domain.
+   * Role can not be created for non existing domain, tenant, service etc.
+   * Role are create with default roleScope=Public. Role scope provide visibility to the role (e.g. Roles with System scope should not be visible to customer)
+   * RoleName is mandatory field and must be unique within a domain per service, there may be duplicate role name across domains.
+   * DomainId is a mandatory field.
+   * ServiceId is a mandatory field, if serviceId is 100 then tenantId field should be empty or if serviceId is not equal to 100 then there must be a tenantId  provided in request.
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
+#### 4.4.8.2 <a id="delete_role_definition"></a>Delete Role Definition####
+#### DELETE [HPKeystoneExtensionBaseURI]/roleDefs/{roleId}
+*Privilege Level: SA, SVC, DA*
 
-#### 4.4.8.2 <a id="{deleteroledef}"></a>{deleteroledef}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
+This API is used to delete a role definition identified by roleId. 
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+A valid token must be presented in the X-Auth-Token HTTP header. Otherwise, a 401 will be returned.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+**Data Parameters**
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+This call does not require a request body
+
+**Success Response**
+
+{Specify the status code and any content that is returned.}
+
+**Status Code**
+
+204 - No Content
+
+**Response Data**
+
+This call does not require a request body.
+
+**Error Response**
+
+Please refer to error response body for additional details.
+
+**Status Code**
+
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI or request body |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Item not found | Token is not valid |  
+| 409 | Conflict  | In case of existing role assignment for the role   |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request |  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
+**Response Data**
+
+JSON
+Response for deleting previously deleted domain.
+
+```
+HTTP/1.1 404 Not Found
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=FE74A50121DBE8B200CCA95E9B759EED; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 176
+Date: Wed, 31 Oct 2012 20:35:12 GMT
+
+{
+  "identityFault" : {
+    "code" : "BAD_REQUEST",
+    "message" : "Role not found for roleId 16159990324894",
+    "details" : "Role not found for roleId 16159990324894"
+  }
+}
+
+HTTP/1.1 403 Forbidden
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=DCCE78AA6D9D3EF884E81979DC381898; Path=/; Secure
+Content-Type: application/json;charset=UTF-8
+Content-Length: 54
+Date: Wed, 31 Oct 2012 20:38:22 GMT
+
+{
+  "forbidden": {
+    "message": "Invalid token",
+    "code": 403
+  }
+}
+
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<forbidden code="403" xmlns="http://docs.openstack.org/identity/api/v2.0">
+   <message>Invalid token</message>
+</forbidden>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XDELETE -H "X-Auth-Token: HPAuth_TOCKEN" https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs/16159990324894
+
+```
+
+**Additional Notes**
+* Role deletion is a privileged operation.
+* Superadmin can delete roles from customer domain as well as from system domain.
+* domain admin can only delete roles defined in their own domain.
+* Delete role is not allowed is there exist a role assignment for the role.
+
+
+
+#### 4.4.8.3 <a id="update_role_definition"></a>Update Role Definition####
+#### PUT [HPKeystoneExtensionBaseURI]/roleDefs/{roleId}
+*Privilege Level: SA, SVC, DA*
+
+This API is used to update an existing role definition. RoleId is used to uniquely identify a role definition in the system.
+
+**Request Data**
+
+A valid token must be presented in the X-Auth-Token HTTP header. Otherwise, a 401 will be returned.
+
+**URL Parameters**
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+* *roleName* - String - Human readable name of the role definition.
+* *description* (Optional) - String - description of the role definition.
 
 JSON
 
 ```
-{json data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs/XXXXXXXXXXXXXX HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4ee243692b88f9f72b19c1a3
+Accept: application/xml
+Content-Type: application/json
+Host: localhost:8443
+Content-Length: 50
+{
+  "role": {
+    "roleName": "mongo-db-admin",
+    "description": "mongo-db-admin for abc tenant"
+  }
+}
 ```
 
-XML
+XML 
 
 ```
-{xml data structure here}
-```
 
-Optional:
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs/XXXXXXXXXXXXXX HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4ee243692b88f9f72b19c1a3
+Accept: application/json
+Content-Type: application/xml
+Host: localhost:8443
+Content-Length: 50
 
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+<role xmlns=" http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+   <roleName>mongo-db-admin</roleName>
+   <description>mongo-db-admin for xyz tenant</description>
+</role>
 ```
 
 **Success Response**
@@ -10123,31 +9552,482 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+{
+  "role": {
+    "roleId": "12121"
+    "roleName": "mongo-db-admin",
+    "tenantId": "222",
+    "domainId": "123",
+    "serviceId": "140"
+    "description": "mongo-db-admin for xyz tenant"
+  }
 ```
 
 XML
 
 ```
-{xml data structure here}
+<role xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+   <roleId>12121</roleId>
+   <roleName>mongo-db-admin</roleName>
+   <description>mongo-db-admin for xyz tenant</description>
+   <domainId>123</domainId>
+   <serviceId>140</serviceId>
+   <tenantId>222</tenantId>
+</role>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
+Please refer to error response body for additional details.
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI or request body |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Item not found | Token is not valid |  
+| 409 | Conflict  | In case of existing role name or role assignment for the role |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request |  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 404 Not Found
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=42CC6D3F833AAB14A6E7B83B2267F251; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 162
+Date: Wed, 31 Oct 2012 21:04:36 GMT
+
+{
+  "identityFault" : {
+    "code" : "BAD_REQUEST",
+    "message" : "Role not found for roleId 2342422",
+    "details" : "Role not found for roleId 2342422"
+  }
+}
+
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPUT -H "X-Auth-Token: HPAuth_TOCKEN" -H "Content-type: application/json" '{"role":{"roleName":"mongo-db-admin","description":"mongo-db-admin for abc tenant"}}'  https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs/123456789012
+```
+
+**Additional Notes**
+
+* Role update is privileged operation.
+* Superadmin can update a role defined within system domain or in customer domain.
+* Only superadmin can update the domainId of the role definition unless there is no role association exist for the role.
+* Domain admin are not allowed to change the domainId field of role definition.
+* Domain admin are not allowed update system defined roles or roles from other domains.
+* Update on certain (domainId, tenantId, serviceId) field are not allowed if there are existing role assignments in the system for the role. 
+* Update on roleName and description is allowed even if there exist a role assignment.
+* Update role should also obeys the constraints defined in create role.
+
+
+
+#### 4.4.8.4 <a id="update_role_scope"></a>Update Role Scope####
+#### PUT [HPKeystoneExtensionBaseURI]/roleDefs/{roleId}/scope
+*Privilege Level: SA, SVC*
+
+This API is used to update the scope an existing role defined in system. Following are the possible role scope defined in system
+
+* Public : Roles with "Public" scope can be used by customer for role assignment (e.g. domainadmin, domainuser).
+* Public_SAR : Roles with "Public_SAR" scope are defined by service and injected in system at the time of service registration (e.g. Object Storage admin).  These roles are automatically assigned to user at the time of service provisioning, customer domain admin can also make  role assignment for these roles.
+* System : "System" scoped roles are not visible to customer and are reserved for system use only (e.g. superadmin). Special privilege (SA) will be required to create role assignment for these roles.
+
+**Request Data**
+
+A valid token must be presented in the X-Auth-Token HTTP header. Otherwise, a 401 will be returned.
+
+**URL Parameters**
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+* *roleScope* - String - Human readable name of the role definition.
+
+
+
+JSON
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs/XXXXXXXXXXXXXX/scope HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4ee243692b88f9f72b19c1a3
+Accept: application/xml
+Content-Type: application/json
+Host: localhost:8443
+Content-Length: 50
+ 
+{
+  "scope": {
+    "roleScope": "Public_SAR"
+  }
+}
+```
+
+XML
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs/XXXXXXXXXXXXXX/scope HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4ee243692b88f9f72b19c1a3
+Accept: application/xml
+Content-Type: application/xml
+Host: localhost:8443
+Content-Length: 50
+ 
+<scope xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+   <roleScope>Public_SAR</roleScope>
+</scope>
+
+```
+
+**Success Response**
+
+{Specify the status code and any content that is returned.}
+
+**Status Code**
+
+204 - No Content
+
+**Response Data**
+
+There will be no response fir this request.
+
+**Error Response**
+
+Please refer to error response body for additional details.
+
+**Status Code**
+
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI or request body |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Item not found | Token is not valid |  
+| 409 | Conflict  | In case of existing role name or role assignment for the role |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request |  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 404 Not Found
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=42CC6D3F833AAB14A6E7B83B2267F251; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 162
+Date: Wed, 31 Oct 2012 21:04:36 GMT
+
+{
+  "identityFault" : {
+    "code" : "BAD_REQUEST",
+    "message" : "Role not found for roleId 2342422",
+    "details" : "Role not found for roleId 2342422"
+  }
+}
+
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPUT -H "X-Auth-Token: HPAuth_TOCKEN" -H "Content-type: application/json" '{"scope":{"roleScope":"Public_SAR"}}'  https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs/123456789012/scipe
+```
+
+**Additional Notes**
+
+* Update role scope is a privileged operation, only superadmin is allowed to do so.
+* Update role scope is not allowed if there is an existing role assignments in the system for a role.
+
+
+#### 4.4.8.5 <a id="get_a_role_definition"></a>Get A Role Definition####
+#### GET [HPKeystoneExtensionBaseURI]/roleDefs/{roleId}
+*Privilege Level: SA, SVC, DA, DU*
+
+This API is used to get a role definition specified by a roleId.
+
+**Request Data**
+
+A valid token must be presented in the X-Auth-Token HTTP header. Otherwise, a 401 will be returned.
+
+**URL Parameters**
+
+**Data Parameters**
+
+
+This call does not require a request body
+
+**Success Response**
+
+The role definition will be return. 
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+{Either put 'This call does not require a request body' or include JSON/XML response data structure}
+
+JSON
+
+```
+{
+  "role": {
+    "roleId": "xxxxxxxxxxxx",
+    "roleName": "db-admin",
+    "description": "db-admin for abc tenant",
+    "tenantId": "xxxxxxxxxxxx"
+    "domainId": "xxxxxxxxxxxx"
+    "serviceId": "xxxxxxxxxxxx"
+  }
+}
+```
+
+XML
+
+```
+<role xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+    <roleId>xxxxxxxxxxxx</roleId>
+    <roleName>db-admin</roleName>
+    <description>db-admin for abc tenant</description>
+    <tenantId>xxxxxxxxxxxx</tenantId>
+    <serviceId>xxxxxxxxxxxxxx</serviceId>
+    <domainId>xxxxxxxxxxxx</domainId>
+</role>
+```
+
+**Error Response**
+
+Please refer to error response body for additional details.
+
+**Status Code**
+
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI or request body |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Item not found | Token is not valid |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request |  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 404 Not Found
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=3CF024C732444A0434F6632CA7C3C80A; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 160
+Date: Wed, 31 Oct 2012 21:18:51 GMT
+
+{
+  "identityFault" : {
+    "code" : "BAD_REQUEST",
+    "message" : "No role found for roleId 2312312",
+    "details" : "No role found for roleId 2312312"
+  }
+}
+
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XGET -H "X-Auth-Token: HPAuth_TOCKEN" https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs/16159990324894
+```
+
+**Additional Notes**
+* Superadmin can get a role from any domain.
+* Domain admin and domain users are not allowed to access roles from other domains, except system defined public global roles (domainId=*).
+
+
+
+#### 4.4.8.6 <a id="list_role_definitions"></a>List Role Definitions####
+#### GET [HPKeystoneExtensionBaseURI]/roleDefs
+
+*Privilege Level: SA, SVC*
+
+This API is used to get a list of role definitions defined in system and is reserved for admin use only. Filer options (domainId, tenantId, serviceId and serviceName) are provided with this API to get the manageable size of response list.
+
+**Request Data**
+
+A valid token must be presented in the X-Auth-Token HTTP header. Otherwise, a 401 will be returned.
+
+**URL Parameters**
+
+* *limit (Optional)* - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker (Optional)* - string - the resource Id of the last item in the previous list
+* *domainId* (Optional)} - string - filter by domainId
+* *tenantId* (Optional)} - string - filter by tenant
+* *serviceId* (Optional)} - string - filter by serviceId
+* *roleName* (Optional)} - string - filter by roleName
+
+
+**Data Parameters**
+
+This call does not require a request body
+
+**Success Response**
+
+Returns list of roleDefs for given input with http status code 200.
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+{"roles": {"role": [
+      {
+      "roleId": "001",
+      "roleName": "role01",
+      "description": "role01- description",
+      "serviceId" : "100",
+      "domainId": "123",
+      "tenantId": ""
+   }, {
+      "roleId": "002",
+      "roleName": "role02",
+      "description": "role02- description",
+      "serviceId" : "140",
+      "domainId": "123",
+      "tenantId": "*"
+   }, {
+      "roleId": "003",
+      "roleName": "role03",
+      "description": "role03- description",
+      "serviceId" : "150",
+      "domainId": "123",
+      "tenantId": "xxxxxxxxxxxx"
+   },
+]}
+```
+
+XML
+
+```
+<roles xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+<role >
+   <roleId>001</roleId>
+   <roleName>Role001</roleName>
+   <description>some desc</description>
+   <domainId>123</domainId>
+   <serviceId>100</serviceId>
+   <tenantId></tenantId>
+</role>
+<role >
+   <roleId>002</roleId>
+   <roleName>Role001</roleName>
+   <description> some desc </description>
+   <domainId>123</domainId>
+   <serviceId>140</serviceId>
+   <tenantId>*</tenantId>
+</role>
+<role >
+   <roleId>003</roleId>
+   <roleName>Role003</roleName>
+   <description>Some desc</description>
+   <domainId>123</domainId>
+   <serviceId>150</serviceId>
+   <tenantId>xxxxxxxxxxxx</tenantId>
+</role>
+</roles>
+```
+
+**Error Response**
+
+Please refer to error response body for additional details.
+
+**Status Code**
+
+| Status Code  | Description  | Reasons |   
+| :----------- | :----------- | :-------|  
+| 400 | Bad Request | Malformed request in URI or request body |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 404 | Item not found | Token is not valid |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request |  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
 
 **Response Data**
 
@@ -10174,637 +10054,14 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XGET -H "X-Auth-Token: HPAuth_TOCKEN" https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.8.3 <a id="{getdomainsroledefs}"></a>{getdomainsroledefs}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.8.4 <a id="{getroleadef}"></a>{getroleadef}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.8.5 <a id="{listroledefs}"></a>{listroledefs}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.8.6 <a id="{updateroledef}"></a>{updateroledef}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.8.7 <a id="{updateroledefscope}"></a>{updateroledefscope}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+* This is a privileged operation and only reserved for admin use .
+* This APi will display roles defined in system, to get roles for specific domain appropriate filter should be used (e.g. domainId=* should be use to get global roles).
+* Response can be filtered by domainId, tenantId, serviceId and serviceName.
 
 
 ### 4.4.9 Service
@@ -11330,7 +10587,8 @@ Curl Example
 
 ### 4.4.10 Signature
 
-{Describe the resource and what information they provide. Then enumerate all the API method calls below.}
+The Signature APIs enable the requester to obtain a token by using a signature for authentication.
+
 
 **Status Lifecycle**
 
@@ -11349,65 +10607,188 @@ N/A
 None.
 
 
-#### 4.4.10.1 <a id="{ec2signature}"></a>{ec2signature}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.10.1 <a id="ec2_signature"></a>EC2 Signature####
+#### POST [HPKeystoneExtensionBaseURI]/ec2Tokens
+*Privilege Level: Anon*
 
-{Description about the method call}
+Validate an EC2 signature and return a scoped token.
+
+**Detailed Description**
+
+This API is used to validate an EC2 signature and return a token. This implementation currently supports EC2 signature versions 0, 1 and 2 (similar to keystone reference implementation). This API identifies the user through the 'access' identifier and verifies the provided signature using the data provided in request. Once the signature is successfully verified, the API returns a scoped token response with tenant and role information.
+
+A Nova EC2 signature verification always requires a scoped token in the response. The API has to find a tenant for the user (as tenant data, id or name, if the tenant is not provided in request). This implementation expects that that that the tenant identifier is prefixed in 'access' and 'AWSAccessKeyId'. 
+
+The optional query parameters HP-IDM-serviceId and HP-IDM-endpointTemplateId can be used to include only a specific subset of roles in the response. If there are no specific roles found, then a 401 (unauthorized) error is returned in the response. These parameters can have comma separated values to specify multiple service ids. To request global roles to be included in response, the global identifier (which is currently configured as 'global') must be used in any of two query parameter values. If this query parameter is not specified or has an empty value, then the response will include all roles available for that signature request. 
+
+**AWSAccessKeyId Must Prefixed By Tenant ID**
+
+Since a user's access key can be associated with multiple tenants, clients must prefix the user access key ID with the tenant ID of the tenant where the signature is scoped to prior to the signature calculation. For example, "84569201246014:8WXZS37LDZGYWM32H4LP". Notice the tenant ID "84569201246014".
+
+For Swift-migrated access keys, which already have a tenant ID prefix, it would end up with this, "84569201246014:84569201246015:8WXZS37LDZGYWM32H4LP". In this case, both tenant IDs will be part of the signature but only the first prefix, "84569201246014", will be used to determine the tenant to be scoped. The second tenant ID, "84569201246015", is treated as part of the access key.
+
+**Signature Details**
+
+The signature is calculated by first creating the string to sign as described in the following sections. Then an RFC 2104 compliant HMAC is calculated over the string using SHA1 or SHA256 as the hash algorithm and the Secret Access key. The resultant signature bytes are then base64 encoded to form the signature string.
+
+**Version 0 Signature String To Sign Details**
+
+The supported signature method for version 0 signatures is HmacSHA1. The string to sign consists of the value associated with the "Action" query parameter concatenated with the value associated with the "Timestamp" query parameter.
+
+**Version 1 Signature String To Sign Details**
+
+The supported signature method for version 1 signatures is HmacSHA1. The string to sign is built by first doing a case insensitive sort of the query parameters based on the query parameter names. Then the name and value for each query parameter is concatenated together in the sorted order one-by-one to form the string.
+
+**Version 2 Signature String To Sign Details**
+
+The supported signature methods for version 2 signatures are HmacSHA1 and HmacSHA256.
+
+The string to sign for version 2 signatures consists of the following concatenated in the order specified:
+
+1) The value of the "verb" followed by "\n"
+
+2) The canonicalized value (lowercase) of the "host" followed by "\n". The ":" and the port number may or not be included. The server signature verifier will calculate the signature with and without the ":" character and the port number included.
+
+3) The canonicalized value of the "path" followed by "\n". If the path is not specifed or is the empty string then the character "/" is used. The canonicalized path value is formed by first URL encoding the path (using UTF-8 character set) and them making the following substitutions:
+
+"%20" replaces "+"
+"*" replaces "%2A"
+"~" replaces "%7E"
+"/" replaces "%2F"
+
+4) The canonicalized query string. The canonicalized query string is formed by first performing a natural byte ordering (case sensitive sort) by name of the name/value pairs in the query string. Each name and each value are then URL encoded (using UTF-8 character set) and the following substitutions are made:
+
+"%20" replaces "+"
+"*" replaces "%2A"
+"~" replaces "%7E"
+
+Then name/value strings are formed by concatenating name, "=", and value.The resulting name/value strings are then concatenated together based on sorted order above with each separated from the other by the "&" character.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *HP-IDM-serviceId* - (Optional) - Query Parameter - used to filter roles by service identifier. Value consists of one or more comma separated service identifier values. Specifying the the value "global" will cause global roles to be included.
+* *HP-IDM-endpointTemplateId* - (Optional) - Query Parameter - used to filter roles by endpoint template identifier. Consists of one or more comma separated endpoint template identifier values. Specifying the value "global" will cause global roles to be included.
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+See the signature details descriptions above for information on what data parameters are required for each signature version.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
 
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
+JSON Signature Version 2
 
 ```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/ec2tokens?HP-IDM-serviceId=100%2C110 HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 818
+ 
+{
+    "ec2Credentials":{
+        "access":"77242319481696:M8RVSYL1HEAHP3L11DC5",
+        "host":"localhost:80",
+        "verb":"GET",
+        "params":{
+            "puHWtp":"oH.uGBH6F6dI5sQL1",
+            "SignatureVersion":"2",
+            "AWSAccessKeyId":"77242319481696:M8RVSYL1HEAHP3L11DC5",
+            "ehtosy":"z9.idDFmU8hZWMQzS",
+            "Timestamp":"1326934083.68",
+            "nlKpzmwkDWYM":"9NgzXvwjuaiVoE5cP",
+            "SignatureMethod":"HmacSHA256",
+            "XNyFgC83lLGV":"QE9YFUoiNaa2qv9sXw",
+            "au7":".4mK1HY2",
+            "Action":"HJOFRgVIBSvegztSkm",
+            "dcD5xQMQx":"i9OeD",
+            "5Te8ywzJQsvvsNF":"qUd",
+            "ob1e06nT4":"PqqJC3JzTZaofJTfTXB"
+        },
+        "signature":"f+E0MFsshpiXY3CwXOYv07jJ+FXewLPbjwFk47usPiA=",
+        "path":"/"
+    }
+}
 ```
 
 Optional:
 
-JSON
+JSON Signature Version 0
 
 ```
-{json data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/ec2tokens?HP-IDM-serviceId=100%2C110 HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 815
+ 
+{
+    "ec2Credentials":{
+        "access":"77242319481696:M8RVSYL1HEAHP3L11DC5",
+        "host":"localhost:80",
+        "verb":"GET",
+        "params":{
+            "SignatureVersion":"0",
+            "AWSAccessKeyId":"77242319481696:M8RVSYL1HEAHP3L11DC5",
+            "JtISfQAiYdrKOVI3":"iII",
+            "3ULz":"mtJWfYPNnfUTHwIRc",
+            "fOVH8OwHID":"y79b",
+            "Timestamp":"1326934083.16",
+            "zvTqAh2Ql9mzE":"zqC6KwMMCYq",
+            "j0aawvqoNNibmF4JjoBv":"4WyqLq66tSW5dzQ8Ps.q",
+            "OgUE1nimEOBSYkvDd":"dFZX3RjMRh7",
+            "kNX6Oit8fDM1":"TJ7mTM7YbJQ84",
+            "Action":"RyMTEhVxIOZgysaashyV",
+            "w8cpX":"lnjWTLEy0nVLq",
+            "4tWPmGmAfEcWP01":"X7zr4JZ1"
+        },
+        "signature":"4LOFvWlHu1q3jU3R6WmIE3AJpKg=",
+        "path":"/"
+    }
+}
 ```
 
-XML
+JSON Signature Version 1
 
 ```
-{xml data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/ec2tokens?HP-IDM-serviceId=100%2C110 HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 607
+ 
+{
+    "ec2Credentials":{
+        "access":"77242319481696:M8RVSYL1HEAHP3L11DC5",
+        "host":"localhost:80",
+        "verb":"GET",
+        "params":{
+            "qI6GjS4":"1TfGb7kP.a",
+            "SignatureVersion":"1",
+            "AWSAccessKeyId":"77242319481696:M8RVSYL1HEAHP3L11DC5",
+            "WQ9":"el2",
+            "Timestamp":"1326934083.26",
+            "lKi9TPAP":"kQ5qjovtZ2d4wJst7NkU",
+            "DuoDn0s1iCYfXnBK3V":"2doHkN",
+            "1emaHCDcGwJrKk":"RJKQi",
+            "Action":"ngxrsX"
+        },
+        "signature":"uik8Yk57mcqT85BHR8bAw9HTdiE=",
+        "path":"/"
+    }
+}
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -11415,31 +10796,464 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
-JSON
+JSON - All signature versions
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=DA7240A00E59F8E371DE567D405EB085; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 658
+Date: Thu, 19 Jan 2012 01:00:36 GMT
+ 
+{"access": {
+  "token": {
+    "expires": "2012-01-19T12:43:07.566Z",
+    "id": "HPAuth_4f17671bb0be3f62bf1090d2",
+    "tenant": {
+      "id": "77242319481696",
+      "name": "HP nova Tenant Services"
+    }
+  },
+  "user": {
+    "id": "97324764821142",
+    "name": "arun2",
+    "roles": [
+      {
+        "id": "00000000004003",
+        "serviceId": "100",
+        "name": "domainadmin"
+      },
+      {
+        "id": "00000000004017",
+        "serviceId": "100",
+        "name": "tenant-member",
+        "tenantId": "77242319481696"
+      },
+      {
+        "id": "00000000004004",
+        "serviceId": "100",
+        "name": "domainuser"
+      }
+    ]
+  }
+}}
+```
+
+**Error Response**
+
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Missing access key id, signature value, or other parameters |
+| 401 | Unauthorized | Invalid signature version, missing signature method, invalid access key, invalid signature, no tenant association found for user, no service specific roles found for service ids specified in query |
+| 403 | Forbidden | User is disabled |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+
+
+**Response Data**
+
+JSON - Signature is not valid
+
+```
+HTTP/1.1 401 Unauthorized
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=82034D30BB39215596243EDD6B9F2BB7; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 222
+Date: Fri, 16 Dec 2011 19:19:11 GMT
+ 
+{
+  "unauthorized" : {
+    "anies" : null,
+    "code" : 401,
+    "details" : "Provided signatures are not correct for access key :G8B5UNGWZU39K7BNR9KP",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+JSON - No service specific role is found
+
+```
+HTTP/1.1 401 Unauthorized
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=10831C151368F11FE2F8A07EB6B34B87; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 187
+Date: Thu, 19 Jan 2012 01:09:29 GMT
+ 
+{
+  "unauthorized" : {
+    "anies" : null,
+    "code" : 401,
+    "details" : "Not authorized to access the service.",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
 ```
 
-**Error Response**
+Curl Example
 
-{Enumerate all the possible error status codes and any content that is returned.}
+```
+curl -k -X POST -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/ec2tokens?HP-IDM-serviceId=100,110" -d '{
+    "ec2Credentials":{
+        "access":"77242319481696:M8RVSYL1HEAHP3L11DC5",
+        "host":"localhost:80",
+        "verb":"GET",
+        "params":{
+            "puHWtp":"oH.uGBH6F6dI5sQL1",
+            "SignatureVersion":"2",
+            "AWSAccessKeyId":"77242319481696:M8RVSYL1HEAHP3L11DC5",
+            "ehtosy":"z9.idDFmU8hZWMQzS",
+            "Timestamp":"1326934083.68",
+            "nlKpzmwkDWYM":"9NgzXvwjuaiVoE5cP",
+            "SignatureMethod":"HmacSHA256",
+            "XNyFgC83lLGV":"QE9YFUoiNaa2qv9sXw",
+            "au7":".4mK1HY2",
+            "Action":"HJOFRgVIBSvegztSkm",
+            "dcD5xQMQx":"i9OeD",
+            "5Te8ywzJQsvvsNF":"qUd",
+            "ob1e06nT4":"PqqJC3JzTZaofJTfTXB"
+        },
+        "signature":"f+E0MFsshpiXY3CwXOYv07jJ+FXewLPbjwFk47usPiA=",
+        "path":"/"
+    }
+}'
+```
+
+**Additional Notes**
+
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+
+
+#### 4.4.10.2 <a id="generic_signature"></a>Generic Signature####
+#### POST [HPKeystoneExtensionBaseURI]/gstokens
+*Privilege Level: Anon*
+
+This API is used to validate a signature and optionally return a token. Validation includes checking that the key used to generate the signature belongs to a particular user and that the key is in a valid state. The signature may be created using an access key, a private key associated with a certificate, or a private key in a key pair.
+
+Key types supported include "accesskey", "certificate", and "keypair". If key type "certificate" is specified then the subject key identifier should be specified as the keyId parameter value.
+
+The "signatureMethod" attribute is optional and only applicable when "accesskey" is specified for the "keyType" attribute. If the "signatureMethod" attribute is not specified then the algorithm associated with the access key at create or import time is used. 
+
+This API can be used in two modes, (1) Signature Validation with Token Returned Mode, and (2) Signature Validation Mode.
+
+**Signature Validation With Token Returned Mode**
+
+This mode of operation results in a scoped or unscoped token, user information, and roles filtered by service identifiers and/or end point template identifiers being returned in the response. This is the default mode of operation. 
+
+The optional "belongsTo" parameter can be used to verify that the user belongs to a specific tenant and to scope the returned token. The query parameters "HP-IDM-serviceId" and "HP-IDM-endpointTemplateId" are ignored if the "belongsTo" query parameter is not also specified.
+
+The optional query parameters "HP-IDM-serviceId" and "HP-IDM-endpointTemplateId" can be used to include only a specific subset of roles in the response. If there are no specific roles found, then a response code of 401 (unauthorized) error is returned in the response. These parameters can have comma separated values to specify multiple service ids. To request global roles to be included in response, the global identifier (which is currently configured as 'global') must be used in either of the two query parameter values. If these query parameters are not specified or have an  empty value, then the response will include all the available roles for the user. 
+
+**Signature Validation Mode**
+
+Signature Validation Mode is used to quickly and simply validate a signature.  The token identifier and expires values are not returned. This mode is selected by explicitly selected by setting the query parameter "returnToken=false".  The query parameters  
+
+"HP-IDM-serviceId", "HP-IDM-endpointTemplateId" and "belongsTo" function the same as in Signature Validation With Token Returned Mode above
+
+**Request Data**
+
+See the API description above for details on which parameters are required and optional for each mode.
+
+**URL Parameters**
+
+* *belongsTo* - (Optional) - Query Parameter - if specified this parameter is used to scope a token to a tenant. The value consists of a tenant identifier.
+* *HP-IDM-serviceId* - (Optional) - Query Parameter - used to filter roles by service identifier. Value consists of one or more comma separated service identifier values. Specifying the the value "global" will cause global roles to be included. Ignored if belongsTo parameter is not also specified.
+* *HP-IDM-endpointTemplateId* - (Optional) - Query Parameter - used to filter roles by endpoint template identifier. Consists of one or more comma separated endpoint template identifier values. Specifying the value "global" will cause global roles to be included. Ignored if the belongsTo parameter is not also specified.
+* *returnToken* - (Optional) - Query Parameter - used to specify whether or not a token should be returned as a result of signature validation. Value is one of (true, false). The default value is true. This parameter does not affect the function of The query parameters "HP-IDM-serviceId", "HP-IDM-endpointTemplateId" and "belongsTo".
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+* *dataToSign* - String - the data that is to be signed
+* *keyId* - String - key identifier for the key used to sign the data. If key type "certificate" is specified then the subject key identifier should be specified. 
+* *keyType* - String - type of key used to generate signature. Value is one of (accesskey, certificate, keypair)
+* *signature* - String - signature calculated over dataToSign using key identified by key identifier and algorithm specified in signatureMethod (or algorithm associated with key).
+* *signatureMethod* - String - the algorithm used to generate the signature is optional and only applicable when "accesskey" is specified for the "keyType" attribute. If the "signatureMethod" attribute is not specified then the algorithm associated with the access key at create or import time is used.
+
+JSON - Validate signature with token returned
+
+```
+POST https://localhost:8443//v2.0/HP-IDM/v1.0/gstokens HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 261
+ 
+{
+  "auth": {
+      "genericSignatureCredentials": {
+      "keyType": "accesskey",
+      "keyId": "J926JC4JVE2U4YEJGMFW",
+      "signatureMethod": "HmacSHA1",
+      "dataToSign": "Some Data to Sign",
+      "signature": "nxSnQgBxJ9kWzYzRNME8hILeHIE="
+    }
+  }
+}
+```
+
+XML - Validate signature with token returned
+
+```
+POST https://localhost:8443//v2.0/HP-IDM/v1.0/gstokens HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 357
+ 
+<auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+<genericSignatureCredentials keyType="accesskey" keyId="J926JC4JVE2U4YEJGMFW" signatureMethod="HmacSHA1">
+<dataToSign>Some Data to Sign</dataToSign>
+<signature>nxSnQgBxJ9kWzYzRNME8hILeHIE=</signature>
+</genericSignatureCredentials>
+</auth>
+```
+
+XML - Validate signature with token returned and "belongsTo" specified
+
+```
+POST https://localhost:8443//v2.0/HP-IDM/v1.0/gstokens?belongsTo=80471193132652 HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 357
+ 
+<auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+<genericSignatureCredentials keyType="accesskey" keyId="J926JC4JVE2U4YEJGMFW" signatureMethod="HmacSHA1">
+<dataToSign>Some Data to Sign</dataToSign>
+<signature>nxSnQgBxJ9kWzYzRNME8hILeHIE=</signature>
+</genericSignatureCredentials>
+</auth>
+```
+
+JSON - Validate signature only
+
+```
+POST https://localhost:8443//v2.0/HP-IDM/v1.0/gstokens?belongsTo=81321234014466&returnToken=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 261
+ 
+{ "auth": {
+   "genericSignatureCredentials": {
+   "keyType": "accesskey",
+   "keyId": "D3ZWJHE58ZX3EDCFZWWE",
+   "signatureMethod": "HmacSHA1",
+   "dataToSign": "Some Data to Sign",
+   "signature": "OiEOOeciHUuXouFh6rX23p2RbE0="
+}   } }
+```
+
+XML - Validate signature only
+
+```
+POST https://localhost:8443//v2.0/HP-IDM/v1.0/gstokens?belongsTo=81321234014466&returnToken=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 357
+ 
+<auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+<genericSignatureCredentials keyType="accesskey" keyId="D3ZWJHE58ZX3EDCFZWWE" signatureMethod="HmacSHA1">
+<dataToSign>Some Data to Sign</dataToSign>
+<signature>OiEOOeciHUuXouFh6rX23p2RbE0=</signature>
+</genericSignatureCredentials>
+</auth>
+```
+
+**Success Response**
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+200 - OK
+
+**Response Data**
+
+JSON - Validate signature with token and roles returned
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 439
+Date: Fri, 22 Jun 2012 19:42:58 GMT
+ 
+{"access": {
+  "token": {
+    "expires": "2012-06-23T07:42:58.155Z",
+    "id": "HPAuth_4fe4c9a1e4b0a799509ae9d0",
+    "tenant": {}
+  },
+  "user": {
+    "id": "70125538195745",
+    "name": "sigtoken",
+    "roles": [
+      {
+        "id": "00000000004004",
+        "serviceId": "100",
+        "name": "domainuser"
+      },
+      {
+        "id": "00000000004003",
+        "serviceId": "100",
+        "name": "domainadmin"
+      }
+    ]
+  }
+}}
+```
+
+XML - Validate signature with token returned and "belongsTo" specified
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 702
+Date: Fri, 22 Jun 2012 20:31:48 GMT
+ 
+<access xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:hpext="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+   <token id="HPAuth_4fe4d634e4b0a799509ae9e1" expires="2012-06-23T08:31:48.499Z">
+      <tenant id="80471193132652" name="Tenant2 for GS Testing"/>
+   </token>
+   <user id="70125538195745" name="sigtoken">
+      <roles>
+         <role id="00000000004004" name="domainuser" serviceId="100"/>
+         <role id="00000000004017" name="tenant-member" serviceId="100" tenantId="80471193132652"/>
+         <role id="00000000004003" name="domainadmin" serviceId="100"/>
+      </roles>
+   </user>
+</access>
+```
+
+JSON - Validate signature only
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 557
+Date: Wed, 27 Jun 2012 20:16:01 GMT
+ 
+{"access": {
+  "token": {"tenant": {
+    "id": "81321234014466",
+    "name": "Tenant for GS Testing"
+  }},
+  "user": {
+    "id": "86973081871520",
+    "name": "kevin999",
+    "roles": [
+      {
+        "id": "00000000004003",
+        "serviceId": "100",
+        "name": "domainadmin"
+      },
+      {
+        "id": "00000000004017",
+        "serviceId": "100",
+        "name": "tenant-member",
+        "tenantId": "81321234014466"
+      },
+      {
+        "id": "00000000004004",
+        "serviceId": "100",
+        "name": "domainuser"
+      }
+    ]
+  }
+}}
+```
+
+XML - Validate signature only
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 629
+Date: Wed, 27 Jun 2012 20:10:15 GMT
+ 
+<access xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:hpext="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+   <token>
+      <tenant id="81321234014466" name="Tenant for GS Testing"/>
+   </token>
+   <user id="86973081871520" name="kevin999">
+      <roles>
+         <role id="00000000004003" name="domainadmin" serviceId="100"/>
+         <role id="00000000004017" name="tenant-member" serviceId="100" tenantId="81321234014466"/>
+         <role id="00000000004004" name="domainuser" serviceId="100"/>
+      </roles>
+   </user>
+</access>
+```
+
+
+**Error Response**
+
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Missing key id, missing or invalid key type, missing signature value, or data to sign |
+| 401 | Unauthorized | Inactive key state or non-existent key, invalid signature, no tenant association found for user, no service specific roles found for service ids specified in query |
+| 403 | Forbidden | User is disabled |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+
 
 **Response Data**
 
@@ -11466,137 +11280,21 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.10.2 <a id="{genericsignature}"></a>{genericsignature}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
+curl -k -X POST -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/gstokens?belongsTo=30983299632008" -d '{
+  "auth": {
+      "genericSignatureCredentials": {
+      "keyType": "accesskey",
+      "keyId": "V7TEGGSZZ4NJK9UR4998",
+      "signatureMethod": "HmacSHA1",
+      "dataToSign": "Some Data to Sign",
+      "signature": "OVOtheh+ZgbJBOvwSk4mIIMfaDw="
     }
   }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+}'
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ### 4.4.11 Tenant
@@ -16050,7 +15748,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 ### 4.4.14 User Access Key
 
-{Describe the resource and what information they provide. Then enumerate all the API method calls below.}
+The User Access Key REST API provides the ability to manage user access keys.
 
 **Status Lifecycle**
 
@@ -16069,97 +15767,149 @@ N/A
 None.
 
 
-#### 4.4.14.1 <a id="{createaccesskey}"></a>{createaccesskey}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.14.1 <a id="create_user_access_key"></a>Create User Access Key####
+#### POST [HPKeystoneExtensionBaseURI]/accesskeys
 
-{Description about the method call}
+*Privilege Level: SA, DA, SS*
+
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The optional data parameters are algorithm, domainId, keyLength, status, userId, validFrom, and validTo.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+There are no URL parameters for this operation.
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+* *algorithm* (Optional) - String - the algorithm the key will be used with. One of 
+* *domainId* - String - domain identifier of the owner of the key.
+* *keyLength* (Optional) - Integer - Length of the key in bits.
+* *status* (Optional) String - the key status. One the values (active, inactive). Defaults to active if not specified.
+* *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
+* *validFrom* (Optional) - DateTime - The date the key becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+* *validTo* (Optional) - DateTime - The date the key becomes invalid specified in the following form "YYYY-MM-DDThh:mm:ss" 
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
 
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
 JSON
 
 ```
-{json data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e7b748be4b0600fec3d2a24
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 235
+ 
+{ "accessKey":
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "domainId": "00000000001001",
+         "otherAttributes": {},
+         "status": "active",
+         "userId": "00000000003002"
+       }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e69969de4b0a8f279022d55
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 259
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accessKey userId="000000003002" domainId="000000001001" status="active" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0">
+<algorithm>HmacSHA1</algorithm>
+<keyLength>64</keyLength>
+</accessKey>
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+201 - Created
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 376
+Date: Thu, 22 Sep 2011 18:01:17 GMT
+ 
+{
+  "accessKey" : {
+    "algorithm" : "HmacSHA1",
+    "keyLength" : 64,
+    "secretKey" : "pXmYG556MjD",
+    "accessKeyId" : "KNGTV6EFKLPYE8LXF4VL",
+    "createdOn" : 1316714474259,
+    "domainId" : "00000000001001",
+    "otherAttributes" : {
+    },
+    "status" : "active",
+    "userId" : "00000000003002",
+    "validFrom" : 1316714474000,
+    "validTo" : 1632074474000
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=C20FB3A7F8BE4A7EF0EA7BE232327FE6; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 448
+Date: Fri, 09 Sep 2011 04:32:07 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><accessKey xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" accessKeyId="FG54K8NB67KHASRF6KY1" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T21:32:04.000-07:00" validTo="2021-09-05T21:32:04.000-07:00" createdOn="2011-09-08T21:32:04.937-07:00">
+   <algorithm>HmacSHA1</algorithm>
+   <keyLength>64</keyLength>
+   <secretKey>iwv//jFjJ2E</secretKey>
+</accessKey>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
 
 **Response Data**
 
@@ -16186,105 +15936,89 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -X POST -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys" -d '{
+  "accessKey" : {
+    "algorithm" : "HmacSHA1",
+    "keyLength" : 240,
+    "domainId" : "11180052618906",
+    "otherAttributes" : {
+    },
+    "status" : "active",
+    "userId" : "84463950217213"
+  }}'
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.14.2 <a id="{deleteaccesskey}"></a>{deleteaccesskey}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.14.2 <a id="delete_user_access_key"></a>Delete User Access Key####
+#### DELETE [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId} 
+*Privilege Level: SA, DA, SS*
 
-{Description about the method call}
+Delete a user access key.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The accesskeyId url path parameter is required. The userId query parameter is only required to delete an access key for a user other than the requester.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *accesskeyId* (Required) - URL path parameter - user access key identifier string
+* *userId* (Optional) - Query Parameter - User identifier of the access key owner. If not specified then defaults to userId of the requester.
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+This call does not require a request body.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+204 - No Content
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
+This call does not return a response body on success.
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=90D365930EDDB20FF49CC2DDA4B7C925; Path=/v2.0; Secure
+Date: Thu, 22 Sep 2011 22:15:42 GMT
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=7F457E3037CCB2DEC6C33D408F544EA8; Path=/v2.0; 
+SecureDate: Fri, 09 Sep 2011 04:25:47 GMT 
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
 
 **Response Data**
 
@@ -16311,73 +16045,63 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -X DELETE -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/ZNFNCA1JJL3T7XY12V2F" 
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.14.3 <a id="{getaccesskey}"></a>{getaccesskey}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.14.3 <a id="get_access_keys"></a>Get Access Keys####
+#### GET [HPKeystoneExtensionBaseURI]/accesskeys
 
-{Description about the method call}
+*Privilege Level: SA,DA, SS*
+
+Gets a list of selected user access keys. 
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The following query parameters are optional (domainId, export, status, userId). There are no required query parameters.
+
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+* *domainId* (Optional) - Query Parameter - Domain identifier. Selects keys with matching domain identifier.
+* *export* (Optional) - Query Parameter - Export secret key value. Value is one of (true, false). If not specified the value is set to false.
+* *status* (Optional) - Query Parameter - Key status. Selects keys with matching status. Value is one of (active, inactive, expired, revoked, deleted, purged).
+* *userId* (Optional) - Query Parameter - User identifier. Selects keys with matching user identifier. If not specified the userId of the requester is used.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+This call does not require a request body.
 
-{List all the attributes that comprises the data structure}
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_4e7b71f5e4b0600fec3d2a20
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_4e699292e4b0a8f279022d4d
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -16385,31 +16109,98 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 798
+Date: Thu, 22 Sep 2011 17:37:18 GMT
+ 
+{
+  "accessKeys" : {
+    "anies" : null,
+    "accessKey" : [ {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "V7TEGGSZZ4NJK9UR4UFE",
+      "createdOn" : 1316712986234,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "active",
+      "userId" : "00000000003002",
+      "validFrom" : 1316712986000,
+      "validTo" : 1632072986000
+    }, {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "WHDFDP7UVJS9F3USU1NF",
+      "createdOn" : 1316661731171,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "active",
+      "userId" : "00000000003002",
+      "validFrom" : 1316661731000,
+      "validTo" : 1632021731000
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=744A36BAF6E7165CCBC4C6CA1812204D; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 1340
+Date: Fri, 09 Sep 2011 04:20:29 GMT
+ 
+<accessKeys xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0">
+   <accessKey accessKeyId="2SL748X97NEP7B6MVXPS" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T15:20:20.000-07:00" validTo="2021-09-05T15:20:20.000-07:00" createdOn="2011-09-08T15:20:20.275-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+   <accessKey accessKeyId="98XM1KSN7BC2C88U9S7G" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T16:43:56.000-07:00" validTo="2021-09-05T16:43:56.000-07:00" createdOn="2011-09-08T16:43:56.494-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+   <accessKey accessKeyId="3D76NSUB49C96DFBRUF9" userId="000000003002" domainId="000000001001" status="deleted" validFrom="2011-09-08T15:19:10.000-07:00" validTo="2021-09-05T15:19:10.000-07:00" createdOn="2011-09-08T15:19:10.378-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+   <accessKey accessKeyId="9L47KGME4ZKCH9YRWDY7" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T17:34:09.000-07:00" validTo="2021-09-05T17:34:09.000-07:00" createdOn="2011-09-08T17:34:09.494-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+</accessKeys>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
 
 **Response Data**
 
@@ -16436,73 +16227,61 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -H "X-Auth-Token: HPAuth_21805c02da2661574e46235bd8c27c10623bddc09a7cf4c67004771628e5453c" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=true"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.14.4 <a id="{importaccesskey}"></a>{importaccesskey}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.14.4 <a id="get_an_access_key"></a>Get An Access Key####
+#### GET [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId}
 
-{Description about the method call}
+*Privilege Level: SA,DA,SS*
+
+Gets a single user access key by it's access key identifier.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The accesskeyId URL path parameter is required. The 'export' and 'userId' query parameters are optional.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *accesskeyId* (Required) - URL path parameter - user access key identifier string
+* *userId* (Optional) - Query Parameter - user identifier string for user other than current authenticated user
+* *export* (Optional) - Query Parameter - used to specify whether secret key value should be returned ("true" or "false")
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+This call does not require a request body.
 
-{List all the attributes that comprises the data structure}
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/V7TEGGSZZ4NJK9UR4UFE?export=true HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_4e7bc0d2e4b0600fec3d2a4a
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443 
+
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/3D76NSUB49C96DFBRUF9?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_4e699292e4b0a8f279022d4d
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -16510,31 +16289,69 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 376
+Date: Thu, 22 Sep 2011 23:12:53 GMT
+
+{  
+   "accessKey" : {    
+     "algorithm" : "HmacSHA1",    
+     "keyLength" : 64,    
+     "secretKey" : "hNi0oiTU2sH",    
+     "accessKeyId" : "V7TEGGSZZ4NJK9UR4UFE",    
+     "createdOn" : 1316712986234,    
+     "domainId" : "00000000001001",    
+     "otherAttributes" : {    
+     },    
+     "status" : "active",    
+     "userId" : "00000000003002",    
+     "validFrom" : 1316712986000,    
+     "validTo" : 1632072986000  
+   }
+} 
+
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=34C3B7E6EC0F9035A75BD4A0CF6CAC37; Path=/v2.0; 
+SecureContent-Type: application/xml
+Content-Length: 415
+Date: Fri, 09 Sep 2011 04:15:42 GMT
+
+<accessKey accessKeyId="3D76NSUB49C96DFBRUF9" userId="000000003002" domainId="000000001001" status="deleted" validFrom="2011-09-08T15:19:10.000-07:00" validTo="2021-09-05T15:19:10.000-07:00" createdOn="2011-09-08T15:19:10.378-07:00" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0">
+  <algorithm>HmacSHA1</algorithm>
+  <keyLength>64</keyLength>
+</accessKey> 
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
 
 **Response Data**
 
@@ -16561,7 +16378,7 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/HAJ5LLHHTKHBXB6MK3TL?export=true"
 ```
 
 **Additional Notes**
@@ -16569,65 +16386,102 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.14.5 <a id="{updateaccesskey}"></a>{updateaccesskey}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.14.5 <a id="import_user_access_key(s)"></a>Import User Access Key(s)####
+#### PUT [HPKeystoneExtensionBaseURI]/accesskeys
+*Privilege Level: SA, DA, SS*
 
-{Description about the method call}
+Import one or more user access keys. 
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The request data consists of an accessKeys data structure containing one or more accessKey elements. The secretKey and algorithm elements of the accessKey are required. The accessKeyId, domainId, keyLength, status, userId, validFrom, and validTo attributes are optional.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+There are no URL parameters for this request.
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+* *algorithm* - String - the algorithm the key will be used with. This is not validated when imported.
+* *domainId* (Optional) - String - domain identifier of the owner of the key.
+* *keyLength* (Optional) - Integer - Length of the key in bits.
+* *status* (Optional) String - the key status. One the values (active, inactive). Defaults to active if not specified.
+* *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
+* *validFrom* (Optional) - DateTime - The date the key becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+* *validTo* (Optional) - DateTime - The date the key becomes invalid specified in the following form "YYYY-MM-DDThh:mm:ss". 
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
 JSON
 
 ```
-{json data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e7bb54fe4b0600fec3d2a37
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 919
+ 
+{"accessKeys": {
+   "anies": null,
+   "accessKey":    [
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "hNi0oiTU2sH",
+         "accessKeyId": "V7TEGGSZZ4NJK9UR4998",
+         "createdOn": 1316712986234,
+         "domainId": "00000000001001",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "00000000003002",
+         "validFrom": 1316712986000,
+         "validTo": 1632072986000
+      },
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "DBWjcUCMEED",
+         "accessKeyId": "RVWVEGE88EHZBSBMJ999",
+         "createdOn": 1316724920250,
+         "domainId": "00000000001001",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "00000000003002",
+         "validFrom": 1316724920000,
+         "validTo": 1632084920000
+      }
+    ],
+   "otherAttributes": {}
+}}
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e6d258be4b05605729d7c3a
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 546
+ 
+<accessKeys xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <accessKey accessKeyId="98XM1KSN7BC2C88U9999" userId="000000003002" domainId="000000001001" status="inactive" validFrom="2011-09-08T16:43:56.000-07:00" validTo="2021-09-05T16:43:56.000-07:00" createdOn="2011-09-08T16:43:56.494-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+      <secretKey>HyGB2QRiOu7</secretKey>
+   </accessKey>
+</accessKeys>
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -16635,31 +16489,87 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 802
+Date: Thu, 22 Sep 2011 22:23:53 GMT
+ 
+{
+  "accessKeys" : {
+    "anies" : null,
+    "accessKey" : [ {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "V7TEGGSZZ4NJK9UR4998",
+      "createdOn" : 1316730228058,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "00000000003002",
+      "validFrom" : 1316712986000,
+      "validTo" : 1632072986000
+    }, {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "RVWVEGE88EHZBSBMJ999",
+      "createdOn" : 1316730228065,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "00000000003002",
+      "validFrom" : 1316724920000,
+      "validTo" : 1632084920000
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=41C4EA0FDBAB389A7F904935A283566A; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 537
+Date: Sun, 11 Sep 2011 21:18:37 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accessKeys xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <accessKey accessKeyId="98XM1KSN7BC2C88U9999" userId="000000003002" domainId="000000001001" status="inactive" validFrom="2011-09-08T16:43:56.000-07:00" validTo="2021-09-05T16:43:56.000-07:00" createdOn="2011-09-11T14:18:34.736-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+</accessKeys>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 409 | Conflict | An access key already exists with the specified access key identifier |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
 
 **Response Data**
 
@@ -16686,12 +16596,205 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys" -d '{"accessKeys": {
+   "anies": null,
+   "accessKey":    [
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "hNi0oiTU2sH",
+         "accessKeyId": "V7TEGGSZZ4NJK9UR4998",
+         "createdOn": 1316712986234,
+         "domainId": "11180052618906",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "84463950217213",
+         "validFrom": 1316712986000,
+         "validTo": 1632072986000
+      },
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "DBWjcUCMEED",
+         "accessKeyId": "RVWVEGE88EHZBSBMJ999",
+         "createdOn": 1316724920250,
+         "domainId": "11180052618906",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "84463950217213",
+         "validFrom": 1316724920000,
+         "validTo": 1632084920000
+      }
+    ],
+   "otherAttributes": {}
+}}'
+
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+
+#### 4.4.14.6 <a id="update_user_access_key"></a>Update User Access Key####
+#### PUT [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId}
+*Privilege Level: SA, DA, SS*
+
+Update a user access key. This method may be used to modify the key status only.
+
+**Request Data**
+
+The accesskeyId url path parameter is required. The userId query parameter is optional. If the userId parameter is not specified then it defaults to the user identifer of the requester.
+
+**URL Parameters**
+
+* *accesskeyId* - URL path parameter - user access key identifier.
+* *userId* (Optional) - Query Parameter - user identifier string. Defaults to user identifier of the requester if not specified.
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+* *status* - {data type} - Key status. One of the values (active, inactive).
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+JSON
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/KNGTV6EFKLPYE8LXF4VL HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e7bba89e4b0600fec3d2a3a
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 51
+ 
+{
+  "accessKey" : {
+    "status" : "inactive"
+  }
+}
+```
+
+XML
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/2SL748X97NEP7B6MVXPS HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e6ab9fde4b06fe4272ee23e
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 146
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accessKey status="inactive" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"/>
+```
+
+**Success Response**
+
+{Specify the status code and any content that is returned.}
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 345
+Date: Thu, 22 Sep 2011 22:47:17 GMT
+ 
+{
+  "accessKey" : {
+    "algorithm" : "HmacSHA1",
+    "keyLength" : 64,
+    "accessKeyId" : "KNGTV6EFKLPYE8LXF4VL",
+    "createdOn" : 1316714474259,
+    "domainId" : "00000000001001",
+    "otherAttributes" : {
+    },
+    "status" : "inactive",
+    "userId" : "00000000003002",
+    "validFrom" : 1316714474000,
+    "validTo" : 1632074474000
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=4D3047BA05428AD806C48E269C8DD8B4; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 416
+Date: Sat, 10 Sep 2011 01:16:12 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><accessKey xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" accessKeyId="2SL748X97NEP7B6MVXPS" userId="000000003002" domainId="000000001001" status="inactive" validFrom="2011-09-08T15:20:20.000-07:00" validTo="2021-09-05T15:20:20.000-07:00" createdOn="2011-09-08T15:20:20.275-07:00"><algorithm>HmacSHA1</algorithm><keyLength>64</keyLength></accessKey>
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/V7TEGGSZZ4NJK9UR4998" -d '{
+  "accessKey" : {
+    "status" : "active"
+  }
+}'
+```
+
+**Additional Notes**
+
 
 
 ### 4.4.15 User Certificate
@@ -17872,97 +17975,178 @@ N/A
 None.
 
 
-#### 4.4.16.1 <a id="{createkeypair}"></a>{createkeypair}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.16.1 <a id="create_user_key_pair"></a>Create User Key Pair####
+#### POST [HPKeystoneExtensionBaseURI]/keypairs
+*Privilege Level: SA, DA, SS*
 
-{Description about the method call}
+Create a user key pair.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The optional data parameters are domainId, publicKeyAlgorithm, publicKeyLength, status, userId, validFrom, and validTo. If not specified the userId defaults to the user identifier of the requester.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+There are no URL parameters for this operation.
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+* *domainId* - String - domain identifier of the owner of the key.
+* *publicKeyAlgorithm* (Optional) - String - the public key algorithm. One of the values (RSA, DSA). Defaults to RSA if not specified.
+* *publicKeyLength* (Optional) - Integer - Length of the key in bits. Recommended value is 1024 (2048 max) for RSA and 512 (1024 max) for DSA. The default publicKeyLength is 1024 if not specified.
+* *status* (Optional) String - the key pair status. One the values (active, inactive). Defaults to active if not specified.
+* *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
+* *validFrom* (Optional) - DateTime - The date the key pair becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+* *validTo* (Optional) - DateTime - The date the key pair becomes invalid specified in the following form "YYYY-MM-DDThh:mm:ss" 
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
 JSON
 
 ```
-{json data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e9caa84e4b0ea896133e05e
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 85
+ 
+{"keyPair":{"userId":"00000000003002","domainId":"00000000001001","status":"active"}}
 ```
 
 XML
 
 ```
-{xml data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e81f502e4b078454c0c31bf
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 286
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<keyPair userId="00000000003002" domainId="00000000001001" status="active" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0">
+<publicKeyAlgorithm>DSA</publicKeyAlgorithm>
+<publicKeyLength>1024</publicKeyLength>
+</keyPair>
 ```
 
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+201 - Created
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 1764
+Date: Mon, 17 Oct 2011 22:31:41 GMT
+ 
+{
+  "keyPair" : {
+    "publicKeyAlgorithm" : "RSA",
+    "publicKeyLength" : 1024,
+    "publicKeyFile" : {
+      "format" : "BASE64_DER",
+      "data" : "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCGUsqlqZdV5A3aN6KaQc6z/knS\nNX4EMoKoaqmwa0rd/euqe5jpXA/PsFdSPAn7OW266DTqQOAaajHsJC4XejzPRBp+\nrJX450BELp8SQVnoi5CAcic2lufc9aCZdsU3jmh0dZRZ3Mwm+9eSiCp8ua4g82eO\n2tXVyYPJKwrEygkpKwIDAQAB\n-----END PUBLIC KEY-----",
+      "anies" : null
+    },
+    "privateKeyFile" : {
+      "format" : "BASE64_PKCS8",
+      "data" : "-----BEGIN PRIVATE KEY-----\nMIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAIZSyqWpl1XkDdo3\noppBzrP+SdI1fgQygqhqqbBrSt3966p7mOlcD8+wV1I8Cfs5bbroNOpA4BpqMewk\nLhd6PM9EGn6slfjnQEQunxJBWeiLkIByJzaW59z1oJl2xTeOaHR1lFnczCb715KI\nKny5riDzZ47a1dXJg8krCsTKCSkrAgMBAAECgYARalCN1AQkBbJqFYaGe3vCSHjn\nwTm6b5YTIekoT3DggVh5vRahQudl5RYdOl2M7fA1KIAb0xd7NUONu08iih2yDasQ\nUs78lbHmSHkci2AaiMNQ8hprDgjDwo/NfF51kv1NNU8xKdDo7V2DaKfOceRFzZq0\nHgD2x6FbzN1+BhGOKQJBALsmLBAV2Y0yfkpGbDXM7Mza3maJo8SH0bCbCB8thsup\nVxmy9tiGrZZlC56VJEvxGcA9uxkDizj8zoXUbsU+xt0CQQC3vXWYF6fnGY3IKhmS\niThWQl73mXDxp10mALc1Tub6ZbAgH7zzCSpFaGFtgjYASnWfq5FksUb2HZuGDQDb\n+runAkBEWufjJCfmw5ePB3PEnsmq9RIgP4uaX8U+DRIFWTqPrpVKpKw2X9KNSPDa\nhjzQpAo0xhdNRpcWRHgmN3YSAyDdAkEAkIPJa/ifLNsict76AhE/aEkHnMLo3IiA\ncRV7A8itTyCP6JRN7vG0d6bjilgx1QS7gvxUfNgaMhWTb1nm5R5OXQJAJWhGkE7K\nGFYVG/o/f+W2ZHmDaY80Mw98poCEVqBrgUzMKHrDsjwC9goPJ18kCGOo+JeenDd9\ncvWsqi845kBBvQ==\n-----END PRIVATE KEY-----",
+      "anies" : null
+    },
+    "createdOn" : 1318890700376,
+    "domainId" : "00000000001001",
+    "keyPairId" : "6616KAAUK6L9HJGUT6Z7",
+    "otherAttributes" : {
+    },
+    "status" : "active",
+    "userId" : "00000000003002",
+    "validFrom" : 1318890700000,
+    "validTo" : 1634250700000
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=E4698FCC45832765B206DC2CC4D094AC; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 1800
+Date: Tue, 27 Sep 2011 16:09:16 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<keyPair keyPairId="MTUL5V3139RYT99FN9WX" userId="00000000003002" domainId="00000000001001" status="active" validFrom="2011-09-27T09:09:15.000-07:00" validTo="2021-09-24T09:09:15.000-07:00" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <publicKeyAlgorithm>DSA</publicKeyAlgorithm>
+   <publicKeyLength>1024</publicKeyLength>
+   <publicKeyFile>
+      <format>BASE64_DER</format>
+      <data>-----BEGIN PUBLIC KEY-----
+MIIBtzCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9E
+AMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f
+6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv
+8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtc
+NrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwky
+jMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/h
+WuWfBpKLZl6Ae1UlZAFMO/7PSSoDgYQAAoGAfLUsxMrUOcOSHUy3JcrniVknVQSh
+ONIldkdIOZqQqNIRT2XfqIYR8JwPW+cBYHC8cjCl4OQes/wt02Q4uIrk7yLVAweQ
+HqLl6Ia1s+cbSNr+86Z6cSRbEo8b+92t2s0S5OizdY5zKshUgCEJYmv578MqQ0H2
+MG8BkyMjXk6iR7g=
+-----END PUBLIC KEY-----</data>
+   </publicKeyFile>
+   <privateKeyFile>
+      <format>BASE64_PKCS8</format>
+      <data>-----BEGIN PRIVATE KEY-----
+MIIBSwIBADCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdS
+PO9EAMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVCl
+pJ+f6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith
+1yrv8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7L
+vKtcNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3
+zwkyjMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImo
+g9/hWuWfBpKLZl6Ae1UlZAFMO/7PSSoEFgIUW9I1Vgai6mksIAdl1BpBtMOzL8Y=
+-----END PRIVATE KEY-----</data>
+   </privateKeyFile>
+</keyPair>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | The request for the operation is not well formed or missing the required parameters |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 404 | Not Found | The key pair was not found |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
+
 
 **Response Data**
 
@@ -17989,105 +18173,102 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -X POST -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs" -d '{"keyPair":{"publicKeyAlgorithm" : "RSA", "userId":"84463950217213","domainId":"11180052618906","status":"active"}}'
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.16.2 <a id="{deletekeypair}"></a>{deletekeypair}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.16.2 <a id="delete_user_key_pair"></a>Delete User Key Pair####
+#### DELETE [HPKeystoneExtensionBaseURI]/keypairs/{keypairId}
+*Privilege Level: SA, DA, SS*
 
-{Description about the method call}
+Delete a user key pair.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The keypairId url path parameter is required. The userId query parameter is only required to delete a key pair for a user other than the requester.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *keypairId* (Required) - URL path parameter - user key pair identifier string
+* *userId* (Optional) - Query Parameter - User identifier of the access key owner. If not specified then defaults to userId of the requester.
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+This call does not require a request body.
 
-{List all the attributes that comprises the data structure}
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+DELETE https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/6616KAAUK6L9HJGUT6Z7 HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_4e9caa84e4b0ea896133e05e
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+DELETE https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/3K3A3FJSC9YRX5LVJCES HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_4e81f502e4b078454c0c31bf
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+204 - No Content
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=06BB563F31C6543DE13C39F82290764C; Path=/v2.0; Secure
+Date: Mon, 17 Oct 2011 22:35:05 GMT
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=C1E6F9C41377350F6C6236CD0923BAC8; Path=/v2.0; Secure
+Date: Tue, 27 Sep 2011 16:22:36 GMT
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | The request for the operation is not well formed or missing the required parameters |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 404 | Not Found | The key pair was not found |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
+
 
 **Response Data**
 
@@ -18114,73 +18295,60 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -X DELETE -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/HX6K62WXLNAMZCKKDJSM" 
+
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
+#### 4.4.16.3 <a id="get_user_key_pair"></a>Get User Key Pair####
+#### GET [HPKeystoneExtensionBaseURI]/keypairs/{keypairId}
+*Privilege Level: SA, DA, SS*
 
-#### 4.4.16.3 <a id="{getkeypair}"></a>{getkeypair}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
+Get a user key pair by it's key pair identifier.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The keypairId URL path parameter is required. The userId and export query parameters are optional. If userId is not specified then it defaults to the user identifier of the requester.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+* *export* (Optional) - Query Parameter - used to specify whether the public key value should be returned ("true" or "false")
+* *keypairId* (Required) - URL path parameter - user key pair identifier.
+* *userId* (Optional) - Query Parameter - user identifier. Defaults to the user identifier of the requester.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+This call does not require a request body.
 
-{List all the attributes that comprises the data structure}
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/ZZPADZV9LPZCLZJ1GDEK?export=true HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_4e9caa84e4b0ea896133e05e
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/3K3A3FJSC9YRX5LVJCES?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_4e815f48e4b0459717485fba
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -18188,31 +18356,70 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 1146
+Date: Mon, 17 Oct 2011 22:27:16 GMT
+ 
+{"keyPair": {
+   "publicKeyAlgorithm": "DSA",
+   "publicKeyLength": 1024,
+   "publicKeyFile":    {
+      "format": "BASE64_DER",
+      "data": "-----BEGIN PUBLIC KEY-----\nMIIBtzCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9E\nAMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f\n6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv\n8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtc\nNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwky\njMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/h\nWuWfBpKLZl6Ae1UlZAFMO/7PSSoDgYQAAoGAZhoL6337/91YiivdlD729s2h2S2W\nqGUv8BZSX9JMT0HVYBmvAKdOC25BeeWyth+j7/9Q8GGDZJwJXjqhEt8PiSc+Msun\nR9Lwnm3QrrJH93BTtgV1EELdSB/kCKRSwqSc7aDVfPbl2TAGRMVYbAax87NpJfs5\nYwF0M3N+S/3ebsk=\n-----END PUBLIC KEY-----",
+      "anies": null
+   },
+   "privateKeyFile": null,
+   "createdOn": 1318870262630,
+   "domainId": "00000000001001",
+   "keyPairId": "ZZPADZV9LPZCLZJ1GDEK",
+   "otherAttributes": {},
+   "status": "active",
+   "userId": "00000000003002",
+   "validFrom": 1318870262000,
+   "validTo": 1634230262000
+}}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=DD727F06C56ED76708C62ADA5C0F0273; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 493
+Date: Tue, 27 Sep 2011 05:56:44 GMT
+ 
+<keyPair keyPairId="3K3A3FJSC9YRX5LVJCES" userId="00000000003002" domainId="00000000001001" status="active" validFrom="2011-09-26T22:03:37.000-07:00" validTo="2021-09-23T22:03:37.000-07:00" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <publicKeyAlgorithm>RSA</publicKeyAlgorithm>
+   <publicKeyLength>1024</publicKeyLength>
+</keyPair>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | The request for the operation is not well formed or missing the required parameters |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 404 | Not Found | The key pair was not found |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
+
 
 **Response Data**
 
@@ -18239,73 +18446,61 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/XX1ZH9BT8U4CK86ZWPVK?export=true"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.16.4 <a id="{getkeypairs}"></a>{getkeypairs}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.16.4 <a id="get_user_key_pairs"></a>Get User Key Pairs####
+#### GET [HPKeystoneExtensionBaseURI]/keypairs
+*Privilege Level: SA, DA, SS*
 
-{Description about the method call}
+Gets a list of selected user key pairs.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The following query parameters are optional (domainId, export, status, userId). There are no required query parameters.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+* *domainId* (Optional) - Query Parameter - Domain identifier. Selects key pairs with matching domain identifier.
+* *export* (Optional) - Query Parameter - Export public key value. Value is one of (true, false). If not specified the value is set to false.
+* *status* (Optional) - Query Parameter - Key pair status. Selects key pairs with matching status. Value is one of (active, inactive, expired, revoked, deleted, purged).
+* *userId* (Optional) - Query Parameter - User identifier. Selects key pairs with matching user identifier. If not specified the userId of the requester is used.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+This call does not require a request body.
 
-{List all the attributes that comprises the data structure}
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_4e9caa84e4b0ea896133e05e
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_4e815f48e4b0459717485fba
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -18313,31 +18508,233 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 5172
+Date: Mon, 17 Oct 2011 22:22:49 GMT
+ 
+{
+  "keyPairs" : {
+    "anies" : null,
+    "keyPair" : [ {
+      "publicKeyAlgorithm" : "DSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318638472194,
+      "domainId" : "00000000001001",
+      "keyPairId" : "XPYXH98W782MYNPWRKR5",
+      "otherAttributes" : {
+      },
+      "status" : "deleted",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638472000,
+      "validTo" : 1633998472000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318638836077,
+      "domainId" : "00000000001001",
+      "keyPairId" : "74HVY65RF5WTPS3KWUNB",
+      "otherAttributes" : {
+      },
+      "status" : "deleted",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638836000,
+      "validTo" : 1633998836000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318638458948,
+      "domainId" : "00000000001001",
+      "keyPairId" : "DFMVNXR7DY2E2N5XGJZ3",
+      "otherAttributes" : {
+      },
+      "status" : "deleted",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638458000,
+      "validTo" : 1633998458000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318638806673,
+      "domainId" : "00000000001001",
+      "keyPairId" : "7VS9SZCGNF1EEM62GJPF",
+      "otherAttributes" : {
+      },
+      "status" : "deleted",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638806000,
+      "validTo" : 1633998806000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318638821162,
+      "domainId" : "00000000001001",
+      "keyPairId" : "KZAZ6T5ETSBBD1Z3JWCY",
+      "otherAttributes" : {
+      },
+      "status" : "deleted",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638821000,
+      "validTo" : 1633998821000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318638851494,
+      "domainId" : "00000000001001",
+      "keyPairId" : "LMK91XLGN7VLWC59UKPD",
+      "otherAttributes" : {
+      },
+      "status" : "deleted",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638851000,
+      "validTo" : 1633998851000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318638748395,
+      "domainId" : "00000000001001",
+      "keyPairId" : "ALCJDAL4LR93B63YB6D8",
+      "otherAttributes" : {
+      },
+      "status" : "deleted",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638748000,
+      "validTo" : 1633998748000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318638486502,
+      "domainId" : "00000000001001",
+      "keyPairId" : "AF6ZHPL3ZLCVMC3HT3KX",
+      "otherAttributes" : {
+      },
+      "status" : "deleted",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638486000,
+      "validTo" : 1633998486000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318638708446,
+      "domainId" : "00000000001001",
+      "keyPairId" : "CM328S1UQGKBA1NBA2F8M8E25PH7AN04",
+      "otherAttributes" : {
+      },
+      "status" : "deleted",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638708000,
+      "validTo" : 1350174708000
+    }, {
+      "publicKeyAlgorithm" : "DSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318638708454,
+      "domainId" : "00000000001001",
+      "keyPairId" : "44LB7S0CNMSM9EA3VAHBU22R2O3H09PT",
+      "otherAttributes" : {
+      },
+      "status" : "deleted",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638708000,
+      "validTo" : 1350174708000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318638866340,
+      "domainId" : "00000000001001",
+      "keyPairId" : "NY2JZ58MAWKGF6ZL4ETY",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638866000,
+      "validTo" : 1633998866000
+    }, {
+      "publicKeyAlgorithm" : "DSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : null,
+      "privateKeyFile" : null,
+      "createdOn" : 1318870262630,
+      "domainId" : "00000000001001",
+      "keyPairId" : "ZZPADZV9LPZCLZJ1GDEK",
+      "otherAttributes" : {
+      },
+      "status" : "active",
+      "userId" : "00000000003002",
+      "validFrom" : 1318870262000,
+      "validTo" : 1634230262000
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=722C26794D3645C09A23DD2902FF61C9; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 797
+Date: Tue, 27 Sep 2011 05:53:19 GMT
+ 
+<keyPairs xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <keyPair keyPairId="3K3A3FJSC9YRX5LVJCES" userId="00000000003002" domainId="00000000001001" status="active" validFrom="2011-09-26T22:03:37.000-07:00" validTo="2021-09-23T22:03:37.000-07:00">
+      <publicKeyAlgorithm>RSA</publicKeyAlgorithm>
+      <publicKeyLength>1024</publicKeyLength>
+   </keyPair>
+   <keyPair keyPairId="R9AR1E3DTZAPP1GMRT2V" userId="00000000003002" domainId="00000000001001" status="active" validFrom="2011-09-26T22:06:33.000-07:00" validTo="2021-09-23T22:06:33.000-07:00">
+      <publicKeyAlgorithm>DSA</publicKeyAlgorithm>
+      <publicKeyLength>1024</publicKeyLength>
+   </keyPair>
+</keyPairs>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | The request for the operation is not well formed or missing the required parameters |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
+
 
 **Response Data**
 
@@ -18364,7 +18761,7 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs?export=true"
 ```
 
 **Additional Notes**
@@ -18372,65 +18769,144 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.16.5 <a id="{importkeypair}"></a>{importkeypair}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.16.5 <a id="import_user_key_pair(s)"></a>Import User Key Pair(s)####
+#### PUT [HPKeystoneExtensionBaseURI]/keypairs
+*Privilege Level: SA, DA, SS*
 
-{Description about the method call}
+Import one or more user key pairs.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The request data consists of a keyPairs data structure containing one or more keyPair elements. The userId attribute, publicKeyFile, and publicKeyAlgorithm elements are required in each keyPair object specified in the request body.  All other attributes and elements of each keyPair object are optional. 
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+There are no URL parameters for this request.
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+* *domainId* (Optional) - String - domain identifier of the owner of the key.
+* *keyPairId* (Optional) - String - key pair identifier. If not provided a new identifier will be automatically generated.
+* *publicKeyAlgorithm* - String - the public key algorithm. One of the values (RSA, DSA). Required only for Base64-DER encoded keys.
+* *publicKeyFile* - String - the public key encoded in Base64-DER, OpenSSH, or SSHv2 format.
+* *publicKeyLength* (Optional) - Integer - Length of the key in bits. 
+* *status* (Optional) String - the key status. One the values (active, inactive). Defaults to active if not specified.
+* *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
+* *validFrom* (Optional) - DateTime - The date the key pair becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+* *validTo* (Optional) - DateTime - The date the key pair becomes invalid specified in the following form "YYYY-MM-DDThh:mm:ss". 
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e9cb252e4b0ea896133e06c
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 2043
+ 
+{
+  "keyPairs" : {
+    "anies" : null,
+    "keyPair" : [ {
+      "publicKeyAlgorithm" : "DSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : {
+        "format" : "BASE64_DER",
+        "data" : "-----BEGIN PUBLIC KEY-----\nMIIBuDCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9E\nAMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f\n6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv\n8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtc\nNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwky\njMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/h\nWuWfBpKLZl6Ae1UlZAFMO/7PSSoDgYUAAoGBAPESoRxpdmkx3TtVgRqgRTRqkdFF\n4tz412CZ6/AtjjKAtfC24x0m2unrMTE6MymmJL977ENtrjoley9CEo9SN60wAxcE\nWWPKdfgNvZBTYabxde8X2O2fe+4WzkKT6eLzY+Bio1r/+ReUOZMrik7kU6gbj9Xg\nkNJhBhnTAeo2btLA\n-----END PUBLIC KEY-----",
+        "anies" : null
+      },
+      "privateKeyFile" : null,
+      "createdOn" : 1318638472194,
+      "domainId" : "00000000001001",
+      "keyPairId" : "XPYXH98W782MYNPWR998",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638472000,
+      "validTo" : 1633998472000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : {
+        "format" : "BASE64_DER",
+        "data" : "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCAb6t2vuziv02d/C2arwfG4hS4\nTxhxTrz4skaAKCJ9Lhh1UDNzMrQR/Hrz37OnlPeQxuqWNMWWfaBNUNNrniXKcmax\nNQ51T9+i/xkKopldXye2rRloPJqAtqCyMNNkSGmrKOuCDZ4k5xBgHxWzZ2gmtysk\nM355ih/Ga2bwYrZcbQIDAQAB\n-----END PUBLIC KEY-----",
+        "anies" : null
+      },
+      "privateKeyFile" : null,
+      "createdOn" : 1318638836077,
+      "domainId" : "00000000001001",
+      "keyPairId" : "74HVY65RF5WTPS3KW999",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638836000,
+      "validTo" : 1633998836000
+    }],
+    "otherAttributes" : {
+    }
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e823bdce4b0bf3036ce86c9
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 1968
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<keyPairs xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0">
+<keyPair keyPairId="MTUL5V3139RYT99F1001" userId="00000000003002" domainId="00000000001001" status="inactive" validFrom="2011-09-27T09:09:15.000-07:00" validTo="2021-09-24T09:09:15.000-07:00">
+<publicKeyAlgorithm>DSA</publicKeyAlgorithm>
+<publicKeyLength>1024</publicKeyLength>
+<publicKeyFile><format>BASE64_DER</format>
+<data>-----BEGIN PUBLIC KEY-----
+MIIBtzCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9E
+AMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f
+6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv
+8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtc
+NrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwky
+jMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/h
+WuWfBpKLZl6Ae1UlZAFMO/7PSSoDgYQAAoGAfLUsxMrUOcOSHUy3JcrniVknVQSh
+ONIldkdIOZqQqNIRT2XfqIYR8JwPW+cBYHC8cjCl4OQes/wt02Q4uIrk7yLVAweQ
+HqLl6Ia1s+cbSNr+86Z6cSRbEo8b+92t2s0S5OizdY5zKshUgCEJYmv578MqQ0H2
+MG8BkyMjXk6iR7g=
+-----END PUBLIC KEY-----</data>
+</publicKeyFile>
+</keyPair>
+<keyPair keyPairId="58H6P29VJMA6RDSM1002" userId="00000000003002" domainId="00000000001001" status="inactive" validFrom="2011-09-27T11:00:08.000-07:00" validTo="2021-09-24T11:00:08.000-07:00" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <publicKeyAlgorithm>RSA</publicKeyAlgorithm>
+   <publicKeyLength>1024</publicKeyLength>
+   <publicKeyFile>
+      <format>BASE64_DER</format>
+      <data>-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrd/fkVlLavFyaPIa+O1xX8zwV
+cR6e0cLUyQMC0bWmgnYKzetP5AGDPbRz+4p4PVakDipL9s9CALeWFogamWT3dPIC
+GVxPilqqGZCU9VyId6XmPVFJsmaccB0Q9yzH4dMwmhV3DUseP6oSLL5pTI7zqU3b
+gjlzWp9ke59+CMHw2QIDAQAB
+-----END PUBLIC KEY-----</data>
+   </publicKeyFile>
+</keyPair>
+</keyPairs>
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -18438,31 +18914,129 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 2044
+Date: Mon, 17 Oct 2011 22:55:36 GMT
+ 
+{
+  "keyPairs" : {
+    "anies" : null,
+    "keyPair" : [ {
+      "publicKeyAlgorithm" : "DSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : {
+        "format" : "BASE64_DER",
+        "data" : "-----BEGIN PUBLIC KEY-----\nMIIBuDCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9E\nAMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f\n6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv\n8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtc\nNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwky\njMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/h\nWuWfBpKLZl6Ae1UlZAFMO/7PSSoDgYUAAoGBAPESoRxpdmkx3TtVgRqgRTRqkdFF\n4tz412CZ6/AtjjKAtfC24x0m2unrMTE6MymmJL977ENtrjoley9CEo9SN60wAxcE\nWWPKdfgNvZBTYabxde8X2O2fe+4WzkKT6eLzY+Bio1r/+ReUOZMrik7kU6gbj9Xg\nkNJhBhnTAeo2btLA\n-----END PUBLIC KEY-----",
+        "anies" : null
+      },
+      "privateKeyFile" : null,
+      "createdOn" : 1318892134912,
+      "domainId" : "00000000001001",
+      "keyPairId" : "XPYXH98W782MYNPWR998",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638472000,
+      "validTo" : 1633998472000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : {
+        "format" : "BASE64_DER",
+        "data" : "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCAb6t2vuziv02d/C2arwfG4hS4\nTxhxTrz4skaAKCJ9Lhh1UDNzMrQR/Hrz37OnlPeQxuqWNMWWfaBNUNNrniXKcmax\nNQ51T9+i/xkKopldXye2rRloPJqAtqCyMNNkSGmrKOuCDZ4k5xBgHxWzZ2gmtysk\nM355ih/Ga2bwYrZcbQIDAQAB\n-----END PUBLIC KEY-----",
+        "anies" : null
+      },
+      "privateKeyFile" : null,
+      "createdOn" : 1318892134920,
+      "domainId" : "00000000001001",
+      "keyPairId" : "74HVY65RF5WTPS3KW999",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "00000000003002",
+      "validFrom" : 1318638836000,
+      "validTo" : 1633998836000
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=46752770BB3B0070A228B023738391B9; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 1867
+Date: Tue, 27 Sep 2011 21:11:35 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<keyPairs xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <keyPair keyPairId="MTUL5V3139RYT99F1001" userId="00000000003002" domainId="00000000001001" status="inactive" validFrom="2011-09-27T09:09:15.000-07:00" validTo="2021-09-24T09:09:15.000-07:00">
+      <publicKeyAlgorithm>DSA</publicKeyAlgorithm>
+      <publicKeyLength>1024</publicKeyLength>
+      <publicKeyFile>
+         <format>BASE64_DER</format>
+         <data>-----BEGIN PUBLIC KEY-----
+MIIBtzCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9E
+AMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f
+6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv
+8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtc
+NrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwky
+jMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/h
+WuWfBpKLZl6Ae1UlZAFMO/7PSSoDgYQAAoGAfLUsxMrUOcOSHUy3JcrniVknVQSh
+ONIldkdIOZqQqNIRT2XfqIYR8JwPW+cBYHC8cjCl4OQes/wt02Q4uIrk7yLVAweQ
+HqLl6Ia1s+cbSNr+86Z6cSRbEo8b+92t2s0S5OizdY5zKshUgCEJYmv578MqQ0H2
+MG8BkyMjXk6iR7g=
+-----END PUBLIC KEY-----</data>
+      </publicKeyFile>
+   </keyPair>
+   <keyPair keyPairId="58H6P29VJMA6RDSM1002" userId="00000000003002" domainId="00000000001001" status="inactive" validFrom="2011-09-27T11:00:08.000-07:00" validTo="2021-09-24T11:00:08.000-07:00">
+      <publicKeyAlgorithm>RSA</publicKeyAlgorithm>
+      <publicKeyLength>1024</publicKeyLength>
+      <publicKeyFile>
+         <format>BASE64_DER</format>
+         <data>-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrd/fkVlLavFyaPIa+O1xX8zwV
+cR6e0cLUyQMC0bWmgnYKzetP5AGDPbRz+4p4PVakDipL9s9CALeWFogamWT3dPIC
+GVxPilqqGZCU9VyId6XmPVFJsmaccB0Q9yzH4dMwmhV3DUseP6oSLL5pTI7zqU3b
+gjlzWp9ke59+CMHw2QIDAQAB
+-----END PUBLIC KEY-----</data>
+      </publicKeyFile>
+   </keyPair>
+</keyPairs>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | The request for the operation is not well formed or missing the required parameters |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 404 | Not Found | The key pair was not found |
+| 409 | Conflict | A key pair already exists with the specified key pair identifier |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
+
 
 **Response Data**
 
@@ -18489,73 +19063,118 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs" -d '{
+  "keyPairs" : {
+    "anies" : null,
+    "keyPair" : [ {
+      "publicKeyAlgorithm" : "DSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : {
+        "format" : "BASE64_DER",
+        "data" : "-----BEGIN PUBLIC KEY-----\nMIIBuDCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9E\nAMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f\n6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv\n8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtc\nNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwky\njMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/h\nWuWfBpKLZl6Ae1UlZAFMO/7PSSoDgYUAAoGBAPESoRxpdmkx3TtVgRqgRTRqkdFF\n4tz412CZ6/AtjjKAtfC24x0m2unrMTE6MymmJL977ENtrjoley9CEo9SN60wAxcE\nWWPKdfgNvZBTYabxde8X2O2fe+4WzkKT6eLzY+Bio1r/+ReUOZMrik7kU6gbj9Xg\nkNJhBhnTAeo2btLA\n-----END PUBLIC KEY-----",
+        "anies" : null
+      },
+      "privateKeyFile" : null,
+      "createdOn" : 1318638472194,
+      "domainId" : "11180052618906",
+      "keyPairId" : "XPYXH98W782MYNPWR998",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "84463950217213",
+      "validFrom" : 1318638472000,
+      "validTo" : 1633998472000
+    }, {
+      "publicKeyAlgorithm" : "RSA",
+      "publicKeyLength" : 1024,
+      "publicKeyFile" : {
+        "format" : "BASE64_DER",
+        "data" : "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCAb6t2vuziv02d/C2arwfG4hS4\nTxhxTrz4skaAKCJ9Lhh1UDNzMrQR/Hrz37OnlPeQxuqWNMWWfaBNUNNrniXKcmax\nNQ51T9+i/xkKopldXye2rRloPJqAtqCyMNNkSGmrKOuCDZ4k5xBgHxWzZ2gmtysk\nM355ih/Ga2bwYrZcbQIDAQAB\n-----END PUBLIC KEY-----",
+        "anies" : null
+      },
+      "privateKeyFile" : null,
+      "createdOn" : 1318638836077,
+      "domainId" : "11180052618906",
+      "keyPairId" : "74HVY65RF5WTPS3KW999",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "84463950217213",
+      "validFrom" : 1318638836000,
+      "validTo" : 1633998836000
+    }],
+    "otherAttributes" : {
+    }
+  }
+}'
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.16.6 <a id="{updatekeypair}"></a>{updatekeypair}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.16.6 <a id="update_user_key_pair"></a>Update User Key Pair####
+#### PUT [HPKeystoneExtensionBaseURI]/keypairs/{keypairId}
+*Privilege Level: SA, DA, SS*
 
-{Description about the method call}
+Update a user key pair. This operation is used to udpate the key pair status. See the schema or examples below for details.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The keypairId url path parameter is required. The userId query parameter is optional. If the userId parameter is not specified then it defaults to the user identifer of the requester. The status attribute must be set to active or inactive in the request body.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+* *keypairId* - URL path parameter - user key pair identifier.
+* *userId* (Optional) - Query Parameter - user identifier string. Defaults to user identifier of the requester if not specified.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+* *status* - String - Key pair status. One of the values (active, inactive).
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
 
 JSON
 
 ```
-{json data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/NY2JZ58MAWKGF6ZL4ETY HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e9caa84e4b0ea896133e05e
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 47
+ 
+{
+  "keyPair" : {
+    "status" : "active"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/3K3A3FJSC9YRX5LVJCES HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e81f502e4b078454c0c31bf
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 143
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<keyPair status="inactive" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"/>
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -18568,26 +19187,67 @@ XML
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 408
+Date: Mon, 17 Oct 2011 22:43:24 GMT
+ 
+{
+  "keyPair" : {
+    "publicKeyAlgorithm" : "RSA",
+    "publicKeyLength" : 1024,
+    "publicKeyFile" : null,
+    "privateKeyFile" : null,
+    "createdOn" : 1318638866340,
+    "domainId" : "00000000001001",
+    "keyPairId" : "NY2JZ58MAWKGF6ZL4ETY",
+    "otherAttributes" : {
+    },
+    "status" : "active",
+    "userId" : "00000000003002",
+    "validFrom" : 1318638866000,
+    "validTo" : 1633998866000
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=7150037BA8D7F3DF5ABB470E2EB8EC5D; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 837
+Date: Tue, 27 Sep 2011 16:17:04 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<keyPair keyPairId="3K3A3FJSC9YRX5LVJCES" userId="00000000003002" domainId="00000000001001" status="inactive" validFrom="2011-09-26T22:03:37.000-07:00" validTo="2021-09-23T22:03:37.000-07:00" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <publicKeyAlgorithm>RSA</publicKeyAlgorithm>
+   <publicKeyLength>1024</publicKeyLength>
+</keyPair>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | The request for the operation is not well formed or missing the required parameters. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.  |
+| 403 | Forbidden | Disabled or suspended user making the request |
+| 404 | Not Found | The key pair was not found |
+| 500 | Internal Server Error | The server encountered a problem while processing the request |
+| 503 | Service Unavailable | The server is unavailable to process the request |
+
 
 **Response Data**
 
@@ -18614,12 +19274,15 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/74HVY65RF5WTPS3KW999" -d '{
+  "keyPair" : {
+    "status" : "active"
+  }
+}'
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 # 5. Additional References
