@@ -361,7 +361,6 @@ curl -k -X POST -H "Content-Type: application/json" -H "Accept: application/json
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ## Generic Signature

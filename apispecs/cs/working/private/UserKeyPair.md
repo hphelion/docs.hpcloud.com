@@ -1,6 +1,7 @@
 # User Key Pair
 
-{Describe the resource and what information they provide. Then enumerate all the API method calls below.}
+The User Key Pair REST API provides the ability to manage user access keys.
+
 
 **Status Lifecycle**
 
@@ -810,8 +811,6 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
 
 ## Import User Key Pair(s)
 #### PUT [HPKeystoneExtensionBaseURI]/keypairs
@@ -1225,8 +1224,6 @@ Content-Length: 143
 200 - OK
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 

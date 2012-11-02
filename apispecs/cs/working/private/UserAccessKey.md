@@ -946,8 +946,6 @@ Content-Length: 146
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
 200 - OK
