@@ -635,7 +635,6 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ## Import User Access Key(s)
