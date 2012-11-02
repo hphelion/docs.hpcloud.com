@@ -201,6 +201,7 @@ See schema file, domain.xsd, for more details on the request and response data s
 * *company* (Optional) - string - 
 * *website* (Optional) - string - 
 * *emailAddress* (Optional) - string -
+* *billToAddress" (Optional) - Bill to Address 
 
 
 
@@ -255,6 +256,8 @@ Content-Length: 617
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <domain xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" name="HP Private Cloud Domain" emailAddress="hp-private-cloud-6@hp.com" addressLine1="1, HP Way" city="Cupertino" state="CA" zip="90210" country="USA" website="www.hp.com" company="HP" phone="1-888-555-1212" status="enabled">
   <description>Hp's Private Cloud Domain</description>
+  <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+   </billToAddress> 
 </domain>
 ```
 
@@ -321,6 +324,8 @@ Date: Fri, 24 Feb 2012 18:02:43 GMT
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <domain xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" domainId="80354991891807" name="HP Private Cloud Domain" emailAddress="hp-private-cloud-6@hp.com" addressLine1="1, HP Way" city="Cupertino" state="CA" zip="90210" country="USA" website="www.hp.com" company="HP" phone="1-888-555-1212" status="enabled">
   <description>Hp's Private Cloud Domain</description>
+  <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+   </billToAddress> 
 </domain>
 ```
 
