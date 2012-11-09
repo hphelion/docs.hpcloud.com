@@ -1,4 +1,4 @@
-# Service
+# Services
 
 The Service REST API provides the ability to manage registered services.
 

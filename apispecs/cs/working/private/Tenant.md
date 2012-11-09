@@ -1,4 +1,4 @@
-# Tenant
+# Tenants
 
 A Tenant is a collection of services, associated with zero or more users who have access to these services via role references.
 

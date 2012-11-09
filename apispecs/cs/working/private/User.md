@@ -21,7 +21,7 @@ None.
 
 ## List Users
 #### GET [HPKeystoneExtensionBaseURI]/users?name=username&emailAddress=email&limit=pagesize&marker=userId
-*Privilege Level: SA, DA, SS*
+*Privilege Level: SA, SS*
 
 Returns all users of all tenants and takes a "marker" and "limit" parameter to limit the number of Users in the response. Can also be used to lookup users by `name` or `emailAddress`.
 

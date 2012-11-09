@@ -106,19 +106,19 @@ The service is exposed in the service catalog, as shown in the following fragmen
 | Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? |
 | :------- | :------------------- | :---------- | :--------------------- | :---------------- |
 | Tenants | [List Tenants](#list_tenants) | GET | /tenants | Y/Y |
-| Token | [Authenticate](#authenticate) | POST | /tokens | Y/Y |
-| Token | [Rescope Token](#rescope_token) | POST | /tokens | Y/Y |
-| Token | [Revoke Token](#revoke_token) | DELETE | /HP-IDM/v1.0/tokens/{tokenId} | Y/Y |
-| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.0 | Y/Y |
-| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.1 | Y/Y |
-| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.0 | Y/Y |
-| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.1 | Y/Y |
-| User Access Key | [Create User Access Key](#create_user_access_key) | POST | /HP-IDM/v1.0/accesskeys | Y/Y |
-| User Access Key | [Delete User Access Key](#delete_user_access_key) | DELETE | /HP-IDM/v1.0/accesskeys/{accesskeyId}  | Y/Y |
-| User Access Key | [Get Access Keys](#get_access_keys) | GET | /HP-IDM/v1.0/accesskeys | Y/Y |
-| User Access Key | [Get An Access Key](#get_an_access_key) | GET | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
-| User Access Key | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y |
-| User Access Key | [Update User Access Key](#update_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
+| Tokens | [Authenticate](#authenticate) | POST | /tokens | Y/Y |
+| Tokens | [Rescope Token](#rescope_token) | POST | /tokens | Y/Y |
+| Tokens | [Revoke Token](#revoke_token) | DELETE | /HP-IDM/v1.0/tokens/{tokenId} | Y/Y |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.0 | Y/Y |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.1 | Y/Y |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.0 | Y/Y |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.1 | Y/Y |
+| User Access Keys | [Create User Access Key](#create_user_access_key) | POST | /HP-IDM/v1.0/accesskeys | Y/Y |
+| User Access Keys | [Delete User Access Key](#delete_user_access_key) | DELETE | /HP-IDM/v1.0/accesskeys/{accesskeyId}  | Y/Y |
+| User Access Keys | [Get Access Keys](#get_access_keys) | GET | /HP-IDM/v1.0/accesskeys | Y/Y |
+| User Access Keys | [Get An Access Key](#get_an_access_key) | GET | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
+| User Access Keys | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y |
+| User Access Keys | [Update User Access Key](#update_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
 
 ## 4.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
@@ -351,7 +351,7 @@ curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a9295
 
 **Additional Notes**
 
-### 4.4.2 Token
+### 4.4.2 Tokens
 
 A yummy cookie one uses to bribe the authorization monster.
 
@@ -1176,7 +1176,7 @@ curl -s -k -H "X-Auth-User: 62424047631429:jdoe" -H "X-Auth-Key: secrete" -H "Ac
 
 **Additional Notes**
 
-### 4.4.3 User Access Key
+### 4.4.3 User Access Keys
 
 The User Access Key REST API provides the ability to manage user access keys.
 

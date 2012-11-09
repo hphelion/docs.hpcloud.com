@@ -1,4 +1,4 @@
-# Token
+# Tokens
 
 A yummy cookie one uses to bribe the authorization monster.
 

@@ -1,4 +1,4 @@
-# User Access Key
+# User Access Keys
 
 The User Access Key REST API provides the ability to manage user access keys.
 

@@ -1,4 +1,4 @@
-# User Key Pair
+# User Key Pairs
 
 The User Key Pair REST API provides the ability to manage user access keys.
 

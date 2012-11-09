@@ -25,8 +25,8 @@ Note that the **EnterpriseUserEmailVerification** action must handle validations
 
 ## Action Parameters ##
 
-| Parameter Name	| Parameter Type 	| Is Required 	| Default 	|
-| :--	| :--	| :- 	| :- 	|
+| Parameter Name | Parameter Type | Is Required | Default |
+| :------------- | :------------- | :---------- | :------ |
 | state	| xs:string 	| false 	| 	|
 | password 	| xs:string 	| **true**	| 	|
 | domainId	| xs:string 	| **true** 	| 	|

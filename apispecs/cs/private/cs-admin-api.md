@@ -87,19 +87,19 @@ group: apispec
 | Domains | [Get Users For A Domain](#get_users_for_a_domain) | GET | /HP-IDM/v1.0/domains/{domainId}/tenants | Y/Y | System Adminstrator (SA), Domain Admin (DA) |
 | Domains | [List Role Definitions (Deprecated)](#list_role_definitions_(deprecated)) | GET | /HP-IDM/v1.0/domains/{domainId}/roles | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
 | Domains | [Transfer Ownership Of A Domain](#transfer_ownership_of_a_domain) | PUT | /HP-IDM/v1.0/domains/{domainId}/owner/{userId}	 | Y/Y | System Adminstrator (SA) |
-| Endpoint Template | [Add Endpoint Template](#add_endpoint_template) | POST | /HP-IDM/v1.0/endpointTemplates | Y/Y | SA, SVC |
-| Endpoint Template | [Delete Endpoint Template](#delete_endpoint_template) | DELETE | /HP-IDM/v1.0/endpointTemplates/ {endpointTemplateId}  | Y/Y | SA, SVC |
-| Endpoint Template | [Get Enabled Endpoint Templates](#get_enabled_endpoint_templates) | GET | /HP-IDM/v1.0/endpointTemplates/enabled | Y/Y | SA, SVC, DA, DU  |
-| Endpoint Template | [Get Endpoint Template By Id](#get_endpoint_template_by_id) | GET | /HP-IDM/v1.0/endpointTemplates/{endpointTemplateId} | Y/Y | SA, SVC, DA, DU |
-| Endpoint Template | [Get Endpoint Templates](#get_endpoint_templates) | GET | /HP-IDM/v1.0/endpointTemplates | Y/Y | SA, SVC, DA, DU  |
-| Endpoint Template | [Update Endpoint Template](#update_endpoint_template) | GET | /HP-IDM/v1.0/endpointTemplates | Y/Y | SA, SVC  |
-| Group | [Add A User To A Group](#add_a_user_to_a_group) | PUT | /HP-IDM/v1.0/groups/{groupId}/users/{userId} | Y/Y | SA, DA |
-| Group | [Create A Group](#create_a_group) | POST | /HP-IDM/v1.0/groups | Y/Y | SA,DA |
-| Group | [Delates A Group](#delates_a_group) | DELETE | /HP-IDM/v1.0/groups/{groupId} | Y/Y | SA ,DA |
-| Group | [Get A Specific Group](#get_a_specific_group) | GET | /HP-IDM/v1.0/groups/{groupId} | Y/Y | SA,DA, DU  |
-| Group | [List Users For The Group](#list_users_for_the_group) | GET | /HP-IDM/v1.0/groups/{groupId}/users | Y/Y | SA,DA |
-| Group | [Delete User From The Group](#delete_user_from_the_group) | DELETE | /HP-IDM/v1.0/groups/{groupId}/users/{userId} | Y/Y | SA,DA |
-| Group | [Update Group](#update_group) | PUT | /HP-IDM/v1.0/groups/{groupId} | Y/Y | SA, DA |
+| Endpoint Templates | [Add Endpoint Template](#add_endpoint_template) | POST | /HP-IDM/v1.0/endpointTemplates | Y/Y | SA, SVC |
+| Endpoint Templates | [Delete Endpoint Template](#delete_endpoint_template) | DELETE | /HP-IDM/v1.0/endpointTemplates/ {endpointTemplateId}  | Y/Y | SA, SVC |
+| Endpoint Templates | [Get Enabled Endpoint Templates](#get_enabled_endpoint_templates) | GET | /HP-IDM/v1.0/endpointTemplates/enabled | Y/Y | SA, SVC, DA, DU  |
+| Endpoint Templates | [Get Endpoint Template By Id](#get_endpoint_template_by_id) | GET | /HP-IDM/v1.0/endpointTemplates/{endpointTemplateId} | Y/Y | SA, SVC, DA, DU |
+| Endpoint Templates | [Get Endpoint Templates](#get_endpoint_templates) | GET | /HP-IDM/v1.0/endpointTemplates | Y/Y | SA, SVC, DA, DU  |
+| Endpoint Templates | [Update Endpoint Template](#update_endpoint_template) | GET | /HP-IDM/v1.0/endpointTemplates | Y/Y | SA, SVC  |
+| Groups | [Add A User To A Group](#add_a_user_to_a_group) | PUT | /HP-IDM/v1.0/groups/{groupId}/users/{userId} | Y/Y | SA, DA |
+| Groups | [Create A Group](#create_a_group) | POST | /HP-IDM/v1.0/groups | Y/Y | SA,DA |
+| Groups | [Delates A Group](#delates_a_group) | DELETE | /HP-IDM/v1.0/groups/{groupId} | Y/Y | SA ,DA |
+| Groups | [Get A Specific Group](#get_a_specific_group) | GET | /HP-IDM/v1.0/groups/{groupId} | Y/Y | SA,DA, DU  |
+| Groups | [List Users For The Group](#list_users_for_the_group) | GET | /HP-IDM/v1.0/groups/{groupId}/users | Y/Y | SA,DA |
+| Groups | [Delete User From The Group](#delete_user_from_the_group) | DELETE | /HP-IDM/v1.0/groups/{groupId}/users/{userId} | Y/Y | SA,DA |
+| Groups | [Update Group](#update_group) | PUT | /HP-IDM/v1.0/groups/{groupId} | Y/Y | SA, DA |
 | Management Console | [User Details](#user_details) | GET | /HP-IDM/v1.0/users/details/{userId} | Y/Y | MC-CS Certificate |
 | Management Console | [User Preferences](#user_preferences) | GET | /HP-IDM/v1.0/preferences/{userId} | Y/Y | MC-CS Certificate |
 | Management Console | [User Preferences](#user_preferences) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | MC-CS Certificate |
@@ -117,25 +117,25 @@ group: apispec
 | Role Defs | [Update Role Scope](#update_role_scope) | PUT | /HP-IDM/v1.0/roleDefs/{roleId}/scope | Y/Y | SA, SVC |
 | Role Defs | [Get A Role Definition](#get_a_role_definition) | GET | /HP-IDM/v1.0/roleDefs/{roleId} | Y/Y | SA, SVC, DA, DU |
 | Role Defs | [List Role Definitions](#list_role_definitions) | GET | /HP-IDM/v1.0/roleDefs | Y/Y | SA, SVC |
-| Service | [Get Service By Id](#get_service_by_id) | GET | /HP-IDM/v1.0/services/{serviceId}    | Y/Y | SA, SVC |
-| Service | [List Registered Services](#list_registered_services) | GET | /HP-IDM/v1.0/services | Y/Y | SA, SVC, DA, DU |
-| Service | [Register New Service](#register_new_service) | POST | /HP-IDM/v1.0/services  	 | Y/Y | SA, SVC |
-| Service | [Update Service](#update_service) | PUT | /HP-IDM/v1.0/services/{serviceId}  	 | Y/Y | SA, SVC |
+| Services | [Get Service By Id](#get_service_by_id) | GET | /HP-IDM/v1.0/services/{serviceId}    | Y/Y | SA, SVC |
+| Services | [List Registered Services](#list_registered_services) | GET | /HP-IDM/v1.0/services | Y/Y | SA, SVC, DA, DU |
+| Services | [Register New Service](#register_new_service) | POST | /HP-IDM/v1.0/services  	 | Y/Y | SA, SVC |
+| Services | [Update Service](#update_service) | PUT | /HP-IDM/v1.0/services/{serviceId}  	 | Y/Y | SA, SVC |
 | Signature | [EC2 Signature](#ec2_signature) | POST | /HP-IDM/v1.0/ec2Tokens | Y/Y | Anon |
 | Signature | [Generic Signature](#generic_signature) | POST | /HP-IDM/v1.0/gstokens | Y/Y | Anon |
-| Tenant | [Get All Tenants](#get_all_tenants) | GET | /HP-IDM/v1.0/tenants | Y/Y | SA |
-| Tenant | [Get A Tenant](#get_a_tenant) | GET | /HP-IDM/v1.0/tenants/{tenantId}  | Y/Y | SA, DA, DU |
-| Tenant | [Check For Existence Of Tenant Name](#check_for_existence_of_tenant_name) | GET | /HP-IDM/v1.0/tenants/{tenantId}  | Y/Y | Anon |
-| Tenant | [Get A List Of Users For A Tenant (includes Role Assignments)](#get_a_list_of_users_for_a_tenant_(includes_role_assignments)) | GET | /HP-IDM/v1.0/tenants/{tenantId}/users | Y/Y | SA, DA |
-| Tenant | [Create A Tenant](#create_a_tenant) | POST | /HP-IDM/v1.0/tenants  | Y/Y | SA, DA |
-| Tenant | [Update A Tenant](#update_a_tenant) | PUT | /HP-IDM/v1.0/tenants/{tenantID}  | Y/Y | SA, DA |
-| Tenant | [Delete A Tenant](#delete_a_tenant) | DELETE | /HP-IDM/v1.0/tenants/{tenantId} | Y/Y | SA, DA |
-| Tenant | [Get Endpoints For A Tenant](#get_endpoints_for_a_tenant) | GET | /HP-IDM/v1.0/tenants/{tenantId}/endpoints | Y/Y | SA, DA, DU |
-| Tenant | [Add Endpoint To A Tenant](#add_endpoint_to_a_tenant) | POST | /HP-IDM/v1.0/tenants/{tenantId]}/endpoints | Y/Y | SA, DA |
-| Tenant | [Remove Endpoints From A Tenant](#remove_endpoints_from_a_tenant) | DELETE | /HP-IDM/v1.0/tenants/{tenantId}/endpoints/{endpointId} | Y/Y | DA, SA |
-| Token | [Validate Token](#validate_token) | GET | /tokens/{tokenId} | Y/Y | Anon |
-| Token | [Quick Token Validation](#quick_token_validation) | GET | /tokens/{tokenId} | Y/Y | Anon |
-| Token | [Refresh Token](#refresh_token) | GET | /tokens/{tokenId} | Y/Y | SS |
+| Tenants | [Get All Tenants](#get_all_tenants) | GET | /HP-IDM/v1.0/tenants | Y/Y | SA |
+| Tenants | [Get A Tenant](#get_a_tenant) | GET | /HP-IDM/v1.0/tenants/{tenantId}  | Y/Y | SA, DA, DU |
+| Tenants | [Check For Existence Of Tenant Name](#check_for_existence_of_tenant_name) | GET | /HP-IDM/v1.0/tenants/{tenantId}  | Y/Y | Anon |
+| Tenants | [Get A List Of Users For A Tenant (includes Role Assignments)](#get_a_list_of_users_for_a_tenant_(includes_role_assignments)) | GET | /HP-IDM/v1.0/tenants/{tenantId}/users | Y/Y | SA, DA |
+| Tenants | [Create A Tenant](#create_a_tenant) | POST | /HP-IDM/v1.0/tenants  | Y/Y | SA, DA |
+| Tenants | [Update A Tenant](#update_a_tenant) | PUT | /HP-IDM/v1.0/tenants/{tenantID}  | Y/Y | SA, DA |
+| Tenants | [Delete A Tenant](#delete_a_tenant) | DELETE | /HP-IDM/v1.0/tenants/{tenantId} | Y/Y | SA, DA |
+| Tenants | [Get Endpoints For A Tenant](#get_endpoints_for_a_tenant) | GET | /HP-IDM/v1.0/tenants/{tenantId}/endpoints | Y/Y | SA, DA, DU |
+| Tenants | [Add Endpoint To A Tenant](#add_endpoint_to_a_tenant) | POST | /HP-IDM/v1.0/tenants/{tenantId]}/endpoints | Y/Y | SA, DA |
+| Tenants | [Remove Endpoints From A Tenant](#remove_endpoints_from_a_tenant) | DELETE | /HP-IDM/v1.0/tenants/{tenantId}/endpoints/{endpointId} | Y/Y | DA, SA |
+| Tokens | [Validate Token](#validate_token) | GET | /tokens/{tokenId} | Y/Y | Anon |
+| Tokens | [Quick Token Validation](#quick_token_validation) | GET | /tokens/{tokenId} | Y/Y | Anon |
+| Tokens | [Refresh Token](#refresh_token) | GET | /tokens/{tokenId} | Y/Y | SS |
 | Users | [List Users](#list_users) | GET | /HP-IDM/v1.0/users | Y/Y | SA, DA, SS |
 | Users | [Get A User](#get_a_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | SA, DA, SS |
 | Users | [Check For Existence Of User](#check_for_existence_of_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | Anon |
@@ -149,17 +149,17 @@ group: apispec
 | Users | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | /HP-IDM/v1.0/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
 | Users | [Create A User's Non Tenant Role Assignment](#create_a_users_non_tenant_role_assignment) | PUT | /HP-IDM/v1.0/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
 | Users | [Delete A User's Non Tenant Role Assignment](#delete_a_users_non_tenant_role_assignment) | DELETE | /HP-IDM/v1.0/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
-| User Certificate | [Delete User Certificate](#delete_user_certificate) | DELETE | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	D | Y/Y | SA, DA, SS |
-| User Certificate | [Get User Certificate](#get_user_certificate) | GET | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} | Y/Y | SA, DA, SS |
-| User Certificate | [Create A User Certificate](#create_a_user_certificate) | POST | /HP-IDM/v1.0/certificates | Y/Y | SA, DA, SS |
-| User Certificate | [Import User Certificate(s)](#import_user_certificate(s)) | PUT | /HP-IDM/v1.0/certificates | Y/Y | SA, DA, SS |
-| User Certificate | [Update User Certificate](#update_user_certificate) | PUT | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	 | Y/Y | SA,DA,SS |
-| User Key Pair | [Create User Key Pair](#create_user_key_pair) | POST | /HP-IDM/v1.0/keypairs | Y/Y | SA, DA, SS |
-| User Key Pair | [Delete User Key Pair](#delete_user_key_pair) | DELETE | /HP-IDM/v1.0/keypairs/{keypairId} | Y/Y | SA, DA, SS |
-| User Key Pair | [Get User Key Pair](#get_user_key_pair) | GET | /HP-IDM/v1.0/keypairs/{keypairId} | Y/Y | SA, DA, SS |
-| User Key Pair | [Get User Key Pairs](#get_user_key_pairs) | GET | /HP-IDM/v1.0/keypairs | Y/Y | SA, DA, SS |
-| User Key Pair | [Import User Key Pair(s)](#import_user_key_pair(s)) | PUT | /HP-IDM/v1.0/keypairs | Y/Y | SA, DA, SS |
-| User Key Pair | [Update User Key Pair](#update_user_key_pair) | PUT | /HP-IDM/v1.0/keypairs/{keypairId} | Y/Y | SA, DA, SS |
+| User Certificates | [Delete User Certificate](#delete_user_certificate) | DELETE | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	D | Y/Y | SA, DA, SS |
+| User Certificates | [Get User Certificate](#get_user_certificate) | GET | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} | Y/Y | SA, DA, SS |
+| User Certificates | [Create A User Certificate](#create_a_user_certificate) | POST | /HP-IDM/v1.0/certificates | Y/Y | SA, DA, SS |
+| User Certificates | [Import User Certificate(s)](#import_user_certificate(s)) | PUT | /HP-IDM/v1.0/certificates | Y/Y | SA, DA, SS |
+| User Certificates | [Update User Certificate](#update_user_certificate) | PUT | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	 | Y/Y | SA,DA,SS |
+| User Key Pairs | [Create User Key Pair](#create_user_key_pair) | POST | /HP-IDM/v1.0/keypairs | Y/Y | SA, DA, SS |
+| User Key Pairs | [Delete User Key Pair](#delete_user_key_pair) | DELETE | /HP-IDM/v1.0/keypairs/{keypairId} | Y/Y | SA, DA, SS |
+| User Key Pairs | [Get User Key Pair](#get_user_key_pair) | GET | /HP-IDM/v1.0/keypairs/{keypairId} | Y/Y | SA, DA, SS |
+| User Key Pairs | [Get User Key Pairs](#get_user_key_pairs) | GET | /HP-IDM/v1.0/keypairs | Y/Y | SA, DA, SS |
+| User Key Pairs | [Import User Key Pair(s)](#import_user_key_pair(s)) | PUT | /HP-IDM/v1.0/keypairs | Y/Y | SA, DA, SS |
+| User Key Pairs | [Update User Key Pair](#update_user_key_pair) | PUT | /HP-IDM/v1.0/keypairs/{keypairId} | Y/Y | SA, DA, SS |
 
 ## 4.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
@@ -4975,7 +4975,7 @@ curl -k --cert dev_hpmiddleware.pem  -XPUT -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 
-### 4.4.3 Endpoint Template
+### 4.4.3 Endpoint Templates
 
 The Endpoint Template REST API provides the ability to manage service endpoints.
 
@@ -6103,7 +6103,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H
 **Additional Notes**
 
 
-### 4.4.4 Group
+### 4.4.4 Groups
 
 Group is a collection of users. The primary purpose of group is to provide multiple users with the same privillages
 
@@ -9897,7 +9897,7 @@ curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XGET -H "X-Auth-Token: HPAut
 * Response can be filtered by domainId, tenantId, serviceId and serviceName.
 
 
-### 4.4.8 Service
+### 4.4.8 Services
 
 The Service REST API provides the ability to manage registered services.
 
@@ -11310,7 +11310,7 @@ curl -k -X POST -H "Content-Type: application/json" -H "Accept: application/json
 
 
 
-### 4.4.10 Tenant
+### 4.4.10 Tenants
 
 A Tenant is a collection of services, associated with zero or more users who have access to these services via role references.
 
@@ -12896,7 +12896,7 @@ Curl Example
 ```
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints/543"
 ```
-### 4.4.11 Token
+### 4.4.11 Tokens
 
 A yummy cookie one uses to bribe the authorization monster.
 
@@ -15775,7 +15775,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-### 4.4.13 User Certificate
+### 4.4.13 User Certificates
 
 User Certificate Operations.
 
@@ -16928,7 +16928,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 
 
-### 4.4.14 User Key Pair
+### 4.4.14 User Key Pairs
 
 The User Key Pair REST API provides the ability to manage user access keys.
 

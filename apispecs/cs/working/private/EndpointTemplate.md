@@ -1,4 +1,4 @@
-# Endpoint Template
+# Endpoint Templates
 
 The Endpoint Template REST API provides the ability to manage service endpoints.
 

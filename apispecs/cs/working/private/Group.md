@@ -1,4 +1,4 @@
-# Group
+# Groups
 
 Group is a collection of users. The primary purpose of group is to provide multiple users with the same privillages
 
