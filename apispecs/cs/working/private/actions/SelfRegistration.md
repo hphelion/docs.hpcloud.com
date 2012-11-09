@@ -114,6 +114,7 @@ After submission of an email a **CtrlSvcsContactActivity** Salesforce object is 
 | -- 	| -- 	|
 | WELCOME_TO_CLOUD_EMAIL_ID 	| WelcomeEmailSent	|
 | EMAIL_VERIFICATION_EMAIL_ID 	| VerificationEmailSent	|
+| EMAIL_VERIFICATION_EMAIL_WITH_PWD_COLLECT_EMAIL_ID	| VerifEmailWithPwdCollectSent	|
 
 Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
 

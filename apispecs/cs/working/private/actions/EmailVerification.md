@@ -48,6 +48,7 @@ This action will be used to validate email verification nonce which was sent to 
 | Parameter Name	| Parameter Type 	| Is Required 	|
 | :--	| :--	| :- 	|
 | emailVerificationNonce 	| xs:string 	| **true** 	|
+| password 	| xs:string 	| false 	|
 
 ## Action Steps ##
 
@@ -61,7 +62,7 @@ This action will be used to validate email verification nonce which was sent to 
 
 ## Constraints ##
 
-N/A
+1. The verification mode chosen in SelfRegistration dictates whether the password parameter is required, it is an error to omit the password if it's use was indicated.
 
 ## JobTicket Results ##
 
