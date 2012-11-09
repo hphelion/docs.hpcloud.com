@@ -240,7 +240,7 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
                     # SA?
                     priv_lev = 'SA'
                 api_table.append((group_name, action_name, action_name_tag, verb, path, 'Y/Y',
-                    pm.group('privilege')))
+                    priv_lev))
                 if not private_api:
                     continue
             api_content.append("%s" % (line))

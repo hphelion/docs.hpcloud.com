@@ -64,17 +64,17 @@ group: apispec
 
 | Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| Action | [Post Action](#post_action) | POST | /HP-IDM/v1.0/action/{action} | Y/Y | {Privilege Level} |
-| Action | [Get Jobs By Account](#get_jobs_by_account) | GET | /HP-IDM/v1.0/job | Y/Y | {Privilege Level} |
-| Action | [Get A Job Ticket](#get_a_job_ticket) | GET | /HP-IDM/v1.0/job/{ticketId} | Y/Y | {Privilege Level} |
-| Action | [Restart A TIMEDOUT Job](#restart_a_timedout_job) | PUT | /HP-IDM/v1.0/job/{ticketId} | Y/Y | {Privilege Level} |
-| Action | [Delete A Job](#delete_a_job) | PUT | /HP-IDM/v1.0/job/{ticketId} | Y/Y | {Privilege Level} |
-| Action | [Get Error Jobs](#get_error_jobs) | GET | /HP-IDM/v1.0/job/error | Y/Y | {Privilege Level} |
-| Action | [Get A Count Of Error Jobs](#get_a_count_of_error_jobs) | GET | /HP-IDM/v1.0/job/error/count | Y/Y | {Privilege Level} |
-| Action | [Get Error Jobs By Category](#get_error_jobs_by_category) | GET | /HP-IDM/v1.0/job/error/{category} | Y/Y | {Privilege Level} |
-| Action | [Delete Error Jobs By Category](#delete_error_jobs_by_category) | GET | /HP-IDM/v1.0/job/error/{category} | Y/Y | {Privilege Level} |
-| Action | [Get Jobs By Status](#get_jobs_by_status) | GET | /HP-IDM/v1.0/job/status/{status} | Y/Y | {Privilege Level} |
-| Action | [Get Job Count By Status](#get_job_count_by_status) | GET | /HP-IDM/v1.0/job/status/{status}/count | Y/Y | {Privilege Level} |
+| Action | [Post Action](#post_action) | POST | /HP-IDM/v1.0/action/{action} | Y/Y | SA |
+| Action | [Get Jobs By Account](#get_jobs_by_account) | GET | /HP-IDM/v1.0/job | Y/Y | SA |
+| Action | [Get A Job Ticket](#get_a_job_ticket) | GET | /HP-IDM/v1.0/job/{ticketId} | Y/Y | SA |
+| Action | [Restart A TIMEDOUT Job](#restart_a_timedout_job) | PUT | /HP-IDM/v1.0/job/{ticketId} | Y/Y | SA |
+| Action | [Delete A Job](#delete_a_job) | PUT | /HP-IDM/v1.0/job/{ticketId} | Y/Y | SA |
+| Action | [Get Error Jobs](#get_error_jobs) | GET | /HP-IDM/v1.0/job/error | Y/Y | SA |
+| Action | [Get A Count Of Error Jobs](#get_a_count_of_error_jobs) | GET | /HP-IDM/v1.0/job/error/count | Y/Y | SA |
+| Action | [Get Error Jobs By Category](#get_error_jobs_by_category) | GET | /HP-IDM/v1.0/job/error/{category} | Y/Y | SA |
+| Action | [Delete Error Jobs By Category](#delete_error_jobs_by_category) | GET | /HP-IDM/v1.0/job/error/{category} | Y/Y | SA |
+| Action | [Get Jobs By Status](#get_jobs_by_status) | GET | /HP-IDM/v1.0/job/status/{status} | Y/Y | SA |
+| Action | [Get Job Count By Status](#get_job_count_by_status) | GET | /HP-IDM/v1.0/job/status/{status}/count | Y/Y | SA |
 | Domains | [Check For Existence Of Domain Name](#check_for_existence_of_domain_name) | GET | /HP-IDM/v1.0/job/status/{status}/count | Y/Y | Anonymous |
 | Domains | [Create A Domain](#create_a_domain) | GET | /HP-IDM/v1.0/domains  | Y/Y | System Adminstrator (SA) |
 | Domains | [Delete A Domain](#delete_a_domain) | DELETE | /HP-IDM/v1.0/domains/{domainId}  | Y/Y | System Adminstrator (SA) |
