@@ -20,7 +20,7 @@ None.
 
 
 ## Validate Token
-#### GET [KeystoneBaseURI]/tokens/\<tokenId\>?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111
+#### GET /tokens/\<tokenId\>?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111
 *Privilege Level: Anon*
 
 This API is used to validate a token. Validation includes checking that
@@ -261,7 +261,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Accep
 
 
 ## Quick Token Validation
-#### HEAD [KeystoneBaseURI]/tokens/\<tokenId\>?belongsTo=tenantId
+#### HEAD /tokens/\<tokenId\>?belongsTo=tenantId
 *Privilege Level: Anon*
 
 This API is used to do a quick token validation. Validation includes checking that the token belongs to a particular user and it has not expired.   If the query parameter, belongTo, is provided the call will check the corresponding tenantId to ensure membership in that tenant. If there is no tenantId then it is globally scoped. In the event a token is not valid, a 404 (item not found) will be returned.  This call won't return any roles associated with the token.

@@ -137,9 +137,9 @@ group: apispec
 | Tenant | [Get Endpoints For A Tenant](#get_endpoints_for_a_tenant) | GET | /HP-IDM/v1.0/tenants/{tenantId}/endpoints | Y/Y | SA, DA, DU |
 | Tenant | [Add Endpoint To A Tenant](#add_endpoint_to_a_tenant) | POST | /HP-IDM/v1.0/tenants/{tenantId]}/endpoints | Y/Y | SA, DA |
 | Tenant | [Remove Endpoints From A Tenant](#remove_endpoints_from_a_tenant) | DELETE | /HP-IDM/v1.0/tenants/{tenantId}/endpoints/{endpointId} | Y/Y | DA, SA |
-| Token | [Validate Token](#validate_token) | GET | [KeystoneBaseURI]/tokens/{tokenId} | Y/Y | Anon |
-| Token | [Quick Token Validation](#quick_token_validation) | GET | [KeystoneBaseURI]/tokens/{tokenId} | Y/Y | Anon |
-| Token | [Refresh Token](#refresh_token) | GET | [KeystoneBaseURI]/tokens/{tokenId} | Y/Y | SS |
+| Token | [Validate Token](#validate_token) | GET | /tokens/{tokenId} | Y/Y | Anon |
+| Token | [Quick Token Validation](#quick_token_validation) | GET | /tokens/{tokenId} | Y/Y | Anon |
+| Token | [Refresh Token](#refresh_token) | GET | /tokens/{tokenId} | Y/Y | SS |
 | Users | [List Users](#list_users) | GET | /HP-IDM/v1.0/users | Y/Y | SA, DA, SS |
 | Users | [Get A User](#get_a_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | SA, DA, SS |
 | Users | [Check For Existence Of User](#check_for_existence_of_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | Anon |
@@ -13684,7 +13684,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Accep
 
 
 #### 4.4.12.2 <a id="quick_token_validation"></a>Quick Token Validation####
-#### HEAD [KeystoneBaseURI]/tokens/\<tokenId\>?belongsTo=tenantId
+#### HEAD /tokens/\<tokenId\>?belongsTo=tenantId
 *Privilege Level: Anon*
 
 This API is used to do a quick token validation. Validation includes checking that the token belongs to a particular user and it has not expired.   If the query parameter, belongTo, is provided the call will check the corresponding tenantId to ensure membership in that tenant. If there is no tenantId then it is globally scoped. In the event a token is not valid, a 404 (item not found) will be returned.  This call won't return any roles associated with the token.

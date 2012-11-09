@@ -120,12 +120,21 @@ def grep_all_mds(dirname=None):
         bail("Error: unable to read %s" % (dirname))
 
 
-def get_api_index_table(api_table):
-    table = ['| Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |']
-    table.append('| :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |')
+def get_api_index_table(api_table, private_api=None):
+    if private_api:
+        table = ['| Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |']
+        table.append('| :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |')
+    else:
+        # hide the privelege level column for public APIs
+        table = ['| Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? |']
+        table.append('| :------- | :------------------- | :---------- | :--------------------- | :---------------- |')
     for (group, operation, operation_tag, verb, path, jx, priv) in api_table:
-        table.append('| %s | [%s](#%s) | %s | %s | %s | %s |' % (
-            group, operation, operation_tag, verb, path, jx, priv))
+        if private_api:
+            table.append('| %s | [%s](#%s) | %s | %s | %s | %s |' % (
+                group, operation, operation_tag, verb, path, jx, priv))
+        else:
+            table.append('| %s | [%s](#%s) | %s | %s | %s |' % (
+                group, operation, operation_tag, verb, path, jx))
     return string.join(table, '\n')
 
 
@@ -228,8 +237,10 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
             if pm:
                 api_table.append((group_name, action_name, action_name_tag, verb, path, 'Y/Y',
                     pm.group('privilege')))
+                if not private_api:
+                    continue
             api_content.append("%s" % (line))
-    intro_md = intro_md.replace('{API_INDEX_TABLE_PLACE_HOLDER}', get_api_index_table(api_table))
+    intro_md = intro_md.replace('{API_INDEX_TABLE_PLACE_HOLDER}', get_api_index_table(api_table, private_api))
     output = open(outfile, 'w')
     output.write(intro_md)
     output.write(string.join(api_content, '\n'))

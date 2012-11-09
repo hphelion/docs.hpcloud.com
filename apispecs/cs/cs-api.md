@@ -103,22 +103,22 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 **Admin URI**: N/A
 
-| Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
-| :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| Tenants | [List Tenants](#list_tenants) | GET | /tenants | Y/Y | SS |
-| Token | [Authenticate](#authenticate) | POST | /tokens | Y/Y | Anon |
-| Token | [Rescope Token](#rescope_token) | POST | /tokens | Y/Y | SS |
-| Token | [Revoke Token](#revoke_token) | DELETE | /HP-IDM/v1.0/tokens/{tokenId} | Y/Y | SA,DA,SS |
-| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.0 | Y/Y | Anon |
-| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.1 | Y/Y | Anon |
-| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.0 | Y/Y | Anon |
-| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.1 | Y/Y | Anon |
-| User Access Key | [Create User Access Key](#create_user_access_key) | POST | /HP-IDM/v1.0/accesskeys | Y/Y | SA, DA, SS |
-| User Access Key | [Delete User Access Key](#delete_user_access_key) | DELETE | /HP-IDM/v1.0/accesskeys/{accesskeyId}  | Y/Y | SA, DA, SS |
-| User Access Key | [Get Access Keys](#get_access_keys) | GET | /HP-IDM/v1.0/accesskeys | Y/Y | SA,DA, SS |
-| User Access Key | [Get An Access Key](#get_an_access_key) | GET | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y | SA,DA,SS |
-| User Access Key | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y | SA, DA, SS |
-| User Access Key | [Update User Access Key](#update_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y | SA, DA, SS |
+| Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? |
+| :------- | :------------------- | :---------- | :--------------------- | :---------------- |
+| Tenants | [List Tenants](#list_tenants) | GET | /tenants | Y/Y |
+| Token | [Authenticate](#authenticate) | POST | /tokens | Y/Y |
+| Token | [Rescope Token](#rescope_token) | POST | /tokens | Y/Y |
+| Token | [Revoke Token](#revoke_token) | DELETE | /HP-IDM/v1.0/tokens/{tokenId} | Y/Y |
+| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.0 | Y/Y |
+| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.1 | Y/Y |
+| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.0 | Y/Y |
+| Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.1 | Y/Y |
+| User Access Key | [Create User Access Key](#create_user_access_key) | POST | /HP-IDM/v1.0/accesskeys | Y/Y |
+| User Access Key | [Delete User Access Key](#delete_user_access_key) | DELETE | /HP-IDM/v1.0/accesskeys/{accesskeyId}  | Y/Y |
+| User Access Key | [Get Access Keys](#get_access_keys) | GET | /HP-IDM/v1.0/accesskeys | Y/Y |
+| User Access Key | [Get An Access Key](#get_an_access_key) | GET | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
+| User Access Key | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y |
+| User Access Key | [Update User Access Key](#update_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
 
 ## 4.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
@@ -153,7 +153,6 @@ None.
 
 #### 4.4.1.1 <a id="list_tenants"></a>List Tenants####
 #### GET /tenants
-*Privilege Level: SS*
 
 This API returns a listing of all tenants for which the holder of the provided token has a role assignment. If the user is not a valid, an error is returned.
 
@@ -375,7 +374,6 @@ None.
 
 #### 4.4.2.1 <a id="authenticate"></a>Authenticate####
 #### POST /tokens
-*Privilege Level: Anon*
 
 This API is used to authenticate a user to be able to use an OpenStack service. The result of a successful authentication is a token to be used with service requests. A username and password or access/secret key credentials are given as input to this interface. If authentication succeeds, the response will include an authentication token and service catalog ( list of available services for that user ). Tokens are valid for 12 hours. Issued tokens can become invalid in two cases:
 
@@ -728,7 +726,6 @@ curl -X POST -H "Content-Type: application/json"
 
 #### 4.4.2.2 <a id="rescope_token"></a>Rescope Token####
 #### POST /tokens
-*Privilege Level: SS*
 
 This API provides the ability to re-scope a valid token with another tenant. An existing unexpired token, regardless of its currently scoped or not, can be scoped to another tenant as long as the user has valid association with that tenant.
 
@@ -933,7 +930,6 @@ curl -k -H "Content-Type: application/json" -d '{"auth":{"tenantName":"HP Swift 
 
 #### 4.4.2.3 <a id="revoke_token"></a>Revoke Token####
 #### DELETE /HP-IDM/v1.0/tokens/{tokenId}
-*Privilege Level: SA,DA,SS*
 
 This API is used to revoke an authentication token. This operation does not require a request body. Once a token has been revoked, attempts to validate the token via GET /tokens/tokenId will fail with a 404 (item not found) as the token no longer exists. Trying revoke a non existing token, including one which has expired will also return a 404 (item not found).
 
@@ -997,16 +993,12 @@ curl -k -XDELETE https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/
 
 #### 4.4.2.4 <a id="swift_legacy_authentication"></a>Swift Legacy Authentication####
 #### GET /v1.0
-*Privilege Level: Anon*
 
 #### GET /v1.1
-*Privilege Level: Anon*
 
 #### GET /auth/v1.0
-*Privilege Level: Anon*
 
 #### GET /auth/v1.1
-*Privilege Level: Anon*
 
 Pre-Keystone (aka auth v2.0), Openstack services rely on disparate authentication mechanisms to authenticate their services.  For example, Swift uses swauth, while Nova uses novaauth.  The v1/v1.1 style of authentication relies on custom HTTP headers (specific to each service) to communicate authentication data, rather than relying on well-defined XML/JSON documents that can be validated via XSDs.  With the release of Diablo, most Openstack services have switched to using Keystone API completely, with the exception of the Swift CLI tool.  To provide backward-compatibility for this particular tool, CS (as well as the FOSS Keystone) provides this API. 
 
@@ -1208,7 +1200,6 @@ None.
 #### 4.4.3.1 <a id="create_user_access_key"></a>Create User Access Key####
 #### POST /HP-IDM/v1.0/accesskeys
 
-*Privilege Level: SA, DA, SS*
 
 
 **Request Data**
@@ -1392,7 +1383,6 @@ curl -k -X POST -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46
 
 #### 4.4.3.2 <a id="delete_user_access_key"></a>Delete User Access Key####
 #### DELETE /HP-IDM/v1.0/accesskeys/{accesskeyId} 
-*Privilege Level: SA, DA, SS*
 
 Delete a user access key.
 
@@ -1493,7 +1483,6 @@ curl -k -X DELETE -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d
 #### 4.4.3.3 <a id="get_access_keys"></a>Get Access Keys####
 #### GET /HP-IDM/v1.0/accesskeys
 
-*Privilege Level: SA,DA, SS*
 
 Gets a list of selected user access keys. 
 
@@ -1675,7 +1664,6 @@ curl -k -H "X-Auth-Token: HPAuth_21805c02da2661574e46235bd8c27c10623bddc09a7cf4c
 #### 4.4.3.4 <a id="get_an_access_key"></a>Get An Access Key####
 #### GET /HP-IDM/v1.0/accesskeys/{accesskeyId}
 
-*Privilege Level: SA,DA,SS*
 
 Gets a single user access key by it's access key identifier.
 
@@ -1825,7 +1813,6 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 
 #### 4.4.3.5 <a id="import_user_access_key(s)"></a>Import User Access Key(s)####
 #### PUT /HP-IDM/v1.0/accesskeys
-*Privilege Level: SA, DA, SS*
 
 Import one or more user access keys. 
 
@@ -2073,7 +2060,6 @@ curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d
 
 #### 4.4.3.6 <a id="update_user_access_key"></a>Update User Access Key####
 #### PUT /HP-IDM/v1.0/accesskeys/{accesskeyId}
-*Privilege Level: SA, DA, SS*
 
 Update a user access key. This method may be used to modify the key status only.
 
