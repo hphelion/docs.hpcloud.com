@@ -103,10 +103,6 @@ group: apispec
 | Management Console | [User Details](#user_details) | GET | /HP-IDM/v1.0/users/details/{userId} | Y/Y | MC-CS Certificate |
 | Management Console | [User Preferences](#user_preferences) | GET | /HP-IDM/v1.0/preferences/{userId} | Y/Y | MC-CS Certificate |
 | Management Console | [User Preferences](#user_preferences) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | MC-CS Certificate |
-| Region | [{getservicebyid}](#{getservicebyid}) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | {Privilege Level} |
-| Region | [{listregisteredservices}](#{listregisteredservices}) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | {Privilege Level} |
-| Region | [{registernewservice}](#{registernewservice}) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | {Privilege Level} |
-| Region | [{updateservice}](#{updateservice}) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | {Privilege Level} |
 | Role Assignment | [List Role Assignments Made On A Tenant](#list_role_assignments_made_on_a_tenant) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
 | Role Assignment | [List Tenant Role Assignments For A User](#list_tenant_role_assignments_for_a_user) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
 | Role Assignment | [Check Tenant Role Assignment For A User](#check_tenant_role_assignment_for_a_user) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
@@ -7782,528 +7778,7 @@ Not yet documented.
 Not yet documented.
 
 
-### 4.4.6 Region
-
-{Describe the resource and what information they provide. Then enumerate all the API method calls below.}
-
-**Status Lifecycle**
-
-N/A
-
-**Rate Limits**
-
-N/A
-
-**Quota Limits**
-
-N/A
-
-**Business Rules**
-
-None.
-
-
-#### 4.4.6.1 <a id="{getservicebyid}"></a>{getservicebyid}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.6.2 <a id="{listregisteredservices}"></a>{listregisteredservices}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.6.3 <a id="{registernewservice}"></a>{registernewservice}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-#### 4.4.6.4 <a id="{updateservice}"></a>{updateservice}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
-
-**Request Data**
-
-{Specify all the required/optional url and data parameters for the given method call.}
-
-**URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
-
-**Data Parameters**
-
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Success Response**
-
-{Specify the status code and any content that is returned.}
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-**Error Response**
-
-{Enumerate all the possible error status codes and any content that is returned.}
-
-**Status Code**
-
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
-
-**Response Data**
-
-JSON
-
-```
-{
-  "unauthorized" : {
-    "code" : 401,
-    "details" : "Invalid credentials",
-    "message" : "UNAUTHORIZED",
-    "otherAttributes" : {
-    }
-  }
-}
-```
-
-XML
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
-
-Curl Example
-
-```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
-
-**Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
-
-
-### 4.4.7 Role Assignment
+### 4.4.6 Role Assignment
 
 API to create, update, list and delete CS role assignments
 
@@ -8324,7 +7799,7 @@ N/A
 None.
 
 
-#### 4.4.7.1 <a id="list_role_assignments_made_on_a_tenant"></a>List Role Assignments Made On A Tenant####
+#### 4.4.6.1 <a id="list_role_assignments_made_on_a_tenant"></a>List Role Assignments Made On A Tenant####
 #### GET /tenants/{tenantId}/roles
 *Privilege Level: SA, DA, DU*
 
@@ -8562,7 +8037,7 @@ curl -sk --cacert $CACERT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenant
 None
 
 
-#### 4.4.7.2 <a id="list_tenant_role_assignments_for_a_user"></a>List Tenant Role Assignments For A User####
+#### 4.4.6.2 <a id="list_tenant_role_assignments_for_a_user"></a>List Tenant Role Assignments For A User####
 #### GET {path only, no root path} tenants/{tenantId}/users/{userId}/roles?serviceId=xxx&limit=pagesize&marker=roleId
 *Privilege Level: SA, DA, DU*
 
@@ -8745,7 +8220,7 @@ curl -sk --cacert $CACERT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenant
 None
 
 
-#### 4.4.7.3 <a id="check_tenant_role_assignment_for_a_user"></a>Check Tenant Role Assignment For A User####
+#### 4.4.6.3 <a id="check_tenant_role_assignment_for_a_user"></a>Check Tenant Role Assignment For A User####
 #### HEAD /tenants/{tenantId}/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA, DU*
 
@@ -8872,7 +8347,7 @@ curl -sk --cacert $CACERT -XHEAD -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0
 None
 
 
-#### 4.4.7.4 <a id="create_tenant_role_assignments_for_a_user"></a>Create Tenant Role Assignments For A User####
+#### 4.4.6.4 <a id="create_tenant_role_assignments_for_a_user"></a>Create Tenant Role Assignments For A User####
 #### PUT /tenants/{tenantId}/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -8978,7 +8453,7 @@ curl -sk --cacert $CACERT -XPUT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/
 None
 
 
-#### 4.4.7.5 <a id="delete_tenant_role_assignment_for_a_user"></a>Delete Tenant Role Assignment For A User####
+#### 4.4.6.5 <a id="delete_tenant_role_assignment_for_a_user"></a>Delete Tenant Role Assignment For A User####
 #### DELETE /tenants/{tenantId}/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -9079,7 +8554,7 @@ curl -sk --cacert $CACERT -XDELETE -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1
 None
 
 
-#### 4.4.7.6 <a id="list_tenant_role_assignments_for_a_group"></a>List Tenant Role Assignments For A Group####
+#### 4.4.6.6 <a id="list_tenant_role_assignments_for_a_group"></a>List Tenant Role Assignments For A Group####
 #### GET /tenants/{tenantId}/groups/{groupId}/roles
 *Privilege Level: SA, DA, DU*
 
@@ -9259,7 +8734,7 @@ curl -sk --cacert $CACERT -XDELETE -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1
 None
 
 
-#### 4.4.7.7 <a id="create_tenant_role_assignments_for_a_group"></a>Create Tenant Role Assignments For A Group####
+#### 4.4.6.7 <a id="create_tenant_role_assignments_for_a_group"></a>Create Tenant Role Assignments For A Group####
 #### PUT /tenants/{tenantId}/groups/{groupId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -9365,7 +8840,7 @@ curl -sk --cacert $CACERT -XPUT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/
 None
 
 
-#### 4.4.7.8 <a id="delete_tenant_role_assignment_for_a_group"></a>Delete Tenant Role Assignment For A Group####
+#### 4.4.6.8 <a id="delete_tenant_role_assignment_for_a_group"></a>Delete Tenant Role Assignment For A Group####
 #### DELETE /tenants/{tenantId}/groups/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -9466,7 +8941,7 @@ curl -sk --cacert $CACERT -XDELETE -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1
 
 None
 
-### 4.4.8 Role Defs
+### 4.4.7 Role Defs
 
 Roles are entities defined in system to support notion of capability (e.g. SuperAdmin, block-admin, projectmanager etc...), subjects (users/groups) are associated with role to form a logical grouping, subjects with same role have similar capabilities in system. Roles are associated with security policies which provides capability to a role on a particular target as defined in the policy.
 
@@ -9562,7 +9037,7 @@ N/A
 None.
 
 
-#### 4.4.8.1 <a id="create_role_definition"></a>Create Role Definition####
+#### 4.4.7.1 <a id="create_role_definition"></a>Create Role Definition####
 #### POST /HP-IDM/v1.0/roleDefs
 *Privilege Level: SA, SVC, DA*
 
@@ -9727,7 +9202,7 @@ curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPOST -H "X-Auth-Token: H
    * ServiceId is a mandatory field, if serviceId is 100 then tenantId field should be empty or if serviceId is not equal to 100 then there must be a tenantId  provided in request.
 
 
-#### 4.4.8.2 <a id="delete_role_definition"></a>Delete Role Definition####
+#### 4.4.7.2 <a id="delete_role_definition"></a>Delete Role Definition####
 #### DELETE /HP-IDM/v1.0/roleDefs/{roleId}
 *Privilege Level: SA, SVC, DA*
 
@@ -9845,7 +9320,7 @@ curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XDELETE -H "X-Auth-Token: HP
 
 
 
-#### 4.4.8.3 <a id="update_role_definition"></a>Update Role Definition####
+#### 4.4.7.3 <a id="update_role_definition"></a>Update Role Definition####
 #### PUT /HP-IDM/v1.0/roleDefs/{roleId}
 *Privilege Level: SA, SVC, DA*
 
@@ -10013,7 +9488,7 @@ curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPUT -H "X-Auth-Token: HP
 
 
 
-#### 4.4.8.4 <a id="update_role_scope"></a>Update Role Scope####
+#### 4.4.7.4 <a id="update_role_scope"></a>Update Role Scope####
 #### PUT /HP-IDM/v1.0/roleDefs/{roleId}/scope
 *Privilege Level: SA, SVC*
 
@@ -10153,7 +9628,7 @@ curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPUT -H "X-Auth-Token: HP
 * Update role scope is not allowed if there is an existing role assignments in the system for a role.
 
 
-#### 4.4.8.5 <a id="get_a_role_definition"></a>Get A Role Definition####
+#### 4.4.7.5 <a id="get_a_role_definition"></a>Get A Role Definition####
 #### GET /HP-IDM/v1.0/roleDefs/{roleId}
 *Privilege Level: SA, SVC, DA, DU*
 
@@ -10277,7 +9752,7 @@ curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XGET -H "X-Auth-Token: HPAut
 
 
 
-#### 4.4.8.6 <a id="list_role_definitions"></a>List Role Definitions####
+#### 4.4.7.6 <a id="list_role_definitions"></a>List Role Definitions####
 #### GET /HP-IDM/v1.0/roleDefs
 
 *Privilege Level: SA, SVC*
@@ -10422,7 +9897,7 @@ curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XGET -H "X-Auth-Token: HPAut
 * Response can be filtered by domainId, tenantId, serviceId and serviceName.
 
 
-### 4.4.9 Service
+### 4.4.8 Service
 
 The Service REST API provides the ability to manage registered services.
 
@@ -10443,7 +9918,7 @@ N/A
 None.
 
 
-#### 4.4.9.1 <a id="get_service_by_id"></a>Get Service By Id####
+#### 4.4.8.1 <a id="get_service_by_id"></a>Get Service By Id####
 #### GET /HP-IDM/v1.0/services/{serviceId}   
 *Privilege Level: SA, SVC*
 
@@ -10558,7 +10033,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.9.2 <a id="list_registered_services"></a>List Registered Services####
+#### 4.4.8.2 <a id="list_registered_services"></a>List Registered Services####
 #### GET /HP-IDM/v1.0/services
 *Privilege Level: SA, SVC, DA, DU*
 
@@ -10793,7 +10268,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.9.3 <a id="register_new_service"></a>Register New Service####
+#### 4.4.8.3 <a id="register_new_service"></a>Register New Service####
 #### POST /HP-IDM/v1.0/services  	
 *Privilege Level: SA, SVC*
 
@@ -10959,7 +10434,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.9.4 <a id="update_service"></a>Update Service####
+#### 4.4.8.4 <a id="update_service"></a>Update Service####
 #### PUT /HP-IDM/v1.0/services/{serviceId}  	
 *Privilege Level: SA, SVC*
 
@@ -11124,7 +10599,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-### 4.4.10 Signature
+### 4.4.9 Signature
 
 The Signature APIs enable the requester to obtain a token by using a signature for authentication.
 
@@ -11146,7 +10621,7 @@ N/A
 None.
 
 
-#### 4.4.10.1 <a id="ec2_signature"></a>EC2 Signature####
+#### 4.4.9.1 <a id="ec2_signature"></a>EC2 Signature####
 #### POST /HP-IDM/v1.0/ec2Tokens
 *Privilege Level: Anon*
 
@@ -11489,7 +10964,7 @@ curl -k -X POST -H "Content-Type: application/json" -H "Accept: application/json
 
 
 
-#### 4.4.10.2 <a id="generic_signature"></a>Generic Signature####
+#### 4.4.9.2 <a id="generic_signature"></a>Generic Signature####
 #### POST /HP-IDM/v1.0/gstokens
 *Privilege Level: Anon*
 
@@ -11835,7 +11310,7 @@ curl -k -X POST -H "Content-Type: application/json" -H "Accept: application/json
 
 
 
-### 4.4.11 Tenant
+### 4.4.10 Tenant
 
 A Tenant is a collection of services, associated with zero or more users who have access to these services via role references.
 
@@ -11855,7 +11330,7 @@ N/A
 
 None.
 
-#### 4.4.11.1 <a id="get_all_tenants"></a>Get All Tenants####
+#### 4.4.10.1 <a id="get_all_tenants"></a>Get All Tenants####
 #### GET /HP-IDM/v1.0/tenants
 *Privilege Level: SA*
 
@@ -12033,7 +11508,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants"
 ```
 
-#### 4.4.11.2 <a id="get_a_tenant"></a>Get A Tenant####
+#### 4.4.10.2 <a id="get_a_tenant"></a>Get A Tenant####
 #### GET /HP-IDM/v1.0/tenants/{tenantId} 
 *Privilege Level: SA, DA, DU*
 
@@ -12171,7 +11646,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 ```
 
-#### 4.4.11.3 <a id="check_for_existence_of_tenant_name"></a>Check For Existence Of Tenant Name####
+#### 4.4.10.3 <a id="check_for_existence_of_tenant_name"></a>Check For Existence Of Tenant Name####
 #### HEAD [HPKeystoneExtensionBaseURI]/tenants?name=tenantName
 *Privilege Level: Anon*
 
@@ -12293,7 +11768,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X HEAD -
 
 There is no response body returned in API response data. This API does not require http header X-Auth-Token and is protected by client certificate authentication.
 
-#### 4.4.11.4 <a id="get_a_list_of_users_for_a_tenant_(includes_role_assignments)"></a>Get A List Of Users For A Tenant (includes Role Assignments)####
+#### 4.4.10.4 <a id="get_a_list_of_users_for_a_tenant_(includes_role_assignments)"></a>Get A List Of Users For A Tenant (includes Role Assignments)####
 #### GET /HP-IDM/v1.0/tenants/{tenantId}/users
 *Privilege Level: SA, DA*
 
@@ -12485,7 +11960,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/users"
 ```
 
-#### 4.4.11.5 <a id="create_a_tenant"></a>Create A Tenant####
+#### 4.4.10.5 <a id="create_a_tenant"></a>Create A Tenant####
 #### POST /HP-IDM/v1.0/tenants 
 *Privilege Level: SA, DA*
 
@@ -12665,7 +12140,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants" -d '{"tenant":{"description":"Payroll Tenant Services for TimeWarner","domainId":"47826457774667","name":"Payroll Tenant Services","status":"enabled"}}'
 ```
 
-#### 4.4.11.6 <a id="update_a_tenant"></a>Update A Tenant####
+#### 4.4.10.6 <a id="update_a_tenant"></a>Update A Tenant####
 #### PUT /HP-IDM/v1.0/tenants/{tenantID} 
 *Privilege Level: SA, DA*
 
@@ -12859,7 +12334,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/37942731773710" -d '{"tenant":{"description":"Tenant for Market forecasting service","otherAttributes":{"swiftAccountHash":"abcd23456"}}}'
 ```
 
-#### 4.4.11.7 <a id="delete_a_tenant"></a>Delete A Tenant####
+#### 4.4.10.7 <a id="delete_a_tenant"></a>Delete A Tenant####
 #### DELETE /HP-IDM/v1.0/tenants/{tenantId}
 *Privilege Level: SA, DA*
 
@@ -12958,7 +12433,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 ```
 
-#### 4.4.11.8 <a id="get_endpoints_for_a_tenant"></a>Get Endpoints For A Tenant####
+#### 4.4.10.8 <a id="get_endpoints_for_a_tenant"></a>Get Endpoints For A Tenant####
 #### GET /HP-IDM/v1.0/tenants/{tenantId}/endpoints
 *Privilege Level: SA, DA, DU*
 
@@ -13154,7 +12629,7 @@ Current Impl: We don't filter by enabled flag so include all of them.
 1. Do we need to include global endpoints (endpoint templates with global flag as true) in this call? In keystone reference code base, it does not include them.  Current Impl: We don't include global endpoint templates in the response.
 
 
-#### 4.4.11.9 <a id="add_endpoint_to_a_tenant"></a>Add Endpoint To A Tenant####
+#### 4.4.10.9 <a id="add_endpoint_to_a_tenant"></a>Add Endpoint To A Tenant####
 #### POST /HP-IDM/v1.0/tenants/{tenantId]}/endpoints
 *Privilege Level: SA, DA*
 
@@ -13322,7 +12797,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints" -d '{"endpointTemplate":{"id":120}}'
 ```
 
-#### 4.4.11.10 <a id="remove_endpoints_from_a_tenant"></a>Remove Endpoints From A Tenant####
+#### 4.4.10.10 <a id="remove_endpoints_from_a_tenant"></a>Remove Endpoints From A Tenant####
 #### DELETE /HP-IDM/v1.0/tenants/{tenantId}/endpoints/{endpointId}
 *Privilege Level: DA, SA*
 
@@ -13421,7 +12896,7 @@ Curl Example
 ```
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints/543"
 ```
-### 4.4.12 Token
+### 4.4.11 Token
 
 A yummy cookie one uses to bribe the authorization monster.
 
@@ -13442,7 +12917,7 @@ N/A
 None.
 
 
-#### 4.4.12.1 <a id="validate_token"></a>Validate Token####
+#### 4.4.11.1 <a id="validate_token"></a>Validate Token####
 #### GET /tokens/{tokenId}
 *Privilege Level: Anon*
 
@@ -13683,7 +13158,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Accep
 **Additional Notes**
 
 
-#### 4.4.12.2 <a id="quick_token_validation"></a>Quick Token Validation####
+#### 4.4.11.2 <a id="quick_token_validation"></a>Quick Token Validation####
 #### HEAD /tokens/\<tokenId\>?belongsTo=tenantId
 *Privilege Level: Anon*
 
@@ -13799,7 +13274,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -XHEAD "h
 **Additional Notes**
 
 
-#### 4.4.12.3 <a id="refresh_token"></a>Refresh Token####
+#### 4.4.11.3 <a id="refresh_token"></a>Refresh Token####
 #### [HPKeystoneExtensionBaseURI]/tokens/\<tokenId\>
 *Privilege Level: SS*
 
@@ -13946,7 +13421,7 @@ curl -k -XPOST --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H
 
 **Additional Notes**
 
-### 4.4.13 Users
+### 4.4.12 Users
 
 Cloud users.
 
@@ -13967,7 +13442,7 @@ N/A
 None.
 
 
-#### 4.4.13.1 <a id="list_users"></a>List Users####
+#### 4.4.12.1 <a id="list_users"></a>List Users####
 #### GET /HP-IDM/v1.0/users
 *Privilege Level: SA, DA, SS*
 
@@ -14270,7 +13745,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.13.2 <a id="get_a_user"></a>Get A User####
+#### 4.4.12.2 <a id="get_a_user"></a>Get A User####
 #### GET /HP-IDM/v1.0/users/{userId} 
 *Privilege Level: SA, DA, SS*
 
@@ -14423,7 +13898,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.13.3 <a id="check_for_existence_of_user"></a>Check For Existence Of User####
+#### 4.4.12.3 <a id="check_for_existence_of_user"></a>Check For Existence Of User####
 #### HEAD [HPKeystoneExtensionBaseURI]/users?name=username
 *Privilege Level: Anon*
 
@@ -14550,7 +14025,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem "https://
 
 **Additional Notes**
 
-#### 4.4.13.4 <a id="create_a_new_user"></a>Create A New User####
+#### 4.4.12.4 <a id="create_a_new_user"></a>Create A New User####
 #### POST /HP-IDM/v1.0/users
 *Privilege Level: SA, DA, SR*
 
@@ -14755,7 +14230,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.13.5 <a id="update_a_user"></a>Update A User####
+#### 4.4.12.5 <a id="update_a_user"></a>Update A User####
 #### PUT /HP-IDM/v1.0/users/{userId} 
 *Privilege Level: SA, DA\*, SS*
 
@@ -14936,7 +14411,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.13.6 <a id="delete_a_user"></a>Delete A User####
+#### 4.4.12.6 <a id="delete_a_user"></a>Delete A User####
 #### DELETE /HP-IDM/v1.0/users/{userId}
 *Privilege Level: SA, DA*
 
@@ -15069,7 +14544,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.13.7 <a id="get_all_groups_for_a_user"></a>Get All Groups For A User####
+#### 4.4.12.7 <a id="get_all_groups_for_a_user"></a>Get All Groups For A User####
 #### GET /HP-IDM/v1.0/users/{userId}/groups
 *Privilege Level: SA, DA, SS*
 
@@ -15244,7 +14719,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.13.8 <a id="update_password_for_a_user"></a>Update Password For A User####
+#### 4.4.12.8 <a id="update_password_for_a_user"></a>Update Password For A User####
 #### PUT /HP-IDM/v1.0/users/{userId}/password
 *Privilege Level: SA, DA, SS*
 
@@ -15399,7 +14874,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.13.9 <a id="initial_password_reset"></a>Initial Password Reset####
+#### 4.4.12.9 <a id="initial_password_reset"></a>Initial Password Reset####
 #### POST /HP-IDM/v1.0/users/password/reset
 *Privilege Level: SA, DA, Anon*
 
@@ -15528,7 +15003,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.13.10 <a id="validate_password_resetid_and_update_password"></a>Validate Password ResetId And Update Password####
+#### 4.4.12.10 <a id="validate_password_resetid_and_update_password"></a>Validate Password ResetId And Update Password####
 #### PUT /HP-IDM/v1.0/users/password/reset/{resetId}
 *Privilege Level: Anon*
 
@@ -15709,7 +15184,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Conte
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.13.11 <a id="list_a_users_non_tenant_role_assignments"></a>List A User's Non Tenant Role Assignments####
+#### 4.4.12.11 <a id="list_a_users_non_tenant_role_assignments"></a>List A User's Non Tenant Role Assignments####
 #### GET /HP-IDM/v1.0/users/{userId}/username}/roles
 *Privilege Level: SA, DA, DU*
 
@@ -15934,7 +15409,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.13.12 <a id="check_users_non_tenant_role_assignment"></a>Check User's Non Tenant Role Assignment####
+#### 4.4.12.12 <a id="check_users_non_tenant_role_assignment"></a>Check User's Non Tenant Role Assignment####
 #### HEAD [HPKeystoneExtensionBaseURI]/users/\<userId\>/roles/\<roleId\> 
 *Privilege Level: SA, DA, DU*
 
@@ -16061,7 +15536,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.13.13 <a id="create_a_users_non_tenant_role_assignment"></a>Create A User's Non Tenant Role Assignment####
+#### 4.4.12.13 <a id="create_a_users_non_tenant_role_assignment"></a>Create A User's Non Tenant Role Assignment####
 #### PUT /HP-IDM/v1.0/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -16179,7 +15654,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.13.14 <a id="delete_a_users_non_tenant_role_assignment"></a>Delete A User's Non Tenant Role Assignment####
+#### 4.4.12.14 <a id="delete_a_users_non_tenant_role_assignment"></a>Delete A User's Non Tenant Role Assignment####
 #### DELETE /HP-IDM/v1.0/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -16300,7 +15775,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-### 4.4.14 User Certificate
+### 4.4.13 User Certificate
 
 User Certificate Operations.
 
@@ -16321,7 +15796,7 @@ N/A
 None.
 
 
-#### 4.4.14.1 <a id="get_user_certificates"></a>Get User Certificates####
+#### 4.4.13.1 <a id="get_user_certificates"></a>Get User Certificates####
 #### GET /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS* 
 
@@ -16549,7 +16024,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.14.2 <a id="delete_user_certificate"></a>Delete User Certificate####
+#### 4.4.13.2 <a id="delete_user_certificate"></a>Delete User Certificate####
 #### DELETE /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	D
 *Privilege Level: SA, DA, SS*
 
@@ -16671,7 +16146,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.14.3 <a id="get_user_certificate"></a>Get User Certificate####
+#### 4.4.13.3 <a id="get_user_certificate"></a>Get User Certificate####
 #### GET /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber}
 *Privilege Level: SA, DA, SS*
 
@@ -16854,7 +16329,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.14.4 <a id="create_a_user_certificate"></a>Create A User Certificate####
+#### 4.4.13.4 <a id="create_a_user_certificate"></a>Create A User Certificate####
 #### POST /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS*
 
@@ -17059,7 +16534,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.14.5 <a id="import_user_certificate(s)"></a>Import User Certificate(s)####
+#### 4.4.13.5 <a id="import_user_certificate(s)"></a>Import User Certificate(s)####
 #### PUT /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS*
 
@@ -17290,7 +16765,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.14.6 <a id="update_user_certificate"></a>Update User Certificate####
+#### 4.4.13.6 <a id="update_user_certificate"></a>Update User Certificate####
 #### PUT /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	
 *Privilege Level: SA,DA,SS*
 
@@ -17453,7 +16928,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 
 
-### 4.4.15 User Key Pair
+### 4.4.14 User Key Pair
 
 The User Key Pair REST API provides the ability to manage user access keys.
 
@@ -17475,7 +16950,7 @@ N/A
 None.
 
 
-#### 4.4.15.1 <a id="create_user_key_pair"></a>Create User Key Pair####
+#### 4.4.14.1 <a id="create_user_key_pair"></a>Create User Key Pair####
 #### POST /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
@@ -17680,7 +17155,7 @@ curl -k -X POST -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46
 
 
 
-#### 4.4.15.2 <a id="delete_user_key_pair"></a>Delete User Key Pair####
+#### 4.4.14.2 <a id="delete_user_key_pair"></a>Delete User Key Pair####
 #### DELETE /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 
@@ -17802,7 +17277,7 @@ curl -k -X DELETE -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d
 **Additional Notes**
 
 
-#### 4.4.15.3 <a id="get_user_key_pair"></a>Get User Key Pair####
+#### 4.4.14.3 <a id="get_user_key_pair"></a>Get User Key Pair####
 #### GET /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 
@@ -17953,7 +17428,7 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 
 
 
-#### 4.4.15.4 <a id="get_user_key_pairs"></a>Get User Key Pairs####
+#### 4.4.14.4 <a id="get_user_key_pairs"></a>Get User Key Pairs####
 #### GET /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
@@ -18267,7 +17742,7 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 **Additional Notes**
 
 
-#### 4.4.15.5 <a id="import_user_key_pair(s)"></a>Import User Key Pair(s)####
+#### 4.4.14.5 <a id="import_user_key_pair(s)"></a>Import User Key Pair(s)####
 #### PUT /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
@@ -18611,7 +18086,7 @@ curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d
 
 
 
-#### 4.4.15.6 <a id="update_user_key_pair"></a>Update User Key Pair####
+#### 4.4.14.6 <a id="update_user_key_pair"></a>Update User Key Pair####
 #### PUT /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 

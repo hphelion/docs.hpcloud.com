@@ -235,6 +235,10 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
                 print line
             pm = re_priv.match(line)
             if pm:
+                priv_lev = pm.group('privilege')
+                if priv_lev == '{Privilege Level}':
+                    # SA?
+                    priv_lev = 'SA'
                 api_table.append((group_name, action_name, action_name_tag, verb, path, 'Y/Y',
                     pm.group('privilege')))
                 if not private_api:
