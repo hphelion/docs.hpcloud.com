@@ -1120,7 +1120,7 @@ XML
 Curl Example
 
 ```
-curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates/130" -d '{  "EndpointTemplate" : {  "name" : "Compute", "type":"compute", "id":"130","region":"az-3.region-a.geo-6","global":"false","enabled":"true",releaseState="public","publicURL": "https:\/\/az-3.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/", "adminURL": "https:\/\/https://nv-aw2az3-manage0009.uswest.hpcloud.net\/v1.1\/"} }'
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates/111" -d '{  "EndpointTemplate" : {  "name" : "Compute",  "region":"az-3.region-a.geo-1",releaseState="preview"} }'
 ```
 
 **Additional Notes**

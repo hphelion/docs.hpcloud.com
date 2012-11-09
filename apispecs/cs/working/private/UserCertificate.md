@@ -1144,11 +1144,7 @@ XML
 Curl Example
 
 ```
-curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test/1239dac6" -XPUT -d "{
-  "certificate" : {
-    "status" : "inactive"
-  }
-}"
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test/1239dac6" -XPUT -d '{"certificate": {"status": "inactive"} }'
 ```
 
 **Additional Notes**
