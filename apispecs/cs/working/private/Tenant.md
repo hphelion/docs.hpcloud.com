@@ -285,7 +285,12 @@ Date: Wed, 10 Aug 2011 22:36:32 GMT
 <tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"
 enabled="true" status="enabled" domainId="798477662343"
 tenantId="270316896886"
-description="Tenant for Sales Forecasting service" />
+description="Tenant for Sales Forecasting service" >
+<billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </billToAddress> 
+<soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </soldToAddress> 
+</tenant>
 ```
 
 **Error Response**
@@ -663,6 +668,8 @@ See schema file for more details on the request and response data structure.
 * *domainId* - string - The Id of the domain this tenant is a member of.
 * *name* - string - The name of the tenant being created.
 * *status* - string (Optional) - String to describe the initial status of this tenant (enabled/disabled).
+* *billToAddress"  (Optional)
+* *soldToAddress"  (Optional)
 
 JSON
 
@@ -700,6 +707,10 @@ Content-Length: 254
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" name="Time Warner Salesforce Services" domainId="27960688482075" status="enabled">
   <description>Tenant for hosting Time Warner Salesforce Applications</description>
+<billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </billToAddress> 
+<soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </soldToAddress> 
 </tenant>
 ```
 
@@ -864,7 +875,12 @@ Connection: keep-alive
 Content-Length: 350
  
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" status="disabled"/>
+<tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" status="disabled">
+<billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </billToAddress> 
+<soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </soldToAddress> 
+</tenant>
 ```
 
 XML (with swift account hash)
