@@ -96,7 +96,7 @@ Note that the **EnterpriseUserEmailVerification** action must handle validations
 After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
 
 | Templates Used	| CtrlSvcsContactActivity Type 	|
-| -- 	| -- 	|
+| -------------- 	| ----------------------------- 	|
 | WELCOME_TO_CLOUD_EMAIL_ID 	| WelcomeEmailSent	|
 | EMAIL_ENTERPRISE_VERIFICATION_EMAIL_ID 	| EmailVerifEmailSent	|
 | EMAIL_ENTERPRISE_VERIFICATION_WITH_PWD_COLLECT_EMAIL_ID 	| EntVerifEmailWithPwdCollectSent	|
@@ -104,7 +104,7 @@ After submission of an email a **CtrlSvcsContactActivity** Salesforce object is 
 Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
 
 | Email Text 	| Replaced With 	|
-| -- 	| -- 	|
+| ---------- 	| -------------- 	|
 | %accountId% 	| user.accountId 	|
 | %username% 	| user.username 	|
 | %firstName% 	| user.firstName 	|

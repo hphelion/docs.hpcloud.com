@@ -15,7 +15,7 @@ N/A
 ## Action Parameters ##
 
 | Parameter Name	| Parameter Type	| Is Required	|
-| -----------	| ------------------	| -------------	|
+| --------------	| ------------------	| -------------	|
 | state 	| xs:string 	| false 	|
 | password 	| xs:string 	| **true** 	|
 | addressLine1 	| xs:string 	| false 	|
@@ -34,7 +34,7 @@ N/A
 
 ## Action Steps ##
 | Step Name 	| Step Description 	| Is Retryable 	|
-| -- 	| -- 	| -- 	|
+| ---------- 	| ----------------- 	| ------------ 	|
 | CreateUmsUser 	| Create a new UMS User object. 	| false 	|
 | CreateKmsUser 	| Create a new KMS User Account corresponding to a UMS User. 	| false 	|
 | CreateKmsUserKeys 	| Create a set of KMS Keys for the specified UMS User. 	| false 	|

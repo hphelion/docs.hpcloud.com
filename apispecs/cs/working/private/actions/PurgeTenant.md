@@ -15,7 +15,7 @@ Delete the specified Tenant from the UMS. Cancel all activated services and all 
 ## Action Parameters ##
 
 | Parameter Name	| Parameter Type	| Is Required	|
-| -----------	| ------------------	| -------------	|
+| ---------------	| ------------------	| -------------	|
 | tenantId 	| xs:string 	| **true** 	|
 | tenantName 	| xs:string 	| **true** 	|
 
@@ -23,7 +23,7 @@ Delete the specified Tenant from the UMS. Cancel all activated services and all 
 
 ## Action Steps ##
 | Step Name 	| Step Description 	| Is Retryable 	|
-| -- 	| -- 	| -- 	|
+| ---------- 	| ----------------- 	| ------------ 	|
 | FindUmsTenant 	| Find the specified tenant 	| false 	|
 | PurgeZuoraTenantAccount 	| Cancel all subscriptions in Zuora that are owned by this tenant. Do not remove tenant account. 	| false 	|
 | PurgeServicesForTenant 	| Attempt to purge (physically remove) all the services for the tenant by de-provisioning the tenant's services first. *Note:* Rollback is not supported. 	| false 	|

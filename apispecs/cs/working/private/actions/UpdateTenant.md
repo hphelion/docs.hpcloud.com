@@ -15,7 +15,7 @@ Change the name and/or description for an existing Tenant in both UMS and Zuora.
 ## Action Parameters ##
 
 | Parameter Name	| Parameter Type	| Is Required	|
-| -----------	| ------------------	| -------------	|
+| ---------------	| ------------------	| -------------	|
 | tenantId 	| xs:string 	| **true** 	|
 | tenantName 	| xs:string 	| false 	|
 | description 	| xs:string 	| false 	|
@@ -23,7 +23,7 @@ Change the name and/or description for an existing Tenant in both UMS and Zuora.
 
 ## Action Steps ##
 | Step Name 	| Step Description 	| Is Retryable 	|
-| -- 	| -- 	| -- 	|
+| ---------- 	| ----------------- 	| ------------ 	|
 | FindUmsTenant 	| 	| 	|
 | UpdateUmsTenant 	| Update the tenant's name and/or description in the UMS. 	| false 	|
 | UpdateZuoraTenantAccount 	| Update the tenant's name and/or description in Zuora. 	| **true** 	|

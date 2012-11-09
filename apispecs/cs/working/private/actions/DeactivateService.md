@@ -25,7 +25,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:-------------|:-------------|:----------|
 |tenantId|xs:string|true|
 |serviceName|xs:string|true|
 |regionCode|xs:string|false|
@@ -113,7 +113,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:--------|:---------------|:-----------|
 |FindUmsTenant|Retrieve an existing Tenant from the UMS based on the ```tenantId``` or the ```tenantName``` of the Tenant.|false|
 |DeactivateZuoraSubscription|Cancel Zuora subscriptions for a service that is being deactivated.|false|
 |DeprovisionService|Deprovision the tenant to specified external service.Currently, the tenant is only deprovisioned from Object Storage (Swift). Other services do not require any provisioning actions beyond the CS DB.Note: Deprovisioning rollback from Object Storage is not supported.|false|

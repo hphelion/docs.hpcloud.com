@@ -15,13 +15,13 @@ Completely remove the specified Domain from the system. Cascade removal to all s
 ## Action Parameters ##
 
 | Parameter Name	| Parameter Type	| Is Required	|
-| -----------	| ------------------	| -------------	|
+| --------------	| ------------------	| -------------	|
 | domainId 	| xs:string 	| **true** 	|
 | dryrun 	| xs:string 	| false 	|
 
 ## Action Steps ##
 | Step Name 	| Step Description 	| Is Retryable 	|
-| -- 	| -- 	| -- 	|
+| ---------- 	| ----------------- 	| ------------ 	|
 | DeactivateZuoraAccount 	| When a domain is deleted we mark the corresponding Zuora Account as inactive by setting its state to 'Canceled' - with one Ell. 	| false 	|
 | PurgeServicesForDomain 	| Find all domain tenants and attempt to purge (physically remove) all the services for every tenant by deprovisioning the tenant's services first. *Note:* Rollback is not supported. 	| false 	|
 | DeleteKmsDomain 	| 	| false 	|

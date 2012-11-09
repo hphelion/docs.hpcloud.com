@@ -36,7 +36,7 @@ Activate specified Tenant to to the specified service.
 
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:-------------|:-------------|:----------|
 |domainId|xs:string|true|
 |tenantId|xs:string|true|
 |serviceName|xs:string|true|
@@ -126,7 +126,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:--------|:---------------|:-----------|
 |FindOrCreateUmsTenant|Create a new or retrieve an existing Tenant from the UMS based on the tenantName of the Tenant, *OR* retrieve an existing Tenant from the UMS based on the tenantId of the Tenant.|false|
 |CreateZuoraSubscription|Create Zuora subscriptions for a service that is being activated.|false|
 |ProvisionService|Provision the tenant to specified external service.Currently, the tenant is only provisioned to Object Storage (Swift). Other services do not require any provisioning actions beyond the CS DB.|false|

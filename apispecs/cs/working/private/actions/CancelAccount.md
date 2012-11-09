@@ -19,7 +19,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:-------------|:-------------|:----------|
 |domainId|xs:string|true|
 |terminate|xs:boolean|false|
 |reason|xs:string|false|
@@ -84,7 +84,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:--------|:---------------|:-----------|
 |UpdateUmsDomain||false|
 |UpdateKmsDomain|Update the state of a KMS Tenant to match that of its corresponding UMS Domain.|false|
 |UpdateServicesForDomain||false|
