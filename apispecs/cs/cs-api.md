@@ -1206,7 +1206,7 @@ None.
 
 
 #### 4.4.3.1 <a id="create_user_access_key"></a>Create User Access Key####
-#### POST [HPKeystoneExtensionBaseURI]/accesskeys
+#### POST /HP-IDM/v1.0/accesskeys
 
 *Privilege Level: SA, DA, SS*
 
@@ -1391,7 +1391,7 @@ curl -k -X POST -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46
 
 
 #### 4.4.3.2 <a id="delete_user_access_key"></a>Delete User Access Key####
-#### DELETE [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId} 
+#### DELETE /HP-IDM/v1.0/accesskeys/{accesskeyId} 
 *Privilege Level: SA, DA, SS*
 
 Delete a user access key.
@@ -1491,7 +1491,7 @@ curl -k -X DELETE -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d
 
 
 #### 4.4.3.3 <a id="get_access_keys"></a>Get Access Keys####
-#### GET [HPKeystoneExtensionBaseURI]/accesskeys
+#### GET /HP-IDM/v1.0/accesskeys
 
 *Privilege Level: SA,DA, SS*
 
@@ -1673,7 +1673,7 @@ curl -k -H "X-Auth-Token: HPAuth_21805c02da2661574e46235bd8c27c10623bddc09a7cf4c
 
 
 #### 4.4.3.4 <a id="get_an_access_key"></a>Get An Access Key####
-#### GET [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId}
+#### GET /HP-IDM/v1.0/accesskeys/{accesskeyId}
 
 *Privilege Level: SA,DA,SS*
 
@@ -1824,7 +1824,7 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 
 
 #### 4.4.3.5 <a id="import_user_access_key(s)"></a>Import User Access Key(s)####
-#### PUT [HPKeystoneExtensionBaseURI]/accesskeys
+#### PUT /HP-IDM/v1.0/accesskeys
 *Privilege Level: SA, DA, SS*
 
 Import one or more user access keys. 
@@ -2072,7 +2072,7 @@ curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d
 
 
 #### 4.4.3.6 <a id="update_user_access_key"></a>Update User Access Key####
-#### PUT [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId}
+#### PUT /HP-IDM/v1.0/accesskeys/{accesskeyId}
 *Privilege Level: SA, DA, SS*
 
 Update a user access key. This method may be used to modify the key status only.

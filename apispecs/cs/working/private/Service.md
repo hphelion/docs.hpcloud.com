@@ -20,7 +20,7 @@ None.
 
 
 ## Get Service by Id
-#### GET [iaas:HPKeystoneExtensionBaseURI]/services/{serviceId}   
+#### GET [HPKeystoneExtensionBaseURI]/services/{serviceId}   
 *Privilege Level: SA, SVC*
 
 This API is used to get registered service data by its id (system generated service identifier).
@@ -135,7 +135,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 ## List Registered Services
-#### GET [iaas:HPKeystoneExtensionBaseURI]/services?limit={pagesize}&marker={ServiceId}&serviceType={ServiceType}  
+#### GET [HPKeystoneExtensionBaseURI]/services?limit={pagesize}&marker={ServiceId}&serviceType={ServiceType}  
 *Privilege Level: SA, SVC, DA, DU*
 
 This API is used to get paginated list of registered services available in the system. The marker value is serviceId of last item in previous list. Results are sorted by serviceId. To get list of services for a specific type of service, serviceType request parameter can be added. 
@@ -370,7 +370,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 ## Register New Service
-#### POST [iaas:HPKeystoneExtensionBaseURI]/services  	
+#### POST [HPKeystoneExtensionBaseURI]/services  	
 *Privilege Level: SA, SVC*
 
 This API is used to add new service registration. 
@@ -536,7 +536,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 ## Update Service
-#### PUT [iaas:HPKeystoneExtensionBaseURI]/services/{serviceId}  	
+#### PUT [HPKeystoneExtensionBaseURI]/services/{serviceId}  	
 *Privilege Level: SA, SVC*
 
 This API is used to modify registered service data and for decommissioning the service if its no longer in use.

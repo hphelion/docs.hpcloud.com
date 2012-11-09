@@ -121,10 +121,10 @@ group: apispec
 | Role Defs | [Update Role Scope](#update_role_scope) | PUT | /HP-IDM/v1.0/roleDefs/{roleId}/scope | Y/Y | SA, SVC |
 | Role Defs | [Get A Role Definition](#get_a_role_definition) | GET | /HP-IDM/v1.0/roleDefs/{roleId} | Y/Y | SA, SVC, DA, DU |
 | Role Defs | [List Role Definitions](#list_role_definitions) | GET | /HP-IDM/v1.0/roleDefs | Y/Y | SA, SVC |
-| Service | [Get Service By Id](#get_service_by_id) | GET | [iaas:HPKeystoneExtensionBaseURI]/services/{serviceId}    | Y/Y | SA, SVC |
-| Service | [List Registered Services](#list_registered_services) | GET | [iaas:HPKeystoneExtensionBaseURI]/services | Y/Y | SA, SVC, DA, DU |
-| Service | [Register New Service](#register_new_service) | POST | [iaas:HPKeystoneExtensionBaseURI]/services  	 | Y/Y | SA, SVC |
-| Service | [Update Service](#update_service) | PUT | [iaas:HPKeystoneExtensionBaseURI]/services/{serviceId}  	 | Y/Y | SA, SVC |
+| Service | [Get Service By Id](#get_service_by_id) | GET | /HP-IDM/v1.0/services/{serviceId}    | Y/Y | SA, SVC |
+| Service | [List Registered Services](#list_registered_services) | GET | /HP-IDM/v1.0/services | Y/Y | SA, SVC, DA, DU |
+| Service | [Register New Service](#register_new_service) | POST | /HP-IDM/v1.0/services  	 | Y/Y | SA, SVC |
+| Service | [Update Service](#update_service) | PUT | /HP-IDM/v1.0/services/{serviceId}  	 | Y/Y | SA, SVC |
 | Signature | [EC2 Signature](#ec2_signature) | POST | /HP-IDM/v1.0/ec2Tokens | Y/Y | Anon |
 | Signature | [Generic Signature](#generic_signature) | POST | /HP-IDM/v1.0/gstokens | Y/Y | Anon |
 | Tenant | [Get All Tenants](#get_all_tenants) | GET | /HP-IDM/v1.0/tenants | Y/Y | SA |
@@ -143,7 +143,7 @@ group: apispec
 | Users | [List Users](#list_users) | GET | /HP-IDM/v1.0/users | Y/Y | SA, DA, SS |
 | Users | [Get A User](#get_a_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | SA, DA, SS |
 | Users | [Check For Existence Of User](#check_for_existence_of_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | Anon |
-| Users | [Create A New User](#create_a_new_user) | POST | [HPKeystoneExtensionBaseURI/users | Y/Y | SA, DA, SR |
+| Users | [Create A New User](#create_a_new_user) | POST | /HP-IDM/v1.0/users | Y/Y | SA, DA, SR |
 | Users | [Delete A User](#delete_a_user) | DELETE | /HP-IDM/v1.0/users/{userId} | Y/Y | SA, DA |
 | Users | [Get All Groups For A User](#get_all_groups_for_a_user) | GET | /HP-IDM/v1.0/users/{userId}/groups | Y/Y | SA, DA, SS |
 | Users | [Update Password For A User](#update_password_for_a_user) | PUT | /HP-IDM/v1.0/users/{userId}/password | Y/Y | SA, DA, SS |
@@ -208,7 +208,7 @@ N/A
 None.
 
 #### 4.4.1.1 <a id="post_action"></a>Post Action####
-#### POST [HPKeystoneExtensionBaseURI]/action/{action}
+#### POST /HP-IDM/v1.0/action/{action}
 Privilege Level: {Privilege Level}*
 
 Submit an action to be executed. Each action takes a specific set of execution parameters within the content of the Post. (For an exact list of parameters for each Action, click the link below.) In the absence of any query parameters, the Action will be submitted and the call will immediately return a Job Ticket. The Job Ticket contains information about the executing Job, and can be refreshed through the job API call.
@@ -319,7 +319,7 @@ curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X POST -H 
 ```
 
 #### 4.4.1.2 <a id="get_jobs_by_account"></a>Get Jobs By Account####
-#### GET [HPKeystoneExtensionBaseURI]/job
+#### GET /HP-IDM/v1.0/job
 *Privilege Level: {Privilege Level}*
 
 Return a list of all Job Tickets submitted by the specified Account ID. 
@@ -419,7 +419,7 @@ curl -k -s -S --connect-timeout 2 --noproxy 127.0.0.1,localhost,hpcloud.net -m 3
 ```
 
 #### 4.4.1.3 <a id="get_a_job_ticket"></a>Get A Job Ticket####
-#### GET [HPKeystoneExtensionBaseURI]/job/{ticketId}
+#### GET /HP-IDM/v1.0/job/{ticketId}
 *Privilege Level: {Privilege Level}*
 
 This call will return the specified Job Ticket, and will optionally block the caller until the Job Ticket is marked as complete.
@@ -672,7 +672,7 @@ curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "
 ```
 
 #### 4.4.1.4 <a id="restart_a_timedout_job"></a>Restart A TIMEDOUT Job####
-#### PUT [HPKeystoneExtensionBaseURI]/job/{ticketId}
+#### PUT /HP-IDM/v1.0/job/{ticketId}
 *Privilege Level: {Privilege Level}*
 
 Some Actions contain Steps that are retryable. Examples are calls to Zuora or Salesforce, which might fail due to internet connectivity issues. These steps contain a retry count the determines how many times they should re-attempt execution. Once all retries have been used up the Step and the Action are tagged with the TIMEDOUT status.
@@ -804,7 +804,7 @@ curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X DELETE -
 ```
 
 #### 4.4.1.6 <a id="get_error_jobs"></a>Get Error Jobs####
-#### GET [HPKeystoneExtensionBaseURI]/job/error
+#### GET /HP-IDM/v1.0/job/error
 *Privilege Level: {Privilege Level}*
 
 Return a list of all Job Tickets that are in the ERROR or CANCELLED state.
@@ -1234,7 +1234,7 @@ curl -k -s -S --connect-timeout 2 --noproxy <proxy-excpetions> -m 30 -X GET -H "
 ```
 
 #### 4.4.1.7 <a id="get_a_count_of_error_jobs"></a>Get A Count Of Error Jobs####
-#### GET [HPKeystoneExtensionBaseURI]/job/error/count
+#### GET /HP-IDM/v1.0/job/error/count
 *Privilege Level: {Privilege Level}*
 
 Return a count of all error job tickets in the database. Error tickets have a status of either ERROR or TIMEDOUT.
@@ -1296,7 +1296,7 @@ Date: Thu, 06 Oct 2011 16:12:00 GMT
 curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/error/count
 ```
 #### 4.4.1.8 <a id="get_error_jobs_by_category"></a>Get Error Jobs By Category####
-#### GET [HPKeystoneExtensionBaseURI]/job/error/{category}
+#### GET /HP-IDM/v1.0/job/error/{category}
 *Privilege Level: {Privilege Level}*
 
 Job Tickets that are in the ERROR state will have an Action Exception attached to them. Action Exceptions are categorize, and can be retrieved or delete in bulk by category. This API is used to retreive all ERROR action jobs whose Action Exceptions are of a specified category. The list of all categories is found on the Action Exception page.
@@ -1778,7 +1778,7 @@ Date: Wed, 05 Oct 2011 15:31:25 GMT
 ```
 
 #### 4.4.1.10 <a id="get_jobs_by_status"></a>Get Jobs By Status####
-#### GET [HPKeystoneExtensionBaseURI]/job/status/{status}
+#### GET /HP-IDM/v1.0/job/status/{status}
 *Privilege Level: {Privilege Level}*
 
 Return all Job Tickets from the database which have the given status value. The Action Page provides a list of all possible status values.
@@ -1925,7 +1925,7 @@ curl -k -s -S --connect-timeout 2 --noproxy <proxy-exceptions> -m 30 -X GET -H "
 ```
 
 #### 4.4.1.11 <a id="get_job_count_by_status"></a>Get Job Count By Status####
-#### GET [HPKeystoneExtensionBaseURI]/job/status/{status}/count
+#### GET /HP-IDM/v1.0/job/status/{status}/count
 *Privilege Level: {Privilege Level}*
 
 Return a count of all Job Tickets from the database which have the given status value. The Action Page provides a list of all possible status values.
@@ -2165,7 +2165,7 @@ curl -k  --cert dev_hpmiddleware.pem  -I -H "Accept: application/json" "https://
 
 
 #### 4.4.2.2 <a id="create_a_domain"></a>Create A Domain####
-#### GET [HPKeystoneExtensionBaseURI]/domains 
+#### GET /HP-IDM/v1.0/domains 
 *Privilege Level: System Adminstrator (SA)*
 
 Creates a domain using the specified request body. A response body is also returned with the new domain information with a service generated domainId.
@@ -2398,7 +2398,7 @@ curl -k --cert dev_hpmiddleware.pem  -XPOST -H "X-Auth-Token: HPAuth_769bcc02e0b
 
 
 #### 4.4.2.3 <a id="delete_a_domain"></a>Delete A Domain####
-#### DELETE [HPKeystoneExtensionBaseURI]/domains/{domainId} 
+#### DELETE /HP-IDM/v1.0/domains/{domainId} 
 *Privilege Level: System Adminstrator (SA)*
 
 Deletes the specified domain by its {domainID}. This API deletes the Users, Tenants, Groups, Roles, RoleRefs and Grants associated to the Domain.
@@ -2559,7 +2559,7 @@ curl -k --cert dev_hpmiddleware.pem  -XDELETE -H "X-Auth-Token: HPAuth_769bcc02e
 
 
 #### 4.4.2.4 <a id="get_a_domain"></a>Get A Domain####
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId} 
+#### GET /HP-IDM/v1.0/domains/{domainId} 
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 Get a domain based on the {domainId} specified. DomainId's are opaque values returned with get domain list operations. 
@@ -2739,7 +2739,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 
 
 #### 4.4.2.5 <a id="get_all_domains"></a>Get All Domains####
-#### GET [HPKeystoneExtensionBaseURI]/domains
+#### GET /HP-IDM/v1.0/domains
 *Privilege Level: System Adminstrator (SA)*
 
 Allows reading a list of all domains. This API supports pagination through 'limit' and 'marker' usage. The returned list may be filtered to allow only those domains which the caller has access to. 
@@ -3088,7 +3088,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 
 
 #### 4.4.2.6 <a id="get_groups_for_a_domain"></a>Get Groups For A Domain####
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups
+#### GET /HP-IDM/v1.0/domains/{domainId}/groups
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API is used to get list of groups for a given domain. Api results can be filtered by using parameters. Query parameters "marker" and "limit" can be used for pagination
@@ -3284,7 +3284,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 
 
 #### 4.4.2.7 <a id="get_subscribe_able_services_for_a_domain"></a>Get Subscribe Able Services For A Domain####
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/subscribeableServices
+#### GET /HP-IDM/v1.0/domains/{domainId}/subscribeableServices
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API returns all subscribe able services that are available for the given {domainId} . It can also filter the result based on service name or endpoint template id. In request, either 'serviceName' filter or 'serviceEndpointId' filter is to be used. If both of filter values are provided, then error is returned back. This is essentially endpoint template data with some additional subscription specific attributes.
@@ -3814,7 +3814,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 #### 4.4.2.8 <a id="get_service_activations_for_a_domain"></a>Get Service Activations For A Domain####
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/services
+#### GET /HP-IDM/v1.0/domains/{domainId}/services
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API returns all services that have been activated for the given {domainId} . It can also filter the result based on tenantId. 
@@ -4038,7 +4038,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 #### 4.4.2.9 <a id="get_tenants_for_a_domain"></a>Get Tenants For A Domain####
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants
+#### GET /HP-IDM/v1.0/domains/{domainId}/tenants
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This REST API returns all tenants of a {domainId} and takes a "marker" and "limit" parameter to limit the number of Tenants in the response.
@@ -4454,7 +4454,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 #### 4.4.2.11 <a id="list_role_definitions_(deprecated)"></a>List Role Definitions (Deprecated)####
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/roles
+#### GET /HP-IDM/v1.0/domains/{domainId}/roles
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API is used to list all the roles defined in the domain and takes a "marker" and "limit" parameter to limit the number of roles in the response.
@@ -4617,7 +4617,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 #### 4.4.2.12 <a id="transfer_ownership_of_a_domain"></a>Transfer Ownership Of A Domain####
-#### PUT [HPKeystoneExtensionBaseURI]/domains/{domainId}/owner/{userId}	
+#### PUT /HP-IDM/v1.0/domains/{domainId}/owner/{userId}	
 *Privilege Level: System Adminstrator (SA)*
 
 A Domain has a owner, it is usually the first user of the Domain or the self registered user during the self registration process. This REST API transfers the domain ownership from one valid User of that Domain to another valid User of the Domain. 
@@ -4780,7 +4780,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 #### 4.4.2.13 <a id="update_a_domain"></a>Update A Domain####
-#### PUT [HPKeystoneExtensionBaseURI]/domains/{domainId}
+#### PUT /HP-IDM/v1.0/domains/{domainId}
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA**)
 
 Allows update of an existing domain using the {domainId} and request body. Does not allow update or change of domainID.
@@ -5001,7 +5001,7 @@ None.
 
 
 #### 4.4.3.1 <a id="add_endpoint_template"></a>Add Endpoint Template####
-#### POST [HPKeystoneExtensionBaseURI]/endpointTemplates
+#### POST /HP-IDM/v1.0/endpointTemplates
 *Privilege Level: SA, SVC*
 
 Adds new endpoint template data. Endpoint template data is provided in POST request body. Service name ('name' attribute) and region is required in EndpointTemplate. Input 'id' needs to be unique value in the system. 
@@ -5219,7 +5219,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -
 
 
 #### 4.4.3.2 <a id="delete_endpoint_template"></a>Delete Endpoint Template####
-#### DELETE [HPKeystoneExtensionBaseURI]/endpointTemplates/ {endpointTemplateId} 
+#### DELETE /HP-IDM/v1.0/endpointTemplates/ {endpointTemplateId} 
 *Privilege Level: SA, SVC*
 
 Deletes an endpoint template for the specified endpointTemplateId This will also remove all tenant association with this template.
@@ -5298,7 +5298,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE
 
 
 #### 4.4.3.3 <a id="get_enabled_endpoint_templates"></a>Get Enabled Endpoint Templates####
-#### GET [HPKeystoneExtensionBaseURI]/endpointTemplates/enabled
+#### GET /HP-IDM/v1.0/endpointTemplates/enabled
 *Privilege Level: SA, SVC, DA, DU *
 
 Get a list of available endpoint templates. If serviceName is provided in query, then endpoint templates specific to only that service are included in response.  In case of incorrect service name ( does not exist in system), empty list is returned. This list will to include only enabled endpoint templates. The operation does not require a request body.
@@ -5537,7 +5537,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 
 #### 4.4.3.4 <a id="get_endpoint_template_by_id"></a>Get Endpoint Template By Id####
-#### GET [HPKeystoneExtensionBaseURI]/endpointTemplates/{endpointTemplateId}
+#### GET /HP-IDM/v1.0/endpointTemplates/{endpointTemplateId}
 *Privilege Level: SA, SVC, DA, DU*
 
 Get an endpoint template by endpointTemplateId.
@@ -5689,7 +5689,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 
 #### 4.4.3.5 <a id="get_endpoint_templates"></a>Get Endpoint Templates####
-#### GET [HPKeystoneExtensionBaseURI]/endpointTemplates
+#### GET /HP-IDM/v1.0/endpointTemplates
 *Privilege Level: SA, SVC, DA, DU *
 
 Get a list of endpoint templates. If serviceName is provided in query, then endpoint templates specific to only that service are included in response. In case of incorrect service name ( does not exist in system), empty list is returned. This list will include disabled endpoint templates in addition to enabled endpoint templates. The operation does not require a request body.
@@ -6123,7 +6123,7 @@ None.
 
 
 #### 4.4.4.1 <a id="add_a_user_to_a_group"></a>Add A User To A Group####
-####  PUT [HPKeystoneExtensionBaseURI]/groups/{groupId}/users/{userId}
+####  PUT /HP-IDM/v1.0/groups/{groupId}/users/{userId}
 *Privilege Level: SA, DA*
 
 This API is used to add an existing user to a specified group of the given domain. This interface requires the groupId and userId.
@@ -6260,7 +6260,7 @@ curl -i -H "X-Auth-Token:HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde
 
 
 #### 4.4.4.2 <a id="create_a_group"></a>Create A Group####
-####  POST [HPKeystoneExtensionBaseURI]/groups
+####  POST /HP-IDM/v1.0/groups
 *Privilege Level: SA,DA*
 
 {Description about the method call}
@@ -6423,7 +6423,7 @@ curl -k  -XPOST -H "X-Auth-Token: HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da
 
 
 #### 4.4.4.3 <a id="delates_a_group"></a>Delates A Group####
-####  DELETE [HPKeystoneExtensionBaseURI]/groups/{groupId}
+####  DELETE /HP-IDM/v1.0/groups/{groupId}
 *Privilege Level: SA ,DA*
 
 Delete a group specified by the groupId. This operation also deletes the associated Roles associated to the Group. This operation does not delete User objects associated with the Group.
@@ -6549,7 +6549,7 @@ curl -i -H "X-Auth-Token:HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde
 
 
 #### 4.4.4.4 <a id="get_a_specific_group"></a>Get A Specific Group####
-####  GET [HPKeystoneExtensionBaseURI]/groups/{groupId}
+####  GET /HP-IDM/v1.0/groups/{groupId}
 *Privilege Level: SA,DA, DU *
 
 {Description about the method call}
@@ -6700,7 +6700,7 @@ curl -k -H "X-Auth-Token:HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde
 
 
 #### 4.4.4.5 <a id="list_users_for_the_group"></a>List Users For The Group####
-####  GET [HPKeystoneExtensionBaseURI]/groups/{groupId}/users
+####  GET /HP-IDM/v1.0/groups/{groupId}/users
 *Privilege Level: SA,DA*
 
 This API is used to list the users for a specified group and takes a "marker" and "limit" parameter to limit the number of Users in the response. Results can also be filtered by using optional filters
@@ -6940,7 +6940,7 @@ curl -v -k -H "X-Auth-Token: HPAuth_b0846199b9d7c4aa0c7c86169ef693e6298da25c564a
 
 
 #### 4.4.4.6 <a id="delete_user_from_the_group"></a>Delete User From The Group####
-#### DELETE 	[HPKeystoneExtensionBaseURI]/groups/{groupId}/users/{userId}
+#### DELETE 	/HP-IDM/v1.0/groups/{groupId}/users/{userId}
 *Privilege Level: SA,DA*
 
 Remove a user from a group   
@@ -7064,7 +7064,7 @@ curl -v -k -H "X-Auth-Token: HPAuth_b0846199b9d7c4aa0c7c86169ef693e6298da25c564a
 
 
 #### 4.4.4.7 <a id="update_group"></a>Update Group####
-####  PUT 	[HPKeystoneExtensionBaseURI]/groups/{groupId}
+####  PUT 	/HP-IDM/v1.0/groups/{groupId}
 *Privilege Level: SA, DA*
 
 Update a group resource for the specified groupId.   Only description and name can  be updated in this operation.
@@ -7266,7 +7266,7 @@ N/A
 None.
 
 #### 4.4.5.1 <a id="user_details"></a>User Details####
-#### GET [HPKeystoneExtensionBaseURI]/users/details/{userId}
+#### GET /HP-IDM/v1.0/users/details/{userId}
 *Privilege Level: MC-CS Certificate*
 
 The UserDetails class is a dynamically constructed amalgamation of many different database collections.
@@ -7567,7 +7567,7 @@ curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "
 
 
 #### 4.4.5.2 <a id="user_preferences"></a>User Preferences####
-#### GET [HPKeystoneExtensionBaseURI]/preferences/{userId}
+#### GET /HP-IDM/v1.0/preferences/{userId}
 *Privilege Level: MC-CS Certificate*
 
 The UserPreference database collection is nothing more that a set of nested hash maps that is associated with a specific user.  Querying it returns that hash map.
@@ -7734,7 +7734,7 @@ Curl Example
 curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <path-to-cert> --cacert <path-to-cacert> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/preferences/<userId>
 ```
 
-#### PUT [HPKeystoneExtensionBaseURI]/preferences/{userId}
+#### PUT /HP-IDM/v1.0/preferences/{userId}
 *Privilege Level: MC-CS Certificate*
 
 The UserPreference database collection is nothing more that a set of nested hash maps that is associated with a specific user.  Values may be updated.
@@ -9563,7 +9563,7 @@ None.
 
 
 #### 4.4.8.1 <a id="create_role_definition"></a>Create Role Definition####
-#### POST [HPKeystoneExtensionBaseURI]/roleDefs
+#### POST /HP-IDM/v1.0/roleDefs
 *Privilege Level: SA, SVC, DA*
 
 This API is used to create a new role definition in system.
@@ -9728,7 +9728,7 @@ curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPOST -H "X-Auth-Token: H
 
 
 #### 4.4.8.2 <a id="delete_role_definition"></a>Delete Role Definition####
-#### DELETE [HPKeystoneExtensionBaseURI]/roleDefs/{roleId}
+#### DELETE /HP-IDM/v1.0/roleDefs/{roleId}
 *Privilege Level: SA, SVC, DA*
 
 This API is used to delete a role definition identified by roleId. 
@@ -9846,7 +9846,7 @@ curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XDELETE -H "X-Auth-Token: HP
 
 
 #### 4.4.8.3 <a id="update_role_definition"></a>Update Role Definition####
-#### PUT [HPKeystoneExtensionBaseURI]/roleDefs/{roleId}
+#### PUT /HP-IDM/v1.0/roleDefs/{roleId}
 *Privilege Level: SA, SVC, DA*
 
 This API is used to update an existing role definition. RoleId is used to uniquely identify a role definition in the system.
@@ -10014,7 +10014,7 @@ curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPUT -H "X-Auth-Token: HP
 
 
 #### 4.4.8.4 <a id="update_role_scope"></a>Update Role Scope####
-#### PUT [HPKeystoneExtensionBaseURI]/roleDefs/{roleId}/scope
+#### PUT /HP-IDM/v1.0/roleDefs/{roleId}/scope
 *Privilege Level: SA, SVC*
 
 This API is used to update the scope an existing role defined in system. Following are the possible role scope defined in system
@@ -10154,7 +10154,7 @@ curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPUT -H "X-Auth-Token: HP
 
 
 #### 4.4.8.5 <a id="get_a_role_definition"></a>Get A Role Definition####
-#### GET [HPKeystoneExtensionBaseURI]/roleDefs/{roleId}
+#### GET /HP-IDM/v1.0/roleDefs/{roleId}
 *Privilege Level: SA, SVC, DA, DU*
 
 This API is used to get a role definition specified by a roleId.
@@ -10278,7 +10278,7 @@ curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XGET -H "X-Auth-Token: HPAut
 
 
 #### 4.4.8.6 <a id="list_role_definitions"></a>List Role Definitions####
-#### GET [HPKeystoneExtensionBaseURI]/roleDefs
+#### GET /HP-IDM/v1.0/roleDefs
 
 *Privilege Level: SA, SVC*
 
@@ -10444,7 +10444,7 @@ None.
 
 
 #### 4.4.9.1 <a id="get_service_by_id"></a>Get Service By Id####
-#### GET [iaas:HPKeystoneExtensionBaseURI]/services/{serviceId}   
+#### GET /HP-IDM/v1.0/services/{serviceId}   
 *Privilege Level: SA, SVC*
 
 This API is used to get registered service data by its id (system generated service identifier).
@@ -10559,7 +10559,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 #### 4.4.9.2 <a id="list_registered_services"></a>List Registered Services####
-#### GET [iaas:HPKeystoneExtensionBaseURI]/services
+#### GET /HP-IDM/v1.0/services
 *Privilege Level: SA, SVC, DA, DU*
 
 This API is used to get paginated list of registered services available in the system. The marker value is serviceId of last item in previous list. Results are sorted by serviceId. To get list of services for a specific type of service, serviceType request parameter can be added. 
@@ -10794,7 +10794,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 #### 4.4.9.3 <a id="register_new_service"></a>Register New Service####
-#### POST [iaas:HPKeystoneExtensionBaseURI]/services  	
+#### POST /HP-IDM/v1.0/services  	
 *Privilege Level: SA, SVC*
 
 This API is used to add new service registration. 
@@ -10960,7 +10960,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 #### 4.4.9.4 <a id="update_service"></a>Update Service####
-#### PUT [iaas:HPKeystoneExtensionBaseURI]/services/{serviceId}  	
+#### PUT /HP-IDM/v1.0/services/{serviceId}  	
 *Privilege Level: SA, SVC*
 
 This API is used to modify registered service data and for decommissioning the service if its no longer in use.
@@ -11147,7 +11147,7 @@ None.
 
 
 #### 4.4.10.1 <a id="ec2_signature"></a>EC2 Signature####
-#### POST [HPKeystoneExtensionBaseURI]/ec2Tokens
+#### POST /HP-IDM/v1.0/ec2Tokens
 *Privilege Level: Anon*
 
 Validate an EC2 signature and return a scoped token.
@@ -11490,7 +11490,7 @@ curl -k -X POST -H "Content-Type: application/json" -H "Accept: application/json
 
 
 #### 4.4.10.2 <a id="generic_signature"></a>Generic Signature####
-#### POST [HPKeystoneExtensionBaseURI]/gstokens
+#### POST /HP-IDM/v1.0/gstokens
 *Privilege Level: Anon*
 
 This API is used to validate a signature and optionally return a token. Validation includes checking that the key used to generate the signature belongs to a particular user and that the key is in a valid state. The signature may be created using an access key, a private key associated with a certificate, or a private key in a key pair.
@@ -11856,7 +11856,7 @@ N/A
 None.
 
 #### 4.4.11.1 <a id="get_all_tenants"></a>Get All Tenants####
-#### GET [HPKeystoneExtensionBaseURI]/tenants
+#### GET /HP-IDM/v1.0/tenants
 *Privilege Level: SA*
 
 Allows reading a list of all tenants across domains. This API supports pagination through 'limit' and 'marker' usage. The returned list may be filtered to allow only those tenants which the caller has access to. The operation does not require a request body.
@@ -12034,7 +12034,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 ```
 
 #### 4.4.11.2 <a id="get_a_tenant"></a>Get A Tenant####
-#### GET [HPKeystoneExtensionBaseURI]/tenants/{tenantId} 
+#### GET /HP-IDM/v1.0/tenants/{tenantId} 
 *Privilege Level: SA, DA, DU*
 
 Get a tenant based on the {tenantId} specified. tenantId's are opaque values returned with get tenant list operations. This operation does not require a request body.
@@ -12294,7 +12294,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X HEAD -
 There is no response body returned in API response data. This API does not require http header X-Auth-Token and is protected by client certificate authentication.
 
 #### 4.4.11.4 <a id="get_a_list_of_users_for_a_tenant_(includes_role_assignments)"></a>Get A List Of Users For A Tenant (includes Role Assignments)####
-#### GET [HPKeystoneExtensionBaseURI]/tenants/{tenantId}/users
+#### GET /HP-IDM/v1.0/tenants/{tenantId}/users
 *Privilege Level: SA, DA*
 
 This API returns all Users for a given Tenant, Roles associated for each User is also returned. If the user is not a valid, an error is returned.
@@ -12486,7 +12486,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 ```
 
 #### 4.4.11.5 <a id="create_a_tenant"></a>Create A Tenant####
-#### POST [HPKeystoneExtensionBaseURI]/tenants 
+#### POST /HP-IDM/v1.0/tenants 
 *Privilege Level: SA, DA*
 
 Creates a tenant using the specified request body. The provided tenant name MUST be unique in the system.  A response body is also returned with the new tenant information with a service generated tenantId.
@@ -12666,7 +12666,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -
 ```
 
 #### 4.4.11.6 <a id="update_a_tenant"></a>Update A Tenant####
-#### PUT [HPKeystoneExtensionBaseURI]/tenants/{tenantID} 
+#### PUT /HP-IDM/v1.0/tenants/{tenantID} 
 *Privilege Level: SA, DA*
 
 Allows updating an existing tenant using the tenantId and request body. Does not allow update or change of tenantId and domainId ('domainId' cannot be updated, passing that in request body will result in failure).
@@ -12860,7 +12860,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H
 ```
 
 #### 4.4.11.7 <a id="delete_a_tenant"></a>Delete A Tenant####
-#### DELETE [HPKeystoneExtensionBaseURI]/tenants/{tenantId}
+#### DELETE /HP-IDM/v1.0/tenants/{tenantId}
 *Privilege Level: SA, DA*
 
 Deletes the specified tenant by its tenantId. This API also deletes the Roles and Endpoints associated with the Tenant.
@@ -12959,7 +12959,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE
 ```
 
 #### 4.4.11.8 <a id="get_endpoints_for_a_tenant"></a>Get Endpoints For A Tenant####
-#### GET HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints
+#### GET /HP-IDM/v1.0/tenants/{tenantId}/endpoints
 *Privilege Level: SA, DA, DU*
 
 Get a list of endpoints for a tenant. Each endpoint data in the returned list has reference URL which can be used to query specific endpointTemplate (i.e. in format /endpointTemplates/{endpointTemplateId}) . This list will include disabled endpoint templates id. The operation does not require a request body.
@@ -13155,7 +13155,7 @@ Current Impl: We don't filter by enabled flag so include all of them.
 
 
 #### 4.4.11.9 <a id="add_endpoint_to_a_tenant"></a>Add Endpoint To A Tenant####
-#### POST HPKeystoneExtensionBaseURI]/tenants/{tenantId]}/endpoints
+#### POST /HP-IDM/v1.0/tenants/{tenantId]}/endpoints
 *Privilege Level: SA, DA*
 
 Add endpoint template association with a tenant. 
@@ -13323,7 +13323,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -
 ```
 
 #### 4.4.11.10 <a id="remove_endpoints_from_a_tenant"></a>Remove Endpoints From A Tenant####
-#### DELETE HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints/{endpointId}
+#### DELETE /HP-IDM/v1.0/tenants/{tenantId}/endpoints/{endpointId}
 *Privilege Level: DA, SA*
 
 Remove tenant's endpoint template association for given endpoint id. The operation does not require a request body.
@@ -13443,7 +13443,7 @@ None.
 
 
 #### 4.4.12.1 <a id="validate_token"></a>Validate Token####
-#### GET [KeystoneBaseURI]/tokens/{tokenId}
+#### GET /tokens/{tokenId}
 *Privilege Level: Anon*
 
 This API is used to validate a token. Validation includes checking that
@@ -13968,7 +13968,7 @@ None.
 
 
 #### 4.4.13.1 <a id="list_users"></a>List Users####
-#### GET [HPKeystoneExtensionBaseURI]/users
+#### GET /HP-IDM/v1.0/users
 *Privilege Level: SA, DA, SS*
 
 Returns all users of all tenants and takes a "marker" and "limit" parameter to limit the number of Users in the response. Can also be used to lookup users by `name` or `emailAddress`.
@@ -14271,7 +14271,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 
 #### 4.4.13.2 <a id="get_a_user"></a>Get A User####
-#### GET [HPKeystoneExtensionBaseURI]/users/{userId} 
+#### GET /HP-IDM/v1.0/users/{userId} 
 *Privilege Level: SA, DA, SS*
 
 
@@ -14551,7 +14551,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem "https://
 **Additional Notes**
 
 #### 4.4.13.4 <a id="create_a_new_user"></a>Create A New User####
-#### POST [HPKeystoneExtensionBaseURI/users
+#### POST /HP-IDM/v1.0/users
 *Privilege Level: SA, DA, SR*
 
 Creates a new user within a specific domain with a service generated userId for the user resource.
@@ -14756,7 +14756,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 #### 4.4.13.5 <a id="update_a_user"></a>Update A User####
-#### PUT [HPKeystoneExtensionBaseURI]/users/{userId} 
+#### PUT /HP-IDM/v1.0/users/{userId} 
 *Privilege Level: SA, DA\*, SS*
 
 Updates a user for the specified userId.
@@ -14937,7 +14937,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 #### 4.4.13.6 <a id="delete_a_user"></a>Delete A User####
-#### DELETE [HPKeystoneExtensionBaseURI]/users/{userId}
+#### DELETE /HP-IDM/v1.0/users/{userId}
 *Privilege Level: SA, DA*
 
 Deletes a user for the specified userId. If the User is an owner of the Domain, this API checks if the caller has privileges to delete a owner of the Domain.
@@ -15070,7 +15070,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 #### 4.4.13.7 <a id="get_all_groups_for_a_user"></a>Get All Groups For A User####
-#### GET [HPKeystoneExtensionBaseURI]/users/{userId}/groups
+#### GET /HP-IDM/v1.0/users/{userId}/groups
 *Privilege Level: SA, DA, SS*
 
 Returns all groups for the user specified within the userId.
@@ -15245,7 +15245,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 #### 4.4.13.8 <a id="update_password_for_a_user"></a>Update Password For A User####
-#### PUT [HPKeystoneExtensionBaseURI]/users/{userId}/password
+#### PUT /HP-IDM/v1.0/users/{userId}/password
 *Privilege Level: SA, DA, SS*
 
 Update a user's password specified by the userId.
@@ -15400,7 +15400,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 #### 4.4.13.9 <a id="initial_password_reset"></a>Initial Password Reset####
-#### POST [HPKeystoneExtensionBaseURI]/users/password/reset
+#### POST /HP-IDM/v1.0/users/password/reset
 *Privilege Level: SA, DA, Anon*
 
 This API is used to initiate a forgot password reset for a given username.  If the username is validated, an email will be sent to the user (based on the email attribute of the user object) containing a URL link with an embedded resetId.  The user is expected to then click on the link which will send them to a location on the HP Services web management console where the console will then pickup the resetId and validate it.
@@ -15529,7 +15529,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 #### 4.4.13.10 <a id="validate_password_resetid_and_update_password"></a>Validate Password ResetId And Update Password####
-#### PUT [HPKeystoneExtensionBaseURI]/users/password/reset/{resetId}
+#### PUT /HP-IDM/v1.0/users/password/reset/{resetId}
 *Privilege Level: Anon*
 
 This API is used to validate the password resetId (nonce), if validated, then the user's password will be updated based on the new password passed in the body of the  call.  Updated user object is returned as response.
@@ -15710,7 +15710,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Conte
 
 
 #### 4.4.13.11 <a id="list_a_users_non_tenant_role_assignments"></a>List A User's Non Tenant Role Assignments####
-#### GET [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles
+#### GET /HP-IDM/v1.0/users/{userId}/username}/roles
 *Privilege Level: SA, DA, DU*
 
 This API would return all the non tenant role assignments for a user in his domain filtered by serviceId.
@@ -16062,7 +16062,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 #### 4.4.13.13 <a id="create_a_users_non_tenant_role_assignment"></a>Create A User's Non Tenant Role Assignment####
-#### PUT [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId}
+#### PUT /HP-IDM/v1.0/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
 This API is used to create a non tenant role assignment for user in his domain.
@@ -16180,7 +16180,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 #### 4.4.13.14 <a id="delete_a_users_non_tenant_role_assignment"></a>Delete A User's Non Tenant Role Assignment####
-#### DELETE [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId}
+#### DELETE /HP-IDM/v1.0/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
 This API is used to delete a non tenant role assignment for a user. 
@@ -16322,7 +16322,7 @@ None.
 
 
 #### 4.4.14.1 <a id="get_user_certificates"></a>Get User Certificates####
-#### GET [HPKeystoneExtensionBaseURI]/certificates
+#### GET /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS* 
 
 Allows reading a selected list of certificates. This API supports pagination through 'limit' and 'marker' usage.
@@ -16550,7 +16550,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 
 #### 4.4.14.2 <a id="delete_user_certificate"></a>Delete User Certificate####
-#### DELETE [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	D
+#### DELETE /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	D
 *Privilege Level: SA, DA, SS*
 
 Delete a user certificate.The issuer name {issuerName} and serial number {serialNumber} are required in the URI.
@@ -16672,7 +16672,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 
 #### 4.4.14.3 <a id="get_user_certificate"></a>Get User Certificate####
-#### GET [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber}
+#### GET /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber}
 *Privilege Level: SA, DA, SS*
 
 Get a specified user certificate. The issuer name {issuerName} and serial number {serialNumber} are required in the URI.
@@ -16855,7 +16855,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 #### 4.4.14.4 <a id="create_a_user_certificate"></a>Create A User Certificate####
-#### POST [HPKeystoneExtensionBaseURI]/certificates
+#### POST /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS*
 
 Create a user certificate. This method requires a request body. The user identifier and subject elements are required elements in the body.
@@ -17060,7 +17060,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 
 #### 4.4.14.5 <a id="import_user_certificate(s)"></a>Import User Certificate(s)####
-#### PUT [HPKeystoneExtensionBaseURI]/certificates
+#### PUT /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS*
 
 Import user certificate(s). The operation requires a request body containing the user certificate(s) and the user identifier.
@@ -17291,7 +17291,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 #### 4.4.14.6 <a id="update_user_certificate"></a>Update User Certificate####
-#### PUT [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	
+#### PUT /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	
 *Privilege Level: SA,DA,SS*
 
 Update a user certificate. This method requires a request body containing the status element of the certificate. The issuer name {issuerName} and serial number {serialNumber} are required in the URI.
@@ -17476,7 +17476,7 @@ None.
 
 
 #### 4.4.15.1 <a id="create_user_key_pair"></a>Create User Key Pair####
-#### POST [HPKeystoneExtensionBaseURI]/keypairs
+#### POST /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
 Create a user key pair.
@@ -17681,7 +17681,7 @@ curl -k -X POST -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46
 
 
 #### 4.4.15.2 <a id="delete_user_key_pair"></a>Delete User Key Pair####
-#### DELETE [HPKeystoneExtensionBaseURI]/keypairs/{keypairId}
+#### DELETE /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 
 Delete a user key pair.
@@ -17803,7 +17803,7 @@ curl -k -X DELETE -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d
 
 
 #### 4.4.15.3 <a id="get_user_key_pair"></a>Get User Key Pair####
-#### GET [HPKeystoneExtensionBaseURI]/keypairs/{keypairId}
+#### GET /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 
 Get a user key pair by it's key pair identifier.
@@ -17954,7 +17954,7 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 
 
 #### 4.4.15.4 <a id="get_user_key_pairs"></a>Get User Key Pairs####
-#### GET [HPKeystoneExtensionBaseURI]/keypairs
+#### GET /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
 Gets a list of selected user key pairs.
@@ -18268,7 +18268,7 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 
 
 #### 4.4.15.5 <a id="import_user_key_pair(s)"></a>Import User Key Pair(s)####
-#### PUT [HPKeystoneExtensionBaseURI]/keypairs
+#### PUT /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
 Import one or more user key pairs.
@@ -18612,7 +18612,7 @@ curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d
 
 
 #### 4.4.15.6 <a id="update_user_key_pair"></a>Update User Key Pair####
-#### PUT [HPKeystoneExtensionBaseURI]/keypairs/{keypairId}
+#### PUT /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 
 Update a user key pair. This operation is used to udpate the key pair status. See the schema or examples below for details.

@@ -603,7 +603,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem "https://
 **Additional Notes**
 
 ## Create A New User
-#### POST [HPKeystoneExtensionBaseURI/users
+#### POST [HPKeystoneExtensionBaseURI]/users
 *Privilege Level: SA, DA, SR*
 
 Creates a new user within a specific domain with a service generated userId for the user resource.
