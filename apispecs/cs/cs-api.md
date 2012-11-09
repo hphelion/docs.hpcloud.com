@@ -113,12 +113,12 @@ The service is exposed in the service catalog, as shown in the following fragmen
 | Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.1 | Y/Y | Anon |
 | Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.0 | Y/Y | Anon |
 | Token | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.1 | Y/Y | Anon |
-| User Access Key | [Create User Access Key](#create_user_access_key) | POST | [HPKeystoneExtensionBaseURI]/accesskeys | Y/Y | SA, DA, SS |
-| User Access Key | [Delete User Access Key](#delete_user_access_key) | DELETE | [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId}  | Y/Y | SA, DA, SS |
-| User Access Key | [Get Access Keys](#get_access_keys) | GET | [HPKeystoneExtensionBaseURI]/accesskeys | Y/Y | SA,DA, SS |
-| User Access Key | [Get An Access Key](#get_an_access_key) | GET | [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId} | Y/Y | SA,DA,SS |
-| User Access Key | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | [HPKeystoneExtensionBaseURI]/accesskeys | Y/Y | SA, DA, SS |
-| User Access Key | [Update User Access Key](#update_user_access_key) | PUT | [HPKeystoneExtensionBaseURI]/accesskeys/{accesskeyId} | Y/Y | SA, DA, SS |
+| User Access Key | [Create User Access Key](#create_user_access_key) | POST | /HP-IDM/v1.0/accesskeys | Y/Y | SA, DA, SS |
+| User Access Key | [Delete User Access Key](#delete_user_access_key) | DELETE | /HP-IDM/v1.0/accesskeys/{accesskeyId}  | Y/Y | SA, DA, SS |
+| User Access Key | [Get Access Keys](#get_access_keys) | GET | /HP-IDM/v1.0/accesskeys | Y/Y | SA,DA, SS |
+| User Access Key | [Get An Access Key](#get_an_access_key) | GET | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y | SA,DA,SS |
+| User Access Key | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y | SA, DA, SS |
+| User Access Key | [Update User Access Key](#update_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y | SA, DA, SS |
 
 ## 4.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*

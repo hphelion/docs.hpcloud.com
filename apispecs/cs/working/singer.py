@@ -200,8 +200,10 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
                 verb = m.group('verb')
                 path = m.group('path')
                 # loose more junk
-                if path.startswith('[csbu:'):
-                    path = path[6:]
+                path = path.replace('[HPKeystoneExtensionBaseURI]', '/HP-IDM/v1.0')
+                path = path.replace('[csbu:HPKeystoneExtensionBaseURI]', '/HP-IDM/v1.0')
+                #if path.startswith('[csbu:'):
+                #    path = path[6:]
                 # strip query string part since we are already describing
                 # them in the URL section
                 qs = path.find('?')

@@ -64,49 +64,49 @@ group: apispec
 
 | Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| Action | [Post Action](#post_action) | POST | [HPKeystoneExtensionBaseURI]/action/{action} | Y/Y | {Privilege Level} |
-| Action | [Get Jobs By Account](#get_jobs_by_account) | GET | [HPKeystoneExtensionBaseURI]/job | Y/Y | {Privilege Level} |
-| Action | [Get A Job Ticket](#get_a_job_ticket) | GET | [HPKeystoneExtensionBaseURI]/job/{ticketId} | Y/Y | {Privilege Level} |
-| Action | [Restart A TIMEDOUT Job](#restart_a_timedout_job) | PUT | [HPKeystoneExtensionBaseURI]/job/{ticketId} | Y/Y | {Privilege Level} |
-| Action | [Delete A Job](#delete_a_job) | PUT | [HPKeystoneExtensionBaseURI]/job/{ticketId} | Y/Y | {Privilege Level} |
-| Action | [Get Error Jobs](#get_error_jobs) | GET | [HPKeystoneExtensionBaseURI]/job/error | Y/Y | {Privilege Level} |
-| Action | [Get A Count Of Error Jobs](#get_a_count_of_error_jobs) | GET | [HPKeystoneExtensionBaseURI]/job/error/count | Y/Y | {Privilege Level} |
-| Action | [Get Error Jobs By Category](#get_error_jobs_by_category) | GET | [HPKeystoneExtensionBaseURI]/job/error/{category} | Y/Y | {Privilege Level} |
-| Action | [Delete Error Jobs By Category](#delete_error_jobs_by_category) | GET | [HPKeystoneExtensionBaseURI]/job/error/{category} | Y/Y | {Privilege Level} |
-| Action | [Get Jobs By Status](#get_jobs_by_status) | GET | [HPKeystoneExtensionBaseURI]/job/status/{status} | Y/Y | {Privilege Level} |
-| Action | [Get Job Count By Status](#get_job_count_by_status) | GET | [HPKeystoneExtensionBaseURI]/job/status/{status}/count | Y/Y | {Privilege Level} |
-| Domains | [Check For Existence Of Domain Name](#check_for_existence_of_domain_name) | GET | [HPKeystoneExtensionBaseURI]/job/status/{status}/count | Y/Y | Anonymous |
-| Domains | [Create A Domain](#create_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains  | Y/Y | System Adminstrator (SA) |
-| Domains | [Delete A Domain](#delete_a_domain) | DELETE | [HPKeystoneExtensionBaseURI]/domains/{domainId}  | Y/Y | System Adminstrator (SA) |
-| Domains | [Get A Domain](#get_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}  | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domains | [Get All Domains](#get_all_domains) | GET | [HPKeystoneExtensionBaseURI]/domains | Y/Y | System Adminstrator (SA) |
-| Domains | [Get Groups For A Domain](#get_groups_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domains | [Get Subscribe Able Services For A Domain](#get_subscribe_able_services_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/subscribeableServices | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domains | [Get Service Activations For A Domain](#get_service_activations_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/services | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domains | [Get Tenants For A Domain](#get_tenants_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domains | [Get Users For A Domain](#get_users_for_a_domain) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants | Y/Y | System Adminstrator (SA), Domain Admin (DA) |
-| Domains | [List Role Definitions (Deprecated)](#list_role_definitions_(deprecated)) | GET | [HPKeystoneExtensionBaseURI]/domains/{domainId}/roles | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
-| Domains | [Transfer Ownership Of A Domain](#transfer_ownership_of_a_domain) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId}/owner/{userId}	 | Y/Y | System Adminstrator (SA) |
-| Endpoint Template | [{addendpointtemplate}](#{addendpointtemplate}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
-| Endpoint Template | [{deleteendpointtemplate}](#{deleteendpointtemplate}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
-| Endpoint Template | [{getenabledendpointtemplates}](#{getenabledendpointtemplates}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
-| Endpoint Template | [{getendpointtemplatebyid}](#{getendpointtemplatebyid}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
-| Endpoint Template | [{getendpointtemplates}](#{getendpointtemplates}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
-| Endpoint Template | [{updateendpointtemplate}](#{updateendpointtemplate}) | PUT | [HPKeystoneExtensionBaseURI]/domains/{domainId} | Y/Y | {Privilege Level} |
-| Group | [Add A User To A Group](#add_a_user_to_a_group) | PUT | [HPKeystoneExtensionBaseURI]/groups/{groupId}/users/{userId} | Y/Y | SA, DA |
-| Group | [Create A Group](#create_a_group) | POST | [HPKeystoneExtensionBaseURI]/groups | Y/Y | SA,DA |
-| Group | [Delates A Group](#delates_a_group) | DELETE | [HPKeystoneExtensionBaseURI]/groups/{groupId} | Y/Y | SA ,DA |
-| Group | [Get A Specific Group](#get_a_specific_group) | GET | [HPKeystoneExtensionBaseURI]/groups/{groupId} | Y/Y | SA,DA, DU  |
-| Group | [List Users For The Group](#list_users_for_the_group) | GET | [HPKeystoneExtensionBaseURI]/groups/{groupId}/users | Y/Y | SA,DA |
-| Group | [Delete User From The Group](#delete_user_from_the_group) | DELETE | [HPKeystoneExtensionBaseURI]/groups/{groupId}/users/{userId} | Y/Y | SA,DA |
-| Group | [Update Group](#update_group) | PUT | [HPKeystoneExtensionBaseURI]/groups/{groupId} | Y/Y | SA, DA |
-| Management Console | [User Details](#user_details) | GET | [HPKeystoneExtensionBaseURI]/users/details/{userId} | Y/Y | MC-CS Certificate |
-| Management Console | [User Preferences](#user_preferences) | GET | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | MC-CS Certificate |
-| Management Console | [User Preferences](#user_preferences) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | MC-CS Certificate |
-| Region | [{getservicebyid}](#{getservicebyid}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Region | [{listregisteredservices}](#{listregisteredservices}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Region | [{registernewservice}](#{registernewservice}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
-| Region | [{updateservice}](#{updateservice}) | PUT | [HPKeystoneExtensionBaseURI]/preferences/{userId} | Y/Y | {Privilege Level} |
+| Action | [Post Action](#post_action) | POST | /HP-IDM/v1.0/action/{action} | Y/Y | {Privilege Level} |
+| Action | [Get Jobs By Account](#get_jobs_by_account) | GET | /HP-IDM/v1.0/job | Y/Y | {Privilege Level} |
+| Action | [Get A Job Ticket](#get_a_job_ticket) | GET | /HP-IDM/v1.0/job/{ticketId} | Y/Y | {Privilege Level} |
+| Action | [Restart A TIMEDOUT Job](#restart_a_timedout_job) | PUT | /HP-IDM/v1.0/job/{ticketId} | Y/Y | {Privilege Level} |
+| Action | [Delete A Job](#delete_a_job) | PUT | /HP-IDM/v1.0/job/{ticketId} | Y/Y | {Privilege Level} |
+| Action | [Get Error Jobs](#get_error_jobs) | GET | /HP-IDM/v1.0/job/error | Y/Y | {Privilege Level} |
+| Action | [Get A Count Of Error Jobs](#get_a_count_of_error_jobs) | GET | /HP-IDM/v1.0/job/error/count | Y/Y | {Privilege Level} |
+| Action | [Get Error Jobs By Category](#get_error_jobs_by_category) | GET | /HP-IDM/v1.0/job/error/{category} | Y/Y | {Privilege Level} |
+| Action | [Delete Error Jobs By Category](#delete_error_jobs_by_category) | GET | /HP-IDM/v1.0/job/error/{category} | Y/Y | {Privilege Level} |
+| Action | [Get Jobs By Status](#get_jobs_by_status) | GET | /HP-IDM/v1.0/job/status/{status} | Y/Y | {Privilege Level} |
+| Action | [Get Job Count By Status](#get_job_count_by_status) | GET | /HP-IDM/v1.0/job/status/{status}/count | Y/Y | {Privilege Level} |
+| Domains | [Check For Existence Of Domain Name](#check_for_existence_of_domain_name) | GET | /HP-IDM/v1.0/job/status/{status}/count | Y/Y | Anonymous |
+| Domains | [Create A Domain](#create_a_domain) | GET | /HP-IDM/v1.0/domains  | Y/Y | System Adminstrator (SA) |
+| Domains | [Delete A Domain](#delete_a_domain) | DELETE | /HP-IDM/v1.0/domains/{domainId}  | Y/Y | System Adminstrator (SA) |
+| Domains | [Get A Domain](#get_a_domain) | GET | /HP-IDM/v1.0/domains/{domainId}  | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get All Domains](#get_all_domains) | GET | /HP-IDM/v1.0/domains | Y/Y | System Adminstrator (SA) |
+| Domains | [Get Groups For A Domain](#get_groups_for_a_domain) | GET | /HP-IDM/v1.0/domains/{domainId}/groups | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Subscribe Able Services For A Domain](#get_subscribe_able_services_for_a_domain) | GET | /HP-IDM/v1.0/domains/{domainId}/subscribeableServices | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Service Activations For A Domain](#get_service_activations_for_a_domain) | GET | /HP-IDM/v1.0/domains/{domainId}/services | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Tenants For A Domain](#get_tenants_for_a_domain) | GET | /HP-IDM/v1.0/domains/{domainId}/tenants | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Get Users For A Domain](#get_users_for_a_domain) | GET | /HP-IDM/v1.0/domains/{domainId}/tenants | Y/Y | System Adminstrator (SA), Domain Admin (DA) |
+| Domains | [List Role Definitions (Deprecated)](#list_role_definitions_(deprecated)) | GET | /HP-IDM/v1.0/domains/{domainId}/roles | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [Transfer Ownership Of A Domain](#transfer_ownership_of_a_domain) | PUT | /HP-IDM/v1.0/domains/{domainId}/owner/{userId}	 | Y/Y | System Adminstrator (SA) |
+| Endpoint Template | [Add Endpoint Template](#add_endpoint_template) | POST | /HP-IDM/v1.0/endpointTemplates | Y/Y | SA, SVC |
+| Endpoint Template | [Delete Endpoint Template](#delete_endpoint_template) | DELETE | /HP-IDM/v1.0/endpointTemplates/ {endpointTemplateId}  | Y/Y | SA, SVC |
+| Endpoint Template | [Get Enabled Endpoint Templates](#get_enabled_endpoint_templates) | GET | /HP-IDM/v1.0/endpointTemplates/enabled | Y/Y | SA, SVC, DA, DU  |
+| Endpoint Template | [Get Endpoint Template By Id](#get_endpoint_template_by_id) | GET | /HP-IDM/v1.0/endpointTemplates/{endpointTemplateId} | Y/Y | SA, SVC, DA, DU |
+| Endpoint Template | [Get Endpoint Templates](#get_endpoint_templates) | GET | /HP-IDM/v1.0/endpointTemplates | Y/Y | SA, SVC, DA, DU  |
+| Endpoint Template | [Update Endpoint Template](#update_endpoint_template) | GET | /HP-IDM/v1.0/endpointTemplates | Y/Y | SA, SVC  |
+| Group | [Add A User To A Group](#add_a_user_to_a_group) | PUT | /HP-IDM/v1.0/groups/{groupId}/users/{userId} | Y/Y | SA, DA |
+| Group | [Create A Group](#create_a_group) | POST | /HP-IDM/v1.0/groups | Y/Y | SA,DA |
+| Group | [Delates A Group](#delates_a_group) | DELETE | /HP-IDM/v1.0/groups/{groupId} | Y/Y | SA ,DA |
+| Group | [Get A Specific Group](#get_a_specific_group) | GET | /HP-IDM/v1.0/groups/{groupId} | Y/Y | SA,DA, DU  |
+| Group | [List Users For The Group](#list_users_for_the_group) | GET | /HP-IDM/v1.0/groups/{groupId}/users | Y/Y | SA,DA |
+| Group | [Delete User From The Group](#delete_user_from_the_group) | DELETE | /HP-IDM/v1.0/groups/{groupId}/users/{userId} | Y/Y | SA,DA |
+| Group | [Update Group](#update_group) | PUT | /HP-IDM/v1.0/groups/{groupId} | Y/Y | SA, DA |
+| Management Console | [User Details](#user_details) | GET | /HP-IDM/v1.0/users/details/{userId} | Y/Y | MC-CS Certificate |
+| Management Console | [User Preferences](#user_preferences) | GET | /HP-IDM/v1.0/preferences/{userId} | Y/Y | MC-CS Certificate |
+| Management Console | [User Preferences](#user_preferences) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | MC-CS Certificate |
+| Region | [{getservicebyid}](#{getservicebyid}) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | {Privilege Level} |
+| Region | [{listregisteredservices}](#{listregisteredservices}) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | {Privilege Level} |
+| Region | [{registernewservice}](#{registernewservice}) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | {Privilege Level} |
+| Region | [{updateservice}](#{updateservice}) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | {Privilege Level} |
 | Role Assignment | [List Role Assignments Made On A Tenant](#list_role_assignments_made_on_a_tenant) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
 | Role Assignment | [List Tenant Role Assignments For A User](#list_tenant_role_assignments_for_a_user) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
 | Role Assignment | [Check Tenant Role Assignment For A User](#check_tenant_role_assignment_for_a_user) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
@@ -115,55 +115,55 @@ group: apispec
 | Role Assignment | [List Tenant Role Assignments For A Group](#list_tenant_role_assignments_for_a_group) | GET | /tenants/{tenantId}/groups/{groupId}/roles | Y/Y | SA, DA, DU |
 | Role Assignment | [Create Tenant Role Assignments For A Group](#create_tenant_role_assignments_for_a_group) | PUT | /tenants/{tenantId}/groups/{groupId}/roles/{roleId} | Y/Y | SA, DA |
 | Role Assignment | [Delete Tenant Role Assignment For A Group](#delete_tenant_role_assignment_for_a_group) | DELETE | /tenants/{tenantId}/groups/{userId}/roles/{roleId} | Y/Y | SA, DA |
-| Role Defs | [Create Role Definition](#create_role_definition) | POST | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | SA, SVC, DA |
-| Role Defs | [Delete Role Definition](#delete_role_definition) | DELETE | [HPKeystoneExtensionBaseURI]/roleDefs/{roleId} | Y/Y | SA, SVC, DA |
-| Role Defs | [Update Role Definition](#update_role_definition) | PUT | [HPKeystoneExtensionBaseURI]/roleDefs/{roleId} | Y/Y | SA, SVC, DA |
-| Role Defs | [Update Role Scope](#update_role_scope) | PUT | [HPKeystoneExtensionBaseURI]/roleDefs/{roleId}/scope | Y/Y | SA, SVC |
-| Role Defs | [Get A Role Definition](#get_a_role_definition) | GET | [HPKeystoneExtensionBaseURI]/roleDefs/{roleId} | Y/Y | SA, SVC, DA, DU |
-| Role Defs | [List Role Definitions](#list_role_definitions) | GET | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | SA, SVC |
-| Service | [{getservicebyid}](#{getservicebyid}) | GET | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | {Privilege Level} |
-| Service | [{listregisteredservices}](#{listregisteredservices}) | GET | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | {Privilege Level} |
-| Service | [{registernewservice}](#{registernewservice}) | GET | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | {Privilege Level} |
-| Service | [{updateservice}](#{updateservice}) | GET | [HPKeystoneExtensionBaseURI]/roleDefs | Y/Y | {Privilege Level} |
-| Signature | [EC2 Signature](#ec2_signature) | POST | [HPKeystoneExtensionBaseURI]/ec2Tokens | Y/Y | Anon |
-| Signature | [Generic Signature](#generic_signature) | POST | [HPKeystoneExtensionBaseURI]/gstokens | Y/Y | Anon |
-| Tenant | [Get All Tenants](#get_all_tenants) | GET | [HPKeystoneExtensionBaseURI]/tenants | Y/Y | SA |
-| Tenant | [Get A Tenant](#get_a_tenant) | GET | [HPKeystoneExtensionBaseURI]/tenants/{tenantId}  | Y/Y | SA, DA, DU |
-| Tenant | [Check For Existence Of Tenant Name](#check_for_existence_of_tenant_name) | GET | [HPKeystoneExtensionBaseURI]/tenants/{tenantId}  | Y/Y | Anon |
-| Tenant | [Get A List Of Users For A Tenant (includes Role Assignments)](#get_a_list_of_users_for_a_tenant_(includes_role_assignments)) | GET | [HPKeystoneExtensionBaseURI]/tenants/{tenantId}/users | Y/Y | SA, DA |
-| Tenant | [Create A Tenant](#create_a_tenant) | POST | [HPKeystoneExtensionBaseURI]/tenants  | Y/Y | SA, DA |
-| Tenant | [Update A Tenant](#update_a_tenant) | PUT | [HPKeystoneExtensionBaseURI]/tenants/{tenantID}  | Y/Y | SA, DA |
-| Tenant | [Delete A Tenant](#delete_a_tenant) | DELETE | [HPKeystoneExtensionBaseURI]/tenants/{tenantId} | Y/Y | SA, DA |
-| Tenant | [Get Endpoints For A Tenant](#get_endpoints_for_a_tenant) | GET | HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints | Y/Y | SA, DA, DU |
-| Tenant | [Add Endpoint To A Tenant](#add_endpoint_to_a_tenant) | POST | HPKeystoneExtensionBaseURI]/tenants/{tenantId]}/endpoints | Y/Y | SA, DA |
-| Tenant | [Remove Endpoints From A Tenant](#remove_endpoints_from_a_tenant) | DELETE | HPKeystoneExtensionBaseURI]/tenants/{tenantId}/endpoints/{endpointId} | Y/Y | DA, SA |
+| Role Defs | [Create Role Definition](#create_role_definition) | POST | /HP-IDM/v1.0/roleDefs | Y/Y | SA, SVC, DA |
+| Role Defs | [Delete Role Definition](#delete_role_definition) | DELETE | /HP-IDM/v1.0/roleDefs/{roleId} | Y/Y | SA, SVC, DA |
+| Role Defs | [Update Role Definition](#update_role_definition) | PUT | /HP-IDM/v1.0/roleDefs/{roleId} | Y/Y | SA, SVC, DA |
+| Role Defs | [Update Role Scope](#update_role_scope) | PUT | /HP-IDM/v1.0/roleDefs/{roleId}/scope | Y/Y | SA, SVC |
+| Role Defs | [Get A Role Definition](#get_a_role_definition) | GET | /HP-IDM/v1.0/roleDefs/{roleId} | Y/Y | SA, SVC, DA, DU |
+| Role Defs | [List Role Definitions](#list_role_definitions) | GET | /HP-IDM/v1.0/roleDefs | Y/Y | SA, SVC |
+| Service | [Get Service By Id](#get_service_by_id) | GET | [iaas:HPKeystoneExtensionBaseURI]/services/{serviceId}    | Y/Y | SA, SVC |
+| Service | [List Registered Services](#list_registered_services) | GET | [iaas:HPKeystoneExtensionBaseURI]/services | Y/Y | SA, SVC, DA, DU |
+| Service | [Register New Service](#register_new_service) | POST | [iaas:HPKeystoneExtensionBaseURI]/services  	 | Y/Y | SA, SVC |
+| Service | [Update Service](#update_service) | PUT | [iaas:HPKeystoneExtensionBaseURI]/services/{serviceId}  	 | Y/Y | SA, SVC |
+| Signature | [EC2 Signature](#ec2_signature) | POST | /HP-IDM/v1.0/ec2Tokens | Y/Y | Anon |
+| Signature | [Generic Signature](#generic_signature) | POST | /HP-IDM/v1.0/gstokens | Y/Y | Anon |
+| Tenant | [Get All Tenants](#get_all_tenants) | GET | /HP-IDM/v1.0/tenants | Y/Y | SA |
+| Tenant | [Get A Tenant](#get_a_tenant) | GET | /HP-IDM/v1.0/tenants/{tenantId}  | Y/Y | SA, DA, DU |
+| Tenant | [Check For Existence Of Tenant Name](#check_for_existence_of_tenant_name) | GET | /HP-IDM/v1.0/tenants/{tenantId}  | Y/Y | Anon |
+| Tenant | [Get A List Of Users For A Tenant (includes Role Assignments)](#get_a_list_of_users_for_a_tenant_(includes_role_assignments)) | GET | /HP-IDM/v1.0/tenants/{tenantId}/users | Y/Y | SA, DA |
+| Tenant | [Create A Tenant](#create_a_tenant) | POST | /HP-IDM/v1.0/tenants  | Y/Y | SA, DA |
+| Tenant | [Update A Tenant](#update_a_tenant) | PUT | /HP-IDM/v1.0/tenants/{tenantID}  | Y/Y | SA, DA |
+| Tenant | [Delete A Tenant](#delete_a_tenant) | DELETE | /HP-IDM/v1.0/tenants/{tenantId} | Y/Y | SA, DA |
+| Tenant | [Get Endpoints For A Tenant](#get_endpoints_for_a_tenant) | GET | /HP-IDM/v1.0/tenants/{tenantId}/endpoints | Y/Y | SA, DA, DU |
+| Tenant | [Add Endpoint To A Tenant](#add_endpoint_to_a_tenant) | POST | /HP-IDM/v1.0/tenants/{tenantId]}/endpoints | Y/Y | SA, DA |
+| Tenant | [Remove Endpoints From A Tenant](#remove_endpoints_from_a_tenant) | DELETE | /HP-IDM/v1.0/tenants/{tenantId}/endpoints/{endpointId} | Y/Y | DA, SA |
 | Token | [Validate Token](#validate_token) | GET | [KeystoneBaseURI]/tokens/{tokenId} | Y/Y | Anon |
 | Token | [Quick Token Validation](#quick_token_validation) | GET | [KeystoneBaseURI]/tokens/{tokenId} | Y/Y | Anon |
 | Token | [Refresh Token](#refresh_token) | GET | [KeystoneBaseURI]/tokens/{tokenId} | Y/Y | SS |
-| Users | [List Users](#list_users) | GET | [HPKeystoneExtensionBaseURI]/users | Y/Y | SA, DA, SS |
-| Users | [Get A User](#get_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}  | Y/Y | SA, DA, SS |
-| Users | [Check For Existence Of User](#check_for_existence_of_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}  | Y/Y | Anon |
+| Users | [List Users](#list_users) | GET | /HP-IDM/v1.0/users | Y/Y | SA, DA, SS |
+| Users | [Get A User](#get_a_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | SA, DA, SS |
+| Users | [Check For Existence Of User](#check_for_existence_of_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | Anon |
 | Users | [Create A New User](#create_a_new_user) | POST | [HPKeystoneExtensionBaseURI/users | Y/Y | SA, DA, SR |
-| Users | [Delete A User](#delete_a_user) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId} | Y/Y | SA, DA |
-| Users | [Get All Groups For A User](#get_all_groups_for_a_user) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/groups | Y/Y | SA, DA, SS |
-| Users | [Update Password For A User](#update_password_for_a_user) | PUT | [HPKeystoneExtensionBaseURI]/users/{userId}/password | Y/Y | SA, DA, SS |
-| Users | [Initial Password Reset](#initial_password_reset) | POST | [HPKeystoneExtensionBaseURI]/users/password/reset | Y/Y | SA, DA, Anon |
-| Users | [Validate Password ResetId And Update Password](#validate_password_resetid_and_update_password) | PUT | [HPKeystoneExtensionBaseURI]/users/password/reset/{resetId} | Y/Y | Anon |
-| Users | [List A User's Non Tenant Role Assignments](#list_a_users_non_tenant_role_assignments) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
-| Users | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | [HPKeystoneExtensionBaseURI]/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
-| Users | [Create A User's Non Tenant Role Assignment](#create_a_users_non_tenant_role_assignment) | PUT | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
-| Users | [Delete A User's Non Tenant Role Assignment](#delete_a_users_non_tenant_role_assignment) | DELETE | [HPKeystoneExtensionBaseURI]/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
-| User Certificate | [Delete User Certificate](#delete_user_certificate) | DELETE | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	D | Y/Y | SA, DA, SS |
-| User Certificate | [Get User Certificate](#get_user_certificate) | GET | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} | Y/Y | SA, DA, SS |
-| User Certificate | [Create A User Certificate](#create_a_user_certificate) | POST | [HPKeystoneExtensionBaseURI]/certificates | Y/Y | SA, DA, SS |
-| User Certificate | [Import User Certificate(s)](#import_user_certificate(s)) | PUT | [HPKeystoneExtensionBaseURI]/certificates | Y/Y | SA, DA, SS |
-| User Certificate | [Update User Certificate](#update_user_certificate) | PUT | [HPKeystoneExtensionBaseURI]/certificates/{issuerName}/{serialNumber} 	 | Y/Y | SA,DA,SS |
-| User Key Pair | [Create User Key Pair](#create_user_key_pair) | POST | [HPKeystoneExtensionBaseURI]/keypairs | Y/Y | SA, DA, SS |
-| User Key Pair | [Delete User Key Pair](#delete_user_key_pair) | DELETE | [HPKeystoneExtensionBaseURI]/keypairs/{keypairId} | Y/Y | SA, DA, SS |
-| User Key Pair | [Get User Key Pair](#get_user_key_pair) | GET | [HPKeystoneExtensionBaseURI]/keypairs/{keypairId} | Y/Y | SA, DA, SS |
-| User Key Pair | [Get User Key Pairs](#get_user_key_pairs) | GET | [HPKeystoneExtensionBaseURI]/keypairs | Y/Y | SA, DA, SS |
-| User Key Pair | [Import User Key Pair(s)](#import_user_key_pair(s)) | PUT | [HPKeystoneExtensionBaseURI]/keypairs | Y/Y | SA, DA, SS |
-| User Key Pair | [Update User Key Pair](#update_user_key_pair) | PUT | [HPKeystoneExtensionBaseURI]/keypairs/{keypairId} | Y/Y | SA, DA, SS |
+| Users | [Delete A User](#delete_a_user) | DELETE | /HP-IDM/v1.0/users/{userId} | Y/Y | SA, DA |
+| Users | [Get All Groups For A User](#get_all_groups_for_a_user) | GET | /HP-IDM/v1.0/users/{userId}/groups | Y/Y | SA, DA, SS |
+| Users | [Update Password For A User](#update_password_for_a_user) | PUT | /HP-IDM/v1.0/users/{userId}/password | Y/Y | SA, DA, SS |
+| Users | [Initial Password Reset](#initial_password_reset) | POST | /HP-IDM/v1.0/users/password/reset | Y/Y | SA, DA, Anon |
+| Users | [Validate Password ResetId And Update Password](#validate_password_resetid_and_update_password) | PUT | /HP-IDM/v1.0/users/password/reset/{resetId} | Y/Y | Anon |
+| Users | [List A User's Non Tenant Role Assignments](#list_a_users_non_tenant_role_assignments) | GET | /HP-IDM/v1.0/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
+| Users | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | /HP-IDM/v1.0/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
+| Users | [Create A User's Non Tenant Role Assignment](#create_a_users_non_tenant_role_assignment) | PUT | /HP-IDM/v1.0/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
+| Users | [Delete A User's Non Tenant Role Assignment](#delete_a_users_non_tenant_role_assignment) | DELETE | /HP-IDM/v1.0/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
+| User Certificate | [Delete User Certificate](#delete_user_certificate) | DELETE | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	D | Y/Y | SA, DA, SS |
+| User Certificate | [Get User Certificate](#get_user_certificate) | GET | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} | Y/Y | SA, DA, SS |
+| User Certificate | [Create A User Certificate](#create_a_user_certificate) | POST | /HP-IDM/v1.0/certificates | Y/Y | SA, DA, SS |
+| User Certificate | [Import User Certificate(s)](#import_user_certificate(s)) | PUT | /HP-IDM/v1.0/certificates | Y/Y | SA, DA, SS |
+| User Certificate | [Update User Certificate](#update_user_certificate) | PUT | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	 | Y/Y | SA,DA,SS |
+| User Key Pair | [Create User Key Pair](#create_user_key_pair) | POST | /HP-IDM/v1.0/keypairs | Y/Y | SA, DA, SS |
+| User Key Pair | [Delete User Key Pair](#delete_user_key_pair) | DELETE | /HP-IDM/v1.0/keypairs/{keypairId} | Y/Y | SA, DA, SS |
+| User Key Pair | [Get User Key Pair](#get_user_key_pair) | GET | /HP-IDM/v1.0/keypairs/{keypairId} | Y/Y | SA, DA, SS |
+| User Key Pair | [Get User Key Pairs](#get_user_key_pairs) | GET | /HP-IDM/v1.0/keypairs | Y/Y | SA, DA, SS |
+| User Key Pair | [Import User Key Pair(s)](#import_user_key_pair(s)) | PUT | /HP-IDM/v1.0/keypairs | Y/Y | SA, DA, SS |
+| User Key Pair | [Update User Key Pair](#update_user_key_pair) | PUT | /HP-IDM/v1.0/keypairs/{keypairId} | Y/Y | SA, DA, SS |
 
 ## 4.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
@@ -2662,6 +2662,8 @@ Date: Mon, 20 Aug 2012 23:06:39 GMT
  
 <domain domainId="63283648950838" name="HP Private Cloud Domain" emailAddress="hp-private-cloud-6@hp.com" addressLine1="1, HP Way" city="Cupertino" state="CA" zip="90210" country="USA" website="www.hp.com" company="HP" phone="1-888-555-1212" status="enabled" billingId="4028e69737163f4e013732dc605210ba" contactId="001Q000000TU4q4IAD" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
    <description>Hp's Private Cloud Domain</description>
+   <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+   </billToAddress> 
 </domain>
 ```
 
@@ -2994,6 +2996,8 @@ Date: Tue, 30 Oct 2012 23:54:44 GMT
    <domain domainId="23213441623236" name="Sees Candies 6" status="enabled"/>
    <domain domainId="25279093386747" name="Sees Candies" emailAddress="owner@sees.com" addressLine1="128, Market Blvd" city="San Francisco" state="CA" zip="90210" country="USA" website="www.sees.com" phone="1-800-555-1212" status="enabled">
       <description>See's Candies Domain</description>
+      <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+      </billToAddress> 
    </domain>
    <domain domainId="45548920306336" name="Sees Candies 5" status="enabled"/>
    <domain domainId="53584481318159" name="Sees Candies 2" emailAddress="owner@sees.com" addressLine1="128, Market Blvd" city="San Francisco" state="CA" zip="90210" country="USA" website="www.sees.com" phone="1-800-555-1212" status="enabled">
@@ -4897,7 +4901,10 @@ Content-Length: 508
 Date: Thu, 22 Dec 2011 19:51:00 GMT
  
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<domain xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" domainId="26856794720485" name="action-king-DOMAIN" emailAddress="actionking@hp.com" addressLine2="Studio Lanes" company="action-king" phone="1-800-NO-DISNEY" status="enabled"/>
+<domain xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" domainId="26856794720485" name="action-king-DOMAIN" emailAddress="actionking@hp.com" addressLine2="Studio Lanes" company="action-king" phone="1-800-NO-DISNEY" status="enabled">
+<billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </billToAddress> 
+</domain>
 ```
 
 **Error Response**
@@ -4974,7 +4981,7 @@ curl -k --cert dev_hpmiddleware.pem  -XPUT -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 ### 4.4.3 Endpoint Template
 
-{Describe the resource and what information they provide. Then enumerate all the API method calls below.}
+The Endpoint Template REST API provides the ability to manage service endpoints.
 
 **Status Lifecycle**
 
@@ -4993,97 +5000,191 @@ N/A
 None.
 
 
-#### 4.4.3.1 <a id="{addendpointtemplate}"></a>{addendpointtemplate}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.3.1 <a id="add_endpoint_template"></a>Add Endpoint Template####
+#### POST [HPKeystoneExtensionBaseURI]/endpointTemplates
+*Privilege Level: SA, SVC*
 
-{Description about the method call}
+Adds new endpoint template data. Endpoint template data is provided in POST request body. Service name ('name' attribute) and region is required in EndpointTemplate. Input 'id' needs to be unique value in the system. 
+
+Name (service name) and region combination needs to be unique in system. 
+Service with given name should already be registered with system otherwise related error is returned back. Similarly type (service type) should have a valid system-recognized (pre-defined) value.
+Release state attribute if not provided in input data, then its value is derived from related registered service. If provided, then value should have a valid system-recognized (pre-defined) value.
+
+If enabled and global flag values are not provided in input data, system uses 'true' and 'false' as its default value respectively. 
+
+Region code is not marked as required in current implementation but should be provided.  The format of region code is  [csbu:az-number].[csbu:region-alpha].[csbu:geo-number]   So, and example would be: az-1.region-a.geo-1
+
+Note: Only tenant specific enabled and global endpoint templates are returned as part of service catalog during scoped token validation call.
+
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+Request body includes the new endpoint template with required fields defined.
 
 JSON
 
 ```
-{json data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4f9ff1d3b0be1d0584f2a7aa
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 704
+ 
+ 
+  "EndpointTemplate" : {
+    "version" : {
+      "id" : "1.1",
+      "info" : null,
+      "list" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
+      "otherAttributes" : {
+      }
+    },
+    "anies" : null,
+    "adminURL" : "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
+    "enabled" : true,
+    "global" : false,
+    "id" : "216",
+    "internalURL" : null,
+    "name" : "Compute",
+    "otherAttributes" : {
+    },
+    "publicURL" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+    "publicURL2" : "https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+    "region" : "az-3.region-a.geo-7",
+    "releaseState" : "public",
+    "type" : "compute"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4f9ff1d3b0be1d0584f2a7aa
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 719
+ 
+<ns1:endpointTemplate id="215" type="compute" 
+name="Compute" region="az-3.region-a.geo-6" 
+publicURL="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" 
+publicURL2="https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" 
+adminURL="https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/" 
+global="false" enabled="true" xmlns:ns1="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" 
+xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" 
+xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" 
+xmlns:ns4="http://docs.openstack.org/common/api/v1.0" 
+xmlns:ns5="http://www.w3.org/2005/Atom">
+   <ns1:version id="1.1" list="https://az-3.region-a.geo-1.compute.hpcloudsvc.com"/>
+</ns1:endpointTemplate>
 ```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
-200 - OK
+201 - Created
 
 **Response Data**
-
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=A6E1D38BE03CE5F52B1C30D61DE88271; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 705
+Date: Tue, 01 May 2012 18:06:19 GMT
+ 
+{
+  "EndpointTemplate" : {
+    "version" : {
+      "id" : "1.1",
+      "info" : null,
+      "list" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
+      "otherAttributes" : {
+      }
+    },
+    "anies" : null,
+    "adminURL" : "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
+    "enabled" : true,
+    "global" : false,
+    "id" : "216",
+    "internalURL" : null,
+    "name" : "Compute",
+    "otherAttributes" : {
+    },
+    "publicURL" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+    "publicURL2" : "https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+    "region" : "az-3.region-a.geo-7",
+    "releaseState" : "public",
+    "type" : "compute"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=30639D2AB6506F0C93DC6D4681AF069A; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 791
+Date: Tue, 01 May 2012 18:01:52 GMT
+ 
+<ns1:endpointTemplate id="215" type="compute" 
+name="Compute" region="az-3.region-a.geo-6" 
+publicURL="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" 
+publicURL2="https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" 
+adminURL="https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/" 
+global="false" enabled="true" releaseState="public" 
+xmlns:ns1="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" 
+xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" 
+xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" 
+xmlns:ns4="http://docs.openstack.org/common/api/v1.0" 
+xmlns:ns5="http://www.w3.org/2005/Atom">
+   <ns1:version id="1.1" list="https://az-3.region-a.geo-1.compute.hpcloudsvc.com"/>
+</ns1:endpointTemplate>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | EndpointTemplateId not found |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -5110,105 +5211,60 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" -d '{  "EndpointTemplate" : {  "name" : "Compute", "type":"compute", "id":"215","region":"az-3.region-a.geo-6","global":"false","enabled":"true",releaseState="public","publicURL": "https:\/\/az-3.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/", "adminURL": "https:\/\/https://nv-aw2az3-manage0009.uswest.hpcloud.net\/v1.1\/"} }' "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates"
+
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
+#### 4.4.3.2 <a id="delete_endpoint_template"></a>Delete Endpoint Template####
+#### DELETE [HPKeystoneExtensionBaseURI]/endpointTemplates/ {endpointTemplateId} 
+*Privilege Level: SA, SVC*
 
-#### 4.4.3.2 <a id="{deleteendpointtemplate}"></a>{deleteendpointtemplate}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+Deletes an endpoint template for the specified endpointTemplateId This will also remove all tenant association with this template.
 
-{Description about the method call}
+endpointTemplateId  is required otherwise 400 (bad request) is returned.
+
+If endpointTemplateId is not present in system, 404 (item not found) error is returned.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *endpointTemplateId* - scalar - Unique ID of the endpoint template to be deleted.
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-{List all the attributes that comprises the data structure}
+This call does not require a request body.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
-
 **Status Code**
 
-200 - OK
+204 - No Content
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
+No content is expected in response body
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | EndpointTemplateId not found |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -5235,73 +5291,39 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/xml" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates/1200"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
+#### 4.4.3.3 <a id="get_enabled_endpoint_templates"></a>Get Enabled Endpoint Templates####
+#### GET [HPKeystoneExtensionBaseURI]/endpointTemplates/enabled
+*Privilege Level: SA, SVC, DA, DU *
 
-#### 4.4.3.3 <a id="{getenabledendpointtemplates}"></a>{getenabledendpointtemplates}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+Get a list of available endpoint templates. If serviceName is provided in query, then endpoint templates specific to only that service are included in response.  In case of incorrect service name ( does not exist in system), empty list is returned. This list will to include only enabled endpoint templates. The operation does not require a request body.
 
-{Description about the method call}
+This API supports pagination through 'limit' and 'marker' usage. Marker is templateId and should be valid otherwise 404 (not found) error is going to be returned.
+
+Note: Only tenant specific enabled and global endpoint templates are returned as part of service catalog during scoped token validation call.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
+* *serviceName* (Optional) - string - service name to return endpoint templates specific to
+* *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker* (Optional) - string - the template Id. 
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+This call does not require a request body.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -5309,31 +5331,179 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=AAB73BB788D3C4C074D29B7FDF0E5E86; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 2905
+Date: Tue, 01 May 2012 18:11:05 GMT
+ 
+{
+  "endpointTemplates" : {
+    "anies" : null,
+    "endpointTemplate" : [ {
+      "version" : {
+        "id" : "1.1",
+        "info" : null,
+        "list" : "https://az-1.region-a.geo-1.compute.hpcloudsvc.com",
+        "otherAttributes" : {
+        }
+      },
+      "anies" : null,
+      "adminURL" : "https://nv-aw2az1-manage0009.uswest.hpcloud.net/v1.1/",
+      "enabled" : true,
+      "global" : false,
+      "id" : "100",
+      "internalURL" : null,
+      "name" : "Compute",
+      "otherAttributes" : {
+      },
+      "publicURL" : "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+      "publicURL2" : "https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+      "region" : "az-1.region-a.geo-1",
+      "releaseState" : "public",
+      "type" : "compute"
+    }, {
+      "version" : {
+        "id" : "1.1",
+        "info" : null,
+        "list" : "https://az-2.region-a.geo-1.compute.hpcloudsvc.com",
+        "otherAttributes" : {
+        }
+      },
+      "anies" : null,
+      "adminURL" : "https://nv-aw2az2-manage0009.uswest.hpcloud.net/v1.1/",
+      "enabled" : true,
+      "global" : false,
+      "id" : "110",
+      "internalURL" : null,
+      "name" : "Compute",
+      "otherAttributes" : {
+      },
+      "publicURL" : "https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+      "publicURL2" : "https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+      "region" : "az-2.region-a.geo-1",
+      "releaseState" : "public",
+      "type" : "compute"
+    }, {
+      "version" : {
+        "id" : "1.1",
+        "info" : null,
+        "list" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
+        "otherAttributes" : {
+        }
+      },
+      "anies" : null,
+      "adminURL" : "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
+      "enabled" : true,
+      "global" : false,
+      "id" : "111",
+      "internalURL" : null,
+      "name" : "Compute",
+      "otherAttributes" : {
+      },
+      "publicURL" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+      "publicURL2" : "https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+      "region" : "az-3.region-a.geo-1",
+      "releaseState" : "public",
+      "type" : "compute"
+    }, {
+      "version" : {
+        "id" : "1.0",
+        "info" : null,
+        "list" : null,
+        "otherAttributes" : {
+        }
+      },
+      "anies" : null,
+      "adminURL" : "https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/",
+      "enabled" : true,
+      "global" : false,
+      "id" : "120",
+      "internalURL" : null,
+      "name" : "Object Storage",
+      "otherAttributes" : {
+      },
+      "publicURL" : "https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/%tenant_id%",
+      "publicURL2" : null,
+      "region" : "region-a.geo-1",
+      "releaseState" : "public",
+      "type" : "object-store"
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=D2D513368A8C87BB990F528CA809F59F; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 2099
+Date: Tue, 01 May 2012 18:13:03 GMT
+ 
+<ns1:endpointTemplates xmlns:ns1="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" 
+xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" 
+xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" 
+xmlns:ns4="http://docs.openstack.org/common/api/v1.0" 
+xmlns:ns5="http://www.w3.org/2005/Atom">
+   <ns1:endpointTemplate id="100" type="compute" name="Compute" region="az-1.region-a.geo-1" 
+           publicURL="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" 
+           publicURL2="https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" 
+           adminURL="https://nv-aw2az1-manage0009.uswest.hpcloud.net/v1.1/" 
+           global="false" enabled="true" releaseState="public">
+      <ns1:version id="1.1" list="https://az-1.region-a.geo-1.compute.hpcloudsvc.com"/>
+   </ns1:endpointTemplate>
+   <ns1:endpointTemplate id="110" type="compute" name="Compute" region="az-2.region-a.geo-1" 
+           publicURL="https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" 
+           publicURL2="https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" 
+           adminURL="https://nv-aw2az2-manage0009.uswest.hpcloud.net/v1.1/" 
+           global="false" enabled="true" releaseState="public">
+      <ns1:version id="1.1" list="https://az-2.region-a.geo-1.compute.hpcloudsvc.com"/>
+   </ns1:endpointTemplate>
+   <ns1:endpointTemplate id="111" type="compute" name="Compute" region="az-3.region-a.geo-1" 
+           publicURL="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" 
+           publicURL2="https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" 
+           adminURL="https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/" 
+           global="false" enabled="true" releaseState="public">
+      <ns1:version id="1.1" list="https://az-3.region-a.geo-1.compute.hpcloudsvc.com"/>
+   </ns1:endpointTemplate>
+   <ns1:endpointTemplate id="120" type="object-store" name="Object Storage" region="region-a.geo-1" 
+           publicURL="https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/%tenant_id%" 
+           adminURL="https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/" 
+           global="false" enabled="true" releaseState="public">
+      <ns1:version id="1.0"/>
+   </ns1:endpointTemplate>
+</ns1:endpointTemplates>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | Marker value is not valid (not found in database).  |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
+
 
 **Response Data**
 
@@ -5360,73 +5530,31 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/xml" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates/enabled?limit=4"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
+#### 4.4.3.4 <a id="get_endpoint_template_by_id"></a>Get Endpoint Template By Id####
+#### GET [HPKeystoneExtensionBaseURI]/endpointTemplates/{endpointTemplateId}
+*Privilege Level: SA, SVC, DA, DU*
 
-#### 4.4.3.4 <a id="{getendpointtemplatebyid}"></a>{getendpointtemplatebyid}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
+Get an endpoint template by endpointTemplateId.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
+The operation does not require a request body.
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *endpointTemplateId* - scalar - The numeric id for a endpoint template
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
-
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
+This operation does not require a request body.
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -5434,31 +5562,100 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates/111 HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4f9ff1d3b0be1d0584f2a7aa
+Accept: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+ 
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=26457FB26BD6F8EB5D0214BEF521B01A; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 705
+Date: Tue, 01 May 2012 17:58:17 GMT
+ 
+{
+  "EndpointTemplate" : {
+    "version" : {
+      "id" : "1.1",
+      "info" : null,
+      "list" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
+      "otherAttributes" : {
+      }
+    },
+    "anies" : null,
+    "adminURL" : "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
+    "enabled" : true,
+    "global" : false,
+    "id" : "111",
+    "internalURL" : null,
+    "name" : "Compute",
+    "otherAttributes" : {
+    },
+    "publicURL" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+    "publicURL2" : "https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+    "region" : "az-3.region-a.geo-1",
+    "releaseState" : "public",
+    "type" : "compute"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates/111 HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4f9ff1d3b0be1d0584f2a7aa
+Accept: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+ 
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=86F04EB5AE761FF0933F90844BF6441A; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 791
+Date: Tue, 01 May 2012 17:59:00 GMT
+ 
+<ns1:endpointTemplate id="111" type="compute" 
+name="Compute" region="az-3.region-a.geo-1" 
+publicURL="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" 
+publicURL2="https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" 
+adminURL="https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/" 
+global="false" enabled="true" releaseState="public" 
+xmlns:ns1="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" 
+xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" 
+xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" 
+xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
+   <ns1:version id="1.1" list="https://az-3.region-a.geo-1.compute.hpcloudsvc.com"/>
+</ns1:endpointTemplate>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | EndpointTemplateId not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -5485,73 +5682,37 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/xml" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates/1200"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
+#### 4.4.3.5 <a id="get_endpoint_templates"></a>Get Endpoint Templates####
+#### GET [HPKeystoneExtensionBaseURI]/endpointTemplates
+*Privilege Level: SA, SVC, DA, DU *
 
-#### 4.4.3.5 <a id="{getendpointtemplates}"></a>{getendpointtemplates}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+Get a list of endpoint templates. If serviceName is provided in query, then endpoint templates specific to only that service are included in response. In case of incorrect service name ( does not exist in system), empty list is returned. This list will include disabled endpoint templates in addition to enabled endpoint templates. The operation does not require a request body.
 
-{Description about the method call}
+This API supports pagination through 'limit' and 'marker' usage. Marker is templateId and should be valid otherwise 404 (not found) error is going to be returned.
+
+Note: Only tenant specific enabled and global endpoint templates are returned as part of service catalog during scoped token validation call.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *serviceName* (Optional) - string - service name to return endpoint templates specific to
+* *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker* (Optional) - string - the template Id. 
 
 **Data Parameters**
 
-See schema file for more details on the request and response data structure.
+This call does not require a request body.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -5559,31 +5720,142 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=DFCFC378DE6320D5C411461BD518902F; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 2286
+Date: Tue, 01 May 2012 17:56:33 GMT
+ 
+{
+  "endpointTemplates" : {
+    "anies" : null,
+    "endpointTemplate" : [ {
+      "version" : {
+        "id" : "1.1",
+        "info" : null,
+        "list" : "https://az-1.region-a.geo-1.compute.hpcloudsvc.com",
+        "otherAttributes" : {
+        }
+      },
+      "anies" : null,
+      "adminURL" : "https://nv-aw2az1-manage0009.uswest.hpcloud.net/v1.1/",
+      "enabled" : true,
+      "global" : false,
+      "id" : "100",
+      "internalURL" : null,
+      "name" : "Compute",
+      "otherAttributes" : {
+      },
+      "publicURL" : "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+      "publicURL2" : "https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+      "region" : "az-1.region-a.geo-1",
+      "releaseState" : "public",
+      "type" : "compute"
+    }, {
+      "version" : {
+        "id" : "1.1",
+        "info" : null,
+        "list" : "https://az-2.region-a.geo-1.compute.hpcloudsvc.com",
+        "otherAttributes" : {
+        }
+      },
+      "anies" : null,
+      "adminURL" : "https://nv-aw2az2-manage0009.uswest.hpcloud.net/v1.1/",
+      "enabled" : true,
+      "global" : false,
+      "id" : "110",
+      "internalURL" : null,
+      "name" : "Compute",
+      "otherAttributes" : {
+      },
+      "publicURL" : "https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+      "publicURL2" : "https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+      "region" : "az-2.region-a.geo-1",
+      "releaseState" : "public",
+      "type" : "compute"
+    }, {
+      "version" : {
+        "id" : "1.1",
+        "info" : null,
+        "list" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
+        "otherAttributes" : {
+        }
+      },
+      "anies" : null,
+      "adminURL" : "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
+      "enabled" : true,
+      "global" : false,
+      "id" : "111",
+      "internalURL" : null,
+      "name" : "Compute",
+      "otherAttributes" : {
+      },
+      "publicURL" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+      "publicURL2" : "https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+      "region" : "az-3.region-a.geo-1",
+      "releaseState" : "public",
+      "type" : "compute"
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=B982B0384A07FED4F9C0182501C7FFDF; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 2543
+Date: Tue, 01 May 2012 17:54:24 GMT
+ 
+ 
+<ns1:endpointTemplates xmlns:ns1="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
+   <ns1:endpointTemplate id="100" type="compute" name="Compute" region="az-1.region-a.geo-1" publicURL="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" publicURL2="https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" adminURL="https://nv-aw2az1-manage0009.uswest.hpcloud.net/v1.1/" global="false" enabled="true" releaseState="public">
+      <ns1:version id="1.1" list="https://az-1.region-a.geo-1.compute.hpcloudsvc.com"/>
+   </ns1:endpointTemplate>
+   <ns1:endpointTemplate id="110" type="compute" name="Compute" region="az-2.region-a.geo-1" publicURL="https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" publicURL2="https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" adminURL="https://nv-aw2az2-manage0009.uswest.hpcloud.net/v1.1/" global="false" enabled="true" releaseState="public">
+      <ns1:version id="1.1" list="https://az-2.region-a.geo-1.compute.hpcloudsvc.com"/>
+   </ns1:endpointTemplate>
+   <ns1:endpointTemplate id="111" type="compute" name="Compute" region="az-3.region-a.geo-1" publicURL="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" publicURL2="https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/" adminURL="https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/" global="false" enabled="true" releaseState="public">
+      <ns1:version id="1.1" list="https://az-3.region-a.geo-1.compute.hpcloudsvc.com"/>
+   </ns1:endpointTemplate>
+   <ns1:endpointTemplate id="120" type="object-store" name="Object Storage" region="region-a.geo-1" publicURL="https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/%tenant_id%" adminURL="https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/" global="false" enabled="true" releaseState="public">
+      <ns1:version id="1.0"/>
+   </ns1:endpointTemplate>
+   <ns1:endpointTemplate id="130" type="identity" name="Identity" region="region-a.geo-1" publicURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0/" internalURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0/" adminURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0/" global="true" enabled="true" releaseState="public">
+      <ns1:version id="2.0" list="https://region-a.geo-1.identity.hpcloudsvc.com/extension"/>
+   </ns1:endpointTemplate>
+</ns1:endpointTemplates>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | Marker value is not valid (not found in database).  |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
+
 
 **Response Data**
 
@@ -5610,73 +5882,105 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/xml" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates?serviceName=Compute&limit=5"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
+#### 4.4.3.6 <a id="update_endpoint_template"></a>Update Endpoint Template####
+#### PUT HPKeystoneExtensionBaseURI]/endpointTemplates/{endpointTemplateId} 
+*Privilege Level: SA, SVC *
 
-#### 4.4.3.6 <a id="{updateendpointtemplate}"></a>{updateendpointtemplate}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+Updates existing endpoint template data. Endpoint template data is provided in PUT request body. Id, service name and region are required in EndpointTemplate. Returns back is the updated endpoint template data as the response body. If optional attributes values are not provided or left blank, then it will overwrite existing attribute value, with null or blank respectively, in system if there.
 
-{Description about the method call}
+Name (service name) and region combination needs to be unique in system. 
+Service with given name should already be registered with system otherwise related error is returned back. Similarly type (service type) should have a valid system-recognized (pre-defined) value.
+Release state attribute if not provided in input data, then its value is left unchnaged. If provided, then value should have a valid system-recognized (pre-defined) value.
+
+Template must exist in system otherwise returns 404 (item not found) error.
+
+If enabled and global flag values are not provided in input data, system does not update its existing values for other fields, it will update with null/blank if not provided. 
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
 
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *endpointTemplateId* - scalar - The numeric id for a endpoint template
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+Request body contains the endpoint template to be updated.
 
 JSON
 
 ```
-{json data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates/111 HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4f9ff1d3b0be1d0584f2a7aa
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Content-Length: 704
+Host: localhost:8443
+ 
+ 
+  "EndpointTemplate" : {
+    "version" : {
+      "id" : "1.1",
+      "info" : null,
+      "list" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
+      "otherAttributes" : {
+      }
+    },
+    "anies" : null,
+    "adminURL" : "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
+    "enabled" : true,
+    "global" : false,
+    "id" : "111",
+    "internalURL" : null,
+    "name" : "Compute",
+    "otherAttributes" : {
+    },
+    "publicURL" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+    "publicURL2" : "https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+    "region" : "az-3.region-a.geo-1",
+    "releaseState" : "public",
+    "type" : "compute"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates/130 HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4e9c7424b0be3d7fd233fa60
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 536
+ 
+<endpointTemplate id="130" type="identity" 
+name="Identity" region="region-a.geo-1" 
+publicURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0" 
+internalURL="hhttps://region-a.geo-1.identity.hpcloudsvc.com/v2.0" 
+adminURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0" 
+global="true" enabled="true" 
+xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+     <version id="2.0" info="https://region-a.geo-1.identity.hpcloudsvc.com/info/v2.0" 
+           list="https://region-a.geo-1.identity.hpcloudsvc.com/allVersions"/>
+</endpointTemplate>
 ```
 
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
 
 **Success Response**
 
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -5684,31 +5988,93 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
+Response body is the updated endpoint template.
 
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=3EA75781EBE573B3E9EA8490E9E20BD0; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 705
+Date: Tue, 01 May 2012 18:05:18 GMT
+ 
+{
+  "EndpointTemplate" : {
+    "version" : {
+      "id" : "1.1",
+      "info" : null,
+      "list" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com",
+      "otherAttributes" : {
+      }
+    },
+    "anies" : null,
+    "adminURL" : "https://nv-aw2az3-manage0009.uswest.hpcloud.net/v1.1/",
+    "enabled" : true,
+    "global" : false,
+    "id" : "111",
+    "internalURL" : null,
+    "name" : "Compute",
+    "otherAttributes" : {
+    },
+    "publicURL" : "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+    "publicURL2" : "https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud/",
+    "region" : "az-3.region-a.geo-1",
+    "releaseState" : "public",
+    "type" : "compute"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=F40BD043DC35086A78BD2963A2FD5759; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 797
+Date: Mon, 17 Oct 2011 18:36:40 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<endpointTemplate xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" 
+xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" 
+xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" 
+xmlns:ns4="http://docs.openstack.org/common/api/v1.0" 
+xmlns:ns5="http://www.w3.org/2005/Atom" 
+id="130" type="identity" name="Identity" 
+region="region-a.geo-1" 
+publicURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0" 
+internalURL="hhttps://region-a.geo-1.identity.hpcloudsvc.com/v2.0" 
+adminURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0" 
+global="true" enabled="true" releaseState="public">
+  <version id="2.0" info="https://region-a.geo-1.identity.hpcloudsvc.com/info/v2.0"
+         list="https://region-a.geo-1.identity.hpcloudsvc.com/allVersions"/>
+</endpointTemplate>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | EndpointTemplateId not found.   |
+| 409 | Conflict | Another template exists for given service name and region.    |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
+
 
 **Response Data**
 
@@ -5735,12 +6101,10 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates/111" -d '{  "EndpointTemplate" : {  "name" : "Compute",  "region":"az-3.region-a.geo-1",releaseState="preview"} }'
 ```
 
 **Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ### 4.4.4 Group
@@ -10060,7 +10424,7 @@ curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XGET -H "X-Auth-Token: HPAut
 
 ### 4.4.9 Service
 
-{Describe the resource and what information they provide. Then enumerate all the API method calls below.}
+The Service REST API provides the ability to manage registered services.
 
 **Status Lifecycle**
 
@@ -10079,65 +10443,27 @@ N/A
 None.
 
 
-#### 4.4.9.1 <a id="{getservicebyid}"></a>{getservicebyid}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
+#### 4.4.9.1 <a id="get_service_by_id"></a>Get Service By Id####
+#### GET [iaas:HPKeystoneExtensionBaseURI]/services/{serviceId}   
+*Privilege Level: SA, SVC*
 
-{Description about the method call}
+This API is used to get registered service data by its id (system generated service identifier).
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *serviceId* - scalar - The numeric id for a registered service
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
-```
+This call does not require a request body.
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -10145,31 +10471,62 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 236
+Date: Wed, 14 Sep 2011 22:33:42 GMT
+ 
+{"registerService": {
+   "description": "Test Service Desc",
+   "id": "18",
+   "otherAttributes": {},
+   "releaseState": "preview",
+   "serviceName": "HP-Swift USWest Zone2",
+   "serviceType": "object-store"
+}}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=BEEB2026E2A5A6AA5FDCE7E14FB262F9; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 320
+Date: Wed, 14 Sep 2011 22:35:31 GMT
+ 
+<ns2:registerService 
+serviceName="HP-Swift USWest Zone2" 
+serviceType="object-store" 
+releaseState="preview"
+id="18" 
+description="Test Service Desc"
+xmlns="http://docs.openstack.org/identity/api/v2.0"
+xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0"/>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -10196,73 +10553,87 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/services/18"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+#### 4.4.9.2 <a id="list_registered_services"></a>List Registered Services####
+#### GET [iaas:HPKeystoneExtensionBaseURI]/services
+*Privilege Level: SA, SVC, DA, DU*
 
-
-#### 4.4.9.2 <a id="{listregisteredservices}"></a>{listregisteredservices}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
+This API is used to get paginated list of registered services available in the system. The marker value is serviceId of last item in previous list. Results are sorted by serviceId. To get list of services for a specific type of service, serviceType request parameter can be added. 
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
 
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
+* *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker* (Optional) - string - represents serviceId of last item in previous returned list of this call. For getting list from beginning, pass no value.
+* *serviceType* (Optional) - string - value to filter the list by serviceType
 
 **Data Parameters**
 
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
+This call does not require a request body.
 
 JSON
 
 ```
-{json data structure here}
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/services HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_50638582957cd84dc49587a2
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
 ```
 
 XML
 
 ```
-{xml data structure here}
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/services HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_50638582957cd84dc49587a2
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
 ```
 
 Optional:
 
+Request With serviceType Filter:
+
 JSON
 
 ```
-{json data structure here}
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/services?serviceType=compute HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_50638582957cd84dc49587a2
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
 ```
 
 XML
 
 ```
-{xml data structure here}
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/services?serviceType=compute HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_50638582957cd84dc49587a2
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
 ```
 
-**Success Response**
 
-{Specify the status code and any content that is returned.}
+**Success Response**
 
 **Status Code**
 
@@ -10270,31 +10641,127 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=B34844913BF641E4944208961C8413F5; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 1868
+Date: Wed, 26 Sep 2012 22:53:50 GMT
+ 
+{"registerServices": {
+   "anies": null,
+   "otherAttributes": {},
+   "registerService":    [
+            {
+         "description": "HP Cloud Identity",
+         "id": "100",
+         "otherAttributes": {},
+         "releaseState": "public",
+         "serviceName": "Identity",
+         "serviceType": "identity"
+      },
+            {
+         "description": "HP Cloud Object Storage",
+         "id": "110",
+         "otherAttributes": {},
+         "releaseState": "public",
+         "serviceName": "Object Storage",
+         "serviceType": "object-store"
+      },
+            {
+         "description": "HP Cloud Compute",
+         "id": "120",
+         "otherAttributes": {},
+         "releaseState": "public",
+         "serviceName": "Compute",
+         "serviceType": "compute"
+      },
+            {
+         "description": "HP Cloud EC2 Compatibility Layer",
+         "id": "121",
+         "otherAttributes": {},
+         "releaseState": "public",
+         "serviceName": "EC2",
+         "serviceType": "ec2"
+      },
+            {
+         "description": "HP Cloud Block Storage",
+         "id": "130",
+         "otherAttributes": {},
+         "releaseState": "public",
+         "serviceName": "Block Storage",
+         "serviceType": "volume"
+      },
+            {
+         "description": "HP Cloud Image Management",
+         "id": "140",
+         "otherAttributes": {},
+         "releaseState": "public",
+         "serviceName": "Image Management",
+         "serviceType": "image"
+      },
+            {
+         "description": "HP Cloud Content Delivery Network",
+         "id": "150",
+         "otherAttributes": {},
+         "releaseState": "public",
+         "serviceName": "CDN",
+         "serviceType": "hpext:cdn"
+      },
+            {
+         "description": "HP Cloud Relational Database for MySQL",
+         "id": "160",
+         "otherAttributes": {},
+         "releaseState": "beta",
+         "serviceName": "Relational DB MySQL",
+         "serviceType": "hpext:dbaas"
+      }
+   ]
+}}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=864B386D67CF39F3ADBE5CD8B8F41748; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 1504
+Date: Wed, 26 Sep 2012 22:47:19 GMT
+ 
+<ns1:registerServices xmlns:ns1="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
+   <ns1:registerService id="100" description="HP Cloud Identity" serviceName="Identity" serviceType="identity" releaseState="public"/>
+   <ns1:registerService id="110" description="HP Cloud Object Storage" serviceName="Object Storage" serviceType="object-store" releaseState="public"/>
+   <ns1:registerService id="120" description="HP Cloud Compute" serviceName="Compute" serviceType="compute" releaseState="public"/>
+   <ns1:registerService id="121" description="HP Cloud EC2 Compatibility Layer" serviceName="EC2" serviceType="ec2" releaseState="public"/>
+   <ns1:registerService id="130" description="HP Cloud Block Storage" serviceName="Block Storage" serviceType="volume" releaseState="public"/>
+   <ns1:registerService id="140" description="HP Cloud Image Management" serviceName="Image Management" serviceType="image" releaseState="public"/>
+   <ns1:registerService id="150" description="HP Cloud Content Delivery Network" serviceName="CDN" serviceType="hpext:cdn" releaseState="public"/>
+   <ns1:registerService id="160" description="HP Cloud Relational Database for MySQL" serviceName="Relational DB MySQL" serviceType="hpext:dbaas" releaseState="beta"/>
+</ns1:registerServices>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -10321,68 +10788,73 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/services?serviceType=compute"
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+#### 4.4.9.3 <a id="register_new_service"></a>Register New Service####
+#### POST [iaas:HPKeystoneExtensionBaseURI]/services  	
+*Privilege Level: SA, SVC*
 
-
-#### 4.4.9.3 <a id="{registernewservice}"></a>{registernewservice}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
+This API is used to add new service registration. 
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
+Service registration data is expected in request body. In request data, service name and service type is required. Service name is expected to be unique so passing same service name will result in error. Case-insensitive existence check is done for service name.  If 'releaseState' value is provided, it needs to be system recognized release state otherwise it will result in error. If no release state value is provided, system defined default value ('restricted') is used. Numeric 'id' value needs to be provided otherwise it will result in error. If there is another registered service exists with given id, duplicate conflict (409) error is returned.
+
+Following are pre-defined serviceType and releaseState values in system which are maintained in database. Please note releaseState list may grow with time. Clients can define their own serviceType values when registering new service.
+
+Valid values for serviceType : 'compute' , 'image-service', 'object-store', 'identity', 'hpext:block-store', 'hpext:cdn'
+Valid values for releaseState : 'restricted', 'preview', 'beta', 'public' , 'decommissioned'
+
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
 JSON
 
 ```
-{json data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/services HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4f6a6aeab0be221be646e227
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Content-Length: 211
+Host: localhost:8443
+ 
+{"registerService": {
+   "description": "Test Service Desc",
+   "id": "240",
+   "otherAttributes": {},
+   "releaseState": "preview",
+   "serviceName": "HP-Swift USWest Zone2",
+   "serviceType": "object-store"
+}}
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
-
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/services HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4f6a6aeab0be221be646e227
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Content-Length: 212
+Host: localhost:8443
+ 
+<hpext:registerService 
+id="230"
+serviceName="HP-Nova USWest Zone2 " 
+description="Test Service Desc" 
+releaseState="preview" 
+serviceType="compute" 
+xmlns:hpext="http://www.hp.com/identity/api/ext/HP-IDM/v1.0"/>
 ```
 
 **Success Response**
@@ -10391,7 +10863,7 @@ XML
 
 **Status Code**
 
-200 - OK
+201 - Created
 
 **Response Data**
 
@@ -10400,26 +10872,62 @@ XML
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=700D7BA73D95F49792F50528D4A792B7; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 235
+Date: Thu, 22 Mar 2012 00:02:46 GMT
+ 
+{
+  "registerService" : {
+    "description" : "Test Service Desc",
+    "id" : "240",
+    "otherAttributes" : {
+    },
+    "releaseState" : "preview",
+    "serviceName" : "HP-Swift USWest Zone2",
+    "serviceType" : "object-store"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=91B57CCC2DF15E35AD6BB6B6884AB1C2; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 249
+Date: Wed, 21 Mar 2012 23:59:58 GMT
+ 
+ 
+<registerService id="230"&nbsp;
+description="Test Service Desc"&nbsp;
+serviceName="HP-Nova USWest Zone2"&nbsp;
+serviceType="compute"&nbsp;
+releaseState="preview"&nbsp;
+xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0"/>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -10446,73 +10954,79 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" -H "Content-Type: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/services" -d '{"registerService": {"description": "Test Service Desc","id": "240","otherAttributes": {},"releaseState": "preview","serviceName": "HP-Swift USWest Zone2","serviceType": "object-store"}}'
 ```
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+#### 4.4.9.4 <a id="update_service"></a>Update Service####
+#### PUT [iaas:HPKeystoneExtensionBaseURI]/services/{serviceId}  	
+*Privilege Level: SA, SVC*
 
-
-#### 4.4.9.4 <a id="{updateservice}"></a>{updateservice}####
-#### {HTTP Verb: GET, POST, DELETE, PUT} {path only, no root path}
-*Privilege Level: {Privilege Level}*
-
-{Description about the method call}
+This API is used to modify registered service data and for decommissioning the service if its no longer in use.
 
 **Request Data**
 
-{Specify all the required/optional url and data parameters for the given method call.}
-
 **URL Parameters**
-
-{Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional)} - {data type} - {description of the attribute}
 
 **Data Parameters**
 
+For updating a service, serviceId is required as its used to lookup existing service data. Service name and service type data cannot be null or blank.  Service name is expected to be unique so if service name is changed, it still needs to be unique in the system. Case-insensitive check is done for service name.  If 'releaseState' value is provided, it needs to be system recognized release state otherwise it will result in error. 
+
+If service is no longer is use and needs to be marked deleted, its releaseState can be updated to 'decommissioned' . Note once its releaseState is marked deleted, its release state cannot be altered from there on.
+
+Following are pre-defined serviceType and releaseState values in system which are maintained in database. Please note that this list may grow with time.
+
+Valid values for serviceType : 'compute' , 'image-service', 'object-store', 'identity', 'hpext:block-store', 'hpext:cdn'
+Valid values for releaseState : 'restricted', 'preview', 'beta', 'public' , 'decommissioned'
+
 See schema file for more details on the request and response data structure.
 
-{List all the attributes that comprises the data structure}
-
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* - {data type} - {description of the attribute}
-* *{name_of_attribute}* (Optional) - {data type} - {description of the attribute}
-
-{Either put 'This call does not require a request body' or include JSON/XML request data structure}
-
 JSON
 
 ```
-{json data structure here}
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/services/150 HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4e9c7424b0be3d7fd233fa60
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Content-Length: 232
+Host: localhost:8443
+ 
+{
+  "registerService" : {
+    "description" : "HP Content Delivery Network Service",
+    "id" : "150",
+    "otherAttributes" : {
+    },
+    "releaseState" : "preview",
+    "serviceName" : "CDN",
+    "serviceType" : "hpext:cdn"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
-```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/services/150 HTTP/1.1
+Accept-Encoding: gzip,deflate
+X-Auth-Token: HPAuth_4e9c7424b0be3d7fd233fa60
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Content-Length: 197
+Host: localhost:8443
+ 
+<registerService xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" 
+id="150" description="HP Content Delivery Network Service" 
+serviceName="CDN" serviceType="hpext:cdn" 
+releaseState="preview"/>
 
-Optional:
-
-JSON
-
-```
-{json data structure here}
-```
-
-XML
-
-```
-{xml data structure here}
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -10520,31 +11034,64 @@ XML
 
 **Response Data**
 
-{Either put 'This call does not require a request body' or include JSON/XML response data structure}
-
 JSON
 
 ```
-{json data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 232
+Date: Mon, 17 Oct 2011 18:54:03 GMT
+ 
+{
+  "registerService" : {
+    "description" : "HP Content Delivery Network Service",
+    "id" : "150",
+    "otherAttributes" : {
+    },
+    "releaseState" : "preview",
+    "serviceName" : "CDN",
+    "serviceType" : "hpext:cdn"
+  }
+}
 ```
 
 XML
 
 ```
-{xml data structure here}
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=F5F3B66446537D2E713B4F9747ECCC65; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 252
+Date: Mon, 17 Oct 2011 18:52:18 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<registerService xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" 
+id="150" 
+description="HP Content Delivery Network Service" 
+serviceName="CDN" 
+serviceType="hpext:cdn" 
+releaseState="preview"/>
 ```
 
 **Error Response**
 
-{Enumerate all the possible error status codes and any content that is returned.}
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
 
 **Response Data**
 
@@ -10571,12 +11118,10 @@ XML
 Curl Example
 
 ```
-{curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" -H "Content-Type: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/services" -d '{"registerService": {"description": "HP Content Delivery Network Service","id": "150","otherAttributes": {},"releaseState": "preview","serviceName": "CDN","serviceType": "hpext:cdn"}}'
 ```
 
 **Additional Notes**
-
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
 ### 4.4.10 Signature
@@ -11577,7 +12122,12 @@ Date: Wed, 10 Aug 2011 22:36:32 GMT
 <tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"
 enabled="true" status="enabled" domainId="798477662343"
 tenantId="270316896886"
-description="Tenant for Sales Forecasting service" />
+description="Tenant for Sales Forecasting service" >
+<billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </billToAddress> 
+<soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </soldToAddress> 
+</tenant>
 ```
 
 **Error Response**
@@ -11955,6 +12505,8 @@ See schema file for more details on the request and response data structure.
 * *domainId* - string - The Id of the domain this tenant is a member of.
 * *name* - string - The name of the tenant being created.
 * *status* - string (Optional) - String to describe the initial status of this tenant (enabled/disabled).
+* *billToAddress"  (Optional)
+* *soldToAddress"  (Optional)
 
 JSON
 
@@ -11992,6 +12544,10 @@ Content-Length: 254
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" name="Time Warner Salesforce Services" domainId="27960688482075" status="enabled">
   <description>Tenant for hosting Time Warner Salesforce Applications</description>
+<billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </billToAddress> 
+<soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </soldToAddress> 
 </tenant>
 ```
 
@@ -12156,7 +12712,12 @@ Connection: keep-alive
 Content-Length: 350
  
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" status="disabled"/>
+<tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" status="disabled">
+<billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </billToAddress> 
+<soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
+ </soldToAddress> 
+</tenant>
 ```
 
 XML (with swift account hash)
@@ -16885,11 +17446,7 @@ XML
 Curl Example
 
 ```
-curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test/1239dac6" -XPUT -d "{
-  "certificate" : {
-    "status" : "inactive"
-  }
-}"
+curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test/1239dac6" -XPUT -d '{"certificate": {"status": "inactive"} }'
 ```
 
 **Additional Notes**
