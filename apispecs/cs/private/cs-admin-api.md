@@ -136,7 +136,7 @@ group: apispec
 | Tokens | [Validate Token](#validate_token) | GET | /tokens/{tokenId} | Y/Y | Anon |
 | Tokens | [Quick Token Validation](#quick_token_validation) | GET | /tokens/{tokenId} | Y/Y | Anon |
 | Tokens | [Refresh Token](#refresh_token) | GET | /tokens/{tokenId} | Y/Y | SS |
-| Users | [List Users](#list_users) | GET | /HP-IDM/v1.0/users | Y/Y | SA, DA, SS |
+| Users | [List Users](#list_users) | GET | /HP-IDM/v1.0/users | Y/Y | SA, SS |
 | Users | [Get A User](#get_a_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | SA, DA, SS |
 | Users | [Check For Existence Of User](#check_for_existence_of_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | Anon |
 | Users | [Create A New User](#create_a_new_user) | POST | /HP-IDM/v1.0/users | Y/Y | SA, DA, SR |
@@ -209,6 +209,8 @@ Privilege Level: {Privilege Level}*
 
 Submit an action to be executed. Each action takes a specific set of execution parameters within the content of the Post. (For an exact list of parameters for each Action, click the link below.) In the absence of any query parameters, the Action will be submitted and the call will immediately return a Job Ticket. The Job Ticket contains information about the executing Job, and can be refreshed through the job API call.
 An Action request may contain the timeOut query parameter that is set to a non-zero positive value. The value indicates that the request should wait at least the given length of time for the Action to complete - either successfully or due to error. If the Action does not complete with the time period then the job is cancelled and any completed action steps will be rolled back.
+
+Please see [Appendix A: Avaiable Actions](#available_action) for detail information on the actions.
 
 **Request Data**
 
@@ -13444,7 +13446,7 @@ None.
 
 #### 4.4.12.1 <a id="list_users"></a>List Users####
 #### GET /HP-IDM/v1.0/users
-*Privilege Level: SA, DA, SS*
+*Privilege Level: SA, SS*
 
 Returns all users of all tenants and takes a "marker" and "limit" parameter to limit the number of Users in the response. Can also be used to lookup users by `name` or `emailAddress`.
 
@@ -18271,6 +18273,2752 @@ curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d
 # 6. Glossary
 
 {Put down definitions of terms and items that need explanation.}
+
+---
+
+# Appendix A: Available Actions <a id="available_action">
+
+## Activate Block Storage
+### POST [HPKeystoneExtensionBaseURI]/action/activateblockstorage
+*Privilege Level: System Administrators, Domain Administrators*  
+*Constraints:*  
+1. A service endpoint can be subscribed to only once by the same tenant. (FindUmsTenant)  
+2. serviceName parameter must be valid (AuthorizeProvisioningAction)  
+3. serviceName and regionCode parameters must be valid and must resolve a unique EndpointTemplate (CreateEndpointRef)  
+4. serviceName must resolve to a RegisteredService object (AssociateRoles)  
+5. serviceName and regionCode parameters must be valid and must resolve a unique EndpointTemplate (CreateProvisioningInfo)  
+
+Activate specified (existing) Tenant to Block Storage service.
+
+**Request Data**  
+
+**URL Parameters**
+
+None 
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|serviceName|xs:string|true|
+|domainId|xs:string|false|
+|tenantName|xs:string|true|
+|regionCode|xs:string|true|
+|dryrun|xs:string|false|
+
+JSON
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/activateblockstorage HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+{ "JobTicket" :
+    { "actionParams" : {
+        "serviceName":"block-storage",
+        "regionCode":"az1:east:us",
+        "tenantName":"Tenant1"
+        }
+    }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+```
+curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X POST -H 'User-Agent: Jakarta Commons-HttpClient/3.1' -H 'Content-Type: application/json' --cert <cert-path> --cacert <ca-cert-path> --data '{"JobTicket": {"actionParams":{"status": "SUSPENDED_3", "domainId": "92636548281306"}}}' -H 'X-Auth-Token: <auth-token>' [HPKeystoneExtensionBaseURI]/action/UpdateDomain?timeOut=20000  
+```
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|FindUmsTenant|Retrieve an existing Tenant from the UMS based on the Name of the Tenant|false|
+|AuthorizeProvisioningAction|Perform authorisation checks prior to provisioning.  Essentially validate that the user attempting to provision the tenant is actually authorised to perform this action.  The *ITLSessionContext* associated with the incoming request thread is used for authorisation checks.|false|
+|CreateZuoraSubscription|&nbsp;|false|
+|CreateEndpointRef|Create an *EndpointRef* that links an endpoint via an *EndpointTemplate* to a Tenant.  The *EndpointRef* that links the tenant to the endpoint. This linkage, if it does not already exist, is setup in CS DB.|false|
+|AssociateRoles|Assign service activation roles to a specified user and/or to a specified group|false|
+|CreateProvisioningInfo|Create or update an existing *ProvisioningInfo* record to track a tenant's provisioned service.  The *ProvisioningInfo* that tracks the provisioning status of this tenant with the provisioned endpoint (via *serviceName* and regionCode) is setup.  The status of this *ProvisioningInfo* set to ENABLED and also the serviceAccountId field is set to the accountId (for now this is the tenantId) of the tenant.  If the ProvisioningInfo exists, then it will be reused and only the status will be marked ENABLED.  In the future this behaviour may change since the currentbehaviour retains the ProvisioningInfo record of a 'Deprovisioned' tenant since provisioning history has not been implemented yet.|false|
+
+
+
+
+## ActivateCdn
+#### POST [HPKeystoneExtensionBaseURI]/action/activatecdn
+*Privilege Level: System Administrators, Domain Administrators*  
+*Constraints:* 
+ 
+1.  A service endpoint can be subscribed to only once by the same tenant. _(FindUmsTenant)_  
+2.  serviceName parameter must be valid _(AuthorizeProvisioningAction)_  
+3.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(CreateEndpointRef)_  
+4.  serviceName must resolve to a RegisteredService object _(AssociateRoles)_  
+5.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(CreateProvisioningInfo)_  
+
+
+Activate the specified (existing) Swift Tenant to CDN service.
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|serviceName|xs:string|true|
+|domainId|xs:string|false|
+|tenantName|xs:string|true|
+|regionCode|xs:string|true|
+|dryrun|xs:string|false|
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/activatecdn HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"cdn",
+      "regionCode":"az1:east:us",
+      "tenantName":"Tenant1"
+    }
+  }
+}
+```
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|FindUmsTenant|Retrieve an existing Tenant from the UMS based on the Name of the Tenant.|false|
+|AuthorizeProvisioningAction|Perform authorization checks prior to provisioning. Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action. The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
+|CreateZuoraSubscription| |false|
+|CreateEndpointRef|Create an ```EndpointRef``` that links an endpoint via an ```EndpointTemplate``` to a Tenant. The ```EndpointRef``` that links the tenant to the endpoint. This linkage, if it does not already exist, is setup in CS DB. | false |
+| AssociateRoles | Assign service activation roles to a specified user and/or to a specified group | false |
+| CreateProvisioningInfo | Create or update an existing ```ProvisioningInfo``` record to track a tenant's provisioned service.  The ```ProvisioningInfo``` that tracks the provisioning status of this tenant with the provisioned endpoint (via ```serviceName``` and ```regionCode```) is setup.  The status of this ```ProvisioningInfo``` set to ```ENABLED``` and also the ```serviceAccountId``` field is set to the accountId (for now this is the tenantId) of the tenant.  If the ```ProvisioningInfo``` exists, then it will be reused and only the status will be marked ```ENABLED```.  In the future this behavior may change since the current behavior retains the ```ProvisioningInfo``` record of a 'Deprovisioned' tenant since provisioning history has not been implemented yet. | false |
+
+**Notes**
+
+1.  The ```tenantName``` must resolve to an existing tenant and must be provisioned to at least one ```Object Storage``` service.
+2.  The ```domainId``` is neither required nor used.
+3.  As part of activation the ```Domain Administrators``` group for the domain of the Tenant is added to the role ```cdn-admin``` for this tenant.
+
+
+## ActivateCompute
+#### POST [HPKeystoneExtensionBaseURI]/action/activatecompute
+*Privilege Level: System Administrators, Domain Administrators*
+  
+*Constraints:*
+  
+1.  A service endpoint can be subscribed to only once by the same tenant. _(CreateUmsTenant)_
+2.  If a tenant with {{tenantName}} exists then the domainId of that tenant must match the {{domainId}} parameter _(CreateUmsTenant)_
+3.  serviceName parameter must be valid _(AuthorizeProvisioningAction)_
+4.  {{serviceName}} and {{regionCode}} parameters must be valid and must resolve a unique ```EndpointTemplate``` _(CreateEndpointRef)_
+5.  serviceName must resolve to a RegisteredService object _(AssociateRoles)_
+6.  {{serviceName}} and {{regionCode}} parameters must be valid and must resolve a unique ```EndpointTemplate``` _(CreateProvisioningInfo)_
+
+Activate specified Tenant to OpenStack Compute (Nova) service.
+
+As part of activation the ```Domain Administrators``` group for the domain of the Tenant is added to the roles ```netadmin``` and ```volume-manager``` for this tenant.
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|serviceName|xs:string|true|
+|domainId|xs:string|true|
+|tenantName|xs:string|true|
+|regionCode|xs:string|true|
+|dryrun|xs:string|false|
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/activatecompute HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"compute",
+      "regionCode":"az1:east:us",
+      "domainId":"01234567890123",
+      "tenantName":"Tenant1"
+    }
+  }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|CreateUmsTenant|Create a new or retrieve an existing Tenant from the UMS based on the Name of the Tenant.|false|
+|AuthorizeProvisioningAction|Perform authorization checks prior to provisioning. Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action. The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
+|CreateZuoraSubscription| |false|
+|CreateZuoraSubscription| |false|
+|CreateEndpointRef|Create an ```EndpointRef``` that links an endpoint via an ```EndpointTemplate``` to a Tenant. The ```EndpointRef``` that links the tenant to the endpoint. This linkage, if it does not already exist, is setup in CS DB.|false|
+|AssociateRoles|Assign service activation roles to a specified user and/or to a specified group|false|
+|CreateProvisioningInfo|Create or update an existing ```ProvisioningInfo``` record to track a tenant's provisioned service. The ```ProvisioningInfo``` that tracks the provisioning status of this tenant with the provisioned endpoint (via {{serviceName}} and {{regionCode}}) is setup. The status of this ```ProvisioningInfo``` set to ```ENABLED``` and also the {{serviceAccountId}} field is set to the accountId (for now this is the tenantId) of the tenant. If the ```ProvisioningInfo``` exists, then it will be reused and only the status will be marked ```ENABLED```. In the future this behavior may change since the current behavior retains the ```ProvisioningInfo``` record of a 'Deprovisioned' tenant since provisioning history has not been implemented yet.|false|
+
+**Notes**
+
+1.  The ```tenantName``` must be globally unique.
+2.  A ```Block Storage``` service must be available in the *same region* to which this tenant will automatically be provisioned to.
+
+
+
+## ActivateImageService
+#### POST [HPKeystoneExtensionBaseURI]/action/activateimageservice
+*Privilege Level: System Administrators, Domain Administrators*
+  
+*Constraints:*
+
+1.  A service endpoint can be subscribed to only once by the same tenant. _(CreateUmsTenant)_
+2.  If a tenant with ```tenantName``` exists then the domainId of that tenant must match the ```domainId``` parameter _(CreateUmsTenant)_
+3.  serviceName parameter must be valid _(AuthorizeProvisioningAction)_
+4.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(CreateEndpointRef)_
+5.  serviceName must resolve to a RegisteredService object _(AssociateRoles)_
+6.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(CreateProvisioningInfo)_
+
+
+Activate specified Tenant to OpenStack Image Service (Glance). As part of activation certain ```Service Roles``` assignments are made for this tenant.
+
+
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|domainId|xs:string|true|
+|tenantId|xs:string|true|
+|serviceName|xs:string|true|
+|regionCode|xs:string|true|
+|tenantName|xs:string|true|
+|dryrun|xs:string|false|
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/activateimageservice HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"image-service",
+      "regionCode":"az1:east:us",
+      "domainId":"01234567890123",
+      "tenantName":"Tenant1"
+    }
+  }
+}
+```
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/activateimageservice HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"image-service",
+      "regionCode":"az1:east:us",
+      "domainId":"01234567890123",
+      "tenantId":"12345678901234"
+    }
+  }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+{success http status code}
+
+**Response Data**
+
+JSON
+
+{json response code formatted}
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|CreateUmsTenant|Create a new or retrieve an existing Tenant from the UMS based on the Name of the Tenant.|false|
+|AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
+|CreateZuoraSubscription||false|
+|CreateEndpointRef|Create an ```EndpointRef``` that links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint. This linkage, if it does not already exist, is setup in CS DB.|false|
+|AssociateRoles|Assign service activation roles to a specified user and/or to a specified group|false|
+|CreateProvisioningInfo|Create or update an existing ```ProvisioningInfo``` record to track a tenant's provisioned service.The ```ProvisioningInfo``` that tracks the provisioning status of this tenant with the provisioned endpoint (via ```serviceName``` and ```regionCode```) is setup.The status of this ```ProvisioningInfo``` set to ```ENABLED``` and also the ```serviceAccountId``` field is set to the accountId (for now this is the tenantId) of the tenant.If the ```ProvisioningInfo``` exists, then it will be reused and only the status will be marked ```ENABLED```.In the future this behavior may change since the current behavior retains the ```ProvisioningInfo``` record of a 'Deprovisioned' tenantsince provisioning history has not been implemented yet.|false|
+
+**Notes**
+
+1.  The ```tenantName``` must be globally unique.
+2.  EITHER ```tenantName``` OR ```tenantId``` are required.
+3.  If only the ```tenantName``` is provided then, if the tenant with the specified name does not exist then a new tenant will be created.
+4.  If only the ```tenantId``` is provided then the tenant with the specified ```tenantId``` must exist.
+5.  If both are provided then ```tenantId``` takes precedence and the net effect is the same as if only the ```tenantId``` was provided.
+## ActivateObjectStorage
+#### POST [HPKeystoneExtensionBaseURI]/action/activateobjectstorage
+*Privilege Level: System Administrators, Domain Administrators*  
+ 
+*Constraints:*  
+
+1.  A service endpoint can be subscribed to only once by the same tenant. _(CreateUmsTenant)_
+2.  If a tenant with ```tenantName``` exists then the domainId of that tenant must match the ```domainId``` parameter _(CreateUmsTenant)_
+3.  serviceName parameter must be valid _(AuthorizeProvisioningAction)_
+4.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(CreateEndpointRef)_
+5.  serviceName must resolve to a RegisteredService object _(AssociateRoles)_
+6.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(CreateProvisioningInfo)_
+
+Activate specified Tenant to OpenStack Object Storage (Swift) service.
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|serviceName|xs:string|true|
+|domainId|xs:string|true|
+|tenantName|xs:string|true|
+|regionCode|xs:string|true|
+|dryrun|xs:string|false|
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/activateobjectstorage HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"object-storage",
+      "regionCode":"az1:east:us",
+      "domainId":"01234567890123",
+      "tenantName":"Tenant1"
+    }
+  }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|CreateUmsTenant|Create a new or retrieve an existing Tenant from the UMS based on the Name of the Tenant.|false|
+|AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
+|CreateZuoraSubscription||false|
+|CreateEndpointRef|Create an ```EndpointRef``` that links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint. This linkage, if it does not already exist, is setup in CS DB.|false|
+|AssociateRoles|Assign service activation roles to a specified user and/or to a specified group|false|
+|CreateProvisioningInfo|Create or update an existing ```ProvisioningInfo``` record to track a tenant's provisioned service.The ```ProvisioningInfo``` that tracks the provisioning status of this tenant with the provisioned endpoint (via ```serviceName``` and ```regionCode```) is setup.The status of this ```ProvisioningInfo``` set to ```ENABLED``` and also the ```serviceAccountId``` field is set to the accountId (for now this is the tenantId) of the tenant.If the ```ProvisioningInfo``` exists, then it will be reused and only the status will be marked ```ENABLED```.In the future this behavior may change since the current behavior retains the ```ProvisioningInfo``` record of a 'Deprovisioned' tenantsince provisioning history has not been implemented yet.|false|
+
+**Notes**
+
+1.  The ```tenantName``` must be globally unique.
+2.  As part of activation the ```Domain Administrators``` group for the domain of the Tenant is added to the role ```admin``` for this tenant.
+## ActivateService
+#### POST [HPKeystoneExtensionBaseURI]/action/activateservice
+*Privilege Level: 
+System Administrators, Domain Administrators*  
+
+Apart from regular authorization requirement there are added authorization check on service activation call. Following are the new constraints added:
+
+1.  Services and its endpoint template(s) has release state associated with it, by default customer has privilege to activate a service, as long as the service and endpoint template is/are in public state.
+2.  Service releaseState takes higher presidency over endpoint template releaseState. (e.g. if service is in "beta" release state and its endpoint template is in "public", customer should not allowed to activate such services)
+3.  If one of the endpoint template of a service is not in "public" state, service activation on that region should not be allowed.
+4.  NOC and SA has privilege to activate any service does not matters what is the release state.
+5.  To allow customer to activate a non public service, there should be special grant created on behalf of customer by NOC/Support
+ 
+*Constraints:*  
+
+1.  If a tenantId is provided, then a tenant with the specified tenantId must exist. In this case, the tenantName is ignored and no new tenant will be created. _(FindOrCreateUmsTenant)_
+2.  If a tenant with tenantName exists then the domainId of that tenant must match the domainId parameter. _(FindOrCreateUmsTenant)_
+3.  A service endpoint can be subscribed to only once by the same tenant. _(FindOrCreateUmsTenant)_
+4.  The tenantId must be available (the UMS tenant must exist) at the time this is called. _(ProvisionService)_
+5.  Service specific errors may be returned. _(ProvisionService)_
+6.  ```CDN``` activation: Tenant being activated _must_ have an active subscription to Object Storage service. _(ProvisionService)_
+7.  ```Block Storage``` activation: Tenant being activated _must_ have an active subscription to Compute service in the same region. _(ProvisionService)_
+8.  serviceName and regionCode parameters must be valid and must resolve a unique EndpointTemplate _(CreateEndpointRef)_
+9.  serviceName must resolve to a RegisteredService object _(AssociateRoles)_
+10.  serviceName and regionCode parameters must be valid and must resolve a unique EndpointTemplate _(CreateProvisioningInfo)_
+
+Activate specified Tenant to to the specified service.
+
+**Request Data**  
+
+**URL Parameters**
+
+{parameters provided within the url}
+
+**Data Parameters**
+
+
+|Parameter Name|Parameter Type|Is Required|
+|:-------------|:-------------|:----------|
+|domainId|xs:string|true|
+|tenantId|xs:string|true|
+|serviceName|xs:string|true|
+|regionCode|xs:string|false|
+|tenantName|xs:string|true|
+|dryrun|xs:string|false|
+
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/activateservice HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"Object Storage",
+      "regionCode":"az1:east:us",
+      "domainId":"01234567890123",
+      "tenantName":"Tenant1"
+    }
+  }
+}
+```
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/activateservice HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"Compute",
+      "regionCode":"az1:east:us",
+      "domainId":"01234567890123",
+      "tenantId":"12345678901234"
+    }
+  }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:--------|:---------------|:-----------|
+|FindOrCreateUmsTenant|Create a new or retrieve an existing Tenant from the UMS based on the tenantName of the Tenant, *OR* retrieve an existing Tenant from the UMS based on the tenantId of the Tenant.|false|
+|CreateZuoraSubscription|Create Zuora subscriptions for a service that is being activated.|false|
+|ProvisionService|Provision the tenant to specified external service.Currently, the tenant is only provisioned to Object Storage (Swift). Other services do not require any provisioning actions beyond the CS DB.|false|
+|CreateEndpointRef|Create an EndpointRef that links an endpoint via an EndpointTemplate to a Tenant.The EndpointRef that links the tenant to the endpoint is created if it does not exist in the CS DB|false|
+|AssociateRoles|Assign service activation roles to a specified user and/or to a specified group|false|
+|CreateProvisioningInfo|Create or update an existing ProvisioningInfo record to track a tenant's provisioned service.The ProvisioningInfo that tracks the provisioning status of this tenant with the provisioned endpoint (via serviceName and regionCode) is setup.The status of this ProvisioningInfo set to ENABLED and also the serviceAccountId field is set to the accountId (for now this is the tenantId) of the tenant.If the ProvisioningInfo exists, then it will be reused and only the status will be marked ENABLED.In the future this behavior may change since the current behavior retains the ProvisioningInfo record of a 'Deprovisioned' tenantsince provisioning history has not been implemented yet.|false|
+
+**Notes**
+
+1.  The tenantName must be globally unique.
+2.  EITHER tenantName OR tenantId are required.
+3.  If only the tenantName is provided then, if the tenant with the specified name does not exist then a new tenant will be created.
+4.  If only the tenantId is provided then the tenant with the specified tenantId must exist.
+5.  If both are provided then tenantId takes precedence and the net effect is the same as if only the tenantId was provided.
+6.  As part of activation certain *Service Roles* assignments are made for this tenant. 
+## Cancel Account
+#### POST [HPKeystoneExtensionBaseURI]/action/cancelaccount
+*Privilege Level: System Admin*  
+ 
+*Constraints:*  
+
+None
+
+Mark a Domain and all connected objects are CANCELED or TERMINATED. A canceled account can later be re-enabled, but a terminated account can never be used again.
+
+This action will also cancel subscriptions in Zuora and update status in Salesforce.
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-------------|:-------------|:----------|
+|domainId|xs:string|true|
+|terminate|xs:boolean|false|
+|reason|xs:string|false|
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/cancelaccount HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "domainId":"44386614938865",
+      "terminate":"true",
+      "reason":"deadbeat"
+    }
+  }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+{success http status code}
+
+**Response Data**
+
+JSON
+
+{json response code formatted}
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:--------|:---------------|:-----------|
+|UpdateUmsDomain||false|
+|UpdateKmsDomain|Update the state of a KMS Tenant to match that of its corresponding UMS Domain.|false|
+|UpdateServicesForDomain||false|
+|UpdateSalesforceAccount||false|
+|DeactivateZuoraAccount|Update the Zuora Account that corresponds to the specified UMS Domain instance.|false|
+
+**Notes**
+
+None
+## CreateDomain - SEVERELY DEPRECATED - TO BE REMOVED IN CONSER-4098
+#### POST [HPKeystoneExtensionBaseURI]/action/createdomain
+*Privilege Level: System Admin*  
+ 
+*Constraints:*  
+
+1.  Domain name must be unique. _(CreateUmsDomain)_
+2.  If Salesforce cannot be accessed than this Action Step will be retried at a future time. _(CreateSalesforceAccount)_
+
+This Action is used to create a new Domain in Control Services. Once successfully created in CS, new Accounts are created in both Salesforce and Zuora which are linked to the Domain.
+
+**Request Data**  
+
+**URL Parameters**
+
+TBD
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|name|xs:string|true|
+|state|xs:string|false|
+|addressLine1|xs:string|false|
+|addressLine2|xs:string|false|
+|city|xs:string|false|
+|zip|xs:string|false|
+|country|xs:string|false|
+|phone|xs:string|false|
+|company|xs:string|false|
+|website|xs:string|false|
+|emailAddress|xs:string|false|
+
+JSON
+
+TBD
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+1.  The domainId for the created Domain. _(CreateUmsDomain)_
+2.  KMS_TENANT holds the ID for the tenant created in KMS. _(CreateKmsDomain)_
+3.  SALESFORCE_ACCOUNT will contain the Salesforce Account ID. _(CreateSalesforceAccount)_
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|CreateUmsDomain|Create a new UMS Domain object.|false|
+|CreateKmsDomain|Create a new KMS Tenant corresponding to a UMS Domain.|false|
+|CreateSalesforceAccount|Create a new Salesforce Account. No Salesforce Contact is created with the new Account.|true|
+|CreateZuoraDomainAccount|Create a new Zuora account with no BillTo/SoldTo Contact.|true|
+
+
+**Notes**
+## Create Tenant
+#### POST [HPKeystoneExtensionBaseURI]/action/createtenant
+*Privilege Level: System Admin, Domain Admin*  
+ 
+*Constraints:*  
+
+1.  Tenant Name must be unique.
+2.  If Zuora cannot be accessed than this Action Step will be retried at a future time.
+
+This Action is used to create a new Tenant for an existing Domain in Control Services. Once successfully created in CS, a new Account is created in Zuora which is linked to the Tenant. Later, when the tenant activates services, the corresponding Zuora Account will subscribe to products in order to support customer billing.
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|tenantName|xs:string|true|
+|domainId|xs:string|true|
+|description|xs:string|false|
+
+JSON
+
+TBD
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|CreateUmsTenant|Create a new UMS Tenant object.|false|
+|CreateZuoraTenantAccount|Create a Zuora Account that is a child of the Domain Account|true|
+
+**Notes**
+## CreateUser
+
+## Description ##
+
+First, create a new User within the specified Domain in Control Services, and create accesskeys for the User. Next, create a new Contact for this user in Salesforce beneath the Salesforce Account of the Domain. Finally, if there is not already a Zuora Contact, then create one based on the user info.
+
+In order to support MC IP address validation there are two additional parameters. ipCheckSucceeded store a boolean value indicating whether or not the IP address of the client is not blocked. ipAddress contains the actual address.
+
+
+## Validation Modes ##
+
+**Default Mode**: In this mode the user is activated immediately. If **sendWelcomeEmail**=true the email is also sent immediately.
+
+**Email Validation Mode**: In this mode, where **emailValidationType**!=None, the user is created in a suspended state and a validation email sent. See Action Parameters for the different validation modes. If **sendWelcomeEmail**=true and **emailValidationType**!=None then the welcome email is sent on successful validation.
+
+Note that the **EnterpriseUserEmailVerification** action must handle validations from this action.
+
+## PrivilegeLevel ##
+
+**System Admin, Domain Admin**
+
+## Examples ##
+
+    http://host:port/v2.0/HP-IDM/v1.0/action/createuser
+
+## Action Parameters ##
+
+| Parameter Name | Parameter Type | Is Required | Default |
+| :------------- | :------------- | :---------- | :------ |
+| state	| xs:string 	| false 	| 	|
+| password 	| xs:string 	| **true**	| 	|
+| domainId	| xs:string 	| **true** 	| 	|
+| addressLine1	| xs:string 	| false 	| 	|
+| addressLine2	| xs:string 	| false 	| 	|
+| city	| xs:string 	| false 	| 	|
+| zip	| xs:string 	| false 	| 	|
+| country	| xs:string 	| false 	| 	|
+| phone	| xs:string 	| false 	| 	|
+| company	| xs:string 	| false 	| 	|
+| website	| xs:string 	| false 	| 	|
+| emailAddress	| xs:string 	| false 	| 	|
+| username 	| xs:string 	| **true**	| 	|
+| firstName	| xs:string 	| false 	| 	|
+| lastName	| xs:string 	| false 	| 	|
+| ipAddress	| xs:string 	| false 	| 	|
+| promoCode	| xs:string	| false	| 	|
+| partnerCode	| xs:string	| false	| 	|
+| riskScore	| xs:int 	| false 	| 	| 
+| phoneInBillingLocation	| xs:string 	| false 	| 	|
+| ipBillingDistance	| xs:int 	| false 	| 	|
+| ipCity	| xs:string 	| false 	| 	|
+| ipRegion	| xs:string 	| false 	| 	|
+| ipCountry	| xs:string 	| false 	| 	|
+| anonymousProxy	| xs:boolean 	| false 	| 	|
+| proxyScore	| xs:int 	| false 	| 	|
+| transparentProxy	| xs:boolean 	| false 	| 	|
+| corporateProxy	| xs:boolean 	| false 	| 	|
+| highRiskCountry	| xs:boolean 	| false 	| 	|
+| highRiskEmail	| xs:boolean 	| false 	| 	|
+| sendWelcomeEmail 	| xs:boolean 	| false	| false	|
+| emailValidationType 	| xs:string 	| false 	| None	|
+
+**emailValidationType Values**
+
+| Value	| Effect 	|
+| ------	| --------	|
+| None 	| Perform no email validation. 	|
+| EmailVerification 	| Send verification email with a link that activates the user.	|
+| EmailVerificationWithPwdCollection 	| Send verification email with a link that activates the user and capture a password .	|
+
+## Action Steps ##
+
+| Step Name 	| Step Description 	| Is Retryable 	|
+| -----------	| ------------------	| -------------	|
+| CreateUmsUser 	| Create a new UMS User object. 	| false 	|
+| CreateKmsUser 	| Create a new KMS User Account corresponding to a UMS User. 	| false 	|
+| CreateKmsUserKeys 	| Create a set of KMS Keys for the specified UMS User. 	| false 	|
+| CreateSalesforceContact 	| Create a new or locate an existing Salesforce Contact. 	| **true** 	|
+| CreateZuoraContact 	| Create a new Contact in Zuora only if there is not one already. 	| **true** 	|
+
+## Constraints ##
+
+1. The UMS User and the User's Domain must be enabled. _(CreateKmsUserKeys)_
+1. If Salesforce cannot be accessed than this Action Step will be retried at a future time. _(CreateSalesforceContact)_
+1. If Zuora cannot be accessed than this Action Step will be retried at a future time. _(CreateZuoraContact)_
+
+## JobTicket Results ##
+
+1. KMS_USER holds the ID for the UserAccount created in the KMS. _(CreateKmsUser)_
+1. KMS_USER_KEY holds the ID for the UserAccessKeys created in KMS. _(CreateKmsUserKeys)_
+1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _(CreateSalesforceContact)_
+1. ZUORA_DOMAIN_ACCOUNT will contain the Zuora Account ID. _(CreateZuoraContact)_
+
+## Email Integration ##
+
+After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
+
+| Templates Used	| CtrlSvcsContactActivity Type 	|
+| -------------- 	| ----------------------------- 	|
+| WELCOME_TO_CLOUD_EMAIL_ID 	| WelcomeEmailSent	|
+| EMAIL_ENTERPRISE_VERIFICATION_EMAIL_ID 	| EmailVerifEmailSent	|
+| EMAIL_ENTERPRISE_VERIFICATION_WITH_PWD_COLLECT_EMAIL_ID 	| EntVerifEmailWithPwdCollectSent	|
+
+Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
+
+| Email Text 	| Replaced With 	|
+| ---------- 	| -------------- 	|
+| %accountId% 	| user.accountId 	|
+| %username% 	| user.username 	|
+| %firstName% 	| user.firstName 	|
+| %lastName% 	| user.lastName 	|
+| %addressLine1% 	| user.addressLine1 	|
+| %addressLine2% 	| user.addressLine2 	|
+| %city% 	| user.city 	|
+| %state% 	| user.state 	|
+| %zip% 	| user.zip 	|
+| %country% 	| user.country 	|
+| %phone% 	| user.phone 	|
+| %company% 	| user.company 	|
+| %website% 	| user.website 	|
+| %emailAddress% 	| user.emailAddress 	|
+| %ResetToken%	| user.nonce	|
+## DeactivateBlockStorage
+#### POST [HPKeystoneExtensionBaseURI]/action/deactivateblockstorage
+*Privilege Level: System Administrators, Domain Administrators*  
+ 
+*Constraints:*  
+
+1.  serviceName parameter must be valid _(AuthorizeProvisioningAction)_
+2.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteEndpointRef)_
+3.  serviceName must resolve to a RegisteredService object _(UnassociateRoles)_
+4.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteProvisioningInfo)_
+
+Deactivate specified Tenant from Block Storage service.
+
+**Request Data**  
+
+**URL Parameters**
+
+{parameters provided within the url}
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|serviceName|xs:string|true|
+|domainId|xs:string|false|
+|tenantName|xs:string|true|
+|regionCode|xs:string|true|
+|dryrun|xs:string|false|
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/deactivateblockstorage HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"block-storage",
+      "regionCode":"az1:east:us",
+      "tenantName":"Tenant1"
+    }
+  }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
+|DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|
+|UnassociateRoles|Remove assigned service activation roles from a specified user and/or from a specified group|false|
+|DeleteProvisioningInfo|Update an existing ```ProvisioningInfo``` record to ```DELETED``` status to mark a tenant's removal from a previously provisioned service.In the future this behavior may change since the current behavior retains the ```ProvisioningInfo``` record of a 'Deprovisioned' tenantsince provisioning history has not been implemented yet.|false|
+
+
+**Notes**
+
+1.  ```tenantName``` must resolve to an existing tenant, and *{_}must not{_}* be provisioned for ```Compute``` service in the same region.
+```domainId``` is neither required nor used.
+2.  As part of deactivation the ```Domain Administrators``` group for the domain of the Tenant is removed from the role ```volume-manager``` for this tenant.
+## DeactivateCdn
+#### POST [HPKeystoneExtensionBaseURI]/action/deactivatecdn
+*Privilege Level: System Administrators, Domain Administrators*  
+ 
+*Constraints:*  
+
+1.  serviceName parameter must be valid _(AuthorizeProvisioningAction)_
+2.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteEndpointRef)_
+3.  serviceName must resolve to a RegisteredService object _(UnassociateRoles)_
+4.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteProvisioningInfo)_
+
+Deactivate the specified Tenant from CDN service.
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|serviceName|xs:string|true|
+|domainId|xs:string|false|
+|tenantName|xs:string|true|
+|regionCode|xs:string|true|
+|dryrun|xs:string|false|
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/deactivatecdn HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"cdn",
+      "regionCode":"az1:east:us",
+      "tenantName":"Tenant1"
+    }
+  }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
+|DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|
+|UnassociateRoles|Remove assigned service activation roles from a specified user and/or from a specified group|false|
+|DeleteProvisioningInfo|Update an existing ```ProvisioningInfo``` record to ```DELETED``` status to mark a tenant's removal from a previously provisioned service.In the future this behavior may change since the current behavior retains the ```ProvisioningInfo``` record of a 'Deprovisioned' tenantsince provisioning history has not been implemented yet.|false|
+
+**Notes**
+
+1.  ```tenantName``` must resolve to an existing tenant.
+2.  ```domainId``` is neither required nor used.
+3.  As part of deactivation the ```Domain Administrators``` group for the domain of the Tenant is removed from the role ```cdn-admin``` for this tenant.
+## DeactivateCompute
+#### POST [HPKeystoneExtensionBaseURI]/action/{action path}
+*Privilege Level: System Administrators, Domain Administrators*  
+ 
+*Constraints:*  
+
+1.  serviceName parameter must be valid _(AuthorizeProvisioningAction)_
+2.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteEndpointRef)_
+3.  serviceName must resolve to a RegisteredService object _(UnassociateRoles)_
+4.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteProvisioningInfo)_
+
+Deactivate specified Tenant from OpenStack Compute (Nova) service.
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|serviceName|xs:string|true|
+|domainId|xs:string|false|
+|tenantName|xs:string|true|
+|regionCode|xs:string|true|
+|dryrun|xs:string|false|
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/deactivatecompute HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"compute",
+      "regionCode":"az1:east:us",
+      "tenantName":"Tenant1"
+    }
+  }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
+|DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|
+|UnassociateRoles|Remove assigned service activation roles from a specified user and/or from a specified group|false|
+|DeleteProvisioningInfo|Update an existing ```ProvisioningInfo``` record to ```DELETED``` status to mark a tenant's removal from a previously provisioned service.In the future this behavior may change since the current behavior retains the ```ProvisioningInfo``` record of a 'Deprovisioned' tenantsince provisioning history has not been implemented yet.|false|
+
+**Notes**
+
+1.  ```tenantName``` must resolve to an existing tenant.
+2.  This tenant will automatically be de-provisioned  from the corresponding ```Block Storage``` service in the same region to which it was provisioned.
+3.  ```domainId``` is neither required nor used.
+4.  As part of deactivation the ```Domain Administrators``` group for the domain of the Tenant is removed from the roles ```netadmin``` and ```volume-manager``` for this tenant.
+## DeactivateImageService
+#### POST [HPKeystoneExtensionBaseURI]/action/{action path}
+*Privilege Level: System Administrators, Domain Administrators*  
+ 
+*Constraints:*  
+
+1.  serviceName parameter must be valid _(AuthorizeProvisioningAction)_
+2.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteEndpointRef)_
+3.  serviceName must resolve to a RegisteredService object _(UnassociateRoles)_
+4.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteProvisioningInfo)_
+
+Deactivate specified Tenant from OpenStack Image Service (Glance).
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type| Is Required|
+|:-|:-|:-|
+|domainId|xs:string|false|
+|tenantId|xs:string|true|
+|serviceName|xs:string|true|
+|regionCode|xs:string|true|
+|tenantName|xs:string|true|
+|dryrun|xs:string|false|
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/deactivateimageservice HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"image-service",
+      "regionCode":"az1:east:us",
+      "tenantName":"Tenant1"
+    }
+  }
+}
+```
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/deactivateimageservice HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"image-service",
+      "regionCode":"az1:east:us",
+      "tenantId":"12345678901234"
+    }
+  }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
+|DeactivateZuoraSubscription|Cancel Zuora subscriptions for a service that is being deactivated.|false|
+|DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|
+|UnassociateRoles|Remove assigned service activation roles from a specified user and/or from a specified group|false|
+|DeleteProvisioningInfo|Update an existing ```ProvisioningInfo``` record to ```DELETED``` status to mark a tenant's removal from a previously provisioned service.In the future this behavior may change since the current behavior retains the ```ProvisioningInfo``` record of a 'Deprovisioned' tenantsince provisioning history has not been implemented yet.|false|
+
+
+**Notes**
+
+1.  Either the ```tenantName``` OR ```tenantId``` is required and it must resolve to an existing tenant.
+2.  As part of deactivation the *Service Roles* assigned at activation time are removed from the tenant. 
+3.  ```domainId``` is neither required nor used.
+
+## DeactivateObjectStorage
+#### POST [HPKeystoneExtensionBaseURI]/action/deactivateobjectstorage
+*Privilege Level: System Administrators, Domain Administrators*  
+ 
+*Constraints:*  
+
+1.  serviceName parameter must be valid _(AuthorizeProvisioningAction)_
+2.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteEndpointRef)_
+3.  serviceName must resolve to a RegisteredService object _(UnassociateRoles)_
+4.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteProvisioningInfo)_
+
+Deactivate specified Tenant from OpenStack Object Storage (Swift) service.
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|serviceName|xs:string|true|
+|domainId|xs:string|false|
+|tenantName|xs:string|true|
+|regionCode|xs:string|true|
+|dryrun|xs:string|false|
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/deactivateobjectstorage HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"object-storage",
+      "regionCode":"az1:east:us",
+      "tenantName":"Tenant1"
+    }
+  }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
+|DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|
+|UnassociateRoles|Remove assigned service activation roles from a specified user and/or from a specified group|false|
+|DeleteProvisioningInfo|Update an existing ```ProvisioningInfo``` record to ```DELETED``` status to mark a tenant's removal from a previously provisioned service.In the future this behavior may change since the current behavior retains the ```ProvisioningInfo``` record of a 'Deprovisioned' tenantsince provisioning history has not been implemented yet.|false|
+
+
+**Notes**
+
+1.  ```tenantName``` must resolve to an existing tenant.
+2.  As part of deactivation the ```Domain Administrators``` group for the domain of the Tenant is removed from the role ```admin``` for this tenant.
+3.  ```domainId``` is neither required nor used.
+## DeactivateService
+#### POST [HPKeystoneExtensionBaseURI]/action/deactivateservice
+*Privilege Level: System Administrators, Domain Administrators*  
+ 
+*Constraints:*  
+
+1.  If a ```tenantId``` is provided, then a tenant with the specified ```tenantId``` must exist. In this case, the ```tenantName``` is ignored. _(FindUmsTenant)_
+2.  A service endpoint can be subscribed to only once by the same tenant. _(FindUmsTenant)_
+3.  The ```tenantId``` must be available (the UMS tenant must exist) at the time this is called. _(DeprovisionService)_
+4.  Service specific errors may be returned. _(DeprovisionService)_
+5.  ```Block Storage``` deactivation: Tenant being activated _must not_ have an active subscription to ```Compute``` service in the same region. _(DeprovisionService)_
+6.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteEndpointRef)_
+7.  serviceName must resolve to a RegisteredService object _(UnassociateRoles)_
+8.  ```serviceName``` and ```regionCode``` parameters must be valid and must resolve a unique ```EndpointTemplate``` _(DeleteProvisioningInfo)_
+
+
+Deactivate specified Tenant from the specified service.
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-------------|:-------------|:----------|
+|tenantId|xs:string|true|
+|serviceName|xs:string|true|
+|regionCode|xs:string|false|
+|tenantName|xs:string|true|
+|dryrun|xs:string|false|
+
+JSON
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/deactivateservice HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"Block Storage",
+      "regionCode":"az1:east:us",
+      "tenantName":"Tenant1"
+    }
+  }
+}
+```
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/deactivateservice HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+Content-Length: 512
+
+{ "JobTicket" :
+  { "actionParams" : {
+      "serviceName":"CDN",
+      "regionCode":"az1:east:us",
+      "tenantId":"12345678901234"
+    }
+  }
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+JSON
+
+TBD
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+```UMS_TENANT``` holds the tenantId for the new or existing Tenant. _(FindUmsTenant)_
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:--------|:---------------|:-----------|
+|FindUmsTenant|Retrieve an existing Tenant from the UMS based on the ```tenantId``` or the ```tenantName``` of the Tenant.|false|
+|DeactivateZuoraSubscription|Cancel Zuora subscriptions for a service that is being deactivated.|false|
+|DeprovisionService|Deprovision the tenant to specified external service.Currently, the tenant is only deprovisioned from Object Storage (Swift). Other services do not require any provisioning actions beyond the CS DB.Note: Deprovisioning rollback from Object Storage is not supported.|false|
+|DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|
+|UnassociateRoles|Remove assigned service activation roles from a specified user and/or from a specified group|false|
+|DeleteProvisioningInfo|Update an existing ```ProvisioningInfo``` record to ```DELETED``` status to mark a tenant's removal from a previously provisioned service.In the future this behavior may change since the current behavior retains the ```ProvisioningInfo``` record of a 'Deprovisioned' tenantsince provisioning history has not been implemented yet.|false|
+
+
+**Notes**
+
+1.  Either the ```tenantName``` OR ```tenantId``` is required and it must resolve to an existing tenant.
+2.  As part of deactivation the *Service Roles* assigned at activation time are removed from the tenant.
+3.  ```domainId``` is neither required nor used.
+## DevexMigration
+#### POST [HPKeystoneExtensionBaseURI]/action/NOT DOCUMENTED
+*Privilege Level: System Administrator*  
+ 
+*Constraints:*  
+
+1. TBD
+
+Description TO BE PROVIDED
+
+**Request Data**  
+
+**URL Parameters**
+
+TBD
+
+**Data Parameters**
+
+|Parameter Name|Parameter Type|Is Required|
+|:-|:-|:-|
+|password|xs:string|true|
+|secretKey|xs:string|false|
+|tenantId|xs:string|false|
+|accountId|xs:string|true|
+|contactId|xs:string|false|
+|billingId|xs:string|false|
+|emailAddress|xs:string|true|
+|username|xs:string|true|
+|firstName|xs:string|true|
+|lastName|xs:string|true|
+|salt|xs:string|true|
+|swiftEndpoint|xs:string|false|
+|nova1Endpoint|xs:string|false|
+|nova2Endpoint|xs:string|false|
+|swiftHash|xs:string|false|
+|swiftAccessKeyId|xs:string|false|
+|novaAccessKeyId|xs:string|false|
+|dryrun|xs:string|false|
+
+JSON
+
+TBD
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+-  UMS_USER holds the accountId for the user created in the UMS. _(CreateUmsUserAndDomain)_
+-  UMS_DOMAIN holds the domainId for the domain created in the UMS. _(CreateUmsUserAndDomain)_
+-  KMS_TENANT holds the ID for the tenant created in KMS. _(CreateKmsDomain)_
+-  KMS_USER holds the ID for the UserAccount created in the KMS. _(CreateKmsUser)_
+
+JSON
+
+{json response code formatted}
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+|Step Name|Step Description|Is Retryable|
+|:-|:-|:-|
+|CreateUmsUserAndDomain|Create a new UMS User and Domain. The User will be configured as the Administrator for the new Domain.|false|
+|MigrateUmsUser|No description available.|false|
+|CreateKmsDomain|Create a new KMS Tenant corresponding to a UMS Domain.|false|
+|CreateKmsUser|Create a new KMS User Account corresponding to a UMS User.|false|
+|ImportKmsUserKeys|No description available.|false|
+|MigrateSalesforceAccount|No description available.|false|
+|MigrateZuoraDomainAndContact|No description available.|false|
+|MigrateProvisionedServices|No description available.|false|
+|EnableMigratedDomain|No description available.|false|
+
+**Notes**
+## EmailVerification
+## Description ##
+
+This action will be used to validate email verification nonce which was sent to the customer as part of self registration process. After successful validation of the nonce this action will activate all the entities in CS and in SF.
+
+## PrivilegeLevel ##
+
+**Anonymous**
+
+## Examples ##
+
+**Request:**
+
+	{"JobTicket" :
+        {"actionParams" :
+            {"emailVerificationNonce":"eTA3Tzc5dUg4dktWQmtnVVp3VEpIYkdXT2xsNkwya2g0K2h6c21LODJ6cz1DZQ"}
+        }
+    }
+
+**Response**
+
+	{"JobTicket":{
+		"action": "EmailVerification",
+		"actionParams": {},
+		"actionResults":{
+			"SALESFORCE_ACCOUNT": "001Q000000W5ttYIAR",
+			"UMS_USER": "80761182701046",
+			"UMS_DOMAIN": "84861700411934",
+			"EMAIL_VERIFY_STATUS": "COMPLETE"
+			},
+		"completion": "2012-08-01T20:51:15.562Z",
+		"errorCategory": "",
+		"errorDescription": "",
+		"status": "COMPLETE",
+		"stepStatus":{
+			"UpdateKmsDomain": "COMPLETE",
+			"UpdateSalesforceAccount": "COMPLETE",
+			"ValidateEmailVerificationNonce": "COMPLETE",
+			"SendWelcomeEmail": "COMPLETE",
+			"ActivateUmsUserAndDomain": "COMPLETE"
+			},
+		"submission": "2012-08-01T20:51:13.600Z",
+		"ticketId": "501996c1529528c09f16e89e"
+	}
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type 	| Is Required 	|
+| :--	| :--	| :- 	|
+| emailVerificationNonce 	| xs:string 	| **true** 	|
+| password 	| xs:string 	| false 	|
+
+## Action Steps ##
+
+| Step Name 	| Step Description 	| Is Retryable 	|
+| -----------	| ------------------	| -------------	|
+| ValidateEmailVerificationNonce 	| This step will verify the nonce and it validity.	| false 	|
+| ActivateUmsUserAndDomain 	| This step will enable the UMS domain and user account 	| false 	|
+| UpdateKmsDomain 	| This step will update KMS user and tenant accounts 	| false 	|
+| UpdateSalesforceAccount 	| This step will update the SF Account and Contact and set these to Enabled state	| false 	|
+| SendWelcomeEmail 	| Send welcome email 	| false 	|
+
+## Constraints ##
+
+1. The verification mode chosen in SelfRegistration dictates whether the password parameter is required, it is an error to omit the password if it's use was indicated.
+
+## JobTicket Results ##
+
+1. UMS_USER holds the ID for the UserAccount updated in UMS.
+1. UMS_DOMAIN holds the ID for the Domain updated in UMS.
+1. SALESFORCE_ACCOUNT will contain the Salesforce Account ID.
+1. EMAIL_VERIFY_STATUS will contains the verification status.# EnterpriseUserEmailVerification
+
+## Description ##
+
+This action is used to validate and activate users created with the **CreateUser** action. After successful validation of the nonce this action will activate all the entities in CS and in SF.
+
+See **CreateUser** action for email integration information. 
+
+## PrivilegeLevel ##
+
+**Anonymous**
+
+## Examples ##
+
+**Request:**
+
+	{"JobTicket" :
+        {"actionParams" :
+            {"emailVerificationNonce":"eTA3Tzc5dUg4dktWQmtnVVp3VEpIYkdXT2xsNkwya2g0K2h6c21LODJ6cz1DZQ"}
+        }
+    }
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type 	| Is Required 	|
+| :--	| :--	| :- 	|
+| emailVerificationNonce 	| xs:string 	| **true** 	|
+| password 	| xs:string 	| false 	|
+
+## Action Steps ##
+
+| Step Name 	| Step Description 	| Is Retryable 	|
+| -----------	| ------------------	| -------------	|
+| ValidateEmailVerificationNonce 	| This step will verify the nonce and it validity.	| false 	|
+| ActivateUmsUser	| This step will enable the UMS domain and user account 	| false 	|
+| UpdateKmsUser 	| This step will update KMS user and tenant accounts 	| false 	|
+| UpdateSalesforceAccount 	| This step will update the SF Account and Contact and set these to Enabled state	| false 	|
+| SendWelcomeEmail 	| Send welcome email 	| false 	|
+
+## Constraints ##
+
+1. The verification mode chosen in CreateUser dictates whether the password parameter is required, it is an error to omit the password if it's use was indicated.
+
+## JobTicket Results ##
+
+1. UMS_USER holds the ID for the UserAccount updated in UMS.
+1. SALESFORCE_ACCOUNT will contain the Salesforce Account ID.
+1. EMAIL_VERIFY_STATUS will contains the verification status.##  ForgotPasswordReset
+#### POST [HPKeystoneExtensionBaseURI]/action/ForgotPasswordReset
+*Privilege Level: Anonymous*  
+ 
+*Constraints:*  
+
+None
+
+This action causes a reset password email to be sent to the user specified by the username parameter. The nonce and passwordResetTime are set in the database and the nonce sent in a templated email to the users registered address.
+
+
+**Request Data**  
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+| Parameter Name	| Parameter Type	| Is Required	|
+| :--------------	| :--------------	| :-----------	|
+| username	| xs:string	| true	|
+
+XML
+
+```
+POST http://host:port/v2.0/HP-IDM/v1.0/action/ForgotPasswordReset HTTP/1.1
+Accept: application/json
+Content-Type: application/xml
+User-Agent: Exploder 12.3
+Host: localhost:9999
+Connection: keep-alive
+
+<JobTicket>
+  <actionParams>
+    <entry><key>username</key><value>demouser</value></entry>
+  </actionParams>
+</JobTicket>
+```
+
+**Success Response**
+
+**Status Code**
+
+TBD
+
+**Response Data**
+
+No parameters are returned since the nonce is in the email and shouldn't be returned to the user by any other means.
+
+**Error Response**
+
+**Status Code**
+
+400 - Bad Request
+401 - Unauthorized
+403 - Forbidden
+500 - Internal Server Error
+503 - Service Unavailable
+
+**Response Data**
+
+JSON
+
+TBD  
+
+XML
+
+TBD  
+
+Curl Example
+
+TBD 
+
+**Action Steps**
+
+| Step Name	| Step Description	| Is Retryable	|
+| :---------	| :---------------	| :------------	|
+| ForgotPasswordResetOnUmsUser	| Set a nonce in the UMS User and set passwordResetTime to the current time	| true	|
+| SendForgotPasswordResetEmail	| Send the nonce to the user in a templated email.	| true	|
+
+##Email Integration##
+
+After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
+
+| Templates Used	| CtrlSvcsContactActivity Type 	|
+| -------------- 	| ---------------------------- 	|
+| PASSWORD_RESET_EMAIL_ID 	| PasswordRecoveryEmail	|
+
+Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
+
+| Email Text 	| Replaced With 	|
+| ---------- 	| --------------	|
+| %accountId% 	| user.accountId 	|
+| %username% 	| user.username 	|
+| %firstName% 	| user.firstName 	|
+| %lastName% 	| user.lastName 	|
+| %addressLine1% 	| user.addressLine1 	|
+| %addressLine2% 	| user.addressLine2 	|
+| %city% 	| user.city 	|
+| %state% 	| user.state 	|
+| %zip% 	| user.zip 	|
+| %country% 	| user.country 	|
+| %phone% 	| user.phone 	|
+| %company% 	| user.company 	|
+| %website% 	| user.website 	|
+| %emailAddress% 	| user.emailAddress 	|
+| %ResetToken%	| user.nonce	|
+## NocUserRegistration
+
+## Description ##
+
+N/A
+
+## PrivilegeLevel ##
+
+N/A
+
+## Examples ##
+
+N/A
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type	| Is Required	|
+| --------------	| ------------------	| -------------	|
+| state 	| xs:string 	| false 	|
+| password 	| xs:string 	| **true** 	|
+| addressLine1 	| xs:string 	| false 	|
+| addressLine2 	| xs:string 	| false 	|
+| city 	| xs:string 	| false 	|
+| zip 	| xs:string 	| false 	|
+| country 	| xs:string 	| false 	|
+| phone 	| xs:string 	| false 	|
+| company 	| xs:string 	| false 	|
+| website 	| xs:string 	| false 	|
+| emailAddress 	| xs:string 	| false 	|
+| username 	| xs:string 	| **true** 	|
+| firstName 	| xs:string 	| false 	|
+| lastName 	| xs:string 	| false 	|
+
+
+## Action Steps ##
+| Step Name 	| Step Description 	| Is Retryable 	|
+| ---------- 	| ----------------- 	| ------------ 	|
+| CreateUmsUser 	| Create a new UMS User object. 	| false 	|
+| CreateKmsUser 	| Create a new KMS User Account corresponding to a UMS User. 	| false 	|
+| CreateKmsUserKeys 	| Create a set of KMS Keys for the specified UMS User. 	| false 	|
+| CreateSalesforceContactAndAccount 	| Create a new or a locate existing Salesforce Contact. A query is performed based on the User's email address. If an existing contact is found, then it is assumed to correspond to the UMS User. 	| false 	|
+
+## Constraints ##
+
+1. The User's name and company are checked against the HP Restricted Parties List. If there is a hit then the new User and existing Domain are disabled after creation. _(CreateUmsUser)_
+1. The UMS User and the User's Domain must be enabled. _(CreateKmsUserKeys)_
+1. If Salesforce cannot be accessed than this Action Step will be retried at a future time. _(CreateSalesforceContactAndAccount)_
+
+
+## JobTicket Results ##
+
+1. KMS_USER holds the ID for the UserAccount created in the KMS. _(CreateKmsUser)_
+1. KMS_USER_KEY holds the ID for the UserAccessKeys created in KMS. _(CreateKmsUserKeys)_
+1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _(CreateSalesforceContactAndAccount)_
+## PurgeDomain
+
+## Description ##
+
+Completely remove the specified Domain from the system. Cascade removal to all subordinate Users, Tenants and Resources. Inactivate any associated accounts in Zuora and Salesforce.
+
+## PrivilegeLevel ##
+
+**System Admin**
+
+## Examples ##
+
+	http://host:port/v2.0/HP-IDM/v1.0/action/purgedomain
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type	| Is Required	|
+| --------------	| ------------------	| -------------	|
+| domainId 	| xs:string 	| **true** 	|
+| dryrun 	| xs:string 	| false 	|
+
+## Action Steps ##
+| Step Name 	| Step Description 	| Is Retryable 	|
+| ---------- 	| ----------------- 	| ------------ 	|
+| DeactivateZuoraAccount 	| When a domain is deleted we mark the corresponding Zuora Account as inactive by setting its state to 'Canceled' - with one Ell. 	| false 	|
+| PurgeServicesForDomain 	| Find all domain tenants and attempt to purge (physically remove) all the services for every tenant by deprovisioning the tenant's services first. *Note:* Rollback is not supported. 	| false 	|
+| DeleteKmsDomain 	| 	| false 	|
+| DeleteUmsDomain 	| 	| false 	|
+
+## Constraints ##
+
+N/A
+
+## JobTicket Results ##
+
+N/A
+## PurgeTenant
+
+## Description ##
+
+Delete the specified Tenant from the UMS. Cancel all activated services and all Zuora subscriptions for the tenant.
+
+## PrivilegeLevel ##
+
+**System Admin, Domain Admin**
+
+## Examples ##
+
+	http://host:port/v2.0/HP-IDM/v1.0/action/purgetenant
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type	| Is Required	|
+| ---------------	| ------------------	| -------------	|
+| tenantId 	| xs:string 	| **true** 	|
+| tenantName 	| xs:string 	| **true** 	|
+
+**One or the other**
+
+## Action Steps ##
+| Step Name 	| Step Description 	| Is Retryable 	|
+| ---------- 	| ----------------- 	| ------------ 	|
+| FindUmsTenant 	| Find the specified tenant 	| false 	|
+| PurgeZuoraTenantAccount 	| Cancel all subscriptions in Zuora that are owned by this tenant. Do not remove tenant account. 	| false 	|
+| PurgeServicesForTenant 	| Attempt to purge (physically remove) all the services for the tenant by de-provisioning the tenant's services first. *Note:* Rollback is not supported. 	| false 	|
+| PurgeUmsTenant 	| Delete the tenant from the UMS. 	| false 	|
+
+## Constraints ##
+
+1. tenantId or tenantName must be valid.
+
+## JobTicket Results ##
+
+1. The tenantId for the purged Tenant.
+## PurgeUser
+
+## Description ##
+
+Completely remove the specified User from the system. Deallocate any services assigned to this user, and inactivate accounts in third party systems, such as Zuora and Salesforce.
+
+## PrivilegeLevel ##
+
+N/A
+
+## Examples ##
+
+	http://host:port/v2.0/HP-IDM/v1.0/action/purgeuser
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type	| Is Required	|
+| -----------	| ------------------	| -------------	|
+| accountId 	| xs:string 	| **true** 	|
+| dryrun 	| xs:string 	| false 	|
+
+## Action Steps ##
+| Step Name 	| Step Description 	| Is Retryable 	|
+| -- 	| -- 	| -- 	|
+| DeleteKmsUser 	| 	| false 	|
+| DeleteUmsUser 	| 	| false 	|
+
+## Constraints ##
+
+N/A
+
+## JobTicket Results ##
+
+N/A# SelfRegistration
+
+## Description ##
+
+This action sets up a new Domain and User using minimal parameters. Keys are created for the user, and Accounts are created in both Salesforce and Zuora. In order to support MC IP address validation there are two additional parameters. ipCheckSucceeded store a boolean value indicating whether or not the IP address of the client is not blocked. ipAddress contains the actual address.
+
+## Validation Modes ##
+
+**No Validation**: In this mode all the required entities (user, domain, etc....) are created in the mongodb and the Sales Force and they are set to \*enabled\* state. Welcome email will be sent to customer immediately after successful registration process.
+
+In this mode the user is activated immediately. If **sendWelcomeEmail**=true the email is sent immediately.
+
+**Email Validation Mode**: In this mode all the required entities (user, domain, etc....) are created in the mongodb and the Sales Force and they set to \*suspended\* state. Email verification email along with email verification nonce will be sent to customer, customer has to follow the direction given in the email to validate their email address. To support this work flow we have added "statusReason" field to the Domain Collections and "emailVerificationStatus" to the User collection, same fields are added to the Account and Contact object of SF and they should be in sync.
+
+If **sendWelcomeEmail**=true and **emailValidationRequired**=true then the welcome email is sent on successful validation.
+
+Note that the **EmailVerification** action must handle validations from this action.
+
+**See: Self Registration & Email Validation Work Flow**
+
+## PrivilegeLevel ##
+
+**Anonymous**
+
+## Examples ##
+
+    POST http://host:port/v2.0/HP-IDM/v1.0/action/SelfRegistration HTTP/1.1
+	Accept: application/json
+	Content-Type: application/json
+	User-Agent: Exploder 12.3
+	Host: localhost:9999
+	Connection: keep-alive
+	Content-Length: 512
+	{"JobTicket" : {
+		"actionParams" : {
+			"username":"jason",
+      		"password":"this4now",
+      		"emailAddress":"jason@hp.com",
+      		"emailValidationRequired":"true"
+      		}
+      	}
+	}
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type 	| Is Required 	| Default 	|
+| :--------------	| :--------------	| :---------- 	| :------- 	|
+| state 	| xs:string 	| false 	| 	|
+| password 	| xs:string 	| **true** 	| 	|
+| addressLine1 	| xs:string 	| false 	| 	|
+| addressLine2 	| xs:string 	| false 	| 	|
+| city 	| xs:string 	| false 	| 	|
+| zip 	| xs:string 	| false 	| 	|
+| country 	| xs:string 	| false 	| 	|
+| phone 	| xs:string 	| false 	| 	|
+| company 	| xs:string 	| false 	| 	|
+| website 	| xs:string 	| false 	| 	|
+| emailAddress 	| xs:string 	| **true** 	| 	|
+| username 	| xs:string 	| **true** 	| 	|
+| firstName 	| xs:string 	| false 	| 	|
+| lastName 	| xs:string 	| false 	| 	|
+| ipAddress 	| xs:string 	| false 	| 	|
+| promoCode 	| xs:string 	| false	| 	|
+| partnerCode 	| xs:string 	| false 	| 	|
+| riskScore 	| xs:int 	| false 	| 	|
+| phoneInBillingLocation 	| xs:string 	| false 	| 	|
+| ipBillingDistance	| xs:int 	| false 	| 	|
+| ipCity 	| xs:string 	| false 	| 	|
+| ipRegion 	| xs:string 	| false 	| 	|
+| ipCountry 	| xs:string 	| false 	| 	|
+| anonymousProxy 	| xs:boolean 	| false 	| 	|
+| proxyScore 	| xs:int 	| false 	| 	|
+| transparentProxy 	| xs:boolean 	| false 	| 	|
+| corporateProxy 	| xs:boolean 	| false 	| 	|
+| highRiskCountry 	| xs:boolean 	| false 	| 	|
+| highRiskEmail 	| xs:boolean 	| false 	| 	|
+| emailValidationRequired 	| xs:boolean 	| false 	| 	|
+| referringUrl 	| xs:string 	| false 	| 	|
+| useCase	| xs:string 	| false 	| 	|
+| sendWelcomeEmail 	| xs:boolean 	| false 	| false	|
+
+## Action Steps ##
+
+| Step Name 	| Step Description	| Is Retryable 	|
+| -----------	| -----------------	| --------------	|
+| CreateUmsUserAndDomain 	| Create a new UMS User and Domain. The User will be configured as the Administrator for the new Domain. 	| false 	|
+| CreateKmsDomain 	| Create a new KMS Tenant corresponding to a UMS Domain. 	| false 	|
+| CreateKmsUser 	| Create a new KMS User Account corresponding to a UMS User. 	| false 	|
+| CreateKmsUserKeys 	| Create a set of KMS Keys for the specified UMS User. 	| false 	|
+| CreateSalesforceAccount 	| Create a new Salesforce Account. No Salesforce Contact is created with the new Account. 	| false 	|
+| CreateSalesforceContact 	| Create a new or a locate existing Salesforce Contact. A query is performed based on the User's email address. If an existing contact is found, then it is assumed to correspond to the UMS User. 	| false 	|
+| CreateZuoraDomainAndContact 	| Create a new Account and Contact in Zuora that correspond with the given Domain and User. 	| false 	|
+
+## Constraints ##
+
+1. The UMS User and the User's Domain must be enabled. _(CreateKmsUserKeys)_
+
+## JobTicket Results ##
+
+1. UMS_USER holds the accountId for the user created in the UMS. _(CreateUmsUserAndDomain)_
+1. UMS_DOMAIN holds the domainId for the domain created in the UMS. _CreateUmsUserAndDomain_
+1. KMS_TENANT holds the ID for the tenant created in KMS. _(CreateKmsDomain)_
+1. KMS_USER holds the ID for the UserAccount created in the KMS. _(CreateKmsUser)_
+1. KMS_USER_KEY holds the ID for the UserAccessKeys created in KMS. _(CreateKmsUserKeys)_
+1. SALESFORCE_ACCOUNT will contain the Salesforce Account ID. _(CreateSalesforceAccount)_
+1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _(CreateSalesforceContact)_
+1. ZUORA_DOMAIN_ACCOUNT will contain the Zuora Account ID. _(CreateZuoraDomainAndContact)_
+
+##Email Integration##
+
+After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
+
+| Templates Used	| CtrlSvcsContactActivity Type 	|
+| --------------- 	| ---------------------------- 	|
+| WELCOME_TO_CLOUD_EMAIL_ID 	| WelcomeEmailSent	|
+| EMAIL_VERIFICATION_EMAIL_ID 	| VerificationEmailSent	|
+| EMAIL_VERIFICATION_EMAIL_WITH_PWD_COLLECT_EMAIL_ID	| VerifEmailWithPwdCollectSent	|
+
+Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
+
+| Email Text 	| Replaced With 	|
+| ----------- 	| --------------	|
+| %accountId% 	| user.accountId 	|
+| %username% 	| user.username 	|
+| %firstName% 	| user.firstName 	|
+| %lastName% 	| user.lastName 	|
+| %addressLine1% 	| user.addressLine1 	|
+| %addressLine2% 	| user.addressLine2 	|
+| %city% 	| user.city 	|
+| %state% 	| user.state 	|
+| %zip% 	| user.zip 	|
+| %country% 	| user.country 	|
+| %phone% 	| user.phone 	|
+| %company% 	| user.company 	|
+| %website% 	| user.website 	|
+| %emailAddress% 	| user.emailAddress 	|
+| %ResetToken%	| user.nonce	|
+## SvcOnBoardingUserRegistration
+
+## Description ##
+
+This action will create a user in system domain with required privilege to register a new service in CS infrastructure. Mostly this action would be called by NOC person using cs-manage script.
+
+## PrivilegeLevel ##
+
+**Caller must have SuperAdmin or L3-plus-support role.**
+
+## Examples ##
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type 	| Is Required 	|
+| :--	| :--	| :- 	|
+| password 	| xs:string 	| **true**	|
+| emailAddress 	| xs:string 	| **true** 	|
+| username 	| xs:string 	| **true** 	|
+| serviceId	| xs:string 	| **true** 	|
+
+## Action Steps ##
+
+| Step Name 	| Step Description 	| Is Retryable 	|
+| -----------	| ------------------	| -------------	|
+| CheckForExistingService 	| This step will check if a service is specified serviceId already exist in system, if yes then it would not go further.	| false 	|
+| CreateUmsUser 	| Create a new UMS User object. 	| false 	|
+| CreateKmsUser 	| Create a new KMS User Account corresponding to a UMS User. 	| false 	|
+| CreateKmsUserKeys 	| Create a set of KMS Keys for the specified UMS User. 	| false 	|
+| CreateSalesforceContactAndAccount 	| Create a new or a locate existing Salesforce Contact. A query is performed based on the User's email address. If an existing contact is found, then it is assumed to correspond to the UMS User. 	| false 	|
+| CreateSvcRegAuthzPolicies 	| This step would create required policy on the above created user account.	| false 	|
+
+## Constraints ##
+
+1. Service with given serviceId should not exist in system, if exist there would be exception thrown.
+1. The User's name and company are checked against the HP Restricted Parties List. If there is a hit then the new User and existing Domain are disabled after creation. _CreateUmsUser_
+1. The UMS User and the User's Domain must be enabled. _CreateKmsUserKeys_
+1. If Salesforce cannot be accessed than this Action Step will be retried at a future time. _CreateSalesforceContactAndAccount_
+
+## JobTicket Results ##
+
+1. KMS_USER holds the ID for the UserAccount created in the KMS. _CreateKmsUser_
+1. KMS_USER_KEY holds the ID for the UserAccessKeys created in KMS. _CreateKmsUserKeys_
+1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _CreateSalesforceContactAndAccount_# UpdateDomain
+
+## Description ##
+
+Update the properties of the specified Domain. Property changes are propagated to all internal (UMS, KMS) and external (Salesforce) services.
+
+In addition to set simple property values, the UpdateDomain action can also set the status for a Domain.
+
+| Status Value 	| Privilege Level 	| Description 	|
+| -- 	| -- 	| -- 	|
+| ENABLED 	| SA 	| Default state to an active account 	|
+| SUSPENDED_3 	| SA 	| No user in a suspended domain can log into their account. 	|
+| DELETED 	| SA 	| Soft delete. Domain data is not purged. Can be re-ENABLED only by SA. 	|
+
+## PrivilegeLevel ##
+
+**System Administration, Domain Administration**
+
+## Examples ##
+
+	POST http://host:port/v2.0/HP-IDM/v1.0/action/updatedomain HTTP/1.1
+	Accept: application/json
+	Content-Type: application/json
+	User-Agent: Exploder 12.3
+	Host: localhost:9999
+	Connection: keep-alive
+	Content-Length: 512
+	{ "JobTicket" : {
+		"actionParams" : {
+      		"domainId":"44386614938865",
+      		"city":"Portland",
+      		"state":"Oregon"
+      		"zip":"97213"
+    		}
+		}
+	}
+
+	POST http://host:port/v2.0/HP-IDM/v1.0/action/updatedomain HTTP/1.1
+	Accept: application/json
+	Content-Type: application/json
+	User-Agent: Exploder 12.3
+	Host: localhost:9999
+	Connection: keep-alive
+	Content-Length: 512
+	{ "JobTicket" : {
+		"actionParams" : {
+      		"status":"SUSPENDED_3",
+    		}
+		}
+	}
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type 	| Is Required 	|
+| :--	| :--	| :- 	|
+| name 	| xs:string 	| false 	|
+| state 	| xs:string 	| false 	|
+| status 	| xs:string 	| false 	|
+| domainId 	| xs:string 	| **true** 	|
+| addressLine1 	| xs:string 	| false 	|
+| addressLine2 	| xs:string 	| false 	|
+| city 	| xs:string 	| false 	|
+| zip 	| xs:string 	| false 	|
+| country 	| xs:string 	| false 	|
+| phone 	| xs:string 	| false 	|
+| company 	| xs:string 	| false 	|
+| website 	| xs:string 	| false 	|
+| emailAddress 	| xs:string 	| false 	|
+
+## Action Steps ##
+
+| Step Name 	| Step Description 	| Is Retryable 	|
+| -----------	| ------------------	| -------------	|
+| UpdateUmsDomain 	| 	| false 	|
+| UpdateKmsDomain 	| Update the state of a KMS Tenant to match that of its corresponding UMS Domain. 	| false 	|
+| UpdateSalesforceAccount 	| 	| false 	|
+| UpdateZuoraAccount 	| Update the Zuora Account that corresponds to the specified UMS Domain instance. 	| true 	|
+
+## Constraints ##
+
+N/A
+
+## JobTicket Results ##
+
+1. Following execution the KMS Tenant ID will be stored in the KMS_TENANT field. _(UpdateKmsDomain)_
+1. ZUORA_DOMAIN_ACCOUNT is set with the Zuora AccountID for the corresponding Domain instance. _(UpdateZuoraAccount)_# UpdateTenant
+
+## Description ##
+
+Change the name and/or description for an existing Tenant in both UMS and Zuora.
+
+## PrivilegeLevel ##
+
+**System Admin, Domain Admin**
+
+## Examples ##
+
+	http://host:port/v2.0/HP-IDM/v1.0/action/updatetenant
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type	| Is Required	|
+| ---------------	| ------------------	| -------------	|
+| tenantId 	| xs:string 	| **true** 	|
+| tenantName 	| xs:string 	| false 	|
+| description 	| xs:string 	| false 	|
+| status 	| xs:string 	| false	|
+
+## Action Steps ##
+| Step Name 	| Step Description 	| Is Retryable 	|
+| ---------- 	| ----------------- 	| ------------ 	|
+| FindUmsTenant 	| 	| 	|
+| UpdateUmsTenant 	| Update the tenant's name and/or description in the UMS. 	| false 	|
+| UpdateZuoraTenantAccount 	| Update the tenant's name and/or description in Zuora. 	| **true** 	|
+
+
+## Constraints ##
+
+1. tenantId must be valid.
+1. tenantName must be unique.
+1. If Zuora cannot be accessed than this Action Step will be retried at a future time.
+
+## JobTicket Results ##
+
+1. The tenantId for the created Tenant.
+1. ZUORA_TENANT_ACCOUNT will contain the Zuora Account ID.
+## UpdateUser
+
+## Description ##
+
+Update the properties of the specified User. Property changes are propagated to all internal (UMS, KMS) and external (Salesforce) services.
+
+In addition to set simple property values, the UpdateUser action can also set the status for a User. Now, update in password value is not allowed through 'UpdateUser' action. You will need to use UMS operation for password change.
+
+If the user modified their email address then a notification email to the old and new address.
+
+| Status Value 	| Privilege Level 	| Description 	|
+| -- 	| -- 	| -- 	|
+| ENABLED 	| SA 	| Default state to an active user. 	|
+| DISABLED 	| DA 	| Disabled users can not log into their accounts. 	|
+| SUSPENDED_3 	| SA 	| Disabled users can not log into their accounts. Can be re-ENABLED only by SA. 	|
+| DELETED 	| SA 	| Soft delete. User data is not purged. Can be re-ENABLED only by SA. 	|
+
+
+
+## PrivilegeLevel ##
+
+**System Administration, Domain Administration, Self-Service**
+
+## Examples ##
+
+	POST http://host:port/v2.0/HP-IDM/v1.0/action/updateuser HTTP/1.1
+	Accept: application/json
+	Content-Type: application/json
+	User-Agent: Exploder 12.3
+	Host: localhost:9999
+	Connection: keep-alive
+	Content-Length: 512
+	{ "JobTicket" : {
+		"actionParams" : {
+      		"accountId":"44386614938865",
+      		"firstName":"Kermit",
+      		"lastName":"Melling"
+      		"emailAddress":"kermit.melling@hp.com"
+    		}
+    	}
+    }
+
+	POST http://host:port/v2.0/HP-IDM/v1.0/action/updateuser HTTP/1.1
+	Accept: application/json
+	Content-Type: application/json
+	User-Agent: Exploder 12.3
+	Host: localhost:9999
+	Connection: keep-alive
+	Content-Length: 512
+
+	{ "JobTicket" : {
+		"actionParams" : {
+      		"status":"DISABLED",
+    		}
+		}
+	}
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type	| Is Required 	|
+| -----------	| ------------------	| -------------	|
+| state 	| xs:string 	| false 	|
+| status 	| xs:string 	| false 	|
+| password **DISALLOWED**	| 	| 	|
+| accountId 	| xs:string 	| **true**	|
+| addressLine1 	| xs:string 	| false 	|
+| addressLine2 	| xs:string 	| false 	|
+| city 	| xs:string 	| false 	|
+| zip 	| xs:string 	| false 	|
+| country 	| xs:string 	| false 	|
+| phone 	| xs:string 	| false 	|
+| company 	| xs:string 	| false 	|
+| website 	| xs:string 	| false 	|
+| emailAddress 	| xs:string 	| false 	|
+| username 	| xs:string 	| false 	|
+| firstName 	| xs:string 	| false 	|
+| lastName 	| xs:string 	| false 	|
+| ipAddress 	| xs:string 	| false 	|
+| promoCode 	| xs:string 	| false	|
+| partnerCode 	| xs:string 	| false	|
+| riskScore 	| xs:int 	| false 	|
+| phoneInBillingLocation 	| xs:string 	| false 	|
+| ipBillingDistance 	| xs:int 	| false 	|
+| ipCity 	| xs:string 	| false 	|
+| ipRegion 	| xs:string 	| false 	|
+| ipCountry 	| xs:string 	| false 	|
+| anonymousProxy 	| xs:boolean 	| false 	|
+| proxyScore 	| xs:int 	| false 	|
+| transparentProxy 	| xs:boolean 	| false 	|
+| corporateProxy 	| xs:boolean 	| false 	|
+| highRiskCountry 	| xs:boolean 	| false 	|
+| highRiskEmail 	| xs:boolean 	| false 	|
+
+## Action Steps ##
+| Step Name 	| Step Description 	| Is Retryable 	|
+| -- 	| -- 	|
+| UpdateUmsUser 	| Update the property values for a given User in the UMS. 	| false 	|
+| UpdateKmsUser 	| Update the state of a KMS User to match that of the UMS. 	| false 	|
+| UpdateSalesforceContact 	| Update the appropriate Salesforce "Contact" object to match the UMS properties. 	| true 	|
+| UpdateZuoraContact 	| If the given UMS User is also a Zuora Contact, then update the corresponding Zuora Contact with all the current User properties. By default, only the Domain Admin has a corresponding Zuora Contact. 	| true 	|
+| SendEmailUpdateEmails 	| If the UMS user has modified their email address then send a notification email to the old and new email address. \\ 	| true 	|
+
+## Constraints ##
+
+1. The user "status" value can only be updated by the SA or DA. _UpdateUmsUser_
+1. Once a KMS User and Keys is marked as deleted it cannot be reenabled. _UpdateKmsUser_
+1. Action is ignored if UMS User has no BillingID. _UpdateZuoraContact_
+
+## JobTicket Results ##
+
+1. Following execution the KMS User ID will be stored in the KMS_USER field. _UpdateKmsUser_
+1. Following execution the SF ContactID will be stored in the SALESFORCE_CONTACT field. _UpdateSalesforceContact_
+1. If the users email address was changed then **mailToOldAddress** and **mailToNewAddress** will be set to the respective addresses.
+
+## Email Update Email ##
+
+If the user changes their email address then a confirmation is sent to both the old and new address. Email messages are stored in the database. The email update email is stored under the identifier **"EMAIL_UPDATED_EMAIL_ID"**. Before being sent each email is processed by replacing text of the for %<keyword>% with a specific value. Replacement values available in the welcome email are listed in the following table.
+
+| Email Text 	| Replaced With 	|
+| -- 	| -- 	|
+| %accountId% 	| user.accountId 	|
+| %username% 	| user.username 	|
+| %firstName% 	| user.firstName 	|
+| %lastName% 	| user.lastName 	|
+| %addressLine1% 	| user.addressLine1 	|
+| %addressLine2% 	| user.addressLine2 	|
+| %city% 	| user.city 	|
+| %state% 	| user.state 	|
+| %zip% 	| user.zip 	|
+| %country% 	| user.country 	|
+| %phone% 	| user.phone 	|
+| %company% 	| user.company 	|
+| %website% 	| user.website 	|
+| %emailAddress% 	| user.emailAddress 	|
+
+After submission of a each email a **CtrlSvcsContactActivity** Salesforce object is created. The first with **ActvityType**="EmailUpdatedToOldAddress", the second with **ActvityType**="EmailUpdatedToNewAddress".# UserNameRecovery
+
+## Description ##
+
+This action causes an email to be sent to the user that contains a list of all usernames associated with the provided email address.
+
+## PrivilegeLevel ##
+
+Anonymous
+
+## Examples ##
+
+	POST http://host:port/v2.0/HP-IDM/v1.0/action/UserNameRecovery HTTP/1.1
+	Accept: application/json
+	Content-Type: application/xml
+	User-Agent: Exploder 12.3
+	Host: localhost:9999
+	Connection: keep-alive
+	
+	<JobTicket>
+		<actionParams>
+			<entry><key>email</key><value>demouser@nowhere.com</value></entry>
+		</actionParams>
+	</JobTicket>
+
+## Action Parameters ##
+
+| Parameter Name	| Parameter Type 	| Is Required 	|
+| :--	| :--	| :- 	|
+| email 	| xs:string 	| **true** 	|
+
+## Action Steps ##
+
+| Step Name 	| Step Description 	| Is Retryable 	|
+| -----------	| ------------------	| -------------	|
+| SendUserNameRecoveryEmail	| Send the list of usernames by email. 	| true 	|
+
+## Constraints ##
+
+1. There must be at least one username associated with the provided email address, or an error will be generated.
+
+## JobTicket Results ##
+
+1. No parameters are returned since the username list is in the email.
+
+## Email Integration ##
+
+After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
+
+| Templates Used	| CtrlSvcsContactActivity Type 	|
+| -- 	| -- 	|
+| USERNAME_RECOVERY_EMAIL_ID 	| UserNameRecoveryEmail	|
+
+Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
+
+| Email Text 	| Replaced With 	|
+| -- 	| -- 	|
+| %accountId% 	| user.accountId 	|
+| %username% 	| user.username 	|
+| %firstName% 	| user.firstName 	|
+| %lastName% 	| user.lastName 	|
+| %addressLine1% 	| user.addressLine1 	|
+| %addressLine2% 	| user.addressLine2 	|
+| %city% 	| user.city 	|
+| %state% 	| user.state 	|
+| %zip% 	| user.zip 	|
+| %country% 	| user.country 	|
+| %phone% 	| user.phone 	|
+| %company% 	| user.company 	|
+| %website% 	| user.website 	|
+| %emailAddress% 	| user.emailAddress 	|
+| %ResetToken% 	| nonce value if required 	|
+| %UsersForEmailAddress% 	| The HTML formatted list of usernames (see below) 	|
+| %firstName% 	| The users first name (see below)	|
+
+If there is more than one username returned the value of *firstName* will be provided as "Cloud User" since there may be multiple options for their name.
+
+The value of **UsersForEmailAddress** is pre-formatted HTML, since there will be a list of at least one user. To make use of this field in the template use:
+
+	<ul>
+	%UsersForEmailAddress%
+	</ul>
+
+This will expand to:
+
+	<ul>
+	<li>username1</li><li>username2</li>...
+	</ul>
 
 ---
 

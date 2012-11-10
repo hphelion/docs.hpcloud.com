@@ -159,13 +159,25 @@ def create_anchor_tag(s):
     return string.join(lower_word_list, '_')
 
 
+def create_actions_appendix(dirname):
+    contents = grep_all_mds(dirname)
+    api_content = []
+    for line in contents.split('\n'):
+        if line.startswith('# '):
+            line = line.replace('#', '##')
+        #elif line.startswith('## '):
+        #    line = line.replace('##', '###')
+        api_content.append(line)
+    return string.join(api_content, '\n')
+            
 def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
     if opt.outfile:
         outfile = opt.outfile
     intro_md = read_file('cs-api-intro.md')
+    end_md = read_file('cs-api-end.md')
     if private_api:
         intro_md = read_file('cs-private-api-intro.md')
-    end_md = read_file('cs-api-end.md')
+        end_md = read_file('cs-private-api-end.md')
     contents = grep_all_mds(dirname)
     group_count = 0
     action_count = 0
@@ -248,6 +260,9 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
     output = open(outfile, 'w')
     output.write(intro_md)
     output.write(string.join(api_content, '\n'))
+    if private_api:
+        action_appendix = create_actions_appendix(os.path.join(dirname, 'actions'))
+        end_md = end_md.replace('{AVAILABLEACTIONS}', action_appendix)
     output.write(end_md)
     output.close()
 

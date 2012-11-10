@@ -37,6 +37,8 @@ Privilege Level: {Privilege Level}*
 Submit an action to be executed. Each action takes a specific set of execution parameters within the content of the Post. (For an exact list of parameters for each Action, click the link below.) In the absence of any query parameters, the Action will be submitted and the call will immediately return a Job Ticket. The Job Ticket contains information about the executing Job, and can be refreshed through the job API call.
 An Action request may contain the timeOut query parameter that is set to a non-zero positive value. The value indicates that the request should wait at least the given length of time for the Action to complete - either successfully or due to error. If the Action does not complete with the time period then the job is cancelled and any completed action steps will be rolled back.
 
+Please see [Appendix A: Avaiable Actions](#available_action) for detail information on the actions.
+
 **Request Data**
 
 See documentation of the multifarious actions that can be posted at the Available Actions page.   Examples below are illustrative only.
