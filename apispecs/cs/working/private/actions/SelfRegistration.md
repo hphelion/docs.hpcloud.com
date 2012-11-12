@@ -79,6 +79,7 @@ Note that the **EmailVerification** action must handle validations from this act
 | useCase	| xs:string 	| false 	| 	|
 | sendWelcomeEmail 	| xs:boolean 	| false 	| false	|
 | emailValidationType 	| xs:string 	| false 	| None	|
+| customerType 	| xs:string 	| false 	| Self Service 	|
 
 **emailValidationType Values**
 
@@ -87,6 +88,15 @@ Note that the **EmailVerification** action must handle validations from this act
 | None 	| Perform no email validation. 	|
 | EmailVerification 	| Send verification email with a link that activates the user.	|
 | EmailVerificationWithPwdCollection 	| Send verification email with a link that activates the user and capture a password .	|
+
+**customerType Values**
+
+| Value	| Effect 	|
+| ------	| --------	|
+| Gratis Account	| 	|
+| Self Service	| 	|
+| HP Internal	| 	|
+| Corporate	| Causes the Zuora defaultPaymentMethod to be set to "Other" on the Zuora account.	|
 
 ## Action Steps ##
 
