@@ -66,6 +66,7 @@ In addition to set simple property values, the UpdateDomain action can also set 
 | company 	| xs:string 	| false 	|
 | website 	| xs:string 	| false 	|
 | emailAddress 	| xs:string 	| false 	|
+| homeRegion 	| xs:string 	| false 	|
 
 ## Action Steps ##
 

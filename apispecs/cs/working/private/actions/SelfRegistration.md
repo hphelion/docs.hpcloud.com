@@ -80,6 +80,8 @@ Note that the **EmailVerification** action must handle validations from this act
 | sendWelcomeEmail 	| xs:boolean 	| false 	| false	|
 | emailValidationType 	| xs:string 	| false 	| None	|
 | customerType 	| xs:string 	| false 	| Self Service 	|
+| homeRegion	| xs:string 	| false 	| 	|
+
 
 **emailValidationType Values**
 
@@ -124,6 +126,10 @@ Note that the **EmailVerification** action must handle validations from this act
 1. SALESFORCE_ACCOUNT will contain the Salesforce Account ID. _(CreateSalesforceAccount)_
 1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _(CreateSalesforceContact)_
 1. ZUORA_DOMAIN_ACCOUNT will contain the Zuora Account ID. _(CreateZuoraDomainAndContact)_
+
+
+## Region Resolution ##
+{{PRIVATE}} If homeRegion is specified in input data, then domain, user, groups, authz user grants, group refs are created in specified homeRegion. If home region is not specified in input data, then CS domain and user and related entities are created in region of CS instance where SelfRegistration action request was submitted. All user related authz grants, group ref are created in new user's region. The created user's geoRegion is passed to KMS steps (CreateKmsDomain, CreateKmsUser,  CreateKmsUserKeys) which is going to create related KMS entities in user's geoRegion. Currently we are not propagating region to salesforce and zuora side.
 
 ##Email Integration##
 

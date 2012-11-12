@@ -30,6 +30,7 @@ N/A
 | username 	| xs:string 	| **true** 	|
 | firstName 	| xs:string 	| false 	|
 | lastName 	| xs:string 	| false 	|
+| homeRegion 	| xs:string 	| false 	|
 
 
 ## Action Steps ##
@@ -52,3 +53,6 @@ N/A
 1. KMS_USER holds the ID for the UserAccount created in the KMS. _(CreateKmsUser)_
 1. KMS_USER_KEY holds the ID for the UserAccessKeys created in KMS. _(CreateKmsUserKeys)_
 1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _(CreateSalesforceContactAndAccount)_
+
+## Region Resolution ##
+{{PRIVATE}} If homeRegion is specified in input data, then NOC user, authz user grants, group refs are created in specified homeRegion. If home region is not specified in input data, then CS user and related entities are created in same region as NOC domain's region. All user related authz grants, group ref are created in new user's region. The created user's geoRegion is passed to KMS steps (CreateKmsUser,  CreateKmsUserKeys) which is going to create related KMS entities in user's geoRegion. Currently we are not propagating region to salesforce side.

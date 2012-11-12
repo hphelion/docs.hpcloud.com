@@ -90,6 +90,7 @@ If the user modified their email address then a notification email to the old an
 | corporateProxy 	| xs:boolean 	| false 	|
 | highRiskCountry 	| xs:boolean 	| false 	|
 | highRiskEmail 	| xs:boolean 	| false 	|
+| homeRegion 	| xs:string 	| false 	|
 
 ## Action Steps ##
 | Step Name 	| Step Description 	| Is Retryable 	|

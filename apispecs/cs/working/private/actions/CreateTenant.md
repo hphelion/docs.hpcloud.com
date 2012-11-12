@@ -22,6 +22,7 @@ None
 |tenantName|xs:string|true|
 |domainId|xs:string|true|
 |description|xs:string|false|
+|homeRegion|xs:string|false|
 
 JSON
 
@@ -50,6 +51,10 @@ TBD
 503 - Service Unavailable
 
 **Response Data**
+
+
+## Region Resolution ##
+{{PRIVATE}} If homeRegion is specified in input data, then CS tenant is created in specified homeRegion. If home region is not specified in input data, then CS tenant is created in same region where tenant's domain region. Currently we are not propagating region to zuora side.
 
 JSON
 

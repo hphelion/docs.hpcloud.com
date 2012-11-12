@@ -340,7 +340,9 @@ The UserPreference database collection is nothing more that a set of nested hash
 
 **Request Data**
 
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 Only the user id is required to retrieve the preferences.
+
 
 **URL Parameters**
 
@@ -416,11 +418,15 @@ XML
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI or request body   |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation   |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request|  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
 
 **Response Data**
 
@@ -507,7 +513,9 @@ The UserPreference database collection is nothing more that a set of nested hash
 
 **Request Data**
 
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 Only the user id is required to retrieve the preferences.
+
 
 **URL Parameters**
 
@@ -531,17 +539,195 @@ Not yet documented.
 
 **Error Response**
 
+Please refer to error response body for additional details.
+
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI or request body   |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation   |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request|  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
 503 - Service Unavailable
 
 **Response Data**
 
-Not yet documented.
+JSON
+
+```
+{"userDetails": {
+   "bs": false,
+   "domain":    {
+      "domainId": "33678705570176",
+      "emailAddress": "kim.jensen2@hp.com",
+      "name": "33678705570176-DOMAIN",
+      "owners": ["41145980532179"],
+      "status": "ENABLED"
+   },
+   "jobTickets": [],
+   "setDateLastModified": false,
+   "setDateRecordAdded": false,
+   "setId": false,
+   "setVersion": true,
+   "tenants":    [
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2A-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "19893479403843"
+      },
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2C-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "33349277569059"
+      },
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2D-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "51153082887747"
+      },
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2B-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "73489722654413"
+      }
+   ],
+   "user":    {
+      "accountId": "41145980532179",
+      "dateRecordAdded": "2012-11-12T22:19:01.539Z",
+      "domainId": "33678705570176",
+      "emailAddress": "kim.jensen2@hp.com",
+      "status": "ENABLED",
+      "timeLastSuccessfulLogin": "2012-11-12T22:19:02.961Z",
+      "username": "SW_12112012141901492"
+   },
+   "userPreferences":    {
+      "bs": false,
+      "preferenceNames": [],
+      "preferences": [],
+      "setDateLastModified": false,
+      "setDateRecordAdded": false,
+      "setId": false,
+      "setVersion": true,
+      "substoreNames": [],
+      "substores": [],
+      "version": 0
+   },
+   "version": 0
+}}
+
+```
+
+XML
+```
+<userDetails>
+   <version>0</version>
+   <domain>
+      <domainId>33678705570176</domainId>
+      <emailAddress>kim.jensen2@hp.com</emailAddress>
+      <name>33678705570176-DOMAIN</name>
+      <owners>
+         <owner>41145980532179</owner>
+      </owners>
+      <status>ENABLED</status>
+   </domain>
+   <jobTickets/>
+   <userPreferences>
+      <version>0</version>
+      <substores/>
+      <preferences/>
+   </userPreferences>
+   <tenants>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2A-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>19893479403843</tenantId>
+      </tenant>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2C-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>33349277569059</tenantId>
+      </tenant>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2D-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>51153082887747</tenantId>
+      </tenant>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2B-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>73489722654413</tenantId>
+      </tenant>
+   </tenants>
+   <user>
+      <accountId>41145980532179</accountId>
+      <dateRecordAdded>2012-11-12T14:19:01.539-08:00</dateRecordAdded>
+      <domainId>33678705570176</domainId>
+      <emailAddress>kim.jensen2@hp.com</emailAddress>
+      <status>ENABLED</status>
+      <timeLastSuccessfulLogin>2012-11-12T14:19:02.961-08:00</timeLastSuccessfulLogin>
+      <username>SW_12112012141901492</username>
+   </user>
+</userDetails>
+```
 
 **Curl Example**
 

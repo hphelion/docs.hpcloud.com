@@ -59,6 +59,7 @@ Note that the **EnterpriseUserEmailVerification** action must handle validations
 | highRiskEmail	| xs:boolean 	| false 	| 	|
 | sendWelcomeEmail 	| xs:boolean 	| false	| false	|
 | emailValidationType 	| xs:string 	| false 	| None	|
+| homeRegion	| xs:string 	| false 	| 	|
 
 **emailValidationType Values**
 
@@ -90,6 +91,9 @@ Note that the **EnterpriseUserEmailVerification** action must handle validations
 1. KMS_USER_KEY holds the ID for the UserAccessKeys created in KMS. _(CreateKmsUserKeys)_
 1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _(CreateSalesforceContact)_
 1. ZUORA_DOMAIN_ACCOUNT will contain the Zuora Account ID. _(CreateZuoraContact)_
+
+## Region Resolution ##
+{{PRIVATE}} If homeRegion is specified in input data, then CS user, authz user grants, group refs are created in specified homeRegion. If home region is not specified in input data, then CS user and related entities are created in same region as domain's region. All user related authz grants, group ref are created in new user's region. The created user's geoRegion is passed to KMS steps (CreateKmsUser,  CreateKmsUserKeys) which is going to create related KMS entities in user's geoRegion. Currently we are not propagating region to salesforce and zuora side.
 
 ## Email Integration ##
 
