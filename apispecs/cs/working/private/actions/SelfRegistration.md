@@ -10,9 +10,9 @@ This action sets up a new Domain and User using minimal parameters. Keys are cre
 
 In this mode the user is activated immediately. If **sendWelcomeEmail**=true the email is sent immediately.
 
-**Email Validation Mode**: In this mode all the required entities (user, domain, etc....) are created in the mongodb and the Sales Force and they set to \*suspended\* state. Email verification email along with email verification nonce will be sent to customer, customer has to follow the direction given in the email to validate their email address. To support this work flow we have added "statusReason" field to the Domain Collections and "emailVerificationStatus" to the User collection, same fields are added to the Account and Contact object of SF and they should be in sync.
+**Email Validation Mode**: In this mode, where **emailValidationType**!=None, the user is created in a suspended state and a validation email sent. See Action Parameters for the different validation modes. If **sendWelcomeEmail**=true and **emailValidationType**!='None' then the welcome email is sent on successful validation.
 
-If **sendWelcomeEmail**=true and **emailValidationRequired**=true then the welcome email is sent on successful validation.
+The **emailValidationRequired** flag is retained for the time being for backward compatibility. If this flag is set then it's equivalent to an **emailValidationType** of 'EmailVerification'. If both these parameters are specified then **emailValidationType** takes precedence.
 
 Note that the **EmailVerification** action must handle validations from this action.
 
@@ -78,6 +78,15 @@ Note that the **EmailVerification** action must handle validations from this act
 | referringUrl 	| xs:string 	| false 	| 	|
 | useCase	| xs:string 	| false 	| 	|
 | sendWelcomeEmail 	| xs:boolean 	| false 	| false	|
+| emailValidationType 	| xs:string 	| false 	| None	|
+
+**emailValidationType Values**
+
+| Value	| Effect 	|
+| ------	| --------	|
+| None 	| Perform no email validation. 	|
+| EmailVerification 	| Send verification email with a link that activates the user.	|
+| EmailVerificationWithPwdCollection 	| Send verification email with a link that activates the user and capture a password .	|
 
 ## Action Steps ##
 
