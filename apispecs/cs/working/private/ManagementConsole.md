@@ -58,118 +58,90 @@ This call does not require a request body
 JSON
 
 ```
-{
-  "user" : {
-    "state" : "Colorado",
-    "country" : "United States",
-    "status" : "ENABLED",
-    "city" : "Fort Collins",
-    "accountId" : "37598452056865",
-    "domainId" : "71688867269283",
-    "contactId" : null,
-    "billingId" : "4028e6963577fe0d0135828a2e5647d8",
-    "addressLine1" : "1234 Harmony Road",
-    "addressLine2" : "MS 5678",
-    "zip" : "97222",
-    "phone" : "9705551212",
-    "company" : "Hewlett Packard Cloud Seeding",
-    "website" : "http://www.hp.com",
-    "emailAddress" : "bozo@hp.com",
-    "passwordResetCount" : null,
-    "passwordResetTime" : null,
-    "passwordLockoutStartTime" : null,
-    "username" : "JL1329334986631",
-    "firstName" : "James",
-    "lastName" : "Long",
-    "passwordLockoutCount" : null,
-    "passwordLockoutWindow" : null,
-    "timeLastSuccessfulLogin" : null,
-    "passwordRetryTimespan" : null,
-    "passwordRetryStartTime" : null
-  },
-  "domain" : {
-    "name" : "71688867269283-DOMAIN",
-    "state" : "Colorado",
-    "country" : "United States",
-    "status" : "ENABLED",
-    "description" : null,
-    "city" : "Fort Collins",
-    "domainId" : "71688867269283",
-    "contactId" : null,
-    "billingId" : "4028e6963577fe0d0135828a2b7f47d1",
-    "addressLine1" : "1234 Harmony Road",
-    "addressLine2" : "MS 5678",
-    "zip" : "97222",
-    "phone" : "9705551212",
-    "company" : "Hewlett Packard Cloud Seeding",
-    "website" : "http://www.hp.com",
-    "emailAddress" : "bozo@hp.com"
-  },
-  "tenants" : [ {
-    "name" : "NoveTenant1329334994693",
-    "status" : "ENABLED",
-    "description" : "Compute",
-    "tenantId" : "39525494045831",
-    "billingId" : null,
-    "swiftAccountHash" : null
-  } ],
-  "jobs" : [ {
-    "status" : "COMPLETE",
-    "action" : "TEST",
-    "errorDescription" : "",
-    "submission" : null,
-    "completion" : null,
-    "jobticketId" : ""
-  } ],
-  "preferences" : {
-    "substore" : [ {
-      "storeName" : "UI Preferences",
-      "store" : {
-        "substore" : [ ],
-        "preference" : [ {
-          "key" : "Font",
-          "value" : "Dingbat"
-        }, {
-          "key" : "BackgroundColor",
-          "value" : "BLACK"
-        }, {
-          "key" : "ForegroundColor",
-          "value" : "BROWN"
-        } ]
+{"userDetails": {
+   "bs": false,
+   "domain":    {
+      "domainId": "33678705570176",
+      "emailAddress": "kim.jensen2@hp.com",
+      "name": "33678705570176-DOMAIN",
+      "owners": ["41145980532179"],
+      "status": "ENABLED"
+   },
+   "jobTickets": [],
+   "setDateLastModified": false,
+   "setDateRecordAdded": false,
+   "setId": false,
+   "setVersion": true,
+   "tenants":    [
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2A-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "19893479403843"
+      },
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2C-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "33349277569059"
+      },
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2D-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "51153082887747"
+      },
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2B-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "73489722654413"
       }
-    } ],
-    "preference" : [ ],
-    "accountId" : "37598452056865",
-    "id" : {
-      "time" : 1329335008000,
-      "machine" : 224520590,
-      "timeSecond" : 1329335008,
-      "inc" : -1996416285,
-      "new" : false
-    },
-    "setId" : true,
-    "idHex" : null,
-    "version" : 1,
-    "setVersion" : true,
-    "dateRecordAdded" : 1329335008246,
-    "setDateRecordAdded" : true,
-    "dateLastModified" : 1329335008246,
-    "setDateLastModified" : true,
-    "bs" : false,
-    "immutable" : null
-  },
-  "id" : null,
-  "setId" : false,
-  "idHex" : null,
-  "version" : 0,
-  "setVersion" : true,
-  "dateRecordAdded" : null,
-  "setDateRecordAdded" : false,
-  "dateLastModified" : null,
-  "setDateLastModified" : false,
-  "bs" : false,
-  "immutable" : null
-}
+   ],
+   "user":    {
+      "accountId": "41145980532179",
+      "dateRecordAdded": "2012-11-12T22:19:01.539Z",
+      "domainId": "33678705570176",
+      "emailAddress": "kim.jensen2@hp.com",
+      "status": "ENABLED",
+      "timeLastSuccessfulLogin": "2012-11-12T22:19:02.961Z",
+      "username": "SW_12112012141901492"
+   },
+   "userPreferences":    {
+      "bs": false,
+      "preferenceNames": [],
+      "preferences": [],
+      "setDateLastModified": false,
+      "setDateRecordAdded": false,
+      "setId": false,
+      "setVersion": true,
+      "substoreNames": [],
+      "substores": [],
+      "version": 0
+   },
+   "version": 0
+}}
+
 ```
 
 XML
@@ -177,105 +149,85 @@ XML
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <userDetails>
-    <version>0</version>
-    <domain>
-        <addressLine1>1234 Harmony Road</addressLine1>
-        <addressLine2>MS 5678</addressLine2>
-        <billingId>4028e6963577fe0d0135828a2b7f47d1</billingId>
-        <city>Fort Collins</city>
-        <company>Hewlett Packard Cloud Seeding</company>
-        <country>United States</country>
-        <domainId>71688867269283</domainId>
-        <emailAddress>bozo@hp.com</emailAddress>
-        <name>71688867269283-DOMAIN</name>
-        <phone>9705551212</phone>
-        <state>Colorado</state>
-        <status>ENABLED</status>
-        <website></website>
-        <zip>97222</zip>
-    </domain>
-    <jobTickets>
-        <jobTicket>
-            <action>TEST</action>
-            <errorDescription></errorDescription>
-            <jobticketId></jobticketId>
-            <status>COMPLETE</status>
-        </jobTicket>
-    </jobTickets>
-    <userPreferences>
-        <dateLastModified>2012-02-15T12:43:28.246-07:00</dateLastModified>
-        <dateRecordAdded>2012-02-15T12:43:28.246-07:00</dateRecordAdded>
-        <id/>
-        <version>1</version>
-        <userId>37598452056865</userId>
-        <substores>
-            <substore>
-                <storeName>UI Preferences</storeName>
-                <store>
-                    <substores/>
-                    <preferences>
-                        <preference>
-                            <key>Font</key>
-                            <value>Dingbat</value>
-                        </preference>
-                        <preference>
-                            <key>BackgroundColor</key>
-                            <value>BLACK</value>
-                        </preference>
-                        <preference>
-                            <key>ForegroundColor</key>
-                            <value>BROWN</value>
-                        </preference>
-                    </preferences>
-                </store>
-            </substore>
-        </substores>
-        <preferences/>
-    </userPreferences>
-    <tenants>
-        <tenant>
-            <services>
-                <service>
-                    <regionCode>az-1.region-a.geo-1</regionCode>
-                    <serviceName>Compute</serviceName>
-                    <status>ENABLED</status>
-                </service>
-                <service>
-                    <regionCode>az-1.region-a.geo-1</regionCode>
-                    <serviceName>Block Storage</serviceName>
-                    <status>ENABLED</status>
-                </service>
-                <service>
-                    <regionCode>az-1.region-a.geo-1</regionCode>
-                    <serviceName>Image Management</serviceName>
-                    <status>ENABLED</status>
-                </service>
-            </services>
-            <description>Compute</description>
-            <name>NoveTenant1329334994693</name>
-            <status>ENABLED</status>
-            <tenantId>39525494045831</tenantId>
-        </tenant>
-    </tenants>
-    <user>
-        <accountId>37598452056865</accountId>
-        <addressLine1>1234 Harmony Road</addressLine1>
-        <addressLine2>MS 5678</addressLine2>
-        <billingId>4028e6963577fe0d0135828a2e5647d8</billingId>
-        <city>Fort Collins</city>
-        <company>Hewlett Packard Cloud Seeding</company>
-        <country>United States</country>
-        <domainId>71688867269283</domainId>
-        <emailAddress>bozo@hp.com</emailAddress>
-        <firstName>James</firstName>
-        <lastName>Long</lastName>
-        <phone>9705551212</phone>
-        <state>Colorado</state>
-        <status>ENABLED</status>
-        <username>JL1329334986631</username>
-        <website></website>
-        <zip>97222</zip>
-    </user>
+   <version>0</version>
+   <domain>
+      <domainId>33678705570176</domainId>
+      <emailAddress>kim.jensen2@hp.com</emailAddress>
+      <name>33678705570176-DOMAIN</name>
+      <owners>
+         <owner>41145980532179</owner>
+      </owners>
+      <status>ENABLED</status>
+   </domain>
+   <jobTickets/>
+   <userPreferences>
+      <version>0</version>
+      <substores/>
+      <preferences/>
+   </userPreferences>
+   <tenants>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2A-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>19893479403843</tenantId>
+      </tenant>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2C-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>33349277569059</tenantId>
+      </tenant>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2D-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>51153082887747</tenantId>
+      </tenant>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2B-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>73489722654413</tenantId>
+      </tenant>
+   </tenants>
+   <user>
+      <accountId>41145980532179</accountId>
+      <dateRecordAdded>2012-11-12T14:19:01.539-08:00</dateRecordAdded>
+      <domainId>33678705570176</domainId>
+      <emailAddress>kim.jensen2@hp.com</emailAddress>
+      <status>ENABLED</status>
+      <timeLastSuccessfulLogin>2012-11-12T14:19:02.961-08:00</timeLastSuccessfulLogin>
+      <username>SW_12112012141901492</username>
+   </user>
 </userDetails>
 ```
 
@@ -555,179 +507,7 @@ Please refer to error response body for additional details.
 
 **Response Data**
 
-JSON
-
-```
-{"userDetails": {
-   "bs": false,
-   "domain":    {
-      "domainId": "33678705570176",
-      "emailAddress": "kim.jensen2@hp.com",
-      "name": "33678705570176-DOMAIN",
-      "owners": ["41145980532179"],
-      "status": "ENABLED"
-   },
-   "jobTickets": [],
-   "setDateLastModified": false,
-   "setDateRecordAdded": false,
-   "setId": false,
-   "setVersion": true,
-   "tenants":    [
-            {
-         "description": "Object Storage",
-         "name": "TS1-TC2A-SwiftTestTenant12112012141901492",
-         "services": [         {
-            "regionCode": "region-a.geo-1",
-            "serviceName": "Object Storage",
-            "status": "ENABLED"
-         }],
-         "status": "ENABLED",
-         "tenantId": "19893479403843"
-      },
-            {
-         "description": "Object Storage",
-         "name": "TS1-TC2C-SwiftTestTenant12112012141901492",
-         "services": [         {
-            "regionCode": "region-a.geo-1",
-            "serviceName": "Object Storage",
-            "status": "ENABLED"
-         }],
-         "status": "ENABLED",
-         "tenantId": "33349277569059"
-      },
-            {
-         "description": "Object Storage",
-         "name": "TS1-TC2D-SwiftTestTenant12112012141901492",
-         "services": [         {
-            "regionCode": "region-a.geo-1",
-            "serviceName": "Object Storage",
-            "status": "ENABLED"
-         }],
-         "status": "ENABLED",
-         "tenantId": "51153082887747"
-      },
-            {
-         "description": "Object Storage",
-         "name": "TS1-TC2B-SwiftTestTenant12112012141901492",
-         "services": [         {
-            "regionCode": "region-a.geo-1",
-            "serviceName": "Object Storage",
-            "status": "ENABLED"
-         }],
-         "status": "ENABLED",
-         "tenantId": "73489722654413"
-      }
-   ],
-   "user":    {
-      "accountId": "41145980532179",
-      "dateRecordAdded": "2012-11-12T22:19:01.539Z",
-      "domainId": "33678705570176",
-      "emailAddress": "kim.jensen2@hp.com",
-      "status": "ENABLED",
-      "timeLastSuccessfulLogin": "2012-11-12T22:19:02.961Z",
-      "username": "SW_12112012141901492"
-   },
-   "userPreferences":    {
-      "bs": false,
-      "preferenceNames": [],
-      "preferences": [],
-      "setDateLastModified": false,
-      "setDateRecordAdded": false,
-      "setId": false,
-      "setVersion": true,
-      "substoreNames": [],
-      "substores": [],
-      "version": 0
-   },
-   "version": 0
-}}
-
-```
-
-XML
-```
-<userDetails>
-   <version>0</version>
-   <domain>
-      <domainId>33678705570176</domainId>
-      <emailAddress>kim.jensen2@hp.com</emailAddress>
-      <name>33678705570176-DOMAIN</name>
-      <owners>
-         <owner>41145980532179</owner>
-      </owners>
-      <status>ENABLED</status>
-   </domain>
-   <jobTickets/>
-   <userPreferences>
-      <version>0</version>
-      <substores/>
-      <preferences/>
-   </userPreferences>
-   <tenants>
-      <tenant>
-         <services>
-            <service>
-               <regionCode>region-a.geo-1</regionCode>
-               <serviceName>Object Storage</serviceName>
-               <status>ENABLED</status>
-            </service>
-         </services>
-         <description>Object Storage</description>
-         <name>TS1-TC2A-SwiftTestTenant12112012141901492</name>
-         <status>ENABLED</status>
-         <tenantId>19893479403843</tenantId>
-      </tenant>
-      <tenant>
-         <services>
-            <service>
-               <regionCode>region-a.geo-1</regionCode>
-               <serviceName>Object Storage</serviceName>
-               <status>ENABLED</status>
-            </service>
-         </services>
-         <description>Object Storage</description>
-         <name>TS1-TC2C-SwiftTestTenant12112012141901492</name>
-         <status>ENABLED</status>
-         <tenantId>33349277569059</tenantId>
-      </tenant>
-      <tenant>
-         <services>
-            <service>
-               <regionCode>region-a.geo-1</regionCode>
-               <serviceName>Object Storage</serviceName>
-               <status>ENABLED</status>
-            </service>
-         </services>
-         <description>Object Storage</description>
-         <name>TS1-TC2D-SwiftTestTenant12112012141901492</name>
-         <status>ENABLED</status>
-         <tenantId>51153082887747</tenantId>
-      </tenant>
-      <tenant>
-         <services>
-            <service>
-               <regionCode>region-a.geo-1</regionCode>
-               <serviceName>Object Storage</serviceName>
-               <status>ENABLED</status>
-            </service>
-         </services>
-         <description>Object Storage</description>
-         <name>TS1-TC2B-SwiftTestTenant12112012141901492</name>
-         <status>ENABLED</status>
-         <tenantId>73489722654413</tenantId>
-      </tenant>
-   </tenants>
-   <user>
-      <accountId>41145980532179</accountId>
-      <dateRecordAdded>2012-11-12T14:19:01.539-08:00</dateRecordAdded>
-      <domainId>33678705570176</domainId>
-      <emailAddress>kim.jensen2@hp.com</emailAddress>
-      <status>ENABLED</status>
-      <timeLastSuccessfulLogin>2012-11-12T14:19:02.961-08:00</timeLastSuccessfulLogin>
-      <username>SW_12112012141901492</username>
-   </user>
-</userDetails>
-```
+Not yet documented.
 
 **Curl Example**
 
