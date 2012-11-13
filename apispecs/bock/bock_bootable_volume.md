@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Bootable Volume API
+title: HP Bootable Volume API
 title_section: The API specifications for the HP Bootable Volume service.
 description: "Bootable Volume API Specifications"
 group: apispec
@@ -11,7 +11,7 @@ group: apispec
 
 # 1. Overview
 
-The HP Bootable Volume Backup API is an extension to the OpenStack Nova API
+The HP Bootable Volume API is an extension to the OpenStack Nova API
 which allows users to create persistent volumes which are pre-initialized
 with a bootable image (from Glance). The API changes are implemented in two
 separate facilities. The first, is a simple extension to the volume-create
@@ -327,7 +327,7 @@ Not supported.
 JSON
 
 ```
-{"itemNotFound": {"message": "Backup [backup_id] could not be found.", "code": 404}}
+{"itemNotFound": {"message": "Volume [volume_id] could not be found.", "code": 404}}
 ```
 
 XML
