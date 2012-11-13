@@ -18,8 +18,8 @@ module Jekyll
 
     # Markdown tags
     # @todo Support tutorial images.
-    page_instance.content = page_instance.content.sub!(/!(\[.*?\])\((.*?)\)/, '\1(/content/documentation/\2)' )
-    result['content'] = result['content'].sub!(/!(\[.*?\])\((.*?)\)/, '\1(/content/documentation/\2)' )
+    page_instance.content = page_instance.content.gsub(/!(\[.*?\])\((.*?)\)/, '!\1(/content/documentation/\2)' )
+    result['content'] = result['content'].gsub(/!(\[.*?\])\((.*?)\)/, '!\1(/content/documentation/\2)' )
 
     result
   end
