@@ -1,5 +1,5 @@
-##  ForgotPasswordReset
-#### POST [HPKeystoneExtensionBaseURI]/action/ForgotPasswordReset
+#  ForgotPasswordReset
+## POST [HPKeystoneExtensionBaseURI]/action/ForgotPasswordReset
 *Privilege Level: Anonymous*  
  
 *Constraints:*  

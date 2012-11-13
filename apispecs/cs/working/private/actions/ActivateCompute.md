@@ -1,5 +1,5 @@
-## ActivateCompute
-#### POST [HPKeystoneExtensionBaseURI]/action/activatecompute
+# ActivateCompute
+## POST [HPKeystoneExtensionBaseURI]/action/activatecompute
 *Privilege Level: System Administrators, Domain Administrators*
   
 *Constraints:*

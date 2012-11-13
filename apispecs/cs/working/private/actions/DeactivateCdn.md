@@ -1,5 +1,5 @@
-## DeactivateCdn
-#### POST [HPKeystoneExtensionBaseURI]/action/deactivatecdn
+# DeactivateCdn
+## POST [HPKeystoneExtensionBaseURI]/action/deactivatecdn
 *Privilege Level: System Administrators, Domain Administrators*  
  
 *Constraints:*  

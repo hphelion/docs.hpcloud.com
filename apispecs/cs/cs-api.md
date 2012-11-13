@@ -351,6 +351,7 @@ curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a9295
 
 **Additional Notes**
 
+
 ### 4.4.2 Tokens
 
 A yummy cookie one uses to bribe the authorization monster.
@@ -1175,6 +1176,7 @@ curl -s -k -H "X-Auth-User: 62424047631429:jdoe" -H "X-Auth-Key: secrete" -H "Ac
 ```
 
 **Additional Notes**
+
 
 ### 4.4.3 User Access Keys
 

@@ -1,5 +1,5 @@
-## DeactivateService
-#### POST [HPKeystoneExtensionBaseURI]/action/deactivateservice
+# DeactivateService
+## POST [HPKeystoneExtensionBaseURI]/action/deactivateservice
 *Privilege Level: System Administrators, Domain Administrators*  
  
 *Constraints:*  

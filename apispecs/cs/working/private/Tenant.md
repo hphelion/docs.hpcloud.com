@@ -1,22 +1,3 @@
-# Tenants
-
-A Tenant is a collection of services, associated with zero or more users who have access to these services via role references.
-
-**Status Lifecycle**
-
-N/A
-
-**Rate Limits**
-
-N/A
-
-**Quota Limits**
-
-N/A
-
-**Business Rules**
-
-None.
 
 ## Get All Tenants
 #### GET [HPKeystoneExtensionBaseURI]/tenants?name=tenantName&limit=pagesize&marker=tenantId

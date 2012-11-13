@@ -1,5 +1,5 @@
-## Activate Block Storage
-### POST [HPKeystoneExtensionBaseURI]/action/activateblockstorage
+# Activate Block Storage
+## POST [HPKeystoneExtensionBaseURI]/action/activateblockstorage
 *Privilege Level: System Administrators, Domain Administrators*  
 *Constraints:*  
 1. A service endpoint can be subscribed to only once by the same tenant. (FindUmsTenant)  

@@ -1,23 +1,3 @@
-# Tokens
-
-A yummy cookie one uses to bribe the authorization monster.
-
-**Status Lifecycle**
-
-N/A
-
-**Rate Limits**
-
-N/A
-
-**Quota Limits**
-
-N/A
-
-**Business Rules**
-
-None.
-
 
 ## Validate Token
 #### GET /tokens/\<tokenId\>?belongsTo=tenantId&HP-IDM-serviceId=110,global,130&HP-IDM-endpointTemplateId=110,111

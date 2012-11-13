@@ -1,5 +1,5 @@
-## ActivateService
-#### POST [HPKeystoneExtensionBaseURI]/action/activateservice
+# ActivateService
+## POST [HPKeystoneExtensionBaseURI]/action/activateservice
 *Privilege Level: 
 System Administrators, Domain Administrators*  
 

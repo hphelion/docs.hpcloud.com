@@ -1,5 +1,5 @@
-## ActivateImageService
-#### POST [HPKeystoneExtensionBaseURI]/action/activateimageservice
+# ActivateImageService
+## POST [HPKeystoneExtensionBaseURI]/action/activateimageservice
 *Privilege Level: System Administrators, Domain Administrators*
   
 *Constraints:*

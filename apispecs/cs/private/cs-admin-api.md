@@ -123,6 +123,7 @@ group: apispec
 | Services | [Update Service](#update_service) | PUT | /HP-IDM/v1.0/services/{serviceId}  	 | Y/Y | SA, SVC |
 | Signature | [EC2 Signature](#ec2_signature) | POST | /HP-IDM/v1.0/ec2Tokens | Y/Y | Anon |
 | Signature | [Generic Signature](#generic_signature) | POST | /HP-IDM/v1.0/gstokens | Y/Y | Anon |
+| Tenants | [List Tenants](#list_tenants) | GET | /tenants | Y/Y | SS |
 | Tenants | [Get All Tenants](#get_all_tenants) | GET | /HP-IDM/v1.0/tenants | Y/Y | SA |
 | Tenants | [Get A Tenant](#get_a_tenant) | GET | /HP-IDM/v1.0/tenants/{tenantId}  | Y/Y | SA, DA, DU |
 | Tenants | [Check For Existence Of Tenant Name](#check_for_existence_of_tenant_name) | GET | /HP-IDM/v1.0/tenants/{tenantId}  | Y/Y | Anon |
@@ -133,6 +134,13 @@ group: apispec
 | Tenants | [Get Endpoints For A Tenant](#get_endpoints_for_a_tenant) | GET | /HP-IDM/v1.0/tenants/{tenantId}/endpoints | Y/Y | SA, DA, DU |
 | Tenants | [Add Endpoint To A Tenant](#add_endpoint_to_a_tenant) | POST | /HP-IDM/v1.0/tenants/{tenantId]}/endpoints | Y/Y | SA, DA |
 | Tenants | [Remove Endpoints From A Tenant](#remove_endpoints_from_a_tenant) | DELETE | /HP-IDM/v1.0/tenants/{tenantId}/endpoints/{endpointId} | Y/Y | DA, SA |
+| Tokens | [Authenticate](#authenticate) | POST | /tokens | Y/Y | Anon |
+| Tokens | [Rescope Token](#rescope_token) | POST | /tokens | Y/Y | SS |
+| Tokens | [Revoke Token](#revoke_token) | DELETE | /HP-IDM/v1.0/tokens/{tokenId} | Y/Y | SA,DA,SS |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.0 | Y/Y | Anon |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.1 | Y/Y | Anon |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.0 | Y/Y | Anon |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.1 | Y/Y | Anon |
 | Tokens | [Validate Token](#validate_token) | GET | /tokens/{tokenId} | Y/Y | Anon |
 | Tokens | [Quick Token Validation](#quick_token_validation) | GET | /tokens/{tokenId} | Y/Y | Anon |
 | Tokens | [Refresh Token](#refresh_token) | GET | /tokens/{tokenId} | Y/Y | SS |
@@ -149,6 +157,12 @@ group: apispec
 | Users | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | /HP-IDM/v1.0/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
 | Users | [Create A User's Non Tenant Role Assignment](#create_a_users_non_tenant_role_assignment) | PUT | /HP-IDM/v1.0/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
 | Users | [Delete A User's Non Tenant Role Assignment](#delete_a_users_non_tenant_role_assignment) | DELETE | /HP-IDM/v1.0/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
+| User Access Keys | [Create User Access Key](#create_user_access_key) | POST | /HP-IDM/v1.0/accesskeys | Y/Y | SA, DA, SS |
+| User Access Keys | [Delete User Access Key](#delete_user_access_key) | DELETE | /HP-IDM/v1.0/accesskeys/{accesskeyId}  | Y/Y | SA, DA, SS |
+| User Access Keys | [Get Access Keys](#get_access_keys) | GET | /HP-IDM/v1.0/accesskeys | Y/Y | SA,DA, SS |
+| User Access Keys | [Get An Access Key](#get_an_access_key) | GET | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y | SA,DA,SS |
+| User Access Keys | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y | SA, DA, SS |
+| User Access Keys | [Update User Access Key](#update_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y | SA, DA, SS |
 | User Certificates | [Delete User Certificate](#delete_user_certificate) | DELETE | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	D | Y/Y | SA, DA, SS |
 | User Certificates | [Get User Certificate](#get_user_certificate) | GET | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} | Y/Y | SA, DA, SS |
 | User Certificates | [Create A User Certificate](#create_a_user_certificate) | POST | /HP-IDM/v1.0/certificates | Y/Y | SA, DA, SS |
@@ -207,10 +221,10 @@ None.
 #### POST /HP-IDM/v1.0/action/{action}
 Privilege Level: {Privilege Level}*
 
-Submit an action to be executed. Each action takes a specific set of execution parameters within the content of the Post. (For an exact list of parameters for each Action, click the link below.) In the absence of any query parameters, the Action will be submitted and the call will immediately return a Job Ticket. The Job Ticket contains information about the executing Job, and can be refreshed through the job API call.
+Submit an action to be executed. Each action takes a specific set of execution parameters within the content of the Post. (For an exact list of parameters for each Action, click the link below.) In the absence of any query parameters, the Action will be submitted and the call will immediately return a Job Ticket. The Job Ticket contains information about the executing Job, and can be refreshed through the job API call.
 An Action request may contain the timeOut query parameter that is set to a non-zero positive value. The value indicates that the request should wait at least the given length of time for the Action to complete - either successfully or due to error. If the Action does not complete with the time period then the job is cancelled and any completed action steps will be rolled back.
 
-Please see [Appendix A: Avaiable Actions](#available_action) for detail information on the actions.
+Please see [Appendix A: Available Actions](#available_action) for detail information on the actions.
 
 **Request Data**
 
@@ -242,7 +256,7 @@ Host: Pat Sajak
 
 **Status Code**
 
-201 (Created)
+201 (Created)
 
 **Response Data**
 
@@ -1989,6 +2003,7 @@ Curl Example
 ```
 curl -k -s -S --connect-timeout 2 --noproxy <proxy-exceptions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/status/COMPLETE/count
 ```
+
 
 
 ### 4.4.2 Domains
@@ -4977,6 +4992,7 @@ curl -k --cert dev_hpmiddleware.pem  -XPUT -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 
+
 ### 4.4.3 Endpoint Templates
 
 The Endpoint Template REST API provides the ability to manage service endpoints.
@@ -6105,6 +6121,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H
 **Additional Notes**
 
 
+
 ### 4.4.4 Groups
 
 Group is a collection of users. The primary purpose of group is to provide multiple users with the same privillages
@@ -7230,6 +7247,7 @@ curl -k  -X PUT -H "X-Auth-Token: HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da
 
 
 
+
 ### 4.4.5 Management Console
 
 Hitherto the MC has stored data in its own Mongo service and defined its own database and set of collections. Control Services was added to the HP Cloud deployment in the Maine release. CS also maintains its own Mongo service and database. 
@@ -7290,118 +7308,90 @@ This call does not require a request body
 JSON
 
 ```
-{
-  "user" : {
-    "state" : "Colorado",
-    "country" : "United States",
-    "status" : "ENABLED",
-    "city" : "Fort Collins",
-    "accountId" : "37598452056865",
-    "domainId" : "71688867269283",
-    "contactId" : null,
-    "billingId" : "4028e6963577fe0d0135828a2e5647d8",
-    "addressLine1" : "1234 Harmony Road",
-    "addressLine2" : "MS 5678",
-    "zip" : "97222",
-    "phone" : "9705551212",
-    "company" : "Hewlett Packard Cloud Seeding",
-    "website" : "http://www.hp.com",
-    "emailAddress" : "bozo@hp.com",
-    "passwordResetCount" : null,
-    "passwordResetTime" : null,
-    "passwordLockoutStartTime" : null,
-    "username" : "JL1329334986631",
-    "firstName" : "James",
-    "lastName" : "Long",
-    "passwordLockoutCount" : null,
-    "passwordLockoutWindow" : null,
-    "timeLastSuccessfulLogin" : null,
-    "passwordRetryTimespan" : null,
-    "passwordRetryStartTime" : null
-  },
-  "domain" : {
-    "name" : "71688867269283-DOMAIN",
-    "state" : "Colorado",
-    "country" : "United States",
-    "status" : "ENABLED",
-    "description" : null,
-    "city" : "Fort Collins",
-    "domainId" : "71688867269283",
-    "contactId" : null,
-    "billingId" : "4028e6963577fe0d0135828a2b7f47d1",
-    "addressLine1" : "1234 Harmony Road",
-    "addressLine2" : "MS 5678",
-    "zip" : "97222",
-    "phone" : "9705551212",
-    "company" : "Hewlett Packard Cloud Seeding",
-    "website" : "http://www.hp.com",
-    "emailAddress" : "bozo@hp.com"
-  },
-  "tenants" : [ {
-    "name" : "NoveTenant1329334994693",
-    "status" : "ENABLED",
-    "description" : "Compute",
-    "tenantId" : "39525494045831",
-    "billingId" : null,
-    "swiftAccountHash" : null
-  } ],
-  "jobs" : [ {
-    "status" : "COMPLETE",
-    "action" : "TEST",
-    "errorDescription" : "",
-    "submission" : null,
-    "completion" : null,
-    "jobticketId" : ""
-  } ],
-  "preferences" : {
-    "substore" : [ {
-      "storeName" : "UI Preferences",
-      "store" : {
-        "substore" : [ ],
-        "preference" : [ {
-          "key" : "Font",
-          "value" : "Dingbat"
-        }, {
-          "key" : "BackgroundColor",
-          "value" : "BLACK"
-        }, {
-          "key" : "ForegroundColor",
-          "value" : "BROWN"
-        } ]
+{"userDetails": {
+   "bs": false,
+   "domain":    {
+      "domainId": "33678705570176",
+      "emailAddress": "kim.jensen2@hp.com",
+      "name": "33678705570176-DOMAIN",
+      "owners": ["41145980532179"],
+      "status": "ENABLED"
+   },
+   "jobTickets": [],
+   "setDateLastModified": false,
+   "setDateRecordAdded": false,
+   "setId": false,
+   "setVersion": true,
+   "tenants":    [
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2A-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "19893479403843"
+      },
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2C-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "33349277569059"
+      },
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2D-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "51153082887747"
+      },
+            {
+         "description": "Object Storage",
+         "name": "TS1-TC2B-SwiftTestTenant12112012141901492",
+         "services": [         {
+            "regionCode": "region-a.geo-1",
+            "serviceName": "Object Storage",
+            "status": "ENABLED"
+         }],
+         "status": "ENABLED",
+         "tenantId": "73489722654413"
       }
-    } ],
-    "preference" : [ ],
-    "accountId" : "37598452056865",
-    "id" : {
-      "time" : 1329335008000,
-      "machine" : 224520590,
-      "timeSecond" : 1329335008,
-      "inc" : -1996416285,
-      "new" : false
-    },
-    "setId" : true,
-    "idHex" : null,
-    "version" : 1,
-    "setVersion" : true,
-    "dateRecordAdded" : 1329335008246,
-    "setDateRecordAdded" : true,
-    "dateLastModified" : 1329335008246,
-    "setDateLastModified" : true,
-    "bs" : false,
-    "immutable" : null
-  },
-  "id" : null,
-  "setId" : false,
-  "idHex" : null,
-  "version" : 0,
-  "setVersion" : true,
-  "dateRecordAdded" : null,
-  "setDateRecordAdded" : false,
-  "dateLastModified" : null,
-  "setDateLastModified" : false,
-  "bs" : false,
-  "immutable" : null
-}
+   ],
+   "user":    {
+      "accountId": "41145980532179",
+      "dateRecordAdded": "2012-11-12T22:19:01.539Z",
+      "domainId": "33678705570176",
+      "emailAddress": "kim.jensen2@hp.com",
+      "status": "ENABLED",
+      "timeLastSuccessfulLogin": "2012-11-12T22:19:02.961Z",
+      "username": "SW_12112012141901492"
+   },
+   "userPreferences":    {
+      "bs": false,
+      "preferenceNames": [],
+      "preferences": [],
+      "setDateLastModified": false,
+      "setDateRecordAdded": false,
+      "setId": false,
+      "setVersion": true,
+      "substoreNames": [],
+      "substores": [],
+      "version": 0
+   },
+   "version": 0
+}}
+
 ```
 
 XML
@@ -7409,105 +7399,85 @@ XML
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <userDetails>
-    <version>0</version>
-    <domain>
-        <addressLine1>1234 Harmony Road</addressLine1>
-        <addressLine2>MS 5678</addressLine2>
-        <billingId>4028e6963577fe0d0135828a2b7f47d1</billingId>
-        <city>Fort Collins</city>
-        <company>Hewlett Packard Cloud Seeding</company>
-        <country>United States</country>
-        <domainId>71688867269283</domainId>
-        <emailAddress>bozo@hp.com</emailAddress>
-        <name>71688867269283-DOMAIN</name>
-        <phone>9705551212</phone>
-        <state>Colorado</state>
-        <status>ENABLED</status>
-        <website></website>
-        <zip>97222</zip>
-    </domain>
-    <jobTickets>
-        <jobTicket>
-            <action>TEST</action>
-            <errorDescription></errorDescription>
-            <jobticketId></jobticketId>
-            <status>COMPLETE</status>
-        </jobTicket>
-    </jobTickets>
-    <userPreferences>
-        <dateLastModified>2012-02-15T12:43:28.246-07:00</dateLastModified>
-        <dateRecordAdded>2012-02-15T12:43:28.246-07:00</dateRecordAdded>
-        <id/>
-        <version>1</version>
-        <userId>37598452056865</userId>
-        <substores>
-            <substore>
-                <storeName>UI Preferences</storeName>
-                <store>
-                    <substores/>
-                    <preferences>
-                        <preference>
-                            <key>Font</key>
-                            <value>Dingbat</value>
-                        </preference>
-                        <preference>
-                            <key>BackgroundColor</key>
-                            <value>BLACK</value>
-                        </preference>
-                        <preference>
-                            <key>ForegroundColor</key>
-                            <value>BROWN</value>
-                        </preference>
-                    </preferences>
-                </store>
-            </substore>
-        </substores>
-        <preferences/>
-    </userPreferences>
-    <tenants>
-        <tenant>
-            <services>
-                <service>
-                    <regionCode>az-1.region-a.geo-1</regionCode>
-                    <serviceName>Compute</serviceName>
-                    <status>ENABLED</status>
-                </service>
-                <service>
-                    <regionCode>az-1.region-a.geo-1</regionCode>
-                    <serviceName>Block Storage</serviceName>
-                    <status>ENABLED</status>
-                </service>
-                <service>
-                    <regionCode>az-1.region-a.geo-1</regionCode>
-                    <serviceName>Image Management</serviceName>
-                    <status>ENABLED</status>
-                </service>
-            </services>
-            <description>Compute</description>
-            <name>NoveTenant1329334994693</name>
-            <status>ENABLED</status>
-            <tenantId>39525494045831</tenantId>
-        </tenant>
-    </tenants>
-    <user>
-        <accountId>37598452056865</accountId>
-        <addressLine1>1234 Harmony Road</addressLine1>
-        <addressLine2>MS 5678</addressLine2>
-        <billingId>4028e6963577fe0d0135828a2e5647d8</billingId>
-        <city>Fort Collins</city>
-        <company>Hewlett Packard Cloud Seeding</company>
-        <country>United States</country>
-        <domainId>71688867269283</domainId>
-        <emailAddress>bozo@hp.com</emailAddress>
-        <firstName>James</firstName>
-        <lastName>Long</lastName>
-        <phone>9705551212</phone>
-        <state>Colorado</state>
-        <status>ENABLED</status>
-        <username>JL1329334986631</username>
-        <website></website>
-        <zip>97222</zip>
-    </user>
+   <version>0</version>
+   <domain>
+      <domainId>33678705570176</domainId>
+      <emailAddress>kim.jensen2@hp.com</emailAddress>
+      <name>33678705570176-DOMAIN</name>
+      <owners>
+         <owner>41145980532179</owner>
+      </owners>
+      <status>ENABLED</status>
+   </domain>
+   <jobTickets/>
+   <userPreferences>
+      <version>0</version>
+      <substores/>
+      <preferences/>
+   </userPreferences>
+   <tenants>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2A-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>19893479403843</tenantId>
+      </tenant>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2C-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>33349277569059</tenantId>
+      </tenant>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2D-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>51153082887747</tenantId>
+      </tenant>
+      <tenant>
+         <services>
+            <service>
+               <regionCode>region-a.geo-1</regionCode>
+               <serviceName>Object Storage</serviceName>
+               <status>ENABLED</status>
+            </service>
+         </services>
+         <description>Object Storage</description>
+         <name>TS1-TC2B-SwiftTestTenant12112012141901492</name>
+         <status>ENABLED</status>
+         <tenantId>73489722654413</tenantId>
+      </tenant>
+   </tenants>
+   <user>
+      <accountId>41145980532179</accountId>
+      <dateRecordAdded>2012-11-12T14:19:01.539-08:00</dateRecordAdded>
+      <domainId>33678705570176</domainId>
+      <emailAddress>kim.jensen2@hp.com</emailAddress>
+      <status>ENABLED</status>
+      <timeLastSuccessfulLogin>2012-11-12T14:19:02.961-08:00</timeLastSuccessfulLogin>
+      <username>SW_12112012141901492</username>
+   </user>
 </userDetails>
 ```
 
@@ -7572,7 +7542,9 @@ The UserPreference database collection is nothing more that a set of nested hash
 
 **Request Data**
 
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 Only the user id is required to retrieve the preferences.
+
 
 **URL Parameters**
 
@@ -7648,11 +7620,15 @@ XML
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI or request body   |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation   |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request|  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
 
 **Response Data**
 
@@ -7739,7 +7715,9 @@ The UserPreference database collection is nothing more that a set of nested hash
 
 **Request Data**
 
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 Only the user id is required to retrieve the preferences.
+
 
 **URL Parameters**
 
@@ -7763,12 +7741,18 @@ Not yet documented.
 
 **Error Response**
 
+Please refer to error response body for additional details.
+
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
+| Status Code | Description | Reasons |  
+| :-----------| :-----------| :-------|  
+| 400 | Bad Request | Malformed request in URI or request body   |  
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation   |  
+| 403 | Forbidden | Disabled or suspended user making the request |  
+| 500 | Internal Server Error | The server encountered a problem while processing the request|  
+| 503 | Service Unavailable | The server is unavailable to process the request |  
+
 503 - Service Unavailable
 
 **Response Data**
@@ -7778,6 +7762,7 @@ Not yet documented.
 **Curl Example**
 
 Not yet documented.
+
 
 
 ### 4.4.6 Role Assignment
@@ -8943,6 +8928,7 @@ curl -sk --cacert $CACERT -XDELETE -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1
 
 None
 
+
 ### 4.4.7 Role Defs
 
 Roles are entities defined in system to support notion of capability (e.g. SuperAdmin, block-admin, projectmanager etc...), subjects (users/groups) are associated with role to form a logical grouping, subjects with same role have similar capabilities in system. Roles are associated with security policies which provides capability to a role on a particular target as defined in the policy.
@@ -9899,6 +9885,7 @@ curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XGET -H "X-Auth-Token: HPAut
 * Response can be filtered by domainId, tenantId, serviceId and serviceName.
 
 
+
 ### 4.4.8 Services
 
 The Service REST API provides the ability to manage registered services.
@@ -10599,6 +10586,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 ```
 
 **Additional Notes**
+
 
 
 ### 4.4.9 Signature
@@ -11312,9 +11300,10 @@ curl -k -X POST -H "Content-Type: application/json" -H "Accept: application/json
 
 
 
+
 ### 4.4.10 Tenants
 
-A Tenant is a collection of services, associated with zero or more users who have access to these services via role references.
+Tenant is a collection of services, and associated with zero or more users who have access to these services via role references.
 
 **Status Lifecycle**
 
@@ -11332,7 +11321,210 @@ N/A
 
 None.
 
-#### 4.4.10.1 <a id="get_all_tenants"></a>Get All Tenants####
+
+#### 4.4.10.1 <a id="list_tenants"></a>List Tenants####
+#### GET /tenants
+*Privilege Level: SS*
+
+This API returns a listing of all tenants for which the holder of the provided token has a role assignment. If the user is not a valid, an error is returned.
+
+**Request Data**
+
+This API supports pagination. See Pagination for more details.
+
+This API also supports an optional *name* filter for get-by-name. Pagination and *name* filter are mutually exclusive.
+
+**URL Parameters**
+
+* *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker* (Optional)} - string - the resource Id of the last item in the previous list
+* *name* (Optional) - string - name of the tenant to be returned
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+This call does not require a request body.
+
+JSON
+
+```
+GET /v2.0/tenants HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+```
+
+XML
+
+```
+GET /v2.0/tenants/ HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+```
+
+Optional:
+
+JSON
+
+With *name* filter.
+
+```
+GET /v2.0/tenants?name=tenantName HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+```
+
+With pagination.
+
+```
+GET /v2.0/tenants?limit=10 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+``` 
+
+XML
+
+With pagination.
+
+```
+GET /v2.0/tenants?limit=100&marker=S4DFJ123SF HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+Host: localhost:9999
+Connection: keep-alive
+```
+
+**Success Response**
+
+*Specify the status code and any content that is returned.*
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+A list of tenants in the specified format is returned.
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 240
+Date: Tue, 29 Nov 2011 17:17:50 GMT
+
+{
+  "tenants": [
+    {
+      "id": "39595655514446",
+      "name": "Banking Tenant Services",
+      "description": "Banking Tenant Services for TimeWarner",
+      "enabled": true,
+      "created": "2011-11-29T16:59:52.635Z",
+      "updated": "2011-11-29T16:59:52.635Z"
+    }
+  ]
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 380
+Date: Thu, 25 Aug 2011 23:33:19 GMT
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tenants xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.w3.org/2005/Atom">
+  <tenant id="541212460710" name="Time Warner Tenant Services" enabled="false" display-name="Time Warner Tenant Services">
+    <description>Tenant for hosting Time Warner Applications & services</description>
+  </tenant>
+</tenants>
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+***List Tenants***
+
+```
+curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/tenants"
+```
+
+***Get Tenant By Name***
+
+```
+curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/tenants?name=MyTenant"
+```
+
+**Additional Notes**
+
+
+#### 4.4.10.2 <a id="get_all_tenants"></a>Get All Tenants####
 #### GET /HP-IDM/v1.0/tenants
 *Privilege Level: SA*
 
@@ -11510,7 +11702,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants"
 ```
 
-#### 4.4.10.2 <a id="get_a_tenant"></a>Get A Tenant####
+#### 4.4.10.3 <a id="get_a_tenant"></a>Get A Tenant####
 #### GET /HP-IDM/v1.0/tenants/{tenantId} 
 *Privilege Level: SA, DA, DU*
 
@@ -11648,7 +11840,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 ```
 
-#### 4.4.10.3 <a id="check_for_existence_of_tenant_name"></a>Check For Existence Of Tenant Name####
+#### 4.4.10.4 <a id="check_for_existence_of_tenant_name"></a>Check For Existence Of Tenant Name####
 #### HEAD [HPKeystoneExtensionBaseURI]/tenants?name=tenantName
 *Privilege Level: Anon*
 
@@ -11770,7 +11962,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X HEAD -
 
 There is no response body returned in API response data. This API does not require http header X-Auth-Token and is protected by client certificate authentication.
 
-#### 4.4.10.4 <a id="get_a_list_of_users_for_a_tenant_(includes_role_assignments)"></a>Get A List Of Users For A Tenant (includes Role Assignments)####
+#### 4.4.10.5 <a id="get_a_list_of_users_for_a_tenant_(includes_role_assignments)"></a>Get A List Of Users For A Tenant (includes Role Assignments)####
 #### GET /HP-IDM/v1.0/tenants/{tenantId}/users
 *Privilege Level: SA, DA*
 
@@ -11962,7 +12154,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/users"
 ```
 
-#### 4.4.10.5 <a id="create_a_tenant"></a>Create A Tenant####
+#### 4.4.10.6 <a id="create_a_tenant"></a>Create A Tenant####
 #### POST /HP-IDM/v1.0/tenants 
 *Privilege Level: SA, DA*
 
@@ -12142,7 +12334,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants" -d '{"tenant":{"description":"Payroll Tenant Services for TimeWarner","domainId":"47826457774667","name":"Payroll Tenant Services","status":"enabled"}}'
 ```
 
-#### 4.4.10.6 <a id="update_a_tenant"></a>Update A Tenant####
+#### 4.4.10.7 <a id="update_a_tenant"></a>Update A Tenant####
 #### PUT /HP-IDM/v1.0/tenants/{tenantID} 
 *Privilege Level: SA, DA*
 
@@ -12336,7 +12528,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/37942731773710" -d '{"tenant":{"description":"Tenant for Market forecasting service","otherAttributes":{"swiftAccountHash":"abcd23456"}}}'
 ```
 
-#### 4.4.10.7 <a id="delete_a_tenant"></a>Delete A Tenant####
+#### 4.4.10.8 <a id="delete_a_tenant"></a>Delete A Tenant####
 #### DELETE /HP-IDM/v1.0/tenants/{tenantId}
 *Privilege Level: SA, DA*
 
@@ -12435,7 +12627,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 ```
 
-#### 4.4.10.8 <a id="get_endpoints_for_a_tenant"></a>Get Endpoints For A Tenant####
+#### 4.4.10.9 <a id="get_endpoints_for_a_tenant"></a>Get Endpoints For A Tenant####
 #### GET /HP-IDM/v1.0/tenants/{tenantId}/endpoints
 *Privilege Level: SA, DA, DU*
 
@@ -12631,7 +12823,7 @@ Current Impl: We don't filter by enabled flag so include all of them.
 1. Do we need to include global endpoints (endpoint templates with global flag as true) in this call? In keystone reference code base, it does not include them.  Current Impl: We don't include global endpoint templates in the response.
 
 
-#### 4.4.10.9 <a id="add_endpoint_to_a_tenant"></a>Add Endpoint To A Tenant####
+#### 4.4.10.10 <a id="add_endpoint_to_a_tenant"></a>Add Endpoint To A Tenant####
 #### POST /HP-IDM/v1.0/tenants/{tenantId]}/endpoints
 *Privilege Level: SA, DA*
 
@@ -12799,7 +12991,7 @@ Curl Example
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints" -d '{"endpointTemplate":{"id":120}}'
 ```
 
-#### 4.4.10.10 <a id="remove_endpoints_from_a_tenant"></a>Remove Endpoints From A Tenant####
+#### 4.4.10.11 <a id="remove_endpoints_from_a_tenant"></a>Remove Endpoints From A Tenant####
 #### DELETE /HP-IDM/v1.0/tenants/{tenantId}/endpoints/{endpointId}
 *Privilege Level: DA, SA*
 
@@ -12898,6 +13090,7 @@ Curl Example
 ```
 curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints/543"
 ```
+
 ### 4.4.11 Tokens
 
 A yummy cookie one uses to bribe the authorization monster.
@@ -12919,7 +13112,819 @@ N/A
 None.
 
 
-#### 4.4.11.1 <a id="validate_token"></a>Validate Token####
+#### 4.4.11.1 <a id="authenticate"></a>Authenticate####
+#### POST /tokens
+*Privilege Level: Anon*
+
+This API is used to authenticate a user to be able to use an OpenStack service. The result of a successful authentication is a token to be used with service requests. A username and password or access/secret key credentials are given as input to this interface. If authentication succeeds, the response will include an authentication token and service catalog ( list of available services for that user ). Tokens are valid for 12 hours. Issued tokens can become invalid in two cases:
+
+1. the token has expired
+2. the token has been revoked.
+
+Besides using a username and password, another way to authenticate is using symmetric keys. Symmetric keys are user access key and secret key pairs provisioned for user account. In this type of credential data, request body is expected to contain an access key and a secret key information belonging to the user. Once those keys are verified, a new token is created. In this type of authentication, the only change is in expected request body data (please see related example below). There is no difference in response format/content whether authentication is done using password credential data or access key credential data.
+
+##### Service Catalog:
+
+In case of un-scoped token request, the service catalog is going to include global active endpoint templates as endpoints in its data. In case of scoped token request, the service catalog is going to include tenant specific endpoints as well as global active endpoint templates as endpoints.
+
+##### Scoped Tokens:
+
+A token scoped to a tenant can be obtained by providing either a tenantName or a tenantId. This will also return service endpoints for other services associated with the tenant in question. An unscoped token will likely not contain service endpoints except for those for the Identity Service. Note that if tenant information is unknown, an unscoped token can be obtained and then a list of tenants obtained. Tenant information can also be found in the Management Console.
+
+**Request Data**
+
+See examples below.
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+JSON
+
+Authenticate using password credential for an unscoped token.
+
+```
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+Content-Length: 171
+
+{
+    "auth":{
+        "passwordCredentials":{
+            "username":"arunkant",
+            "password":"changeme"
+        }
+    }
+}
+```
+
+Authenticate using password credential for a scoped token.
+
+```
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+Content-Length: 171
+
+{
+    "auth":{
+        "passwordCredentials":{
+            "username":"arunkant",
+            "password":"changeme"
+        },
+        "tenantId":"95096564413950"
+    }
+}
+```
+
+Authenticate using access key credential.
+
+```
+POST https://localhost:8443/v2.0/tokens HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 176
+ 
+{
+    "auth":{
+        "apiAccessKeyCredentials":{
+            "accessKey":"19N488ACAF3859DW9AFS9",
+            "secretKey":"vpGCFNzFZ8BMP1g8r3J6Cy7/ACOQUYyS9mXJDlxc"
+        }       
+    }
+}
+```
+
+XML
+
+Authenticate using password credential for a scoped token.
+
+```
+ccept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+Content-Length: 211
+
+<auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://docs.openstack.org/identity/api/v2.0" tenantName="HP5 Tenant Services">
+  <passwordCredentials username="arunkant" password="changeme"/>
+</auth>
+```
+
+Authenticate using access key credential.
+
+```
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+Content-Length: 219
+
+<auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
+  <apiAccessKeyCredentials secretKey="vpGCFNzFZ8BMP1g8r3J6Cy7/ACOQUYyS9mXJDlxc" accessKey="9N488ACAF3859DW9AFS9"/>
+</auth>
+```
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 3248
+Date: Fri, 14 Oct 2011 21:17:14 GMT
+ 
+ 
+{"access": {
+   "token":    {
+      "expires": "2011-10-14T21:42:59.455Z",
+      "id": "HPAuth_4e98a5dbb0befc448cd0454f",
+      "tenant":       {
+         "id": "14541255461800",
+         "name": "HR Tenant Services"
+      }
+   },
+   "user":    {
+      "id": "30744378952176",
+      "name": "arunkant",
+      "roles":       [
+                  {
+            "id": "00000000004008",
+            "serviceId": "120",
+            "name": "nova:developer",
+            "tenantId": "14541255461800"
+         },
+                  {
+            "id": "00000000004003",
+            "serviceId": "100",
+            "name": "domainadmin",
+            "tenantId": "14541255461800"
+         },
+                  {
+            "id": "00000000004004",
+            "serviceId": "100",
+            "name": "domainuser",
+            "tenantId": "14541255461800"
+         },
+                  {
+            "id": "00000000004017",
+            "serviceId": "100",
+            "name": "tenant-member",
+            "tenantId": "14541255461800"
+         }
+      ]
+   },
+   "serviceCatalog":    [
+            {
+         "name": "storage5063096349006363528",
+         "type": "compute",
+         "endpoints": [         {
+            "adminURL": "https://localhost:8443/identity/api/v2.0/admin/0",
+            "internalURL": "https://localhost:8443/identity/api/v2.0/internal/0",
+            "publicURL": "https://localhost:8443/identity/api/v2.0/public/0",
+            "region": "SFO"
+         }]
+      },
+            {
+         "name": "Object Storage",
+         "type": "object-store",
+         "endpoints": [         {
+            "tenantId": "14541255461800",
+            "adminURL": "https://region-a.geo-1.objects.hpcloudsvc.com/auth/v1.0/",
+            "internalURL": "https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/AUTH_14541255461800",
+            "publicURL": "https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/AUTH_14541255461800",
+            "region": "region-a.geo-1",
+            "id": "1.0",
+            "info": "https://region-a.geo-1.objects.hpcloudsvc.com/info/v1.0",
+            "list": "https://region-a.geo-1.objects.hpcloudsvc.com/allVersions"
+         }]
+      },
+            {
+         "name": "Identity",
+         "type": "identity",
+         "endpoints": [         {
+            "adminURL": "https://region-a.geo-1.identity.hpcloudsvc.com/v2.0",
+            "internalURL": "hhttps://region-a.geo-1.identity.hpcloudsvc.com/v2.0",
+            "publicURL": "https://region-a.geo-1.identity.hpcloudsvc.com/v2.0",
+            "region": "region-a.geo-1",
+            "id": "2.0",
+            "info": "https://region-a.geo-1.identity.hpcloudsvc.com/info/v2.0",
+            "list": "https://region-a.geo-1.identity.hpcloudsvc.com/allVersions"
+         }]
+      },
+            {
+         "name": "storage5065129211418544729",
+         "type": "compute",
+         "endpoints": [         {
+            "adminURL": "https://localhost:8443/identity/api/v2.0/admin/0",
+            "internalURL": "https://localhost:8443/identity/api/v2.0/internal/0",
+            "publicURL": "https://localhost:8443/identity/api/v2.0/public/0",
+            "region": "SFO"
+         }]
+      },
+            {
+         "name": "storage5042344434157721570",
+         "type": "compute",
+         "endpoints": [         {
+            "adminURL": "https://localhost:8443/identity/api/v2.0/admin/0",
+            "internalURL": "https://localhost:8443/identity/api/v2.0/internal/0",
+            "publicURL": "https://localhost:8443/identity/api/v2.0/public/0",
+            "region": "SFO"
+         }]
+      }
+   ]
+}}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 2667
+Date: Fri, 14 Oct 2011 21:18:40 GMT
+ 
+<access xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://docs.openstack.org/common/api/v1.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <token id="HPAuth_4e98a5dbb0befc448cd0454f" expires="2011-10-14T21:42:59.455Z">
+      <tenant id="14541255461800" name="HR Tenant Services"/>
+   </token>
+   <user id="30744378952176" name="arunkant">
+      <roles>
+         <role id="00000000004008" name="nova:developer" serviceId="120" tenantId="14541255461800"/>
+         <role id="00000000004003" name="domainadmin" serviceId="100" tenantId="14541255461800"/>
+         <role id="00000000004004" name="domainuser" serviceId="100" tenantId="14541255461800"/>
+         <role id="00000000004017" name="tenant-member" serviceId="100" tenantId="14541255461800"/>
+      </roles>
+   </user>
+   <serviceCatalog>
+      <service type="compute" name="storage5063096349006363528">
+         <endpoint region="SFO" publicURL="https://localhost:8443/identity/api/v2.0/public/0" internalURL="https://localhost:8443/identity/api/v2.0/internal/0" adminURL="https://localhost:8443/identity/api/v2.0/admin/0">
+            <version/>
+         </endpoint>
+      </service>
+      <service type="object-store" name="Object Storage">
+         <endpoint region="region-a.geo-1" tenantId="14541255461800" publicURL="https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/AUTH_14541255461800" internalURL="https://region-a.geo-1.objects.hpcloudsvc.com/v1.0/AUTH_14541255461800" adminURL="https://region-a.geo-1.objects.hpcloudsvc.com/auth/v1.0/">
+            <version id="1.0" info="https://region-a.geo-1.objects.hpcloudsvc.com/info/v1.0" list="https://region-a.geo-1.objects.hpcloudsvc.com/allVersions"/>
+         </endpoint>
+      </service>
+      <service type="identity" name="Identity">
+         <endpoint region="region-a.geo-1" publicURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0" internalURL="hhttps://region-a.geo-1.identity.hpcloudsvc.com/v2.0" adminURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0">
+            <version id="2.0" info="https://region-a.geo-1.identity.hpcloudsvc.com/info/v2.0" list="https://region-a.geo-1.identity.hpcloudsvc.com/allVersions"/>
+         </endpoint>
+      </service>
+      <service type="compute" name="storage5065129211418544729">
+         <endpoint region="SFO" publicURL="https://localhost:8443/identity/api/v2.0/public/0" internalURL="https://localhost:8443/identity/api/v2.0/internal/0" adminURL="https://localhost:8443/identity/api/v2.0/admin/0">
+            <version/>
+         </endpoint>
+      </service>
+      <service type="compute" name="storage5042344434157721570">
+         <endpoint region="SFO" publicURL="https://localhost:8443/identity/api/v2.0/public/0" internalURL="https://localhost:8443/identity/api/v2.0/internal/0" adminURL="https://localhost:8443/identity/api/v2.0/admin/0">
+            <version/>
+         </endpoint>
+      </service>
+   </serviceCatalog>
+</access>
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "identityFault": {
+    "message": "Fault",
+    "details": "Error Details...",
+    "code": 500
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<identityFault xmlns="http://docs.openstack.org/identity/api/v2.0"
+          code="500">
+        <message>Fault</message>
+        <details>Error Details...</details>
+</identityFault>
+```
+
+Curl Example
+
+***Authenticate with Username/Password and Tenant ID***
+
+```
+curl -X POST -H "Content-Type: application/json"
+     https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens
+     -d '{"auth":{"passwordCredentials":{"username":"falken@wg.com",          "password":"J0shua!"}, "tenantId":"72020596871800"}}'
+
+```
+
+***Authenticate with Access Keys and Tenant ID***
+
+```
+curl -X POST -H "Content-Type: application/json"
+        https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens
+    -d '{"auth":{"apiAccessKeyCredentials":{"accessKey":"B5VKMNLEZ7YUN9BTFDZC", "secretKey":"CQSp+KsLQGFz6+V/S1s4XXpE42q472pD9VhIBFsn"}, "tenantId":"72020596871800"}}'
+```
+
+**Additional Notes**
+
+
+#### 4.4.11.2 <a id="rescope_token"></a>Rescope Token####
+#### POST /tokens
+*Privilege Level: SS*
+
+This API provides the ability to re-scope a valid token with another tenant. An existing unexpired token, regardless of its currently scoped or not, can be scoped to another tenant as long as the user has valid association with that tenant.
+
+Re-scoping of token can be done from 1) unscoped token to a scoped token for specific tenant 2) scoped token from one tenant to another tenant 3) scoped token to unscoped token (with no tenantId and tenantName specified in request). Re-scoping of token does not alter the token expiration time and same token id is returned in response.
+
+##### Service Catalog:
+
+In case of un-scoped token request, the service catalog is going to include global active endpoint templates as endpoints in its data. In case of scoped token request, the service catalog is going to include tenant specific endpoints as well as global active endpoint templates as endpoints.
+
+**Request Data**
+
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+JSON
+
+```
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+Content-Length: 154
+
+{
+    "auth": {
+        "tenantName": "HP Swift Tenant Services",
+        "token": {
+            "id": "HPAuth_4ea80da3b0be73fc0385eceb"
+        }
+    }
+}
+```
+
+XML
+
+```
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+Content-Length: 195
+
+<auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://docs.openstack.org/identity/api/v2.0" tenantId="19694547081948">
+  <token id="HPAuth_4e934043b0be09f52fb4c29d" />
+</auth>
+```
+
+**Success Response**
+
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 1283
+Date: Wed, 26 Oct 2011 13:43:14 GMT
+
+{"access": {
+  "token": {
+    "expires": "2011-10-26T14:13:14.311Z",
+    "id": "HPAuth_4ea80e72b0be73fc0385ecef",
+    "tenant": {
+      "id": "90260810095453",
+      "name": "HP Swift Tenant Services"
+    }
+  },
+  "user": {
+    "id": "53449493563804",
+    "name": "arunkant",
+    "roles": [
+      {
+        "id": "00000000004017",
+        "serviceId": "100",
+        "name": "tenant-member",
+        "tenantId": "90260810095453"
+      },
+      {
+        "id": "00000000004003",
+        "serviceId": "100",
+        "name": "domainadmin",
+        "tenantId": "90260810095453"
+      },
+      {
+        "id": "00000000004004",
+        "serviceId": "100",
+        "name": "domainuser",
+        "tenantId": "90260810095453"
+      }
+    ]
+  },
+  "serviceCatalog": [{
+    "name": "Identity",
+    "type": "identity",
+    "endpoints": [{
+      "adminURL": "https:\/\/region-a.geo-1.identity.hpcloudsvc.com\/v2.0",
+      "internalURL": "https:\/\/region-a.geo-1.identity.hpcloudsvc.com\/v2.0",
+      "publicURL": "https:\/\/region-a.geo-1.identity.hpcloudsvc.com\/v2.0",
+      "region": "region-a.geo-1",
+      "id": "2.0",
+      "info": "https:\/\/region-a.geo-1.identity.hpcloudsvc.com\/info\/v2.0",
+      "list": "https:\/\/region-a.geo-1.identity.hpcloudsvc.com\/allVersions"
+    }]
+  }]
+}}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 1166
+Date: Wed, 26 Oct 2011 13:46:53 GMT
+
+
+<access xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://docs.openstack.org/common/api/v1.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <token id="HPAuth_4ea80e72b0be73fc0385ecef" expires="2011-10-26T14:13:14.311Z">
+      <tenant id="90260810095453" name="HP Swift Tenant Services"/>
+   </token>
+   <user id="53449493563804" name="arunkant">
+      <roles>
+         <role id="00000000004017" name="tenant-member" serviceId="100" tenantId="90260810095453"/>
+         <role id="00000000004003" name="domainadmin" serviceId="100" tenantId="90260810095453"/>
+         <role id="00000000004004" name="domainuser" serviceId="100" tenantId="90260810095453"/>
+      </roles>
+   </user>
+   <serviceCatalog>
+      <service type="identity" name="Identity">
+         <endpoint region="region-a.geo-1" publicURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0" internalURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0" adminURL="https://region-a.geo-1.identity.hpcloudsvc.com/v2.0">
+            <version id="2.0" info="https://region-a.geo-1.identity.hpcloudsvc.com/info/v2.0" list="https://region-a.geo-1.identity.hpcloudsvc.com/allVersions"/>
+         </endpoint>
+      </service>
+   </serviceCatalog>
+</access>
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "identityFault": {
+    "message": "Fault",
+    "details": "Error Details...",
+    "code": 500
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<identityFault xmlns="http://docs.openstack.org/identity/api/v2.0"
+          code="500">
+        <message>Fault</message>
+        <details>Error Details...</details>
+</identityFault>
+```
+
+Curl Example
+
+```
+curl -k -H "Content-Type: application/json" -d '{"auth":{"tenantName":"HP Swift Tenant Services","token":{"id":"HPAuth_4ea80da3b0be73fc0385eceb"}}}' -XPOST https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens
+```
+
+**Additional Notes**
+
+
+#### 4.4.11.3 <a id="revoke_token"></a>Revoke Token####
+#### DELETE /HP-IDM/v1.0/tokens/{tokenId}
+*Privilege Level: SA,DA,SS*
+
+This API is used to revoke an authentication token. This operation does not require a request body. Once a token has been revoked, attempts to validate the token via GET /tokens/tokenId will fail with a 404 (item not found) as the token no longer exists. Trying revoke a non existing token, including one which has expired will also return a 404 (item not found).
+
+**Request Data**
+
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+This call does not require a request body.
+
+**Success Response**
+
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+
+**Error Response**
+
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+
+
+**Response Data**
+
+JSON
+
+```
+{"forbidden":{"message":"Full authentication is required to access this resource","code":403}}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8"?><forbidden xmlns="http://docs.openstack.org/identity/api/v2.0" code="403"><message>Full authentication is required to access this resource</message></forbidden>
+```
+
+Curl Example
+
+```
+curl -k -XDELETE https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/HPAuth_123456789
+```
+
+**Additional Notes**
+
+{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+
+
+#### 4.4.11.4 <a id="swift_legacy_authentication"></a>Swift Legacy Authentication####
+#### GET /v1.0
+*Privilege Level: Anon*
+
+#### GET /v1.1
+*Privilege Level: Anon*
+
+#### GET /auth/v1.0
+*Privilege Level: Anon*
+
+#### GET /auth/v1.1
+*Privilege Level: Anon*
+
+Pre-Keystone (aka auth v2.0), Openstack services rely on disparate authentication mechanisms to authenticate their services.  For example, Swift uses swauth, while Nova uses novaauth.  The v1/v1.1 style of authentication relies on custom HTTP headers (specific to each service) to communicate authentication data, rather than relying on well-defined XML/JSON documents that can be validated via XSDs.  With the release of Diablo, most Openstack services have switched to using Keystone API completely, with the exception of the Swift CLI tool.  To provide backward-compatibility for this particular tool, CS (as well as the FOSS Keystone) provides this API. 
+
+**Request Data**
+
+
+**URL Parameters**
+
+None
+
+**Data Parameters**
+
+The following HTTP headers must be specified.
+
+* *X-Auth-User* - containing the <tenantId:username> for a scoped token for Swift
+* *X-Auth-Key* - containing the password for the given user
+
+**Success Response**
+
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+In addition to the token access response, the following response HTTP headers are populated by the server.
+
+* *X-Auth-Token* - token ID
+* *X-Storage-URL* - containing a list of public endpoints for Swift
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+X-Auth-Token: HPAuth_4f03696fe4b071e9f15c0550
+X-Storage-Url: https://az1-sw-proxy-ext-0001.rndd.aw1.hpcloud.net:443/v1.0/14565730729748
+Content-Type: application/json
+Content-Length: 1583
+Date: Tue, 03 Jan 2012 20:47:43 GMT
+ 
+{"access": {
+  "token": {
+    "expires": "2012-01-03T21:17:43.087Z",
+    "id": "HPAuth_4f03696fe4b071e9f15c0550",
+    "tenant": {
+      "id": "14565730729748",
+      "name": "Swift SSL"
+    }
+  },
+  "user": {
+    "id": "70970596121812",
+    "name": "joeuserA@timewarner.com",
+    "roles": [
+      {
+        "id": "00000000004022",
+        "serviceId": "110",
+        "name": "Admin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004013",
+        "serviceId": "130",
+        "name": "block-admin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004025",
+        "serviceId": "120",
+        "name": "sysadmin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004016",
+        "serviceId": "120",
+        "name": "netadmin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004024",
+        "serviceId": "140",
+        "name": "user",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004003",
+        "serviceId": "100",
+        "name": "domainadmin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004014",
+        "serviceId": "150",
+        "name": "cdn-admin",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004004",
+        "serviceId": "100",
+        "name": "domainuser",
+        "tenantId": "14565730729748"
+      },
+      {
+        "id": "00000000004014",
+        "serviceId": "150",
+        "name": "cdn-admin",
+        "tenantId": "14565730729748"
+      }
+    ]
+  }
+}}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+X-Auth-Token: HPAuth_4f03696fe4b071e9f15c0550
+X-Storage-Url: https://az1-sw-proxy-ext-0001.rndd.aw1.hpcloud.net:443/v1.0/14565730729748
+Content-Type: application/xml
+Content-Length: 730
+Date: Tue, 03 Jan 2012 20:47:43 GMT
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><access xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:hpext="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom"><token id="HPAuth_767eaf4d50bee574eefb8e3b1081bde75edf31c59f806e35a8793296247aa7f9" expires="2012-10-10T11:09:38.813Z"><tenant id="62424047631429" name="conser4301_swift"/></token><user id="97539030347757" name="conser4301"><roles><role id="00000000004004" name="domainuser" serviceId="100"/><role id="00000000004022" name="Admin" serviceId="110" tenantId="62424047631429"/><role id="00000000004003" name="domainadmin" serviceId="100"/></roles></user></access>
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -s -k -H "X-Auth-User: 62424047631429:jdoe" -H "X-Auth-Key: secrete" -H "Accept: application/xml" -D /tmp/headers.txt https://region-a.geo-1.identity.hpcloudsvc.com:35357/v1.0
+```
+
+**Additional Notes**
+
+
+#### 4.4.11.5 <a id="validate_token"></a>Validate Token####
 #### GET /tokens/{tokenId}
 *Privilege Level: Anon*
 
@@ -13160,7 +14165,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Accep
 **Additional Notes**
 
 
-#### 4.4.11.2 <a id="quick_token_validation"></a>Quick Token Validation####
+#### 4.4.11.6 <a id="quick_token_validation"></a>Quick Token Validation####
 #### HEAD /tokens/\<tokenId\>?belongsTo=tenantId
 *Privilege Level: Anon*
 
@@ -13276,7 +14281,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -XHEAD "h
 **Additional Notes**
 
 
-#### 4.4.11.3 <a id="refresh_token"></a>Refresh Token####
+#### 4.4.11.7 <a id="refresh_token"></a>Refresh Token####
 #### [HPKeystoneExtensionBaseURI]/tokens/\<tokenId\>
 *Privilege Level: SS*
 
@@ -13422,6 +14427,7 @@ curl -k -XPOST --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H
 ```
 
 **Additional Notes**
+
 
 ### 4.4.12 Users
 
@@ -15777,7 +16783,1057 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-### 4.4.13 User Certificates
+
+### 4.4.13 User Access Keys
+
+The User Access Key REST API provides the ability to manage user access keys.
+
+**Status Lifecycle**
+
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
+
+
+#### 4.4.13.1 <a id="create_user_access_key"></a>Create User Access Key####
+#### POST /HP-IDM/v1.0/accesskeys
+
+*Privilege Level: SA, DA, SS*
+
+
+**Request Data**
+
+The optional data parameters are algorithm, domainId, keyLength, status, userId, validFrom, and validTo.
+
+**URL Parameters**
+
+There are no URL parameters for this operation.
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+* *algorithm* (Optional) - String - the algorithm the key will be used with. One of 
+* *domainId* - String - domain identifier of the owner of the key.
+* *keyLength* (Optional) - Integer - Length of the key in bits.
+* *status* (Optional) String - the key status. One the values (active, inactive). Defaults to active if not specified.
+* *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
+* *validFrom* (Optional) - DateTime - The date the key becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+* *validTo* (Optional) - DateTime - The date the key becomes invalid specified in the following form "YYYY-MM-DDThh:mm:ss" 
+
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+JSON
+
+```
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e7b748be4b0600fec3d2a24
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 235
+ 
+{ "accessKey":
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "domainId": "00000000001001",
+         "otherAttributes": {},
+         "status": "active",
+         "userId": "00000000003002"
+       }
+}
+```
+
+XML
+
+```
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e69969de4b0a8f279022d55
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 259
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accessKey userId="000000003002" domainId="000000001001" status="active" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0">
+<algorithm>HmacSHA1</algorithm>
+<keyLength>64</keyLength>
+</accessKey>
+```
+
+**Success Response**
+
+**Status Code**
+
+201 - Created
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 376
+Date: Thu, 22 Sep 2011 18:01:17 GMT
+ 
+{
+  "accessKey" : {
+    "algorithm" : "HmacSHA1",
+    "keyLength" : 64,
+    "secretKey" : "pXmYG556MjD",
+    "accessKeyId" : "KNGTV6EFKLPYE8LXF4VL",
+    "createdOn" : 1316714474259,
+    "domainId" : "00000000001001",
+    "otherAttributes" : {
+    },
+    "status" : "active",
+    "userId" : "00000000003002",
+    "validFrom" : 1316714474000,
+    "validTo" : 1632074474000
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=C20FB3A7F8BE4A7EF0EA7BE232327FE6; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 448
+Date: Fri, 09 Sep 2011 04:32:07 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><accessKey xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" accessKeyId="FG54K8NB67KHASRF6KY1" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T21:32:04.000-07:00" validTo="2021-09-05T21:32:04.000-07:00" createdOn="2011-09-08T21:32:04.937-07:00">
+   <algorithm>HmacSHA1</algorithm>
+   <keyLength>64</keyLength>
+   <secretKey>iwv//jFjJ2E</secretKey>
+</accessKey>
+```
+
+**Error Response**
+
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -X POST -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys" -d '{
+  "accessKey" : {
+    "algorithm" : "HmacSHA1",
+    "keyLength" : 240,
+    "domainId" : "11180052618906",
+    "otherAttributes" : {
+    },
+    "status" : "active",
+    "userId" : "84463950217213"
+  }}'
+```
+
+**Additional Notes**
+
+
+
+#### 4.4.13.2 <a id="delete_user_access_key"></a>Delete User Access Key####
+#### DELETE /HP-IDM/v1.0/accesskeys/{accesskeyId} 
+*Privilege Level: SA, DA, SS*
+
+Delete a user access key.
+
+**Request Data**
+
+The accesskeyId url path parameter is required. The userId query parameter is only required to delete an access key for a user other than the requester.
+
+**URL Parameters**
+
+* *accesskeyId* (Required) - URL path parameter - user access key identifier string
+* *userId* (Optional) - Query Parameter - User identifier of the access key owner. If not specified then defaults to userId of the requester.
+
+**Data Parameters**
+
+This call does not require a request body.
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+**Success Response**
+
+**Status Code**
+
+204 - No Content
+
+**Response Data**
+
+This call does not return a response body on success.
+
+JSON
+
+```
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=90D365930EDDB20FF49CC2DDA4B7C925; Path=/v2.0; Secure
+Date: Thu, 22 Sep 2011 22:15:42 GMT
+```
+
+XML
+
+```
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=7F457E3037CCB2DEC6C33D408F544EA8; Path=/v2.0; 
+SecureDate: Fri, 09 Sep 2011 04:25:47 GMT 
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -X DELETE -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/ZNFNCA1JJL3T7XY12V2F" 
+```
+
+**Additional Notes**
+
+
+
+#### 4.4.13.3 <a id="get_access_keys"></a>Get Access Keys####
+#### GET /HP-IDM/v1.0/accesskeys
+
+*Privilege Level: SA,DA, SS*
+
+Gets a list of selected user access keys. 
+
+**Request Data**
+
+The following query parameters are optional (domainId, export, status, userId). There are no required query parameters.
+
+
+**URL Parameters**
+
+* *domainId* (Optional) - Query Parameter - Domain identifier. Selects keys with matching domain identifier.
+* *export* (Optional) - Query Parameter - Export secret key value. Value is one of (true, false). If not specified the value is set to false.
+* *status* (Optional) - Query Parameter - Key status. Selects keys with matching status. Value is one of (active, inactive, expired, revoked, deleted, purged).
+* *userId* (Optional) - Query Parameter - User identifier. Selects keys with matching user identifier. If not specified the userId of the requester is used.
+
+
+**Data Parameters**
+
+This call does not require a request body.
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+
+JSON
+
+```
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_4e7b71f5e4b0600fec3d2a20
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+```
+
+XML
+
+```
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_4e699292e4b0a8f279022d4d
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+```
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 798
+Date: Thu, 22 Sep 2011 17:37:18 GMT
+ 
+{
+  "accessKeys" : {
+    "anies" : null,
+    "accessKey" : [ {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "V7TEGGSZZ4NJK9UR4UFE",
+      "createdOn" : 1316712986234,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "active",
+      "userId" : "00000000003002",
+      "validFrom" : 1316712986000,
+      "validTo" : 1632072986000
+    }, {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "WHDFDP7UVJS9F3USU1NF",
+      "createdOn" : 1316661731171,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "active",
+      "userId" : "00000000003002",
+      "validFrom" : 1316661731000,
+      "validTo" : 1632021731000
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=744A36BAF6E7165CCBC4C6CA1812204D; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 1340
+Date: Fri, 09 Sep 2011 04:20:29 GMT
+ 
+<accessKeys xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0">
+   <accessKey accessKeyId="2SL748X97NEP7B6MVXPS" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T15:20:20.000-07:00" validTo="2021-09-05T15:20:20.000-07:00" createdOn="2011-09-08T15:20:20.275-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+   <accessKey accessKeyId="98XM1KSN7BC2C88U9S7G" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T16:43:56.000-07:00" validTo="2021-09-05T16:43:56.000-07:00" createdOn="2011-09-08T16:43:56.494-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+   <accessKey accessKeyId="3D76NSUB49C96DFBRUF9" userId="000000003002" domainId="000000001001" status="deleted" validFrom="2011-09-08T15:19:10.000-07:00" validTo="2021-09-05T15:19:10.000-07:00" createdOn="2011-09-08T15:19:10.378-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+   <accessKey accessKeyId="9L47KGME4ZKCH9YRWDY7" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T17:34:09.000-07:00" validTo="2021-09-05T17:34:09.000-07:00" createdOn="2011-09-08T17:34:09.494-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+</accessKeys>
+```
+
+**Error Response**
+
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -H "X-Auth-Token: HPAuth_21805c02da2661574e46235bd8c27c10623bddc09a7cf4c67004771628e5453c" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=true"
+```
+
+**Additional Notes**
+
+
+
+#### 4.4.13.4 <a id="get_an_access_key"></a>Get An Access Key####
+#### GET /HP-IDM/v1.0/accesskeys/{accesskeyId}
+
+*Privilege Level: SA,DA,SS*
+
+Gets a single user access key by it's access key identifier.
+
+**Request Data**
+
+The accesskeyId URL path parameter is required. The 'export' and 'userId' query parameters are optional.
+
+**URL Parameters**
+
+* *accesskeyId* (Required) - URL path parameter - user access key identifier string
+* *userId* (Optional) - Query Parameter - user identifier string for user other than current authenticated user
+* *export* (Optional) - Query Parameter - used to specify whether secret key value should be returned ("true" or "false")
+
+**Data Parameters**
+
+This call does not require a request body.
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+
+JSON
+
+```
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/V7TEGGSZZ4NJK9UR4UFE?export=true HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_4e7bc0d2e4b0600fec3d2a4a
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443 
+
+```
+
+XML
+
+```
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/3D76NSUB49C96DFBRUF9?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_4e699292e4b0a8f279022d4d
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+```
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 376
+Date: Thu, 22 Sep 2011 23:12:53 GMT
+
+{  
+   "accessKey" : {    
+     "algorithm" : "HmacSHA1",    
+     "keyLength" : 64,    
+     "secretKey" : "hNi0oiTU2sH",    
+     "accessKeyId" : "V7TEGGSZZ4NJK9UR4UFE",    
+     "createdOn" : 1316712986234,    
+     "domainId" : "00000000001001",    
+     "otherAttributes" : {    
+     },    
+     "status" : "active",    
+     "userId" : "00000000003002",    
+     "validFrom" : 1316712986000,    
+     "validTo" : 1632072986000  
+   }
+} 
+
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=34C3B7E6EC0F9035A75BD4A0CF6CAC37; Path=/v2.0; 
+SecureContent-Type: application/xml
+Content-Length: 415
+Date: Fri, 09 Sep 2011 04:15:42 GMT
+
+<accessKey accessKeyId="3D76NSUB49C96DFBRUF9" userId="000000003002" domainId="000000001001" status="deleted" validFrom="2011-09-08T15:19:10.000-07:00" validTo="2021-09-05T15:19:10.000-07:00" createdOn="2011-09-08T15:19:10.378-07:00" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0">
+  <algorithm>HmacSHA1</algorithm>
+  <keyLength>64</keyLength>
+</accessKey> 
+```
+
+**Error Response**
+
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/HAJ5LLHHTKHBXB6MK3TL?export=true"
+```
+
+**Additional Notes**
+
+
+
+#### 4.4.13.5 <a id="import_user_access_key(s)"></a>Import User Access Key(s)####
+#### PUT /HP-IDM/v1.0/accesskeys
+*Privilege Level: SA, DA, SS*
+
+Import one or more user access keys. 
+
+**Request Data**
+
+The request data consists of an accessKeys data structure containing one or more accessKey elements. The secretKey and algorithm elements of the accessKey are required. The accessKeyId, domainId, keyLength, status, userId, validFrom, and validTo attributes are optional.
+
+**URL Parameters**
+
+There are no URL parameters for this request.
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+* *algorithm* - String - the algorithm the key will be used with. This is not validated when imported.
+* *domainId* (Optional) - String - domain identifier of the owner of the key.
+* *keyLength* (Optional) - Integer - Length of the key in bits.
+* *status* (Optional) String - the key status. One the values (active, inactive). Defaults to active if not specified.
+* *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
+* *validFrom* (Optional) - DateTime - The date the key becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+* *validTo* (Optional) - DateTime - The date the key becomes invalid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+JSON
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e7bb54fe4b0600fec3d2a37
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 919
+ 
+{"accessKeys": {
+   "anies": null,
+   "accessKey":    [
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "hNi0oiTU2sH",
+         "accessKeyId": "V7TEGGSZZ4NJK9UR4998",
+         "createdOn": 1316712986234,
+         "domainId": "00000000001001",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "00000000003002",
+         "validFrom": 1316712986000,
+         "validTo": 1632072986000
+      },
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "DBWjcUCMEED",
+         "accessKeyId": "RVWVEGE88EHZBSBMJ999",
+         "createdOn": 1316724920250,
+         "domainId": "00000000001001",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "00000000003002",
+         "validFrom": 1316724920000,
+         "validTo": 1632084920000
+      }
+    ],
+   "otherAttributes": {}
+}}
+```
+
+XML
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e6d258be4b05605729d7c3a
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 546
+ 
+<accessKeys xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <accessKey accessKeyId="98XM1KSN7BC2C88U9999" userId="000000003002" domainId="000000001001" status="inactive" validFrom="2011-09-08T16:43:56.000-07:00" validTo="2021-09-05T16:43:56.000-07:00" createdOn="2011-09-08T16:43:56.494-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+      <secretKey>HyGB2QRiOu7</secretKey>
+   </accessKey>
+</accessKeys>
+```
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 802
+Date: Thu, 22 Sep 2011 22:23:53 GMT
+ 
+{
+  "accessKeys" : {
+    "anies" : null,
+    "accessKey" : [ {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "V7TEGGSZZ4NJK9UR4998",
+      "createdOn" : 1316730228058,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "00000000003002",
+      "validFrom" : 1316712986000,
+      "validTo" : 1632072986000
+    }, {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "RVWVEGE88EHZBSBMJ999",
+      "createdOn" : 1316730228065,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "00000000003002",
+      "validFrom" : 1316724920000,
+      "validTo" : 1632084920000
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=41C4EA0FDBAB389A7F904935A283566A; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 537
+Date: Sun, 11 Sep 2011 21:18:37 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accessKeys xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <accessKey accessKeyId="98XM1KSN7BC2C88U9999" userId="000000003002" domainId="000000001001" status="inactive" validFrom="2011-09-08T16:43:56.000-07:00" validTo="2021-09-05T16:43:56.000-07:00" createdOn="2011-09-11T14:18:34.736-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+</accessKeys>
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 409 | Conflict | An access key already exists with the specified access key identifier |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys" -d '{"accessKeys": {
+   "anies": null,
+   "accessKey":    [
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "hNi0oiTU2sH",
+         "accessKeyId": "V7TEGGSZZ4NJK9UR4998",
+         "createdOn": 1316712986234,
+         "domainId": "11180052618906",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "84463950217213",
+         "validFrom": 1316712986000,
+         "validTo": 1632072986000
+      },
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "DBWjcUCMEED",
+         "accessKeyId": "RVWVEGE88EHZBSBMJ999",
+         "createdOn": 1316724920250,
+         "domainId": "11180052618906",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "84463950217213",
+         "validFrom": 1316724920000,
+         "validTo": 1632084920000
+      }
+    ],
+   "otherAttributes": {}
+}}'
+
+```
+
+**Additional Notes**
+
+
+#### 4.4.13.6 <a id="update_user_access_key"></a>Update User Access Key####
+#### PUT /HP-IDM/v1.0/accesskeys/{accesskeyId}
+*Privilege Level: SA, DA, SS*
+
+Update a user access key. This method may be used to modify the key status only.
+
+**Request Data**
+
+The accesskeyId url path parameter is required. The userId query parameter is optional. If the userId parameter is not specified then it defaults to the user identifer of the requester.
+
+**URL Parameters**
+
+* *accesskeyId* - URL path parameter - user access key identifier.
+* *userId* (Optional) - Query Parameter - user identifier string. Defaults to user identifier of the requester if not specified.
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+* *status* - {data type} - Key status. One of the values (active, inactive).
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+JSON
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/KNGTV6EFKLPYE8LXF4VL HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e7bba89e4b0600fec3d2a3a
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 51
+ 
+{
+  "accessKey" : {
+    "status" : "inactive"
+  }
+}
+```
+
+XML
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/2SL748X97NEP7B6MVXPS HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e6ab9fde4b06fe4272ee23e
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 146
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accessKey status="inactive" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"/>
+```
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 345
+Date: Thu, 22 Sep 2011 22:47:17 GMT
+ 
+{
+  "accessKey" : {
+    "algorithm" : "HmacSHA1",
+    "keyLength" : 64,
+    "accessKeyId" : "KNGTV6EFKLPYE8LXF4VL",
+    "createdOn" : 1316714474259,
+    "domainId" : "00000000001001",
+    "otherAttributes" : {
+    },
+    "status" : "inactive",
+    "userId" : "00000000003002",
+    "validFrom" : 1316714474000,
+    "validTo" : 1632074474000
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=4D3047BA05428AD806C48E269C8DD8B4; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 416
+Date: Sat, 10 Sep 2011 01:16:12 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><accessKey xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" accessKeyId="2SL748X97NEP7B6MVXPS" userId="000000003002" domainId="000000001001" status="inactive" validFrom="2011-09-08T15:20:20.000-07:00" validTo="2021-09-05T15:20:20.000-07:00" createdOn="2011-09-08T15:20:20.275-07:00"><algorithm>HmacSHA1</algorithm><keyLength>64</keyLength></accessKey>
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/V7TEGGSZZ4NJK9UR4998" -d '{
+  "accessKey" : {
+    "status" : "active"
+  }
+}'
+```
+
+**Additional Notes**
+
+
+
+
+### 4.4.14 User Certificates
 
 User Certificate Operations.
 
@@ -15798,7 +17854,7 @@ N/A
 None.
 
 
-#### 4.4.13.1 <a id="get_user_certificates"></a>Get User Certificates####
+#### 4.4.14.1 <a id="get_user_certificates"></a>Get User Certificates####
 #### GET /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS* 
 
@@ -16026,7 +18082,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.13.2 <a id="delete_user_certificate"></a>Delete User Certificate####
+#### 4.4.14.2 <a id="delete_user_certificate"></a>Delete User Certificate####
 #### DELETE /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	D
 *Privilege Level: SA, DA, SS*
 
@@ -16148,7 +18204,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.13.3 <a id="get_user_certificate"></a>Get User Certificate####
+#### 4.4.14.3 <a id="get_user_certificate"></a>Get User Certificate####
 #### GET /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber}
 *Privilege Level: SA, DA, SS*
 
@@ -16331,7 +18387,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.13.4 <a id="create_a_user_certificate"></a>Create A User Certificate####
+#### 4.4.14.4 <a id="create_a_user_certificate"></a>Create A User Certificate####
 #### POST /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS*
 
@@ -16536,7 +18592,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 **Additional Notes**
 
 
-#### 4.4.13.5 <a id="import_user_certificate(s)"></a>Import User Certificate(s)####
+#### 4.4.14.5 <a id="import_user_certificate(s)"></a>Import User Certificate(s)####
 #### PUT /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS*
 
@@ -16767,7 +18823,7 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 **Additional Notes**
 
-#### 4.4.13.6 <a id="update_user_certificate"></a>Update User Certificate####
+#### 4.4.14.6 <a id="update_user_certificate"></a>Update User Certificate####
 #### PUT /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	
 *Privilege Level: SA,DA,SS*
 
@@ -16930,7 +18986,8 @@ curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Aut
 
 
 
-### 4.4.14 User Key Pairs
+
+### 4.4.15 User Key Pairs
 
 The User Key Pair REST API provides the ability to manage user access keys.
 
@@ -16952,7 +19009,7 @@ N/A
 None.
 
 
-#### 4.4.14.1 <a id="create_user_key_pair"></a>Create User Key Pair####
+#### 4.4.15.1 <a id="create_user_key_pair"></a>Create User Key Pair####
 #### POST /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
@@ -17157,7 +19214,7 @@ curl -k -X POST -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46
 
 
 
-#### 4.4.14.2 <a id="delete_user_key_pair"></a>Delete User Key Pair####
+#### 4.4.15.2 <a id="delete_user_key_pair"></a>Delete User Key Pair####
 #### DELETE /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 
@@ -17279,7 +19336,7 @@ curl -k -X DELETE -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d
 **Additional Notes**
 
 
-#### 4.4.14.3 <a id="get_user_key_pair"></a>Get User Key Pair####
+#### 4.4.15.3 <a id="get_user_key_pair"></a>Get User Key Pair####
 #### GET /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 
@@ -17430,7 +19487,7 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 
 
 
-#### 4.4.14.4 <a id="get_user_key_pairs"></a>Get User Key Pairs####
+#### 4.4.15.4 <a id="get_user_key_pairs"></a>Get User Key Pairs####
 #### GET /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
@@ -17744,7 +19801,7 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 **Additional Notes**
 
 
-#### 4.4.14.5 <a id="import_user_key_pair(s)"></a>Import User Key Pair(s)####
+#### 4.4.15.5 <a id="import_user_key_pair(s)"></a>Import User Key Pair(s)####
 #### PUT /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
@@ -18088,7 +20145,7 @@ curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d
 
 
 
-#### 4.4.14.6 <a id="update_user_key_pair"></a>Update User Key Pair####
+#### 4.4.15.6 <a id="update_user_key_pair"></a>Update User Key Pair####
 #### PUT /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 
@@ -18278,8 +20335,41 @@ curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d
 
 # Appendix A: Available Actions <a id="available_action">
 
-## Activate Block Storage
-### POST [HPKeystoneExtensionBaseURI]/action/activateblockstorage
+| Actions |
+| :------ |
+| [Activate Block Storage](#activate_block_storage) |
+| [ActivateCdn](#activatecdn) |
+| [ActivateCompute](#activatecompute) |
+| [ActivateImageService](#activateimageservice) |
+| [ActivateObjectStorage](#activateobjectstorage) |
+| [ActivateService](#activateservice) |
+| [Cancel Account](#cancel_account) |
+| [CreateDomain - SEVERELY DEPRECATED - TO BE REMOVED IN CONSER-4098](#createdomain_-_severely_deprecated_-_to_be_removed_in_conser-4098) |
+| [Create Tenant](#create_tenant) |
+| [CreateUser](#createuser) |
+| [DeactivateBlockStorage](#deactivateblockstorage) |
+| [DeactivateCdn](#deactivatecdn) |
+| [DeactivateCompute](#deactivatecompute) |
+| [DeactivateImageService](#deactivateimageservice) |
+| [DeactivateObjectStorage](#deactivateobjectstorage) |
+| [DeactivateService](#deactivateservice) |
+| [DevexMigration](#devexmigration) |
+| [EmailVerification](#emailverification) |
+| [EnterpriseUserEmailVerification](#enterpriseuseremailverification) |
+| [ForgotPasswordReset](#forgotpasswordreset) |
+| [NocUserRegistration](#nocuserregistration) |
+| [PurgeDomain](#purgedomain) |
+| [PurgeTenant](#purgetenant) |
+| [PurgeUser](#purgeuser) |
+| [SelfRegistration](#selfregistration) |
+| [SvcOnBoardingUserRegistration](#svconboardinguserregistration) |
+| [UpdateDomain](#updatedomain) |
+| [UpdateTenant](#updatetenant) |
+| [UpdateUser](#updateuser) |
+| [UserNameRecovery](#usernamerecovery) |
+
+### Activate Block Storage <a id="activate_block_storage"></a>
+#### POST [HPKeystoneExtensionBaseURI]/action/activateblockstorage
 *Privilege Level: System Administrators, Domain Administrators*  
 *Constraints:*  
 1. A service endpoint can be subscribed to only once by the same tenant. (FindUmsTenant)  
@@ -18375,7 +20465,8 @@ curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X POST -H 
 
 
 
-## ActivateCdn
+
+### ActivateCdn <a id="activatecdn"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/activatecdn
 *Privilege Level: System Administrators, Domain Administrators*  
 *Constraints:* 
@@ -18479,7 +20570,8 @@ TBD
 3.  As part of activation the ```Domain Administrators``` group for the domain of the Tenant is added to the role ```cdn-admin``` for this tenant.
 
 
-## ActivateCompute
+
+### ActivateCompute <a id="activatecompute"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/activatecompute
 *Privilege Level: System Administrators, Domain Administrators*
   
@@ -18589,7 +20681,8 @@ TBD
 
 
 
-## ActivateImageService
+
+### ActivateImageService <a id="activateimageservice"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/activateimageservice
 *Privilege Level: System Administrators, Domain Administrators*
   
@@ -18721,7 +20814,8 @@ TBD
 3.  If only the ```tenantName``` is provided then, if the tenant with the specified name does not exist then a new tenant will be created.
 4.  If only the ```tenantId``` is provided then the tenant with the specified ```tenantId``` must exist.
 5.  If both are provided then ```tenantId``` takes precedence and the net effect is the same as if only the ```tenantId``` was provided.
-## ActivateObjectStorage
+
+### ActivateObjectStorage <a id="activateobjectstorage"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/activateobjectstorage
 *Privilege Level: System Administrators, Domain Administrators*  
  
@@ -18825,7 +20919,8 @@ TBD
 
 1.  The ```tenantName``` must be globally unique.
 2.  As part of activation the ```Domain Administrators``` group for the domain of the Tenant is added to the role ```admin``` for this tenant.
-## ActivateService
+
+### ActivateService <a id="activateservice"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/activateservice
 *Privilege Level: 
 System Administrators, Domain Administrators*  
@@ -18969,7 +21064,8 @@ TBD
 4.  If only the tenantId is provided then the tenant with the specified tenantId must exist.
 5.  If both are provided then tenantId takes precedence and the net effect is the same as if only the tenantId was provided.
 6.  As part of activation certain *Service Roles* assignments are made for this tenant. 
-## Cancel Account
+
+### Cancel Account <a id="cancel_account"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/cancelaccount
 *Privilege Level: System Admin*  
  
@@ -19065,7 +21161,8 @@ TBD
 **Notes**
 
 None
-## CreateDomain - SEVERELY DEPRECATED - TO BE REMOVED IN CONSER-4098
+
+### CreateDomain - SEVERELY DEPRECATED - TO BE REMOVED IN CONSER-4098 <a id="createdomain_-_severely_deprecated_-_to_be_removed_in_conser-4098"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/createdomain
 *Privilege Level: System Admin*  
  
@@ -19153,7 +21250,8 @@ TBD
 
 
 **Notes**
-## Create Tenant
+
+### Create Tenant <a id="create_tenant"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/createtenant
 *Privilege Level: System Admin, Domain Admin*  
  
@@ -19177,6 +21275,7 @@ None
 |tenantName|xs:string|true|
 |domainId|xs:string|true|
 |description|xs:string|false|
+|homeRegion|xs:string|false|
 
 JSON
 
@@ -19206,6 +21305,10 @@ TBD
 
 **Response Data**
 
+
+#### Region Resolution ####
+{{PRIVATE}} If homeRegion is specified in input data, then CS tenant is created in specified homeRegion. If home region is not specified in input data, then CS tenant is created in same region where tenant's domain region. Currently we are not propagating region to zuora side.
+
 JSON
 
 TBD  
@@ -19226,16 +21329,17 @@ TBD
 |CreateZuoraTenantAccount|Create a Zuora Account that is a child of the Domain Account|true|
 
 **Notes**
-## CreateUser
 
-## Description ##
+### CreateUser <a id="createuser"></a>
+#### POST [HPKeystoneExtensionBaseURI]/action/createuser
+*Privilege Level: System Admin*
 
 First, create a new User within the specified Domain in Control Services, and create accesskeys for the User. Next, create a new Contact for this user in Salesforce beneath the Salesforce Account of the Domain. Finally, if there is not already a Zuora Contact, then create one based on the user info.
 
 In order to support MC IP address validation there are two additional parameters. ipCheckSucceeded store a boolean value indicating whether or not the IP address of the client is not blocked. ipAddress contains the actual address.
 
 
-## Validation Modes ##
+#### Validation Modes ####
 
 **Default Mode**: In this mode the user is activated immediately. If **sendWelcomeEmail**=true the email is also sent immediately.
 
@@ -19243,15 +21347,15 @@ In order to support MC IP address validation there are two additional parameters
 
 Note that the **EnterpriseUserEmailVerification** action must handle validations from this action.
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 **System Admin, Domain Admin**
 
-## Examples ##
+#### Examples ####
 
     http://host:port/v2.0/HP-IDM/v1.0/action/createuser
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name | Parameter Type | Is Required | Default |
 | :------------- | :------------- | :---------- | :------ |
@@ -19287,6 +21391,7 @@ Note that the **EnterpriseUserEmailVerification** action must handle validations
 | highRiskEmail	| xs:boolean 	| false 	| 	|
 | sendWelcomeEmail 	| xs:boolean 	| false	| false	|
 | emailValidationType 	| xs:string 	| false 	| None	|
+| homeRegion	| xs:string 	| false 	| 	|
 
 **emailValidationType Values**
 
@@ -19296,7 +21401,7 @@ Note that the **EnterpriseUserEmailVerification** action must handle validations
 | EmailVerification 	| Send verification email with a link that activates the user.	|
 | EmailVerificationWithPwdCollection 	| Send verification email with a link that activates the user and capture a password .	|
 
-## Action Steps ##
+#### Action Steps ####
 
 | Step Name 	| Step Description 	| Is Retryable 	|
 | -----------	| ------------------	| -------------	|
@@ -19306,20 +21411,23 @@ Note that the **EnterpriseUserEmailVerification** action must handle validations
 | CreateSalesforceContact 	| Create a new or locate an existing Salesforce Contact. 	| **true** 	|
 | CreateZuoraContact 	| Create a new Contact in Zuora only if there is not one already. 	| **true** 	|
 
-## Constraints ##
+#### Constraints ####
 
 1. The UMS User and the User's Domain must be enabled. _(CreateKmsUserKeys)_
 1. If Salesforce cannot be accessed than this Action Step will be retried at a future time. _(CreateSalesforceContact)_
 1. If Zuora cannot be accessed than this Action Step will be retried at a future time. _(CreateZuoraContact)_
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 1. KMS_USER holds the ID for the UserAccount created in the KMS. _(CreateKmsUser)_
 1. KMS_USER_KEY holds the ID for the UserAccessKeys created in KMS. _(CreateKmsUserKeys)_
 1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _(CreateSalesforceContact)_
 1. ZUORA_DOMAIN_ACCOUNT will contain the Zuora Account ID. _(CreateZuoraContact)_
 
-## Email Integration ##
+#### Region Resolution ####
+{{PRIVATE}} If homeRegion is specified in input data, then CS user, authz user grants, group refs are created in specified homeRegion. If home region is not specified in input data, then CS user and related entities are created in same region as domain's region. All user related authz grants, group ref are created in new user's region. The created user's geoRegion is passed to KMS steps (CreateKmsUser,  CreateKmsUserKeys) which is going to create related KMS entities in user's geoRegion. Currently we are not propagating region to salesforce and zuora side.
+
+#### Email Integration ####
 
 After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
 
@@ -19348,7 +21456,8 @@ Email messages are stored in the database. The email template is stored under th
 | %website% 	| user.website 	|
 | %emailAddress% 	| user.emailAddress 	|
 | %ResetToken%	| user.nonce	|
-## DeactivateBlockStorage
+
+### DeactivateBlockStorage <a id="deactivateblockstorage"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/deactivateblockstorage
 *Privilege Level: System Administrators, Domain Administrators*  
  
@@ -19449,7 +21558,8 @@ TBD
 1.  ```tenantName``` must resolve to an existing tenant, and *{_}must not{_}* be provisioned for ```Compute``` service in the same region.
 ```domainId``` is neither required nor used.
 2.  As part of deactivation the ```Domain Administrators``` group for the domain of the Tenant is removed from the role ```volume-manager``` for this tenant.
-## DeactivateCdn
+
+### DeactivateCdn <a id="deactivatecdn"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/deactivatecdn
 *Privilege Level: System Administrators, Domain Administrators*  
  
@@ -19549,7 +21659,8 @@ TBD
 1.  ```tenantName``` must resolve to an existing tenant.
 2.  ```domainId``` is neither required nor used.
 3.  As part of deactivation the ```Domain Administrators``` group for the domain of the Tenant is removed from the role ```cdn-admin``` for this tenant.
-## DeactivateCompute
+
+### DeactivateCompute <a id="deactivatecompute"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/{action path}
 *Privilege Level: System Administrators, Domain Administrators*  
  
@@ -19650,7 +21761,8 @@ TBD
 2.  This tenant will automatically be de-provisioned  from the corresponding ```Block Storage``` service in the same region to which it was provisioned.
 3.  ```domainId``` is neither required nor used.
 4.  As part of deactivation the ```Domain Administrators``` group for the domain of the Tenant is removed from the roles ```netadmin``` and ```volume-manager``` for this tenant.
-## DeactivateImageService
+
+### DeactivateImageService <a id="deactivateimageservice"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/{action path}
 *Privilege Level: System Administrators, Domain Administrators*  
  
@@ -19774,7 +21886,8 @@ TBD
 2.  As part of deactivation the *Service Roles* assigned at activation time are removed from the tenant. 
 3.  ```domainId``` is neither required nor used.
 
-## DeactivateObjectStorage
+
+### DeactivateObjectStorage <a id="deactivateobjectstorage"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/deactivateobjectstorage
 *Privilege Level: System Administrators, Domain Administrators*  
  
@@ -19875,7 +21988,8 @@ TBD
 1.  ```tenantName``` must resolve to an existing tenant.
 2.  As part of deactivation the ```Domain Administrators``` group for the domain of the Tenant is removed from the role ```admin``` for this tenant.
 3.  ```domainId``` is neither required nor used.
-## DeactivateService
+
+### DeactivateService <a id="deactivateservice"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/deactivateservice
 *Privilege Level: System Administrators, Domain Administrators*  
  
@@ -20004,7 +22118,8 @@ TBD
 1.  Either the ```tenantName``` OR ```tenantId``` is required and it must resolve to an existing tenant.
 2.  As part of deactivation the *Service Roles* assigned at activation time are removed from the tenant.
 3.  ```domainId``` is neither required nor used.
-## DevexMigration
+
+### DevexMigration <a id="devexmigration"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/NOT DOCUMENTED
 *Privilege Level: System Administrator*  
  
@@ -20103,16 +22218,17 @@ TBD
 |EnableMigratedDomain|No description available.|false|
 
 **Notes**
-## EmailVerification
-## Description ##
+
+### EmailVerification <a id="emailverification"></a>
+#### Description ####
 
 This action will be used to validate email verification nonce which was sent to the customer as part of self registration process. After successful validation of the nonce this action will activate all the entities in CS and in SF.
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 **Anonymous**
 
-## Examples ##
+#### Examples ####
 
 **Request:**
 
@@ -20148,14 +22264,14 @@ This action will be used to validate email verification nonce which was sent to 
 		"ticketId": "501996c1529528c09f16e89e"
 	}
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type 	| Is Required 	|
 | :--	| :--	| :- 	|
 | emailVerificationNonce 	| xs:string 	| **true** 	|
 | password 	| xs:string 	| false 	|
 
-## Action Steps ##
+#### Action Steps ####
 
 | Step Name 	| Step Description 	| Is Retryable 	|
 | -----------	| ------------------	| -------------	|
@@ -20165,28 +22281,29 @@ This action will be used to validate email verification nonce which was sent to 
 | UpdateSalesforceAccount 	| This step will update the SF Account and Contact and set these to Enabled state	| false 	|
 | SendWelcomeEmail 	| Send welcome email 	| false 	|
 
-## Constraints ##
+#### Constraints ####
 
 1. The verification mode chosen in SelfRegistration dictates whether the password parameter is required, it is an error to omit the password if it's use was indicated.
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 1. UMS_USER holds the ID for the UserAccount updated in UMS.
 1. UMS_DOMAIN holds the ID for the Domain updated in UMS.
 1. SALESFORCE_ACCOUNT will contain the Salesforce Account ID.
-1. EMAIL_VERIFY_STATUS will contains the verification status.# EnterpriseUserEmailVerification
+1. EMAIL_VERIFY_STATUS will contains the verification status.
+### EnterpriseUserEmailVerification <a id="enterpriseuseremailverification"></a>
 
-## Description ##
+#### Description ####
 
 This action is used to validate and activate users created with the **CreateUser** action. After successful validation of the nonce this action will activate all the entities in CS and in SF.
 
 See **CreateUser** action for email integration information. 
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 **Anonymous**
 
-## Examples ##
+#### Examples ####
 
 **Request:**
 
@@ -20196,14 +22313,14 @@ See **CreateUser** action for email integration information.
         }
     }
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type 	| Is Required 	|
 | :--	| :--	| :- 	|
 | emailVerificationNonce 	| xs:string 	| **true** 	|
 | password 	| xs:string 	| false 	|
 
-## Action Steps ##
+#### Action Steps ####
 
 | Step Name 	| Step Description 	| Is Retryable 	|
 | -----------	| ------------------	| -------------	|
@@ -20213,15 +22330,16 @@ See **CreateUser** action for email integration information.
 | UpdateSalesforceAccount 	| This step will update the SF Account and Contact and set these to Enabled state	| false 	|
 | SendWelcomeEmail 	| Send welcome email 	| false 	|
 
-## Constraints ##
+#### Constraints ####
 
 1. The verification mode chosen in CreateUser dictates whether the password parameter is required, it is an error to omit the password if it's use was indicated.
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 1. UMS_USER holds the ID for the UserAccount updated in UMS.
 1. SALESFORCE_ACCOUNT will contain the Salesforce Account ID.
-1. EMAIL_VERIFY_STATUS will contains the verification status.##  ForgotPasswordReset
+1. EMAIL_VERIFY_STATUS will contains the verification status.
+### ForgotPasswordReset <a id="forgotpasswordreset"></a>
 #### POST [HPKeystoneExtensionBaseURI]/action/ForgotPasswordReset
 *Privilege Level: Anonymous*  
  
@@ -20329,21 +22447,22 @@ Email messages are stored in the database. The email template is stored under th
 | %website% 	| user.website 	|
 | %emailAddress% 	| user.emailAddress 	|
 | %ResetToken%	| user.nonce	|
-## NocUserRegistration
 
-## Description ##
+### NocUserRegistration <a id="nocuserregistration"></a>
 
-N/A
-
-## PrivilegeLevel ##
+#### Description ####
 
 N/A
 
-## Examples ##
+#### PrivilegeLevel ####
 
 N/A
 
-## Action Parameters ##
+#### Examples ####
+
+N/A
+
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type	| Is Required	|
 | --------------	| ------------------	| -------------	|
@@ -20361,9 +22480,10 @@ N/A
 | username 	| xs:string 	| **true** 	|
 | firstName 	| xs:string 	| false 	|
 | lastName 	| xs:string 	| false 	|
+| homeRegion 	| xs:string 	| false 	|
 
 
-## Action Steps ##
+#### Action Steps ####
 | Step Name 	| Step Description 	| Is Retryable 	|
 | ---------- 	| ----------------- 	| ------------ 	|
 | CreateUmsUser 	| Create a new UMS User object. 	| false 	|
@@ -20371,40 +22491,43 @@ N/A
 | CreateKmsUserKeys 	| Create a set of KMS Keys for the specified UMS User. 	| false 	|
 | CreateSalesforceContactAndAccount 	| Create a new or a locate existing Salesforce Contact. A query is performed based on the User's email address. If an existing contact is found, then it is assumed to correspond to the UMS User. 	| false 	|
 
-## Constraints ##
+#### Constraints ####
 
 1. The User's name and company are checked against the HP Restricted Parties List. If there is a hit then the new User and existing Domain are disabled after creation. _(CreateUmsUser)_
 1. The UMS User and the User's Domain must be enabled. _(CreateKmsUserKeys)_
 1. If Salesforce cannot be accessed than this Action Step will be retried at a future time. _(CreateSalesforceContactAndAccount)_
 
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 1. KMS_USER holds the ID for the UserAccount created in the KMS. _(CreateKmsUser)_
 1. KMS_USER_KEY holds the ID for the UserAccessKeys created in KMS. _(CreateKmsUserKeys)_
 1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _(CreateSalesforceContactAndAccount)_
-## PurgeDomain
 
-## Description ##
+#### Region Resolution ####
+{{PRIVATE}} If homeRegion is specified in input data, then NOC user, authz user grants, group refs are created in specified homeRegion. If home region is not specified in input data, then CS user and related entities are created in same region as NOC domain's region. All user related authz grants, group ref are created in new user's region. The created user's geoRegion is passed to KMS steps (CreateKmsUser,  CreateKmsUserKeys) which is going to create related KMS entities in user's geoRegion. Currently we are not propagating region to salesforce side.
+### PurgeDomain <a id="purgedomain"></a>
+
+#### Description ####
 
 Completely remove the specified Domain from the system. Cascade removal to all subordinate Users, Tenants and Resources. Inactivate any associated accounts in Zuora and Salesforce.
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 **System Admin**
 
-## Examples ##
+#### Examples ####
 
 	http://host:port/v2.0/HP-IDM/v1.0/action/purgedomain
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type	| Is Required	|
 | --------------	| ------------------	| -------------	|
 | domainId 	| xs:string 	| **true** 	|
 | dryrun 	| xs:string 	| false 	|
 
-## Action Steps ##
+#### Action Steps ####
 | Step Name 	| Step Description 	| Is Retryable 	|
 | ---------- 	| ----------------- 	| ------------ 	|
 | DeactivateZuoraAccount 	| When a domain is deleted we mark the corresponding Zuora Account as inactive by setting its state to 'Canceled' - with one Ell. 	| false 	|
@@ -20412,28 +22535,29 @@ Completely remove the specified Domain from the system. Cascade removal to all s
 | DeleteKmsDomain 	| 	| false 	|
 | DeleteUmsDomain 	| 	| false 	|
 
-## Constraints ##
+#### Constraints ####
 
 N/A
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 N/A
-## PurgeTenant
 
-## Description ##
+### PurgeTenant <a id="purgetenant"></a>
+
+#### Description ####
 
 Delete the specified Tenant from the UMS. Cancel all activated services and all Zuora subscriptions for the tenant.
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 **System Admin, Domain Admin**
 
-## Examples ##
+#### Examples ####
 
 	http://host:port/v2.0/HP-IDM/v1.0/action/purgetenant
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type	| Is Required	|
 | ---------------	| ------------------	| -------------	|
@@ -20442,7 +22566,7 @@ Delete the specified Tenant from the UMS. Cancel all activated services and all 
 
 **One or the other**
 
-## Action Steps ##
+#### Action Steps ####
 | Step Name 	| Step Description 	| Is Retryable 	|
 | ---------- 	| ----------------- 	| ------------ 	|
 | FindUmsTenant 	| Find the specified tenant 	| false 	|
@@ -20450,71 +22574,73 @@ Delete the specified Tenant from the UMS. Cancel all activated services and all 
 | PurgeServicesForTenant 	| Attempt to purge (physically remove) all the services for the tenant by de-provisioning the tenant's services first. *Note:* Rollback is not supported. 	| false 	|
 | PurgeUmsTenant 	| Delete the tenant from the UMS. 	| false 	|
 
-## Constraints ##
+#### Constraints ####
 
 1. tenantId or tenantName must be valid.
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 1. The tenantId for the purged Tenant.
-## PurgeUser
 
-## Description ##
+### PurgeUser <a id="purgeuser"></a>
+
+#### Description ####
 
 Completely remove the specified User from the system. Deallocate any services assigned to this user, and inactivate accounts in third party systems, such as Zuora and Salesforce.
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 N/A
 
-## Examples ##
+#### Examples ####
 
 	http://host:port/v2.0/HP-IDM/v1.0/action/purgeuser
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type	| Is Required	|
 | -----------	| ------------------	| -------------	|
 | accountId 	| xs:string 	| **true** 	|
 | dryrun 	| xs:string 	| false 	|
 
-## Action Steps ##
+#### Action Steps ####
 | Step Name 	| Step Description 	| Is Retryable 	|
 | -- 	| -- 	| -- 	|
 | DeleteKmsUser 	| 	| false 	|
 | DeleteUmsUser 	| 	| false 	|
 
-## Constraints ##
+#### Constraints ####
 
 N/A
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
-N/A# SelfRegistration
+N/A
+### SelfRegistration <a id="selfregistration"></a>
 
-## Description ##
+#### Description ####
 
 This action sets up a new Domain and User using minimal parameters. Keys are created for the user, and Accounts are created in both Salesforce and Zuora. In order to support MC IP address validation there are two additional parameters. ipCheckSucceeded store a boolean value indicating whether or not the IP address of the client is not blocked. ipAddress contains the actual address.
 
-## Validation Modes ##
+#### Validation Modes ####
 
 **No Validation**: In this mode all the required entities (user, domain, etc....) are created in the mongodb and the Sales Force and they are set to \*enabled\* state. Welcome email will be sent to customer immediately after successful registration process.
 
 In this mode the user is activated immediately. If **sendWelcomeEmail**=true the email is sent immediately.
 
-**Email Validation Mode**: In this mode all the required entities (user, domain, etc....) are created in the mongodb and the Sales Force and they set to \*suspended\* state. Email verification email along with email verification nonce will be sent to customer, customer has to follow the direction given in the email to validate their email address. To support this work flow we have added "statusReason" field to the Domain Collections and "emailVerificationStatus" to the User collection, same fields are added to the Account and Contact object of SF and they should be in sync.
+**Email Validation Mode**: In this mode, where **emailValidationType**!=None, the user is created in a suspended state and a validation email sent. See Action Parameters for the different validation modes. If **sendWelcomeEmail**=true and **emailValidationType**!='None' then the welcome email is sent on successful validation.
 
-If **sendWelcomeEmail**=true and **emailValidationRequired**=true then the welcome email is sent on successful validation.
+The **emailValidationRequired** flag is retained for the time being for backward compatibility. If this flag is set then it's equivalent to an **emailValidationType** of 'EmailVerification'. If both these parameters are specified then **emailValidationType** takes precedence.
 
 Note that the **EmailVerification** action must handle validations from this action.
 
 **See: Self Registration & Email Validation Work Flow**
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 **Anonymous**
 
-## Examples ##
+#### Examples ####
 
     POST http://host:port/v2.0/HP-IDM/v1.0/action/SelfRegistration HTTP/1.1
 	Accept: application/json
@@ -20533,7 +22659,7 @@ Note that the **EmailVerification** action must handle validations from this act
       	}
 	}
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type 	| Is Required 	| Default 	|
 | :--------------	| :--------------	| :---------- 	| :------- 	|
@@ -20570,8 +22696,29 @@ Note that the **EmailVerification** action must handle validations from this act
 | referringUrl 	| xs:string 	| false 	| 	|
 | useCase	| xs:string 	| false 	| 	|
 | sendWelcomeEmail 	| xs:boolean 	| false 	| false	|
+| emailValidationType 	| xs:string 	| false 	| None	|
+| customerType 	| xs:string 	| false 	| Self Service 	|
+| homeRegion	| xs:string 	| false 	| 	|
 
-## Action Steps ##
+
+**emailValidationType Values**
+
+| Value	| Effect 	|
+| ------	| --------	|
+| None 	| Perform no email validation. 	|
+| EmailVerification 	| Send verification email with a link that activates the user.	|
+| EmailVerificationWithPwdCollection 	| Send verification email with a link that activates the user and capture a password .	|
+
+**customerType Values**
+
+| Value	| Effect 	|
+| ------	| --------	|
+| Gratis Account	| 	|
+| Self Service	| 	|
+| HP Internal	| 	|
+| Corporate	| Causes the Zuora defaultPaymentMethod to be set to "Other" on the Zuora account.	|
+
+#### Action Steps ####
 
 | Step Name 	| Step Description	| Is Retryable 	|
 | -----------	| -----------------	| --------------	|
@@ -20583,11 +22730,11 @@ Note that the **EmailVerification** action must handle validations from this act
 | CreateSalesforceContact 	| Create a new or a locate existing Salesforce Contact. A query is performed based on the User's email address. If an existing contact is found, then it is assumed to correspond to the UMS User. 	| false 	|
 | CreateZuoraDomainAndContact 	| Create a new Account and Contact in Zuora that correspond with the given Domain and User. 	| false 	|
 
-## Constraints ##
+#### Constraints ####
 
 1. The UMS User and the User's Domain must be enabled. _(CreateKmsUserKeys)_
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 1. UMS_USER holds the accountId for the user created in the UMS. _(CreateUmsUserAndDomain)_
 1. UMS_DOMAIN holds the domainId for the domain created in the UMS. _CreateUmsUserAndDomain_
@@ -20597,6 +22744,10 @@ Note that the **EmailVerification** action must handle validations from this act
 1. SALESFORCE_ACCOUNT will contain the Salesforce Account ID. _(CreateSalesforceAccount)_
 1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _(CreateSalesforceContact)_
 1. ZUORA_DOMAIN_ACCOUNT will contain the Zuora Account ID. _(CreateZuoraDomainAndContact)_
+
+
+#### Region Resolution ####
+{{PRIVATE}} If homeRegion is specified in input data, then domain, user, groups, authz user grants, group refs are created in specified homeRegion. If home region is not specified in input data, then CS domain and user and related entities are created in region of CS instance where SelfRegistration action request was submitted. All user related authz grants, group ref are created in new user's region. The created user's geoRegion is passed to KMS steps (CreateKmsDomain, CreateKmsUser,  CreateKmsUserKeys) which is going to create related KMS entities in user's geoRegion. Currently we are not propagating region to salesforce and zuora side.
 
 ##Email Integration##
 
@@ -20627,19 +22778,20 @@ Email messages are stored in the database. The email template is stored under th
 | %website% 	| user.website 	|
 | %emailAddress% 	| user.emailAddress 	|
 | %ResetToken%	| user.nonce	|
-## SvcOnBoardingUserRegistration
 
-## Description ##
+### SvcOnBoardingUserRegistration <a id="svconboardinguserregistration"></a>
+
+#### Description ####
 
 This action will create a user in system domain with required privilege to register a new service in CS infrastructure. Mostly this action would be called by NOC person using cs-manage script.
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 **Caller must have SuperAdmin or L3-plus-support role.**
 
-## Examples ##
+#### Examples ####
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type 	| Is Required 	|
 | :--	| :--	| :- 	|
@@ -20648,7 +22800,7 @@ This action will create a user in system domain with required privilege to regis
 | username 	| xs:string 	| **true** 	|
 | serviceId	| xs:string 	| **true** 	|
 
-## Action Steps ##
+#### Action Steps ####
 
 | Step Name 	| Step Description 	| Is Retryable 	|
 | -----------	| ------------------	| -------------	|
@@ -20659,20 +22811,21 @@ This action will create a user in system domain with required privilege to regis
 | CreateSalesforceContactAndAccount 	| Create a new or a locate existing Salesforce Contact. A query is performed based on the User's email address. If an existing contact is found, then it is assumed to correspond to the UMS User. 	| false 	|
 | CreateSvcRegAuthzPolicies 	| This step would create required policy on the above created user account.	| false 	|
 
-## Constraints ##
+#### Constraints ####
 
 1. Service with given serviceId should not exist in system, if exist there would be exception thrown.
 1. The User's name and company are checked against the HP Restricted Parties List. If there is a hit then the new User and existing Domain are disabled after creation. _CreateUmsUser_
 1. The UMS User and the User's Domain must be enabled. _CreateKmsUserKeys_
 1. If Salesforce cannot be accessed than this Action Step will be retried at a future time. _CreateSalesforceContactAndAccount_
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 1. KMS_USER holds the ID for the UserAccount created in the KMS. _CreateKmsUser_
 1. KMS_USER_KEY holds the ID for the UserAccessKeys created in KMS. _CreateKmsUserKeys_
-1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _CreateSalesforceContactAndAccount_# UpdateDomain
+1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _CreateSalesforceContactAndAccount_
+### UpdateDomain <a id="updatedomain"></a>
 
-## Description ##
+#### Description ####
 
 Update the properties of the specified Domain. Property changes are propagated to all internal (UMS, KMS) and external (Salesforce) services.
 
@@ -20684,11 +22837,11 @@ In addition to set simple property values, the UpdateDomain action can also set 
 | SUSPENDED_3 	| SA 	| No user in a suspended domain can log into their account. 	|
 | DELETED 	| SA 	| Soft delete. Domain data is not purged. Can be re-ENABLED only by SA. 	|
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 **System Administration, Domain Administration**
 
-## Examples ##
+#### Examples ####
 
 	POST http://host:port/v2.0/HP-IDM/v1.0/action/updatedomain HTTP/1.1
 	Accept: application/json
@@ -20721,7 +22874,7 @@ In addition to set simple property values, the UpdateDomain action can also set 
 		}
 	}
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type 	| Is Required 	|
 | :--	| :--	| :- 	|
@@ -20738,8 +22891,9 @@ In addition to set simple property values, the UpdateDomain action can also set 
 | company 	| xs:string 	| false 	|
 | website 	| xs:string 	| false 	|
 | emailAddress 	| xs:string 	| false 	|
+| homeRegion 	| xs:string 	| false 	|
 
-## Action Steps ##
+#### Action Steps ####
 
 | Step Name 	| Step Description 	| Is Retryable 	|
 | -----------	| ------------------	| -------------	|
@@ -20748,28 +22902,29 @@ In addition to set simple property values, the UpdateDomain action can also set 
 | UpdateSalesforceAccount 	| 	| false 	|
 | UpdateZuoraAccount 	| Update the Zuora Account that corresponds to the specified UMS Domain instance. 	| true 	|
 
-## Constraints ##
+#### Constraints ####
 
 N/A
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 1. Following execution the KMS Tenant ID will be stored in the KMS_TENANT field. _(UpdateKmsDomain)_
-1. ZUORA_DOMAIN_ACCOUNT is set with the Zuora AccountID for the corresponding Domain instance. _(UpdateZuoraAccount)_# UpdateTenant
+1. ZUORA_DOMAIN_ACCOUNT is set with the Zuora AccountID for the corresponding Domain instance. _(UpdateZuoraAccount)_
+### UpdateTenant <a id="updatetenant"></a>
 
-## Description ##
+#### Description ####
 
 Change the name and/or description for an existing Tenant in both UMS and Zuora.
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 **System Admin, Domain Admin**
 
-## Examples ##
+#### Examples ####
 
 	http://host:port/v2.0/HP-IDM/v1.0/action/updatetenant
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type	| Is Required	|
 | ---------------	| ------------------	| -------------	|
@@ -20778,7 +22933,7 @@ Change the name and/or description for an existing Tenant in both UMS and Zuora.
 | description 	| xs:string 	| false 	|
 | status 	| xs:string 	| false	|
 
-## Action Steps ##
+#### Action Steps ####
 | Step Name 	| Step Description 	| Is Retryable 	|
 | ---------- 	| ----------------- 	| ------------ 	|
 | FindUmsTenant 	| 	| 	|
@@ -20786,19 +22941,20 @@ Change the name and/or description for an existing Tenant in both UMS and Zuora.
 | UpdateZuoraTenantAccount 	| Update the tenant's name and/or description in Zuora. 	| **true** 	|
 
 
-## Constraints ##
+#### Constraints ####
 
 1. tenantId must be valid.
 1. tenantName must be unique.
 1. If Zuora cannot be accessed than this Action Step will be retried at a future time.
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 1. The tenantId for the created Tenant.
 1. ZUORA_TENANT_ACCOUNT will contain the Zuora Account ID.
-## UpdateUser
 
-## Description ##
+### UpdateUser <a id="updateuser"></a>
+
+#### Description ####
 
 Update the properties of the specified User. Property changes are propagated to all internal (UMS, KMS) and external (Salesforce) services.
 
@@ -20815,11 +22971,11 @@ If the user modified their email address then a notification email to the old an
 
 
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 **System Administration, Domain Administration, Self-Service**
 
-## Examples ##
+#### Examples ####
 
 	POST http://host:port/v2.0/HP-IDM/v1.0/action/updateuser HTTP/1.1
 	Accept: application/json
@@ -20853,7 +23009,7 @@ If the user modified their email address then a notification email to the old an
 		}
 	}
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type	| Is Required 	|
 | -----------	| ------------------	| -------------	|
@@ -20888,8 +23044,9 @@ If the user modified their email address then a notification email to the old an
 | corporateProxy 	| xs:boolean 	| false 	|
 | highRiskCountry 	| xs:boolean 	| false 	|
 | highRiskEmail 	| xs:boolean 	| false 	|
+| homeRegion 	| xs:string 	| false 	|
 
-## Action Steps ##
+#### Action Steps ####
 | Step Name 	| Step Description 	| Is Retryable 	|
 | -- 	| -- 	|
 | UpdateUmsUser 	| Update the property values for a given User in the UMS. 	| false 	|
@@ -20898,19 +23055,19 @@ If the user modified their email address then a notification email to the old an
 | UpdateZuoraContact 	| If the given UMS User is also a Zuora Contact, then update the corresponding Zuora Contact with all the current User properties. By default, only the Domain Admin has a corresponding Zuora Contact. 	| true 	|
 | SendEmailUpdateEmails 	| If the UMS user has modified their email address then send a notification email to the old and new email address. \\ 	| true 	|
 
-## Constraints ##
+#### Constraints ####
 
 1. The user "status" value can only be updated by the SA or DA. _UpdateUmsUser_
 1. Once a KMS User and Keys is marked as deleted it cannot be reenabled. _UpdateKmsUser_
 1. Action is ignored if UMS User has no BillingID. _UpdateZuoraContact_
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 1. Following execution the KMS User ID will be stored in the KMS_USER field. _UpdateKmsUser_
 1. Following execution the SF ContactID will be stored in the SALESFORCE_CONTACT field. _UpdateSalesforceContact_
 1. If the users email address was changed then **mailToOldAddress** and **mailToNewAddress** will be set to the respective addresses.
 
-## Email Update Email ##
+#### Email Update Email ####
 
 If the user changes their email address then a confirmation is sent to both the old and new address. Email messages are stored in the database. The email update email is stored under the identifier **"EMAIL_UPDATED_EMAIL_ID"**. Before being sent each email is processed by replacing text of the for %<keyword>% with a specific value. Replacement values available in the welcome email are listed in the following table.
 
@@ -20931,17 +23088,18 @@ If the user changes their email address then a confirmation is sent to both the 
 | %website% 	| user.website 	|
 | %emailAddress% 	| user.emailAddress 	|
 
-After submission of a each email a **CtrlSvcsContactActivity** Salesforce object is created. The first with **ActvityType**="EmailUpdatedToOldAddress", the second with **ActvityType**="EmailUpdatedToNewAddress".# UserNameRecovery
+After submission of a each email a **CtrlSvcsContactActivity** Salesforce object is created. The first with **ActvityType**="EmailUpdatedToOldAddress", the second with **ActvityType**="EmailUpdatedToNewAddress".
+### UserNameRecovery <a id="usernamerecovery"></a>
 
-## Description ##
+#### Description ####
 
 This action causes an email to be sent to the user that contains a list of all usernames associated with the provided email address.
 
-## PrivilegeLevel ##
+#### PrivilegeLevel ####
 
 Anonymous
 
-## Examples ##
+#### Examples ####
 
 	POST http://host:port/v2.0/HP-IDM/v1.0/action/UserNameRecovery HTTP/1.1
 	Accept: application/json
@@ -20956,27 +23114,27 @@ Anonymous
 		</actionParams>
 	</JobTicket>
 
-## Action Parameters ##
+#### Action Parameters ####
 
 | Parameter Name	| Parameter Type 	| Is Required 	|
 | :--	| :--	| :- 	|
 | email 	| xs:string 	| **true** 	|
 
-## Action Steps ##
+#### Action Steps ####
 
 | Step Name 	| Step Description 	| Is Retryable 	|
 | -----------	| ------------------	| -------------	|
 | SendUserNameRecoveryEmail	| Send the list of usernames by email. 	| true 	|
 
-## Constraints ##
+#### Constraints ####
 
 1. There must be at least one username associated with the provided email address, or an error will be generated.
 
-## JobTicket Results ##
+#### JobTicket Results ####
 
 1. No parameters are returned since the username list is in the email.
 
-## Email Integration ##
+#### Email Integration ####
 
 After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
 
@@ -21019,6 +23177,7 @@ This will expand to:
 	<ul>
 	<li>username1</li><li>username2</li>...
 	</ul>
+
 
 ---
 

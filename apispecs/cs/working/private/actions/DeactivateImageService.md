@@ -1,5 +1,5 @@
-## DeactivateImageService
-#### POST [HPKeystoneExtensionBaseURI]/action/{action path}
+# DeactivateImageService
+## POST [HPKeystoneExtensionBaseURI]/action/{action path}
 *Privilege Level: System Administrators, Domain Administrators*  
  
 *Constraints:*  

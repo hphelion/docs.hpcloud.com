@@ -1,5 +1,5 @@
-## ActivateObjectStorage
-#### POST [HPKeystoneExtensionBaseURI]/action/activateobjectstorage
+# ActivateObjectStorage
+## POST [HPKeystoneExtensionBaseURI]/action/activateobjectstorage
 *Privilege Level: System Administrators, Domain Administrators*  
  
 *Constraints:*  

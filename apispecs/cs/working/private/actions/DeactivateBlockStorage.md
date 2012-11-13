@@ -1,5 +1,5 @@
-## DeactivateBlockStorage
-#### POST [HPKeystoneExtensionBaseURI]/action/deactivateblockstorage
+# DeactivateBlockStorage
+## POST [HPKeystoneExtensionBaseURI]/action/deactivateblockstorage
 *Privilege Level: System Administrators, Domain Administrators*  
  
 *Constraints:*  

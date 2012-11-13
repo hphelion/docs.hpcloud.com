@@ -1,5 +1,5 @@
-## DeactivateCompute
-#### POST [HPKeystoneExtensionBaseURI]/action/{action path}
+# DeactivateCompute
+## POST [HPKeystoneExtensionBaseURI]/action/{action path}
 *Privilege Level: System Administrators, Domain Administrators*  
  
 *Constraints:*  

@@ -1,5 +1,5 @@
-## ActivateCdn
-#### POST [HPKeystoneExtensionBaseURI]/action/activatecdn
+# ActivateCdn
+## POST [HPKeystoneExtensionBaseURI]/action/activatecdn
 *Privilege Level: System Administrators, Domain Administrators*  
 *Constraints:* 
  

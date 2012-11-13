@@ -1,5 +1,5 @@
-## Cancel Account
-#### POST [HPKeystoneExtensionBaseURI]/action/cancelaccount
+# Cancel Account
+## POST [HPKeystoneExtensionBaseURI]/action/cancelaccount
 *Privilege Level: System Admin*  
  
 *Constraints:*  

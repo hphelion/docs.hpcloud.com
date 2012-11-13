@@ -1,5 +1,5 @@
-## DeactivateObjectStorage
-#### POST [HPKeystoneExtensionBaseURI]/action/deactivateobjectstorage
+# DeactivateObjectStorage
+## POST [HPKeystoneExtensionBaseURI]/action/deactivateobjectstorage
 *Privilege Level: System Administrators, Domain Administrators*  
  
 *Constraints:*  

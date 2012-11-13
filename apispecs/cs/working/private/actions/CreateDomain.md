@@ -1,5 +1,5 @@
-## CreateDomain - SEVERELY DEPRECATED - TO BE REMOVED IN CONSER-4098
-#### POST [HPKeystoneExtensionBaseURI]/action/createdomain
+# CreateDomain - SEVERELY DEPRECATED - TO BE REMOVED IN CONSER-4098
+## POST [HPKeystoneExtensionBaseURI]/action/createdomain
 *Privilege Level: System Admin*  
  
 *Constraints:*  

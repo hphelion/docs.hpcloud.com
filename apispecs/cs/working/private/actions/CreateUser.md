@@ -1,6 +1,6 @@
 # CreateUser
-
-## Description ##
+## POST [HPKeystoneExtensionBaseURI]/action/createuser
+*Privilege Level: System Admin*
 
 First, create a new User within the specified Domain in Control Services, and create accesskeys for the User. Next, create a new Contact for this user in Salesforce beneath the Salesforce Account of the Domain. Finally, if there is not already a Zuora Contact, then create one based on the user info.
 

@@ -107,15 +107,23 @@ def read_file(filename=None):
         bail("Error: unable to read %s" % (filename))
 
 
-def grep_all_mds(dirname=None):
-    content = ''
+def grep_all_mds(rootdir, subdirs):
+    content = {}
     try:
-        dlist = os.listdir(dirname)
-        for fname in sorted(dlist):
-            if fname.endswith('.md'):
-                verbose('reading %s' % (fname))
-                content = content + read_file(os.path.join(dirname, fname))
-        return content
+        for subdir in subdirs:
+            dirname = os.path.join(rootdir, subdir)
+            dlist = os.listdir(dirname)
+            for fname in dlist:
+                if fname.endswith('.md'):
+                    verbose('reading %s' % (fname))
+                    if fname in content:
+                        content[fname] = content[fname] + read_file(os.path.join(dirname, fname))
+                    else:
+                        content[fname] = read_file(os.path.join(dirname, fname))
+        md_content = []
+        for fname in sorted(content.keys()):
+            md_content.append(content[fname])
+        return string.join(md_content, '\n')
     except:
         bail("Error: unable to read %s" % (dirname))
 
@@ -135,6 +143,14 @@ def get_api_index_table(api_table, private_api=None):
         else:
             table.append('| %s | [%s](#%s) | %s | %s | %s |' % (
                 group, operation, operation_tag, verb, path, jx))
+    return string.join(table, '\n')
+
+
+def create_actions_index(action_names):
+    table = ['| Actions |']
+    table.append('| :------ |')
+    for (action_name, tag) in action_names:
+        table.append('| [%s](#%s) |' % (action_name, tag))
     return string.join(table, '\n')
 
 
@@ -159,18 +175,25 @@ def create_anchor_tag(s):
     return string.join(lower_word_list, '_')
 
 
-def create_actions_appendix(dirname):
-    contents = grep_all_mds(dirname)
+def create_actions_appendix(rootdir, subdirs):
+    contents = grep_all_mds(rootdir, subdirs)
+    action_names = []
     api_content = []
     for line in contents.split('\n'):
         if line.startswith('# '):
-            line = line.replace('#', '##')
-        #elif line.startswith('## '):
-        #    line = line.replace('##', '###')
+            line = line.replace('#', '')
+            action_name = line.strip()
+            action_name_tag = create_anchor_tag(action_name)
+            action_names.append((action_name, action_name_tag))
+            line = '### %s <a id="%s"></a>' % (action_name, action_name_tag)
+        elif line.startswith('## '):
+            line = line.replace('##', '####')
         api_content.append(line)
-    return string.join(api_content, '\n')
+    return '%s\n\n%s\n' % (create_actions_index(action_names),
+               string.join(api_content, '\n'))
+
             
-def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
+def create_cs_api_md(opt, outfile, rootdir, subdirs, chapter='4.4', private_api=None):
     if opt.outfile:
         outfile = opt.outfile
     intro_md = read_file('cs-api-intro.md')
@@ -178,7 +201,7 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
     if private_api:
         intro_md = read_file('cs-private-api-intro.md')
         end_md = read_file('cs-private-api-end.md')
-    contents = grep_all_mds(dirname)
+    contents = grep_all_mds(rootdir, subdirs)
     group_count = 0
     action_count = 0
     api_table = []
@@ -261,18 +284,18 @@ def create_cs_api_md(opt, outfile, dirname, chapter='4.4', private_api=None):
     output.write(intro_md)
     output.write(string.join(api_content, '\n'))
     if private_api:
-        action_appendix = create_actions_appendix(os.path.join(dirname, 'actions'))
+        action_appendix = create_actions_appendix(os.path.join(rootdir, 'private'), ['actions'])
         end_md = end_md.replace('{AVAILABLEACTIONS}', action_appendix)
     output.write(end_md)
     output.close()
 
 
 def create_cs_api_public_md(opt):
-    create_cs_api_md(opt, DEFAULT_CS_API_MD, 'public')
+    create_cs_api_md(opt, DEFAULT_CS_API_MD, os.path.dirname(os.path.abspath(__file__)), ['public'])
 
 
 def create_cs_api_private_md(opt):
-    create_cs_api_md(opt, DEFAULT_CS_API_INTERNAL_MD, 'private', private_api=True)
+    create_cs_api_md(opt, DEFAULT_CS_API_INTERNAL_MD, os.path.dirname(os.path.abspath(__file__)), ['public', 'private'], private_api=True)
 
 
 def convert_api_to_wiki_content(opt):
@@ -282,7 +305,7 @@ def convert_api_to_wiki_content(opt):
     return subprocess.check_output(['markdown2confluence', filename]) 
 
 
-def public_to_wiki(opt):
+def publish_to_wiki(opt):
     spacekey = "iaas"
     pagetitle = "CS APIs Markdown"
 
@@ -328,7 +351,7 @@ def main(argv=None):
         # make sure username and password are specified
         if not opt.wiki_user and not opt.wiki_password:
             bail("Error: wiki user name and password must be specified")
-        public_to_wiki(opt)
+        publish_to_wiki(opt)
 
 
 if __name__ == "__main__":

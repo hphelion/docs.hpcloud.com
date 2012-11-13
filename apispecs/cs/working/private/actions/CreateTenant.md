@@ -1,5 +1,5 @@
-## Create Tenant
-#### POST [HPKeystoneExtensionBaseURI]/action/createtenant
+# Create Tenant
+## POST [HPKeystoneExtensionBaseURI]/action/createtenant
 *Privilege Level: System Admin, Domain Admin*  
  
 *Constraints:*  
