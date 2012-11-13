@@ -20389,7 +20389,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |serviceName|xs:string|true|
 |domainId|xs:string|false|
 |tenantName|xs:string|true|
@@ -20454,7 +20454,7 @@ curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X POST -H 
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |FindUmsTenant|Retrieve an existing Tenant from the UMS based on the Name of the Tenant|false|
 |AuthorizeProvisioningAction|Perform authorisation checks prior to provisioning.  Essentially validate that the user attempting to provision the tenant is actually authorised to perform this action.  The *ITLSessionContext* associated with the incoming request thread is used for authorisation checks.|false|
 |CreateZuoraSubscription|&nbsp;|false|
@@ -20489,7 +20489,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |serviceName|xs:string|true|
 |domainId|xs:string|false|
 |tenantName|xs:string|true|
@@ -20555,7 +20555,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |FindUmsTenant|Retrieve an existing Tenant from the UMS based on the Name of the Tenant.|false|
 |AuthorizeProvisioningAction|Perform authorization checks prior to provisioning. Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action. The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
 |CreateZuoraSubscription| |false|
@@ -20597,7 +20597,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |serviceName|xs:string|true|
 |domainId|xs:string|true|
 |tenantName|xs:string|true|
@@ -20665,7 +20665,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:-----------------------|:------------------------------|:--------------------------|
 |CreateUmsTenant|Create a new or retrieve an existing Tenant from the UMS based on the Name of the Tenant.|false|
 |AuthorizeProvisioningAction|Perform authorization checks prior to provisioning. Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action. The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
 |CreateZuoraSubscription| |false|
@@ -20709,7 +20709,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |domainId|xs:string|true|
 |tenantId|xs:string|true|
 |serviceName|xs:string|true|
@@ -20799,7 +20799,7 @@ TBD
 
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |CreateUmsTenant|Create a new or retrieve an existing Tenant from the UMS based on the Name of the Tenant.|false|
 |AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
 |CreateZuoraSubscription||false|
@@ -20839,7 +20839,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |serviceName|xs:string|true|
 |domainId|xs:string|true|
 |tenantName|xs:string|true|
@@ -20907,7 +20907,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |CreateUmsTenant|Create a new or retrieve an existing Tenant from the UMS based on the Name of the Tenant.|false|
 |AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
 |CreateZuoraSubscription||false|
@@ -21182,7 +21182,7 @@ TBD
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |name|xs:string|true|
 |state|xs:string|false|
 |addressLine1|xs:string|false|
@@ -21242,7 +21242,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |CreateUmsDomain|Create a new UMS Domain object.|false|
 |CreateKmsDomain|Create a new KMS Tenant corresponding to a UMS Domain.|false|
 |CreateSalesforceAccount|Create a new Salesforce Account. No Salesforce Contact is created with the new Account.|true|
@@ -21271,7 +21271,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |tenantName|xs:string|true|
 |domainId|xs:string|true|
 |description|xs:string|false|
@@ -21324,7 +21324,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |CreateUmsTenant|Create a new UMS Tenant object.|false|
 |CreateZuoraTenantAccount|Create a Zuora Account that is a child of the Domain Account|true|
 
@@ -21479,7 +21479,7 @@ Deactivate specified Tenant from Block Storage service.
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |serviceName|xs:string|true|
 |domainId|xs:string|false|
 |tenantName|xs:string|true|
@@ -21546,7 +21546,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
 |DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|
 |UnassociateRoles|Remove assigned service activation roles from a specified user and/or from a specified group|false|
@@ -21581,7 +21581,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |serviceName|xs:string|true|
 |domainId|xs:string|false|
 |tenantName|xs:string|true|
@@ -21648,7 +21648,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
 |DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|
 |UnassociateRoles|Remove assigned service activation roles from a specified user and/or from a specified group|false|
@@ -21682,7 +21682,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |serviceName|xs:string|true|
 |domainId|xs:string|false|
 |tenantName|xs:string|true|
@@ -21749,7 +21749,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
 |DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|
 |UnassociateRoles|Remove assigned service activation roles from a specified user and/or from a specified group|false|
@@ -21784,7 +21784,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type| Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |domainId|xs:string|false|
 |tenantId|xs:string|true|
 |serviceName|xs:string|true|
@@ -21872,7 +21872,7 @@ TBD
 
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
 |DeactivateZuoraSubscription|Cancel Zuora subscriptions for a service that is being deactivated.|false|
 |DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|
@@ -21909,7 +21909,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |serviceName|xs:string|true|
 |domainId|xs:string|false|
 |tenantName|xs:string|true|
@@ -21976,7 +21976,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
 |DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|
 |UnassociateRoles|Remove assigned service activation roles from a specified user and/or from a specified group|false|
@@ -22016,7 +22016,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-------------|:-------------|:----------|
+|:----------------------------|:----------------------------|:-------------------------|
 |tenantId|xs:string|true|
 |serviceName|xs:string|true|
 |regionCode|xs:string|false|
@@ -22104,7 +22104,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:--------|:---------------|:-----------|
+|:-----------------------|:------------------------------|:--------------------------|
 |FindUmsTenant|Retrieve an existing Tenant from the UMS based on the ```tenantId``` or the ```tenantName``` of the Tenant.|false|
 |DeactivateZuoraSubscription|Cancel Zuora subscriptions for a service that is being deactivated.|false|
 |DeprovisionService|Deprovision the tenant to specified external service.Currently, the tenant is only deprovisioned from Object Storage (Swift). Other services do not require any provisioning actions beyond the CS DB.Note: Deprovisioning rollback from Object Storage is not supported.|false|
@@ -22138,7 +22138,7 @@ TBD
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |password|xs:string|true|
 |secretKey|xs:string|false|
 |tenantId|xs:string|false|
@@ -22206,7 +22206,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |CreateUmsUserAndDomain|Create a new UMS User and Domain. The User will be configured as the Administrator for the new Domain.|false|
 |MigrateUmsUser|No description available.|false|
 |CreateKmsDomain|Create a new KMS Tenant corresponding to a UMS Domain.|false|
@@ -22704,7 +22704,7 @@ Note that the **EmailVerification** action must handle validations from this act
 **emailValidationType Values**
 
 | Value	| Effect 	|
-| ------	| --------	|
+| :--------------	| :---------------	|
 | None 	| Perform no email validation. 	|
 | EmailVerification 	| Send verification email with a link that activates the user.	|
 | EmailVerificationWithPwdCollection 	| Send verification email with a link that activates the user and capture a password .	|
@@ -22712,16 +22712,16 @@ Note that the **EmailVerification** action must handle validations from this act
 **customerType Values**
 
 | Value	| Effect 	|
-| ------	| --------	|
+| :---------------	| :---------------	|
 | Gratis Account	| 	|
 | Self Service	| 	|
 | HP Internal	| 	|
-| Corporate	| Causes the Zuora defaultPaymentMethod to be set to "Other" on the Zuora account.	|
+| Corporate	| Causes the Zuora defaultPaymentMethod to be set to "Other" and tax exemption to "No" on the Zuora account.	|
 
 #### Action Steps ####
 
 | Step Name 	| Step Description	| Is Retryable 	|
-| -----------	| -----------------	| --------------	|
+| :-----------	| :-----------------	| --------------	|
 | CreateUmsUserAndDomain 	| Create a new UMS User and Domain. The User will be configured as the Administrator for the new Domain. 	| false 	|
 | CreateKmsDomain 	| Create a new KMS Tenant corresponding to a UMS Domain. 	| false 	|
 | CreateKmsUser 	| Create a new KMS User Account corresponding to a UMS User. 	| false 	|
@@ -22754,7 +22754,7 @@ Note that the **EmailVerification** action must handle validations from this act
 After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
 
 | Templates Used	| CtrlSvcsContactActivity Type 	|
-| --------------- 	| ---------------------------- 	|
+| :--------------- 	| :---------------------------- 	|
 | WELCOME_TO_CLOUD_EMAIL_ID 	| WelcomeEmailSent	|
 | EMAIL_VERIFICATION_EMAIL_ID 	| VerificationEmailSent	|
 | EMAIL_VERIFICATION_EMAIL_WITH_PWD_COLLECT_EMAIL_ID	| VerifEmailWithPwdCollectSent	|
@@ -22762,7 +22762,7 @@ After submission of an email a **CtrlSvcsContactActivity** Salesforce object is 
 Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
 
 | Email Text 	| Replaced With 	|
-| ----------- 	| --------------	|
+| :----------- 	| :--------------	|
 | %accountId% 	| user.accountId 	|
 | %username% 	| user.username 	|
 | %firstName% 	| user.firstName 	|
@@ -22794,7 +22794,7 @@ This action will create a user in system domain with required privilege to regis
 #### Action Parameters ####
 
 | Parameter Name	| Parameter Type 	| Is Required 	|
-| :--	| :--	| :- 	|
+| :-------------	| :-------------	| :------------ 	|
 | password 	| xs:string 	| **true**	|
 | emailAddress 	| xs:string 	| **true** 	|
 | username 	| xs:string 	| **true** 	|
@@ -22823,6 +22823,7 @@ This action will create a user in system domain with required privilege to regis
 1. KMS_USER holds the ID for the UserAccount created in the KMS. _CreateKmsUser_
 1. KMS_USER_KEY holds the ID for the UserAccessKeys created in KMS. _CreateKmsUserKeys_
 1. SALESFORCE_CONTACT will contain the Salesforce Contact ID. _CreateSalesforceContactAndAccount_
+
 ### UpdateDomain <a id="updatedomain"></a>
 
 #### Description ####
@@ -22832,7 +22833,7 @@ Update the properties of the specified Domain. Property changes are propagated t
 In addition to set simple property values, the UpdateDomain action can also set the status for a Domain.
 
 | Status Value 	| Privilege Level 	| Description 	|
-| -- 	| -- 	| -- 	|
+| -------------	| ---------------------	| ------------------------------ |
 | ENABLED 	| SA 	| Default state to an active account 	|
 | SUSPENDED_3 	| SA 	| No user in a suspended domain can log into their account. 	|
 | DELETED 	| SA 	| Soft delete. Domain data is not purged. Can be re-ENABLED only by SA. 	|
@@ -22877,7 +22878,7 @@ In addition to set simple property values, the UpdateDomain action can also set 
 #### Action Parameters ####
 
 | Parameter Name	| Parameter Type 	| Is Required 	|
-| :--	| :--	| :- 	|
+| :--------------------- | :------------- | :------------- |
 | name 	| xs:string 	| false 	|
 | state 	| xs:string 	| false 	|
 | status 	| xs:string 	| false 	|
@@ -22896,7 +22897,7 @@ In addition to set simple property values, the UpdateDomain action can also set 
 #### Action Steps ####
 
 | Step Name 	| Step Description 	| Is Retryable 	|
-| -----------	| ------------------	| -------------	|
+| -----------	| ------------------------------------------- | -------------	|
 | UpdateUmsDomain 	| 	| false 	|
 | UpdateKmsDomain 	| Update the state of a KMS Tenant to match that of its corresponding UMS Domain. 	| false 	|
 | UpdateSalesforceAccount 	| 	| false 	|
@@ -22910,6 +22911,7 @@ N/A
 
 1. Following execution the KMS Tenant ID will be stored in the KMS_TENANT field. _(UpdateKmsDomain)_
 1. ZUORA_DOMAIN_ACCOUNT is set with the Zuora AccountID for the corresponding Domain instance. _(UpdateZuoraAccount)_
+
 ### UpdateTenant <a id="updatetenant"></a>
 
 #### Description ####
@@ -22963,7 +22965,7 @@ In addition to set simple property values, the UpdateUser action can also set th
 If the user modified their email address then a notification email to the old and new address.
 
 | Status Value 	| Privilege Level 	| Description 	|
-| -- 	| -- 	| -- 	|
+| --------------|  ------------ 	| ----------------------- 	|
 | ENABLED 	| SA 	| Default state to an active user. 	|
 | DISABLED 	| DA 	| Disabled users can not log into their accounts. 	|
 | SUSPENDED_3 	| SA 	| Disabled users can not log into their accounts. Can be re-ENABLED only by SA. 	|
@@ -23089,6 +23091,7 @@ If the user changes their email address then a confirmation is sent to both the 
 | %emailAddress% 	| user.emailAddress 	|
 
 After submission of a each email a **CtrlSvcsContactActivity** Salesforce object is created. The first with **ActvityType**="EmailUpdatedToOldAddress", the second with **ActvityType**="EmailUpdatedToNewAddress".
+
 ### UserNameRecovery <a id="usernamerecovery"></a>
 
 #### Description ####
@@ -23117,7 +23120,7 @@ Anonymous
 #### Action Parameters ####
 
 | Parameter Name	| Parameter Type 	| Is Required 	|
-| :--	| :--	| :- 	|
+| :------------	| :--------	| :------- 	|
 | email 	| xs:string 	| **true** 	|
 
 #### Action Steps ####
@@ -23139,13 +23142,13 @@ Anonymous
 After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
 
 | Templates Used	| CtrlSvcsContactActivity Type 	|
-| -- 	| -- 	|
+| -------------- 	| -------------- 	|
 | USERNAME_RECOVERY_EMAIL_ID 	| UserNameRecoveryEmail	|
 
 Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
 
 | Email Text 	| Replaced With 	|
-| -- 	| -- 	|
+| -------------- 	| -------------- 	|
 | %accountId% 	| user.accountId 	|
 | %username% 	| user.username 	|
 | %firstName% 	| user.firstName 	|
@@ -23177,6 +23180,7 @@ This will expand to:
 	<ul>
 	<li>username1</li><li>username2</li>...
 	</ul>
+
 
 
 ---
