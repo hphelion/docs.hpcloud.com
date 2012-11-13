@@ -103,16 +103,22 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 **Admin URI**: N/A
 
-| Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
-| :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| Tenant | List Tenants | GET | /tenants?limit=pagesize&marker=tenantId | Y/Y | SS |
-| Token | Authenticate | POST | /tokens | Y/Y | Anon |
-| Token | Rescope Token | POST | /tokens | Y/Y | SS |
-| Token | Revoke Token | DELETE | /HP-IDM/v1.0/tokens/<tokenId> | Y/Y | SA,DA,SS |
-| Token | Swift Legacy Authentication | GET | /v1.0 | Y/Y | Anon |
-| Token | Swift Legacy Authentication | GET | /v1.1 | Y/Y | Anon |
-| Token | Swift Legacy Authentication | GET | /auth/v1.0 | Y/Y | Anon |
-| Token | Swift Legacy Authentication | GET | /auth/v1.1 | Y/Y | Anon |
+| Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? |
+| :------- | :------------------- | :---------- | :--------------------- | :---------------- |
+| Tenants | [List Tenants](#list_tenants) | GET | /tenants | Y/Y |
+| Tokens | [Authenticate](#authenticate) | POST | /tokens | Y/Y |
+| Tokens | [Rescope Token](#rescope_token) | POST | /tokens | Y/Y |
+| Tokens | [Revoke Token](#revoke_token) | DELETE | /HP-IDM/v1.0/tokens/{tokenId} | Y/Y |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.0 | Y/Y |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /v1.1 | Y/Y |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.0 | Y/Y |
+| Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.1 | Y/Y |
+| User Access Keys | [Create User Access Key](#create_user_access_key) | POST | /HP-IDM/v1.0/accesskeys | Y/Y |
+| User Access Keys | [Delete User Access Key](#delete_user_access_key) | DELETE | /HP-IDM/v1.0/accesskeys/{accesskeyId}  | Y/Y |
+| User Access Keys | [Get Access Keys](#get_access_keys) | GET | /HP-IDM/v1.0/accesskeys | Y/Y |
+| User Access Keys | [Get An Access Key](#get_an_access_key) | GET | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
+| User Access Keys | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y |
+| User Access Keys | [Update User Access Key](#update_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
 
 ## 4.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
@@ -124,7 +130,7 @@ The service is exposed in the service catalog, as shown in the following fragmen
 *The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
 
-### 4.4.1 Tenant
+### 4.4.1 Tenants
 
 Tenant is a collection of services, and associated with zero or more users who have access to these services via role references.
 
@@ -145,9 +151,8 @@ N/A
 None.
 
 
-#### 4.4.1.1 List Tenants
-#### GET /tenants?limit=pagesize&marker=tenantId
-*Privilege Level: SS*
+#### 4.4.1.1 <a id="list_tenants"></a>List Tenants####
+#### GET /tenants
 
 This API returns a listing of all tenants for which the holder of the provided token has a role assignment. If the user is not a valid, an error is returned.
 
@@ -297,15 +302,16 @@ Date: Thu, 25 Aug 2011 23:33:19 GMT
 
 **Error Response**
 
-*Enumerate all the possible error status codes and any content that is returned.*
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
 
 **Response Data**
 
@@ -345,9 +351,8 @@ curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a9295
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-### 4.4.2 Token
+### 4.4.2 Tokens
 
 A yummy cookie one uses to bribe the authorization monster.
 
@@ -368,9 +373,8 @@ N/A
 None.
 
 
-#### 4.4.2.1 Authenticate
+#### 4.4.2.1 <a id="authenticate"></a>Authenticate####
 #### POST /tokens
-*Privilege Level: Anon*
 
 This API is used to authenticate a user to be able to use an OpenStack service. The result of a successful authentication is a token to be used with service requests. A username and password or access/secret key credentials are given as input to this interface. If authentication succeeds, the response will include an authentication token and service catalog ( list of available services for that user ). Tokens are valid for 12 hours. Issued tokens can become invalid in two cases:
 
@@ -379,11 +383,11 @@ This API is used to authenticate a user to be able to use an OpenStack service. 
 
 Besides using a username and password, another way to authenticate is using symmetric keys. Symmetric keys are user access key and secret key pairs provisioned for user account. In this type of credential data, request body is expected to contain an access key and a secret key information belonging to the user. Once those keys are verified, a new token is created. In this type of authentication, the only change is in expected request body data (please see related example below). There is no difference in response format/content whether authentication is done using password credential data or access key credential data.
 
-Service Catalog:
+##### Service Catalog:
 
 In case of un-scoped token request, the service catalog is going to include global active endpoint templates as endpoints in its data. In case of scoped token request, the service catalog is going to include tenant specific endpoints as well as global active endpoint templates as endpoints.
 
-Scoped Tokens:
+##### Scoped Tokens:
 
 A token scoped to a tenant can be obtained by providing either a tenantName or a tenantId. This will also return service endpoints for other services associated with the tenant in question. An unscoped token will likely not contain service endpoints except for those for the Identity Service. Note that if tenant information is unknown, an unscoped token can be obtained and then a list of tenants obtained. Tenant information can also be found in the Management Console.
 
@@ -488,8 +492,6 @@ Content-Length: 219
 ```
 
 **Success Response**
-
-{Specify the status code and any content that is returned.}
 
 **Status Code**
 
@@ -669,10 +671,12 @@ Date: Fri, 14 Oct 2011 21:18:40 GMT
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Response Data**
 
@@ -720,18 +724,15 @@ curl -X POST -H "Content-Type: application/json"
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-
-#### 4.4.2.2 Rescope Token
+#### 4.4.2.2 <a id="rescope_token"></a>Rescope Token####
 #### POST /tokens
-*Privilege Level: SS*
 
 This API provides the ability to re-scope a valid token with another tenant. An existing unexpired token, regardless of its currently scoped or not, can be scoped to another tenant as long as the user has valid association with that tenant.
 
 Re-scoping of token can be done from 1) unscoped token to a scoped token for specific tenant 2) scoped token from one tenant to another tenant 3) scoped token to unscoped token (with no tenantId and tenantName specified in request). Re-scoping of token does not alter the token expiration time and same token id is returned in response.
 
-Service Catalog:
+##### Service Catalog:
 
 In case of un-scoped token request, the service catalog is going to include global active endpoint templates as endpoints in its data. In case of scoped token request, the service catalog is going to include tenant specific endpoints as well as global active endpoint templates as endpoints.
 
@@ -884,14 +885,15 @@ Date: Wed, 26 Oct 2011 13:46:53 GMT
 
 **Error Response**
 
-
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
 
 **Response Data**
 
@@ -926,12 +928,9 @@ curl -k -H "Content-Type: application/json" -d '{"auth":{"tenantName":"HP Swift 
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-
-#### 4.4.2.3 Revoke Token
-#### DELETE /HP-IDM/v1.0/tokens/<tokenId>
-*Privilege Level: SA,DA,SS*
+#### 4.4.2.3 <a id="revoke_token"></a>Revoke Token####
+#### DELETE /HP-IDM/v1.0/tokens/{tokenId}
 
 This API is used to revoke an authentication token. This operation does not require a request body. Once a token has been revoked, attempts to validate the token via GET /tokens/tokenId will fail with a 404 (item not found) as the token no longer exists. Trying revoke a non existing token, including one which has expired will also return a 404 (item not found).
 
@@ -961,9 +960,12 @@ This call does not require a request body.
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+
 
 **Response Data**
 
@@ -990,18 +992,14 @@ curl -k -XDELETE https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.4 Swift Legacy Authentication
+#### 4.4.2.4 <a id="swift_legacy_authentication"></a>Swift Legacy Authentication####
 #### GET /v1.0
-*Privilege Level: Anon*
 
 #### GET /v1.1
-*Privilege Level: Anon*
 
 #### GET /auth/v1.0
-*Privilege Level: Anon*
 
 #### GET /auth/v1.1
-*Privilege Level: Anon*
 
 Pre-Keystone (aka auth v2.0), Openstack services rely on disparate authentication mechanisms to authenticate their services.  For example, Swift uses swauth, while Nova uses novaauth.  The v1/v1.1 style of authentication relies on custom HTTP headers (specific to each service) to communicate authentication data, rather than relying on well-defined XML/JSON documents that can be validated via XSDs.  With the release of Diablo, most Openstack services have switched to using Keystone API completely, with the exception of the Swift CLI tool.  To provide backward-compatibility for this particular tool, CS (as well as the FOSS Keystone) provides this API. 
 
@@ -1140,11 +1138,14 @@ Date: Tue, 03 Jan 2012 20:47:43 GMT
 
 **Status Code**
 
-400 - Bad Request
-401 - Unauthorized
-403 - Forbidden
-500 - Internal Server Error
-503 - Service Unavailable
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request.   |
+
 
 **Response Data**
 
@@ -1176,7 +1177,1048 @@ curl -s -k -H "X-Auth-User: 62424047631429:jdoe" -H "X-Auth-Key: secrete" -H "Ac
 
 **Additional Notes**
 
-{Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
+
+### 4.4.3 User Access Keys
+
+The User Access Key REST API provides the ability to manage user access keys.
+
+**Status Lifecycle**
+
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
+
+
+#### 4.4.3.1 <a id="create_user_access_key"></a>Create User Access Key####
+#### POST /HP-IDM/v1.0/accesskeys
+
+
+
+**Request Data**
+
+The optional data parameters are algorithm, domainId, keyLength, status, userId, validFrom, and validTo.
+
+**URL Parameters**
+
+There are no URL parameters for this operation.
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+* *algorithm* (Optional) - String - the algorithm the key will be used with. One of 
+* *domainId* - String - domain identifier of the owner of the key.
+* *keyLength* (Optional) - Integer - Length of the key in bits.
+* *status* (Optional) String - the key status. One the values (active, inactive). Defaults to active if not specified.
+* *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
+* *validFrom* (Optional) - DateTime - The date the key becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+* *validTo* (Optional) - DateTime - The date the key becomes invalid specified in the following form "YYYY-MM-DDThh:mm:ss" 
+
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+JSON
+
+```
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e7b748be4b0600fec3d2a24
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 235
+ 
+{ "accessKey":
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "domainId": "00000000001001",
+         "otherAttributes": {},
+         "status": "active",
+         "userId": "00000000003002"
+       }
+}
+```
+
+XML
+
+```
+POST https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e69969de4b0a8f279022d55
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 259
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accessKey userId="000000003002" domainId="000000001001" status="active" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0">
+<algorithm>HmacSHA1</algorithm>
+<keyLength>64</keyLength>
+</accessKey>
+```
+
+**Success Response**
+
+**Status Code**
+
+201 - Created
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 376
+Date: Thu, 22 Sep 2011 18:01:17 GMT
+ 
+{
+  "accessKey" : {
+    "algorithm" : "HmacSHA1",
+    "keyLength" : 64,
+    "secretKey" : "pXmYG556MjD",
+    "accessKeyId" : "KNGTV6EFKLPYE8LXF4VL",
+    "createdOn" : 1316714474259,
+    "domainId" : "00000000001001",
+    "otherAttributes" : {
+    },
+    "status" : "active",
+    "userId" : "00000000003002",
+    "validFrom" : 1316714474000,
+    "validTo" : 1632074474000
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=C20FB3A7F8BE4A7EF0EA7BE232327FE6; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 448
+Date: Fri, 09 Sep 2011 04:32:07 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><accessKey xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" accessKeyId="FG54K8NB67KHASRF6KY1" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T21:32:04.000-07:00" validTo="2021-09-05T21:32:04.000-07:00" createdOn="2011-09-08T21:32:04.937-07:00">
+   <algorithm>HmacSHA1</algorithm>
+   <keyLength>64</keyLength>
+   <secretKey>iwv//jFjJ2E</secretKey>
+</accessKey>
+```
+
+**Error Response**
+
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -X POST -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys" -d '{
+  "accessKey" : {
+    "algorithm" : "HmacSHA1",
+    "keyLength" : 240,
+    "domainId" : "11180052618906",
+    "otherAttributes" : {
+    },
+    "status" : "active",
+    "userId" : "84463950217213"
+  }}'
+```
+
+**Additional Notes**
+
+
+
+#### 4.4.3.2 <a id="delete_user_access_key"></a>Delete User Access Key####
+#### DELETE /HP-IDM/v1.0/accesskeys/{accesskeyId} 
+
+Delete a user access key.
+
+**Request Data**
+
+The accesskeyId url path parameter is required. The userId query parameter is only required to delete an access key for a user other than the requester.
+
+**URL Parameters**
+
+* *accesskeyId* (Required) - URL path parameter - user access key identifier string
+* *userId* (Optional) - Query Parameter - User identifier of the access key owner. If not specified then defaults to userId of the requester.
+
+**Data Parameters**
+
+This call does not require a request body.
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+**Success Response**
+
+**Status Code**
+
+204 - No Content
+
+**Response Data**
+
+This call does not return a response body on success.
+
+JSON
+
+```
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=90D365930EDDB20FF49CC2DDA4B7C925; Path=/v2.0; Secure
+Date: Thu, 22 Sep 2011 22:15:42 GMT
+```
+
+XML
+
+```
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=7F457E3037CCB2DEC6C33D408F544EA8; Path=/v2.0; 
+SecureDate: Fri, 09 Sep 2011 04:25:47 GMT 
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -X DELETE -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/ZNFNCA1JJL3T7XY12V2F" 
+```
+
+**Additional Notes**
+
+
+
+#### 4.4.3.3 <a id="get_access_keys"></a>Get Access Keys####
+#### GET /HP-IDM/v1.0/accesskeys
+
+
+Gets a list of selected user access keys. 
+
+**Request Data**
+
+The following query parameters are optional (domainId, export, status, userId). There are no required query parameters.
+
+
+**URL Parameters**
+
+* *domainId* (Optional) - Query Parameter - Domain identifier. Selects keys with matching domain identifier.
+* *export* (Optional) - Query Parameter - Export secret key value. Value is one of (true, false). If not specified the value is set to false.
+* *status* (Optional) - Query Parameter - Key status. Selects keys with matching status. Value is one of (active, inactive, expired, revoked, deleted, purged).
+* *userId* (Optional) - Query Parameter - User identifier. Selects keys with matching user identifier. If not specified the userId of the requester is used.
+
+
+**Data Parameters**
+
+This call does not require a request body.
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+
+JSON
+
+```
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_4e7b71f5e4b0600fec3d2a20
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+```
+
+XML
+
+```
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_4e699292e4b0a8f279022d4d
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+```
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 798
+Date: Thu, 22 Sep 2011 17:37:18 GMT
+ 
+{
+  "accessKeys" : {
+    "anies" : null,
+    "accessKey" : [ {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "V7TEGGSZZ4NJK9UR4UFE",
+      "createdOn" : 1316712986234,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "active",
+      "userId" : "00000000003002",
+      "validFrom" : 1316712986000,
+      "validTo" : 1632072986000
+    }, {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "WHDFDP7UVJS9F3USU1NF",
+      "createdOn" : 1316661731171,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "active",
+      "userId" : "00000000003002",
+      "validFrom" : 1316661731000,
+      "validTo" : 1632021731000
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=744A36BAF6E7165CCBC4C6CA1812204D; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 1340
+Date: Fri, 09 Sep 2011 04:20:29 GMT
+ 
+<accessKeys xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0">
+   <accessKey accessKeyId="2SL748X97NEP7B6MVXPS" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T15:20:20.000-07:00" validTo="2021-09-05T15:20:20.000-07:00" createdOn="2011-09-08T15:20:20.275-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+   <accessKey accessKeyId="98XM1KSN7BC2C88U9S7G" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T16:43:56.000-07:00" validTo="2021-09-05T16:43:56.000-07:00" createdOn="2011-09-08T16:43:56.494-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+   <accessKey accessKeyId="3D76NSUB49C96DFBRUF9" userId="000000003002" domainId="000000001001" status="deleted" validFrom="2011-09-08T15:19:10.000-07:00" validTo="2021-09-05T15:19:10.000-07:00" createdOn="2011-09-08T15:19:10.378-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+   <accessKey accessKeyId="9L47KGME4ZKCH9YRWDY7" userId="000000003002" domainId="000000001001" status="active" validFrom="2011-09-08T17:34:09.000-07:00" validTo="2021-09-05T17:34:09.000-07:00" createdOn="2011-09-08T17:34:09.494-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+</accessKeys>
+```
+
+**Error Response**
+
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -H "X-Auth-Token: HPAuth_21805c02da2661574e46235bd8c27c10623bddc09a7cf4c67004771628e5453c" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=true"
+```
+
+**Additional Notes**
+
+
+
+#### 4.4.3.4 <a id="get_an_access_key"></a>Get An Access Key####
+#### GET /HP-IDM/v1.0/accesskeys/{accesskeyId}
+
+
+Gets a single user access key by it's access key identifier.
+
+**Request Data**
+
+The accesskeyId URL path parameter is required. The 'export' and 'userId' query parameters are optional.
+
+**URL Parameters**
+
+* *accesskeyId* (Required) - URL path parameter - user access key identifier string
+* *userId* (Optional) - Query Parameter - user identifier string for user other than current authenticated user
+* *export* (Optional) - Query Parameter - used to specify whether secret key value should be returned ("true" or "false")
+
+**Data Parameters**
+
+This call does not require a request body.
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+
+JSON
+
+```
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/V7TEGGSZZ4NJK9UR4UFE?export=true HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+X-Auth-Token: HPAuth_4e7bc0d2e4b0600fec3d2a4a
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443 
+
+```
+
+XML
+
+```
+GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/3D76NSUB49C96DFBRUF9?export=false HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_4e699292e4b0a8f279022d4d
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+```
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 376
+Date: Thu, 22 Sep 2011 23:12:53 GMT
+
+{  
+   "accessKey" : {    
+     "algorithm" : "HmacSHA1",    
+     "keyLength" : 64,    
+     "secretKey" : "hNi0oiTU2sH",    
+     "accessKeyId" : "V7TEGGSZZ4NJK9UR4UFE",    
+     "createdOn" : 1316712986234,    
+     "domainId" : "00000000001001",    
+     "otherAttributes" : {    
+     },    
+     "status" : "active",    
+     "userId" : "00000000003002",    
+     "validFrom" : 1316712986000,    
+     "validTo" : 1632072986000  
+   }
+} 
+
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=34C3B7E6EC0F9035A75BD4A0CF6CAC37; Path=/v2.0; 
+SecureContent-Type: application/xml
+Content-Length: 415
+Date: Fri, 09 Sep 2011 04:15:42 GMT
+
+<accessKey accessKeyId="3D76NSUB49C96DFBRUF9" userId="000000003002" domainId="000000001001" status="deleted" validFrom="2011-09-08T15:19:10.000-07:00" validTo="2021-09-05T15:19:10.000-07:00" createdOn="2011-09-08T15:19:10.378-07:00" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0">
+  <algorithm>HmacSHA1</algorithm>
+  <keyLength>64</keyLength>
+</accessKey> 
+```
+
+**Error Response**
+
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/HAJ5LLHHTKHBXB6MK3TL?export=true"
+```
+
+**Additional Notes**
+
+
+
+#### 4.4.3.5 <a id="import_user_access_key(s)"></a>Import User Access Key(s)####
+#### PUT /HP-IDM/v1.0/accesskeys
+
+Import one or more user access keys. 
+
+**Request Data**
+
+The request data consists of an accessKeys data structure containing one or more accessKey elements. The secretKey and algorithm elements of the accessKey are required. The accessKeyId, domainId, keyLength, status, userId, validFrom, and validTo attributes are optional.
+
+**URL Parameters**
+
+There are no URL parameters for this request.
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+* *algorithm* - String - the algorithm the key will be used with. This is not validated when imported.
+* *domainId* (Optional) - String - domain identifier of the owner of the key.
+* *keyLength* (Optional) - Integer - Length of the key in bits.
+* *status* (Optional) String - the key status. One the values (active, inactive). Defaults to active if not specified.
+* *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
+* *validFrom* (Optional) - DateTime - The date the key becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+* *validTo* (Optional) - DateTime - The date the key becomes invalid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+JSON
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e7bb54fe4b0600fec3d2a37
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 919
+ 
+{"accessKeys": {
+   "anies": null,
+   "accessKey":    [
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "hNi0oiTU2sH",
+         "accessKeyId": "V7TEGGSZZ4NJK9UR4998",
+         "createdOn": 1316712986234,
+         "domainId": "00000000001001",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "00000000003002",
+         "validFrom": 1316712986000,
+         "validTo": 1632072986000
+      },
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "DBWjcUCMEED",
+         "accessKeyId": "RVWVEGE88EHZBSBMJ999",
+         "createdOn": 1316724920250,
+         "domainId": "00000000001001",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "00000000003002",
+         "validFrom": 1316724920000,
+         "validTo": 1632084920000
+      }
+    ],
+   "otherAttributes": {}
+}}
+```
+
+XML
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e6d258be4b05605729d7c3a
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 546
+ 
+<accessKeys xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <accessKey accessKeyId="98XM1KSN7BC2C88U9999" userId="000000003002" domainId="000000001001" status="inactive" validFrom="2011-09-08T16:43:56.000-07:00" validTo="2021-09-05T16:43:56.000-07:00" createdOn="2011-09-08T16:43:56.494-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+      <secretKey>HyGB2QRiOu7</secretKey>
+   </accessKey>
+</accessKeys>
+```
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 802
+Date: Thu, 22 Sep 2011 22:23:53 GMT
+ 
+{
+  "accessKeys" : {
+    "anies" : null,
+    "accessKey" : [ {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "V7TEGGSZZ4NJK9UR4998",
+      "createdOn" : 1316730228058,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "00000000003002",
+      "validFrom" : 1316712986000,
+      "validTo" : 1632072986000
+    }, {
+      "algorithm" : "HmacSHA1",
+      "keyLength" : 64,
+      "accessKeyId" : "RVWVEGE88EHZBSBMJ999",
+      "createdOn" : 1316730228065,
+      "domainId" : "00000000001001",
+      "otherAttributes" : {
+      },
+      "status" : "inactive",
+      "userId" : "00000000003002",
+      "validFrom" : 1316724920000,
+      "validTo" : 1632084920000
+    } ],
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=41C4EA0FDBAB389A7F904935A283566A; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 537
+Date: Sun, 11 Sep 2011 21:18:37 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accessKeys xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom">
+   <accessKey accessKeyId="98XM1KSN7BC2C88U9999" userId="000000003002" domainId="000000001001" status="inactive" validFrom="2011-09-08T16:43:56.000-07:00" validTo="2021-09-05T16:43:56.000-07:00" createdOn="2011-09-11T14:18:34.736-07:00">
+      <algorithm>HmacSHA1</algorithm>
+      <keyLength>64</keyLength>
+   </accessKey>
+</accessKeys>
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 409 | Conflict | An access key already exists with the specified access key identifier |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys" -d '{"accessKeys": {
+   "anies": null,
+   "accessKey":    [
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "hNi0oiTU2sH",
+         "accessKeyId": "V7TEGGSZZ4NJK9UR4998",
+         "createdOn": 1316712986234,
+         "domainId": "11180052618906",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "84463950217213",
+         "validFrom": 1316712986000,
+         "validTo": 1632072986000
+      },
+            {
+         "algorithm": "HmacSHA1",
+         "keyLength": 64,
+         "secretKey": "DBWjcUCMEED",
+         "accessKeyId": "RVWVEGE88EHZBSBMJ999",
+         "createdOn": 1316724920250,
+         "domainId": "11180052618906",
+         "otherAttributes": {},
+         "status": "inactive",
+         "userId": "84463950217213",
+         "validFrom": 1316724920000,
+         "validTo": 1632084920000
+      }
+    ],
+   "otherAttributes": {}
+}}'
+
+```
+
+**Additional Notes**
+
+
+#### 4.4.3.6 <a id="update_user_access_key"></a>Update User Access Key####
+#### PUT /HP-IDM/v1.0/accesskeys/{accesskeyId}
+
+Update a user access key. This method may be used to modify the key status only.
+
+**Request Data**
+
+The accesskeyId url path parameter is required. The userId query parameter is optional. If the userId parameter is not specified then it defaults to the user identifer of the requester.
+
+**URL Parameters**
+
+* *accesskeyId* - URL path parameter - user access key identifier.
+* *userId* (Optional) - Query Parameter - user identifier string. Defaults to user identifier of the requester if not specified.
+
+**Data Parameters**
+
+See schema file for more details on the request and response data structure.
+
+* *status* - {data type} - Key status. One of the values (active, inactive).
+
+A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+JSON
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/KNGTV6EFKLPYE8LXF4VL HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: HPAuth_4e7bba89e4b0600fec3d2a3a
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 51
+ 
+{
+  "accessKey" : {
+    "status" : "inactive"
+  }
+}
+```
+
+XML
+
+```
+PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/2SL748X97NEP7B6MVXPS HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+Content-Type: application/xml
+X-Auth-Token: HPAuth_4e6ab9fde4b06fe4272ee23e
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: localhost:8443
+Content-Length: 146
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accessKey status="inactive" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"/>
+```
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/json
+Content-Length: 345
+Date: Thu, 22 Sep 2011 22:47:17 GMT
+ 
+{
+  "accessKey" : {
+    "algorithm" : "HmacSHA1",
+    "keyLength" : 64,
+    "accessKeyId" : "KNGTV6EFKLPYE8LXF4VL",
+    "createdOn" : 1316714474259,
+    "domainId" : "00000000001001",
+    "otherAttributes" : {
+    },
+    "status" : "inactive",
+    "userId" : "00000000003002",
+    "validFrom" : 1316714474000,
+    "validTo" : 1632074474000
+  }
+}
+```
+
+XML
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Set-Cookie: JSESSIONID=4D3047BA05428AD806C48E269C8DD8B4; Path=/v2.0; Secure
+Content-Type: application/xml
+Content-Length: 416
+Date: Sat, 10 Sep 2011 01:16:12 GMT
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><accessKey xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" accessKeyId="2SL748X97NEP7B6MVXPS" userId="000000003002" domainId="000000001001" status="inactive" validFrom="2011-09-08T15:20:20.000-07:00" validTo="2021-09-05T15:20:20.000-07:00" createdOn="2011-09-08T15:20:20.275-07:00"><algorithm>HmacSHA1</algorithm><keyLength>64</keyLength></accessKey>
+```
+
+**Error Response**
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation     |
+| 403 | Forbidden | Disabled or suspended user making the request  |
+| 404 | Not Found | Specified accesskeyId or userId not found   |
+| 500 | Internal Server Error | The server encountered a problem while processing the request  |
+| 503 | Service Unavailable | The server is unavailable to process the request  |
+
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/V7TEGGSZZ4NJK9UR4998" -d '{
+  "accessKey" : {
+    "status" : "active"
+  }
+}'
+```
+
+**Additional Notes**
+
+
 
 # 5. Additional References
 
