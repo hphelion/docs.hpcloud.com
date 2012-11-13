@@ -17,7 +17,7 @@ TBD
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |password|xs:string|true|
 |secretKey|xs:string|false|
 |tenantId|xs:string|false|
@@ -85,7 +85,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |CreateUmsUserAndDomain|Create a new UMS User and Domain. The User will be configured as the Administrator for the new Domain.|false|
 |MigrateUmsUser|No description available.|false|
 |CreateKmsDomain|Create a new KMS Tenant corresponding to a UMS Domain.|false|

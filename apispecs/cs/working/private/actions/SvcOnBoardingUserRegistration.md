@@ -13,7 +13,7 @@ This action will create a user in system domain with required privilege to regis
 ## Action Parameters ##
 
 | Parameter Name	| Parameter Type 	| Is Required 	|
-| :--	| :--	| :- 	|
+| :-------------	| :-------------	| :------------ 	|
 | password 	| xs:string 	| **true**	|
 | emailAddress 	| xs:string 	| **true** 	|
 | username 	| xs:string 	| **true** 	|

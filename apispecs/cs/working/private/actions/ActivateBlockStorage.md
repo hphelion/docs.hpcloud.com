@@ -19,7 +19,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |serviceName|xs:string|true|
 |domainId|xs:string|false|
 |tenantName|xs:string|true|
@@ -84,7 +84,7 @@ curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X POST -H 
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |FindUmsTenant|Retrieve an existing Tenant from the UMS based on the Name of the Tenant|false|
 |AuthorizeProvisioningAction|Perform authorisation checks prior to provisioning.  Essentially validate that the user attempting to provision the tenant is actually authorised to perform this action.  The *ITLSessionContext* associated with the incoming request thread is used for authorisation checks.|false|
 |CreateZuoraSubscription|&nbsp;|false|

@@ -26,7 +26,7 @@ Anonymous
 ## Action Parameters ##
 
 | Parameter Name	| Parameter Type 	| Is Required 	|
-| :--	| :--	| :- 	|
+| :------------	| :--------	| :------- 	|
 | email 	| xs:string 	| **true** 	|
 
 ## Action Steps ##
@@ -48,13 +48,13 @@ Anonymous
 After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
 
 | Templates Used	| CtrlSvcsContactActivity Type 	|
-| -- 	| -- 	|
+| -------------- 	| -------------- 	|
 | USERNAME_RECOVERY_EMAIL_ID 	| UserNameRecoveryEmail	|
 
 Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
 
 | Email Text 	| Replaced With 	|
-| -- 	| -- 	|
+| -------------- 	| -------------- 	|
 | %accountId% 	| user.accountId 	|
 | %username% 	| user.username 	|
 | %firstName% 	| user.firstName 	|
