@@ -18,7 +18,7 @@ TBD
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |name|xs:string|true|
 |state|xs:string|false|
 |addressLine1|xs:string|false|
@@ -78,7 +78,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |CreateUmsDomain|Create a new UMS Domain object.|false|
 |CreateKmsDomain|Create a new KMS Tenant corresponding to a UMS Domain.|false|
 |CreateSalesforceAccount|Create a new Salesforce Account. No Salesforce Contact is created with the new Account.|true|

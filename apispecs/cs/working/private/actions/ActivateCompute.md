@@ -24,7 +24,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |serviceName|xs:string|true|
 |domainId|xs:string|true|
 |tenantName|xs:string|true|
@@ -92,7 +92,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:-----------------------|:------------------------------|:--------------------------|
 |CreateUmsTenant|Create a new or retrieve an existing Tenant from the UMS based on the Name of the Tenant.|false|
 |AuthorizeProvisioningAction|Perform authorization checks prior to provisioning. Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action. The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
 |CreateZuoraSubscription| |false|

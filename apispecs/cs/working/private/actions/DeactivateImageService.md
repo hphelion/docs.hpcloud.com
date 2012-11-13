@@ -20,7 +20,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type| Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |domainId|xs:string|false|
 |tenantId|xs:string|true|
 |serviceName|xs:string|true|
@@ -108,7 +108,7 @@ TBD
 
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |AuthorizeProvisioningAction|Perform authorization checks prior to provisioning.Essentially validate that the user attempting to provision the tenant is actually authorized to perform this action.The ```ITLSessionContext``` associated with the incoming request thread is used for authorization checks.|false|
 |DeactivateZuoraSubscription|Cancel Zuora subscriptions for a service that is being deactivated.|false|
 |DeleteEndpointRef|Remove an ```EndpointRef``` tthat links an endpoint via an ```EndpointTemplate``` to a Tenant.The ```EndpointRef``` that links the tenant to the endpoint is deleted if it exists from the CS DB|false|

@@ -18,7 +18,7 @@ None
 **Data Parameters**
 
 |Parameter Name|Parameter Type|Is Required|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |tenantName|xs:string|true|
 |domainId|xs:string|true|
 |description|xs:string|false|
@@ -71,7 +71,7 @@ TBD
 **Action Steps**
 
 |Step Name|Step Description|Is Retryable|
-|:-|:-|:-|
+|:----------------|:----------------|:----------------|
 |CreateUmsTenant|Create a new UMS Tenant object.|false|
 |CreateZuoraTenantAccount|Create a Zuora Account that is a child of the Domain Account|true|
 

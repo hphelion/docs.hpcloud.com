@@ -86,7 +86,7 @@ Note that the **EmailVerification** action must handle validations from this act
 **emailValidationType Values**
 
 | Value	| Effect 	|
-| ------	| --------	|
+| :--------------	| :---------------	|
 | None 	| Perform no email validation. 	|
 | EmailVerification 	| Send verification email with a link that activates the user.	|
 | EmailVerificationWithPwdCollection 	| Send verification email with a link that activates the user and capture a password .	|
@@ -94,16 +94,16 @@ Note that the **EmailVerification** action must handle validations from this act
 **customerType Values**
 
 | Value	| Effect 	|
-| ------	| --------	|
+| :---------------	| :---------------	|
 | Gratis Account	| 	|
 | Self Service	| 	|
 | HP Internal	| 	|
-| Corporate	| Causes the Zuora defaultPaymentMethod to be set to "Other" on the Zuora account.	|
+| Corporate	| Causes the Zuora defaultPaymentMethod to be set to "Other" and tax exemption to "No" on the Zuora account.	|
 
 ## Action Steps ##
 
 | Step Name 	| Step Description	| Is Retryable 	|
-| -----------	| -----------------	| --------------	|
+| :-----------	| :-----------------	| --------------	|
 | CreateUmsUserAndDomain 	| Create a new UMS User and Domain. The User will be configured as the Administrator for the new Domain. 	| false 	|
 | CreateKmsDomain 	| Create a new KMS Tenant corresponding to a UMS Domain. 	| false 	|
 | CreateKmsUser 	| Create a new KMS User Account corresponding to a UMS User. 	| false 	|
@@ -136,7 +136,7 @@ Note that the **EmailVerification** action must handle validations from this act
 After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
 
 | Templates Used	| CtrlSvcsContactActivity Type 	|
-| --------------- 	| ---------------------------- 	|
+| :--------------- 	| :---------------------------- 	|
 | WELCOME_TO_CLOUD_EMAIL_ID 	| WelcomeEmailSent	|
 | EMAIL_VERIFICATION_EMAIL_ID 	| VerificationEmailSent	|
 | EMAIL_VERIFICATION_EMAIL_WITH_PWD_COLLECT_EMAIL_ID	| VerifEmailWithPwdCollectSent	|
@@ -144,7 +144,7 @@ After submission of an email a **CtrlSvcsContactActivity** Salesforce object is 
 Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
 
 | Email Text 	| Replaced With 	|
-| ----------- 	| --------------	|
+| :----------- 	| :--------------	|
 | %accountId% 	| user.accountId 	|
 | %username% 	| user.username 	|
 | %firstName% 	| user.firstName 	|

@@ -9,7 +9,7 @@ In addition to set simple property values, the UpdateUser action can also set th
 If the user modified their email address then a notification email to the old and new address.
 
 | Status Value 	| Privilege Level 	| Description 	|
-| -- 	| -- 	| -- 	|
+| --------------|  ------------ 	| ----------------------- 	|
 | ENABLED 	| SA 	| Default state to an active user. 	|
 | DISABLED 	| DA 	| Disabled users can not log into their accounts. 	|
 | SUSPENDED_3 	| SA 	| Disabled users can not log into their accounts. Can be re-ENABLED only by SA. 	|

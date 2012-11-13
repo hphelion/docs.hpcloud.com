@@ -7,7 +7,7 @@ Update the properties of the specified Domain. Property changes are propagated t
 In addition to set simple property values, the UpdateDomain action can also set the status for a Domain.
 
 | Status Value 	| Privilege Level 	| Description 	|
-| -- 	| -- 	| -- 	|
+| -------------	| ---------------------	| ------------------------------ |
 | ENABLED 	| SA 	| Default state to an active account 	|
 | SUSPENDED_3 	| SA 	| No user in a suspended domain can log into their account. 	|
 | DELETED 	| SA 	| Soft delete. Domain data is not purged. Can be re-ENABLED only by SA. 	|
@@ -52,7 +52,7 @@ In addition to set simple property values, the UpdateDomain action can also set 
 ## Action Parameters ##
 
 | Parameter Name	| Parameter Type 	| Is Required 	|
-| :--	| :--	| :- 	|
+| :--------------------- | :------------- | :------------- |
 | name 	| xs:string 	| false 	|
 | state 	| xs:string 	| false 	|
 | status 	| xs:string 	| false 	|
@@ -71,7 +71,7 @@ In addition to set simple property values, the UpdateDomain action can also set 
 ## Action Steps ##
 
 | Step Name 	| Step Description 	| Is Retryable 	|
-| -----------	| ------------------	| -------------	|
+| -----------	| ------------------------------------------- | -------------	|
 | UpdateUmsDomain 	| 	| false 	|
 | UpdateKmsDomain 	| Update the state of a KMS Tenant to match that of its corresponding UMS Domain. 	| false 	|
 | UpdateSalesforceAccount 	| 	| false 	|
