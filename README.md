@@ -1,3 +1,20 @@
+# We have moved!
+
+Please note if you are still using the old repository at `https://git.hpcloud.net/API-Specs/apihome` then, you will need 
+to update your local git repository's remote url to the new url. 
+
+The command to do that is:
+
+`git remote set-url <name> <newurl> <oldurl>`
+
+which translates to:
+
+`git remote set-url origin git@git.hpcloud.net:DevExDocs/apihome.git git@git.hpcloud.net:API-Specs/apihome.git`
+
+If you have any concerns or questions, please contact Rupak Ganguly.
+
+---
+
 # API Strategy - listing, standards and verification
 
 Please visit the [Wiki page](https://wiki.hpcloud.net/display/iaas/API+Strategy+-+Listing%2C+Standards+and+Verification) to see details.
