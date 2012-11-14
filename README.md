@@ -40,8 +40,8 @@ Before using this project you need the following dependencies installed.
 
 * [Jekyll](jekyllrb.com)
 * [jekyll_ext (a.k.a ejekyll)](https://github.com/rfelix/jekyll_ext)
-* rdiscount
 * Git
 * Git Subtree
 * Docutils - Note, with pip or with easy_install. On linux don't use the apt version.
 * [RbST](http://rubygems.org/gems/RbST)
+* PHP5 (just the CLI portion - already on mac and `apt-get install php5-cli` on linux)
