@@ -61,7 +61,8 @@ Objects have a size elimit of 5 gigabytes. However there is a way to upload larg
 While the primary organisational structure in HP Cloud Object Storage is the container, you may use object names as a way to
 futher organise your data. A common usage of this is to include a delimeter character such as slash ('/') character in the object name. For example, "vacation/pic1.jpg". If this object is stored in a container called "photos", the URI for the object would include "photos/vacation/pic1.jpg". While this appears to allow hierarchies similar to a file system's directory structre, it is important to understand that there is not such hierarchy in HP Cloud Object Storage. For example, if you simply created a container called "photos" and then created an object called "vacation/pic1.jpg", you cannot access "photos/vacation" -- there is no such object in the system. For more, see [Pseudo-Hierarchical Folders/Directories](#pseudo_hierachies).
 
-## 2.xx Container and Object Naming ## {#naming}
+## 2.xx Container and Object Naming
+{#naming}
 
 Container and object names should be properly URL-encoded prior to
 interacting with the ReST interface (the language APIs handle URL
@@ -124,7 +125,8 @@ using a standard web browser. See [FormPOST](#formpost) for more information.
 
 * Signature Based Authentication. This allows a client to use HP Cloud Identity Service _Access Keys_ to "sign" the URL and headers of a request. Since the client has the Access Keys, it does not need to refer to the HP Cloud Identity Service to authenticate itself. Instead, a valid signature in the request allows HP Cloud Obkect Storage to authenticate the request and identify the user. See [Signature Based Authentication](#signature_auth)
  
-### 2.xx.x Using Authentication Tokens ### {#using_tokens}
+### 2.xx.x Using Authentication Tokens 
+{#using_tokens}
 
 TBS -- new stuff -- esp
 
@@ -133,11 +135,13 @@ TBS -- new stuff -- esp
 * Unscoped
 * Scoped to a different tenant
 
-### 2.xx.x General Access Control Lists ### {#general_acls}
+### 2.xx.x General Access Control Lists
+{#general_acls}
 
 TBS -- from the legacy document
 
-### 2.xx.x Cross-tenant Access Control Lists ### {#cross_tenant_acls}
+### 2.xx.x Cross-tenant Access Control Lists 
+{#cross_tenant_acls}
 
 TBS -- from the legacy document
 
@@ -149,11 +153,13 @@ TBS -- from the legacy document
 
 TBS -- from the lagacy document
 
-### 2.xx.x Signature Based Authentication ### {#signature_auth}
+### 2.xx.x Signature Based Authentication 
+{#signature_auth}
 
 TBS -- from the legacy document
 
-## 2.xx Listing large number of containers or objects
+## 2.xx Retrieving large number of container or object names
+{#pagination}
 
 When doing a GET request against an account or container, the service returns a maximum of 10,000 names per request. To
 retrieve subsequent names, you must make another request with
@@ -205,510 +211,9 @@ Again, two items are returned; there may be more:
 
 With this one-item response we received less than the limit number of names, indicating that this is the end of the list.
 
-## 2.xx Pseudo-Hierarchical Folders/Directories ## {#pseudo_hierachies}
-=======================================
+## 2.xx Pseudo-Hierarchical Folders/Directories/
+{#pseudo_hierachies}
 
-For the last section, we come to the most confusing concept in Object
-Storage. In most storage systems, you have the ability to create custom
-hierarchies of files so that you can better organize them. On its
-surface, Object Storage only gives you one level of hierarchy in the
-form of containers. However, it turns out that you can get creative with
-naming your objects to give yourself the same effect as having
-hierarchical containers.
-
-Let's start with a fresh container without any objects in it:
-
-                
-
-
-                
-
-Now list the new container:
-
-                
-
-
-                
-
-Next, add an object but prefix the name with the hierarchy desired:
-
-                
-
-
-                
-
-Do it again with a different object and prefix:
-
-                
-
-
-                
-
-Now list the container, revealing the prefixes:
-
-                
-
-
-                
-
-If you want to perform hierarchical listings, with the prefixes in
-place, you can use the "path" query string variable:
-
-                
-
-
-                
-
-If you wanted to see what prefixes were in place, you can use the
-"delimiter" query string variable to distinguish prefix paths from
-object names:
-
-                
-
-
-                
-
-Using these in combination allows you to discover directories within a
-particular path and then further drill down based on the results.
-
-
-## 2.xx Notable Differences from OpenStack
-
-
-The HP Cloud Object Storage API is an implementation of OpenStack Object
-Storage, but there are some differences to be aware of:
-
-* HP Cloud Services Object Storage naming conventions are slightly
-    more restrictive than those described in the OpenStack documentation
-    referenced here. Specifically, containers and object names may not
-    contain the following characters:
-    -   double-quote: "
-    -   greater-than: \>
-    -   less-than: \<
-
-* Cross-tenant ACLs are only supported by HP Cloud Object Storage
-
-* General ACLs do not support specifying a username or hostname.
-
-* Temorary URLs do not use the X-Account-Meta-Temp-URL-Key meta-data to store the secret key. Instead we use the HP Cloud Identity Services _Access Keys_.
-
-* FormPOST --- TBS DITO
-
-#  3. Account-level View
-
-## 3.1 Tenants and HP Cloud Storage accounts ## {#tenants_accounts}
-
-## 3.2 Regions
-
-## 3.3 Service Catalog
-
-Like all HP Cloud Service offerings, authentication for CDN is achieved
-through the Identity Service, which returns an `X-Auth-Token` that is
-used for subsequent requests to individual services.
-
-For additional details on the Identity Service, please refer to
-[https://docs.hpcloud.com/identity](https://docs.hpcloud.com/identity).
-
-The service is exposed in the service catalog, as shown in the following fragment:
-
-```
-{
-   service catalog fragment here
-}
-```
-
-
-# 4. REST API Specifications
-
-## 4.1 Service API Operations
-
-**Host US West Region**: https://region-a.geo-1.objects.hpcloudsvc.com
-
-**Host US East Region**: https://region-b.geo-1.objects.hpcloudsvc.com
-
-**BaseURI**: {Host}/v1/{account}
-
-## Table ##
-
-| Resource  | Operation                   | HTTP Method | Path                   | JSON/XML?         | Privilege Level |
-| :-------  | :-------------------------- | :---------- | :--------------------- | :---------------- | :-------------  |
-| Account   | List containers             | GET         | /v1/account            | Y/Y               | Admin           |
-| Account   | Retrieve account metadata   | GET         | /v1/account            | n/a               | Admin           |
-| Container | List objects                | GET         | /v1/account/container  | Y/Y               | Admin           |
-| Container | Retrieve container metadata | HEAD        | /v1/account/container  | n/a               | Admin           |
-| Container | Create/update container     | PUT         | /v1/account/container  | n/a               | Admin           |
-| Container | Delete container            | DELETE      | /v1/account/container  | n/a               | Admin           |
-| Object    | Retrieve object             | GET         | /v1/account/container/object | n/a         | Admin           |
-| Object    | Retrieve object metadata    | HEAD        | /v1/account/container/object | n/a         | Admin           |
-| Object    | Create/Update Object        | PUT         | /v1/account/container/object | n/a         | Admin           |
-| Object    | Chunked transfer encoding   | PUT         | /v1/account/container/object | n/a         | Admin           |
-| Object    | Update object metadata      | POST        | /v1/account/container/object | n/a         | Admin           |
-| Object    | Delete object               | DELETE      | /v1/account/container/object | n/a         | Admin           |
-
-
-
-## 4.2 Common Request Headers
-*List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
-
-Many operations accept request headers. This section provides an overview of each request header. Consult the specific operation to determine if the header applies to the operation and any other notes that are of interest.
-
-| Request Header Name | Description |
-| :------------------ | :---------  |
-| Accept              | Where applicable, this determines how the response body is formated. For example, you can use this to list the objects in a container as text (text/plain), JSON (application/json), XML (text/xml, application/xml) or HTML (text/html, application/html). |
-| Content-Length      | Where applicable, this is the length in bytes of the body of the request |
-| Content-Type        | Where applicable, this indicates the MIME type of an object. The Content-Type request header is optional. If not specified, HP Cloud Storage will attempt to identify the content type and assign a MIME type. If this fails, the type is set to application/octet-stream. If you specify a value in the request header, when you next do a HEAD or GET operation on the object, the Content-Type response header is set to the specified value.|
-| X-Auth-Token        | When specified, this identifies the user making the request. In addition, if this token is being used by a user with Admin privilege level, the token must be scoped to the tenant associated with the account. If no token is specified, the request will fail unless tyou have been granted access to the resource by some other mechansim such as ACLs. See REF_NEEDED_HERE for more information about tokens. |
-
-
-## 4.3 Common Response Headers
-
-| Rersponse Header Name | Description |
-| :-------------------- | :---------- |
-| Content-Length        | When the response includes body, this indicates the length of the body in bytes. |
-| Content-Type          | When the response includes a body, this indicates the MIME type of the response. |
-
-
-## 4.4 Service API Operation Details
-
-### 4.4.1 Account ###
-
-**Status Lifecycle**
-
-N/A
-
-**Rate Limits**
-
-N/A
-
-**Quota Limits**
-
-N/A
-
-**Business Rules**
-
-None.
-
-#### 4.4.1. List Account ####
-#### GET /v1/<account>
-
-*This operation returns a listing of the containers in the designed account.*
-
-**Request Data**
-
-**URL Parameters**
-
-* *limit* - (Optional) - Number - For an integet value of _N_, limits the number of results to at most _N_ values.
-
-* *marker* - (Optional) - String - Given a string value _x_, return container names greater in value than the specified marker.
-
-* *format* - (optional) - String - Specify either `json` or `xml` to return the respective serialized response. You may alternativly specify the required type in the *Accept* request header.
-      
-                          
-**Data Parameters**
-
-This call does not require a request body.
-
-**Success Response**
-
-On success, the response body contains a list of the containers.
-
-**Status Code**
-
-200 - OK
-
-**Response Data**
-
-A list of containers is returned in the response body. A 204 (No Content) HTTP return code is passed back if the account
-has no containers.
-
-Text/Plain                         
-
-
-      test_container_1  
-      test_container_2   
-
-JSON
-
-
-      [
-          {"name":"test_container_1", "count":2, "bytes":78},
-          {"name":"test_container_2", "count":1, "bytes":17}  
-      ]   
-                          
-
-XML
-                          
-
-      <?xml version="1.0" encoding="UTF-8"?>  
-
-      <account name="MichaelBarton">  
-        <container>
-          <name>test_container_1</name>
-          <count>2</count>
-          <bytes>78</bytes>
-        </container>
-        <container>
-          <name>test_container_2</name>
-          <count>1</count>
-          <bytes>17</bytes>
-        </container>
-      </account>
-
-**Error Response**
-
-If an error occurs, the response body contains a description of the error.
-
-**Status Code**
-
-404 - Not Found
-etc - TBS
-500 - Internal Server Error
-
-**Curl Example**
-
-```
-curl -i -H "X-Auth-Token: HPAUTH_4848804377729095476739938777829" https://region-a.geo-1.objects.hpcloudsvc.com/v1/48828782005874
-```
-
-**Additional Notes**
-
-
-
-Retrieve Account Metadata
--------------------------
-
-`HEAD` operations against an account are performed to retrieve the
-number of containers and the total bytes stored in HP Cloud Object
-Storage for the account. This information is returned in two custom
-headers, `X-Account-Container-Count` and `X-Account-Bytes-Used`. Since
-the storage system is designed to store large amounts of data, care
-should be taken when representing the total bytes response as an
-integer; when possible, convert it to a 64-bit unsigned integer if your
-platform supports that primitive type.
-
-      HEAD /<api version>/<account> HTTP/1.1
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-                          
-
-The HTTP return code is 204 (No Content) if the request succeeds. A 401
-(Unauthorized) is returned for an invalid account or access key.
-
-      HTTP/1.1 204 No Content
-      Date: Thu, 07 Jun 2010 18:57:07 GMT
-      Server: Apache
-      X-Account-Container-Count: 3
-      X-Account-Bytes-Used: 323479
-                          
-
-Storage Container Services
-==========================
-
-This section documents the ReST operations that can be performed on
-containers. All operations are valid HTTP request methods and resembles
-this format:
-
-      METHOD /v1/<account>/<container> HTTP/1.1
-                    
-
-List Objects
-------------
-
-GET operations against a storage container name are performed to
-retrieve a list of objects stored in the container. Additionally, there
-are a number of optional query parameters that can be used to refine the
-list results.
-
-A request with no query parameters returns the full list of object names
-stored in the container, up to 10,000 names. Optionally specifying the
-query parameters filters the full list and return a subset of objects.
-
-`limit`
-:   For an integer value *n*, limits the number of results to at most
-    *n* values.
-
-`marker`
-:   Given a string value *x*, return object names greater in value than
-    the specified marker.
-
-`prefix`
-:   For a string value *x*, causes the results to be limited to object
-    names beginning with the substring *x*.
-
-`format`
-:   Specify either `json` or `xml` to return the respective serialized
-    response.
-
-`path`
-:   For a string value *x*, return the object names nested in the pseudo
-    path (assuming preconditions are met - see below).
-
-`delimiter`
-:   For a character *c*, return all the object names nested in the
-    container (without the need for the directory marker objects).
-
-<!-- -->
-
-      GET /<api version>/<account>/<container>[?parm=value] HTTP/1.1
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-                        
-
-A list of objects is returned in the response body, one object name per
-line. A 204 (No Content) HTTP return code is passed back if the
-container is empty or does not exist for the specified account. If an
-incorrect account is specified, the HTTP return code is 404 (Not Found).
-
-      HTTP/1.1 200 Ok
-      Date: Thu, 07 Jun 2010 18:50:19 GMT
-      Server: Apache
-      Content-Type: text/plain; charset=UTF-8
-      Content-Length: 171
-                        
-
-      kate_beckinsale.jpg
-      How To Win Friends And Influence People.pdf
-      moms_birthday.jpg
-      poodle_strut.mov
-      Disturbed - Down With The Sickness.mp3
-      army_of_darkness.avi
-      the_mad.avi
-                        
-
-### Serialized List Output
-
-If a `format=xml` or `format=json` argument is appended to the storage
-account URL, the service serves extended object information serialized
-in the chosen format. Other than the `?format=xml|json` parameter, it
-returns the same status/errors codes. The sample responses below are
-formatted for readability.
-
-      GET /<api version>/<account>/<container>?format=json HTTP/1.1
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      Content-Length: 0
-      X-Storage-Token: 182f9c0af0e828cfe3281767d29d19f4
-                          
-
-      HTTP/1.1 200 OK
-      Date: Tue, 25 Nov 2008 19:39:13 GMT
-      Server: Apache
-      Content-Length: 387
-      Content-Type: application/json; charset=utf-8
-                        
-
-~~~~ {.javascript}
- [
-   {"name":"test_obj_1",
-    "hash":"4281c348eaf83e70ddce0e07221c3d28",
-    "bytes":14,
-    "content_type":"application\/octet-stream",
-    "last_modified":"2009-02-03T05:26:32.612278"},
-   {"name":"test_obj_2",
-    "hash":"b039efe731ad111bc1b0ef221c3849d0",
-    "bytes":64,
-    "content_type":"application\/octet-stream",
-    "last_modified":"2009-02-03T05:26:32.612278"},
- ]
-                    
-~~~~
-
-      GET /<api version>/<account>/<container>?format=xml HTTP/1.1
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Storage-Token: 182f9c0af0e828cfe3281767d29d19f4
-                        
-
-      HTTP/1.1 200 OK
-      Date: Tue, 25 Nov 2008 19:42:35 GMT
-      Server: Apache
-      Content-Length: 643
-      Content-Type: application/xml; charset=utf-8
-                        
-
-~~~~ {.xml}
-  <?xml version="1.0" encoding="UTF-8"?>
-
-  <container name="test_container_1">
-    <object>
-      <name>test_object_1</name>
-      <hash>4281c348eaf83e70ddce0e07221c3d28</hash>
-      <bytes>14</bytes>
-      <content_type>application/octet-stream</content_type>
-      <last_modified>2009-02-03T05:26:32.612278</last_modified>
-    </object>
-    <object>
-      <name>test_object_2</name>
-      <hash>b039efe731ad111bc1b0ef221c3849d0</hash>
-      <bytes>64</bytes>
-      <content_type>application/octet-stream</content_type>
-      <last_modified>2009-02-03T05:26:32.612278</last_modified>
-    </object>
-  </container>
-                    
-~~~~
-
-### List Large Number of Objects
-
-The system returns a maximum of 10,000 object names per request. To
-retrieve subsequent object names, another request must be made with a
-'marker' parameter. The marker indicates where the last list left off
-and the system returns object names greater than this marker, up to
-10,000 again. Note that the    marker    value should be URL encoded prior
-to sending the HTTP request.
-
-If 10,000 is larger than desired, a 'limit' parameter may be given.
-
-If the number of object names returned equals the limit given (or 10,000
-if no limit is given), it can be assumed there are more object names to
-be listed. If the container name list is exactly divisible by the limit,
-the last request simply has no content.
-
-For an example, let's use a listing of five object names:
-
-      gala
-      grannysmith
-      honeycrisp
-      jonagold
-      reddelicious
-                        
-
-We'll use a limit of two to show how things work:
-
-      GET /<api version>/<account>/<container>?limit=2
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-                        
-
-      gala
-      grannysmith
-                        
-
-Since we received two items back, there are more object names to list.
-So, you must make another request with a marker of the last item
-returned:
-
-      GET /<api version>/<account>/<container>?limit=2&marker=grannysmith
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-                        
-
-      honeycrisp
-      jonagold
-                        
-
-Again two items are returned; there may be more:
-
-      GET /<api version>/<account>/<container>?limit=2&marker=oranges
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-                        
-
-      reddelicious
-                        
-
-Now we received less than the limit number of container names,
-indicating that we have the complete list.
-
-### Pseudo-Hierarchical Folders/Directories
 
 You can simulate a hierarchical structure in HP Cloud Object Storage by
 following a few guidelines. Object names must contain the forward slash
@@ -860,6 +365,444 @@ requests.
       Date: Thu, 07 Jun 2010 18:50:19 GMT
       Server: Apache
       Content-Type: text/plain; charset=UTF-8
+
+## 2.xx Notable Differences from OpenStack
+
+
+The HP Cloud Object Storage API is an implementation of OpenStack Object
+Storage, but there are some differences to be aware of:
+
+* HP Cloud Services Object Storage naming conventions are slightly
+    more restrictive than those described in the OpenStack documentation
+    referenced here. Specifically, containers and object names may not
+    contain the following characters:
+    -   double-quote: "
+    -   greater-than: \>
+    -   less-than: \<
+
+* Cross-tenant ACLs are only supported by HP Cloud Object Storage
+
+* General ACLs do not support specifying a username or hostname.
+
+* Temorary URLs do not use the X-Account-Meta-Temp-URL-Key meta-data to store the secret key. Instead we use the HP Cloud Identity Services _Access Keys_.
+
+* FormPOST --- TBS DITO
+
+#  3. Account-level View
+
+## 3.1 Tenants and HP Cloud Storage accounts
+{#tenants_accounts}
+
+## 3.2 Regions
+
+## 3.3 Service Catalog
+
+Like all HP Cloud Service offerings, authentication for CDN is achieved
+through the Identity Service, which returns an `X-Auth-Token` that is
+used for subsequent requests to individual services.
+
+For additional details on the Identity Service, please refer to
+[https://docs.hpcloud.com/identity](https://docs.hpcloud.com/identity).
+
+The service is exposed in the service catalog, as shown in the following fragment:
+
+```
+{
+   service catalog fragment here
+}
+```
+
+
+# 4. REST API Specifications
+
+## 4.1 Service API Operations
+
+**Host US West Region**: https://region-a.geo-1.objects.hpcloudsvc.com
+
+**Host US East Region**: https://region-b.geo-1.objects.hpcloudsvc.com
+
+**BaseURI**: {Host}/v1/{account}
+
+## Table ##
+
+| Resource  | Operation                   | HTTP Method | Path                   | JSON/XML?         | Privilege Level |
+| :-------  | :-------------------------- | :---------- | :--------------------- | :---------------- | :-------------  |
+| Account   | List containers             | GET         | /v1/account            | Y/Y               | Admin           |
+| Account   | Retrieve account metadata   | GET         | /v1/account            | n/a               | Admin           |
+| Container | List objects                | GET         | /v1/account/container  | Y/Y               | Admin           |
+| Container | Retrieve container metadata | HEAD        | /v1/account/container  | n/a               | Admin           |
+| Container | Create/update container     | PUT         | /v1/account/container  | n/a               | Admin           |
+| Container | Delete container            | DELETE      | /v1/account/container  | n/a               | Admin           |
+| Object    | Retrieve object             | GET         | /v1/account/container/object | n/a         | Admin           |
+| Object    | Retrieve object metadata    | HEAD        | /v1/account/container/object | n/a         | Admin           |
+| Object    | Create/Update Object        | PUT         | /v1/account/container/object | n/a         | Admin           |
+| Object    | Chunked transfer encoding   | PUT         | /v1/account/container/object | n/a         | Admin           |
+| Object    | Update object metadata      | POST        | /v1/account/container/object | n/a         | Admin           |
+| Object    | Delete object               | DELETE      | /v1/account/container/object | n/a         | Admin           |
+
+
+
+## 4.2 Common Request Headers
+*List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
+
+Many operations accept request headers. This section provides an overview of each request header. Consult the specific operation to determine if the header applies to the operation and any other notes that are of interest.
+
+### 4.2.1 Accept
+{#accept_request}
+
+Where applicable, this determines how the response body is formated. For example, you can use this to list the objects in a container as:
+* text (text/plain)
+* JSON (application/json)
+* XML (text/xml, application/xml)
+* HTML (text/html, application/html).
+
+
+### 4.2.2 Content-Length
+{#content_length_request} 
+
+Where applicable, this is the length in bytes of the body of the request.
+
+### 4.2.3 Content-Type       
+{#content_type_request}
+
+Where applicable, this indicates the MIME type of an object.
+
+When applied to object resources, the Content-Type request header is optional. If not specified, HP Cloud Storage will attempt to identify the content type and assign a MIME type. If this fails, the type is set to application/octet-stream. If you specify a value in the request header, when you next do a HEAD or GET operation on the object, the Content-Type response header is set to the specified value.
+
+### 4.2.4 X-Auth-Token
+{x_auth_token_request}
+
+When specified, this identifies the user making the request. In addition, if this token is being used by a user with Admin privilege level, the token must be scoped to the tenant associated with the account. If no token is specified, the request will fail unless tyou have been granted access to the resource by some other mechansim such as ACLs. See REF_NEEDED_HERE for more information about tokens.
+
+
+## 4.3 Common Response Headers
+
+
+### 4.3.1 Content-Length
+{#content_length_response}
+
+When the response includes a body, this indicates the length of the body in bytes.
+
+### 4.3.2 Content-Type
+{#content_type_response}
+
+When the response includes a body, this indicates the MIME type of the response.
+
+### 4.4 HTTP Response Codes
+{#http_codes}
+
+The following HTTP response codes are used by HP Cloud Object Storage.
+
+|HTTP Code|Meaning|Description|
+|:--------|:------|:----------|
+|200      |Success|The operation completed normally.|
+|201      |Accepted for processing|The operation completed normally.|
+|204      |No Content|The operation completed normally.|
+|tbs      |tbs       |tbs    |
+
+## 4.5 Service API Operation Details
+
+### 4.5.1 Account ###
+
+#### 4.4.1. List Account ####
+#### GET /v1/\<account\>
+
+*This operation returns a listing of the containers in the designed account.*
+
+**Request Data**
+
+The path specifies the account.
+
+**URL Parameters**
+
+By default up to 10,000 names are returned. To retrieve more or fewer names, use the *limit* and *marker* query parameters.
+See [Retrieving large number of container or object names](#pagination) for more information.
+
+* *limit* - (Optional) - Number - For an integet value of _N_, limits the number of results to at most _N_ values.
+
+* *marker* - (Optional) - String - Given a string value _x_, return container names greater in value than the specified marker.
+
+* *format* - (optional) - String - Specify either `json` or `xml` to return the respective serialized response. You may alternativly specify the required type in the *Accept* request header.
+      
+                          
+**Data Parameters**
+
+This call does not require a request body.
+
+**Success Response**
+
+On success, the response body contains a list of the containers.
+
+**Status Code**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Response Data**
+
+A list of containers is returned in the response body. A 204 (No Content) HTTP return code is passed back if the account
+has no containers.
+
+Text/Plain                         
+
+
+      test_container_1  
+      test_container_2   
+
+JSON
+
+
+      [
+          {"name":"test_container_1", "count":2, "bytes":78},
+          {"name":"test_container_2", "count":1, "bytes":17}  
+      ]   
+                          
+
+XML
+                          
+
+      <?xml version="1.0" encoding="UTF-8"?>  
+
+      <account name="MichaelBarton">  
+        <container>
+          <name>test_container_1</name>
+          <count>2</count>
+          <bytes>78</bytes>
+        </container>
+        <container>
+          <name>test_container_2</name>
+          <count>1</count>
+          <bytes>17</bytes>
+        </container>
+      </account>
+
+**Error Response**
+
+If an error occurs, the response body contains a description of the error.
+
+**Status Code**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Curl Example**
+
+```
+curl -i -H "X-Auth-Token: HPAUTH_4848804377729095476739938777829" https://region-a.geo-1.objects.hpcloudsvc.com/v1/48828782005874
+```
+
+**Additional Notes**
+
+
+
+### 4.5.2 Retrieve Account Metadata
+
+
+`HEAD` operations against an account are performed to retrieve the
+number of containers and the total bytes stored in HP Cloud Object
+Storage for the account. This information is returned in two custom
+headers, `X-Account-Container-Count` and `X-Account-Bytes-Used`. Since
+the storage system is designed to store large amounts of data, care
+should be taken when representing the total bytes response as an
+integer; when possible, convert it to a 64-bit unsigned integer if your
+platform supports that primitive type.
+
+      HEAD /<api version>/<account> HTTP/1.1
+      Host: region-a.geo-1.objects.hpcloudsvc.com
+      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
+                          
+
+The HTTP return code is 204 (No Content) if the request succeeds. A 401
+(Unauthorized) is returned for an invalid account or access key.
+
+      HTTP/1.1 204 No Content
+      Date: Thu, 07 Jun 2010 18:57:07 GMT
+      Server: Apache
+      X-Account-Container-Count: 3
+      X-Account-Bytes-Used: 323479
+                          
+
+## 4.5 Container
+
+#### 4.5.1. List Objects in a Container
+#### GET /v1/\<account\>/\<container\>                  
+
+*Retrieve a list of objects stored in the container.*
+
+GET operations against a  container name are performed to
+retrieve a list of objects stored in the container.
+
+**Request Data**
+
+The path specifies the account and container name.
+
+The following request headers apply to this operation.
+
+* [Accept](#accept_request) - Optional - Specifies the format for listing the names. Alternatvly use the *format* paramater.
+* [X-Auth-Token](#x_auth_token_request) - Optional - Authentication token
+
+
+**URL Parameters**
+
+By default up to 10,000 names are returned. To retrieve more or fewer names, use the *limit* and *marker* query parameters.
+See [Retrieving large number of container or object names](#pagination) for more information.
+
+By default, the names of all objects are returned. You can control which names are retrieved using the *prefix*, *path* and *delimiter* query paramaters.
+See [Pseudo-Hierarchical Folders/Directories](#pseudo_hierachies) for more information.
+
+The following query parameters are available:
+
+* *limit* - (Optional) - Number - For an integet value of _N_, limits the number of results to at most _N_ values.
+
+* *marker* - (Optional) - String - Given a string value _x_, return container names greater in value than the specified marker.
+
+* *format* - (optional) - String - Specify either `json` or `xml` to return the respective serialized response. You may alternativly specify the required type in the *Accept* request header.
+
+* *prefix* - (Optional) - String - For a string value *x*, causes the results to be limited to object names beginning with the substring *x*.
+
+* *path* - (Optional) - String - For a string value *x*, return the object names nested in the pseudo path (assuming preconditions are met).
+
+* *delimiter* - (Optional) - String - For a character *c*, return all the object names nested in the container (without the need for the directory marker objects).
+
+**Data Parameters**
+
+This call does not require a request body.
+
+**Success Response**
+
+If the container contains objects, 200 (OK) is returned. If there are no objects in the container, 204 (No Content) is returned.
+
+**Status Code**
+
+200 - OK
+204 - No Content
+
+**Response Data**
+
+If there are objects, their names are returned in body in the requested format.
+
+Text/Plain
+
+      test_obj_1
+      test_obj_2
+
+JSON
+
+    [
+       {
+         "name": "test_obj_1",
+         "hash": "4281c348eaf83e70ddce0e07221c3d28",
+         "bytes": 14,
+         "content_type": "application/octet-stream",
+         "last_modified": "2009-02-03T05:26:32.612278"
+       },
+       {
+         "name": "test_obj_2",
+         "hash": "b039efe731ad111bc1b0ef221c3849d0",
+         "bytes": 64,
+         "content_type": "application/octet-stream",
+         "last_modified": "2009-02-03T05:26:32.612278"
+       }
+     ]
+
+XML
+
+   <?xml version="1.0" encoding="UTF-8"?>
+   <container name="test_container_1">
+    <object>
+      <name>test_object_1</name>
+      <hash>4281c348eaf83e70ddce0e07221c3d28</hash>
+      <bytes>14</bytes>
+      <content_type>application/octet-stream</content_type>
+      <last_modified>2009-02-03T05:26:32.612278</last_modified>
+    </object>
+    <object>
+      <name>test_object_2</name>
+      <hash>b039efe731ad111bc1b0ef221c3849d0</hash>
+      <bytes>64</bytes>
+      <content_type>application/octet-stream</content_type>
+      <last_modified>2009-02-03T05:26:32.612278</last_modified>
+    </object>
+   </container>
+      
+**Error Response**
+
+On failure, the operation will return a [HTTP status code](#http_codes). The response body contains a text description of the error.
+
+
+
+### Serialized List Output
+
+If a `format=xml` or `format=json` argument is appended to the storage
+account URL, the service serves extended object information serialized
+in the chosen format. Other than the `?format=xml|json` parameter, it
+returns the same status/errors codes. The sample responses below are
+formatted for readability.
+
+      GET /<api version>/<account>/<container>?format=json HTTP/1.1
+      Host: region-a.geo-1.objects.hpcloudsvc.com
+      Content-Length: 0
+      X-Storage-Token: 182f9c0af0e828cfe3281767d29d19f4
+                          
+
+      HTTP/1.1 200 OK
+      Date: Tue, 25 Nov 2008 19:39:13 GMT
+      Server: Apache
+      Content-Length: 387
+      Content-Type: application/json; charset=utf-8
+                        
+
+~~~~ {.javascript}
+ [
+   {"name":"test_obj_1",
+    "hash":"4281c348eaf83e70ddce0e07221c3d28",
+    "bytes":14,
+    "content_type":"application\/octet-stream",
+    "last_modified":"2009-02-03T05:26:32.612278"},
+   {"name":"test_obj_2",
+    "hash":"b039efe731ad111bc1b0ef221c3849d0",
+    "bytes":64,
+    "content_type":"application\/octet-stream",
+    "last_modified":"2009-02-03T05:26:32.612278"},
+ ]
+                    
+~~~~
+
+      GET /<api version>/<account>/<container>?format=xml HTTP/1.1
+      Host: region-a.geo-1.objects.hpcloudsvc.com
+      X-Storage-Token: 182f9c0af0e828cfe3281767d29d19f4
+                        
+
+      HTTP/1.1 200 OK
+      Date: Tue, 25 Nov 2008 19:42:35 GMT
+      Server: Apache
+      Content-Length: 643
+      Content-Type: application/xml; charset=utf-8
+                        
+
+~~~~ {.xml}
+  <?xml version="1.0" encoding="UTF-8"?>
+
+  <container name="test_container_1">
+    <object>
+      <name>test_object_1</name>
+      <hash>4281c348eaf83e70ddce0e07221c3d28</hash>
+      <bytes>14</bytes>
+      <content_type>application/octet-stream</content_type>
+      <last_modified>2009-02-03T05:26:32.612278</last_modified>
+    </object>
+    <object>
+      <name>test_object_2</name>
+      <hash>b039efe731ad111bc1b0ef221c3849d0</hash>
+      <bytes>64</bytes>
+      <content_type>application/octet-stream</content_type>
+      <last_modified>2009-02-03T05:26:32.612278</last_modified>
+    </object>
+  </container>
+                    
+~~~~
+
+
+
+
                         
 
 Delete Container
