@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Block Storage API
-title_section: The API specifications for HP Block Storage service.
-description: "Block Storage API Specifications"
+title: HP Cloud Object Storage API
+title_section: The API specifications for HP Cloud Object Storage service.
+description: "HP Cloud Object Storage API Specifications"
 group: apispec
 
 ---
@@ -11,23 +11,15 @@ group: apispec
 1.0 Overview
 
 HP Cloud Object Storage is an affordable, redundant, scalable, and
-dynamic storage service offering. The core storage system is designed to
-provide a safe, secure, automatically re-sizing and network accessible
+dynamic storage service. The core storage system is designed to
+provide a safe, secure, network accessible
 way to store data. You can store an unlimited quantity of files and each
 file can be as large as 5 gigabytes, plus with large object creation,
 you can upload and store objects of virtually any size.
 
 HP Cloud Object Storage allows users to store and retrieve files and
 content via a simple Web Service (ReST: Representational State Transfer)
-interface. There are also language-specific APIs that utilize the
-ReSTful API but make it much easier for developers to integrate into
-their applications.
-
-For more details, please refer to the [object
-storage](https://docs.hpcloud.com/object-storage) documentation.
-
-Questions? Comments? Please let us know over at our
-[forum](https://community.hpcloud.com/forum).
+interface. 
 
 ## API Maturity Level
 
@@ -43,26 +35,51 @@ performed with standard HTTP calls. See the [Wikipedia
 article](http://en.wikipedia.org/wiki/REST) for more information about
 ReST.
 
-2.1 Resources
+## 2.1 Resources
 
 The HP Cloud Storage API allows the management of the following resources:
 
-* Account. The account is the top level resource in the hierarcy. An account is assigned to a use when you activate HP Cloud Object Storage. There is a one-to-one relationship between an account and the _tenant_. In fact, for most users, the HP Cloud Storage account and tenand _Id_ are the same.
+* Account
+* Container
+* Object
+
+### 2.x.x <a id="account_resource"></a>HP Cloud Storage Accounts
+
+The account is the top level resource in the hierarcy. An account is assigned when you activate HP Cloud Object Storage.
+There is a one-to-one relationship between an account and the _tenant_. In fact, for most users, the HP Cloud Storage account and tenand _Id_ are the same.
+
 If you subscribed to the HP Cloud Beta program, your HP Cloud Storage account name may start with "AUTH_", followed by a long number. This makes
 no difference to how you use the API. In all cases, you should use the endpoint from the service catalog that the HP Cloud Identity Service supplies when authenticating yourself.  
-There is more about [tenants and accounts](#tenants_account) later in this document.  
+
+There is more about [tenants and accounts](#tenants_account) later in this document. 
 There is more about using the [HP Cloud Identity Service](#getting_tokens) later in this document.
 
-* Container. A container provides a way for you to organise your objects. You can pick any name that is meaningful to you. However, see [Container and Object Naming](#naming) for restrictions on container names.
+### 2.x.x <a id="container_resource">HP Cloud Storage Containers
 
-* Objects. An object provides a way for you to store an arbitrary blob of data. This may be a document, image, video, backup file and anything else required by your application.
-Objects have a size elimit of 5 gigabytes. However there is a way to upload larger objects by segmenting them into a number or related objects. In addition, to storing the content of an object, you may also associated meta-data with an object. You can pick any name that is meaningful to you. However, see [Container and Object Naming](#naming) for restrictions on object names.
+A container provides a way for you to organise your objects. 
+You can pick any name that is meaningful to you. 
+However, see [Container and Object Naming](#naming) for restrictions on container names.
+
+### 2.x.x <a id="object_resource"></a>HP Cloud Storage Objects
+
+An object provides a way for you to store an arbitrary blob of data. 
+This may be a document, image, video, backup file and anything else required by your application.
+You can pick any name that is meaningful to you. However, see [Container and Object Naming](#naming) for restrictions on object names.
+
+Objects have a size limit of 5 gigabytes.  However, objects larger
+than 5GB can be segmented and then concatenated together so that you can
+upload 5GB segments and download a single concatenated object. You can
+work with the segments and manifests directly with HTTP requests. 
+
+In addition, to storing the content of an object, you may also associate meta-data with an object. 
 
 While the primary organisational structure in HP Cloud Object Storage is the container, you may use object names as a way to
-futher organise your data. A common usage of this is to include a delimeter character such as slash ('/') character in the object name. For example, "vacation/pic1.jpg". If this object is stored in a container called "photos", the URI for the object would include "photos/vacation/pic1.jpg". While this appears to allow hierarchies similar to a file system's directory structre, it is important to understand that there is not such hierarchy in HP Cloud Object Storage. For example, if you simply created a container called "photos" and then created an object called "vacation/pic1.jpg", you cannot access "photos/vacation" -- there is no such object in the system. For more, see [Pseudo-Hierarchical Folders/Directories](#pseudo_hierachies).
+further organise your data. A common usage of this is to include a delimiter character such as slash ('/') character in the object name. For example, "vacation/pic1.jpg". If this object is stored in a container called "photos", the URI for the object would include "photos/vacation/pic1.jpg". While this appears to allow hierarchies similar to a file system's directory structure, it is important to understand that there is no such hierarchy in HP Cloud Object Storage.
+For example, if you simply created a container called "photos" and then created an object called "vacation/pic1.jpg",
+you cannot access "photos/vacation" -- there is no such object in the system. 
+For more, see [Pseudo-Hierarchical Folders/Directories](#pseudo_hierachies).
 
-## 2.xx Container and Object Naming
-{#naming}
+## 2.xx <a id="#naming"><a/>Container and Object Naming
 
 Container and object names should be properly URL-encoded prior to
 interacting with the ReST interface (the language APIs handle URL
@@ -71,20 +88,32 @@ encoded. You must check the length restrictions against the URL-encoded
 string.
 
 Container names must not contain the slash ('/'), double-quote ('"'), less-than ('\<') or
-grater-than ('\>') characters.
+greater-than ('\>') characters.
+The container name length is limited to 256 bytes.
 
 Object names must not contain the double-quote ('"'), less-than ('\<') or
 grater-than ('\>') characters.
+The object name length is limited to 1024 bytes.
 
-Althrough you use URL-encoding to specify the URI of a container or object, when the API returns names (as in, listing a container), the displayed names are not URL-encoded (i.e., they are the original names).
+Although you use URL-encoding to specify the URI of a container or object, when the API returns names (as in, listing a container), the displayed names are not URL-encoded (i.e., they are the original names).
 
 ## 2.xx Consistency
 
 TBS
 
-## 2.xx Error Handling
+### 2.x.x <a id="creation_guarantees"></a>Creation Guantees
 
-TBS
+When you create a container of object, the HP Cloud Object Storage system creates several copies of the container or object.
+The PUT operation makes sure that the container or object is written to disk drives before returning a success code.
+However, it does not wait for all disk drive operations to complete -- as soon as there are two copies known to have been
+successfully written to disk, the operation can complete. Subsequent copies are written in the background after the
+API has returned to you.
+
+## 2.xx Success and Error Handling
+
+### 2.x.x <a id="http_codes"></a>HTTP Status Codes
+
+409 Conflict - You are not allowed to perform the requested operation. For example, you cannot delete a container that contains objects.
 
 ## 2.xx Arbitrary Limits
 
@@ -125,8 +154,7 @@ using a standard web browser. See [FormPOST](#formpost) for more information.
 
 * Signature Based Authentication. This allows a client to use HP Cloud Identity Service _Access Keys_ to "sign" the URL and headers of a request. Since the client has the Access Keys, it does not need to refer to the HP Cloud Identity Service to authenticate itself. Instead, a valid signature in the request allows HP Cloud Obkect Storage to authenticate the request and identify the user. See [Signature Based Authentication](#signature_auth)
  
-### 2.xx.x Using Authentication Tokens 
-{#using_tokens}
+### 2.xx.x <a id="using_tokens"></a>Using Authentication Tokens
 
 TBS -- new stuff -- esp
 
@@ -135,31 +163,27 @@ TBS -- new stuff -- esp
 * Unscoped
 * Scoped to a different tenant
 
-### 2.xx.x General Access Control Lists
-{#general_acls}
+### 2.xx.x <a id="general_acls"></a>General Access Control Lists
 
 TBS -- from the legacy document
 
-### 2.xx.x Cross-tenant Access Control Lists 
-{#cross_tenant_acls}
+### 2.xx.x <a id="cross_tenant_acls"></a>Cross-tenant Access Control Lists
 
 TBS -- from the legacy document
 
-### 2.xx.x Temporary URLs ### {#temp_url}
+### 2.xx.x <a id="temp_url"></a>Temporary URLs
 
 TBS -- from the legacy document
 
-### 2.xx.x FormPOST ### {#formpost}
+### 2.xx.x <a id="formpost"></a>FormPOST
 
 TBS -- from the lagacy document
 
-### 2.xx.x Signature Based Authentication 
-{#signature_auth}
+### 2.xx.x <a id="signature_auth">Signature Based Authentication
 
 TBS -- from the legacy document
 
-## 2.xx Retrieving large number of container or object names
-{#pagination}
+## 2.xx <a id="pagination"></a>Retrieving large number of container or object names
 
 When doing a GET request against an account or container, the service returns a maximum of 10,000 names per request. To
 retrieve subsequent names, you must make another request with
@@ -211,8 +235,7 @@ Again, two items are returned; there may be more:
 
 With this one-item response we received less than the limit number of names, indicating that this is the end of the list.
 
-## 2.xx Pseudo-Hierarchical Folders/Directories/
-{#pseudo_hierachies}
+## 2.xx <a id="pseudo_hierachies"></a>Pseudo-Hierarchical Folders/Directories/
 
 
 You can simulate a hierarchical structure in HP Cloud Object Storage by
@@ -301,70 +324,178 @@ query using slash (/) would give you photos, movieobject, videos.
     GET /v1/acct/container?delimiter=/
     Host: region-a.geo-1.objects.hpcloudsvc.com
     X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-                  
 
-Create Container
-----------------
+## 2.xx <a id="conditional_get"></a>Conditional GET of objects                  
 
-PUT operations against a storage container are used to create that
-container.
+You can perform conditional GET requests of an object by using certain HTTP
+headers as documented in [RFC 2616](http://www.ietf.org/rfc/rfc2616.txt](http://www.ietf.org/rfc/rfc2616.txt). 
+HP Cloud Object Storage supports thefollowing headers:
 
-Containers are storage compartments for your data. The URL encoded name
-must be less than 256 bytes and cannot contain a forward slash '/'
-character.
+* If-Match
+* If-None-Match
+* If-Modified-Since
+* If-Unmodified-Since
 
-Containers can be assigned custom metadata by including additional HTTP
-headers on the PUT request. The custom metadata is assigned to a
-container via HTTP headers identified with the `X-Container-Meta-`
-prefix.
+## 2.xx <a id="range_request"></a>Retrieving a portion of object data
 
-      PUT /<api version>/<account>/<container> HTTP/1.1
+It is also possible to fetch a portion of an object's data using the HTTP _Range_
+header. At this time, HP Cloud Object Storage does not support the full
+specification for _Range_ but basic support is provided. 
+
+HP Cloud Object
+Storage only allows a single range that includes OFFSET and/or LENGTH.
+We support a sub-set of _Range_ and do not adhere to the full RFC-2616
+specification. We support specifying OFFSET-LENGTH where either OFFSET
+or LENGTH can be optional (not both at the same time). 
+
+The following examples show the supported forms of the header:
+
+* `Range: bytes=-5` - last five bytes of the object
+
+* `Range: bytes=10-15` - the five bytes after a 10-byte offset
+
+* `Range: bytes=32-` - all data after the first 32 bytes of the object
+
+### Large Object Creation
+
+Objects that are larger than 5GB must be segmented prior to upload. You
+then upload the segments like you would any other object and create a
+manifest object telling HP Cloud Object Storage how to find the segments
+of the large object. The segments remain individually addressable, but
+retrieving the manifest object streams all the segments concatenated.
+There is no limit to the number of segments that can be a part of a
+single large object.
+
+In order to ensure the download works correctly, you must upload all the
+object segments to the same container and ensure each object name has a
+common prefix where their names sort in the order they should be
+concatenated. You also must create and upload a manifest file. The
+manifest file is simply a zero-byte file with the extra
+X-Object-Manifest: \<container\>/\<prefix\> header, where \<container\>
+is the container the object segments are in and \<prefix\> is the common
+prefix for all the segments.
+
+It is best to upload all the segments first and then create or update
+the manifest. With this method, the full object is not available for
+downloading until the upload is complete. Also, you can upload a new set
+of segments to a second location and then update the manifest to point
+to this new location. During the upload of the new segments, the
+original manifest is still available to download the first set of
+segments.
+
+      PUT /v1/1234567891234/test_container_1/test_obj_1 HTTP/1.1
+      X-Auth-Token: HPAuth_1234
+      ETag: 8a964ee2a5e88be344f36c22562a6486
+      Content-Length: 1
+      X-Object-Meta-PIN: 1234
+                      
+
+      s
+                        
+
+No response body is returned. A status code of 201 (Created) indicates a
+successful write; status 412 (Length Required) denotes a missing
+`Content-Length` or `Content-Type` header in the request. If the MD5
+checksum of the data written to the storage system does NOT match the
+(optionally) supplied ETag value, a 422 (Unprocessable Entity) response
+is returned.
+
+You can continue uploading segments like this example shows, prior to
+uploading the manifest.
+
+      PUT /v1/<account>/<container>/<object> HTTP/1.1
+      X-Auth-Token: HPAuth: 1234
+      ETag: 8a964ee2a5e88be344f36c22562a6486
+      Content-Length: 1
+      X-Object-Meta-PIN: 1234
+                      
+
+      w
+                        
+
+Next, upload the manifest you created that indicates the container the
+object segments reside within. Note that uploading additional segments
+after the manifest is created causes the concatenated object to be that
+much larger but you do not need to recreate the manifest file for
+subsequent additional segments.
+
+      PUT /<api version>/<account>/<container>/<object> HTTP/1.1
+      X-Auth-Token: HPAuth_1234
+      Content-Length: 0
+      X-Object-Meta-PIN: 1234
+      X-Object-Manifest: container/object/segments
+                      
+
+      [...]
+                        
+
+The response's Content-Type for a GET or `HEAD` on the manifest is the
+same as the Content-Type set during the PUT request that created the
+manifest. You can easily change the Content-Type by reissuing the PUT
+request.
+
+2.xx <a id="transfer_encoding_request"></a>Chunked Transfer Encoding
+
+Users can upload data without needing to know in advance the amount of
+data to be uploaded. Users can do this by specifying an HTTP header of
+`Transfer-Encoding:
+              chunked` and not using a `Content-Length` header. A good
+use of this feature would be doing a DB dump, piping the output through
+gzip, then piping the data directly into HP Cloud Object Storage without
+having to buffer the data to disk to compute the file size. If you
+attempt to upload more that 5GB with this method, the server closes the
+TCP/IP connection after 5GB and purge the customer data from the system.
+You must take responsibility for ensuring the data they transfer is less
+than 5GB or for splitting it into 5GB chunks, each in its own storage
+object. If you have files that are larger than 5GB and still want to use
+Object Storage, you can segment them prior to upload, upload them to the
+same container, and then use a manifest file to allow downloading of a
+concatenated object containing all the segmented objects, concatenated
+as a single object.
+
+      PUT /<api version>/<account>/<container>/<object> HTTP/1.1
       Host: region-a.geo-1.objects.hpcloudsvc.com
       X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-                        
+      Transfer-Encoding: chunked
+      X-Object-Meta-PIN: 1234
+                      
 
-No content is returned. A status code of 201 (Created) indicates that
-the container was created as requested. Container PUT requests are
-idempotent and a code of 202 (Accepted) is returned when the container
-already existed. If you request a PUT to a container with an
-`X-Container-Meta-` prefix in the header, your GET/HEAD request
-responses carry the metadata prefix from the container in subsequent
-requests.
+      19
+      A bunch of data broken up
+      D
+       into chunks.
+      0
+                      
 
-      HTTP/1.1 201 Created
-      Date: Thu, 07 Jun 2007 18:50:19 GMT
-      Server: Apache
-      Content-Type: text/plain; charset=UTF-8
-                        
+## 2.xx <a id="content_encoding_header">Enabling File Compression with the Content-Encoding Header
 
-Using custom container metadata, you can create information in the
-header to effectively "tag" a container with metadata. The container
-metadata restrictions are the same as object metadata, you can have 4096
-bytes maximum overall metadata, 90 distinct metadata items at the most.
-Each may have a 128 character name length with a 256 max value length
-each. Any valid UTF-8 http header value is allowed for metadata, however
-we recommend that you URL-encode any non-ASCII values using a "%"
-symbol, followed by the two-digit hexadecimal representation of the
-ISO-Latin code for the character.
 
-      PUT /<api version>/<account>/<container> HTTP/1.1
-      Host: storage.clouddrive.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-      X-Container-Meta-InspectedBy: JackWolf
-                        
+The Content-Encoding header allows a file to be compressed without
+losing the identity of the underlying media type of the file, for
+example, a video.
 
-No content is returned. A status code of 201 (Created) indicates that
-the container was created as requested. Container PUT requests are
-idempotent and a code of 202 (Accepted) is returned when the container
-already existed. If you request a PUT to a container with an
-`X-Container-Meta-` prefix in the header, your GET/HEAD request
-responses carry the metadata prefix from the container in subsequent
-requests.
+In the example, the content-encoding header is assigned with an
+attachment type that indicates how the file should be downloaded:
 
-      HTTP/1.1 201 Created
-      Date: Thu, 07 Jun 2010 18:50:19 GMT
-      Server: Apache
-      Content-Type: text/plain; charset=UTF-8
+      PUT /v1/1234567891234/test_container_1/test_obj_1
+      X-Auth-Token: HPAuth_1234
+      Content-Type: video/mp4
+      Content-Encoding: gzip
+           
+
+## 2.xx <a id="content_disposition_header"></a>Enabling Browser Bypass with the Content-Disposition Header
+
+When an object is assigned the Content-Disposition header you can
+override a browser's default behavior for a file so that the downloader
+saves the file rather than displaying it using default browser settings.
+
+In the example, the content-encoding header is assigned with an
+attachment type that indicates how the file should be downloaded.
+
+      PUT /v1/1234567891234/test_container_1/test_obj_1
+      X-Auth-Token: HPAuth_1234
+      Content-Type: image/tiff
+      Content-Disposition: attachment; filename=platmap.tif
 
 ## 2.xx Notable Differences from OpenStack
 
@@ -423,22 +554,21 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 **BaseURI**: {Host}/v1/{account}
 
-## Table ##
 
 | Resource  | Operation                   | HTTP Method | Path                   | JSON/XML?         | Privilege Level |
 | :-------  | :-------------------------- | :---------- | :--------------------- | :---------------- | :-------------  |
-| Account   | List containers             | GET         | /v1/account            | Y/Y               | Admin           |
-| Account   | Retrieve account metadata   | GET         | /v1/account            | n/a               | Admin           |
-| Container | List objects                | GET         | /v1/account/container  | Y/Y               | Admin           |
-| Container | Retrieve container metadata | HEAD        | /v1/account/container  | n/a               | Admin           |
-| Container | Create/update container     | PUT         | /v1/account/container  | n/a               | Admin           |
-| Container | Delete container            | DELETE      | /v1/account/container  | n/a               | Admin           |
-| Object    | Retrieve object             | GET         | /v1/account/container/object | n/a         | Admin           |
-| Object    | Retrieve object metadata    | HEAD        | /v1/account/container/object | n/a         | Admin           |
-| Object    | Create/Update Object        | PUT         | /v1/account/container/object | n/a         | Admin           |
-| Object    | Chunked transfer encoding   | PUT         | /v1/account/container/object | n/a         | Admin           |
-| Object    | Update object metadata      | POST        | /v1/account/container/object | n/a         | Admin           |
-| Object    | Delete object               | DELETE      | /v1/account/container/object | n/a         | Admin           |
+| [Account](#account_resource)     | List containers             | GET         | /v1/{account}                      | Y/Y         | Admin           |
+| [Account](#account_resource)     | Retrieve account metadata   | GET         | /v1/{account}                      | n/a         | Admin           |
+| [Container](#container_resource) | List objects                | GET         | /v1/{account}/{container}          | Y/Y         | Admin           |
+| [Container](#container_resource) | Retrieve container metadata | HEAD        | /v1/{account}/{container}          | n/a         | Admin           |
+| [Container](#container_resource) | Create/Update container     | PUT         | /v1/{account}/{container}          | n/a         | Admin           |
+| [Container](#container_resource) | Delete container            | DELETE      | /v1/{account}/{container}          | n/a         | Admin           |
+| [Object](#object_resource)       | Retrieve object             | GET         | /v1/{account}/{container}/{object} | n/a         | Admin           |
+| [Object](#object_resource)       | Retrieve object metadata    | HEAD        | /v1/{account}/{container}/{object} | n/a         | Admin           |
+| [Object](#object_resource)       | Create/Update Object        | PUT         | /v1/{account}/{container}/{object} | n/a         | Admin           |
+| [Object](#object_resource)       | Chunked transfer encoding   | PUT         | /v1/{account}/{container}/{object} | n/a         | Admin           |
+| [Object](#object_resource)       | Update object metadata      | POST        | /v1/{account}/{container}/{object} | n/a         | Admin           |
+| [Object](#object_resource)       | Delete object               | DELETE      | /v1/{account}/{container}/{object} | n/a         | Admin           |
 
 
 
@@ -447,8 +577,7 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 Many operations accept request headers. This section provides an overview of each request header. Consult the specific operation to determine if the header applies to the operation and any other notes that are of interest.
 
-### 4.2.1 Accept
-{#accept_request}
+### 4.2.1 <a id="accept_request"></a>Accept
 
 Where applicable, this determines how the response body is formated. For example, you can use this to list the objects in a container as:
 * text (text/plain)
@@ -457,57 +586,86 @@ Where applicable, this determines how the response body is formated. For example
 * HTML (text/html, application/html).
 
 
-### 4.2.2 Content-Length
-{#content_length_request} 
+### 4.2.2 <a id="content_length_request"></a>Content-Length
 
 Where applicable, this is the length in bytes of the body of the request.
 
-### 4.2.3 Content-Type       
-{#content_type_request}
+### 4.2.3 <a id="content_type_request"></a>Content-Type       
 
 Where applicable, this indicates the MIME type of an object.
 
 When applied to object resources, the Content-Type request header is optional. If not specified, HP Cloud Storage will attempt to identify the content type and assign a MIME type. If this fails, the type is set to application/octet-stream. If you specify a value in the request header, when you next do a HEAD or GET operation on the object, the Content-Type response header is set to the specified value.
 
-### 4.2.4 X-Auth-Token
-{x_auth_token_request}
+### 4.2.4 <a id="x_auth_token_request"></a>X-Auth-Token
 
 When specified, this identifies the user making the request. In addition, if this token is being used by a user with Admin privilege level, the token must be scoped to the tenant associated with the account. If no token is specified, the request will fail unless tyou have been granted access to the resource by some other mechansim such as ACLs. See REF_NEEDED_HERE for more information about tokens.
+
+### 4.2.x <a id="x_container_meta_request"></a>X-Container-Meta-{name}
+
+This allows you to set custom meta data on a container using a header name with a prefix of X-Container-Meta-. After this prefix, you can
+pick any name meaningful to you. For example, X-Container-Meta-Reviewed could be used indicate that the contents
+of a container had been reviewed.
+
+Any valid UTF-8 http header value is allowed for metadata, however we
+recommend that you URL-encode any non-ASCII values
+
+When updating the custom meta data of a container, you must specifiy *all* of the meta data in the request. For example, if you plan to use X-Container-Meta-One and X-Container-Meta_Two, both must be specified in a single request. If you did two requests, one setting X-Container-Meta-One and the second setting X-Container-Meta-Two, when you later do a HEAD operations, only X-Container-Meta-Two would exist.
 
 
 ## 4.3 Common Response Headers
 
+### 4.3.x <a id="last_modified_response"></a>Last-Modified
 
-### 4.3.1 Content-Length
-{#content_length_response}
+This is the date and time that the container or object was created or the last time that the meta data was changed.
+
+### 4.3.1 <a id="content_length_response">Content-Length
 
 When the response includes a body, this indicates the length of the body in bytes.
 
-### 4.3.2 Content-Type
-{#content_type_response}
+### 4.3.2 <a id="content_type_response">Content-Type
 
 When the response includes a body, this indicates the MIME type of the response.
 
-### 4.4 HTTP Response Codes
-{#http_codes}
+### 4.3.x <a id="x_container_meta_response"></a>X-Container-Meta-{name}
 
-The following HTTP response codes are used by HP Cloud Object Storage.
+This contains the value of X-Container-Meta-{name} meta data that was previously set on a container, where {name} is
+an arbitrary name meaningful to you.
 
-|HTTP Code|Meaning|Description|
-|:--------|:------|:----------|
-|200      |Success|The operation completed normally.|
-|201      |Accepted for processing|The operation completed normally.|
-|204      |No Content|The operation completed normally.|
-|tbs      |tbs       |tbs    |
+### 4.3.x <a id="x_account_object_count_response"></a>X-Account-Object-Count
 
-## 4.5 Service API Operation Details
+The total number of objects in all containers associated with the account.
 
-### 4.5.1 Account ###
+### 4.3.x <a id="x_account_bytes_used_response"></a>X-Account-Bytes-Used
 
-#### 4.4.1. List Account ####
-#### GET /v1/\<account\>
+The total size in bytes of all objects in all containers assicated with the account.
 
-*This operation returns a listing of the containers in the designed account.*
+### 4.3.x <a id="x_account_container_count_response"></a>X-Account-Container-Count
+
+The number of containers in the account
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 4.4 Service API Operation Details
+
+### 4.4.1 Account ###
+
+#### 4.4.1. <a id="account_get"></a>List Account ####
+#### GET /v1/{<account}
+
+This operation returns a listing of the containers in the designed account.
 
 **Request Data**
 
@@ -522,16 +680,19 @@ See [Retrieving large number of container or object names](#pagination) for more
 
 * *marker* - (Optional) - String - Given a string value _x_, return container names greater in value than the specified marker.
 
-* *format* - (optional) - String - Specify either `json` or `xml` to return the respective serialized response. You may alternativly specify the required type in the *Accept* request header.
+* *format* - (optional) - String - Specify either `json` or `xml` to return the respective serialized response.
+You may alternativly specify the required type in the *Accept* request header.
       
                           
 **Data Parameters**
 
-This call does not require a request body.
+This operation does not require a request body.
 
 **Success Response**
 
 On success, the response body contains a list of the containers.
+A 204 (No Content) HTTP return code is passed back if the account
+has no containers.
 
 **Status Code**
 
@@ -539,8 +700,14 @@ See [HTTP Status Codes](#http_codes) for more information.
 
 **Response Data**
 
-A list of containers is returned in the response body. A 204 (No Content) HTTP return code is passed back if the account
-has no containers.
+The following response headers are returned:
+
+* [X-Account-Object-Count](#x_account_object_count_response)
+* [X-Account-Bytes-Used](#x_account_bytes_used_response)
+* [X-Account-Container-Count](#x_account_container_count_response)
+
+A list of containers is returned in the response body. With JSON and XML formats, you can also see the number (count)
+and size (bytes) of all objects in the listed container.
 
 Text/Plain                         
 
@@ -586,49 +753,213 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 ```
-curl -i -H "X-Auth-Token: HPAUTH_4848804377729095476739938777829" https://region-a.geo-1.objects.hpcloudsvc.com/v1/48828782005874
+curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/48828782005874
+HTTP/1.1 200 OK
+X-Account-Object-Count: 21280
+X-Account-Bytes-Used: 3044371826
+X-Account-Container-Count: 2
+Content-Length: 439867
+Content-Type: text/plain; charset=utf-8
+Date: Fri, 16 Nov 2012 11:18:45 GMT
+
+test_container_1
+test_container_2
+
 ```
 
 **Additional Notes**
 
 
 
-### 4.5.2 Retrieve Account Metadata
+### 4.4.2 <a id="account_head"></a>Retrieve Account Metadata
+### HEAD /v1/{account}
 
+This operation gets the meta data associated with the account.
 
-`HEAD` operations against an account are performed to retrieve the
-number of containers and the total bytes stored in HP Cloud Object
-Storage for the account. This information is returned in two custom
-headers, `X-Account-Container-Count` and `X-Account-Bytes-Used`. Since
-the storage system is designed to store large amounts of data, care
-should be taken when representing the total bytes response as an
-integer; when possible, convert it to a 64-bit unsigned integer if your
-platform supports that primitive type.
+**Request Data**
 
-      HEAD /<api version>/<account> HTTP/1.1
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
+The path specifies the account.
+
+**URL Parameters**
+
+None
+      
                           
+**Data Parameters**
 
-The HTTP return code is 204 (No Content) if the request succeeds. A 401
-(Unauthorized) is returned for an invalid account or access key.
+This operation cannot contain a request body.
 
-      HTTP/1.1 204 No Content
-      Date: Thu, 07 Jun 2010 18:57:07 GMT
-      Server: Apache
-      X-Account-Container-Count: 3
-      X-Account-Bytes-Used: 323479
+**Success Response**
+
+On success the response headers are populated. 
+
+**Status Code**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Response Data**
+
+The following response headers are returned:
+
+* [X-Account-Object-Count](#x_account_object_count_response)
+* [X-Account-Bytes-Used](#x_account_bytes_used_response)
+* [X-Account-Container-Count](#x_account_container_count_response)
+
+
+**Error Response**
+
+If an error occurs, the response body contains a description of the error.
+
+**Status Code**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Curl Example**
+
+```
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/48828782005874 -X HEAD
+HTTP/1.1 200 OK
+X-Account-Object-Count: 21280
+X-Account-Bytes-Used: 3044371826
+X-Account-Container-Count: 2
+Content-Length: 0
+
+```
+
+**Additional Notes**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                           
+### 4.x.x. <a id="account_put"></a>Update Account Meta Data
 
-## 4.5 Container
+TBS
 
-#### 4.5.1. List Objects in a Container
-#### GET /v1/\<account\>/\<container\>                  
+## 4.4 Container
 
-*Retrieve a list of objects stored in the container.*
+### 4.4.x.x <a id="container_put"></a>Create/Update Container
+### PUT /v1/{account}/{container}
 
-GET operations against a  container name are performed to
-retrieve a list of objects stored in the container.
+This operation creates a container or updates the meta data associated with an existing container. 
+You are free to a pick container name that is meaningful to you.
+See [Container and Object Naming](#naming) for restrictions on container names.
+
+You can set custom meta data on a container using a header name with a prefix of X-Container-Meta-. After this prefix, you can
+pick any name meaningful to you. For example, X-Container-Meta-Reviewed could be used indicate that the contents
+of a container had been reviewed.
+
+Any valid UTF-8 http header value is allowed for metadata, however we
+recommend that you URL-encode any non-ASCII values
+
+When updating the custom meta data of a container, you must specifiy *all* of the meta data in the request. For example, if you plan to use X-Container-Meta-One and X-Container-Meta_Two, both must be specified in a single request. If you did two requests, one setting X-Container-Meta-One and the second setting X-Container-Meta-Two, when you later do a HEAD operations, only X-Container-Meta-Two would exist.
+
+You don't need to check if a container already exists before doing the PUT operation because the operation is idempotent (i.e., it will create a new container
+or update an existing container as appropriate). 
+
+**Request Data**
+
+The path specifies the account and the name of the container to create.
+
+**URL Parameters**
+
+None  
+                          
+**Data Parameters**
+
+This operation does not require a request body.
+
+**Success Response**
+
+On success, the container is created. See [Creation Guantees](#creation_guarantees) for more information.
+
+**Status Code**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Response Data**
+
+A description of the HTTP Status Code.
+
+**Error Response**
+
+If an error occurs, the response body contains a description of the error.
+
+**Status Code**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Curl Example**
+
+```
+curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/48828782005874/test_container_1 -H 'x-container-meta-one: one' -X PUT
+HTTP/1.1 201 Created
+Content-Length: 18
+Content-Type: text/html; charset=UTF-8
+X-Trans-Id: tx637b78d521264774867355b2262c4d4a
+Date: Fri, 16 Nov 2012 14:10:20 GMT
+
+201 Created
+
+```
+
+**Additional Notes**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### 4.4.x.x <a id="container_get"></a>List Objects in a Container
+#### GET /v1/{account}/{container}                  
+
+Retrieve a list of objects stored in a container.
 
 **Request Data**
 
@@ -664,7 +995,7 @@ The following query parameters are available:
 
 **Data Parameters**
 
-This call does not require a request body.
+This operation does not require a request body.
 
 **Success Response**
 
@@ -672,12 +1003,16 @@ If the container contains objects, 200 (OK) is returned. If there are no objects
 
 **Status Code**
 
-200 - OK
-204 - No Content
+See [HTTP Status Codes](#http_codes) for more information.
 
 **Response Data**
 
-If there are objects, their names are returned in body in the requested format.
+If there are objects, their names are returned in the response body in the requested format. The JSON and XML formats
+list additional data about each object as follows:
+* hash - The MD5 checksum for the contents on the object
+* bytes -- The size in bytes of the object
+* content_type - The MIME type of the object
+* last_modified - The date and time the object was created or the time at which the object meta data was last updated. 
 
 Text/Plain
 
@@ -725,212 +1060,406 @@ XML
       
 **Error Response**
 
-On failure, the operation will return a [HTTP status code](#http_codes). The response body contains a text description of the error.
+If an error occurs, the response body contains a description of the error.
+
+**Status Response**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Curl Example**
+
+```
+curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/48828782005874/test_container_1 -XGET
+HTTP/1.1 200 OK
+X-Container-Object-Count: 2
+X-Container-Meta-One: one
+X-Container-Bytes-Used: 378
+Content-Length: 28
+Content-Type: text/plain; charset=utf-8
+
+test_object_1
+test_object_2
+
+
+```
+
+**Additional Notes**
 
 
 
-### Serialized List Output
 
-If a `format=xml` or `format=json` argument is appended to the storage
-account URL, the service serves extended object information serialized
-in the chosen format. Other than the `?format=xml|json` parameter, it
-returns the same status/errors codes. The sample responses below are
-formatted for readability.
 
-      GET /<api version>/<account>/<container>?format=json HTTP/1.1
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      Content-Length: 0
-      X-Storage-Token: 182f9c0af0e828cfe3281767d29d19f4
-                          
 
-      HTTP/1.1 200 OK
-      Date: Tue, 25 Nov 2008 19:39:13 GMT
-      Server: Apache
-      Content-Length: 387
-      Content-Type: application/json; charset=utf-8
+
+
+
+
+
+
+
+
+
+
+#### 4.4.x.x <a id="container_get"></a>Retrieve the Meta Data of a Container
+#### HEAD /v1/{account}/{container}                  
+
+Retrieve the meta data of a container.
+
+**Request Data**
+
+The path specifies the account and container name.
+
+The following request headers apply to this operation.
+
+* [X-Auth-Token](#x_auth_token_request) - Optional - Authentication token
+
+
+**URL Parameters**
+
+None.
+
+**Data Parameters**
+
+This operation does not require a request body.
+
+**Success Response**
+
+The meta data is returned in the response headers.
+
+**Status Code**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Response Data**
+
+The following response headers are returned:
+
+* [X-Container-Object-Count](#x_container_object_count_response)
+* [X-Container-Meta-{name}](#x_container_meta_response)
+* [X-Container-Bytes-Used](#x_container_bytes_used)
+      
+**Error Response**
+
+If an error occurs, the response body contains a description of the error.
+
+**Status Response**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Curl Example**
+
+```
+curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/48828782005874/test_container_1 -XHEAD
+HTTP/1.1 200 OK
+X-Container-Object-Count: 2
+X-Container-Meta-One: one
+X-Container-Bytes-Used: 378
+Content-Length: 0
+
+```
+
+**Additional Notes**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     
+#### 4.4.x.x <a id="container_delete"></a>Delete a Container
+#### GET /v1/{account}/{container}                  
+
+Delete a container.
+
+You cannot delete a container if it has any objects in it.
+
+**Request Data**
+
+The path specifies the account and container name.
+
+The following request headers apply to this operation.
+
+* [X-Auth-Token](#x_auth_token_request) - Optional - Authentication token
+
+**URL Parameters**
+
+None.
+
+**Data Parameters**
+
+This operation does not require a request body.
+
+**Success Response**
+
+The container is deleted.
+
+**Status Code**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Response Data**
+
+None
+      
+**Error Response**
+
+If an error occurs, the response body contains a description of the error.
+
+**Status Response**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Curl Example**
+
+```
+curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/48828782005874/test_container_1 -XGET
+HTTP/1.1 200 OK
+X-Container-Object-Count: 2
+X-Container-Meta-One: one
+X-Container-Bytes-Used: 378
+Content-Length: 28
+Content-Type: text/plain; charset=utf-8
+
+test_object_1
+test_object_2
+
+
+```
+
+**Additional Notes**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
                         
 
-~~~~ {.javascript}
- [
-   {"name":"test_obj_1",
-    "hash":"4281c348eaf83e70ddce0e07221c3d28",
-    "bytes":14,
-    "content_type":"application\/octet-stream",
-    "last_modified":"2009-02-03T05:26:32.612278"},
-   {"name":"test_obj_2",
-    "hash":"b039efe731ad111bc1b0ef221c3849d0",
-    "bytes":64,
-    "content_type":"application\/octet-stream",
-    "last_modified":"2009-02-03T05:26:32.612278"},
- ]
-                    
-~~~~
 
-      GET /<api version>/<account>/<container>?format=xml HTTP/1.1
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Storage-Token: 182f9c0af0e828cfe3281767d29d19f4
-                        
 
-      HTTP/1.1 200 OK
-      Date: Tue, 25 Nov 2008 19:42:35 GMT
-      Server: Apache
-      Content-Length: 643
-      Content-Type: application/xml; charset=utf-8
-                        
 
-~~~~ {.xml}
-  <?xml version="1.0" encoding="UTF-8"?>
 
-  <container name="test_container_1">
-    <object>
-      <name>test_object_1</name>
-      <hash>4281c348eaf83e70ddce0e07221c3d28</hash>
-      <bytes>14</bytes>
-      <content_type>application/octet-stream</content_type>
-      <last_modified>2009-02-03T05:26:32.612278</last_modified>
-    </object>
-    <object>
-      <name>test_object_2</name>
-      <hash>b039efe731ad111bc1b0ef221c3849d0</hash>
-      <bytes>64</bytes>
-      <content_type>application/octet-stream</content_type>
-      <last_modified>2009-02-03T05:26:32.612278</last_modified>
-    </object>
-  </container>
-                    
-~~~~
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
                         
+## 4.x Object
 
-Delete Container
-----------------
 
-DELETE operations against a storage container are used to permanently
-remove that container. The container must be empty before it can be
-deleted.
 
-A `HEAD` request against the container can be used to determine if it
-contains any objects.
-
-      DELETE /<api version>/<account>/<container> HTTP/1.1
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-                        
-
-*'Response '*
-
-No content is returned. A status code of 204 (No Content) indicates
-success, 404 (Not Found) is returned if the requested container was not
-found, and a 409 (Conflict) if the container is not empty. No response
-body is generated.
-
-      HTTP/1.1 204 No Content
-      Date: Thu, 07 Jun 2010 18:57:07 GMT
-      Server: Apache
-      Content-Length: 0
-      Content-Type: text/plain; charset=UTF-8
-                        
-
-Retrieve Container Metadata
----------------------------
-
-You use `HEAD` operations against a storage container to determine the
-number of objects, and the total bytes of all objects stored in the
-container. Since the storage system is designed to store large amounts
-of data, you should care when representing the total bytes response as
-an integer; when possible, convert it to a 64-bit unsigned integer if
-your platform supports that primitive type.
-
-      HEAD /<api version>/<account>/<container> HTTP/1.1
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-                        
-
-The HTTP return code is 204 (No Content) if the container exists, and
-404 (Not Found) if it does not. The object count and utilization are
-returned in the `X-Container-Object-Count` and `X-Container-Bytes-Used`
-headers respectively.
-
-      HTTP/1.1 204 No Content
-      Date: Wed, 11 Jul 2010 19:37:41 GMT
-      Content-type: text/html
-      X-Container-Object-Count: 7
-      X-Container-Bytes-Used: 413
-      X-Container-Meta-InspectedBy: JackWolf
-                        
-
-Storage Object Services
-=======================
-
-An object represents the data and any metadata for the files stored in
-the system. Through the ReST interface, you can include metadata for an
-object by adding custom HTTP headers to the request and the data payload
-as the request body. Objects cannot exceed 5GB and must have names that
-do not exceed 1024 bytes after URL encoding. However, objects larger
-than 5GB can be segmented and then concatenated together so that you can
-upload 5 GB segments and download a single concatenated object. You can
-work with the segments and manifests directly with HTTP requests.
-
-Retrieve Object
+### 4.x.x <a id="object_get"></a>Retrieve Object
+### GET /v1/{account}/{container}/{object}
 ---------------
 
-You can use GET operations against an object to retrieve the object's
-data.
+Retrieve the contents of an object.
 
-Note that you can perform conditional GET requests by using certain HTTP
-headers as documented in RFC 2616. HP Cloud Object Storage supports the
-following headers:
+In its simplest form, the GET operation returns the object contents in the response body
+and retrieves the object's meta data and places the names and values into response headers.
+However, you there are additional capabilities:
 
-RFC 2616:
-[http://www.ietf.org/rfc/rfc2616.txt](http://www.ietf.org/rfc/rfc2616.txt)
+* You can perform conditional GET requests by using certain HTTP
+headers as documented in [RFC 2616](http://www.ietf.org/rfc/rfc2616.txt](http://www.ietf.org/rfc/rfc2616.txt).
+See [Conditional GET of objects](#conditional_get) for more information.
 
--   If-Match
+* It is also possible to fetch a portion of data using basic support of the HTTP [Range](#range_request)
+header.
 
--   If-None-Match
+* If the object name is the name of an object manifest, the operation concatinates all the segments into one stream.
 
--   If-Modified-Since
+**Request Data**
 
--   If-Unmodified-Since
+The path specifies the account, container name and object name.
 
-It is also possible to fetch a portion of data using the HTTP `Range`
-header. At this time, HP Cloud Object Storage does not support the full
-specification for `Range` but basic support is provided. HP Cloud Object
-Storage only allows a single range that includes OFFSET and/or LENGTH.
-We support a sub-set of `Range` and do not adhere to the full RFC-2616
-specification. We support specifying OFFSET-LENGTH where either OFFSET
-or LENGTH can be optional (not both at the same time). The following are
-supported forms of the header:
+The following request headers apply to this operation.
 
--   `Range: bytes=-5` - last five bytes of the object
+* [X-Auth-Token](#x_auth_token_request) - Optional - Authentication token
+* [If-Match](#conditional_get) - Optional - See [Conditional GET of objects](#conditional_get) for more information.
+* [If-None-Match](#conditional_get) - Optional - See [Conditional GET of objects](#conditional_get) for more information.
+* [If-Modified-Since](#conditional_get) - Optional - See [Conditional GET of objects](#conditional_get) for more information.
+* [If-Unmodified-Since](#conditional_get) - Optional - See [Conditional GET of objects](#conditional_get) for more information.
+* [Range](#range_request) - Optional - See [Retrieving a portion of object data](#range_request) for more information.
 
--   `Range: bytes=10-15` - the five bytes after a 10-byte offset
+**URL Parameters**
 
--   `Range: bytes=32-` - all data after the first 32 bytes of the object
+None.
 
-<!-- -->
+**Data Parameters**
 
-      GET /<api version>/<account>/<container>/<object> HTTP/1.1
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-                        
+This operation does not require a request body.
 
-The object's data is returned in the response body. Object metadata is
-returned as HTTP headers. A status of 200 (Ok) indicates success; status
-404 (Not Found) is returned if no such object exists.
+**Success Response**
 
-      HTTP/1.1 200 Ok
-      Date: Wed, 11 Jul 2010 19:37:41 GMT
-      Server: Apache
-      Last-Modified: Fri, 12 Jun 2010 13:40:18 GMT
-      ETag: b0dffe8254d152d8fd28f3c5e0404a10
-      Content-type: text/html
-      Content-Length: 512000
-                        
+The object contents is returned in the response body and meta data is returned in the response headers.
+Since the HTTP Succes code is written to the response stream before the response body and headers
+are returned, it is possible that you will see a 200 Success code is seen even though the the transfer of headers
+or body had a failure. You should check that the length of the actual body is the same as the
+[Content_Length](#content_length_response) response header. Ideally, you should also
+perform an MD5 checksum over the response body and compare with the [ETag](#etag_response) response header.
 
-      [ ... ]
+**Status Code**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Response Data**
+
+The following response headers are returned:
+
+* [Last-Modified](#last_modified_response)
+* [Content_Length](#content_length_response)
+* [Content_Type](#content_type_response)
+* [ETag](#etag_response)
+* [Content_Encoding](#content_encoding_header)
+* [Content_Disposition](#content_disposition_header)
+
+      
+**Error Response**
+
+If an error occurs, the response body contains a description of the error.
+
+**Status Response**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Curl Example**
+
+```
+curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/48828782005874/test_container_1/test_obj_1 -XGET
+HTTP/1.1 200 OK
+Last-Modified: Fri, 16 Nov 2012 15:34:56 GMT
+ETag: 4281c348eaf83e70ddce0e07221c3d28
+Content_Length: 
+Content_Type: text/plain
+Content-Length: 12
+
+Hello World!
+
+```
+
+**Additional Notes**
+
+
+
+
+
+
+
+
+
+
+### 4.x.x <a id="object_put"></a>Create/Update Object
+### PUT /v1/{account}/{container}/{object}
+---------------
+
+Creates an object.
+
+
+
+
+**Request Data**
+
+The path specifies the account, container name and object name.
+
+The following request headers apply to this operation.
+
+* [X-Auth-Token](#x_auth_token_request) - Optional - Authentication token
+* [If-Match](#conditional_get) - Optional - See [Conditional GET of objects](#conditional_get) for more information.
+* [If-None-Match](#conditional_get) - Optional - See [Conditional GET of objects](#conditional_get) for more information.
+* [If-Modified-Since](#conditional_get) - Optional - See [Conditional GET of objects](#conditional_get) for more information.
+* [If-Unmodified-Since](#conditional_get) - Optional - See [Conditional GET of objects](#conditional_get) for more information.
+* [Range](#range_request) - Optional - See [Retrieving a portion of object data](#range_request) for more information.
+
+**URL Parameters**
+
+None.
+
+**Data Parameters**
+
+This operation does not require a request body.
+
+**Success Response**
+
+The object contents is returned in the response body and meta data is returned in the response headers.
+Since the HTTP Succes code is written to the response stream before the response body and headers
+are returned, it is possible that you will see a 200 Success code is seen even though the the transfer of headers
+or body had a failure. You should check that the length of the actual body is the same as the
+[Content_Length](#content_length_response) response header. Ideally, you should also
+perform an MD5 checksum over the response body and compare with the [ETag](#etag_response) response header.
+
+**Status Code**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Response Data**
+
+The following response headers are returned:
+
+* [Last-Modified](#last_modified_response)
+* [Content_Length](#content_length_response)
+* [Content_Type](#content_type_response)
+* [ETag](#etag_response)
+* [Content_Encoding](#content_encoding_header)
+* [Content_Disposition](#content_disposition_header)
+
+      
+**Error Response**
+
+If an error occurs, the response body contains a description of the error.
+
+**Status Response**
+
+See [HTTP Status Codes](#http_codes) for more information.
+
+**Curl Example**
+
+```
+curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/48828782005874/test_container_1/test_obj_1 -XGET
+HTTP/1.1 200 OK
+Last-Modified: Fri, 16 Nov 2012 15:34:56 GMT
+ETag: 4281c348eaf83e70ddce0e07221c3d28
+Content_Length: 
+Content_Type: text/plain
+Content-Length: 12
+
+Hello World!
+
+```
+
+**Additional Notes**
                         
 
 Create/Update Object
@@ -984,152 +1513,7 @@ is returned.
       Content-Type: text/plain; charset=UTF-8
                         
 
-### Large Object Creation
 
-Objects that are larger than 5GB must be segmented prior to upload. You
-then upload the segments like you would any other object and create a
-manifest object telling HP Cloud Object Storage how to find the segments
-of the large object. The segments remain individually addressable, but
-retrieving the manifest object streams all the segments concatenated.
-There is no limit to the number of segments that can be a part of a
-single large object.
-
-In order to ensure the download works correctly, you must upload all the
-object segments to the same container and ensure each object name has a
-common prefix where their names sort in the order they should be
-concatenated. You also must create and upload a manifest file. The
-manifest file is simply a zero-byte file with the extra
-X-Object-Manifest: \<container\>/\<prefix\> header, where \<container\>
-is the container the object segments are in and \<prefix\> is the common
-prefix for all the segments.
-
-It is best to upload all the segments first and then create or update
-the manifest. With this method, the full object is not available for
-downloading until the upload is complete. Also, you can upload a new set
-of segments to a second location and then update the manifest to point
-to this new location. During the upload of the new segments, the
-original manifest is still available to download the first set of
-segments.
-
-      PUT /<api version>/<account>/<container>/<object> HTTP/1.1
-      Host: storage.clouddrive.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-      ETag: 8a964ee2a5e88be344f36c22562a6486
-      Content-Length: 1
-      X-Object-Meta-PIN: 1234
-                      
-
-      s
-                        
-
-No response body is returned. A status code of 201 (Created) indicates a
-successful write; status 412 (Length Required) denotes a missing
-`Content-Length` or `Content-Type` header in the request. If the MD5
-checksum of the data written to the storage system does NOT match the
-(optionally) supplied ETag value, a 422 (Unprocessable Entity) response
-is returned.
-
-You can continue uploading segments like this example shows, prior to
-uploading the manifest.
-
-      PUT /<api version>/<account>/<container>/<object> HTTP/1.1
-      Host: storage.clouddrive.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-      ETag: 8a964ee2a5e88be344f36c22562a6486
-      Content-Length: 1
-      X-Object-Meta-PIN: 1234
-                      
-
-      w
-                        
-
-Next, upload the manifest you created that indicates the container the
-object segments reside within. Note that uploading additional segments
-after the manifest is created causes the concatenated object to be that
-much larger but you do not need to recreate the manifest file for
-subsequent additional segments.
-
-      PUT /<api version>/<account>/<container>/<object> HTTP/1.1
-      Host: storage.clouddrive.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-      Content-Length: 0
-      X-Object-Meta-PIN: 1234
-      X-Object-Manifest: container/object/segments
-                      
-
-      [...]
-                        
-
-The response's Content-Type for a GET or `HEAD` on the manifest is the
-same as the Content-Type set during the PUT request that created the
-manifest. You can easily change the Content-Type by reissuing the PUT
-request.
-
-### Chunked Transfer Encoding
-
-Users can upload data without needing to know in advance the amount of
-data to be uploaded. Users can do this by specifying an HTTP header of
-`Transfer-Encoding:
-              chunked` and not using a `Content-Length` header. A good
-use of this feature would be doing a DB dump, piping the output through
-gzip, then piping the data directly into HP Cloud Object Storage without
-having to buffer the data to disk to compute the file size. If you
-attempt to upload more that 5GB with this method, the server closes the
-TCP/IP connection after 5GB and purge the customer data from the system.
-You must take responsibility for ensuring the data they transfer is less
-than 5GB or for splitting it into 5GB chunks, each in its own storage
-object. If you have files that are larger than 5GB and still want to use
-Object Storage, you can segment them prior to upload, upload them to the
-same container, and then use a manifest file to allow downloading of a
-concatenated object containing all the segmented objects, concatenated
-as a single object.
-
-      PUT /<api version>/<account>/<container>/<object> HTTP/1.1
-      Host: region-a.geo-1.objects.hpcloudsvc.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-      Transfer-Encoding: chunked
-      X-Object-Meta-PIN: 1234
-                      
-
-      19
-      A bunch of data broken up
-      D
-       into chunks.
-      0
-                      
-
-Enabling File Compression with the Content-Encoding Header
-----------------------------------------------------------
-
-The Content-Encoding header allows a file to be compressed without
-losing the identity of the underlying media type of the file, for
-example, a video.
-
-In the example, the content-encoding header is assigned with an
-attachment type that indicates how the file should be downloaded:
-
-      PUT /<api version>/<account>/<container>/<object> HTTP/1.1
-      Host: storage.clouddrive.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-      Content-Type: video/mp4
-      Content-Encoding: gzip
-           
-
-Enabling Browser Bypass with the Content-Disposition Header
------------------------------------------------------------
-
-When an object is assigned the Content-Disposition header you can
-override a browser's default behavior for a file so that the downloader
-saves the file rather than displaying it using default browser settings.
-
-In the example, the content-encoding header is assigned with an
-attachment type that indicates how the file should be downloaded.
-
-      PUT /<api version>/<account>/<container>/<object> HTTP/1.1
-      Host: storage.clouddrive.com
-      X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-      Content-Type: image/tiff
-      Content-Disposition: attachment; filename=platmap.tif
                         
 
 Copy Object
