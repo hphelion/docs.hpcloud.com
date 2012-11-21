@@ -14,18 +14,18 @@ HP Cloud Object Storage is an affordable, redundant, scalable, and
 dynamic storage service. The core storage system is designed to
 provide a safe, secure, network accessible
 way to store data. You can store an unlimited quantity of files and each
-file can be as large as 5 gigabytes, plus with large object creation,
+file can be as large as 5GB.  With segmented objects,
 you can upload and store objects of virtually any size.
 
-HP Cloud Object Storage allows users to store and retrieve files and
-content via a simple Web Service (ReST: Representational State Transfer)
+HP Cloud Object Storage allows you to store and retrieve files and
+content via a simple Web Service Representational State Transfer (ReST)
 interface. 
 
-## 1.1. API Maturity Level
+## 1.1 API Maturity Level
 
 This section describes the maturity level of the functions and features described in this document.
 
-### 1.1.1 Maturity Level Description
+### 1.1.1 Maturity Level Definitions
 
 The maturity levels are as follows:
 
@@ -33,7 +33,7 @@ The maturity levels are as follows:
 advertised, we do not offer a Service Level Agreement (SLA) for the service or feature.
 
 * Release to General Availability (GA). At this level of maturity, all features and functions are expected to operate
-as advertised. In particular, there are is a Service Level Agreement (SLA) defined and in place.
+as advertised. In particular, there is a Service Level Agreement (SLA) defined and in place.
 
 ### 1.1.2 Container Synchronization
 
@@ -43,7 +43,7 @@ The container synchronization feature has the following maturity level:
 
 **Version API Status**: BETA
 
-### 1.1.3 Remaining (Majority) of Features
+### 1.1.3 Remaining (Majority of) Features
 
 **Maturity Level**: HP Cloud Storage is General Availability (GA).
 
@@ -52,7 +52,7 @@ The container synchronization feature has the following maturity level:
 2. Architectural View
 
 The HP Cloud Object Storage API is implemented as a set of ReSTful web
-services. All authentication and container/object operations can be
+services. All account, container and object operations can be
 performed with standard HTTP calls. See the [Wikipedia
 article](http://en.wikipedia.org/wiki/REST) for more information about
 ReST.
@@ -61,14 +61,14 @@ ReST.
 
 The HP Cloud Storage API allows the management of the following resources:
 
-* Account
-* Container
-* Object
+* [Account](#account_resource)
+* [Container](#container_resource)
+* [Object](#object_resource)
 
-### 2.x.x <a id="account_resource"></a>HP Cloud Storage Accounts
+### 2.2.1 <a id="account_resource"></a>HP Cloud Storage Accounts
 
-The account is the top level resource in the hierarcy. An account is assigned when you activate HP Cloud Object Storage.
-There is a one-to-one relationship between an account and the _tenant_. In fact, for most users, the HP Cloud Storage account and tenand _Id_ are the same.
+The account is the top level resource in the hierarchy. An account is assigned when you activate HP Cloud Object Storage.
+There is a one-to-one relationship between an account and the _tenant_. In fact, for most users, the HP Cloud Storage account and tenant _Id_ are the same.
 
 If you subscribed to the HP Cloud Beta program, your HP Cloud Storage account name may start with "AUTH_", followed by a long number. This makes
 no difference to how you use the API. In all cases, you should use the endpoint from the service catalog that the HP Cloud Identity Service supplies when authenticating yourself.  
@@ -76,32 +76,38 @@ no difference to how you use the API. In all cases, you should use the endpoint 
 There is more about [tenants and accounts](#tenants_account) later in this document. 
 There is more about using the [HP Cloud Identity Service](#getting_tokens) later in this document.
 
-### 2.x.x <a id="container_resource"></a>HP Cloud Storage Containers
 
-A container provides a way for you to organise your objects. 
+### 2.2.2 <a id="container_resource"></a>HP Cloud Storage Containers
+
+A container provides a way for you to organize your objects. 
 You can pick any name that is meaningful to you. 
 However, see [Container and Object Naming](#naming) for restrictions on container names.
 
-### 2.x.x <a id="object_resource"></a>HP Cloud Storage Objects
+### 2.2.3 <a id="object_resource"></a>HP Cloud Storage Objects
 
 An object provides a way for you to store an arbitrary blob of data. 
-This may be a document, image, video, backup file and anything else required by your application.
+This may be a document, image, video, backup file or anything else required by your application.
 You can pick any name that is meaningful to you. However, see [Container and Object Naming](#naming) for restrictions on object names.
 
-Objects have a size limit of 5 gigabytes.  However, objects larger
+Objects have a size limit of 5 gigabytes. However, objects larger
 than 5GB can be segmented and then concatenated together so that you can
 upload 5GB segments and download a single concatenated object. You can
-work with the segments and manifests directly with HTTP requests. 
+work with the segments and manifests directly with API requests. 
 
-In addition, to storing the content of an object, you may also associate meta-data with an object. 
+In addition to storing the content of an object, you may also associate metadata with an object. 
 
-While the primary organisational structure in HP Cloud Object Storage is the container, you may use object names as a way to
-further organise your data. A common usage of this is to include a delimiter character such as slash ('/') character in the object name. For example, "vacation/pic1.jpg". If this object is stored in a container called "photos", the URI for the object would include "photos/vacation/pic1.jpg". While this appears to allow hierarchies similar to a file system's directory structure, it is important to understand that there is no such hierarchy in HP Cloud Object Storage.
-For example, if you simply created a container called "photos" and then created an object called "vacation/pic1.jpg",
-you cannot access "photos/vacation" -- there is no such object in the system. 
+While the primary organizational structure in HP Cloud Object Storage is the container, you may use object names as a way to
+further organize your data. A common usage of this is to include a delimiter character such as slash ('/') character in the object name.
+For example, you could use `/vacation/pic1.jpg` as the name of an object.
+If this object is stored in a container called `photos`, the URI for the object would be `/v1/{account}/photos/vacation/pic1.jpg`.
+
+While this appears to allow hierarchies similar to a file system's directory structure, it is important to understand that there is 
+no such hierarchy in HP Cloud Object Storage.
+For example, if you simply created a container called `photos` and then created an object called `vacation/pic1.jpg`,
+you cannot access `photos/vacation/` -- there is no such object in the system. 
 For more, see [Pseudo-Hierarchical Folders/Directories](#pseudo_hierachies).
 
-## 2.xx <a id="#naming"><a/>Container and Object Naming
+### 2.2.4 <a id="#naming"><a/>Container and Object Naming
 
 Container and object names should be properly URL-encoded prior to
 interacting with the ReST interface (the language APIs handle URL
@@ -114,69 +120,157 @@ greater-than ('\>') characters.
 The container name length is limited to 256 bytes.
 
 Object names must not contain the double-quote ('"'), less-than ('\<') or
-grater-than ('\>') characters.
+greater-than ('\>') characters.
 The object name length is limited to 1024 bytes.
 
 Although you use URL-encoding to specify the URI of a container or object, when the API returns names (as in, listing a container), the displayed names are not URL-encoded (i.e., they are the original names).
 
-## 2.xx Consistency
+## 2.3 Consistency
 
-TBS
+The HP Cloud Object Storage service is based on OpenStack Swift. This provides an "eventual consistency" model. This means that when
+you update the system in some way, you are not necessarily guaranteed to have the update propagated to all parts of the system
+at once. This is a consequence of how the system operates. The HP Cloud Object Storage system comprises 100s of servers, uses
+multiple copies of data and multiple availability zones to achieve very high scalability (in terms of objects stored) and very high availability for the data.
+In such a design, consistency is traded off to achieve high scale and availability.
 
-### 2.x.x <a id="creation_guarantees"></a>Creation Guantees
+As the name implies, the eventual consistency means that after updates, the update will be *eventually* visible to all parts of the
+system. In practice, you can rely on read-after-create consistency. That it, immediately after creating an object, you
+will be able to read or access that object. However, if you replace an object with a new copy, there are situations where
+the system might return the original object. This requires a specific sequence of server failures to end up in this
+situation and is unlikly to occur very often.
 
-When you create a container of object, the HP Cloud Object Storage system creates several copies of the container or object.
+A much more common inconsistency that you may observe is that after you create, replace or delete an object, the container
+may not be updated to list the object -- or may have the timestamp of an older object. So when you list the contents of
+a container, it's possible that a subsequent attempt to read the object might fail if the object was deleted just
+before you performed the list operation.
+
+As far as possible, you should design applications to account for such possible inconsistencies. 
+
+### 2.3.1 <a id="creation_guarantees"></a>Creation Grantees
+
+When you create a container or object, the HP Cloud Object Storage system creates several copies of the container or object.
 The PUT operation makes sure that the container or object is written to disk drives before returning a success code.
 However, it does not wait for all disk drive operations to complete -- as soon as there are two copies known to have been
 successfully written to disk, the operation can complete. Subsequent copies are written in the background after the
 API has returned to you.
 
-## 2.xx Success and Error Handling
+## 2.4 Success and Error Handling
 
-### 2.x.x <a id="http_codes"></a>HTTP Status Codes
+Handling a HTTP success code is straight forward - any of the 200, 201, 202 and 204 codes indicate a success. Once you see
+this, you can assume the operation has completed and any expected response body or response headers are available
+for use.
 
-409 Conflict - You are not allowed to perform the requested operation. For example, you cannot delete a container that contains objects.
+In principal, the standard HTTP success codes distinguish types of success. For example, 201 Created officially indicates that
+a resource has been created -- implying that it previously did not exist, but was created by a PUT operation. However, you
+cannot make such distinctions with HP Cloud Object Storage. In general, it is simpler to process all success code in the same
+way and just proced to the next operation.
 
-## 2.xx Arbitrary Limits
+Handling failures is obviously more difficult. You need to examine the HTTP code to see how to respond. However, in many cases
+you should not simply abandon the task, but consider retrying. In particular, the following HTTP error codes might be recoverable
+as follows:
+
+* 401 Unauthorized. This can mean that you are not authorized to perform an operation. However, it might also mean that
+your [authentication token](#using_tokens) has expired. You should attempt to get a new token by contacting the
+HP Cloud Identity Service (it's also worth, retrying failures on the HP Cloud Identity service.
+
+* 403 Forbidden. As with 401 Unauthorized, it is worth getting a new token before attempting to retry the operation.
+
+* 404 Request Timeout. Please try the request again later.
+
+* 429 Too Many Requests. The system is busy and is asking that you slow down the rate at which you make requests.
+You should sleep or pause for a short period, and then attempt the operation again.
+
+* 500 Internal Error. This is an unusual situation, but can occur if the system is being reconfigured. You should sleep or pause for a short period and retry the operation.
+If the error persists, contact HP Cloud support.
+
+* 503 Service Unavailable. This is an unusual situation, but can occur if the system is being reconfigured. You should sleep or pause for a short period and retry the operation.
+If the error persists, contact HP Cloud support.
+
+In addition, you may get socket connection errors such as connection refused or connection reset by peer. These can happen
+either because of transient failures in the path between your client system as the HP Cloud system or because we are
+reconfiguring the system. For example, when we install new software, we will perform a rolling restart of the software. This might break an individual operation.
+We use load balancers, so your next attempt to perform the operation will be directed to a different server and will work.
+
+In the above scenarios, it has been suggested that you retry operations. The suggestion is that you sleep for one second and then retry. If this fails, you
+should sleep for a longer period before retrying. If after several retries (on the order of 5 attempts) your operation continues to fail, you can then
+consider the failure as unrecoverable.
+
+
+### 2.4.1 <a id="http_codes"></a>HTTP Status Codes
+
+The following HTTP codes are used by HP Cloud Object Storage.
+
+|Code      | Description    | Notes   |
+|:-------- | :------------  | :------ |
+|200 OK    | Standard response for successful requests. | The actual response will depend on the specific operation. |
+|201 Created| Standard response for successful requests. | The actual response will depend on the specific operation. |
+|202 Accepted | Standard response for successful requests. | The actual response will depend on the specific operation. |
+|204 No Content | Standard response to HEAD operations. | The response is in the response headers, there is no body in the response. |
+|400 Bad Request | The request cannot be fulfilled due to bad syntax. | Check your code. |
+|401 Unauthorized | This usually means that the [authorization token in X-Auth-Token](#using_tokens) is invalid (or missing).
+If, the token was valid at some stage and you then get this error, it has probably expired and you simply need to get a new authorization
+token.|
+|403 Forbidden | The request was a valid request, you do not have the appropriate access rights to the resource. |
+|404 Not Found | The requested resource (account, container or object) could not be found. | Generaly, either the resource never existed or has been deleted in the meantime. |
+|405 Method Not Allowed| A request was made of a resource using a request method not supported by that resource| Check your code. |
+|406 Not Acceptable |The requested resource is only capable of generating content not acceptable according to the Accept headers sent in the request. | TBS |
+|409 Conflict |You are not allowed to perform the requested operation. | For example, you cannot delete a container that contains objects.|
+|411 Length Required | A Content-Length request header was not specified. | Check your code. |
+| 412 Precondition Failed | The server does not meet one of the preconditions that the requester put on the request. | See [Conditional Get of Objects](#conditional_get_request) |
+|413 Request Entity Too Large|The request is larger than the server is willing or able to process.| For objects, see [Large Object Creation](#large_objects) |
+|414 Request-URI Too Long | The URI provided was too long for the server to process. | See [Arbitrary Limits](#uri_limits) |
+|416 Requested Range Not Satisfiable | The client has asked for a portion of the file, but the server cannot supply that portion.| For example, if the client asked for a part of the file that lies beyond the end of the file.|
+|418 I'm a teapot| Described in [RFC 2324](http://www.ietf.org/rfc/rfc2324.txt) | Please contact HP Cloud support if you get this error. |
+|422 Unprocessable Entity | The M5 checksum of an uploaded object body does not match the value supplied in the [ETag](#etag_request) request header. | This indicates that some form
+of corruption occurred in the transfer. Retry the operation. |
+|429 Too Many Requests | The user has sent too many requests in a given amount of time. | Sleep for a short period and retry the operation. |
+|431 Request Header Fields Too Large | Either an individual header field, or all the header fields collectively, are too large. | See [Arbitrary Limits](#uri_limits) |
+|500 Internal Server Error | An unexpected internal erorr occurred. | Sleep for a short period and retry the operation. For persistent failure, contact HP
+Cloud support | 
+|503 Service Unavailable | An unexpected internal erorr occurred. | Sleep for a short period and retry the operation. For persistent failure, contact HP
+Cloud support |
+
+
+## 2.5 <a id="uri_limits"</a>Arbitrary Limits
 
 The following constraints apply to the ReST API's HTTP requests:
 
--   Maximum number of HTTP headers per request: 90
+* Maximum number of HTTP headers per request: 90
 
--   Maximum length of all HTTP headers: 4096 bytes
+* Maximum length of all HTTP headers: 4096 bytes
 
--   Maximum length per HTTP request line: 8192 bytes
+* Maximum length per HTTP request line: 8192 bytes
 
--   Maximum length of HTTP request: 5 gigabytes
+* Maximum length of HTTP request: 5 gigabytes
 
--   Maximum length of container name: 256 bytes
+* Maximum length of container name: 256 bytes
 
--   Maximum length of object name: 1024 bytes
+* Maximum length of object name: 1024 bytes
 
-## 2.xx Authentication and Access Controls
+## 2.6 Authentication and Access Controls
 
-### 2.xx.x Overview
+### 2.6.1 Overview
 
 The HP Cloud Object Storage system provides a number of ways to control who can access and change data in an account, container or object. 
-Authenication services are provided by the [HP Cloud Identity Service](https://docs.hpcloud.com/identity). You use this serice to manage
+Authentication services are provided by the [HP Cloud Identity Service](https://docs.hpcloud.com/identity). You use this service to manage
 your passwords and access keys. HP Cloud Object Storage interacts with the Identity Service to verify who you are.
 
-In conjunction with the HP Cloud Identity Service, the HP CLoud Object Storage service provides a number of ways to control access to the system as follows:
+In conjunction with the HP Cloud Identity Service, the HP Cloud Object Storage service provides a number of ways to control access to the system as follows:
 
-* Authentication tokens. Using the HP Cloud Identity Service API, you can authenticate yourself for a specific tenant. The HP Cloud Identity Service returns a token. In subsequent operations, you include this token in the X-Auth-Token request header. The value of the token is used to identify you. If you are associated with the tenant, you now have full acccess to the HP Cloud Object Storage account. See [Using Authentication Tokens](#using_tokens) for more information.
+* Authentication tokens. Using the HP Cloud Identity Service API, you can authenticate yourself for a specific tenant. The HP Cloud Identity Service returns a token. In subsequent operations, you include this token in the X-Auth-Token request header. The value of the token is used to identify you. If you are associated with the tenant, you now have full access to the HP Cloud Object Storage account. See [Using Authentication Tokens](#using_tokens) for more information.
 
-* General Access Control Lists (ACLs). You can apply an ACL as meta-data on a container. This allows you to make the container and it's objects world readable or writtable. See [General Access Control Lists](#general_acls) for more information.
+* General Access Control Lists (ACLs). You can apply an ACL as metadata on a container. This allows you to make the container and it's objects world readable or writable. See [General Access Control Lists](#general_acls) for more information.
 
 * Cross-tenant Access Control Lists (ACLs). This allows you to make the container and its objects readable or writeable by specific users. See [Cross-tenant Access Control Lists](#cross_tenant_acls) for more information.
 
-* Temporary URLs. This allows you to create a URL that encodes the Access Key information needed to get or put an object. The resulting URL contains enough information to allow it to be used without reference the HP Cloud Identity Service. Speficically, since it does not require you to use the X-Auth-Token request header, making it suitable for embedding in HTML pages and usuable by ordinary browsers. The URL has an expiry date, hence the URL is temporary. See [Temporary URLs](#temp_url) for more information.
+* Temporary URLs. This allows you to create a URL that encodes the Access Key information needed to get or put an object. The resulting URL contains enough information to allow it to be used without reference the HP Cloud Identity Service. Speficically, since it does not require you to use the X-Auth-Token request header, making it suitable for embedding in HTML pages and useable by standard browsers. The URL has an expiry date, hence the URL is temporary. See [Temporary URLs](#temp_url) for more information.
 
 * FormPOST. This is similar in concept to Temporary URLs except the encoding is done in a HTML form. This makes it possible to upload objects directly
 using a standard web browser. See [FormPOST](#formpost) for more information.
 
-* Signature Based Authentication. This allows a client to use HP Cloud Identity Service _Access Keys_ to "sign" the URL and headers of a request. Since the client has the Access Keys, it does not need to refer to the HP Cloud Identity Service to authenticate itself. Instead, a valid signature in the request allows HP Cloud Obkect Storage to authenticate the request and identify the user. See [Signature Based Authentication](#signature_auth)
+* Signature Based Authentication. This allows a client to use HP Cloud Identity Service _Access Keys_ to "sign" the URL and headers of a request. Since the client has the Access Keys, it does not need to refer to the HP Cloud Identity Service to authenticate itself. Instead, a valid signature in the request allows HP Cloud Object Storage to authenticate the request and identify the user. See [Signature Based Authentication](#signature_auth)
  
-### 2.xx.x <a id="using_tokens"></a>Using Authentication Tokens
+### 2.6.2 <a id="using_tokens"></a>Using Authentication Tokens
 
 The HP Cloud Object Storage service is not responsible for authenticating the identity of users. Instead, the HP Cloud Identity Service
 is responsible for authentication and identity management. 
@@ -189,7 +283,7 @@ request header is used by the API to include the token in the request.
 With this authentication token, the HP Cloud Object Stoage service can identify
 the user and decide whether the user is allowed to perform the operation.
 
-#### 2.xx.x.x Getting an authentication token.
+#### 2.6.2.1 Getting an authentication token.
 
 To make a request to the HP Cloud Identity Service, you need:
 
@@ -205,50 +299,63 @@ Access Keys are more suitable for use in APIs because you can create them for us
 have been compromised, you can delete the Access Key. This is more convenient that changing your password credentials. However, not all API bindings support Access Keys.
 
 In addition, to credentials, you also specify a tenant -- either the Id or tenant Name. With your credentials and tenant, the HP Cloud Identity Service checks to see
-whether you have activated the HP Cloud Object Storage servce. If so, it returns an authentication token and the endpoints to all instances of the HP Cloud Object Storage service that you are activated for. See [Service Catalog](#service_catalog) for an example of how the authentication token and endpoints are retutned.
+whether you have activated the HP Cloud Object Storage service. If so, it returns an authentication token and the endpoints to all instances of the HP Cloud Object Storage service that you are activated for. See [Service Catalog](#service_catalog) for an example of how the authentication token and endpoints are retutned.
 
-There are legacy Openstack Object Store APIs that used TempAuth or Swauth as their identity server. The HP Cloud Identity Service offers a compatible interface. You use your username, password and tenant Id as shown in the following example. This example use curl. The X-Storage-Url response header contains the HP Cloud Object Storage endpoint that includes your account and X-Auth-Token reponse header contains your authentication token.
+There are legacy OpenStack Object Store APIs that used TempAuth or Swauth as their identity server. The HP Cloud Identity Service offers a compatible interface.
+You use your username, password and tenant Id as shown in the following example. 
+This example uses curl. 
+The X-Storage-Url response header contains the HP Cloud Object Storage endpoint that includes your account and X-Auth-Token reponse header contains your authentication token.
 
-    curl -i https://region-a.geo-1.identity.hpcloudsvc.com:35357/auth/v1.0/ -H 'x-auth-user: 1234567891234:mary.smith@hp.com' -H 'x-auth-key: MyPassword'
+    curl -i https://region-a.geo-1.identity.hpcloudsvc.com:35357/auth/v1.0/ -H 'x-auth-user: 1234567891234:sally.smith@hp.com' -H 'x-auth-key: MyPassword'
+
     HTTP/1.1 200 OK
     X-Storage-Url: https://region-a.geo-1.objects.hpcloudsvc.com/v1/1234567891234
     X-Auth-Token: HPAuth_1234
 
-The 
+The authentication that you receive is known as a "scoped" token, i.e., it is specific for the tenant and the HP Cloud Object Storage account associated with
+the tenant.
+
+#### 2.6.2.2 Admin Role
+
+When a user has a scoped tenant (as explained above), the user has the *Admin* role for the associated HP Cloud Object Storage [account](#account_resource).
+The Admin role allows full create, modify and read access to all containers, metadata and objects in the account.
+If a user does not have Admin role for an account, they cannot create, modify or read any of the metadata or contents of data in the account unless
+you provide access via other mechanisms such General Access Control Lists or Temporary URLs.
+
+#### 2.6.2.3 Unscoped Tokens
+
+If when requesting an authentication token you do not specify a tenant, or you specify a different tenant than the tenant associated with the [account](#account_resource), then the authentication token is not "scoped" for that account. This means that the user will not have the Admin role for the account and will
+not be able to access the account metadata or data. However, this authentication token can be used to *identify* the username of the requesting user.
+If [Cross-tenant Access Control Lists](#cross_trnant_acls) are used, that the user is allowed appropriate access to the container.
 
 
-* Admin role
-* Scoped for the tenant/account
-* Unscoped
-* Scoped to a different tenant
-
-### 2.xx.x <a id="general_acls"></a>General Access Control Lists
+### 2.6.3 <a id="general_acls"></a>General Access Control Lists
 
 Normally, only a user with Admin role can access a container and objects. This role
-is associated with a tenant as is assigned when you activate a user for HP CLoud Object Storage. To indicate that you have the Admin role, users must
+is associated with a tenant as is assigned when you activate a user for HP Cloud Object Storage. To indicate that you have the Admin role, users must
 supply a X-Auth-Token in their requests. This is explained in 
 [Using Authentication Tokens](#using_tokens).
 
 However, sometimes you want to provide global read or write access
-to a container. You can use the X-Container-Read and X-Container-Write container meta data to enable this. As the names imply, X-Container-Read allows read access and X-Container-Write enables write access.
+to a container. You can use the X-Container-Read and X-Container-Write container metadata to enable this. As the names imply, X-Container-Read allows read access and X-Container-Write enables write access.
 
 The value in X-Container-Read and X-Container-Write is an access control list (ACL). There are two possible entry values:
 
 * `.r:*` - this allows anybody to access the objects in the container
 * `.rlistings` - this allows anybody to list the contents of a container
 
-To allow anybody to both list objects in a container and access the objects themselves, use both values seperated by a ','. For example, if you want to
+To allow anybody to both list objects in a container and access the objects themselves, use both values separated by a ','. For example, if you want to
 allows anybody complete read access to a container, set the X-Container-Read request header as follows:
 
 
     X-Container-Read: .r:*,.rlistings
 
-> Note: the 'r' in the ACL value referres to 'referrer' -- not 'read'
+> Note: the '.r' in the ACL value is named for 'referrer' -- not 'read'
 
-> Note: the '*' in the ACL value is a literal '*'; it does not mean that user or hostnames can be specified in that place of the ACL string.
+> Note: the '*' in the ACL value is a literal '*'; it does not mean that user or hostnames can be specified in this piece of the ACL string.
 
 
-### 2.xx.x <a id="cross_tenant_acls"></a>Cross-tenant Access Control Lists
+### 2.6.4 <a id="cross_tenant_acls"></a>Cross-tenant Access Control Lists
 
 In [General Access Control Lists](#general_acls) you could could not
 specify (or limit to) specific users. The Cross-tenant Access Control Lists
@@ -256,27 +363,26 @@ allow you to specify specific users.
 
 Users of HP Cloud Object Storage can share containers with one another by providing a user name (or names) with the X-Container-Read and X-Container-Write container metadata. The ACL value privides access to both list the objects in the container as well as access to the individual objects themselves.
 
-For example, to grant access to user Mary for read access you can set the X-Container-Read as follows:
+For example, to grant access to user Sally for read access you can set the X-Container-Read as follows:
 
-    X-Container-Read: *:mary@hp.com
+    X-Container-Read: *:sally.smith@hp.com
 
-To allow user Mary to also write to objects in a contains, you should also
-set the X-Container_Write request header as follows:
+To allow user Sally to also write to objects in a contains, you should also
+set the X-Container-Write request header as follows:
 
-
-    X-Container-Read: *:mary@hp.com
-    X-Container-Write: *:mary@hp.com
+    X-Container-Read: *:sally.smith@hp.com
+    X-Container-Write: *:sally.smith@hp.com
 
 If there are several users, use a comma seperated list as shown in the following
 example:
 
-    X-Container-Read: *:mary@hp.com,*joe@hp.com
+    X-Container-Read: *:sally.smith@hp.com,*joe@hp.com
 
-### 2.xx.x <a id="temp_url"></a>Temporary URLs
+### 2.6.5 <a id="temp_url"></a>Temporary URLs
 
 The TempURL feature allows the creation of URLs to provide temporary access to objects.
 A website owner may wish to provide a link to download a large object in 
-HP Cloud Object STorage, but the account has no public access. The website owner can generate a URL that will provide
+HP Cloud Object Storage, but the account has no public access. The website owner can generate a URL that will provide
 GET access for a limited time to the resource.
 
 When the web browser user clicks on the
@@ -303,12 +409,12 @@ URL cannot be used to access the object.
 
 * The full path to the object.
 
-#### Supported Methods
+#### 2.6.5.1 Supported Methods
 
 TempURL is designed to support GET, PUT, and HEAD requests only. POST is expected to
 be handled by [FormPost](#formpost)
 
-#### Differences Between HP Cloud Object Storage and OpenStack Swift TempURL Signature Generation
+#### 2.6.5.2 Differences Between HP Cloud Object Storage and OpenStack Swift TempURL Signature Generation
 
 There are two differences between HP Cloud and OpenStack Swift TempURL signature
 generation:
@@ -319,7 +425,7 @@ set on the Swift account. In HP Cloud you do not need to do this. Instead we use
 * HP Cloud Object Storage Temporary URLs require the user's Tenant ID and Access Key ID to be
 prepended to the signature. OpenStack Swift does not.
 
-#### Creating Signatures
+#### 2.6.5.3 Creating Signatures
 
 A signature is created using the following values concatenated together with a colon (":")
 separating them:
@@ -356,9 +462,9 @@ Be certain to use the full path, from the /v1/ onward. This example shows the mo
 common situation where the Tenant ID and the Object Storage account name are the
 same. However, some Object Storage accounts are named with "AUTH_" at the start of the
 name. You should use this name in your path. Put simply, the path should be the path you
-normally use to access objects - there is not need to change or modify it in any way.
+normally use to access objects - there is no need to change or modify it in any way.
 
-#### Using Temporary URLs
+#### 2.6.5.4 Using Temporary URLs
 
 Let's say the signature ends up equaling "12345678901112:46316625977129:da39a3ee5e6b4b0d3255bfef95601890afd80709" and expires ends up "1323479485". Then, for example, the website could provide a link to:
 
@@ -366,7 +472,7 @@ Let's say the signature ends up equaling "12345678901112:46316625977129:da39a3ee
 
 Any alteration of the resource path or query arguments would will cause an "401 Unauthorized" error to be returned. Similarly, a PUT where GET was the allowed method will also fail. HEAD is allowed if GET or PUT is allowed.
 
-### 2.xx.x <a id="formpost"></a>FormPOST
+### 2.6.5 <a id="formpost"></a>FormPOST
 
 FormPost is designed to allow web browsers to upload (typically large) files directly into HP
 Cloud Object Storage by using signature-based authentication.
@@ -429,11 +535,11 @@ the proper permissions. You can see your Tenant and Access Keys in the API Keys 
 the HP Cloud Management Console.
 
 
-### 2.xx.x <a id="signature_auth"></a>Signature Based Authentication
+### 2.6.6 <a id="signature_auth"></a>Signature Based Authentication
 
 Signature based authentication provides an alternate way of authenticating your request. Normally, you obtain a token from the HP Cloud Identity service and include the token in the  X-Auth-Token header. With signature based authentication you use an Access Key to “sign” a request. The resulting signature is then included in the Authorization header (instead of X-Auth-Token).
 
-#### 2.xx.x.x Creating Shared Secret Signatures
+#### 2.6.6.1 Creating Shared Secret Signatures
 
 To create a signature you need an Access Key. You can see your Access Keys by accessing the API Keys section of the HP Cloud Management Console. You may create additional Access Keys. You may also delete Access Keys. This can be used if you suspect that an Access Key has been compromised. When you delete an Access Key, signature based authentication requests that were signed using the deleted Access Key will fail.
 
@@ -484,7 +590,7 @@ The CanonicalizedHeaders are constructed as follows:
 
 > Note: You must include a [Date](#date_request) header in your request – and include it when constructing the CanonicalizedHeaders
 
-#### 2.xx.x.x Using Signature Based Authentication
+#### 2.6.6.2 Using Signature Based Authentication
 
 Here's an example of using signature based authentication in a request:
 
@@ -495,7 +601,7 @@ Here's an example of using signature based authentication in a request:
     Authorization: HP 971350225483156:AKIAIOSFODNN7EXAMPLE:frJIUN8DYpKDtOLCwo//yllqDzg=
 
 
-## 2.xx <a id="pagination"></a>Retrieving large number of container or object names
+## 2.7 <a id="pagination"></a>Retrieving large number of container or object names
 
 When doing a GET request against an account or container, the service returns a maximum of 10,000 names per request. To
 retrieve subsequent names, you must make another request with
@@ -506,9 +612,9 @@ to sending the HTTP request.
 
 If 10,000 is larger than desired, a *limit* parameter may be given.
 
-If the number of  names returned equals the limit given (or
+If the number of names returned equals the limit given (or
 10,000 if no limit is given), it can be assumed there are more
-names to be listed. If the  name list is exactly divisible by
+names to be listed. If the name list is exactly divisible by
 the limit, the last request has no content.
 
 For example, let's use a listing of five names
@@ -540,14 +646,14 @@ item returned:
 
 Again, two items are returned; there may be more:
 
-      GET /<api version>/123456789101234?limit=2&marker=oranges
+      GET /v1/123456789101234?limit=2&marker=oranges
       
       pears
                         
 
 With this one-item response we received less than the limit number of names, indicating that this is the end of the list.
 
-## 2.xx <a id="pseudo_hierachies"></a>Pseudo-Hierarchical Folders or Directories
+## 2.8 <a id="pseudo_hierachies"></a>Pseudo-Hierarchical Folders or Directories
 
 
 You can simulate a hierarchical structure in HP Cloud Object Storage by
@@ -637,18 +743,18 @@ query using slash (/) would give you photos, movieobject, videos.
     Host: region-a.geo-1.objects.hpcloudsvc.com
     X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
 
-## 2.xx <a id="conditional_get"></a>Conditional GET of objects                  
+## 2.9 <a id="conditional_get"></a>Conditional GET of objects                  
 
 You can perform conditional GET requests of an object by using certain HTTP
 headers as documented in [RFC 2616](http://www.ietf.org/rfc/rfc2616.txt](http://www.ietf.org/rfc/rfc2616.txt). 
-HP Cloud Object Storage supports thefollowing headers:
+HP Cloud Object Storage supports the following headers:
 
 * If-Match
 * If-None-Match
 * If-Modified-Since
 * If-Unmodified-Since
 
-## 2.xx <a id="range_request"></a>Retrieving a portion of object data
+## 2.10 <a id="range_request"></a>Retrieving a portion of object data
 
 It is also possible to fetch a portion of an object's data using the HTTP _Range_
 header. At this time, HP Cloud Object Storage does not support the full
@@ -668,7 +774,7 @@ The following examples show the supported forms of the header:
 
 * `Range: bytes=32-` - all data after the first 32 bytes of the object
 
-### 2.xx Large Object Creation
+## 2.11 <a id="large_objects"><a>Large Object Creation
 
 Objects that are larger than 5GB must be segmented prior to upload. You
 then upload the segments like you would any other object and create a
@@ -699,7 +805,6 @@ segments.
       X-Auth-Token: HPAuth_1234
       ETag: 8a964ee2a5e88be344f36c22562a6486
       Content-Length: 1
-      X-Object-Meta-PIN: 1234
                       
 
       s
@@ -708,7 +813,7 @@ segments.
 No response body is returned. A status code of 201 (Created) indicates a
 successful write; status 412 (Length Required) denotes a missing
 `Content-Length` or `Content-Type` header in the request. If the MD5
-checksum of the data written to the storage system does NOT match the
+checksum of the data written to the storage system does *not* match the
 (optionally) supplied ETag value, a 422 (Unprocessable Entity) response
 is returned.
 
@@ -719,8 +824,7 @@ uploading the manifest.
       X-Auth-Token: HPAuth: 1234
       ETag: 8a964ee2a5e88be344f36c22562a6486
       Content-Length: 1
-      X-Object-Meta-PIN: 1234
-                      
+                     
 
       w
                         
@@ -731,10 +835,9 @@ after the manifest is created causes the concatenated object to be that
 much larger but you do not need to recreate the manifest file for
 subsequent additional segments.
 
-      PUT /<api version>/<account>/<container>/<object> HTTP/1.1
+      PUT /v1/1234567891234/{container}/{object} HTTP/1.1
       X-Auth-Token: HPAuth_1234
       Content-Length: 0
-      X-Object-Meta-PIN: 1234
       X-Object-Manifest: container/object/segments
                       
 
@@ -746,31 +849,32 @@ same as the Content-Type set during the PUT request that created the
 manifest. You can easily change the Content-Type by reissuing the PUT
 request.
 
-2.xx <a id="transfer_encoding_request"></a>Chunked Transfer Encoding
+## 2.12 <a id="transfer_encoding_request"></a>Chunked Transfer Encoding TBS
 
 Users can upload data without needing to know in advance the amount of
 data to be uploaded. Users can do this by specifying an HTTP header of
-`Transfer-Encoding:
-              chunked` and not using a `Content-Length` header. A good
-use of this feature would be doing a DB dump, piping the output through
+`Transfer-Encoding: chunked` and not using a `Content-Length` header.
+
+A good use of this feature would be doing a DB dump, piping the output through
 gzip, then piping the data directly into HP Cloud Object Storage without
-having to buffer the data to disk to compute the file size. If you
-attempt to upload more that 5GB with this method, the server closes the
-TCP/IP connection after 5GB and purge the customer data from the system.
+having to buffer the data to disk to compute the file size.
+
+If you attempt to upload more that 5GB with this method, the server closes the
+TCP/IP connection after 5GB and purges the data from the system.
 You must take responsibility for ensuring the data they transfer is less
 than 5GB or for splitting it into 5GB chunks, each in its own storage
-object. If you have files that are larger than 5GB and still want to use
-Object Storage, you can segment them prior to upload, upload them to the
+object.
+
+If you have files that are larger than 5GB you can segment them prior to upload, 
+upload them to the
 same container, and then use a manifest file to allow downloading of a
 concatenated object containing all the segmented objects, concatenated
 as a single object.
 
-      PUT /<api version>/<account>/<container>/<object> HTTP/1.1
+      PUT /v1/1234567891234/{container}/{object} HTTP/1.1
       Host: region-a.geo-1.objects.hpcloudsvc.com
       X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-      Transfer-Encoding: chunked
-      X-Object-Meta-PIN: 1234
-                      
+      Transfer-Encoding: chunked                     
 
       19
       A bunch of data broken up
@@ -779,7 +883,7 @@ as a single object.
       0
                       
 
-## 2.xx <a id="content_encoding_header"></a>Enabling File Compression with the Content-Encoding Header
+## 2.13 <a id="content_encoding_header"></a>Enabling File Compression with the Content-Encoding Header
 
 
 The Content-Encoding header allows a file to be compressed without
@@ -795,7 +899,7 @@ attachment type that indicates how the file should be downloaded:
       Content-Encoding: gzip
            
 
-## 2.xx <a id="content_disposition_header"></a>Enabling Browser Bypass with the Content-Disposition Header
+## 2.14 <a id="content_disposition_header"></a>Enabling Browser Bypass with the Content-Disposition Header
 
 When an object is assigned the Content-Disposition header you can
 override a browser's default behavior for a file so that the downloader
@@ -809,7 +913,7 @@ attachment type that indicates how the file should be downloaded.
       Content-Type: image/tiff
       Content-Disposition: attachment; filename=platmap.tif
 
-## 2.xx Notable Differences from OpenStack
+## 2.15 Notable Differences from OpenStack
 
 
 The HP Cloud Object Storage API is an implementation of OpenStack Object
@@ -827,9 +931,17 @@ Storage, but there are some differences to be aware of:
 
 * General ACLs do not support specifying a username or hostname.
 
-* Temorary URLs do not use the X-Account-Meta-Temp-URL-Key meta-data to store the secret key. Instead we use the HP Cloud Identity Services _Access Keys_.
+* Temorary URLs do not use the X-Account-Meta-Temp-URL-Key metadata to store the secret key. Instead we use the HP Cloud Identity Services _Access Keys_.
 
 * FormPOST --- TBS DITO
+
+
+
+
+
+
+
+
 
 #  3. Account-level View
 
@@ -838,21 +950,90 @@ Storage, but there are some differences to be aware of:
 
 ## 3.2 Regions
 
+HP Cloud Object Storage has the following service instances in these regions:
+
+* region-a-geo-1 - US West
+
+* region-a.geo-2 - US East
+
+Each instance or region is a distinct storage entity. Each contains its own set of containers and
+objects -- there is no shared data between the regions.
+
+In each instance/region, HP Cloud Object Storage has servers physically located in multiple availability zones.
+It also automatically keeps multiple copies of data in mutiple availability zones.
+The system transparently manages this for you -- you have a single endpoint through which
+you access HP Cloud Object Storage services for an instance/region.
+
 ## 3.3 <a id="service_catalog"></a>Service Catalog
 
-Like all HP Cloud Service offerings, authentication for CDN is achieved
-through the Identity Service, which returns an `X-Auth-Token` that is
-used for subsequent requests to individual services.
+The HP Cloud Identity Service is used to authenticate users. See [Using Authentication Tokens](#using_tokens)
+for more information.
 
 For additional details on the Identity Service, please refer to
 [https://docs.hpcloud.com/identity](https://docs.hpcloud.com/identity).
 
-The service is exposed in the service catalog, as shown in the following fragment:
+The service is exposed in the service catalog, as shown in the following fragment. Note the
+user has the Admin role and is activated for two instances of the HP Cloud
+Object Storage service.
 
 ```
-{
-   service catalog fragment here
-}
+{"access": {
+  "token": {
+    "expires": "2012-11-21T23:14:30.559Z",
+    "id": "HPAuth_1234",
+    "tenant": {
+      "id": "1234567891234",
+      "name": "sally.smith@hp.com"
+    }
+  },
+  "user": {
+    "id": "4321987654321",
+    "name": "sally.smith@hp.com",
+    "roles": [
+     .
+     .
+     .
+      {
+        "id": "00000000004022",
+        "serviceId": "110",
+        "name": "Admin",
+        "tenantId": "87135022548315"
+      },
+      .
+      .
+      .
+    ]
+  },
+  "serviceCatalog": [
+    .
+    .
+    .
+    {
+      "name": "Object Storage",
+      "type": "object-store",
+      "endpoints": [
+        {
+          "tenantId": "1234567891234",
+          "publicURL": "https:\/\/region-a.geo-1.objects.hpcloudsvc.com\/v1\/AUTH_86ca9388-b3df-4016-ad3b-ca05a917455c",
+          "region": "region-a.geo-1",
+          "versionId": "1.0",
+          "versionInfo": "https:\/\/region-a.geo-1.objects.hpcloudsvc.com\/v1.0\/",
+          "versionList": "https:\/\/region-a.geo-1.objects.hpcloudsvc.com"
+        },
+        {
+          "tenantId": "1234567891234",
+          "publicURL": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com:443\/v1\/AUTH_86ca9388-b3df-4016-ad3b-ca05a917455c",
+          "region": "region-b.geo-1",
+          "versionId": "1",
+          "versionInfo": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com:443\/v1\/",
+          "versionList": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com:443"
+        }
+      ]
+    },
+    .
+    .
+    .
+
 ```
 
 
@@ -876,12 +1057,12 @@ The service is exposed in the service catalog, as shown in the following fragmen
 | [Container](#container_resource) | [Retrieve container metadata](#container_head)| HEAD        | /v1/{account}/{container}          | n/a         | Admin |
 | [Container](#container_resource) | [Create/Update container](#container_put)     | PUT         | /v1/{account}/{container}          | n/a         | Admin |
 | [Container](#container_resource) | [Delete container](#container_delete)         | DELETE      | /v1/{account}/{container}          | n/a         | Admin |
-| [Object](#object_resource)       | [Retrieve object(#object_get)                 | GET         | /v1/{account}/{container}/{object} | n/a         | Admin |
-| [Object](#object_resource)       | [Retrieve object metadata(#object_head)       | HEAD        | /v1/{account}/{container}/{object} | n/a         | Admin |
-| [Object](#object_resource)       | [Create/Update Object(#object_put)            | PUT         | /v1/{account}/{container}/{object} | n/a         | Admin |
-| [Object](#object_resource)       | [Chunked transfer encoding(#object_put)       | PUT         | /v1/{account}/{container}/{object} | n/a         | Admin |
-| [Object](#object_resource)       | [Update object metadata(#object_post)         | POST        | /v1/{account}/{container}/{object} | n/a         | Admin |
-| [Object](#object_resource)       | [Delete object(#object_delete)                | DELETE      | /v1/{account}/{container}/{object} | n/a         | Admin |
+| [Object](#object_resource)       | [Retrieve object](#object_get)                 | GET         | /v1/{account}/{container}/{object} | n/a         | Admin |
+| [Object](#object_resource)       | [Retrieve object metadata](#object_head)       | HEAD        | /v1/{account}/{container}/{object} | n/a         | Admin |
+| [Object](#object_resource)       | [Create/Update Object](#object_put)            | PUT         | /v1/{account}/{container}/{object} | n/a         | Admin |
+| [Object](#object_resource)       | [Chunked transfer encoding](#object_put)       | PUT         | /v1/{account}/{container}/{object} | n/a         | Admin |
+| [Object](#object_resource)       | [Update object metadata](#object_post)         | POST        | /v1/{account}/{container}/{object} | n/a         | Admin |
+| [Object](#object_resource)       | [Delete object](#object_delete)                | DELETE      | /v1/{account}/{container}/{object} | n/a         | Admin |
 
 
 
@@ -925,14 +1106,14 @@ When specified, this identifies the user making the request. In addition, if thi
 
 ### 4.2.x <a id="x_container_meta_request"></a>X-Container-Meta-{name}
 
-This allows you to set custom meta data on a container using a header name with a prefix of X-Container-Meta-. After this prefix, you can
+This allows you to set custom metadata on a container using a header name with a prefix of X-Container-Meta-. After this prefix, you can
 pick any name meaningful to you. For example, X-Container-Meta-Reviewed could be used indicate that the contents
 of a container had been reviewed.
 
 Any valid UTF-8 http header value is allowed for metadata, however we
 recommend that you URL-encode any non-ASCII values
 
-When updating the custom meta data of a container, you must specifiy *all* of the meta data in the request. For example, if you plan to use X-Container-Meta-One and X-Container-Meta_Two, both must be specified in a single request. If you did two requests, one setting X-Container-Meta-One and the second setting X-Container-Meta-Two, when you later do a HEAD operations, only X-Container-Meta-Two would exist.
+When updating the custom metadata of a container, you must specify *all* of the metadata in the request. For example, if you plan to use X-Container-Meta-One and X-Container-Meta-Two, both must be specified in a single request. If you did two requests, one setting X-Container-Meta-One and the second setting X-Container-Meta-Two, when you later do a HEAD operations, only X-Container-Meta-Two would exist.
 
 
 ## 4.3 Common Response Headers
@@ -946,7 +1127,7 @@ When supplied, the Date header is the time of the operation expressed in GMT (ef
 
 ### 4.3.x <a id="last_modified_response"></a>Last-Modified
 
-This is the date and time that the container or object was created or the last time that the meta data was changed.
+This is the date and time that the container or object was created or the last time that the metadata was changed.
 
 ### 4.3.1 <a id="content_length_response"</a>>Content-Length
 
@@ -958,7 +1139,7 @@ When the response includes a body, this indicates the MIME type of the response.
 
 ### 4.3.x <a id="x_container_meta_response"></a>X-Container-Meta-{name}
 
-This contains the value of X-Container-Meta-{name} meta data that was previously set on a container, where {name} is
+This contains the value of X-Container-Meta-{name} metadata that was previously set on a container, where {name} is
 an arbitrary name meaningful to you.
 
 ### 4.3.x <a id="x_account_object_count_response"></a>X-Account-Object-Count
@@ -1006,12 +1187,12 @@ The path specifies the account.
 By default up to 10,000 names are returned. To retrieve more or fewer names, use the *limit* and *marker* query parameters.
 See [Retrieving large number of container or object names](#pagination) for more information.
 
-* *limit* - (Optional) - Number - For an integet value of _N_, limits the number of results to at most _N_ values.
+* *limit* - (Optional) - Number - For an integer value of _N_, limits the number of results to at most _N_ values.
 
 * *marker* - (Optional) - String - Given a string value _x_, return container names greater in value than the specified marker.
 
 * *format* - (optional) - String - Specify either `json` or `xml` to return the respective serialized response.
-You may alternativly specify the required type in the *Accept* request header.
+You may alternatively specify the required type in the *Accept* request header.
       
                           
 **Data Parameters**
@@ -1125,24 +1306,24 @@ test_container_2
 
 
 
-#### 4.4.1. <a id="account_post"></a>Updtae Account Meta data####
+#### 4.4.1. <a id="account_post"></a>Update Account Metadata
 #### POST /v1/{<account}
 
-This operation updates custom meta data on an account.
+This operation updates custom metadata on an account.
 
-You can set custom meta data on an account using a request header name with a prefix of X-Account-Meta-. After this prefix, you can
+You can set custom metadata on an account using a request header name with a prefix of X-Account-Meta-. After this prefix, you can
 pick any name meaningful to you. For example, X-Account-Meta-Reviewed could be used indicate that the contents
 of an account had been reviewed.
 
 Any valid UTF-8 http header value is allowed for metadata, however we
 recommend that you URL-encode any non-ASCII values.
 
-Unlike container and object meta data, you only need to specify the meta data item you wish to set or change i.e., the POST
-operation leaves existing X-Account-Meta-{name} meta data intact.
+Unlike container and object metadata, you only need to specify the metadata item you wish to set or change i.e., the POST
+operation leaves existing X-Account-Meta-{name} metadata intact.
 
-To remove a meta data item, use a request header name with a prefix of X-Remove-Account-Meta-. After this prefix, you give
-the name of the item to remove. For example, X-Remove-Account-Meta-Reviewed would indicate the the "reviewed" meta data
-should be deleted. The value field can be any value - however, there must be *some* value for the request to take effect.
+To remove a metadata item, use a request header name with a prefix of X-Remove-Account-Meta-. After this prefix, you give
+the name of the item to remove. For example, X-Remove-Account-Meta-Reviewed would indicate that the "reviewed" metadata
+should be deleted. The value field can be any value; however, there must be *some* value for the request to take effect.
 
 
 **Request Data**
@@ -1160,8 +1341,8 @@ This operation does not require a request body.
 The following request headers apply to this operation:
 
 
-* [X-Account-Meta-{name}](#x_account_meta_request) - Optional - Specifies custom meta data for the container
-* [X-Remove-Account-Meta-{name}](#x_remove_account_meta_request) - Optional - Specifies custom meta data to remove
+* [X-Account-Meta-{name}](#x_account_meta_request) - Optional - Specifies custom metadata for the container
+* [X-Remove-Account-Meta-{name}](#x_remove_account_meta_request) - Optional - Specifies custom metadata to remove
 * [X-Auth-Token](#x_auth_token_request) - Optional - Authentication token
 
 **Success Response**
@@ -1227,7 +1408,7 @@ Content-Type: text/html; charset=UTF-8
 ### 4.4.2 <a id="account_head"></a>Retrieve Account Metadata
 ### HEAD /v1/{account}
 
-This operation gets the meta data associated with the account.
+This operation gets the metadata associated with the account.
 
 **Request Data**
 
@@ -1314,7 +1495,7 @@ Content-Length: 0
 
 
                           
-### 4.x.x. <a id="account_put"></a>Update Account Meta Data
+### 4.x.x. <a id="account_put"></a>Update Account Metadata
 
 TBS
 
@@ -1323,18 +1504,18 @@ TBS
 ### 4.4.x.x <a id="container_put"></a>Create/Update Container
 ### PUT /v1/{account}/{container}
 
-This operation creates a container or updates the meta data associated with an existing container. 
+This operation creates a container or updates the metadata associated with an existing container. 
 You are free to a pick container name that is meaningful to you.
 See [Container and Object Naming](#naming) for restrictions on container names.
 
-You can set custom meta data on a container using a header name with a prefix of X-Container-Meta-. After this prefix, you can
+You can set custom metadata on a container using a header name with a prefix of X-Container-Meta-. After this prefix, you can
 pick any name meaningful to you. For example, X-Container-Meta-Reviewed could be used indicate that the contents
 of a container had been reviewed.
 
 Any valid UTF-8 http header value is allowed for metadata, however we
 recommend that you URL-encode any non-ASCII values.
 
-When updating the custom meta data of a container, you must specifiy *all* of the meta data in the request. For example, if you plan to use X-Container-Meta-One and X-Container-Meta_Two, both must be specified in a single request. If you did two requests, one setting X-Container-Meta-One and the second setting X-Container-Meta-Two, when you later do a HEAD operations, only X-Container-Meta-Two would exist.
+When updating the custom metadata of a container, you must specify *all* of the metadata in the request. For example, if you plan to use X-Container-Meta-One and X-Container-Meta-Two, both must be specified in a single request. If you did two requests, one setting X-Container-Meta-One and the second setting X-Container-Meta-Two, when you later do a HEAD operations, only X-Container-Meta-Two would exist.
 
 You don't need to check if a container already exists before doing the PUT operation because the operation is idempotent (i.e., it will create a new container
 or update an existing container as appropriate). 
@@ -1346,7 +1527,7 @@ The path specifies the account and the name of the container to create.
 The following request headers apply to this operation:
 
 
-* [X-Container-Meta-{name}](#x_container_meta_request) - Optional - Specifies custom meta data for the container
+* [X-Container-Meta-{name}](#x_container_meta_request) - Optional - Specifies custom metadata for the container
 * [X-Auth-Token](#x_auth_token_request) - Optional - Authentication token
 
 **URL Parameters**
@@ -1359,7 +1540,7 @@ This operation does not require a request body.
 
 **Success Response**
 
-On success, the container is created. See [Creation Guantees](#creation_guarantees) for more information.
+On success, the container is created. See [Creation Guarantees](#creation_guarantees) for more information.
 
 **Status Code**
 
@@ -1426,7 +1607,7 @@ The path specifies the account and container name.
 
 The following request headers apply to this operation.
 
-* [Accept](#accept_request) - Optional - Specifies the format for listing the names. Alternatvly use the *format* paramater.
+* [Accept](#accept_request) - Optional - Specifies the format for listing the names. Alternatively use the *format* parameter.
 * [X-Auth-Token](#x_auth_token_request) - Optional - Authentication token
 
 
@@ -1435,16 +1616,16 @@ The following request headers apply to this operation.
 By default up to 10,000 names are returned. To retrieve more or fewer names, use the *limit* and *marker* query parameters.
 See [Retrieving large number of container or object names](#pagination) for more information.
 
-By default, the names of all objects are returned. You can control which names are retrieved using the *prefix*, *path* and *delimiter* query paramaters.
+By default, the names of all objects are returned. You can control which names are retrieved using the *prefix*, *path* and *delimiter* query parameters.
 See [Pseudo-Hierarchical Folders or Directories](#pseudo_hierachies) for more information.
 
 The following query parameters are available:
 
-* *limit* - (Optional) - Number - For an integet value of _N_, limits the number of results to at most _N_ values.
+* *limit* - (Optional) - Number - For an integer value of _N_, limits the number of results to at most _N_ values.
 
 * *marker* - (Optional) - String - Given a string value _x_, return container names greater in value than the specified marker.
 
-* *format* - (optional) - String - Specify either `json` or `xml` to return the respective serialized response. You may alternativly specify the required type in the *Accept* request header.
+* *format* - (optional) - String - Specify either `json` or `xml` to return the respective serialized response. You may alternatively specify the required type in the *Accept* request header.
 
 * *prefix* - (Optional) - String - For a string value *x*, causes the results to be limited to object names beginning with the substring *x*.
 
@@ -1471,7 +1652,7 @@ list additional data about each object as follows:
 * hash - The MD5 checksum for the contents on the object
 * bytes -- The size in bytes of the object
 * content_type - The MIME type of the object
-* last_modified - The date and time the object was created or the time at which the object meta data was last updated. 
+* last_modified - The date and time the object was created or the time at which the object metadata was last updated. 
 
 Text/Plain
 
@@ -1559,10 +1740,10 @@ test_object_2
 
 
 
-#### 4.4.x.x <a id="container_get"></a>Retrieve the Meta Data of a Container
+#### 4.4.x.x <a id="container_get"></a>Retrieve the Metadata of a Container
 #### HEAD /v1/{account}/{container}                  
 
-Retrieve the meta data of a container.
+Retrieve the metadata of a container.
 
 **Request Data**
 
@@ -1583,7 +1764,7 @@ This operation does not require a request body.
 
 **Success Response**
 
-The meta data is returned in the response headers.
+The metadata is returned in the response headers.
 
 **Status Code**
 
@@ -1748,7 +1929,7 @@ test_object_2
 Retrieve the contents of an object.
 
 In its simplest form, the GET operation returns the object contents in the response body
-and retrieves the object's meta data and places the names and values into response headers.
+and retrieves the object's metadata and places the names and values into response headers.
 However, you there are additional capabilities:
 
 * You can perform conditional GET requests by using certain HTTP
@@ -1784,8 +1965,8 @@ This operation does not require a request body.
 
 **Success Response**
 
-The object contents is returned in the response body and meta data is returned in the response headers.
-Since the HTTP Succes code is written to the response stream before the response body and headers
+The object content is returned in the response body and metadata is returned in the response headers.
+Since the HTTP Success code is written to the response stream before the response body and headers
 are returned, it is possible that you will see a 200 Success code even though the the transfer of headers
 or body had a failure. You should check that the length of the actual body is the same as the
 [Content_Length](#content_length_response) response header. Ideally, you should also
@@ -1852,11 +2033,11 @@ Hello World!
 
 
 
-### 4.x.x <a id="object_get"></a>Retrieve the Meta Data of an Object
+### 4.x.x <a id="object_get"></a>Retrieve the Metadata of an Object
 ### HEAD /v1/{account}/{container}/{object}
 ---------------
 
-Retrieve the meta data of an object.
+Retrieve the metadata of an object.
 
 **Request Data**
 
@@ -1876,7 +2057,7 @@ This operation does not require a request body.
 
 **Success Response**
 
-The object meta data is returned in the response headers.
+The object metadata is returned in the response headers.
 
 **Status Code**
 
@@ -1938,7 +2119,7 @@ X-Object-Meta-Reviewed: Yes
 ### PUT /v1/{account}/{container}/{object}
 ---------------
 
-Creates an object with the supplied data content and meta data.
+Creates an object with the supplied data content and metadata.
 You can overwrite an existing object (i.e. PUT to the same object name
 twice).
 
@@ -1968,7 +2149,7 @@ successfully stored your object's content.
 For [manifest objects](#large_file_creation), the ETag is the MD5 sum of the concatenated string of ETags for
 each of the segments in the manifest.
 
-* You can set custom meta data on a object using a header name with a prefix of [X-Object-Meta-](#x_object_meta_request). 
+* You can set custom metadata on a object using a header name with a prefix of [X-Object-Meta-](#x_object_meta_request). 
 After this prefix, you can pick any name meaningful to you. For example, X-Object-Meta-Reviewed could be used indicate
 that the contents of an object had been reviewed.
 Any valid UTF-8 http header value is allowed for metadata, however we recommend that you URL-encode any non-ASCII values.
@@ -1985,7 +2166,7 @@ The following request headers apply to this operation.
 * [ETag](#etag_request) - Optional - The MD5 checksum of the request body
 * [Content-Encoding](#content_encoding_header) - Optional - Indicate that the contents are compressed
 * [Content-Disposition](#content_disposition_header) - Optional - Override default download behaviour of browers
-* [X-Container-Meta-{name}](#x_container_meta_request) - Optional - Sets custom meta data on the container
+* [X-Container-Meta-{name}](#x_container_meta_request) - Optional - Sets custom metadata on the container
 
 **URL Parameters**
 
@@ -2081,16 +2262,16 @@ ETag: 4281c348eaf83e70ddce0e07221c3d28
 ### COPY /v1/{account}/{source-container}/{source-object}
 ---------------
 
-Creates an object using another object as the source for the content and meta data.
+Creates an object using another object as the source for the content and metadata.
 Using an existing object means that the content is copied inside the HP Cloud Object Storage
 service (i.e., at the server side). This means that the operation will be quicker because
 you do not need to transfer the object contents over the public internet. In addition, you 
 will not be charged for any network transfer of the object contents (however, you
-may be chaarged for the operation itself).
+may be charged for the operation itself).
 
 The target container must exist before you perform the copy object operation.
 
-All metadata is preserved during the object copy. If you specify meta data on the
+All metadata is preserved during the object copy. If you specify metadata on the
 request to copy the object (either the PUT or the COPY), the metadata overwrites
 any conflicting keys on the target (new) object. 
  
@@ -2121,7 +2302,7 @@ The following request headers apply to both PUT and COPY operations.
 * [Content-Type](#content_type_request) - Optional - Specifies a new Content-Type for the new object
 * [Content-Encoding](#content_encoding_header) - Optional - Indicate that the contents are compressed
 * [Content-Disposition](#content_disposition_header) - Optional - Override default download behaviour of browers
-* [X-Object-Meta-{name}](#x_object_meta_request) - Optional - Sets custom meta data on an object
+* [X-Object-Meta-{name}](#x_object_meta_request) - Optional - Sets custom metadata on an object
 
 **URL Parameters**
 
@@ -2290,37 +2471,37 @@ Content-Type: text/html; charset=UTF-8
 
 
 
-### 4.x.x <a id="object_post"></a>Update Object Meta Data
+### 4.x.x <a id="object_post"></a>Update Object Metadata
 ### POST /v1/{account}/{container}/{object}
 ---------------
 
 The POST operation is used in two modes:
-* Overwrites the meta data of an object. This is the operation documented here.
-* FormPOST. With specific query paramaters, the POST operaiton allows you to 
+* Overwrites the metadata of an object. This is the operation documented here.
+* FormPOST. With specific query parameter, the POST operaiton allows you to 
 upload files directly into HP
 Cloud Object Storage by using signature-based authentication. See [FormPOST](#formpost) for more information.
 
 You cannot use the POST operation to
-change any of the following meta data:
+change any of the following metadata:
 
 * [Content-Length](#content_length_request)
 * [ETag](#etag_request)
 * [Last-Modified](#last_modified_response)
 
-The POST opertion is not used to upload content to an object -- use [Create/Update Object](#object_put) PUT operation instead.
+The POST operation is not used to upload content to an object -- use [Create/Update Object](#object_put) PUT operation instead.
 
-To set custom meta data on a object use a header name with a prefix of [X-Object-Meta-](#x_object_meta_request). 
+To set custom metadata on an object use a header name with a prefix of [X-Object-Meta-](#x_object_meta_request). 
 After this prefix, you can pick any name meaningful to you. For example, X-Object-Meta-Reviewed could be used indicate
 that the contents of an object had been reviewed.
 Any valid UTF-8 http header value is allowed for metadata, however we recommend that you URL-encode any non-ASCII values.
 
-All existing meta data, except is overriden by the POST operation.
-This means you must specifiy _all_ of the meta data in the request. For example, if an object already has a Content-Encoding of gzip and 
+All existing metadata, except is overridden by the POST operation.
+This means you must specify _all_ of the metadata in the request. For example, if an object already has a Content-Encoding of gzip and 
 you plan to also set X-Object-Meta-One, both must be specified in a single request. 
 If you only set X-Container-Meta-One, when you later do a HEAD operation, only X-Container-Meta-One would exist -- in effect Content-Encoding is
 lost.
 
-An easier way to change object meta data is to use the [Copy Object](#object_copy) operation since it only changes meta data that you update 
+An easier way to change object metadata is to use the [Copy Object](#object_copy) operation since it only changes metadata that you update 
 in the request.
 
 
@@ -2335,7 +2516,7 @@ The following request headers apply to this operation.
 * [Content-Type](#content_type_request) - Optional - The MIME type of the object
 * [Content-Encoding](#content_encoding_header) - Optional - Indicate that the contents are compressed
 * [Content-Disposition](#content_disposition_header) - Optional - Override default download behaviour of browers
-* [X-Container-Meta-{name}](#x_container_meta_request) - Optional - Sets custom meta data on the container
+* [X-Container-Meta-{name}](#x_container_meta_request) - Optional - Sets custom metadata on the container
 
 **URL Parameters**
 
