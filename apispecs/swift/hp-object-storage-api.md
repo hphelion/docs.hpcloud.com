@@ -8,6 +8,14 @@ group: apispec
 ---
 {% include JB/setup %}
 
+# HP Cloud Object Storage API Specification
+
+**Author: Donagh McCabe**
+
+**Date: 23 November 2012**
+
+**Version: 0.1**
+
 # 1. Overview
 
 HP Cloud Object Storage is an affordable, redundant, scalable, and
@@ -849,7 +857,7 @@ The following examples show the supported forms of the header:
 
 * `Range: bytes=32-` - all data after the first 32 bytes of the object
 
-## 2.12 <a id="large_objects"><a>Large Object Creation
+## 2.12 <a id="large_objects"></a>Large Object Creation
 
 Objects that are larger than 5GB must be segmented prior to upload. You
 then upload the segments as individual objects and create a
@@ -1190,11 +1198,11 @@ Any valid UTF-8 http header value is allowed for metadata, however we
 recommend that you URL-encode any non-ASCII values
 
 
-### 4.2.7 <a id="x_container_read_request"></>X-Container-Read
+### 4.2.7 <a id="x_container_read_request"></a>X-Container-Read
 
 Sets the access control list (ACL) that grants read access to a container and its objects.
 
-### 4.2.8 <a id="x_container_write_request"></>X-Container-Write
+### 4.2.8 <a id="x_container_write_request"></a>X-Container-Write
 
 Sets the access control list (ACL) that grants write access to a container and its objects.
 
