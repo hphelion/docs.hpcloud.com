@@ -1,12 +1,18 @@
+---
+layout: page
+title: HP Cloud Compute Service API Reference
+permalink: /api/compute/
+description: This document describes the HP Cloud Compute Service. HP Cloud Compute is based on OpenStack Nova.
+keywords: Compute, Nova, OpenStack
+
+---
+
 # HP Cloud Compute Service API Reference
 
-**Author(s):** Roland Hochmuth and Ray Hookway  
-**Date:**  August 21, 2012
-**Document Version:** 0.1
 
 # 1. Overview
 
-This document described the HP Cloud Compute Service. HP Cloud Compute is based on OpenStack Nova.
+This document describes the HP Cloud Compute Service. HP Cloud Compute is based on OpenStack Nova.
 
 ## 1.1 API Maturity Level
 
