@@ -1,13 +1,13 @@
 ---
 layout: page
-title: 
-title_section: 
-description: 
-group: apispec
+permalink: /api/dbaas/
+title: Relational Database for MySQL (dbaas) API
+description: "Relational Database for MySQL API Documentation."
+keywords: "MySQL, RDB, DBaaS"
+product: dbaas
 
 ---
-{% include JB/setup %}
-
+# Relational Database for MySQL (dbaas) API
 
 # 1. Overview
 
@@ -67,11 +67,11 @@ For additional details on the Identity Service, please refer to https://docs.hpc
 ## 3.3 Service Catalog
 The service is exposed in the service catalog, as shown in the following fragment:
 
-```
-{
-   service catalog fragment here
-}
-```
+
+    {
+       service catalog fragment here
+    }
+
 
 ---
 
@@ -161,10 +161,10 @@ Returns a list of all database instances
 
 **Request Data**
 
-	GET /v1.0/<tenant_id>/instances HTTP/1.1
-	Accept: application/json
-	Content-Type: application/json
-	X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+    GET /v1.0/<tenant_id>/instances HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
 
 **Data Parameters**
 
@@ -180,38 +180,38 @@ This call does not require a request body
 
 Header
 
-```
-HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 525
-Date: Wed, 07 Mar 2012 17:35:09 GMT
-```
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    Content-Length: 525
+    Date: Wed, 07 Mar 2012 17:35:09 GMT
+
 
 JSON Body
 
-```               
-{
-    "created": "2012-10-29T22:34:53", 
-    "flavor": {
-        "id": "103", 
+
+    {
+        "created": "2012-10-29T22:34:53", 
+        "flavor": {
+            "id": "103", 
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103", 
+                    "rel": "self"
+                }
+            ]
+        }, 
+        "id": "eabe9e32-6ce0-4a36-9750-df415606b44c", 
         "links": [
             {
-                "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103", 
+                "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/eabe9e32-6ce0-4a36-9750-df415606b44c", 
                 "rel": "self"
             }
-        ]
-    }, 
-    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c", 
-    "links": [
-        {
-            "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/eabe9e32-6ce0-4a36-9750-df415606b44c", 
-            "rel": "self"
-        }
-    ], 
-    "name": "My_Instance", 
-    "status": "building"
-}
-```
+        ], 
+        "name": "My_Instance", 
+        "status": "building"
+    }
+
 
 **Error Response**
 
@@ -220,11 +220,11 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), i
 
 **Curl Example**
 
-```
-$ curl -X GET \
-    -H "X-Auth-Token: HPAuth_4f7db4b6e4b02499a5ccb04a" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances
-```
+
+    $ curl -X GET \
+        -H "X-Auth-Token: HPAuth_4f7db4b6e4b02499a5ccb04a" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances
+
 
 
 
@@ -235,14 +235,14 @@ Create a new database instance
 
 **Request Data**
 
-```
-POST /v1.0/<tenant_id>/instances HTTP/1.1
-Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
-Accept: application/json
-Content-Type: application/json
-X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
-Content-Length: 119
-```
+
+    POST /v1.0/<tenant_id>/instances HTTP/1.1
+    Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+    Content-Length: 119
+
 
 **Data Parameters**
 
@@ -254,21 +254,21 @@ Content-Length: 119
 
 JSON
 
-```
-{
-    "instance": 
+
     {
-        "name": "My_Instance",
-        "flavorRef": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103",
-        "port": "3306",
-        "dbtype":
+        "instance": 
         {
-            "name": "mysql",
-            "version": "5.5"
+            "name": "My_Instance",
+            "flavorRef": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103",
+            "port": "3306",
+            "dbtype":
+            {
+                "name": "mysql",
+                "version": "5.5"
+            }
         }
     }
-}
-```
+
 
 **Success Response**
 
@@ -280,56 +280,56 @@ JSON
 
 Header
 
-```
-HTTP/1.1 201 Created
-Content-Type: application/json
-Content-Length: 633
-Date: Wed, 07 Mar 2012 19:03:59 GMT
 
-```
+    HTTP/1.1 201 Created
+    Content-Type: application/json
+    Content-Length: 633
+    Date: Wed, 07 Mar 2012 19:03:59 GMT
+    
+
 
 
 JSON Body
 
-```
-{
-    "created": "2012-10-29T22:34:53", 
-    "credential": {
-        "password": "PazmhxNwyJD8bxvcZDTL", 
-        "username": "dbas"
-    }, 
-    "flavor": {
-        "id": "103", 
-        "links": [
-            {
-                "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103", 
-                "rel": "self"
-            }
-        ]
-    }, 
-    "hostname": "", 
-    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c", 
-    "links": [
-        {
-            "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/instances/eabe9e32-6ce0-4a36-9750-df415606b44c", 
-            "rel": "self"
-        }
-    ], 
-    "name": "My_Instance", 
-    "security_groups": [
-        {
-            "id": "0af5ee60-9d40-4737-b6c4-2ab75f51ce40", 
+
+    {
+        "created": "2012-10-29T22:34:53", 
+        "credential": {
+            "password": "PazmhxNwyJD8bxvcZDTL", 
+            "username": "dbas"
+        }, 
+        "flavor": {
+            "id": "103", 
             "links": [
                 {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/security-groups/0af5ee60-9d40-4737-b6c4-2ab75f51ce40", 
+                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103", 
                     "rel": "self"
                 }
             ]
-        }
-    ], 
-    "status": "building"
-}
-```
+        }, 
+        "hostname": "", 
+        "id": "eabe9e32-6ce0-4a36-9750-df415606b44c", 
+        "links": [
+            {
+                "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/instances/eabe9e32-6ce0-4a36-9750-df415606b44c", 
+                "rel": "self"
+            }
+        ], 
+        "name": "My_Instance", 
+        "security_groups": [
+            {
+                "id": "0af5ee60-9d40-4737-b6c4-2ab75f51ce40", 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/security-groups/0af5ee60-9d40-4737-b6c4-2ab75f51ce40", 
+                        "rel": "self"
+                    }
+                ]
+            }
+        ], 
+        "status": "building"
+    }
+
 
 **Error Response**
 
@@ -337,13 +337,13 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), i
 
 **Curl Example**
 
-```
-$ curl -X POST \
-    -H "Content-Type: application/json" \
-    -H "X-Auth-Token: HPAuth_0c1bf996869092ee62be650e15cd721da3df29260baff6858ef66a5ab2b1ee83" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances \
-    -d '{"instance":{"name": "My_2nd_Instance","flavorRef": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/flavors/102","port": "3306","dbtype":{"name": "mysql","version": "5.5"}}}'
-```
+
+    $ curl -X POST \
+        -H "Content-Type: application/json" \
+        -H "X-Auth-Token: HPAuth_0c1bf996869092ee62be650e15cd721da3df29260baff6858ef66a5ab2b1ee83" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances \
+        -d '{"instance":{"name": "My_2nd_Instance","flavorRef": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/flavors/102","port": "3306","dbtype":{"name": "mysql","version": "5.5"}}}'
+
 
 **Additional Notes**
 
@@ -357,13 +357,13 @@ Returns information about the database instance specified by *instance_id*
 
 **Request Data**
 
-```
-GET /v1.0/<tenant_id>/instances/ef9e2591-7f3c-472b-b86f-f6b90f2cce5d HTTP/1.1
-Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
-Accept: application/json
-Content-Type: application/json
-X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
-```
+
+    GET /v1.0/<tenant_id>/instances/ef9e2591-7f3c-472b-b86f-f6b90f2cce5d HTTP/1.1
+    Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+
 
 **Data Parameters**
 
@@ -380,52 +380,52 @@ This call does not require a request body
 
 Header
 
-```
-HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 596
-Date: Wed, 07 Mar 2012 17:43:00 GMT
-```
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    Content-Length: 596
+    Date: Wed, 07 Mar 2012 17:43:00 GMT
+
 
 JSON Body
 
-```
-{
-    "created": "2012-10-29T22:34:53", 
-    "flavor": {
-        "id": "103", 
-        "links": [
-            {
-                "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103", 
-                "rel": "self"
-            }
-        ]
-    }, 
-    "hostname": "15.185.172.99", 
-    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c", 
-    "links": [
-        {
-            "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/instances/eabe9e32-6ce0-4a36-9750-df415606b44c", 
-            "rel": "self"
-        }
-    ], 
-    "name": "test", 
-    "port": 3306, 
-    "security_groups": [
-        {
-            "id": "0af5ee60-9d40-4737-b6c4-2ab75f51ce40", 
+
+    {
+        "created": "2012-10-29T22:34:53", 
+        "flavor": {
+            "id": "103", 
             "links": [
                 {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/security-groups/0af5ee60-9d40-4737-b6c4-2ab75f51ce40", 
+                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103", 
                     "rel": "self"
                 }
             ]
-        }
-    ], 
-    "status": "running", 
-    "updated": "2012-10-29T22:34:56"
-}
-```
+        }, 
+        "hostname": "15.185.172.99", 
+        "id": "eabe9e32-6ce0-4a36-9750-df415606b44c", 
+        "links": [
+            {
+                "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/instances/eabe9e32-6ce0-4a36-9750-df415606b44c", 
+                "rel": "self"
+            }
+        ], 
+        "name": "test", 
+        "port": 3306, 
+        "security_groups": [
+            {
+                "id": "0af5ee60-9d40-4737-b6c4-2ab75f51ce40", 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/security-groups/0af5ee60-9d40-4737-b6c4-2ab75f51ce40", 
+                        "rel": "self"
+                    }
+                ]
+            }
+        ], 
+        "status": "running", 
+        "updated": "2012-10-29T22:34:56"
+    }
+
 
 **Error Response**
 
@@ -433,12 +433,12 @@ Error Response Code(s): internal server error (500), not found (404), forbidden 
 
 **Curl Example**
 
-```
-$ curl -X GET \
-    -H "X-Auth-Token: HPAuth_4f7db4b6e4b02499a5ccb04a" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances/eabe9e32-6ce0-4a36-9750-df415606b44c 
 
-```
+    $ curl -X GET \
+        -H "X-Auth-Token: HPAuth_4f7db4b6e4b02499a5ccb04a" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances/eabe9e32-6ce0-4a36-9750-df415606b44c 
+    
+
 
 #### 4.4.1.4 Delete a database instance
 #### DELETE /instances/*instance_id*
@@ -448,13 +448,13 @@ Deletes the database instance specified by *instance_id*
 **Request Data**
 
 
-```
-DELETE /v1.0/<tenant_id>/instances/ef9e2591-7f3c-472b-b86f-f6b90f2cce5d HTTP/1.1
-Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
-Accept: application/json
-Content-Type: application/json
-X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
-```
+
+    DELETE /v1.0/<tenant_id>/instances/ef9e2591-7f3c-472b-b86f-f6b90f2cce5d HTTP/1.1
+    Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+
 
 **Data Parameters**
 
@@ -472,12 +472,12 @@ This call does not require a request body.
 
 HEADER
 
-```
-HTTP/1.1 204 No Content
-Content-Length: 58
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 07 Mar 2012 19:41:22 GMT
-```
+
+    HTTP/1.1 204 No Content
+    Content-Length: 58
+    Content-Type: text/plain; charset=UTF-8
+    Date: Wed, 07 Mar 2012 19:41:22 GMT
+
 
 Body will be empty
 
@@ -488,26 +488,26 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), n
 
 **Curl Example**
 
-```
-$ curl -i -X DELETE \
-    -H "X-Auth-Token: HPAuth_4f7db4b6e4b02499a5ccb04a" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances/701ce26f-7522-4d33-85c4-94117dec7a92 
-```
+
+    $ curl -i -X DELETE \
+        -H "X-Auth-Token: HPAuth_4f7db4b6e4b02499a5ccb04a" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances/701ce26f-7522-4d33-85c4-94117dec7a92 
+
 
 #### 4.4.1.5 Restart a specific instance
-#### POST /instances/*instance_id*/action	
+#### POST /instances/*instance_id*/action   
 Restarts the database instance specified by *instance_id*
 
 **Request Data**
 
 
-```
-POST /v1.0/<tenant_id>/instances/ef9e2591-7f3c-472b-b86f-f6b90f2cce5d/action HTTP/1.1
-Accept: application/json
-Content-Type: application/json
-X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
-Content-Length: 0
-```
+
+    POST /v1.0/<tenant_id>/instances/ef9e2591-7f3c-472b-b86f-f6b90f2cce5d/action HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+    Content-Length: 0
+
 **Data Parameters**
 
 *List all the attributes that comprises the data structure*
@@ -516,11 +516,11 @@ Content-Length: 0
 
 JSON
 
-```
-{
-    "restart": {}
-}
-```
+
+    {
+        "restart": {}
+    }
+
 
 **Success Response**
 
@@ -532,13 +532,13 @@ JSON
 
 Header
 
-```
-HTTP/1.1 204 No Content
-Date: Wed, 11 Apr 2012 01:10:22 GMT
-Server: Apache/2.2.17 (Ubuntu)
-Content-Length: 0
-Content-Type: application/json
-```
+
+    HTTP/1.1 204 No Content
+    Date: Wed, 11 Apr 2012 01:10:22 GMT
+    Server: Apache/2.2.17 (Ubuntu)
+    Content-Length: 0
+    Content-Type: application/json
+
 **Error Response**
 
 
@@ -546,13 +546,13 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), n
 
 **Curl Example**
 
-```
-$curl -i -X POST \
-    -H "Content-Type: application/json" \
-    -H "X-Auth-Token: HPAuth_0c1bf996869092ee62be650e15cd721da3df29260baff6858ef66a5ab2b1ee83" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances/9dfcd988-3b57-4bc7-92d1-88dbc8a0080d/action  \
-    -d '{"restart":{}}' 
-```
+
+    $curl -i -X POST \
+        -H "Content-Type: application/json" \
+        -H "X-Auth-Token: HPAuth_0c1bf996869092ee62be650e15cd721da3df29260baff6858ef66a5ab2b1ee83" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances/9dfcd988-3b57-4bc7-92d1-88dbc8a0080d/action  \
+        -d '{"restart":{}}' 
+
 
 #### 4.4.1.6 Reset the password of a specific instance
 #### POST /instances/*instance_id*/action
@@ -561,15 +561,15 @@ Resets the password for the database instance specified by instance_id
 
 **Request Data**
 
-```
-POST /v1.0/<tenant_id>/instances/ef9e2591-7f3c-472b-b86f-f6b90f2cce5d/action HTTP/1.1
-User-Agent: curl/7.21.4 (universal-apple-darwin11.0) libcurl/7.21.4 OpenSSL/0.9.8r zlib/1.2.5
-Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
-Accept: application/json
-Content-Type: application/json
-X-Auth-Token: HPAuth_4f4fcc24e4b04e2d592e7d79
-Content-Length: 0
-```
+
+    POST /v1.0/<tenant_id>/instances/ef9e2591-7f3c-472b-b86f-f6b90f2cce5d/action HTTP/1.1
+    User-Agent: curl/7.21.4 (universal-apple-darwin11.0) libcurl/7.21.4 OpenSSL/0.9.8r zlib/1.2.5
+    Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token: HPAuth_4f4fcc24e4b04e2d592e7d79
+    Content-Length: 0
+
 
 **Data Parameters**
 
@@ -579,11 +579,11 @@ Content-Length: 0
 
 JSON
 
-```
-{
-    "reset-password": {}
-}
-```
+
+    {
+        "reset-password": {}
+    }
+
 
 **Success Response**
 
@@ -595,20 +595,20 @@ JSON
 
 Header
 
-```
-HTTP/1.1 200 OK
-Date: Wed, 11 Apr 2012 16:50:51 GMT
-Server: Apache/2.2.17 (Ubuntu)
-Content-Length: 36
-Content-Type: application/json
-```
+
+    HTTP/1.1 200 OK
+    Date: Wed, 11 Apr 2012 16:50:51 GMT
+    Server: Apache/2.2.17 (Ubuntu)
+    Content-Length: 36
+    Content-Type: application/json
+
 JSON Body
 
-```
-{
-    "password": "CaFreeNbKQY4h9MkzyuD"
-}
-``` 
+
+    {
+        "password": "CaFreeNbKQY4h9MkzyuD"
+    }
+
 
 **Error Response**
 
@@ -616,13 +616,13 @@ Error Response Code(s): badRequest (400) unauthorized (401), forbidden (403), no
 
 **Curl Example**
 
-```
-$ curl -X POST \
-    -H "Content-Type: application/json" \
-    -H "X-Auth-Token: HPAuth_0c1bf996869092ee62be650e15cd721da3df29260baff6858ef66a5ab2b1ee83" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances/9dfcd988-3b57-4bc7-92d1-88dbc8a0080d/action   \
-    -d '{"reset-password":{}}' 
-```
+
+    $ curl -X POST \
+        -H "Content-Type: application/json" \
+        -H "X-Auth-Token: HPAuth_0c1bf996869092ee62be650e15cd721da3df29260baff6858ef66a5ab2b1ee83" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/instances/9dfcd988-3b57-4bc7-92d1-88dbc8a0080d/action   \
+        -d '{"reset-password":{}}' 
+
 
 **Additional Notes**
 
@@ -637,13 +637,13 @@ Returns a list of all available flavors
 
 **Request Data**
 
-```
-GET /v1.0/123456789/flavors HTTP/1.1
-User-Agent: curl/7.21.4 (universal-apple-darwin11.0) libcurl/7.21.4 OpenSSL/0.9.8r zlib/1.2.5
-Accept: application/json
-Content-Type: application/json
-X-Auth-Token: HPAuth_4f4fcc24e4b04e2d592e7d79
-```
+
+    GET /v1.0/123456789/flavors HTTP/1.1
+    User-Agent: curl/7.21.4 (universal-apple-darwin11.0) libcurl/7.21.4 OpenSSL/0.9.8r zlib/1.2.5
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token: HPAuth_4f4fcc24e4b04e2d592e7d79
+
 
 **Data Parameters**
 This call does not require a request body
@@ -660,93 +660,93 @@ This call does not require a request body
 
 Header
 
-```
-HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 739
-Date: Mon, 24 Sep 2012 11:35:09 GMT
-```
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    Content-Length: 739
+    Date: Mon, 24 Sep 2012 11:35:09 GMT
+
 
 JSON Body
 
-```
-{
-    "flavors": [
-        {
-            "id": 100, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/100", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "xsmall", 
-            "ram": 1, 
-            "vcpu": 1
-        },
-        {
-            "id": 101, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/101", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "small", 
-            "ram": 2, 
-            "vcpu": 2
-        },
-        {
-            "id": 102, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/102", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "medium", 
-            "ram": 4, 
-            "vcpu": 2
-        },
-        {
-            "id": 103, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "large", 
-            "ram": 8, 
-            "vcpu": 4
-        },
-        {
-            "id": 104, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/104", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "xlarge", 
-            "ram": 16, 
-            "vcpu": 4
-        },
-        {
-            "id": 105, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/105", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "2xlarge", 
-            "ram": 32, 
-            "vcpu": 8
-        }
-    ]
-}
-```
+
+    {
+        "flavors": [
+            {
+                "id": 100, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/100", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "xsmall", 
+                "ram": 1, 
+                "vcpu": 1
+            },
+            {
+                "id": 101, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/101", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "small", 
+                "ram": 2, 
+                "vcpu": 2
+            },
+            {
+                "id": 102, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/102", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "medium", 
+                "ram": 4, 
+                "vcpu": 2
+            },
+            {
+                "id": 103, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "large", 
+                "ram": 8, 
+                "vcpu": 4
+            },
+            {
+                "id": 104, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/104", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "xlarge", 
+                "ram": 16, 
+                "vcpu": 4
+            },
+            {
+                "id": 105, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/105", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "2xlarge", 
+                "ram": 32, 
+                "vcpu": 8
+            }
+        ]
+    }
+
 
 **Error Response**
 
@@ -754,12 +754,12 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), i
 
 **Curl Example**
 
-```
-$ curl -X GET \
-    -H "Content-Type: application/json" \
-    -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/flavors
-```
+
+    $ curl -X GET \
+        -H "Content-Type: application/json" \
+        -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/flavors
+
 
 #### 4.4.2.2 List all flavors with detail
 #### GET /flavors/detail
@@ -768,14 +768,14 @@ Returns a list of all flavors with detail
 
 **Request Data**
 
-```
-GET /v1.0/123456789/flavors/detail HTTP/1.1
-User-Agent: curl/7.21.4 (universal-apple-darwin11.0) libcurl/7.21.4 OpenSSL/0.9.8r zlib/1.2.5
-Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
-Accept: application/json
-Content-Type: application/json
-X-Auth-Token: HPAuth_4f4fcc24e4b04e2d592e7d79
-```
+
+    GET /v1.0/123456789/flavors/detail HTTP/1.1
+    User-Agent: curl/7.21.4 (universal-apple-darwin11.0) libcurl/7.21.4 OpenSSL/0.9.8r zlib/1.2.5
+    Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token: HPAuth_4f4fcc24e4b04e2d592e7d79
+
 
 **Data Parameters**
 
@@ -793,93 +793,93 @@ This call does not require a request body
 
 Header
 
-```
-HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 739
-Date: Mon, 24 Sep 2012 11:35:09 GMT
-```
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    Content-Length: 739
+    Date: Mon, 24 Sep 2012 11:35:09 GMT
+
 
 JSON Body
 
-```
-{
-    "flavors": [
-        {
-            "id": 100, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/100", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "xsmall", 
-            "ram": 1, 
-            "vcpu": 1
-        },
-        {
-            "id": 101, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/101", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "small", 
-            "ram": 2, 
-            "vcpu": 2
-        },
-        {
-            "id": 102, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/102", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "medium", 
-            "ram": 4, 
-            "vcpu": 2
-        },
-        {
-            "id": 103, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "large", 
-            "ram": 8, 
-            "vcpu": 4
-        },
-        {
-            "id": 104, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/104", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "xlarge", 
-            "ram": 16, 
-            "vcpu": 4
-        },
-        {
-            "id": 105, 
-            "links": [
-                {
-                    "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/105", 
-                    "rel": "self"
-                }
-            ], 
-            "name": "2xlarge", 
-            "ram": 32, 
-            "vcpu": 8
-        }
-    ]
-}
-```
+
+    {
+        "flavors": [
+            {
+                "id": 100, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/100", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "xsmall", 
+                "ram": 1, 
+                "vcpu": 1
+            },
+            {
+                "id": 101, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/101", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "small", 
+                "ram": 2, 
+                "vcpu": 2
+            },
+            {
+                "id": 102, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/102", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "medium", 
+                "ram": 4, 
+                "vcpu": 2
+            },
+            {
+                "id": 103, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/103", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "large", 
+                "ram": 8, 
+                "vcpu": 4
+            },
+            {
+                "id": 104, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/104", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "xlarge", 
+                "ram": 16, 
+                "vcpu": 4
+            },
+            {
+                "id": 105, 
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/105", 
+                        "rel": "self"
+                    }
+                ], 
+                "name": "2xlarge", 
+                "ram": 32, 
+                "vcpu": 8
+            }
+        ]
+    }
+
 
 **Error Response**
 
@@ -887,28 +887,28 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), i
 
 **Curl Example**
 
-```
-$ curl -X GET \
-    -H "Content-Type: application/json" \
-    -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/flavors/detail
-```
+
+    $ curl -X GET \
+        -H "Content-Type: application/json" \
+        -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/flavors/detail
+
 
 #### 4.4.2.3 Get a flavor
-#### GET /flavors/*flavor_id*	
+#### GET /flavors/*flavor_id*   
 
 Get a flavor specified by *flavor_id*
 
 **Request Data**
 
-```
-GET /v1.0/<tenant_id>/flavors/104 HTTP/1.1
-User-Agent: curl/7.21.4 (universal-apple-darwin11.0) libcurl/7.21.4 OpenSSL/0.9.8r zlib/1.2.5
-Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
-Accept: application/json
-Content-Type: application/json
-X-Auth-Token: HPAuth_4f4fcc24e4b04e2d592e7d79
-```
+
+    GET /v1.0/<tenant_id>/flavors/104 HTTP/1.1
+    User-Agent: curl/7.21.4 (universal-apple-darwin11.0) libcurl/7.21.4 OpenSSL/0.9.8r zlib/1.2.5
+    Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token: HPAuth_4f4fcc24e4b04e2d592e7d79
+
 
 **Data Parameters**
 
@@ -924,29 +924,29 @@ This call does not require a request body
 
 Header
 
-```
-HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 156
-Date: Wed, 07 Mar 2012 17:43:00 GMT
-```
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    Content-Length: 156
+    Date: Wed, 07 Mar 2012 17:43:00 GMT
+
 
 JSON Body
 
-```
-{
-  "flavor" : {
-    "vcpu" : 4,
-    "ram" : 16,
-    "id" : 104,
-    "links" : [ {
-      "href" : "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/104",
-      "rel" : "self"
-    } ],
-    "name" : "xlarge"
-  }
-}
-```
+
+    {
+      "flavor" : {
+        "vcpu" : 4,
+        "ram" : 16,
+        "id" : 104,
+        "links" : [ {
+          "href" : "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/flavors/104",
+          "rel" : "self"
+        } ],
+        "name" : "xlarge"
+      }
+    }
+
 
 **Error Response**
 
@@ -954,29 +954,29 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), n
 
 **Curl Example**
 
-```
-$ curl -X GET \
-    -H "Content-Type: application/json" \
-    -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/flavors/102
-```
+
+    $ curl -X GET \
+        -H "Content-Type: application/json" \
+        -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/flavors/102
+
 
 ### 4.4.3 Security Group Operations
 
 #### 4.4.3.1 List all security groups
-#### GET /security-groups	
+#### GET /security-groups   
 
 Returns a list of all security groups
 
 **Request Data**
 
-```
-GET /v1.0/<tenant_id>/security-groups HTTP/1.1
-Accept: application/json
-X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
-Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
-Connection: keep-alive
-```
+
+    GET /v1.0/<tenant_id>/security-groups HTTP/1.1
+    Accept: application/json
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+    Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
+    Connection: keep-alive
+
 
 **Data Parameters**
 
@@ -992,40 +992,40 @@ This call does not require a request body
 
 Header
 
-```
-HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-Content-Type: application/json
-Content-Length: 380                
-```
+
+    HTTP/1.1 200 OK
+    Server: Apache-Coyote/1.1
+    Content-Type: application/json
+    Content-Length: 380                
+
 
 JSON Body
 
-```
-{  
-   "security-groups": [
-   {
-      "id": "a6898281-99cf-40f4-9875-3a49a69cba5d",
-      "name": "default",
-      "description": "Default Security Group",
-      "rules" : [ 
-        {
-          "id": "8cd186e9-2024-4644-81a9-ff83414b60eb",
-          "ip_range": {
-            "cidr": "15.0.0.0/0"
-          }
-        }
-       ],
-      "links" : [
-        {
-          "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/security-groups/a6898281-99cf-40f4-9875-3a49a69cba5d",
-          "rel": "self"
-        }
-       ],
-      "created" : "2012-09-11T20:57:22"
-   }]
-}
-```
+
+    {  
+       "security-groups": [
+       {
+          "id": "a6898281-99cf-40f4-9875-3a49a69cba5d",
+          "name": "default",
+          "description": "Default Security Group",
+          "rules" : [ 
+            {
+              "id": "8cd186e9-2024-4644-81a9-ff83414b60eb",
+              "ip_range": {
+                "cidr": "15.0.0.0/0"
+              }
+            }
+           ],
+          "links" : [
+            {
+              "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/security-groups/a6898281-99cf-40f4-9875-3a49a69cba5d",
+              "rel": "self"
+            }
+           ],
+          "created" : "2012-09-11T20:57:22"
+       }]
+    }
+
 
 **Error Response**
 
@@ -1033,11 +1033,11 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), i
 
 **Curl Example**
 
-```
-$ curl -X GET \
-    -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/security-groups
-```
+
+    $ curl -X GET \
+        -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/security-groups
+
 
 #### 4.4.3.2 Get a specific security group
 #### GET /security-groups/*security_group_id*
@@ -1047,13 +1047,13 @@ Returns a specific security group specified by *security_group_id*
 
 **Request Data**
 
-```
-GET /v1.0/<tenant_id>/security-groups/a6898281-99cf-40f4-9875-3a49a69cba5d HTTP/1.1
-Accept: application/json
-X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
-Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
-Connection: keep-alive
-```
+
+    GET /v1.0/<tenant_id>/security-groups/a6898281-99cf-40f4-9875-3a49a69cba5d HTTP/1.1
+    Accept: application/json
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+    Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
+    Connection: keep-alive
+
 
 **Data Parameters**
 
@@ -1069,40 +1069,40 @@ This call does not require a request body
 
 Header
 
-```
-HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-Content-Type: application/json
-Content-Length: 380
-```
+
+    HTTP/1.1 200 OK
+    Server: Apache-Coyote/1.1
+    Content-Type: application/json
+    Content-Length: 380
+
 
 JSON Body
 
-```
-{  
-   "security-group": 
-   {
-      "id": "a6898281-99cf-40f4-9875-3a49a69cba5d",
-      "name": "default",
-      "description": "Default Security Group",
-      "rules" : [ 
-        {
-          "id": "8cd186e9-2024-4644-81a9-ff83414b60eb",
-          "ip_range": {
-            "cidr": "15.0.0.0/0"
-          }
-        }
-       ],
-      "links" : [
-        {
-          "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/security-groups/a6898281-99cf-40f4-9875-3a49a69cba5d",
-          "rel": "self"
-        }
-       ],
-      "created" : "2012-09-11T20:57:22"
-   }
-}
-```
+
+    {  
+       "security-group": 
+       {
+          "id": "a6898281-99cf-40f4-9875-3a49a69cba5d",
+          "name": "default",
+          "description": "Default Security Group",
+          "rules" : [ 
+            {
+              "id": "8cd186e9-2024-4644-81a9-ff83414b60eb",
+              "ip_range": {
+                "cidr": "15.0.0.0/0"
+              }
+            }
+           ],
+          "links" : [
+            {
+              "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/<tenant_id>/security-groups/a6898281-99cf-40f4-9875-3a49a69cba5d",
+              "rel": "self"
+            }
+           ],
+          "created" : "2012-09-11T20:57:22"
+       }
+    }
+
 
 **Error Response**
 
@@ -1110,11 +1110,11 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), n
 
 **Curl Example**
 
-```
-$ curl -X GET \
-    -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/security-groups/7539a2b3-0d0a-4586-9f5b-61f47610fa00
-```
+
+    $ curl -X GET \
+        -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/security-groups/7539a2b3-0d0a-4586-9f5b-61f47610fa00
+
 
 #### 4.4.3.3 Create a security group rule
 #### POST /security-group-rules
@@ -1124,14 +1124,14 @@ Create a new security group rule.
 
 **Request Data**
 
-```
-POST /v1.0/<tenant_id>/security-group-rules HTTP/1.1
-Accept: application/json
-Content-Type: application/json
-X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
-Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
-Connection: keep-alive
-```
+
+    POST /v1.0/<tenant_id>/security-group-rules HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+    Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
+    Connection: keep-alive
+
 
 **Data Parameters**
 
@@ -1143,17 +1143,17 @@ Connection: keep-alive
 
 JSON
 
-```
-{  
-   "security_group_rule": 
-   {
-      "security_group_id": "a6898281-99cf-40f4-9875-3a49a69cba5d",
-      "cidr": "15.0.0.0/0",
-      "from_port": 3306,
-      "to_port": 3306
-   }
-}
-```
+
+    {  
+       "security_group_rule": 
+       {
+          "security_group_id": "a6898281-99cf-40f4-9875-3a49a69cba5d",
+          "cidr": "15.0.0.0/0",
+          "from_port": 3306,
+          "to_port": 3306
+       }
+    }
+
 
 **Success Response**
 
@@ -1165,28 +1165,28 @@ JSON
 
 Header
 
-```
-HTTP/1.1 201 Created
-Server: Apache-Coyote/1.1
-Content-Type: application/json
-Content-Length: 380
-```
+
+    HTTP/1.1 201 Created
+    Server: Apache-Coyote/1.1
+    Content-Type: application/json
+    Content-Length: 380
+
 
 JSON Body
 
-```
-{  
-   "security_group_rule": 
-   {
-      "id": "dddd8281-99cf-40f4-9875-3a49a69xxxxx",
-      "security_group_id": "a6898281-99cf-40f4-9875-3a49a69cba5d",
-      "cidr": "15.0.0.0/0",
-      "from_port": 3306,
-      "to_port": 3306,
-      "created" : "2012-09-11T20:57:22"
-   }
-}
-```
+
+    {  
+       "security_group_rule": 
+       {
+          "id": "dddd8281-99cf-40f4-9875-3a49a69xxxxx",
+          "security_group_id": "a6898281-99cf-40f4-9875-3a49a69cba5d",
+          "cidr": "15.0.0.0/0",
+          "from_port": 3306,
+          "to_port": 3306,
+          "created" : "2012-09-11T20:57:22"
+       }
+    }
+
 
 **Error Response**
 
@@ -1194,13 +1194,13 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), n
 
 **Curl Example**
 
-```
-$ curl -i -X POST \
-    -H "Content-Type: application/json" \
-    -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/security-group-rules \
-    -d '{"security_group_rule": {"security_group_id": "7539a2b3-0d0a-4586-9f5b-61f47610fa00", "cidr": "0.0.0.0/0", "from_port": 3306, "to_port": 3306 } }' 
-```
+
+    $ curl -i -X POST \
+        -H "Content-Type: application/json" \
+        -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/security-group-rules \
+        -d '{"security_group_rule": {"security_group_id": "7539a2b3-0d0a-4586-9f5b-61f47610fa00", "cidr": "0.0.0.0/0", "from_port": 3306, "to_port": 3306 } }' 
+
 
 #### 4.4.3.4 Delete a security group rule
 #### DELETE /security-group-rules/*rule_id*
@@ -1209,13 +1209,13 @@ Deletes the security group rule specified by *rule_id*
 
 **Request Data**
 
-```
-DELETE /v1.0/<tenant_id>/security-group-rules/dddd8281-99cf-40f4-9875-3a49a69xxxxx HTTP/1.1
-Accept: application/json
-X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
-Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
-Connection: keep-alive
-```
+
+    DELETE /v1.0/<tenant_id>/security-group-rules/dddd8281-99cf-40f4-9875-3a49a69xxxxx HTTP/1.1
+    Accept: application/json
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+    Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
+    Connection: keep-alive
+
 
 **Data Parameters**
 
@@ -1231,10 +1231,10 @@ This call does not require a request body
 
 Header
 
-```
-HTTP/1.1 204 No Content
-Server: Apache-Coyote/1.1
-```
+
+    HTTP/1.1 204 No Content
+    Server: Apache-Coyote/1.1
+
 
 No Body
 
@@ -1244,12 +1244,12 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), n
 
 **Curl Example**
 
-```
-$ curl -i -X DELETE \
-    -H "Content-Type: application/json" \
-    -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/security-group-rules/5ba5e21f-19ca-4d0a-8d62-418134f7d75f
-```
+
+    $ curl -i -X DELETE \
+        -H "Content-Type: application/json" \
+        -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0/38728063898723/security-group-rules/5ba5e21f-19ca-4d0a-8d62-418134f7d75f
+
 
 ### 4.4.4 Version Operations
 
@@ -1260,13 +1260,13 @@ Returns a list of all API versions
 
 **Request Data**
 
-```
-GET / HTTP/1.1
-Accept: application/json
-X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
-Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
-Connection: keep-alive
-```
+
+    GET / HTTP/1.1
+    Accept: application/json
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+    Host: https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com
+    Connection: keep-alive
+
 
 **Data Parameters**
 
@@ -1282,31 +1282,31 @@ This call does not require a request body
 
 Header
 
-```
-HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-Content-Type: application/json
-Content-Length: 380
-```
+
+    HTTP/1.1 200 OK
+    Server: Apache-Coyote/1.1
+    Content-Type: application/json
+    Content-Length: 380
+
 
 JSON Body
 
-```
-{  
-   "versions": [
-   {
-      "id": "v1.0",
-      "status": "CURRENT",
-      "updated": "2012-09-25T00:00:00Z",
-      "links" : [
-        {
-          "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0",
-          "rel": "self"
-        }
-       ]
-   }]
-}
-```
+
+    {  
+       "versions": [
+       {
+          "id": "v1.0",
+          "status": "CURRENT",
+          "updated": "2012-09-25T00:00:00Z",
+          "links" : [
+            {
+              "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0",
+              "rel": "self"
+            }
+           ]
+       }]
+    }
+
 
 **Error Response**
 
@@ -1314,25 +1314,25 @@ Error Response Code(s): badRequest (400), unauthorized (401), forbidden (403), i
 
 **Curl Example**
 
-```
-$ curl -X GET \
-    -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/
-```
+
+    $ curl -X GET \
+        -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/
+
 
 #### 4.4.4.2 Get a specific version
-#### GET /*version_id*	
+#### GET /*version_id*  
 
 Get a specific version specified by *version_id*
 
 **Request Data**
 
-```
-GET /v1.0/ HTTP/1.1
-Accept: application/json
-X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
-Connection: keep-alive
-```
+
+    GET /v1.0/ HTTP/1.1
+    Accept: application/json
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+    Connection: keep-alive
+
 
 **Data Parameters**
 
@@ -1348,30 +1348,30 @@ This call does not require a request body
 
 Header
 
-```
-HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-Content-Type: application/json
-Content-Length: 380
-```
+
+    HTTP/1.1 200 OK
+    Server: Apache-Coyote/1.1
+    Content-Type: application/json
+    Content-Length: 380
+
 
 JSON Body
 
-```
-{  
-   "version": {
-      "id": "v1.0",
-      "status": "CURRENT",
-      "updated": "2012-09-25T00:00:00Z",
-      "links" : [
-        {
-          "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0",
-          "rel": "self"
-        }
-       ]
-   }
-}
-```
+
+    {  
+       "version": {
+          "id": "v1.0",
+          "status": "CURRENT",
+          "updated": "2012-09-25T00:00:00Z",
+          "links" : [
+            {
+              "href": "https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0",
+              "rel": "self"
+            }
+           ]
+       }
+    }
+
 
 **Error Response**
 
@@ -1379,11 +1379,11 @@ Error Response Code(s): badRequest (400), forbidden (403), internal server error
 
 **Curl Example**
 
-```
-$ curl -X GET \
-    -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
-    https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0
-```
+
+    $ curl -X GET \
+        -H "X-Auth-Token: HPAuth_247365d0107526319ebccc4f05d0525a93fa050eae075ad881bbb57434438ff6" \
+        https://region-a.geo-1.dbaas-mysql.hpcloudsvc.com/v1.0
+
 
 
 ---
