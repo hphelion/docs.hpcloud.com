@@ -150,7 +150,7 @@ N/A
 None.
 
 
-#### 4.4.1.1 <a id="list_tenants"></a>List Tenants####
+#### 4.4.1.1 List Tenants#### {#list_tenants}
 #### GET /tenants
 
 This API returns a listing of all tenants for which the holder of the provided token has a role assignment. If the user is not a valid, an error is returned.
@@ -350,7 +350,7 @@ N/A
 None.
 
 
-#### 4.4.2.1 <a id="authenticate"></a>Authenticate####
+#### 4.4.2.1 Authenticate#### {#authenticate}
 #### POST /tokens
 
 This API is used to authenticate a user to be able to use an OpenStack service. The result of a successful authentication is a token to be used with service requests. A username and password or access/secret key credentials are given as input to this interface. If authentication succeeds, the response will include an authentication token and service catalog ( list of available services for that user ). Tokens are valid for 12 hours. Issued tokens can become invalid in two cases:
@@ -679,7 +679,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.2.2 <a id="rescope_token"></a>Rescope Token####
+#### 4.4.2.2 Rescope Token#### {#rescope_token}
 #### POST /tokens
 
 This API provides the ability to re-scope a valid token with another tenant. An existing unexpired token, regardless of its currently scoped or not, can be scoped to another tenant as long as the user has valid association with that tenant.
@@ -869,7 +869,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.2.3 <a id="revoke_token"></a>Revoke Token####
+#### 4.4.2.3 Revoke Token#### {#revoke_token}
 #### DELETE /HP-IDM/v1.0/tokens/{tokenId}
 
 This API is used to revoke an authentication token. This operation does not require a request body. Once a token has been revoked, attempts to validate the token via GET /tokens/tokenId will fail with a 404 (item not found) as the token no longer exists. Trying revoke a non existing token, including one which has expired will also return a 404 (item not found).
@@ -926,7 +926,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.4 <a id="swift_legacy_authentication"></a>Swift Legacy Authentication####
+#### 4.4.2.4 Swift Legacy Authentication#### {#swift_legacy_authentication}
 #### GET /v1.0
 
 #### GET /v1.1
@@ -1123,7 +1123,7 @@ N/A
 None.
 
 
-#### 4.4.3.1 <a id="create_user_access_key"></a>Create User Access Key####
+#### 4.4.3.1 Create User Access Key#### {#create_user_access_key}
 #### POST /HP-IDM/v1.0/accesskeys
 
 
@@ -1293,7 +1293,7 @@ Curl Example
 
 
 
-#### 4.4.3.2 <a id="delete_user_access_key"></a>Delete User Access Key####
+#### 4.4.3.2 Delete User Access Key#### {#delete_user_access_key}
 #### DELETE /HP-IDM/v1.0/accesskeys/{accesskeyId} 
 
 Delete a user access key.
@@ -1382,7 +1382,7 @@ Curl Example
 
 
 
-#### 4.4.3.3 <a id="get_access_keys"></a>Get Access Keys####
+#### 4.4.3.3 Get Access Keys#### {#get_access_keys}
 #### GET /HP-IDM/v1.0/accesskeys
 
 
@@ -1549,7 +1549,7 @@ Curl Example
 
 
 
-#### 4.4.3.4 <a id="get_an_access_key"></a>Get An Access Key####
+#### 4.4.3.4 Get An Access Key#### {#get_an_access_key}
 #### GET /HP-IDM/v1.0/accesskeys/{accesskeyId}
 
 
@@ -1683,7 +1683,7 @@ Curl Example
 
 
 
-#### 4.4.3.5 <a id="import_user_access_key(s)"></a>Import User Access Key(s)####
+#### 4.4.3.5 Import User Access Key(s)#### {#import_user_access_key(s)}
 #### PUT /HP-IDM/v1.0/accesskeys
 
 Import one or more user access keys. 
@@ -1915,7 +1915,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.3.6 <a id="update_user_access_key"></a>Update User Access Key####
+#### 4.4.3.6 Update User Access Key#### {#update_user_access_key}
 #### PUT /HP-IDM/v1.0/accesskeys/{accesskeyId}
 
 Update a user access key. This method may be used to modify the key status only.
