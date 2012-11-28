@@ -85,7 +85,7 @@ private: true
 | Domains | [Get Service Activations For A Domain](#get_service_activations_for_a_domain) | GET | /HP-IDM/v1.0/domains/{domainId}/services | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
 | Domains | [Get Tenants For A Domain](#get_tenants_for_a_domain) | GET | /HP-IDM/v1.0/domains/{domainId}/tenants | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
 | Domains | [Get Users For A Domain](#get_users_for_a_domain) | GET | /HP-IDM/v1.0/domains/{domainId}/tenants | Y/Y | System Adminstrator (SA), Domain Admin (DA) |
-| Domains | [List Role Definitions (Deprecated)](#list_role_definitions_(deprecated)) | GET | /HP-IDM/v1.0/domains/{domainId}/roles | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
+| Domains | [List Role Definitions (Deprecated)](#list_role_definitions_deprecated) | GET | /HP-IDM/v1.0/domains/{domainId}/roles | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
 | Domains | [Transfer Ownership Of A Domain](#transfer_ownership_of_a_domain) | PUT | /HP-IDM/v1.0/domains/{domainId}/owner/{userId}	 | Y/Y | System Adminstrator (SA) |
 | Endpoint Templates | [Add Endpoint Template](#add_endpoint_template) | POST | /HP-IDM/v1.0/endpointTemplates | Y/Y | SA, SVC |
 | Endpoint Templates | [Delete Endpoint Template](#delete_endpoint_template) | DELETE | /HP-IDM/v1.0/endpointTemplates/ {endpointTemplateId}  | Y/Y | SA, SVC |
@@ -161,7 +161,7 @@ private: true
 | User Access Keys | [Delete User Access Key](#delete_user_access_key) | DELETE | /HP-IDM/v1.0/accesskeys/{accesskeyId}  | Y/Y | SA, DA, SS |
 | User Access Keys | [Get Access Keys](#get_access_keys) | GET | /HP-IDM/v1.0/accesskeys | Y/Y | SA,DA, SS |
 | User Access Keys | [Get An Access Key](#get_an_access_key) | GET | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y | SA,DA,SS |
-| User Access Keys | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y | SA, DA, SS |
+| User Access Keys | [Import User Access Key(s)](#import_user_access_key | PUT | /HP-IDM/v1.0/accesskeys | Y/Y | SA, DA, SS |
 | User Access Keys | [Update User Access Key](#update_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y | SA, DA, SS |
 | User Certificates | [Delete User Certificate](#delete_user_certificate) | DELETE | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	D | Y/Y | SA, DA, SS |
 | User Certificates | [Get User Certificate](#get_user_certificate) | GET | /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} | Y/Y | SA, DA, SS |
@@ -4197,7 +4197,7 @@ Curl Example
 
 
 
-#### 4.4.2.11 List Role Definitions (Deprecated)#### {#list_role_definitions_(deprecated)}
+#### 4.4.2.11 List Role Definitions (Deprecated)#### {#list_role_definitions_deprecated}
 #### GET /HP-IDM/v1.0/domains/{domainId}/roles
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
@@ -16119,7 +16119,7 @@ Curl Example
 
 
 
-#### 4.4.13.5 Import User Access Key(s)#### {#import_user_access_key(s)}
+#### 4.4.13.5 Import User Access Key(s)#### {#import_user_access_key}
 #### PUT /HP-IDM/v1.0/accesskeys
 *Privilege Level: SA, DA, SS*
 

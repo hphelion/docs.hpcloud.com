@@ -116,7 +116,7 @@ The service is exposed in the service catalog, as shown in the following fragmen
 | User Access Keys | [Delete User Access Key](#delete_user_access_key) | DELETE | /HP-IDM/v1.0/accesskeys/{accesskeyId}  | Y/Y |
 | User Access Keys | [Get Access Keys](#get_access_keys) | GET | /HP-IDM/v1.0/accesskeys | Y/Y |
 | User Access Keys | [Get An Access Key](#get_an_access_key) | GET | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
-| User Access Keys | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y |
+| User Access Keys | [Import User Access Key(s)](#import_user_access_key | PUT | /HP-IDM/v1.0/accesskeys | Y/Y |
 | User Access Keys | [Update User Access Key](#update_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
 
 ## 4.2 Common Request Headers
@@ -1683,7 +1683,7 @@ Curl Example
 
 
 
-#### 4.4.3.5 Import User Access Key(s)#### {#import_user_access_key(s)}
+#### 4.4.3.5 Import User Access Key(s)#### {#import_user_access_key}
 #### PUT /HP-IDM/v1.0/accesskeys
 
 Import one or more user access keys. 
