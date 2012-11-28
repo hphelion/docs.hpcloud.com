@@ -43,7 +43,15 @@ advertised, we do not offer a Service Level Agreement (SLA) for the service or f
 * Release to General Availability (GA). At this level of maturity, all features and functions are expected to operate
 as advertised. In particular, there is a Service Level Agreement (SLA) defined and in place.
 
-### 1.1.2 Container Synchronization
+### 1.1.2 Maturity Level
+
+Except as noted below, this is the maturity level of this API:
+
+**Maturity Level**: HP Cloud Storage is General Availability (GA).
+
+**Version API Status**: CURRENT
+
+### 1.1.3 Container Synchronization
 
 The container synchronization feature has the following maturity level:
 
@@ -51,11 +59,7 @@ The container synchronization feature has the following maturity level:
 
 **Version API Status**: BETA
 
-### 1.1.3 Remaining (Majority of) Features
 
-**Maturity Level**: HP Cloud Storage is General Availability (GA).
-
-**Version API Status**: CURRENT
 
 # 2. Architectural View
 
@@ -221,7 +225,7 @@ The following HTTP codes are used by HP Cloud Object Storage.
 |405 Method Not Allowed| A request was made of a resource using a request method not supported by that resource| Check your code. |
 |409 Conflict |You are not allowed to perform the requested operation. | For example, you cannot delete a container that contains objects.|
 |411 Length Required | A Content-Length request header was not specified. | Check your code. |
-|412 Precondition Failed | The server does not meet one of the preconditions that the requester put on the request. | See [Conditional Get of Objects](#conditional_get_request) |
+|412 Precondition Failed | The server does not meet one of the preconditions that the requester put on the request. | See [Conditional Get of Objects](#conditional_get) |
 |413 Request Entity Too Large|The request is larger than the server is willing or able to process.| For objects, see [Large Object Creation](#large_objects) |
 |414 Request-URI Too Long | The URI provided was too long for the server to process. | See [Arbitrary Limits](#uri_limits) |
 |416 Requested Range Not Satisfiable | The client has asked for a portion of the file, but the server cannot supply that portion.| For example, if the client asked for a part of the file that lies beyond the end of the file.|
@@ -308,7 +312,7 @@ You use your username, password and tenant Id as shown in the following example.
 This example uses curl. 
 The X-Storage-Url response header contains the HP Cloud Object Storage endpoint (including your account) and the X-Auth-Token reponse header contains your authentication token.
 
-    curl -i https://region-a.geo-1.identity.hpcloudsvc.com:35357/auth/v1.0/ -H 'x-auth-user: 12345678912345:sally' -H 'x-auth-key: MyPassword'
+    curl -i https://region-a.geo-1.identity.hpcloudsvc.com:35357/auth/v1.0/ -X GET -H 'x-auth-user: 12345678912345:sally' -H 'x-auth-key: MyPassword'
 
     HTTP/1.1 200 OK
     X-Storage-Url: https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345
@@ -901,19 +905,19 @@ response headers.
 
 ```
 
-$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/image-segments/world-seg-1 -XPUT -T world-seg.1
+$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/image-segments/world-seg-1 -X PUT -T world-seg.1
 HTTP/1.1 201 Created
 Content-Length: 100
 Content-Type: application/octet-stream
 Etag: 9eee6548e45382ffa8f93d574d35274f
 
-$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/image-segments/world-seg-2 -XPUT -T world-seg.2
+$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/image-segments/world-seg-2 -X PUT -T world-seg.2
 HTTP/1.1 201 Created
 Content-Length: 200
 Content-Type: application/octet-stream
 Etag: 318ea6d6a0aa0567246f2de90c470fcd
 
-$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/images/maps/world.jpg -XPUT -H 'content-length: 0' -H 'x-object-manifest: image-segments/world-seg-' -H 'content-type: image/jpeg'
+$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/images/maps/world.jpg -X PUT -H 'content-length: 0' -H 'x-object-manifest: image-segments/world-seg-' -H 'content-type: image/jpeg'
 HTTP/1.1 201 Created
 
 $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/images/maps/world.jpg -X GET
@@ -991,7 +995,91 @@ attachment type that indicates how the file should be downloaded.
       Content-Type: image/tiff
       Content-Disposition: attachment; filename=platmap.tif
 
-## 2.16 Notable Differences from OpenStack
+## 2.16 Container Synchronization
+
+### 2.16.1 Overview of Container Synchronization
+
+Container Synchronization allows you to authomatically synchronize the objects between containers in different HP Cloud Object Storage
+instances/regions. The containers must be in different instances or regions. The containers do not need to be
+in the same swift account i.e., users associated with two different tenants can share objects.
+
+Container Synchronization works by making a copy of objects in a "source" container and sending the objects to a "destination" container.
+The object is copied in such as way as the retain it's metadata -- such as [Last-Modified](#last_modified_response) and any custom
+metadata you may have on the object. If you delete an object in the source container, it is also deleted from the destination
+container.
+
+The synchronization is done as a background action. When you put an object into the source container, it will take some time
+before it becomes visible in the destination container.
+You may operate on the destination container just like any other container -- adding or deleting objects -- including the
+objects that are in the destination container because they were copied from the source container. To decide how to handle
+object creation, replacement or deletion, the system uses timestamps to determine what to do. In general, the latest timestamp
+"wins" i.e., if you create an object, replace it, delete it and the re-create it, the detination container will eventualy
+contain the most recently created object. However, if you also create and delete objects in the destination container,
+you get some subtle behaviours as follows:
+
+* If an object is copied to the destination container and then deleted, it remains deleted in the destination even though there is still a copy in the source container. Of course, if you modify the object (replace of change its metadata) in the source container, it will reappear in the destination again.
+* The same applies to a replacement or metadata modificaiton of an object in the destination container -- the object will remain as-is unless there is a replacement or modification in the source container.
+* If you replace or modify metadata of an object in the destination container and then delete it in the source container, it is _not_ deleted from the destination. This is because your modified object has a later timestamp than the object you deleted at source.
+* If you create an object in the source container and before the system has a chance to copy it to the destination, you also create an object of the same name in the destination, then the object in the destination is _not_ overwritten by the source container's object.
+
+So far, the discussion has been about synchronizing between a source and destination container. What happens if you make the "destination" a "source" for another container? There are two situaitons:
+
+* The new destination is yet another container. i.e., there is a chain of three containers
+* The new destination is actually the original source container. This is two-way synchronization. In effect, objects placed into either container will be copied to the other container.
+* Two or more source containers could copy data to a single destination
+
+
+### 2.16.2 <a id="container_sync_request"></a>Configuring Containers to Synchronize
+
+This section describes how to set up synchronization between a source and destination container. To set up a chain, or two-way synchronization, simply repeat the operation
+for the new source and destination. To set up syncronization between containers you need to know or agree:
+
+* The full pathname of the destination container  -- to include system name, account and container name (e.g., https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest)
+* The full pathname of the source container  -- to include system name, account and container name (e.g., region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/src)
+* Select and agree on a secret string -- in effect, this is a shared password. Only if both sides have the same password will the system synchronize containers. Obviously, you should keep this secret. If this becomes know to someone else, they could overwrite the contents of the destination container (but not copy the source container).
+
+You then:
+
+1. Set the following metadata on the source container:
+  * X-Container-Sync-To. This is the full path name of the destination, e.g.  https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest
+  * X-Container-Sync-Secret. This is the value of the shared secret value, e.g. "our-secret"
+
+2. The the following metadata on the destination container:
+  * X-Container-Sync-Secret. This is the value of the shared secret value, e.g. "our-secret"
+
+Notice that you do no need to tell the destination container the name of the source container.
+
+Here is an example of setting up a simple one-way synchronisation between two containers. We set up the source container first. In this example, we are setting up
+synchronization between containers in two different tenants/accounts -- hence the authorization token is different. These commands are either run by two different people, or one 
+person must have the credentials for both tenants. In a simpler scenario, where the containers are both in the same tenant, the authorization token would be the same.
+
+Here, the source is set up:
+
+```
+
+curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/src -H 'x-auth-token: HPAUTH_4321' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest' -H 'x-container-sync-secret: our-secret'
+
+```
+
+Here, the destination is setup with a secret value:
+
+```
+
+curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-secret: our-secret'
+
+```
+
+The following example shows setting up two-way synchronization where the account and container names are the same on both systems.
+Notice that the commands are nearly identical except for the "region-a" and "region-b" strings in the paths.
+
+```
+curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-secret: my-secret'
+
+curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-secret: my-secret'
+```
+
+
+## 2.17 Notable Differences from OpenStack
 
 
 The HP Cloud Object Storage API is an implementation of OpenStack Object
@@ -1288,6 +1376,22 @@ The total number of bytes used by all objects in the container.
 
 ### 4.4.1 Account ###
 
+**Status Lifecycle**
+
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
+
 #### 4.4.1.1 <a id="account_get"></a>List Account ####
 #### GET /v1/{account}
 
@@ -1380,7 +1484,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 ```
-curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -X GET
 HTTP/1.1 200 OK
 X-Account-Object-Count: 21280
 X-Account-Bytes-Used: 3044371826
@@ -1485,7 +1589,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 ```
-curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -H 'x-account-meta-one: 1' -H 'x-remove-account-meta-two: -' -XPOST
+curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -H 'x-account-meta-one: 1' -H 'x-remove-account-meta-two: -' -X POST
 HTTP/1.1 204 No Content
 
 ```
@@ -1614,6 +1718,22 @@ Content-Length: 0
 
 ## 4.4.2 Container
 
+**Status Lifecycle**
+
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
+
 ### 4.4.2.1 <a id="container_put"></a>Create/Update Container
 ### PUT /v1/{account}/{container}
 
@@ -1644,6 +1764,8 @@ The following request headers apply to this operation:
 * [Authorization](#signature_auth) - Optional - Use Signature Based Authentication instead of [X-Auth-Token](#x_auth_token_request)
 * [X-Container-Read](#x_container_read_request) - Optional - Sets an ACL that grants read access
 * [X-Container-Write](#x_container_write) - Optional - Sets an ACL that grants write access
+* [X-Container-Sync-To](#container_sync) - Optional - See [Container Synchronization](#container_sync)
+* [X-Container-Sync-Secret](#container_sync) - Optional - See [Container Synchronization](#container_sync)
 
 **URL Parameters**
 
@@ -1724,6 +1846,8 @@ The following request headers apply to this operation:
 * [Authorization](#signature_auth) - Optional - Use Signature Based Authentication instead of [X-Auth-Token](#x_auth_token_request)
 * [X-Container-Read](#x_container_read_request) - Optional - Sets an ACL that grants read access
 * [X-Container-Write](#x_container_write) - Optional - Sets an ACL that grants write access
+* [X-Container-Sync-To](#container_sync) - Optional - See [Container Synchronization](#container_sync)
+* [X-Container-Sync-Secret](#container_sync) - Optional - See [Container Synchronization](#container_sync)
 
 **URL Parameters**
 
@@ -1907,7 +2031,8 @@ The following response headers are returned:
 * [X-Container-Meta-{name}](#x_container_meta_response)
 * [X-Container-Object-Count](#x_container_object_count_response)
 * [X-Container-Bytes-Used](#x_container_bytes_used_response)
-
+* [X-Container-Sync-To](#container_sync)
+* [X-Container-Sync-Secret](#container_sync)
 **Error Response**
 
 If an error occurs, the response body contains a description of the error.
@@ -1919,7 +2044,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 ```
-curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -XGET
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X GET
 HTTP/1.1 200 OK
 X-Container-Object-Count: 2
 X-Container-Meta-One: one
@@ -1950,7 +2075,7 @@ test_object_2
 
 
 
-#### 4.4.2.4 <a id="container_get"></a>Retrieve the Metadata of a Container
+#### 4.4.2.4 <a id="container_head"></a>Retrieve the Metadata of a Container
 #### HEAD /v1/{account}/{container}                  
 
 Retrieve the metadata of a container.
@@ -2000,7 +2125,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 ```
-curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -XHEAD
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X HEAD
 HTTP/1.1 204 No Content
 X-Container-Object-Count: 2
 X-Container-Meta-One: one
@@ -2075,7 +2200,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 ```
-curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -XDELETE
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X DELETE
 HTTP/1.1 204 No Content
 
 ```
@@ -2122,7 +2247,21 @@ HTTP/1.1 204 No Content
                         
 ## 4.4.3 Object
 
+**Status Lifecycle**
 
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
 
 ### 4.4.3.1 <a id="object_get"></a>Retrieve Object
 ### GET /v1/{account}/{container}/{object}
@@ -2203,7 +2342,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 ```
-curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -XGET
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X GET
 HTTP/1.1 200 OK
 Last-Modified: Fri, 16 Nov 2012 15:34:56 GMT
 ETag: 4281c348eaf83e70ddce0e07221c3d28
@@ -2292,7 +2431,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 ```
-curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -XHEAD
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X HEAD
 HTTP/1.1 200 OK
 Last-Modified: Fri, 16 Nov 2012 15:34:56 GMT
 ETag: 4281c348eaf83e70ddce0e07221c3d28
@@ -2421,11 +2560,11 @@ See [HTTP Status Codes](#http_codes) for more information.
 
 ```
 
-curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/ -XPUT -H 'content-type: application/directory' -H 'content-length: 0'
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/ -X PUT -H 'content-type: application/directory' -H 'content-length: 0'
 HTTP/1.1 201 Created
 ETag: d41d8cd98f00b204e9800998ecf8427e
 
-curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/test_obj_1.gif -XPUT -T image1.gif
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/test_obj_1.gif -X PUT -T image1.gif
 HTTP/1.1 201 Created
 ETag: 4281c348eaf83e70ddce0e07221c3d28
 
@@ -2552,13 +2691,13 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 ```
-$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/cont15/obj6' -XCOPY -H 'destination: cont15/obj6-copy1'
+$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/cont15/obj6' -X COPY -H 'destination: cont15/obj6-copy1'
 HTTP/1.1 201 Created
 Etag: b917968b8ad501a40af22c0bf4d83ee0
 X-Copied-From: cont15/obj6
 X-Copied-From-Last-Modified: Thu, 22 Nov 2012 15:19:26 GMT
 
-$ curl -i -H 'x-auth-token: HPAuth_1234' 'https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/cont15/obj6-copy2' -XPUT -H 'content-length: 0' -H 'x-copy-from: cont15/obj6'
+$ curl -i -H 'x-auth-token: HPAuth_1234' 'https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/cont15/obj6-copy2' -X PUT -H 'content-length: 0' -H 'x-copy-from: cont15/obj6'
 HTTP/1.1 201 Created
 Content-Type: text/html; charset=UTF-8
 Etag: b917968b8ad501a40af22c0bf4d83ee0
@@ -2640,7 +2779,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 ```
-curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -XDELETE
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X DELETE
 HTTP/1.1 204 No Content
 
 ```
@@ -2759,7 +2898,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 
 ```
 
-curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1 -XPOST -H 'x-object-meta-reviewed: Yes'
+curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1 -X POST -H 'x-object-meta-reviewed: Yes'
 HTTP/1.1 202 Accepted
 
 ```
