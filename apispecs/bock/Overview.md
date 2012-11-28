@@ -13,5 +13,5 @@ This document is a stub page that should contain an api overview of bock.
 
 ## Sub-pages
 
-* [Backup API](/api/bock/backup/)
-* [Bootable Volume](/api/bock/boot/)
+* [Backup API](/api/block-storage/backup/)
+* [Bootable Volume](/api/block-storage/boot/)
