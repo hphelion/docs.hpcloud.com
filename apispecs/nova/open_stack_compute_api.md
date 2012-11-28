@@ -1,9 +1,10 @@
 ---
 layout: page
-title: HP Cloud Compute Service API Reference
 permalink: /api/compute/
-description: This document describes the HP Cloud Compute Service. HP Cloud Compute is based on OpenStack Nova.
-keywords: Compute, Nova, OpenStack
+title: HP Cloud Compute Service API
+description: "HP Cloud Compute Service API Specifications"
+keywords: "compute, nova, openstack"
+product: compute
 
 ---
 
@@ -42,18 +43,18 @@ The following operations are part of the OpenStack Nova V1.1 API, but are not su
 A flavor determines the primary characteristics of a server. It includes the amount of memory to be allocated to the server, the size of the disk to be created for ephemeral storage and the number of VCPUs to be allocated.
 Flavors can be listed using the nova client flavor-list command as shown below. Also see the [List Flavors](#listFlavors) API method. 
 
-<pre><code> nova flavor-list
-+-----+------------------+-----------+------+----------+-------+------------+----------+
-|  ID |       Name       | Memory_MB | Swap | Local_GB | VCPUs | RXTX_Quota | RXTX_Cap |
-+-----+------------------+-----------+------+----------+-------+------------+----------+
-| 100 | standard.xsmall  | 1024      | 0    | 30       | 1     | 0          | 0        |
-| 101 | standard.small   | 2048      | 0    | 60       | 2     | 0          | 0        |
-| 102 | standard.medium  | 4096      | 0    | 120      | 2     | 0          | 0        |
-| 103 | standard.large   | 8192      | 0    | 240      | 4     | 0          | 0        |
-| 104 | standard.xlarge  | 16384     | 0    | 480      | 4     | 0          | 0        |
-| 105 | standard.2xlarge | 32768     | 0    | 960      | 8     | 0          | 0        |
-+-----+------------------+-----------+------+----------+-------+------------+----------+
-</code></pre>
+    $ nova flavor-list
+    +-----+------------------+-----------+------+----------+-------+------------+----------+
+    |  ID |       Name       | Memory_MB | Swap | Local_GB | VCPUs | RXTX_Quota | RXTX_Cap |
+    +-----+------------------+-----------+------+----------+-------+------------+----------+
+    | 100 | standard.xsmall  | 1024      | 0    | 30       | 1     | 0          | 0        |
+    | 101 | standard.small   | 2048      | 0    | 60       | 2     | 0          | 0        |
+    | 102 | standard.medium  | 4096      | 0    | 120      | 2     | 0          | 0        |
+    | 103 | standard.large   | 8192      | 0    | 240      | 4     | 0          | 0        |
+    | 104 | standard.xlarge  | 16384     | 0    | 480      | 4     | 0          | 0        |
+    | 105 | standard.2xlarge | 32768     | 0    | 960      | 8     | 0          | 0        |
+    +-----+------------------+-----------+------+----------+-------+------------+----------+
+
 
 ####<a href="ServerStates"></a>Server States
 The state of a server is maintained in two values: the VM State and the Task State. The VM State is the state of the server as maintained by Nova.  The possible values for VM State are `ACIVE, BUILD, REBUILD, STOPPED, MIGRATING, RESIZING, PAUSED, SUSPENDED, RESCUE, ERROR` and `DELETED`. A server is running when it is in the `ACTIVE` state. The Task State is essentially a sub-state of the VM State. The status of a server as returned by the Create Server and Get Server Details API is a combination of the VM State and the Task State.
@@ -70,38 +71,39 @@ The following shows the sequence of states that a newly created server goes thro
 
 The output of the nova list and nova show commands include the server status as shown below. The displayed server status includes the VM State and Task State described above. Note that the “Name” of the server shown by the commands is the “display name” of the instance as described in the [Server Names](#serverNames). 
 
-<pre><code>$ nova list
-+--------+---------------+-----------------+--------------------------------------+
-|   ID   |      Name     |      Status     |               Networks               |
-+--------+---------------+-----------------+--------------------------------------+
-| 122745 | webserver          | ACTIVE          | private=10.4.134.153, 15.185.103.98  |
-| 124817 | Server 124817 | BUILD(spawning) | private=10.4.142.174, 15.185.100.117 |
-+--------+---------------+-----------------+--------------------------------------+
-$ nova show 122745
-+-----------------+----------------------------------------------------------+
-|     Property    |                          Value                           |
-+-----------------+----------------------------------------------------------+
-| accessIPv4      |                                                          |
-| accessIPv6      |                                                          |
-| config_drive    |                                                          |
-| created         | 2012-05-08T22:10:27Z                                     |
-| flavor          | standard.xsmall                                          |
-| hostId          | de27de97f19c947b83a714738aeb1865551d355f52626021836a4cdc |
-| id              | 122745                                                   |
-| image           | Ubuntu Oneiric 11.10 Server 64-bit 20120311              |
-| key_name        | openstack                                                |
-| metadata        | {u'foo': u'bar'}                                         |
-| name            | webserver                                                     |
-| private network | 10.4.134.153, 15.185.103.98                              |
-| progress        | 100                                                      |
-| security_groups | default                                                  |
-| status          | ACTIVE                                                   |
-| tenant_id       | 11692683195772                                           |
-| updated         | 2012-05-09T16:34:01Z                                     |
-| user_id         | 28187593996363                                           |
-| uuid            | abe5e3b6-fa6d-40d5-a9ba-c97db1b3db36                     |
-+-----------------+----------------------------------------------------------+
-</code></pre>
+    $ nova list
+    +--------+---------------+-----------------+--------------------------------------+
+    |   ID   |      Name     |      Status     |               Networks               |
+    +--------+---------------+-----------------+--------------------------------------+
+    | 122745 | webserver     | ACTIVE          | private=10.4.134.153, 15.185.103.98  |
+    | 124817 | Server 124817 | BUILD(spawning) | private=10.4.142.174, 15.185.100.117 |
+    +--------+---------------+-----------------+--------------------------------------+
+
+    $ nova show 122745
+    +-----------------+----------------------------------------------------------+
+    |     Property    |                          Value                           |
+    +-----------------+----------------------------------------------------------+
+    | accessIPv4      |                                                          |
+    | accessIPv6      |                                                          |
+    | config_drive    |                                                          |
+    | created         | 2012-05-08T22:10:27Z                                     |
+    | flavor          | standard.xsmall                                          |
+    | hostId          | de27de97f19c947b83a714738aeb1865551d355f52626021836a4cdc |
+    | id              | 122745                                                   |
+    | image           | Ubuntu Oneiric 11.10 Server 64-bit 20120311              |
+    | key_name        | openstack                                                |
+    | metadata        | {u'foo': u'bar'}                                         |
+    | name            | webserver                                                |
+    | private network | 10.4.134.153, 15.185.103.98                              |
+    | progress        | 100                                                      |
+    | security_groups | default                                                  |
+    | status          | ACTIVE                                                   |
+    | tenant_id       | 11692683195772                                           |
+    | updated         | 2012-05-09T16:34:01Z                                     |
+    | user_id         | 28187593996363                                           |
+    | uuid            | abe5e3b6-fa6d-40d5-a9ba-c97db1b3db36                     |
+    +-----------------+----------------------------------------------------------+
+
 
 The [List Servers Detail](#listDetailServers) and [Get Server Details](#getServer) API operations include server status in the information they return.
 
@@ -133,25 +135,25 @@ Each server can have metadata associated with it in the form of key/value pairs.
 #####<a id="EC2Metadata"></a>EC2 Metadata
 You can retrieve metadata about an instance by querying the interface `http://169.254.169.254/latest/metadata`. This interface is only available on a server and returns the available meta-data as shown below.
 
-<pre><code>ubuntu@nserver:~$ curl http://169.254.169.254/latest/meta-data
-local-ipv4
-reservation-id
-local-hostname
-placement/
-ami-launch-index
-public-hostname
-mpi/
-hostname
-ami-id
-public-keys/
-instance-action
-public-ipv4
-block-device-mapping/
-ami-manifest-path
-security-groups
-instance-type
-instance-id
-</code></pre>
+    $ curl http://169.254.169.254/latest/meta-data
+    local-ipv4
+    reservation-id
+    local-hostname
+    placement/
+    ami-launch-index
+    public-hostname
+    mpi/
+    hostname
+    ami-id
+    public-keys/
+    instance-action
+    public-ipv4
+    block-device-mapping/
+    ami-manifest-path
+    security-groups
+    instance-type
+    instance-id
+
 
 To get information about a specific meta-data item, just append the item to the url. For example, to get the server's hostname, use the URL `http://169.254.169.254/latest/meta-data/hostname`. Some meta-data is multi-valued and is accessed by appending the path to the value desired to the URL. The example below gets public key `0` in the OpenSSH format.
 
@@ -178,7 +180,7 @@ One of the tasks that CloudInit performs is to run user provided scripts when an
 #####<a id="FileInjection"></a>File Injection
 The [Create Server](#createServer) API has a parameter named *personality* which allows the specification of files to be injected into an image. For each file to be injected the file path in the root filesystem of the server being created is specified along with the base64 encoded contents of the file. The following json object is a the body of a Create Server request which includes a file to be injected.
 
-<pre><code>{
+    {
     "server" : {
         "name" : "new-server-test",
         "imageRef" : 5579,
@@ -192,8 +194,8 @@ The [Create Server](#createServer) API has a parameter named *personality* which
                 "contents" : "ICAgICAgDQoiQSBjbG91ZCBkb2VzIG5vdCBrbm93IHdoeSBp dCBtb3ZlcyBpbiBqdXN0IHN1Y2ggYSBkaXJlY3Rpb24gYW5k IGF0IHN1Y2ggYSBzcGVlZC4uLkl0IGZlZWxzIGFuIGltcHVs c2lvbi4uLnRoaXMgaXMgdGhlIHBsYWNlIHRvIGdvIG5vdy4g QnV0IHRoZSBza3kga25vd3MgdGhlIHJlYXNvbnMgYW5kIHRo ZSBwYXR0ZXJucyBiZWhpbmQgYWxsIGNsb3VkcywgYW5kIHlv dSB3aWxsIGtub3csIHRvbywgd2hlbiB5b3UgbGlmdCB5b3Vy c2VsZiBoaWdoIGVub3VnaCB0byBzZWUgYmV5b25kIGhvcml6 b25zLiINCg0KLVJpY2hhcmQgQmFjaA=="
             } 
         ] 
+       }
     }
-}</code></pre>
 
 The path must specify a directory in the root file system - otherwise the file will be ignored. For example, files cannot be injected in /tmp for the images provided by HP as /tmp is not in the root filesystem in these images. If a [Configuration Drive](#ConfigurationDrive) is created when the server is created, the path is relative to the file system on the configuration drive, rather than the root file system.
 
@@ -219,47 +221,46 @@ Servers are booted from disk images which are specified at the time the server i
 
 The listing below shows the output of `nova image-list`. For kernel and ramdisk images, the image type is given in parenthesese after the full image name for images provided by HP. Machine images do not include the image type in the image's name. Any image that is marked as `(deprecated)' should not be used.
 
-<pre><code>
-$ nova image-list
-+-------+------------------------------------------------------------------------+----------+--------+
-|   ID  |                                  Name                                  | serverId | Status |
-+-------+------------------------------------------------------------------------+----------+--------+
-| 1232  | CentOS 5.6 Server 64-bit 20111207 (Kernel) (deprecated)                |          | ACTIVE |
-| 1233  | CentOS 5.6 Server 64-bit 20111207 (Ramdisk) (deprecated)               |          | ACTIVE |
-| 1234  | CentOS 5.6 Server 64-bit 20111207 (deprecated)                         |          | ACTIVE |
-| 1235  | Ubuntu Lucid 10.04 LTS Server 64-bit 20111212 (Kernel)                 |          | ACTIVE |
-| 1236  | Ubuntu Lucid 10.04 LTS Server 64-bit 20111212                          |          | ACTIVE |
-| 1237  | Ubuntu Maverick 10.10 Server 64-bit 20111212 (Kernel)                  |          | ACTIVE |
-| 1238  | Ubuntu Maverick 10.10 Server 64-bit 20111212                           |          | ACTIVE |
-| 1239  | Ubuntu Natty 11.04 Server 64-bit 20111212 (Kernel)                     |          | ACTIVE |
-| 1240  | Ubuntu Natty 11.04 Server 64-bit 20111212                              |          | ACTIVE |
-| 1241  | Ubuntu Oneiric 11.10 Server 64-bit 20111212 (Kernel) (deprecated)      |          | ACTIVE |
-| 1242  | Ubuntu Oneiric 11.10 Server 64-bit 20111212 (deprecated)               |          | ACTIVE |
-| 1356  | CentOS 6.2 Server 64-bit 20120125 (Kernel)                             |          | ACTIVE |
-| 1357  | CentOS 6.2 Server 64-bit 20120125 (Ramdisk)                            |          | ACTIVE |
-| 1358  | CentOS 6.2 Server 64-bit 20120125                                      |          | ACTIVE |
-| 1359  | Debian Squeeze 6.0.3 Server 64-bit 20120123 (Kernel)                   |          | ACTIVE |
-| 1360  | Debian Squeeze 6.0.3 Server 64-bit 20120123 (Ramdisk)                  |          | ACTIVE |
-| 1361  | Debian Squeeze 6.0.3 Server 64-bit 20120123                            |          | ACTIVE |
-| 14345 | ActiveState Stackato v1.2.6 - Partner Image                            |          | ACTIVE |
-| 16291 | Fedora 16 Server 64-bit 20120518                                       |          | ACTIVE |
-| 22729 | BitNami Drupal 7.14-0-ubuntu-10.04.4 - Partner Image                   |          | ACTIVE |
-| 22731 | BitNami WebPack 1.2-0-ubuntu-10.04.4 - Partner Image                   |          | ACTIVE |
-| 4654  | BitNami DevPack 1.0-0 Ubuntu 10.04 64-bit - Partner Image              |          | ACTIVE |
-| 54021 | CentOS 5.8 Server 64-bit 20120828                                      |          | ACTIVE |
-| 5575  | Fedora 16 Server 64-bit 20120404 (deprecated)                          |          | ACTIVE |
-| 5579  | Ubuntu Oneiric 11.10 Server 64-bit 20120311                            |          | ACTIVE |
-| 59185 | foo100-image                                                           |          | ACTIVE |
-| 59293 | foo-snap                                                               |          | ACTIVE |
-| 59297 | ActiveState Stackato v2.2.2 - Partner Image                            |          | ACTIVE |
-| 60815 | ActiveState Stackato v2.2.3 - Partner Image                            |          | ACTIVE |
-| 6340  | BitNami WebPack 1.1-1 Ubuntu 10.04 64-bit - Partner Image (deprecated) |          | ACTIVE |
-| 8419  | Ubuntu Precise 12.04 LTS Server 64-bit 20120424                        |          | ACTIVE |
-| 9127  | ActiveState Stackato v1.2.5 - Partner Image (deprecated)               |          | ACTIVE |
-| 9953  | EnterpriseDB PPAS 9.1.2 - Partner Image                                |          | ACTIVE |
-| 9995  | EnterpriseDB PSQL 9.1.3 - Partner Image                                |          | ACTIVE |
-+-------+------------------------------------------------------------------------+----------+--------+
-</code></pre>
+    $ nova image-list
+    +-------+------------------------------------------------------------------------+----------+--------+
+    |   ID  |                                  Name                                  | serverId | Status |
+    +-------+------------------------------------------------------------------------+----------+--------+
+    | 1232  | CentOS 5.6 Server 64-bit 20111207 (Kernel) (deprecated)                |          | ACTIVE |
+    | 1233  | CentOS 5.6 Server 64-bit 20111207 (Ramdisk) (deprecated)               |          | ACTIVE |
+    | 1234  | CentOS 5.6 Server 64-bit 20111207 (deprecated)                         |          | ACTIVE |
+    | 1235  | Ubuntu Lucid 10.04 LTS Server 64-bit 20111212 (Kernel)                 |          | ACTIVE |
+    | 1236  | Ubuntu Lucid 10.04 LTS Server 64-bit 20111212                          |          | ACTIVE |
+    | 1237  | Ubuntu Maverick 10.10 Server 64-bit 20111212 (Kernel)                  |          | ACTIVE |
+    | 1238  | Ubuntu Maverick 10.10 Server 64-bit 20111212                           |          | ACTIVE |
+    | 1239  | Ubuntu Natty 11.04 Server 64-bit 20111212 (Kernel)                     |          | ACTIVE |
+    | 1240  | Ubuntu Natty 11.04 Server 64-bit 20111212                              |          | ACTIVE |
+    | 1241  | Ubuntu Oneiric 11.10 Server 64-bit 20111212 (Kernel) (deprecated)      |          | ACTIVE |
+    | 1242  | Ubuntu Oneiric 11.10 Server 64-bit 20111212 (deprecated)               |          | ACTIVE |
+    | 1356  | CentOS 6.2 Server 64-bit 20120125 (Kernel)                             |          | ACTIVE |
+    | 1357  | CentOS 6.2 Server 64-bit 20120125 (Ramdisk)                            |          | ACTIVE |
+    | 1358  | CentOS 6.2 Server 64-bit 20120125                                      |          | ACTIVE |
+    | 1359  | Debian Squeeze 6.0.3 Server 64-bit 20120123 (Kernel)                   |          | ACTIVE |
+    | 1360  | Debian Squeeze 6.0.3 Server 64-bit 20120123 (Ramdisk)                  |          | ACTIVE |
+    | 1361  | Debian Squeeze 6.0.3 Server 64-bit 20120123                            |          | ACTIVE |
+    | 14345 | ActiveState Stackato v1.2.6 - Partner Image                            |          | ACTIVE |
+    | 16291 | Fedora 16 Server 64-bit 20120518                                       |          | ACTIVE |
+    | 22729 | BitNami Drupal 7.14-0-ubuntu-10.04.4 - Partner Image                   |          | ACTIVE |
+    | 22731 | BitNami WebPack 1.2-0-ubuntu-10.04.4 - Partner Image                   |          | ACTIVE |
+    | 4654  | BitNami DevPack 1.0-0 Ubuntu 10.04 64-bit - Partner Image              |          | ACTIVE |
+    | 54021 | CentOS 5.8 Server 64-bit 20120828                                      |          | ACTIVE |
+    | 5575  | Fedora 16 Server 64-bit 20120404 (deprecated)                          |          | ACTIVE |
+    | 5579  | Ubuntu Oneiric 11.10 Server 64-bit 20120311                            |          | ACTIVE |
+    | 59185 | foo100-image                                                           |          | ACTIVE |
+    | 59293 | foo-snap                                                               |          | ACTIVE |
+    | 59297 | ActiveState Stackato v2.2.2 - Partner Image                            |          | ACTIVE |
+    | 60815 | ActiveState Stackato v2.2.3 - Partner Image                            |          | ACTIVE |
+    | 6340  | BitNami WebPack 1.1-1 Ubuntu 10.04 64-bit - Partner Image (deprecated) |          | ACTIVE |
+    | 8419  | Ubuntu Precise 12.04 LTS Server 64-bit 20120424                        |          | ACTIVE |
+    | 9127  | ActiveState Stackato v1.2.5 - Partner Image (deprecated)               |          | ACTIVE |
+    | 9953  | EnterpriseDB PPAS 9.1.2 - Partner Image                                |          | ACTIVE |
+    | 9995  | EnterpriseDB PSQL 9.1.3 - Partner Image                                |          | ACTIVE |
+    +-------+------------------------------------------------------------------------+----------+--------+
+
 
 Images may be public or private. Public images are provided by HP and are available to all users. Private images are created by taking a snapshot of the root file system of a running server using the [Create Image](#createImage) API method. Images have an attribute which distinguishes public images provided by HP from private images (snapshots) created by the user. A user can access all the public images and any private images he owns.
 
@@ -288,15 +289,15 @@ Access to servers is controlled by security groups which are a collection of rul
 
 The HP Cloud Compute service associates a public IP address with a server when it creates the server. It also creates the default security group shown below when an account is activated.
 
-<pre><code>$ euca-describe-groups
-GROUP   11692683195772  default default
-PERMISSION      11692683195772  default ALLOWS  tcp     22      22      FROM    CIDR    0.0.0.0/0
-PERMISSION      11692683195772  default ALLOWS  tcp     80      80      FROM    CIDR    0.0.0.0/0
-PERMISSION      11692683195772  default ALLOWS  tcp     443     443     FROM    CIDR    0.0.0.0/0
-PERMISSION      11692683195772  default ALLOWS  icmp    -1      -1      FROM    CIDR    0.0.0.0/0
-PERMISSION      11692683195772  default ALLOWS  icmp    -1      -1      GRPNAME default
-PERMISSION      11692683195772  default ALLOWS  tcp     1       65535   GRPNAME default
-PERMISSION      11692683195772  default ALLOWS  udp     1       65536   GRPNAME default</code></pre>
+    $ euca-describe-groups
+	GROUP   11692683195772  default default
+	PERMISSION      11692683195772  default ALLOWS  tcp     22      22      FROM    CIDR    0.0.0.0/0
+	PERMISSION      11692683195772  default ALLOWS  tcp     80      80      FROM    CIDR    0.0.0.0/0
+	PERMISSION      11692683195772  default ALLOWS  tcp     443     443     FROM    CIDR    0.0.0.0/0
+	PERMISSION      11692683195772  default ALLOWS  icmp    -1      -1      FROM    CIDR    0.0.0.0/0
+	PERMISSION      11692683195772  default ALLOWS  icmp    -1      -1      GRPNAME default
+	PERMISSION      11692683195772  default ALLOWS  tcp     1       65535   GRPNAME default
+	PERMISSION      11692683195772  default ALLOWS  udp     1       65536   GRPNAME default
 
 The first four rules of this default security group allow ssh, http, https and ping from all sources. Note in particular, that the "`FROM CIDR 0.0.0.0/0`" means these rules apply to traffic from all sources. The remaining three rules allow tcp and udp on all ports, and ping from any server in the `default` security group.
 
@@ -344,34 +345,34 @@ Availability Zones are further clustered into regions and geographies. HP Cloud 
 The listing below shows a fragment of the Service Catalog returned by the Identity Service which contains the endpoints for HP Cloud Compute. Note that a set of endpoints is returned for each AZ. (The string which identifies the AZ is called `"region"` in the Service Catalog.
 
 	{
-   	u 'endpoints' : [{
-   			u 'publicURL' : u 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737',
-   			u 'publicURL2' : u 'https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud',
-   			u 'region' : u 'az-3.region-a.geo-1',
-   			u 'tenantId' : u '36991859863737',
-   			u 'versionId' : u '1.1',
-   			u 'versionInfo' : u 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/',
-   			u 'versionList' : u 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com'
-   		}, {
-   			u 'publicURL' : u 'https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737',
-   			u 'publicURL2' : u 'https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud',
-   			u 'region' : u 'az-2.region-a.geo-1',
-   			u 'tenantId' : u '36991859863737',
-   			u 'versionId' : u '1.1',
-   			u 'versionInfo' : u 'https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/',
-   			u 'versionList' : u 'https://az-2.region-a.geo-1.compute.hpcloudsvc.com'
-   		}, {
-   			u 'publicURL' : u 'https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737',
-   			u 'publicURL2' : u 'https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud',
-   			u 'region' : u 'az-1.region-a.geo-1',
-   			u 'tenantId' : u '36991859863737',
-   			u 'versionId' : u '1.1',
-   			u 'versionInfo' : u 'https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/',
-   			u 'versionList' : u 'https://az-1.region-a.geo-1.compute.hpcloudsvc.com'
-   		}
-   	],
-   	u 'name' : u 'Compute',
-   	u 'type' : u 'compute'
+	  	  'endpoints' : [{
+	  			  'publicURL' :   'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737',
+	  			  'publicURL2' :   'https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud',
+	  			  'region' :   'az-3.region-a.geo-1',
+	  			  'tenantId' :   '36991859863737',
+	  			  'versionId' :   '1.1',
+	  			  'versionInfo' :   'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/',
+	  			  'versionList' :   'https://az-3.region-a.geo-1.compute.hpcloudsvc.com'
+	  		}, {
+	  			  'publicURL' :   'https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737',
+	  			  'publicURL2' :   'https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud',
+	  			  'region' :   'az-2.region-a.geo-1',
+	  			  'tenantId' :   '36991859863737',
+	  			  'versionId' :   '1.1',
+	  			  'versionInfo' :   'https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/',
+	  			  'versionList' :   'https://az-2.region-a.geo-1.compute.hpcloudsvc.com'
+	  		}, {
+	  			  'publicURL' :   'https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737',
+	  			  'publicURL2' :   'https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud',
+	  			  'region' :   'az-1.region-a.geo-1',
+	  			  'tenantId' :   '36991859863737',
+	  			  'versionId' :   '1.1',
+	  			  'versionInfo' :   'https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/',
+	  			  'versionList' :   'https://az-1.region-a.geo-1.compute.hpcloudsvc.com'
+	  		}
+	  	],
+	  	  'name' :   'Compute',
+	  	  'type' :   'compute'
 	}
 
 ##3.4 Request/Response Types
@@ -387,95 +388,99 @@ specified, JSON is the default. If conflicting formats are specified
 using both an `Accept` header and a query extension, the query extension
 takes precedence.
 
-Example Request with Headers - JSON
+**Example Request with Headers**
 
-<pre><code>POST /v1.1/11692683195772/servers HTTP/1.1
-Host: az-1.region-a.geo-1.compute.hpcloudsvc.com
-X-Auth-Token: HPAuth_a8df744befe0a7c0e759f0601f53226af35f3f6f44c55d9b3a3c0337e7664ac2
-Content-Type: application/json
-Accept: application/xml
-Content-Length: 63
+JSON
 
-{"server":{"name":"webserver","imageRef":5579,"flavorRef":100}}
-</code></pre>
+	POST /v1.1/11692683195772/servers HTTP/1.1
+	Host: az-1.region-a.geo-1.compute.hpcloudsvc.com
+	X-Auth-Token: HPAuth_a8df744befe0a7c0e759f0601f53226af35f3f6f44c55d9b3a3c0337e7664ac2
+	Content-Type: application/json
+	Accept: application/xml
+	Content-Length: 63
+	
+	{"server":{"name":"webserver","imageRef":5579,"flavorRef":100}}
 
-Example Response with Headers - XML
 
-<pre><code>HTTP/1.1 202 Accepted
-Content-Length: 1224
-Content-Type: application/xml; charset=UTF-8
-Date: Thu, 25 Oct 2012 22:37:13 GMT
+**Example Response with Headers**
 
-&lt;server accessIPv4="" accessIPv6="" adminPass="4QAx7M8MrXVmXZSL" created="2012-10-25T22:37:13Z" hostId="" id="467571" name="webserver" status="BUILD(scheduling)" tenantId="11692683195772" updated="2012-10-25T22:37:13Z" userId="28187593996363" uuid="e5ac3d3c-cda3-4106-b60a-0a29b382fda2" xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
-    &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772/servers/467571" rel="self"/&gt;
-    &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/11692683195772/servers/467571" rel="bookmark"/&gt;
-    &lt;image id="5579"&gt;
-        &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/11692683195772/images/5579" rel="bookmark"/&gt;
-    &lt;/image&gt;
-    &lt;flavor id="100"&gt;
-        &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/11692683195772/flavors/100" rel="bookmark"/&gt;
-    &lt;/flavor&gt;
-    &lt;addresses/&gt;
-    &lt;security_groups&gt;
-        &lt;security_group id="9143" name="default"&gt;
-            &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772/os-security-groups/9143" rel="bookmark"/&gt;
-        &lt;/security_group&gt;
-    &lt;/security_groups&gt;
-&lt;/server&gt;
-</code></pre>
+XML
 
-Notice, in the above example, that the content type is set to
-application/json but it asks for an application/xml response with the
-`Accept` header. The same result could be achieved by adding an .xml extension to the request URI as shown below.
+	HTTP/1.1 202 Accepted
+	Content-Length: 1224
+	Content-Type: application/xml; charset=UTF-8
+	Date: Thu, 25 Oct 2012 22:37:13 GMT
+	
+	&lt;server accessIPv4="" accessIPv6="" adminPass="4QAx7M8MrXVmXZSL" created="2012-10-25T22:37:13Z" hostId="" id="467571" name="webserver" status="BUILD(scheduling)" tenantId="11692683195772" updated="2012-10-25T22:37:13Z" userId="28187593996363" uuid="e5ac3d3c-cda3-4106-b60a-0a29b382fda2" xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
+	    &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772/servers/467571" rel="self"/&gt;
+	    &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/11692683195772/servers/467571" rel="bookmark"/&gt;
+	    &lt;image id="5579"&gt;
+	        &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/11692683195772/images/5579" rel="bookmark"/&gt;
+	    &lt;/image&gt;
+	    &lt;flavor id="100"&gt;
+	        &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/11692683195772/flavors/100" rel="bookmark"/&gt;
+	    &lt;/flavor&gt;
+	    &lt;addresses/&gt;
+	    &lt;security_groups&gt;
+	        &lt;security_group id="9143" name="default"&gt;
+	            &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772/os-security-groups/9143" rel="bookmark"/&gt;
+	        &lt;/security_group&gt;
+	    &lt;/security_groups&gt;
+	&lt;/server&gt;
 
-Example Request with .xml Extension - JSON
 
-<pre><code> POST /v1.1/11692683195772/servers.xml HTTP/1.1
-User-Agent: curl/7.21.3 (x86_64-pc-linux-gnu) libcurl/7.21.3 OpenSSL/0.9.8o zlib/1.2.3.4 libidn/1.18
-Host: az-1.region-a.geo-1.compute.hpcloudsvc.com
-Accept: */*
-X-Auth-Token: HPAuth_a8df744befe0a7c0e759f0601f53226af35f3f6f44c55d9b3a3c0337e7664ac2
-Content-Type: application/json
-Content-Length: 62
+Notice, in the above example, that the content type is set to application/json but it asks for an application/xml response with the `Accept` header. The same result could be achieved by adding an .xml extension to the request URI as shown below.
 
-{"server":{"name":"dbserver","imageRef":5579,"flavorRef":100}}
-</code></pre>
+**Example Request with .xml Extension**
+
+JSON
+
+	POST /v1.1/11692683195772/servers.xml HTTP/1.1
+	User-Agent: curl/7.21.3 (x86_64-pc-linux-gnu) libcurl/7.21.3 OpenSSL/0.9.8o zlib/1.2.3.4 libidn/1.18
+	Host: az-1.region-a.geo-1.compute.hpcloudsvc.com
+	Accept: */*
+	X-Auth-Token: HPAuth_a8df744befe0a7c0e759f0601f53226af35f3f6f44c55d9b3a3c0337e7664ac2
+	Content-Type: application/json
+	Content-Length: 62
+	
+	{"server":{"name":"dbserver","imageRef":5579,"flavorRef":100}}
+
 
 ##3.5 Links and References
 
 Responses to several API operations include links which refer to HP Cloud Compute resources. For example, here is the response to a call on the [Get Server](#getServer) method.
 
-List Servers (limit=1) Response: XML
+**List Servers (limit=1) Response: XML**
 
-<pre><code>&lt;servers xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
-    &lt;server id="488379" name="web 1"&gt;
-        &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772/servers/488379" rel="self"/&gt;
-        &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/11692683195772/servers/488379" rel="bookmark"/&gt;
-    &lt;/server&gt;
-&lt;/servers&gt;</code></pre>
+	&lt;servers xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
+	    &lt;server id="488379" name="web 1"&gt;
+	        &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772/servers/488379" rel="self"/&gt;
+	        &lt;atom:link href="https://az-1.region-a.geo-1.compute.hpcloudsvc.com/11692683195772/servers/488379" rel="bookmark"/&gt;
+	    &lt;/server&gt;
+	&lt;/servers&gt;
 
 
-List Servers (limit=1) Response: JSON
+**List Servers (limit=1) Response: JSON**
 
-<pre><code>{
-    "servers": [
-        {
-            "id": 488379,
-            "links": [
-                {
-                    "href": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772/servers/488379",
-                    "rel": "self"
-                },
-                {
-                    "href": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/11692683195772/servers/488379",
-                    "rel": "bookmark"
-                }
-            ],
-            "name": "web 1",
-            "uuid": "7d447c46-cdde-45b4-bdf6-6412a272ce32"
-        }
-    ]
-}</code></pre>
+	{
+	    "servers": [
+	        {
+	            "id": 488379,
+	            "links": [
+	                {
+	                    "href": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772/servers/488379",
+	                    "rel": "self"
+	                },
+	                {
+	                    "href": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/11692683195772/servers/488379",
+	                    "rel": "bookmark"
+	                }
+	            ],
+	            "name": "web 1",
+	            "uuid": "7d447c46-cdde-45b4-bdf6-6412a272ce32"
+	        }
+	    ]
+	}
 
 The link elements in the response give references to the resource, in this case a server, which include the full URI of the server. This URI could be used at a later time to perform some server action (for example, to reboot the server) and capture both the AZ and the id of the server withing the AZ.
 
@@ -567,23 +572,25 @@ error response code denoting the type of error. The system will also
 return additional information about the fault in the body of the
 response.
 
-Fault Response: XML
-<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;cloudServersFault
-    xmlns="http://docs.openstack.org/compute/api/v1.1"
-    code="500"&gt;
-&lt;message&gt;Fault!&lt;/message&gt;
-&lt;details&gt;Error Details...&lt;/details&gt;
-&lt;/computeFault&gt;</code></pre>
+**Fault Response: XML**
 
-Fault Response: JSON
-<pre><code>{
-    "cloudServersFault" : {
-        "code" : 500,
-        "message" : "Fault!",
-        "details" : "Error Details..." 
-    }
-}</code></pre>
+	&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+	&lt;cloudServersFault
+	    xmlns="http://docs.openstack.org/compute/api/v1.1"
+	    code="500"&gt;
+	&lt;message&gt;Fault!&lt;/message&gt;
+	&lt;details&gt;Error Details...&lt;/details&gt;
+	&lt;/computeFault&gt;
+
+**Fault Response: JSON**
+
+	{
+	    "cloudServersFault" : {
+	        "code" : 500,
+	        "message" : "Fault!",
+	        "details" : "Error Details..." 
+	    }
+	}
 
 The error code is returned in the body of the response for convenience.
 The message section returns a human-readable message that is appropriate
@@ -598,56 +605,63 @@ with their associated error codes.
 
 
 
-| Fault Element | Associated Error Code(s) |
-|:--------------|:-------------------------|
-| cloudServersFault | 500, other codes possible |
-| badRequest | 400 |
-| unauthorized | 401 |
-| resizeNotAllowed | 403 |
-| itemNotFound | 404 |
-| badMethod | 405 |
-| inProgress | 409 |
-| overLimit | 413 |
-| badMediaType | 415 |
-| notImplemented | 501 |
-| serviceUnavailable | 503 |
+	| Fault Element | Associated Error Code(s) |
+	|:--------------|:-------------------------|
+	| cloudServersFault | 500, other codes possible |
+	| badRequest | 400 |
+	| unauthorized | 401 |
+	| resizeNotAllowed | 403 |
+	| itemNotFound | 404 |
+	| badMethod | 405 |
+	| inProgress | 409 |
+	| overLimit | 413 |
+	| badMediaType | 415 |
+	| notImplemented | 501 |
+	| serviceUnavailable | 503 |
 
-Fault Response, Item Not Found: XML
-<pre><code>&lt;itemNotFound code="404" 
-    xmlns="http://docs.openstack.org/compute/api/v1.1"&gt;
-    &lt;message&gt;
-        The resource could not be found.
-    &lt;/message&gt;
-&lt;/itemNotFound&gt;
-</code></pre>
+**Fault Response, Item Not Found: XML**
 
-Fault Response, Item Not Found: JSON
-<pre><code>{"itemNotFound": 
-	{"message": "The resource could not be found.", 
-	"code": 404}}
-</code></pre>
+	&lt;itemNotFound code="404" 
+	    xmlns="http://docs.openstack.org/compute/api/v1.1"&gt;
+	    &lt;message&gt;
+	        The resource could not be found.
+	    &lt;/message&gt;
+	&lt;/itemNotFound&gt;
+
+
+**Fault Response, Item Not Found: JSON**
+
+	{	
+		"itemNotFound": 
+		{
+			"message": "The resource could not be found.", 
+			"code": 404}
+		}
+	}
 
 The OverLimit fault is generated when a rate limit threshold is
 exceeded. When an OverLimit fault occurs, the time in seconds after which another request is allowed in returned in the `Retry-After` response header. An explanation of why the request was rate   in the `details` attribute of the response.
 
-Fault Response, Over Limit: XML
-<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;overLimit
-    xmlns="http://docs.openstack.org/compute/api/v1.1"
-    code="413"
-  &lt;message&gt;"This request was rate-limited.&lt;/message&gt;
-  &lt;details&gt;Error Details...&lt;/details&gt;
-&lt;/overLimit&gt;
-</code></pre>
+**Fault Response, Over Limit: XML**
 
-Fault Response, OVer Limit: JSON
-<pre><code>{
-    "overLimit" : {
-        "code" : 413,
-        "message" : "This request was rate-limited.",
-        "details" : "Error Details...",
-    }
-}</code></pre>
+	&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+	&lt;overLimit
+	    xmlns="http://docs.openstack.org/compute/api/v1.1"
+	    code="413"
+	  &lt;message&gt;"This request was rate-limited.&lt;/message&gt;
+	  &lt;details&gt;Error Details...&lt;/details&gt;
+	&lt;/overLimit&gt;
+
+
+**Fault Response, Over Limit: JSON**
+
+	{
+	    "overLimit" : {
+	        "code" : 413,
+	        "message" : "This request was rate-limited.",
+	        "details" : "Error Details...",
+	    }
+	}
 
 
 # 4. REST API Specifications
@@ -758,12 +772,12 @@ Fault Response, OVer Limit: JSON
 
 *Example*
 
-<pre><code>POST /v1.1/11692683195772/servers HTTP/1.1
-Host: az-1.region-a.geo-1.compute.hpcloudsvc.com
-Accept: */*
-X-Auth-Token: HPAuth_2895c13b1118e23d977f6a21aa176fd2bd8a10e04b74bd8e353216072968832a
-Content-Type: application/json
-Content-Length: 85</code></pre>
+	POST /v1.1/11692683195772/servers HTTP/1.1
+	Host: az-1.region-a.geo-1.compute.hpcloudsvc.com
+	Accept: */*
+	X-Auth-Token: HPAuth_2895c13b1118e23d977f6a21aa176fd2bd8a10e04b74bd8e353216072968832a
+	Content-Type: application/json
+	Content-Length: 85
 
 ## 4.3 Common Response Headers
 
@@ -781,10 +795,10 @@ Content-Length: 85</code></pre>
 
 *Example*
 
-<pre><code>HTTP/1.1 202 Accepted
-Content-Length: 1135
-Content-Type: application/json; charset=UTF-8
-Date: Tue, 30 Oct 2012 16:22:35 GMT</code></pre>
+	HTTP/1.1 202 Accepted
+	Content-Length: 1135
+	Content-Type: application/json; charset=UTF-8
+	Date: Tue, 30 Oct 2012 16:22:35 GMT
 
 
 ## 4.4 OpenStack API Operation Details
@@ -793,21 +807,13 @@ The following section, enumerates each resource and describes each of its API ca
 ### <a id="version"></a>4.4.1 Versions
 
 
-            
-
-<p xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:db="http://docbook.org/ns/docbook" xmlns:csapi="http://docs.openstack.org/compute/api/v2" xmlns:xsdxt="http://docs.rackspacecloud.com/xsd-ext/v1.0" xmlns:hpcloud="http://hpcloud.com/ns/apispec/v1.0" xmlns:common="http://docs.openstack.org/common/api/v1.0" xmlns:wadl="http://wadl.dev.java.net/2009/02" xmlns:atom="http://www.w3.org/2005/Atom"> A list of available API versions </p>
-        
-
+A list of available API versions
 
 
 #### <a id="versionDetails"></a>4.4.1.1 Get Version Info
 #### GET v1.1
 
-
-            
-
-<p xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:db="http://docbook.org/ns/docbook" xmlns:csapi="http://docs.openstack.org/compute/api/v2" xmlns:xsdxt="http://docs.rackspacecloud.com/xsd-ext/v1.0" xmlns:hpcloud="http://hpcloud.com/ns/apispec/v1.0" xmlns:common="http://docs.openstack.org/common/api/v1.0" xmlns:wadl="http://wadl.dev.java.net/2009/02" xmlns:atom="http://www.w3.org/2005/Atom"> Returns detailed information about this
-                specific version of the API. </p>
+Returns detailed information about this specific version of the API.
             
 
 
@@ -821,54 +827,47 @@ This call does not require a request body
 
 XML
 
-<div>
-<pre><code>&lt;version id="v1.1" status="CURRENT" updated="2011-01-21T11:33:21Z" xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;&lt;media-types&gt;&lt;media-type base="application/xml" type="application/vnd.openstack.compute-v1.1+xml"/&gt;&lt;media-type base="application/json" type="application/vnd.openstack.compute-v1.1+json"/&gt;&lt;/media-types&gt;&lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" rel="self"/&gt;&lt;atom:link href="http://docs.rackspacecloud.com/servers/api/v1.1/cs-devguide-20110125.pdf" rel="describedby" type="application/pdf"/&gt;&lt;atom:link href="http://docs.rackspacecloud.com/servers/api/v1.1/application.wadl" rel="describedby" type="application/vnd.sun.wadl+xml"/&gt;&lt;/version&gt;</code></pre>
-</div>
+	<version id="v1.1" status="CURRENT" updated="2011-01-21T11:33:21Z" xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"><media-types><media-type base="application/xml" type="application/vnd.openstack.compute-v1.1+xml"/><media-type base="application/json" type="application/vnd.openstack.compute-v1.1+json"/></media-types><atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/" rel="self"/><atom:link href="http://docs.rackspacecloud.com/servers/api/v1.1/cs-devguide-20110125.pdf" rel="describedby" type="application/pdf"/><atom:link href="http://docs.rackspacecloud.com/servers/api/v1.1/application.wadl" rel="describedby" type="application/vnd.sun.wadl+xml"/></version>
 
 JSON
 
-<div>
-<pre><code>{
-    "version": {
-        "id": "v1.1",
-        "links": [
-            {
-                "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
-                "rel": "self"
-            },
-            {
-                "href": "http://docs.rackspacecloud.com/servers/api/v1.1/cs-devguide-20110125.pdf",
-                "rel": "describedby",
-                "type": "application/pdf"
-            },
-            {
-                "href": "http://docs.rackspacecloud.com/servers/api/v1.1/application.wadl",
-                "rel": "describedby",
-                "type": "application/vnd.sun.wadl+xml"
-            }
-        ],
-        "media-types": [
-            {
-                "base": "application/xml",
-                "type": "application/vnd.openstack.compute-v1.1+xml"
-            },
-            {
-                "base": "application/json",
-                "type": "application/vnd.openstack.compute-v1.1+json"
-            }
-        ],
-        "status": "CURRENT",
-        "updated": "2011-01-21T11:33:21Z"
-    }
-}</code></pre>
-</div>
+	{
+	    "version": {
+	        "id": "v1.1",
+	        "links": [
+	            {
+	                "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+	                "rel": "self"
+	            },
+	            {
+	                "href": "http://docs.rackspacecloud.com/servers/api/v1.1/cs-devguide-20110125.pdf",
+	                "rel": "describedby",
+	                "type": "application/pdf"
+	            },
+	            {
+	                "href": "http://docs.rackspacecloud.com/servers/api/v1.1/application.wadl",
+	                "rel": "describedby",
+	                "type": "application/vnd.sun.wadl+xml"
+	            }
+	        ],
+	        "media-types": [
+	            {
+	                "base": "application/xml",
+	                "type": "application/vnd.openstack.compute-v1.1+xml"
+	            },
+	            {
+	                "base": "application/json",
+	                "type": "application/vnd.openstack.compute-v1.1+json"
+	            }
+	        ],
+	        "status": "CURRENT",
+	        "updated": "2011-01-21T11:33:21Z"
+	    }
+	}
 
 ######Example(s)
 
-<div>
-<pre><code>curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_eeb52e2b3fad2151383af237af3ec107ceea775498c2dfc7e8087f26b3b819ae" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/'
-</code></pre>
-</div>
+	curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_eeb52e2b3fad2151383af237af3ec107ceea775498c2dfc7e8087f26b3b819ae" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/'
 
 
 ### <a id="extensions"></a>4.4.2 Extensions
@@ -907,65 +906,58 @@ This call does not require a request body
 
 XML
 
-<div>
-<pre><code>&lt;extensions xmlns:atom="http://www.w3.org/2005/Atom" xmlns="http://docs.openstack.org/compute/api/v1.1"&gt;&lt;extension name="Keypairs" namespace="http://docs.openstack.org/ext/keypairs/api/v1.1" alias="os-keypairs" updated="2011-08-08T00:00:00+00:00"&gt;&lt;description&gt;Keypair Support&lt;/description&gt;&lt;/extension&gt;&lt;extension name="Volumes" namespace="http://docs.openstack.org/ext/volumes/api/v1.1" alias="os-volumes" updated="2011-03-25T00:00:00+00:00"&gt;&lt;description&gt;Volumes support&lt;/description&gt;&lt;/extension&gt;&lt;extension name="Console_output" namespace="http://docs.openstack.org/compute/ext/os-console-output/api/v1.1" alias="os-console-output" updated="2011-12-08T00:00:00+00:00"&gt;&lt;description&gt;Console log output support, with tailing ability.&lt;/description&gt;&lt;/extension&gt;&lt;extension name="SecurityGroups" namespace="http://docs.openstack.org/ext/securitygroups/api/v1.1" alias="security_groups" updated="2011-07-21T00:00:00+00:00"&gt;&lt;description&gt;Security group support&lt;/description&gt;&lt;/extension&gt;&lt;extension name="Floating_ips" namespace="http://docs.openstack.org/ext/floating_ips/api/v1.1" alias="os-floating-ips" updated="2011-06-16T00:00:00+00:00"&gt;&lt;description&gt;Floating IPs support&lt;/description&gt;&lt;/extension&gt;&lt;/extensions&gt;</code></pre>
-</div>
+	&lt;extensions xmlns:atom="http://www.w3.org/2005/Atom" xmlns="http://docs.openstack.org/compute/api/v1.1"&gt;&lt;extension name="Keypairs" namespace="http://docs.openstack.org/ext/keypairs/api/v1.1" alias="os-keypairs" updated="2011-08-08T00:00:00+00:00"&gt;&lt;description&gt;Keypair Support&lt;/description&gt;&lt;/extension&gt;&lt;extension name="Volumes" namespace="http://docs.openstack.org/ext/volumes/api/v1.1" alias="os-volumes" updated="2011-03-25T00:00:00+00:00"&gt;&lt;description&gt;Volumes support&lt;/description&gt;&lt;/extension&gt;&lt;extension name="Console_output" namespace="http://docs.openstack.org/compute/ext/os-console-output/api/v1.1" alias="os-console-output" updated="2011-12-08T00:00:00+00:00"&gt;&lt;description&gt;Console log output support, with tailing ability.&lt;/description&gt;&lt;/extension&gt;&lt;extension name="SecurityGroups" namespace="http://docs.openstack.org/ext/securitygroups/api/v1.1" alias="security_groups" updated="2011-07-21T00:00:00+00:00"&gt;&lt;description&gt;Security group support&lt;/description&gt;&lt;/extension&gt;&lt;extension name="Floating_ips" namespace="http://docs.openstack.org/ext/floating_ips/api/v1.1" alias="os-floating-ips" updated="2011-06-16T00:00:00+00:00"&gt;&lt;description&gt;Floating IPs support&lt;/description&gt;&lt;/extension&gt;&lt;/extensions&gt;
 
 JSON
 
-<div>
-<pre><code>{
-    "extensions": [
-        {
-            "alias": "os-keypairs",
-            "description": "Keypair Support",
-            "links": [],
-            "name": "Keypairs",
-            "namespace": "http://docs.openstack.org/ext/keypairs/api/v1.1",
-            "updated": "2011-08-08T00:00:00+00:00"
-        },
-        {
-            "alias": "os-volumes",
-            "description": "Volumes support",
-            "links": [],
-            "name": "Volumes",
-            "namespace": "http://docs.openstack.org/ext/volumes/api/v1.1",
-            "updated": "2011-03-25T00:00:00+00:00"
-        },
-        {
-            "alias": "os-console-output",
-            "description": "Console log output support, with tailing ability.",
-            "links": [],
-            "name": "Console_output",
-            "namespace": "http://docs.openstack.org/compute/ext/os-console-output/api/v1.1",
-            "updated": "2011-12-08T00:00:00+00:00"
-        },
-        {
-            "alias": "security_groups",
-            "description": "Security group support",
-            "links": [],
-            "name": "SecurityGroups",
-            "namespace": "http://docs.openstack.org/ext/securitygroups/api/v1.1",
-            "updated": "2011-07-21T00:00:00+00:00"
-        },
-        {
-            "alias": "os-floating-ips",
-            "description": "Floating IPs support",
-            "links": [],
-            "name": "Floating_ips",
-            "namespace": "http://docs.openstack.org/ext/floating_ips/api/v1.1",
-            "updated": "2011-06-16T00:00:00+00:00"
-        }
-    ]
-}</code></pre>
-</div>
+	{
+	    "extensions": [
+	        {
+	            "alias": "os-keypairs",
+	            "description": "Keypair Support",
+	            "links": [],
+	            "name": "Keypairs",
+	            "namespace": "http://docs.openstack.org/ext/keypairs/api/v1.1",
+	            "updated": "2011-08-08T00:00:00+00:00"
+	        },
+	        {
+	            "alias": "os-volumes",
+	            "description": "Volumes support",
+	            "links": [],
+	            "name": "Volumes",
+	            "namespace": "http://docs.openstack.org/ext/volumes/api/v1.1",
+	            "updated": "2011-03-25T00:00:00+00:00"
+	        },
+	        {
+	            "alias": "os-console-output",
+	            "description": "Console log output support, with tailing ability.",
+	            "links": [],
+	            "name": "Console_output",
+	            "namespace": "http://docs.openstack.org/compute/ext/os-console-output/api/v1.1",
+	            "updated": "2011-12-08T00:00:00+00:00"
+	        },
+	        {
+	            "alias": "security_groups",
+	            "description": "Security group support",
+	            "links": [],
+	            "name": "SecurityGroups",
+	            "namespace": "http://docs.openstack.org/ext/securitygroups/api/v1.1",
+	            "updated": "2011-07-21T00:00:00+00:00"
+	        },
+	        {
+	            "alias": "os-floating-ips",
+	            "description": "Floating IPs support",
+	            "links": [],
+	            "name": "Floating_ips",
+	            "namespace": "http://docs.openstack.org/ext/floating_ips/api/v1.1",
+	            "updated": "2011-06-16T00:00:00+00:00"
+	        }
+	    ]
+	}
 
 ######Example(s)
 
-<div>
-<pre><code>curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_405ff353aa9bcf6960b49860eb967acd25620fa33d01f732fb220dcd3c6298f1" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/extensions'
-</code></pre>
-</div>
+	curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_405ff353aa9bcf6960b49860eb967acd25620fa33d01f732fb220dcd3c6298f1" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/extensions'
 
 
 ### <a id="extension"></a>4.4.3 Extension
@@ -992,6 +984,7 @@ JSON
 <li><p><em>alias</em> - xsd:string</p><p xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:db="http://docbook.org/ns/docbook" xmlns:csapi="http://docs.openstack.org/compute/api/v2" xmlns:xsdxt="http://docs.rackspacecloud.com/xsd-ext/v1.0" xmlns:hpcloud="http://hpcloud.com/ns/apispec/v1.0" xmlns:common="http://docs.openstack.org/common/api/v1.0" xmlns:wadl="http://wadl.dev.java.net/2009/02" xmlns:atom="http://www.w3.org/2005/Atom">An alias is a name for a pointer to a resource, such as a named extension.</p>
 </li>
 </ul>
+
 ######Request
 
 This call does not require a request body
@@ -1002,31 +995,24 @@ This call does not require a request body
 
 XML
 
-<div>
-<pre><code>&lt;extension xmlns:atom="http://www.w3.org/2005/Atom" xmlns="http://docs.openstack.org/compute/api/v1.1" name="Floating_ips" namespace="http://docs.openstack.org/ext/floating_ips/api/v1.1" alias="os-floating-ips" updated="2011-06-16T00:00:00+00:00"&gt;&lt;description&gt;Floating IPs support&lt;/description&gt;&lt;/extension&gt;</code></pre>
-</div>
+	&lt;extension xmlns:atom="http://www.w3.org/2005/Atom" xmlns="http://docs.openstack.org/compute/api/v1.1" name="Floating_ips" namespace="http://docs.openstack.org/ext/floating_ips/api/v1.1" alias="os-floating-ips" updated="2011-06-16T00:00:00+00:00"&gt;&lt;description&gt;Floating IPs support&lt;/description&gt;&lt;/extension&gt;
 
 JSON
 
-<div>
-<pre><code>{
-    "extension": {
-        "alias": "os-floating-ips",
-        "description": "Floating IPs support",
-        "links": [],
-        "name": "Floating_ips",
-        "namespace": "http://docs.openstack.org/ext/floating_ips/api/v1.1",
-        "updated": "2011-06-16T00:00:00+00:00"
-    }
-}</code></pre>
-</div>
+	{
+	    "extension": {
+	        "alias": "os-floating-ips",
+	        "description": "Floating IPs support",
+	        "links": [],
+	        "name": "Floating_ips",
+	        "namespace": "http://docs.openstack.org/ext/floating_ips/api/v1.1",
+	        "updated": "2011-06-16T00:00:00+00:00"
+	    }
+	}
 
 ######Example(s)
 
-<div>
-<pre><code>curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_87a5a0711fd8f07b04c5784ffcf7c86316c3fb62d027ae3779f475f6d66c61ae" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/extensions/os-floating-ips'
-</code></pre>
-</div>
+	curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_87a5a0711fd8f07b04c5784ffcf7c86316c3fb62d027ae3779f475f6d66c61ae" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/extensions/os-floating-ips'
 
 
 ### <a id="limits"></a>4.4.4 Limits
@@ -1065,99 +1051,91 @@ This call does not require a request body
 
 XML
 
-<div>
-<pre><code>&lt;limits xmlns="http://docs.openstack.org/compute/api/v1.1"&gt;
-    &lt;rates&gt;
-        &lt;rate regex="/{suburi}" uri="/{suburi}"&gt;
-            &lt;limit next-available="2012-10-05T03:47:16Z" remaining="2999" unit="MINUTE" value="3000" verb="GET"/&gt;
-            &lt;limit next-available="2012-10-05T03:47:15Z" remaining="199" unit="MINUTE" value="200" verb="GET"/&gt;
-            &lt;limit next-available="2012-10-05T03:47:15Z" remaining="10" unit="MINUTE" value="10" verb="PUT"/&gt;
-            &lt;limit next-available="2012-10-05T03:47:15Z" remaining="40" unit="MINUTE" value="40" verb="POST"/&gt;
-            &lt;limit next-available="2012-10-05T03:47:15Z" remaining="60" unit="MINUTE" value="60" verb="DELETE"/&gt;
-        &lt;/rate&gt;
-    &lt;/rates&gt;
-    &lt;absolute&gt;
-        &lt;limit name="maxServerMeta" value="50"/&gt;
-        &lt;limit name="maxPersonality" value="5"/&gt;
-        &lt;limit name="maxImageMeta" value="50"/&gt;
-        &lt;limit name="maxPersonalitySize" value="10240"/&gt;
-        &lt;limit name="maxSecurityGroupRules" value="20"/&gt;
-        &lt;limit name="maxSecurityGroups" value="10"/&gt;
-        &lt;limit name="maxTotalInstances" value="20"/&gt;
-        &lt;limit name="maxTotalRAMSize" value="102400"/&gt;
-    &lt;/absolute&gt;
-&lt;/limits&gt;
-</code></pre>
-</div>
+	&lt;limits xmlns="http://docs.openstack.org/compute/api/v1.1"&gt;
+	    &lt;rates&gt;
+	        &lt;rate regex="/{suburi}" uri="/{suburi}"&gt;
+	            &lt;limit next-available="2012-10-05T03:47:16Z" remaining="2999" unit="MINUTE" value="3000" verb="GET"/&gt;
+	            &lt;limit next-available="2012-10-05T03:47:15Z" remaining="199" unit="MINUTE" value="200" verb="GET"/&gt;
+	            &lt;limit next-available="2012-10-05T03:47:15Z" remaining="10" unit="MINUTE" value="10" verb="PUT"/&gt;
+	            &lt;limit next-available="2012-10-05T03:47:15Z" remaining="40" unit="MINUTE" value="40" verb="POST"/&gt;
+	            &lt;limit next-available="2012-10-05T03:47:15Z" remaining="60" unit="MINUTE" value="60" verb="DELETE"/&gt;
+	        &lt;/rate&gt;
+	    &lt;/rates&gt;
+	    &lt;absolute&gt;
+	        &lt;limit name="maxServerMeta" value="50"/&gt;
+	        &lt;limit name="maxPersonality" value="5"/&gt;
+	        &lt;limit name="maxImageMeta" value="50"/&gt;
+	        &lt;limit name="maxPersonalitySize" value="10240"/&gt;
+	        &lt;limit name="maxSecurityGroupRules" value="20"/&gt;
+	        &lt;limit name="maxSecurityGroups" value="10"/&gt;
+	        &lt;limit name="maxTotalInstances" value="20"/&gt;
+	        &lt;limit name="maxTotalRAMSize" value="102400"/&gt;
+	    &lt;/absolute&gt;
+	&lt;/limits&gt;
 
 JSON
 
-<div>
-<pre><code>{
-    "limits": {
-        "absolute": {
-            "maxImageMeta": 50,
-            "maxPersonality": 5,
-            "maxPersonalitySize": 10240,
-            "maxSecurityGroupRules": 20,
-            "maxSecurityGroups": 10,
-            "maxServerMeta": 50,
-            "maxTotalInstances": 20,
-            "maxTotalRAMSize": 102400
-        },
-        "rate": [
-            {
-                "limit": [
-                    {
-                        "next-available": "2012-10-05T03:47:15Z",
-                        "remaining": 3000,
-                        "unit": "MINUTE",
-                        "value": 3000,
-                        "verb": "GET"
-                    },
-                    {
-                        "next-available": "2012-10-05T03:47:15Z",
-                        "remaining": 199,
-                        "unit": "MINUTE",
-                        "value": 200,
-                        "verb": "GET"
-                    },
-                    {
-                        "next-available": "2012-10-05T03:47:15Z",
-                        "remaining": 10,
-                        "unit": "MINUTE",
-                        "value": 10,
-                        "verb": "PUT"
-                    },
-                    {
-                        "next-available": "2012-10-05T03:47:15Z",
-                        "remaining": 40,
-                        "unit": "MINUTE",
-                        "value": 40,
-                        "verb": "POST"
-                    },
-                    {
-                        "next-available": "2012-10-05T03:47:15Z",
-                        "remaining": 60,
-                        "unit": "MINUTE",
-                        "value": 60,
-                        "verb": "DELETE"
-                    }
-                ],
-                "regex": "/{suburi}",
-                "uri": "/{suburi}"
-            }
-        ]
-    }
-}</code></pre>
-</div>
+	{
+	    "limits": {
+	        "absolute": {
+	            "maxImageMeta": 50,
+	            "maxPersonality": 5,
+	            "maxPersonalitySize": 10240,
+	            "maxSecurityGroupRules": 20,
+	            "maxSecurityGroups": 10,
+	            "maxServerMeta": 50,
+	            "maxTotalInstances": 20,
+	            "maxTotalRAMSize": 102400
+	        },
+	        "rate": [
+	            {
+	                "limit": [
+	                    {
+	                        "next-available": "2012-10-05T03:47:15Z",
+	                        "remaining": 3000,
+	                        "unit": "MINUTE",
+	                        "value": 3000,
+	                        "verb": "GET"
+	                    },
+	                    {
+	                        "next-available": "2012-10-05T03:47:15Z",
+	                        "remaining": 199,
+	                        "unit": "MINUTE",
+	                        "value": 200,
+	                        "verb": "GET"
+	                    },
+	                    {
+	                        "next-available": "2012-10-05T03:47:15Z",
+	                        "remaining": 10,
+	                        "unit": "MINUTE",
+	                        "value": 10,
+	                        "verb": "PUT"
+	                    },
+	                    {
+	                        "next-available": "2012-10-05T03:47:15Z",
+	                        "remaining": 40,
+	                        "unit": "MINUTE",
+	                        "value": 40,
+	                        "verb": "POST"
+	                    },
+	                    {
+	                        "next-available": "2012-10-05T03:47:15Z",
+	                        "remaining": 60,
+	                        "unit": "MINUTE",
+	                        "value": 60,
+	                        "verb": "DELETE"
+	                    }
+	                ],
+	                "regex": "/{suburi}",
+	                "uri": "/{suburi}"
+	            }
+	        ]
+	    }
+	}
 
 ######Example(s)
 
-<div>
-<pre><code>curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_1d85b38ddcd884cd98f4591c4c1c5d08097f1422fb7d75f1e631e99ea5343f1a" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/limits'
-</code></pre>
-</div>
+	curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_1d85b38ddcd884cd98f4591c4c1c5d08097f1422fb7d75f1e631e99ea5343f1a" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/limits'
 
 
 ### <a id="Servers"></a>4.4.5 Servers
@@ -1217,65 +1195,58 @@ This call does not require a request body
 
 XML
 
-<div>
-<pre><code>&lt;servers xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
-    &lt;server id="233693" name="server-name-2"&gt;
-        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/233693" rel="self"/&gt;
-        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/233693" rel="bookmark"/&gt;
-    &lt;/server&gt;
-    &lt;server id="233691" name="server-name-1"&gt;
-        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/233691" rel="self"/&gt;
-        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/233691" rel="bookmark"/&gt;
-    &lt;/server&gt;
-&lt;/servers&gt;
-</code></pre>
-</div>
+	&lt;servers xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
+	    &lt;server id="233693" name="server-name-2"&gt;
+	        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/233693" rel="self"/&gt;
+	        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/233693" rel="bookmark"/&gt;
+	    &lt;/server&gt;
+	    &lt;server id="233691" name="server-name-1"&gt;
+	        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/233691" rel="self"/&gt;
+	        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/233691" rel="bookmark"/&gt;
+	    &lt;/server&gt;
+	&lt;/servers&gt;
+
 
 JSON
 
-<div>
-<pre><code>{
-    "servers": [
-        {
-            "id": 233693,
-            "links": [
-                {
-                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/233693",
-                    "rel": "self"
-                },
-                {
-                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/233693",
-                    "rel": "bookmark"
-                }
-            ],
-            "name": "server-name-2",
-            "uuid": "f632dbea-e9bc-4c71-a893-6bdc3696a5ca"
-        },
-        {
-            "id": 233691,
-            "links": [
-                {
-                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/233691",
-                    "rel": "self"
-                },
-                {
-                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/233691",
-                    "rel": "bookmark"
-                }
-            ],
-            "name": "server-name-1",
-            "uuid": "d1d5e151-2fed-4522-9e94-aae0ef3d5db0"
-        }
-    ]
-}</code></pre>
-</div>
+	{
+	    "servers": [
+	        {
+	            "id": 233693,
+	            "links": [
+	                {
+	                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/233693",
+	                    "rel": "self"
+	                },
+	                {
+	                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/233693",
+	                    "rel": "bookmark"
+	                }
+	            ],
+	            "name": "server-name-2",
+	            "uuid": "f632dbea-e9bc-4c71-a893-6bdc3696a5ca"
+	        },
+	        {
+	            "id": 233691,
+	            "links": [
+	                {
+	                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/233691",
+	                    "rel": "self"
+	                },
+	                {
+	                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/233691",
+	                    "rel": "bookmark"
+	                }
+	            ],
+	            "name": "server-name-1",
+	            "uuid": "d1d5e151-2fed-4522-9e94-aae0ef3d5db0"
+	        }
+	    ]
+	}
 
 ######Example(s)
 
-<div>
-<pre><code>curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_405ff353aa9bcf6960b49860eb967acd25620fa33d01f732fb220dcd3c6298f1" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers?status=ACTIVE&amp;image=120&amp;flavor=100&amp;name=server-name'
-</code></pre>
-</div>
+	curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_405ff353aa9bcf6960b49860eb967acd25620fa33d01f732fb220dcd3c6298f1" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers?status=ACTIVE&amp;image=120&amp;flavor=100&amp;name=server-name'
 
 
 #### <a id="createServer"></a>4.4.5.2 Create Server
@@ -1347,60 +1318,56 @@ JSON
 
 XML
 
-<div>
-<pre><code>&lt;?xml version="1.0" ?&gt;
-&lt;server config_drive="True" flavorRef="100" imageRef="120" key_name="key.pub" max_count="1" min_count="1" name="server-name-2" xmlns="http://docs.openstack.org/compute/api/v1.1"&gt;
-    
-                        
-    &lt;security_groups&gt;
-        
-                                
-        &lt;security_group name="security-group"/&gt;
-        
-                        
-    &lt;/security_groups&gt;
-    
-                        
-    &lt;metadata&gt;
-        
-                                
-        &lt;meta key="key-2" value="value-2"/&gt;
-        
-                                
-        &lt;meta key="key-1" value="value-1"/&gt;
-        
-                        
-    &lt;/metadata&gt;
-    
-            
-&lt;/server&gt;
-</code></pre>
-</div>
+	&lt;?xml version="1.0" ?&gt;
+	&lt;server config_drive="True" flavorRef="100" imageRef="120" key_name="key.pub" max_count="1" min_count="1" name="server-name-2" xmlns="http://docs.openstack.org/compute/api/v1.1"&gt;
+	    
+	                        
+	    &lt;security_groups&gt;
+	        
+	                                
+	        &lt;security_group name="security-group"/&gt;
+	        
+	                        
+	    &lt;/security_groups&gt;
+	    
+	                        
+	    &lt;metadata&gt;
+	        
+	                                
+	        &lt;meta key="key-2" value="value-2"/&gt;
+	        
+	                                
+	        &lt;meta key="key-1" value="value-1"/&gt;
+	        
+	                        
+	    &lt;/metadata&gt;
+	    
+	            
+	&lt;/server&gt;
+
 
 JSON
 
-<div>
-<pre><code>{
-    "server": {
-        "config_drive": true,
-        "flavorRef": "100",
-        "imageRef": "120",
-        "key_name": "key.pub",
-        "max_count": 1,
-        "metadata": {
-            "key-1": "value-1",
-            "key-2": "value-2"
-        },
-        "min_count": 1,
-        "name": "server-name-1",
-        "security_groups": [
-            {
-                "name": "security-group"
-            }
-        ]
-    }
-}</code></pre>
-</div>
+	{
+	    "server": {
+	        "config_drive": true,
+	        "flavorRef": "100",
+	        "imageRef": "120",
+	        "key_name": "key.pub",
+	        "max_count": 1,
+	        "metadata": {
+	            "key-1": "value-1",
+	            "key-2": "value-2"
+	        },
+	        "min_count": 1,
+	        "name": "server-name-1",
+	        "security_groups": [
+	            {
+	                "name": "security-group"
+	            }
+	        ]
+	    }
+	}
 
 ######Response
 
@@ -1412,53 +1379,47 @@ JSON
 <li><p><em>Location</em> (required) - xsd:anyURI</p><p xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:db="http://docbook.org/ns/docbook" xmlns:csapi="http://docs.openstack.org/compute/api/v2" xmlns:xsdxt="http://docs.rackspacecloud.com/xsd-ext/v1.0" xmlns:hpcloud="http://hpcloud.com/ns/apispec/v1.0" xmlns:common="http://docs.openstack.org/common/api/v1.0" xmlns:wadl="http://wadl.dev.java.net/2009/02" xmlns:atom="http://www.w3.org/2005/Atom">Full URL to a server created by the service.</p>
 </li>
 </ul>
+
 XML
 
-<div>
-<pre><code>&lt;server accessIPv4="" accessIPv6="" adminPass="2eb56Qh2uVAuC7ub" created="2012-11-01T03:58:01Z" hostId="" id="294393" name="server-name-2" status="BUILD(scheduling)" tenantId="36991859863737" updated="2012-11-01T03:58:01Z" userId="13311562627589" uuid="44823245-b322-4ad0-9cf3-c3c84fd4cbec" xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
-    &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393" rel="self"/&gt;
-    &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/294393" rel="bookmark"/&gt;
-    &lt;image id="120"&gt;
-        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/images/120" rel="bookmark"/&gt;
-    &lt;/image&gt;
-    &lt;flavor id="100"&gt;
-        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/flavors/100" rel="bookmark"/&gt;
-    &lt;/flavor&gt;
-    &lt;metadata&gt;
-        &lt;meta key="key-2"&gt;
-            
-        &lt;/meta&gt;
-        &lt;meta key="key-1"&gt;
-            
-        &lt;/meta&gt;
-    &lt;/metadata&gt;
-    &lt;addresses/&gt;
-    &lt;security_groups&gt;
-        &lt;security_group id="12091" name="default"&gt;
-            &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/os-security-groups/12091" rel="bookmark"/&gt;
-        &lt;/security_group&gt;
-    &lt;/security_groups&gt;
-&lt;/server&gt;
-</code></pre>
-</div>
+	&lt;server accessIPv4="" accessIPv6="" adminPass="2eb56Qh2uVAuC7ub" created="2012-11-01T03:58:01Z" hostId="" id="294393" name="server-name-2" status="BUILD(scheduling)" tenantId="36991859863737" updated="2012-11-01T03:58:01Z" userId="13311562627589" uuid="44823245-b322-4ad0-9cf3-c3c84fd4cbec" xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
+	    &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393" rel="self"/&gt;
+	    &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/294393" rel="bookmark"/&gt;
+	    &lt;image id="120"&gt;
+	        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/images/120" rel="bookmark"/&gt;
+	    &lt;/image&gt;
+	    &lt;flavor id="100"&gt;
+	        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/flavors/100" rel="bookmark"/&gt;
+	    &lt;/flavor&gt;
+	    &lt;metadata&gt;
+	        &lt;meta key="key-2"&gt;
+	            
+	        &lt;/meta&gt;
+	        &lt;meta key="key-1"&gt;
+	            
+	        &lt;/meta&gt;
+	    &lt;/metadata&gt;
+	    &lt;addresses/&gt;
+	    &lt;security_groups&gt;
+	        &lt;security_group id="12091" name="default"&gt;
+	            &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/os-security-groups/12091" rel="bookmark"/&gt;
+	        &lt;/security_group&gt;
+	    &lt;/security_groups&gt;
+	&lt;/server&gt;
+
 
 JSON
 
-<div>
-<pre><code>{
-    "badRequest": {
-        "code": 400,
-        "message": "Security group security-group not found for project 36991859863737."
-    }
-}</code></pre>
-</div>
+	{
+	    "badRequest": {
+	        "code": 400,
+	        "message": "Security group security-group not found for project 36991859863737."
+	    }
+	}
 
 ######Example(s)
 
-<div>
-<pre><code>curl -i -X 'POST'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_056c1b46b85d28f0f30c5de0be445b999e49efb465886f3193637f6b00c33bd4" -d '{"server": {"name": "server-name-1", "imageRef": "120", "key_name": "key.pub", "min_count": 1, "flavorRef": "100", "max_count": 1, "config_drive": true, "security_groups": [{"name": "security-group"}], "metadata": {"key-2": "value-2", "key-1": "value-1"}}}' 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers'
-</code></pre>
-</div>
+	curl -i -X 'POST'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_056c1b46b85d28f0f30c5de0be445b999e49efb465886f3193637f6b00c33bd4" -d '{"server": {"name": "server-name-1", "imageRef": "120", "key_name": "key.pub", "min_count": 1, "flavorRef": "100", "max_count": 1, "config_drive": true, "security_groups": [{"name": "security-group"}], "metadata": {"key-2": "value-2", "key-1": "value-1"}}}' 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers'
 
 
 #### <a id="listDetailServers"></a>4.4.5.3 List Servers Detail
@@ -1508,128 +1469,121 @@ This call does not require a request body
 
 XML
 
-<div>
-<pre><code>&lt;servers xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
-    &lt;server accessIPv4="" accessIPv6="" created="2012-11-01T03:58:01Z" hostId="763e09f51afed6e9a38e2c0e385e49fd8fbd7111a957574f3081540a" id="294393" name="server-name-2" progress="100" status="ACTIVE" tenantId="36991859863737" updated="2012-11-01T03:58:18Z" userId="13311562627589" uuid="44823245-b322-4ad0-9cf3-c3c84fd4cbec"&gt;
-        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393" rel="self"/&gt;
-        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/294393" rel="bookmark"/&gt;
-        &lt;image id="120"&gt;
-            &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/images/120" rel="bookmark"/&gt;
-        &lt;/image&gt;
-        &lt;flavor id="100"&gt;
-            &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/flavors/100" rel="bookmark"/&gt;
-        &lt;/flavor&gt;
-        &lt;metadata&gt;
-            &lt;meta key="key-2"&gt;
-                
-            &lt;/meta&gt;
-            &lt;meta key="key-1"&gt;
-                
-            &lt;/meta&gt;
-        &lt;/metadata&gt;
-        &lt;addresses&gt;
-            &lt;network id="private"&gt;
-                &lt;ip addr="10.2.0.27" version="4"/&gt;
-                &lt;ip addr="15.185.225.248" version="4"/&gt;
-            &lt;/network&gt;
-        &lt;/addresses&gt;
-        &lt;security_groups&gt;
-            &lt;security_group id="12091" name="default"&gt;
-                &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/os-security-groups/12091" rel="bookmark"/&gt;
-            &lt;/security_group&gt;
-        &lt;/security_groups&gt;
-    &lt;/server&gt;
-&lt;/servers&gt;
-</code></pre>
-</div>
+	&lt;servers xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
+	    &lt;server accessIPv4="" accessIPv6="" created="2012-11-01T03:58:01Z" hostId="763e09f51afed6e9a38e2c0e385e49fd8fbd7111a957574f3081540a" id="294393" name="server-name-2" progress="100" status="ACTIVE" tenantId="36991859863737" updated="2012-11-01T03:58:18Z" userId="13311562627589" uuid="44823245-b322-4ad0-9cf3-c3c84fd4cbec"&gt;
+	        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393" rel="self"/&gt;
+	        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/294393" rel="bookmark"/&gt;
+	        &lt;image id="120"&gt;
+	            &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/images/120" rel="bookmark"/&gt;
+	        &lt;/image&gt;
+	        &lt;flavor id="100"&gt;
+	            &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/flavors/100" rel="bookmark"/&gt;
+	        &lt;/flavor&gt;
+	        &lt;metadata&gt;
+	            &lt;meta key="key-2"&gt;
+	                
+	            &lt;/meta&gt;
+	            &lt;meta key="key-1"&gt;
+	                
+	            &lt;/meta&gt;
+	        &lt;/metadata&gt;
+	        &lt;addresses&gt;
+	            &lt;network id="private"&gt;
+	                &lt;ip addr="10.2.0.27" version="4"/&gt;
+	                &lt;ip addr="15.185.225.248" version="4"/&gt;
+	            &lt;/network&gt;
+	        &lt;/addresses&gt;
+	        &lt;security_groups&gt;
+	            &lt;security_group id="12091" name="default"&gt;
+	                &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/os-security-groups/12091" rel="bookmark"/&gt;
+	            &lt;/security_group&gt;
+	        &lt;/security_groups&gt;
+	    &lt;/server&gt;
+	&lt;/servers&gt;
+
 
 JSON
 
-<div>
-<pre><code>{
-    "servers": [
-        {
-            "accessIPv4": "",
-            "accessIPv6": "",
-            "addresses": {
-                "private": [
-                    {
-                        "addr": "10.2.0.27",
-                        "version": 4
-                    },
-                    {
-                        "addr": "15.185.225.248",
-                        "version": 4
-                    }
-                ]
-            },
-            "config_drive": "",
-            "created": "2012-11-01T03:58:01Z",
-            "flavor": {
-                "id": "100",
-                "links": [
-                    {
-                        "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/flavors/100",
-                        "rel": "bookmark"
-                    }
-                ]
-            },
-            "hostId": "763e09f51afed6e9a38e2c0e385e49fd8fbd7111a957574f3081540a",
-            "id": 294393,
-            "image": {
-                "id": "120",
-                "links": [
-                    {
-                        "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/images/120",
-                        "rel": "bookmark"
-                    }
-                ]
-            },
-            "key_name": "key.pub",
-            "links": [
-                {
-                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393",
-                    "rel": "self"
-                },
-                {
-                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/294393",
-                    "rel": "bookmark"
-                }
-            ],
-            "metadata": {
-                "key-1": "",
-                "key-2": ""
-            },
-            "name": "server-name-2",
-            "progress": 100,
-            "security_groups": [
-                {
-                    "id": 12091,
-                    "links": [
-                        {
-                            "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/os-security-groups/12091",
-                            "rel": "bookmark"
-                        }
-                    ],
-                    "name": "default"
-                }
-            ],
-            "status": "ACTIVE",
-            "tenant_id": "36991859863737",
-            "updated": "2012-11-01T03:58:18Z",
-            "user_id": "13311562627589",
-            "uuid": "44823245-b322-4ad0-9cf3-c3c84fd4cbec"
-        }
-    ]
-}</code></pre>
-</div>
+	{
+	    "servers": [
+	        {
+	            "accessIPv4": "",
+	            "accessIPv6": "",
+	            "addresses": {
+	                "private": [
+	                    {
+	                        "addr": "10.2.0.27",
+	                        "version": 4
+	                    },
+	                    {
+	                        "addr": "15.185.225.248",
+	                        "version": 4
+	                    }
+	                ]
+	            },
+	            "config_drive": "",
+	            "created": "2012-11-01T03:58:01Z",
+	            "flavor": {
+	                "id": "100",
+	                "links": [
+	                    {
+	                        "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/flavors/100",
+	                        "rel": "bookmark"
+	                    }
+	                ]
+	            },
+	            "hostId": "763e09f51afed6e9a38e2c0e385e49fd8fbd7111a957574f3081540a",
+	            "id": 294393,
+	            "image": {
+	                "id": "120",
+	                "links": [
+	                    {
+	                        "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/images/120",
+	                        "rel": "bookmark"
+	                    }
+	                ]
+	            },
+	            "key_name": "key.pub",
+	            "links": [
+	                {
+	                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393",
+	                    "rel": "self"
+	                },
+	                {
+	                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/294393",
+	                    "rel": "bookmark"
+	                }
+	            ],
+	            "metadata": {
+	                "key-1": "",
+	                "key-2": ""
+	            },
+	            "name": "server-name-2",
+	            "progress": 100,
+	            "security_groups": [
+	                {
+	                    "id": 12091,
+	                    "links": [
+	                        {
+	                            "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/os-security-groups/12091",
+	                            "rel": "bookmark"
+	                        }
+	                    ],
+	                    "name": "default"
+	                }
+	            ],
+	            "status": "ACTIVE",
+	            "tenant_id": "36991859863737",
+	            "updated": "2012-11-01T03:58:18Z",
+	            "user_id": "13311562627589",
+	            "uuid": "44823245-b322-4ad0-9cf3-c3c84fd4cbec"
+	        }
+	    ]
+	}
 
 ######Example(s)
 
-<div>
-<pre><code>curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_056c1b46b85d28f0f30c5de0be445b999e49efb465886f3193637f6b00c33bd4" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/detail?status=ACTIVE&amp;image=120&amp;flavor=100&amp;name=server-name'
-</code></pre>
-</div>
+	curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_056c1b46b85d28f0f30c5de0be445b999e49efb465886f3193637f6b00c33bd4" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/detail?status=ACTIVE&amp;image=120&amp;flavor=100&amp;name=server-name'
 
 
 ### <a id="Server"></a>4.4.6 Server
@@ -1653,6 +1607,7 @@ JSON
 <li><p><em>server_id</em> - csapi:ID_or_UUID</p><p xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:db="http://docbook.org/ns/docbook" xmlns:csapi="http://docs.openstack.org/compute/api/v2" xmlns:xsdxt="http://docs.rackspacecloud.com/xsd-ext/v1.0" xmlns:hpcloud="http://hpcloud.com/ns/apispec/v1.0" xmlns:common="http://docs.openstack.org/common/api/v1.0" xmlns:wadl="http://wadl.dev.java.net/2009/02" xmlns:atom="http://www.w3.org/2005/Atom"> Server ID. This parameter can be an integer ID or a UUID. In either case, the specified server must be in the addressed Availability Zone. </p>
 </li>
 </ul>
+
 ######Request
 
 This call does not require a request body
@@ -1663,124 +1618,117 @@ This call does not require a request body
 
 XML
 
-<div>
-<pre><code>&lt;server accessIPv4="" accessIPv6="" created="2012-11-01T03:58:01Z" hostId="763e09f51afed6e9a38e2c0e385e49fd8fbd7111a957574f3081540a" id="294393" name="server-name-2" progress="100" status="ACTIVE" tenantId="36991859863737" updated="2012-11-01T03:58:18Z" userId="13311562627589" uuid="44823245-b322-4ad0-9cf3-c3c84fd4cbec" xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
-    &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393" rel="self"/&gt;
-    &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/294393" rel="bookmark"/&gt;
-    &lt;image id="120"&gt;
-        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/images/120" rel="bookmark"/&gt;
-    &lt;/image&gt;
-    &lt;flavor id="100"&gt;
-        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/flavors/100" rel="bookmark"/&gt;
-    &lt;/flavor&gt;
-    &lt;metadata&gt;
-        &lt;meta key="key-2"&gt;
-            
-        &lt;/meta&gt;
-        &lt;meta key="key-1"&gt;
-            
-        &lt;/meta&gt;
-    &lt;/metadata&gt;
-    &lt;addresses&gt;
-        &lt;network id="private"&gt;
-            &lt;ip addr="10.2.0.27" version="4"/&gt;
-            &lt;ip addr="15.185.225.248" version="4"/&gt;
-        &lt;/network&gt;
-    &lt;/addresses&gt;
-    &lt;security_groups&gt;
-        &lt;security_group id="12091" name="default"&gt;
-            &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/os-security-groups/12091" rel="bookmark"/&gt;
-        &lt;/security_group&gt;
-    &lt;/security_groups&gt;
-&lt;/server&gt;
-</code></pre>
-</div>
+	&lt;server accessIPv4="" accessIPv6="" created="2012-11-01T03:58:01Z" hostId="763e09f51afed6e9a38e2c0e385e49fd8fbd7111a957574f3081540a" id="294393" name="server-name-2" progress="100" status="ACTIVE" tenantId="36991859863737" updated="2012-11-01T03:58:18Z" userId="13311562627589" uuid="44823245-b322-4ad0-9cf3-c3c84fd4cbec" xmlns="http://docs.openstack.org/compute/api/v1.1" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
+	    &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393" rel="self"/&gt;
+	    &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/294393" rel="bookmark"/&gt;
+	    &lt;image id="120"&gt;
+	        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/images/120" rel="bookmark"/&gt;
+	    &lt;/image&gt;
+	    &lt;flavor id="100"&gt;
+	        &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/flavors/100" rel="bookmark"/&gt;
+	    &lt;/flavor&gt;
+	    &lt;metadata&gt;
+	        &lt;meta key="key-2"&gt;
+	            
+	        &lt;/meta&gt;
+	        &lt;meta key="key-1"&gt;
+	            
+	        &lt;/meta&gt;
+	    &lt;/metadata&gt;
+	    &lt;addresses&gt;
+	        &lt;network id="private"&gt;
+	            &lt;ip addr="10.2.0.27" version="4"/&gt;
+	            &lt;ip addr="15.185.225.248" version="4"/&gt;
+	        &lt;/network&gt;
+	    &lt;/addresses&gt;
+	    &lt;security_groups&gt;
+	        &lt;security_group id="12091" name="default"&gt;
+	            &lt;atom:link href="https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/os-security-groups/12091" rel="bookmark"/&gt;
+	        &lt;/security_group&gt;
+	    &lt;/security_groups&gt;
+	&lt;/server&gt;
+
 
 JSON
 
-<div>
-<pre><code>{
-    "server": {
-        "accessIPv4": "",
-        "accessIPv6": "",
-        "addresses": {
-            "private": [
-                {
-                    "addr": "10.2.0.27",
-                    "version": 4
-                },
-                {
-                    "addr": "15.185.225.248",
-                    "version": 4
-                }
-            ]
-        },
-        "config_drive": "",
-        "created": "2012-11-01T03:58:01Z",
-        "flavor": {
-            "id": "100",
-            "links": [
-                {
-                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/flavors/100",
-                    "rel": "bookmark"
-                }
-            ]
-        },
-        "hostId": "763e09f51afed6e9a38e2c0e385e49fd8fbd7111a957574f3081540a",
-        "id": 294393,
-        "image": {
-            "id": "120",
-            "links": [
-                {
-                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/images/120",
-                    "rel": "bookmark"
-                }
-            ]
-        },
-        "key_name": "key.pub",
-        "links": [
-            {
-                "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393",
-                "rel": "self"
-            },
-            {
-                "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/294393",
-                "rel": "bookmark"
-            }
-        ],
-        "metadata": {
-            "key-1": "",
-            "key-2": ""
-        },
-        "name": "server-name-2",
-        "progress": 100,
-        "security_groups": [
-            {
-                "id": 12091,
-                "links": [
-                    {
-                        "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/os-security-groups/12091",
-                        "rel": "bookmark"
-                    }
-                ],
-                "name": "default"
-            }
-        ],
-        "status": "ACTIVE",
-        "tenant_id": "36991859863737",
-        "updated": "2012-11-01T03:58:18Z",
-        "user_id": "13311562627589",
-        "uuid": "44823245-b322-4ad0-9cf3-c3c84fd4cbec"
-    }
-}</code></pre>
-</div>
+	{
+	    "server": {
+	        "accessIPv4": "",
+	        "accessIPv6": "",
+	        "addresses": {
+	            "private": [
+	                {
+	                    "addr": "10.2.0.27",
+	                    "version": 4
+	                },
+	                {
+	                    "addr": "15.185.225.248",
+	                    "version": 4
+	                }
+	            ]
+	        },
+	        "config_drive": "",
+	        "created": "2012-11-01T03:58:01Z",
+	        "flavor": {
+	            "id": "100",
+	            "links": [
+	                {
+	                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/flavors/100",
+	                    "rel": "bookmark"
+	                }
+	            ]
+	        },
+	        "hostId": "763e09f51afed6e9a38e2c0e385e49fd8fbd7111a957574f3081540a",
+	        "id": 294393,
+	        "image": {
+	            "id": "120",
+	            "links": [
+	                {
+	                    "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/images/120",
+	                    "rel": "bookmark"
+	                }
+	            ]
+	        },
+	        "key_name": "key.pub",
+	        "links": [
+	            {
+	                "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393",
+	                "rel": "self"
+	            },
+	            {
+	                "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/36991859863737/servers/294393",
+	                "rel": "bookmark"
+	            }
+	        ],
+	        "metadata": {
+	            "key-1": "",
+	            "key-2": ""
+	        },
+	        "name": "server-name-2",
+	        "progress": 100,
+	        "security_groups": [
+	            {
+	                "id": 12091,
+	                "links": [
+	                    {
+	                        "href": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/os-security-groups/12091",
+	                        "rel": "bookmark"
+	                    }
+	                ],
+	                "name": "default"
+	            }
+	        ],
+	        "status": "ACTIVE",
+	        "tenant_id": "36991859863737",
+	        "updated": "2012-11-01T03:58:18Z",
+	        "user_id": "13311562627589",
+	        "uuid": "44823245-b322-4ad0-9cf3-c3c84fd4cbec"
+	    }
+	}
 
 ######Example(s)
 
-<div>
-<pre><code>curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_056c1b46b85d28f0f30c5de0be445b999e49efb465886f3193637f6b00c33bd4" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393'
-</code></pre>
-</div>
+	curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_056c1b46b85d28f0f30c5de0be445b999e49efb465886f3193637f6b00c33bd4" 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737/servers/294393'
 
 
 #### <a id="updateServer"></a>4.4.6.2 Update Server Name
@@ -1812,8 +1760,8 @@ JSON
 XML
 
 <div>
-<pre><code>&lt;?xml version="1.0" ?&gt;
-&lt;server xmlns="http://docs.openstack.org/compute/api/v1.1"&gt;
+<pre><code><?xml version="1.0" ?&gt;
+<server xmlns="http://docs.openstack.org/compute/api/v1.1"&gt;
     
                 
     &lt;name&gt;new-server-name-2&lt;/name&gt;
