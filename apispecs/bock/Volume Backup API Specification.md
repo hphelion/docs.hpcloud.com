@@ -1,13 +1,13 @@
 ---
 layout: page
+permalink: /api/block-storage/backup/
 title: Volume Backup API
-title_section: The API specifications for the HP Volume Backup service.
 description: "Volume Backup API Specifications"
-group: apispec
+keywords: "bock, volumes, block storage, backup"
+product: block-storage
 
 ---
-{% include JB/setup %}
-
+# Volume Backup API
 
 # 1. Overview
 
@@ -87,11 +87,9 @@ provide a volumes service.
 
 The service is exposed in the service catalog, as shown in the following fragment:
 
-```
-{
-   service catalog fragment here
-}
-```
+    {
+       service catalog fragment here
+    }
 
 ---
 
@@ -181,26 +179,22 @@ This call does not require a request body.
 
 JSON
 
-```
-{
-    "backups": [
-        {
-            "id": "1",
-            "status": "available",
-        },
-        {
-            "id": "2",
-            "status": "creating",
-        }
-    ]
-}
-```
+    {
+        "backups": [
+            {
+                "id": "1",
+                "status": "available",
+            },
+            {
+                "id": "2",
+                "status": "creating",
+            }
+        ]
+    }
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Error Response**
 
@@ -212,21 +206,15 @@ Not supported.
 
 JSON
 
-```
-{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
-```
+    {"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Curl Example**
 
-```
-curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri]
-```
+    curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri]
 
 **Additional Notes**
 
@@ -257,42 +245,38 @@ This call does not require a request body.
 
 JSON
 
-```
-{
-    "backups": [
-        {
-            "id": "1",
-            "display_name": "backup-001",
-            "display_description": "Nightly Backup 03-Sep-2012",
-            "volume_id": "9",
-            "container": "nightlybackups",
-            "status": "available",
-            "fail_reason": null,
-            "created_at": "2012-09-03T22:00:00Z",
-            "size": 10,
-            "object_count": 2
-        },
-        {
-            "id": "2",
-            "display_name": "backup-002",
-            "display_description": "Nightly Backup 04-Sep-2012",
-            "volume_id": "9",
-            "container": "nightlybackups",
-            "status": "creating",
-            "fail_reason": null,
-            "created_at": "2012-09-04T22:00:00Z",
-            "size": 10,
-            "object_count": 2
-        }
-    ]
-}
-```
+    {
+        "backups": [
+            {
+                "id": "1",
+                "display_name": "backup-001",
+                "display_description": "Nightly Backup 03-Sep-2012",
+                "volume_id": "9",
+                "container": "nightlybackups",
+                "status": "available",
+                "fail_reason": null,
+                "created_at": "2012-09-03T22:00:00Z",
+                "size": 10,
+                "object_count": 2
+            },
+            {
+                "id": "2",
+                "display_name": "backup-002",
+                "display_description": "Nightly Backup 04-Sep-2012",
+                "volume_id": "9",
+                "container": "nightlybackups",
+                "status": "creating",
+                "fail_reason": null,
+                "created_at": "2012-09-04T22:00:00Z",
+                "size": 10,
+                "object_count": 2
+            }
+        ]
+    }
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Error Response**
 
@@ -304,21 +288,15 @@ Not supported.
 
 JSON
 
-```
-{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
-```
+    {"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Curl Example**
 
-```
-curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri]/detail
-```
+    curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri]/detail
 
 **Additional Notes**
 
@@ -350,28 +328,24 @@ This call does not require a request body.
 
 JSON
 
-```
-{
-    "backup": {
-            "id": "1",
-            "display_name": "backup-001",
-            "display_description": "Nightly Backup 03-Sep-2012",
-            "volume_id": "9",
-            "container": "nightlybackups",
-            "status": "available",
-            "fail_reason": null,
-            "created_at": "2012-09-03T22:00:00Z",
-            "size": 10,
-            "object_count": 2
+    {
+        "backup": {
+                "id": "1",
+                "display_name": "backup-001",
+                "display_description": "Nightly Backup 03-Sep-2012",
+                "volume_id": "9",
+                "container": "nightlybackups",
+                "status": "available",
+                "fail_reason": null,
+                "created_at": "2012-09-03T22:00:00Z",
+                "size": 10,
+                "object_count": 2
+        }
     }
-}
-```
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Error Response**
 
@@ -383,15 +357,11 @@ Not supported.
 
 JSON
 
-```
-{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
-```
+    {"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 
 **Status Code**
@@ -402,21 +372,15 @@ Not supported.
 
 JSON
 
-```
-{"itemNotFound": {"message": "Backup [backup_id] could not be found.", "code": 404}}
-```
+    {"itemNotFound": {"message": "Backup [backup_id] could not be found.", "code": 404}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Curl Example**
 
-```
-curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri]/[backup_id]
-```
+    curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri]/[backup_id]
 
 **Additional Notes**
 
@@ -442,22 +406,18 @@ None.
 
 JSON
 
-```
-{
-    "backup": {
-        "display_name": "backup-001",
-        "display_description": "Nightly Backup 03-Sep-2012",
-        "volume_id": "9",
-        "container": "nightlybackups",
-     }
-}
-```
+    {
+        "backup": {
+            "display_name": "backup-001",
+            "display_description": "Nightly Backup 03-Sep-2012",
+            "volume_id": "9",
+            "container": "nightlybackups",
+         }
+    }
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Success Response**
 
@@ -469,25 +429,21 @@ Not supported.
 
 JSON
 
-```
-{
-    "backup": {
-        "id": "1",
-        "display_name": "backup-001",
-        "display_description": "Nightly Backup 03-Sep-2012",
-        "volume_id": "9",
-        "container": "nightlybackups",
-        "status": "creating",
-        "created_at": "2012-09-03T22:00:00Z",
-     }
-}
-```
+    {
+        "backup": {
+            "id": "1",
+            "display_name": "backup-001",
+            "display_description": "Nightly Backup 03-Sep-2012",
+            "volume_id": "9",
+            "container": "nightlybackups",
+            "status": "creating",
+            "created_at": "2012-09-03T22:00:00Z",
+         }
+    }
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Error Response**
 
@@ -499,15 +455,11 @@ Not supported.
 
 JSON
 
-```
-{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
-```
+    {"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Status Code**
 
@@ -517,9 +469,7 @@ Not supported.
 
 JSON
 
-```
-{"badRequest": {"message": "Incorrect request body format.", "code": 400}}
-```
+    {"badRequest": {"message": "Incorrect request body format.", "code": 400}}
 
 **Status Code**
 
@@ -529,15 +479,11 @@ JSON
 
 JSON
 
-```
-{"badRequest": {"message": "Invalid volume: Volume to be backed up must be available", "code": 400}}
-```
+    {"badRequest": {"message": "Invalid volume: Volume to be backed up must be available", "code": 400}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Status Code**
 
@@ -547,21 +493,15 @@ Not supported.
 
 JSON
 
-```
-{"itemNotFound": {"message": "Volume [volume_id] could not be found.", "code": 404}}
-```
+    {"itemNotFound": {"message": "Volume [volume_id] could not be found.", "code": 404}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Curl Example**
 
-```
-curl -i -H "X-Auth-Token: <Auth_Token>" -d'{"backup": {"display_name": "backup-001", "display_description": "Nightly Backup 03-Sep-2012", "volume_id": "9", "container": "nightlybackups" }}' [BaseUri]
-```
+    curl -i -H "X-Auth-Token: <Auth_Token>" -d'{"backup": {"display_name": "backup-001", "display_description": "Nightly Backup 03-Sep-2012", "volume_id": "9", "container": "nightlybackups" }}' [BaseUri]
 
 **Additional Notes**
 
@@ -605,15 +545,11 @@ This call does not return a response body.
 
 JSON
 
-```
-{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
-```
+    {"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Status Code**
 
@@ -623,15 +559,11 @@ Not supported.
 
 JSON
 
-```
-{"badRequest": {"message": "Invalid backup: Backup status must be available or error", "code": 400}}
-```
+    {"badRequest": {"message": "Invalid backup: Backup status must be available or error", "code": 400}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Status Code**
 
@@ -641,21 +573,15 @@ Not supported.
 
 JSON
 
-```
-{"itemNotFound": {"message": "Backup [backup_id] could not be found.", "code": 404}}
-```
+    {"itemNotFound": {"message": "Backup [backup_id] could not be found.", "code": 404}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Curl Example**
 
-```
-curl -i -X DELETE -H "X-Auth-Token: <Auth_Token>" [BaseUri]/[backup_id]
-```
+    curl -i -X DELETE -H "X-Auth-Token: <Auth_Token>" [BaseUri]/[backup_id]
 
 **Additional Notes**
 
@@ -679,19 +605,15 @@ Restore specified backup to a volume.
 
 JSON
 
-```
-{
-    "restore": {
-        "volume_id": "9",
-     }
-}
-```
+    {
+        "restore": {
+            "volume_id": "9",
+         }
+    }
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Success Response**
 
@@ -703,20 +625,16 @@ Not supported.
 
 JSON
 
-```
-{
-    "restore": {
-        "backup_id": "1",
-        "volume_id": "9",
-     }
-}
-```
+    {
+        "restore": {
+            "backup_id": "1",
+            "volume_id": "9",
+         }
+    }
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Error Response**
 
@@ -728,15 +646,11 @@ Not supported.
 
 JSON
 
-```
-{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
-```
+    {"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Status Code**
 
@@ -746,15 +660,11 @@ Not supported.
 
 JSON
 
-```
-{"badRequest": {"message": "Incorrect request body format.", "code": 400}}
-```
+    {"badRequest": {"message": "Incorrect request body format.", "code": 400}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Status Code**
 
@@ -764,15 +674,11 @@ Not supported.
 
 JSON
 
-```
-{"badRequest": {"message": "Invalid volume: Volume to be restored to must be available", "code": 400}}
-```
+    {"badRequest": {"message": "Invalid volume: Volume to be restored to must be available", "code": 400}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Status Code**
 
@@ -782,9 +688,7 @@ Not supported.
 
 JSON
 
-```
-{"badRequest": {"message": "Invalid volume: Volume to be restored to is smaller than the backup to be restored", "code": 400}}
-```
+    {"badRequest": {"message": "Invalid volume: Volume to be restored to is smaller than the backup to be restored", "code": 400}}
 
 **Status Code**
 
@@ -794,15 +698,11 @@ JSON
 
 JSON
 
-```
-{"badRequest": {"message": "Volume quota exceeded. You cannot create a volume of size [backup_size]G", "code": 400}}
-```
+    {"badRequest": {"message": "Volume quota exceeded. You cannot create a volume of size [backup_size]G", "code": 400}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Status Code**
 
@@ -812,9 +712,7 @@ Not supported.
 
 JSON
 
-```
-{"badRequest": {"message": "Invalid backup: Backup status must be available", "code": 400}}
-```
+    {"badRequest": {"message": "Invalid backup: Backup status must be available", "code": 400}}
 
 **Status Code**
 
@@ -824,22 +722,15 @@ JSON
 
 JSON
 
-```
-{"itemNotFound": {"message": "Backup [backup_id] could not be found.", "code": 404}}
-```
+    {"itemNotFound": {"message": "Backup [backup_id] could not be found.", "code": 404}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Curl Example**
 
-```
-curl -i -H "X-Auth-Token: <Auth_Token>" -d'{"restore": { "volume_id": "9" }}' [BaseUri]/[backup_id]/restore
-
-```
+    curl -i -H "X-Auth-Token: <Auth_Token>" -d'{"restore": { "volume_id": "9" }}' [BaseUri]/[backup_id]/restore
 
 **Additional Notes**
 

@@ -1,13 +1,14 @@
 ---
 layout: page
+permalink: /api/block-storage/boot/
 title: HP Bootable Volume API
 title_section: The API specifications for the HP Bootable Volume service.
 description: "Bootable Volume API Specifications"
-group: apispec
+keywords: "bock, block storage, boot, bootable volume"
+product: block-storage
 
 ---
-{% include JB/setup %}
-
+# HP Bootable Volume API
 
 # 1. Overview
 
@@ -23,7 +24,7 @@ are bootable.
 **Maturity Level**: Beta stage - Bootable Volumes are currently under
 development and planned to be made available in the Beastie Boys release
 
-**Version API Status**: *BETA*
+**Version API Status**: *BETAP*
 
 
 ---
@@ -87,9 +88,9 @@ The service catalog is unaltered.
 
 **Admin URI**: N/A
 
-| Resource     | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
-| :-------     | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-| **volumes**  | List bootable volumes | GET         | {BaseURI}              | Y/**N**           |                  |
+| Resource     | Operation             | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
+| :-------     | :-------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
+| **volumes**  | List bootable volumes | GET         | {BaseURI}              | Y/**N**           |                 |
 |              | Show volume details   | GET         | {BaseURI}/{volume_id}  | Y/**N**           |                 |
 
 ## 4.2 Common Request Headers
@@ -169,53 +170,50 @@ This call does not require a request body.
 
 JSON
 
-```
-{
-    "volumes": [
-        {
-            "attachments": [
-                {
-                    "device": "vda", 
-                    "id": 10, 
-                    "serverId": 1, 
-                    "volumeId": 10
-                }
-            ], 
-            "availabilityZone": "nova", 
-            "createdAt": "2012-10-11 13:37:44", 
-            "displayDescription": null, 
-            "displayName": "FBSD1", 
-            "id": 10, 
-            "metadata": {}, 
-            "size": 20, 
-            "snapshotId": "", 
-            "sourceImageRef": "4", 
-            "status": "in-use", 
-            "volumeType": null
-        }, 
-        {
-            "attachments": [], 
-            "availabilityZone": "nova", 
-            "createdAt": "2012-10-31 15:17:54", 
-            "displayDescription": null, 
-            "displayName": null, 
-            "id": 11, 
-            "metadata": {}, 
-            "size": 10, 
-            "snapshotId": "", 
-            "sourceImageRef": "4", 
-            "status": "available", 
-            "volumeType": null
-        }
-    ]
-}
-```
+    {
+        "volumes": [
+            {
+                "attachments": [
+                    {
+                        "device": "vda", 
+                        "id": 10, 
+                        "serverId": 1, 
+                        "volumeId": 10
+                    }
+                ], 
+                "availabilityZone": "nova", 
+                "createdAt": "2012-10-11 13:37:44", 
+                "displayDescription": null, 
+                "displayName": "FBSD1", 
+                "id": 10, 
+                "metadata": {}, 
+                "size": 20, 
+                "snapshotId": "", 
+                "sourceImageRef": "4", 
+                "status": "in-use", 
+                "volumeType": null
+            }, 
+            {
+                "attachments": [], 
+                "availabilityZone": "nova", 
+                "createdAt": "2012-10-31 15:17:54", 
+                "displayDescription": null, 
+                "displayName": null, 
+                "id": 11, 
+                "metadata": {}, 
+                "size": 10, 
+                "snapshotId": "", 
+                "sourceImageRef": "4", 
+                "status": "available", 
+                "volumeType": null
+            }
+        ]
+    }
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
+
 
 **Error Response**
 
@@ -227,21 +225,15 @@ Not supported.
 
 JSON
 
-```
-{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
-```
+    {"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Curl Example**
 
-```
-curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri]
-```
+    curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri]
 
 **Additional Notes**
 
@@ -272,30 +264,26 @@ This call does not require a request body.
 
 JSON
 
-```
-{
-    "volume": {
-        "attachments": [], 
-        "availabilityZone": "nova", 
-        "createdAt": "2012-11-08 16:39:05", 
-        "displayDescription": null, 
-        "displayName": "test1", 
-        "id": 5, 
-        "metadata": {}, 
-        "size": 15, 
-        "snapshotId": "", 
-        "sourceImageRef": "4", 
-        "status": "available", 
-        "volumeType": null
+    {
+        "volume": {
+            "attachments": [], 
+            "availabilityZone": "nova", 
+            "createdAt": "2012-11-08 16:39:05", 
+            "displayDescription": null, 
+            "displayName": "test1", 
+            "id": 5, 
+            "metadata": {}, 
+            "size": 15, 
+            "snapshotId": "", 
+            "sourceImageRef": "4", 
+            "status": "available", 
+            "volumeType": null
+        }
     }
-}
-```
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Error Response**
 
@@ -307,15 +295,11 @@ Not supported.
 
 JSON
 
-```
-{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
-```
+    {"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 
 **Status Code**
@@ -326,21 +310,15 @@ Not supported.
 
 JSON
 
-```
-{"itemNotFound": {"message": "Volume [volume_id] could not be found.", "code": 404}}
-```
+    {"itemNotFound": {"message": "Volume [volume_id] could not be found.", "code": 404}}
 
 XML
 
-```
-Not supported.
-```
+_Not supported._
 
 **Curl Example**
 
-```
-curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri]/[volume_id]
-```
+    curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri]/[volume_id]
 
 **Additional Notes**
 
