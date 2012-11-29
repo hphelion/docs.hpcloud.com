@@ -57,7 +57,7 @@ body {
   -webkit-box-shadow: black 0 2px 5px;
   -moz-box-shadow: black 0 2px 5px;
   box-shadow: black 0 2px 5px;
-  background-image: url('../images/logo_hpcs.png?1334344055');
+  background-image: url('../images/logo_hpcs.png?1352326719');
   background-repeat: no-repeat;
   background-position: center 20px;
   background-color: #333333;
@@ -137,7 +137,7 @@ body {
 /* line 110, ../sass/maintenance.sass */
 body {
   background-color: black;
-  background: url('../images/maintenance.jpg?1334344055') black no-repeat center;
+  background: url('../images/maintenance.jpg?1352326710') black no-repeat center;
 }
 
 /* line 113, ../sass/maintenance.sass */
