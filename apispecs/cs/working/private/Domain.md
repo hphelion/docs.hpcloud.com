@@ -1093,7 +1093,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 
 
 ## Get Groups For a Domain 
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&excludeRoles=r1,r2}
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&tenantId=t1&tenantName=tName&excludeRoles=r1}
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API is used to get list of groups for a given domain. Api results can be filtered by using parameters. Query parameters "marker" and "limit" can be used for pagination
@@ -1113,6 +1113,8 @@ Following filters can be used to filter the response data.
 *Inclusion Filters*
 * *groupId (Optional)* - string - include results for given groupId. Filters groupId and groupName are mutually exclusive. You can filter either using groupId or using groupName.
 * *groupName (Optional)* - string - include results for given groupName. Filters groupId and groupName are mutually exclusive. You can filter either using groupId or using groupName  
+* *tenantId (Optional)* - string - include results for given tenantId. Filters tenantId and tenantName are mutually exclusive. You can filter either using tenantId or using tenantName
+* *tenantName (Optional)* - string - include results for given tenantName. Filters tenantId and tenantName are mutually exclusive. You can filter either using tenantId or using tenantName    
 
 *Exclusion Filters*
 * *excludeRoles (Optional)* - string - comma separated roleId to exclude 
@@ -1126,7 +1128,7 @@ This call does not require a request body
 
 JSON
 
-Request with filters
+Request without filters
 ```
 GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/groups HTTP/1.1
 Accept-Encoding: gzip,deflate
@@ -1154,10 +1156,20 @@ Optional:
 
 XML
 
-Request with filters
+Request with filters groupId and excludeRoles
 
 ```
 GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/groupId=1234&excludeRoles=roleId1,roleId22 HTTP/1.1
+Connection: close
+Accept: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
+```
+
+Request with filters tenantId and excludeRoles
+
+```
+GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/tenantId=1234&excludeRoles=roleId1,roleId22 HTTP/1.1
 Connection: close
 Accept: application/xml
 User-Agent: Jakarta Commons-HttpClient/3.1
@@ -2222,7 +2234,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 ## Get Users for a Domain
-#### {HTTP Verb: GET, POST, DELETE, PUT} [HPKeystoneExtensionBaseURI]/domains/{domainId}/users?limit=pagesize&marker=userId&excludeGroups=groupid1,groupdid2&excludeRoles=roleId1,roleId2&userId=userId&userName=userName&excludeTenantId=tenantid1,tenantId2
+#### {HTTP Verb: GET, POST, DELETE, PUT} [HPKeystoneExtensionBaseURI]/domains/{domainId}/users?limit=pagesize&marker=userId&excludeGroups=groupid1,groupdid2&excludeRoles=roleId1,roleId2&userId=userId&userName=userName&tenantId=t1&groupId=12345&excludeTenantId=tenantid1,tenantId2
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA)*
 
 This API returns all users of a {domainId} .  The Api results can be filtered using filters which are specified as query parameters.
@@ -2241,6 +2253,8 @@ Following filters can be used to filter the response data.
 *Inclusion-Filters*
 * *userId (Optional)* - string - include results for given userId. Filters userId and userName are mutually exclusive. You can filter either using userId or using userName.
 * *userName (Optional)* - string - include results for given userName. Filters userId and userName are mutually exclusive. You can filter either using userId or using userName.  
+* *tenantId (Optional)* - string - include results for given tenantId. 
+* *groupId (Optional)* - string - include results for given groupId. 
 
 *Exclusion Filters*
 * *excludeRoles (Optional)* - string - comma separated roleId to exclude 
@@ -2319,6 +2333,17 @@ Connection: keep-alive
 Request with userId filter
 ```
 GET /v2.0/HP-IDM/v1.0/domains/798477662343/users?userId=12345 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
+```
+
+
+Request with tenantId and groupId filter
+```
+GET /v2.0/HP-IDM/v1.0/domains/798477662343/users?tenantId=1234&groupId=123455 HTTP/1.1
 Accept: application/xml
 Content-Type: application/xml
 User-Agent: Wink Client v1.1.2
