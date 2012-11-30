@@ -59,7 +59,7 @@ The container synchronization feature has the following maturity level:
 
 **Version API Status**: BETA
 
-
+---
 
 # 2. Architectural View
 
@@ -157,19 +157,12 @@ situation and is unlikely to occur very often.
 
 A much more common inconsistency you may observe is that after you create, replace or delete an object, the container
 may not be updated to list the object -- or may have the timestamp of an older object. So when you list the contents of
-a container, it's possible that a subsequent attempt to read the object might fail if the object was deleted just
+a container, it's possible the list contains objects that were deleted just
 before you performed the list operation. Similarly, the [X-Account-Object-Count](#x_account_object_count_response) metadata may take
 some time to update after objects are created or deleted.
 
 As far as possible, you should design applications to account for such possible inconsistencies. 
 
-### 2.3.1 <a id="creation_guarantees"></a>Creation Guarantees
-
-When you create a container or object, the HP Cloud Object Storage system creates several copies of the container or object.
-The PUT operation makes sure that the container or object is written to disk drives before returning a success code.
-However, it does not wait for all disk drive operations to complete -- as soon as there are two copies known to have been
-successfully written to disk, the operation can complete. Subsequent copies are written in the background after the
-API has returned to you.
 
 ## 2.4 Success and Error Handling
 
@@ -214,8 +207,7 @@ The following HTTP codes are used by HP Cloud Object Storage.
 
 |Code      | Description    | Notes   |
 |:-------- | :------------  | :------ |
-|200 OK    | Standard response for successful requests. | The actual response will depend on the specific operation. The HTTP code is transferred before the body of a request, so
-you should check that the body has not been truncated by comparing with the [Content-Length](#content_length_response) and [ETag](#etag_response) response headers. |
+|200 OK    | Standard response for successful requests. | The actual response will depend on the specific operation. The HTTP code is transferred before the body of a request, so you should check that the body has not been truncated by comparing with the [Content-Length](#content_length_response) and [ETag](#etag_response) response headers. |
 |201 Created| Standard response for successful create of a container. Object creation always returns this code, even if an object of the same name already exists. In terms of how the service works, this is correct since you are creating a new copy of the object.| The actual response will depend on the specific operation. |
 |202 Accepted | Standard response for successful updates to account, container or object. | The actual response will depend on the specific operation. |
 |204 No Content | Standard response to HEAD operations. | The response is in the response headers, there is no body in the response. |
@@ -553,7 +545,7 @@ the HP Cloud Management Console.
 
 Signature based authentication provides an alternate way of authenticating your request. Normally, you obtain a token from the HP Cloud Identity service and include the token in the  X-Auth-Token header. With signature based authentication you use an Access Key to “sign” a request. The resulting signature is then included in the Authorization header (instead of X-Auth-Token).
 
-#### 2.6.7.1 Creating Shared Secret Signatures
+#### 2.6.7.1 Creating a Signature for the Authorization Header
 
 To create a signature you need a Tenant Id and Access Key. You can see your Tenant Id and Access Keys by accessing the API Keys section of the HP Cloud Management Console. You may create additional Access Keys. You may also delete Access Keys. This can be used if you suspect that an Access Key has been compromised. When you delete an Access Key, signature based authentication requests that were signed using the deleted Access Key will fail.
 
@@ -580,7 +572,7 @@ The CanonicalizedResource is the path of the account, container or object you ar
 
 * The CanonicalizedResource must start with the same path as your HP Object Storage endpoint (i.e., to include the version and account). For example, if your service endpoint is `https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345`, your CanonicalizedResource  must start with `/v1/12345678912345`.
 
-> Note: Note: Some older accounts have a path such as `/v1/AUTH_96ca9388-b3df-4016-ad3b-ca05a917455d`. If so, use this full value. 
+> Note: Some older accounts have a path such as `/v1/AUTH_96ca9388-b3df-4016-ad3b-ca05a917455d`. If so, use this full value. 
 
 * The remaining path up to but not including a query is included in your CanonicalizedResource. For example, if your path is `/v1/12345678912345/images?prefix=snow`, then your CanonicalizedResource is `/v1/12345678912345/images`.
 
@@ -682,7 +674,7 @@ For example, an object name could be `photos/2012/image-1.jpg`
 
 * Use path.  
 Create placeholder objects to represent folders or directories. The objects are also named to include the hierarchy.
-For example, for an object called `photos/2012/image-1.jpg`, there would also be placeholder two objects called `photos/` and
+For example, for an object called `photos/2012/image-1.jpg`, there would also be two placeholder  objects called `photos/` and
 `photos/2012/`. To navigate, use the path query parameter as explained below.
 
 While both achieve similar results, there are differences:
@@ -715,7 +707,7 @@ obj6
 obj7
 ```
 
-Notice that there are 7 objects. `obj2` is not the name of an object in the `dir2/dir3` directory -- in fact it's an object named `dir2/dir3/obj2`.
+Notice that there are 7 objects. The first object has a name of `dir1/obj1` -- not `obj1`, i.e., the name contains the hierarchical structure.
 
 By adding the `format=json` query parameter, we can see the objects in more detail.
 ```
@@ -751,7 +743,7 @@ The effect of delimiter is to examine all object names up to the `/` character a
 it uses the "subdir" JSON element. The same happens for XML. Notice that X-Container-Object-Count is still 7, even though there are only 5 names shown. The "subdir"
 elements are *not* objects -- an attempt to `GET /v1/12345678912345/test_container/dir1/` would fail with `403 Not Found`.
 
-To descend into one of the "directories", we use the `prefix` query parameter as follows. Note the `/` at the end of the prefix:
+To descend into one of the "directories", we use the `prefix` query parameter as follows. Note the shash ("/") at the end of the prefix:
 
 ```
 GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&delimiter=/&prefix=dir2/
@@ -784,11 +776,12 @@ If we do this for each of the "directories" in the [prefix/delimiter](#prefix_de
 list the contents of the container, we get:
 ```
 GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json
-X-Container-Object-Count: 10
+X-Container-Object-Count: 11
 
 [
   {"name":"dir1/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:45:47.669580"},
   {"name":"dir1/obj1","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:18:09.788760"},
+  {"name":"dir2/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:46:14.239280"},
   {"name":"dir2/dir3/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:46:14.239280"},
   {"name":"dir2/dir3/obj2","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:40:48.596260"},
   {"name":"dir2/dir3/obj3","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:04.902890"},
@@ -801,15 +794,16 @@ X-Container-Object-Count: 10
 
 ```
 
-Now `dir1/`, `dir2/dir3/`, and `dir4/` are real objects. The [X-Container-Object-Count](#x_container_object_count_response) response header now shows 10 objects in the system.
+Now `dir1/`, `dir2/`, `dir2/dir3/`, and `dir4/` are real objects. The [X-Container-Object-Count](#x_container_object_count_response) response header now shows 10 objects in the system.
 
 Here we query to top level of the container (where path is empty sting):
 ```
 GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&path=
-X-Container-Object-Count: 10
+X-Container-Object-Count: 11
 
 [
   {"name":"dir1/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:45:47.669580"},
+  {"name":"dir2/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:45:47.669580"},
   {"name":"dir4/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:46:41.420930"},
   {"name":"obj6","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:26.524310"},
   {"name":"obj7","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:33.865370"}
@@ -827,7 +821,7 @@ X-Container-Object-Count: 10
 ]
 ```
 
-Notice that path was set to `dir4`. It could also have been set to `dir4/`" -- the effect is the same.
+Notice that path was set to `dir4`. It could also have been set to `dir4/` -- the effect is the same.
 
 
 
@@ -865,7 +859,7 @@ The following examples show the supported forms of the header:
 ## 2.12 <a id="large_objects"></a>Large Object Creation
 
 Objects that are larger than 5GB must be segmented prior to upload. You
-then upload the segments as individual objects and create a
+upload the segments as individual objects and create a
 manifest object telling HP Cloud Object Storage how to find the segments
 of the large object. The segments remain individually addressable, but
 retrieving the manifest object streams all the segments concatenated.
@@ -926,13 +920,13 @@ HTTP/1.1 200 OK
 X-Object-Manifest: image-segments/world-seg-
 Content-Type: image/jpeg
 Content-Length: 300
-Etag: "4e12eb0effb78728966205d154967a67"
+ETag: "4e12eb0effb78728966205d154967a67"
 
 [ .. ]
 
 ```
 
-> Note: the MD5 checksum in the [Etag](#etag_response) header is the MD5 checksum of the concatenated string of MD5 checksums/ETags
+> Note: the MD5 checksum in the [ETag](#etag_response) header is the MD5 checksum of the concatenated string of MD5 checksums/ETags
 for each of the segments in the manifest - not the MD5 checksum of the content that was downloaded. Also the value is enclosed in double-quote characters.
 
 
@@ -978,9 +972,11 @@ example, a video.
 In the example, the content-encoding header is assigned with an
 attachment type that indicates how the file should be downloaded:
 
-      PUT /v1/12345678912345/test_container_1/test_obj_1
-      Content-Type: video/mp4
-      Content-Encoding: gzip
+```
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/vid -X PUT -T vid -H 'Content-Type: video/mp4' -H 'Content-Encoding: gzip'
+HTTP/1.1 201 Created
+ETag: 4281c348eaf83e70ddce0e07221c3d28
+```
            
 
 ## 2.15 <a id="content_disposition_header"></a>Enabling Browser Bypass with the Content-Disposition Header
@@ -992,9 +988,11 @@ saves the file rather than displaying it using default browser settings.
 In the example, the content-encoding header is assigned with an
 attachment type that indicates how the file should be downloaded.
 
-      PUT /v1/12345678912345/test_container_1/test_obj_1
-      Content-Type: image/tiff
-      Content-Disposition: attachment; filename=platmap.tif
+```
+curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/image.tif -X PUT -T image1.tif -H 'Content-Type: image/tiff' -H 'Content-Disposition: attachment; filename=image.tif'
+HTTP/1.1 201 Created
+ETag: 4281c348eaf83e70ddce0e07221c3d28
+```
 
 ## 2.16 Container Synchronization
 
@@ -1122,7 +1120,7 @@ See [Signature Based Authentication](#signature_auth) for more information.
 
 
 
-
+---
 
 #  3. Account-level View
 
@@ -1222,6 +1220,7 @@ Object Storage service.
 
 ```
 
+---
 
 # 4. REST API Specifications
 
@@ -1656,7 +1655,7 @@ HTTP/1.1 204 No Content
 
 
 
-###~ 4.4.1.3 <a id="account_head"></a>Retrieve Account Metadata
+#### 4.4.1.3 <a id="account_head"></a>Retrieve Account Metadata
 #### HEAD /v1/{account}
 
 This operation gets the metadata associated with the account.
@@ -2300,7 +2299,6 @@ None.
 
 #### 4.4.3.1 <a id="object_get"></a>Retrieve Object
 #### GET /v1/{account}/{container}/{object}
----------------
 
 Retrieve the contents of an object.
 
@@ -2417,7 +2415,6 @@ Hello World!
 
 #### 4.4.3.2 <a id="object_head"></a>Retrieve the Metadata of an Object
 #### HEAD /v1/{account}/{container}/{object}
----------------
 
 Retrieve the metadata of an object.
 
@@ -2500,7 +2497,6 @@ X-Object-Meta-Reviewed: Yes
 
 #### 4.4.3.3 <a id="object_put"></a>Create/Replace Object
 #### PUT /v1/{account}/{container}/{object}
----------------
 
 Creates an object with the supplied data content and metadata.
 
@@ -2648,7 +2644,6 @@ ETag: 4281c348eaf83e70ddce0e07221c3d28
 #### 4.4.3.4 <a id="object_copy"></a>Copy Object
 #### PUT /v1/{account}/{target-container}/{target-object}
 #### COPY /v1/{account}/{source-container}/{source-object}
----------------
 
 Creates an object using another object as the source for the content and metadata.
 Using an existing object means that the content is copied inside the HP Cloud Object Storage
@@ -2855,7 +2850,6 @@ HTTP/1.1 204 No Content
 
 #### 4.4.3.6 <a id="object_post"></a>Update Object Metadata
 #### POST /v1/{account}/{container}/{object}
----------------
 
 The POST operation is used in two modes:
 * Updates the metadata of an object. This is the operation documented here.
