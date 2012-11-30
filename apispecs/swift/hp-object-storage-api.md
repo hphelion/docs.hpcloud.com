@@ -12,9 +12,9 @@ group: apispec
 
 **Author: Donagh McCabe**
 
-**Date: 23 November 2012**
+**Date: 30 November 2012**
 
-**Version: 0.1**
+**Version: 0.2**
 
 # 1. Overview
 
@@ -214,7 +214,8 @@ The following HTTP codes are used by HP Cloud Object Storage.
 
 |Code      | Description    | Notes   |
 |:-------- | :------------  | :------ |
-|200 OK    | Standard response for successful requests. | The actual response will depend on the specific operation. |
+|200 OK    | Standard response for successful requests. | The actual response will depend on the specific operation. The HTTP code is transferred before the body of a request, so
+you should check that the body has not been truncated by comparing with the [Content-Length](#content_length_response) and [ETag](#etag_response) response headers. |
 |201 Created| Standard response for successful create of a container. Object creation always returns this code, even if an object of the same name already exists. In terms of how the service works, this is correct since you are creating a new copy of the object.| The actual response will depend on the specific operation. |
 |202 Accepted | Standard response for successful updates to account, container or object. | The actual response will depend on the specific operation. |
 |204 No Content | Standard response to HEAD operations. | The response is in the response headers, there is no body in the response. |
@@ -230,7 +231,7 @@ The following HTTP codes are used by HP Cloud Object Storage.
 |414 Request-URI Too Long | The URI provided was too long for the server to process. | See [Arbitrary Limits](#uri_limits) |
 |416 Requested Range Not Satisfiable | The client has asked for a portion of the file, but the server cannot supply that portion.| For example, if the client asked for a part of the file that lies beyond the end of the file.|
 |418 I'm a teapot| Described in [RFC 2324](http://www.ietf.org/rfc/rfc2324.txt) | Please contact HP Cloud support if you get this error. |
-|422 Unprocessable Entity | The M5 checksum of an uploaded object body does not match the value supplied in the [ETag](#etag_request) request header. | This indicates that some form of corruption occurred in the transfer. Retry the operation. |
+|422 Unprocessable Entity | The MD5 checksum of an uploaded object body does not match the value supplied in the [ETag](#etag_request) request header. | This indicates that some form of corruption occurred in the transfer. Retry the operation. |
 |429 Too Many Requests | The user has sent too many requests in a given amount of time. | Sleep for a short period and retry the operation. |
 |431 Request Header Fields Too Large | Either an individual header field, or all the header fields collectively, are too large. | See [Arbitrary Limits](#uri_limits) |
 |500 Internal Server Error | An unexpected internal error occurred. | Sleep for a short period and retry the operation. For persistent failure, contact HP Cloud support |
@@ -479,7 +480,7 @@ Let's say the signature ends up equaling "12345678912345:GP54NNRN2TKBVWH449AG:da
 ```
     https://swift-cluster.example.com/v1/12345678912345/container/object?temp_url_sig=12345678912345%3AGP54NNRN2TKBVWH449AG%3Ada39a3ee5e6b4b0d3255bfef95601890afd80709&temp_url_expires=1323479485
 ```
-Any alteration of the resource path or query arguments would will cause an "401 Unauthorized" error to be returned. Similarly, a PUT where GET was the allowed method will also fail. HEAD is allowed if GET or PUT is allowed.
+Any alteration of the resource path or query arguments will cause an "401 Unauthorized" error to be returned. Similarly, a PUT where GET was the allowed method will also fail. HEAD is allowed if GET or PUT is allowed.
 
 ### 2.6.6 FormPOST
 <a id="formpost"></a>
@@ -676,7 +677,7 @@ as follows:
 * Use prefix/delimiter.  
 The names of the objects contain the pseudo-hierarchical structure, but here are no real objects to represent a folder or
 directory. To navigate, use the prefix and delimiter query parameters as explained below. 
-By convention, the slash ('/') character is usualy used.
+By convention, the slash ('/') character is usually used.
 For example, an object name could be `photos/2012/image-1.jpg`
 
 * Use path.  
@@ -1010,11 +1011,14 @@ container.
 
 The synchronization is done as a background action. When you put an object into the source container, it will take some time
 before it becomes visible in the destination container.
-HP Cloud Storage Services will not necessarly copy objects in any particular order. Specifically, they
-may be transfered in a different order to which they were created. This has an impact on [segmented
-objects](#large_objects). If the manifest object is copied to the destination container before the object segments,
+HP Cloud Storage Services will not necessarily copy objects in any particular order. Specifically, they
+may be transferred in a different order to which they were created.
+
+> Note: [Segmented objects](#large_objects) (objects larger than 5GB) will not work seemlessly with Container Synchronization.
+If the manifest object is copied to the destination container before the object segments,
 when you perform a GET operation on the manifest object, the system may fail to find some or
-all of the object segments.
+all of the object segments. If your manifest and object segments are in different containers, don't forget that both containers
+must be synchonized and that the container name of the object segments must be the same on both source and destination.
 
 You may operate on the destination container just like any other container -- adding or deleting objects -- including the
 objects that are in the destination container because they were copied from the source container. To decide how to handle
@@ -1028,7 +1032,7 @@ you get some subtle behaviours as follows:
 * If you replace or modify metadata of an object in the destination container and then delete it in the source container, it is _not_ deleted from the destination. This is because your modified object has a later timestamp than the object you deleted at source.
 * If you create an object in the source container and before the system has a chance to copy it to the destination, you also create an object of the same name in the destination, then the object in the destination is _not_ overwritten by the source container's object.
 
-So far, the discussion has been about synchronizing between a source and destination container. What happens if you make the "destination" a "source" for another container? There are two situations:
+So far, the discussion has been about synchronizing between a source and destination container. What happens if you make the "destination" a "source" for another container? There are three situations:
 
 * The new destination is yet another container. i.e., there is a chain of three containers
 * The new destination is actually the original source container. This is two-way synchronization. In effect, objects placed into either container will be copied to the other container.
@@ -1050,12 +1054,12 @@ You then:
   * X-Container-Sync-To. This is the full path name of the destination, e.g.  https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest
   * X-Container-Sync-Secret. This is the value of the shared secret value, e.g. "our-secret"
 
-2. The following metadata on the destination container:
+2. Set the following metadata on the destination container:
   * X-Container-Sync-Secret. This is the value of the shared secret value, e.g. "our-secret"
 
-Notice that you do no need to tell the destination container the name of the source container.
+Notice that you do not need to tell the destination container the name of the source container.
 
-Here is an example of setting up a simple one-way synchronization between two containers. We set up the source container first. In this example, we are setting up
+Here is an example of setting up a simple one-way synchronization between two containers. In this example, we are setting up
 synchronization between containers in two different tenants/accounts -- hence the authorization token is different. These commands are either run by two different people, or one 
 person must have the credentials for both tenants. In a simpler scenario, where the containers are both in the same tenant, the authorization token would be the same.
 
@@ -1104,8 +1108,13 @@ Storage, but there are some differences to be aware of:
 * General ACLs do not support specifying a username or hostname.
 
 * Temporary URLs do not use the X-Account-Meta-Temp-URL-Key metadata to store the secret key. Instead we use the HP Cloud Identity Services _Access Keys_.
+See [Temporary URLs](#temp_url) for more information.
 
-* FormPOST --- The key used in FormPOST uses the HP Cloud Identity Services _Access Keys_.
+* FormPOST. The key used in FormPOST uses the HP Cloud Identity Services _Access Keys_. 
+See [FormPost](#formpost) for more information. 
+
+* Signature Based Authentication. This is an alternative to the [X-Auth-Token](#x_auth_token_request) request header. 
+See [Signature Based Authentication](#signature_auth) for more information.
 
 
 
@@ -1131,7 +1140,7 @@ HP Cloud Object Storage has the following service instances in these regions:
 
 * region-a-geo-1 - US West
 
-* region-a.geo-2 - US East
+* region-b.geo-2 - US East
 
 Each instance or region is a distinct storage entity. Each contains its own set of containers and
 objects -- there is no shared data between the regions.
@@ -1277,8 +1286,7 @@ When specified, this is the date and time at which the operation request is made
 
 As you can see, the date and time is expressed in GMT or UTC time. The first example ("Sun, 06 Nov 1994 08:49:37 +0000") is the preferred format. However, HP Cloud Object Storage uses the second example ("Sun, 06 Nov 1994 08:49:37 GMT") when displaying dates.
 
-### 4.2.5 X-Auth-Token
-<a id="x_auth_token_request"></a>
+### 4.2.5 <a id="x_auth_token_request"></a>X-Auth-Token
 
 When specified, this identifies the user making the request. In addition, if this token is being used by a user with Admin privilege level, the token must be scoped to the tenant associated with the account. If no token is specified, the request will fail unless you have been granted access to the resource by some other mechanism such as ACLs. See [Using Authentication Tokens](#using_tokens) for more information about tokens.
 
@@ -1299,6 +1307,18 @@ Sets the access control list (ACL) that grants read access to a container and it
 ### 4.2.8 <a id="x_container_write_request"></a>X-Container-Write
 
 Sets the access control list (ACL) that grants write access to a container and its objects.
+
+### 4.3.13 <a id="etag_request"></a>ETag
+
+HP Cloud Object Storage
+does not use the Content-MD5 request header - use ETag as a request header instead.
+Use this header to ensure that an upload of an object does not suffer from a data corruption. 
+
+For objects smaller than 5GB and [manifest objects](#large_objects), this is the MD5 checksum of the request body.
+
+Do not use this request header when uploading manifest objectsbecause the
+system will dynamically create an ETag value when you download the manifast. See the [ETag](#etag_request) response header
+and [Large Object Creation](#large_objects) for more information.
 
 ## 4.3 Common Response Headers
 
@@ -1363,6 +1383,12 @@ The number of objects in the container.
 
 The total number of bytes used by all objects in the container.
 
+### 4.3.13 <a id="etag_response"></a>ETag
+
+For objects smaller than 5GB and [manifest objects](#large_objects), this is the MD5 checksum of the response body.
+
+For [manifest objects](#large_objects), this is the MD5 checksum of the concatenated string of MD5 checksums/ETags
+for each of the segments in the manifest - not the MD5 checksum of the content that was downloaded. Also the value is enclosed in double-quote characters.
 
 
 
@@ -2320,8 +2346,13 @@ The object content is returned in the response body and metadata is returned in 
 Since the HTTP Success code is written to the response stream before the response body and headers
 are returned, it is possible that you will see a 200 Success code even though the transfer of headers
 or body had a failure. You should check that the length of the actual body is the same as the
-[Content_Length](#content_length_response) response header. Ideally, you should also
+[Content-Length](#content_length_response) response header.
+
+Ideally for objects of less than 5GB, you should also
 perform an MD5 checksum over the response body and compare with the [ETag](#etag_response) response header.
+
+For manifest objects (objects over 5GB) the ETag value is not the MD5 checksum of the body -- see [Large Object Creation](#large_objects)
+for more information.
 
 **Status Code**
 
@@ -2384,7 +2415,7 @@ Hello World!
 
 
 
-#### 4.4.3.2 <a id="object_get"></a>Retrieve the Metadata of an Object
+#### 4.4.3.2 <a id="object_head"></a>Retrieve the Metadata of an Object
 #### HEAD /v1/{account}/{container}/{object}
 ---------------
 
