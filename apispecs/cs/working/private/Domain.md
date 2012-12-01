@@ -2053,12 +2053,11 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 **Additional Notes**
 
 
-
 ## Get Tenants for a Domain
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants?limit=pagesize&marker=tenantId
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/tenants?limit=pagesize&marker=tenantId&tenantId=tenantId&name=tenantName
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
-This REST API returns all tenants of a {domainId} and takes a "marker" and "limit" parameter to limit the number of Tenants in the response.
+This REST API returns all tenants of a {domainId} and takes a "marker" and "limit" parameter to limit the number of Tenants in the response. The Api results can be filtered using filters which are specified as query parameters.
 
 **Request Data**
 
@@ -2068,6 +2067,11 @@ A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 
 
 * *limit (Optional)* - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
 * *marker (Optional)* - string - the resource Id of the last item in the previous list
+
+Following filters can be used to filter the response data.
+
+* *tenantId (Optional)* - string - include results for given tenantId. Filters tenantId and name are mutually exclusive. You can filter either using tenantId or using name.
+* *name (Optional)* - string - include results for given tenant name. Filters tenantId and name are mutually exclusive. You can filter either using tenantId or using name.  
 
 **Data Parameters**
 
@@ -2100,6 +2104,32 @@ Connection: keep-alive
 
 Optional:
 
+JSON
+
+Request with tenantId filter
+
+```
+GET /v2.0/HP-IDM/v1.0/domains/29649421790262/tenants?tenantId=12345 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4e8f7d182cdcb96406c8c61b
+Host: localhost:9999
+Connection: keep-alive
+```
+
+XML
+
+Request with name filter
+
+```
+GET /V2.0/HP-IDM/v1.0/domains/798477662343/tenants?name=TENANTNAME1 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+Host: localhost:9999
+Connection: keep-alive
+```
 
 **Success Response**
 
@@ -2226,11 +2256,10 @@ XML
 Curl Example
 
 ```
-curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630362/tenants
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630362/tenants?tenantId=12345
 ```
 
 **Additional Notes**
-
 
 
 ## Get Users for a Domain
