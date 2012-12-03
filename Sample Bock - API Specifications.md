@@ -1171,19 +1171,8 @@ None.
 
 *Enumurate the various API calls for this resource*
 
----
 
-## 5. Additional References
-
-### 5.1 Resources
-
-**Wiki Page**: [Wiki page](https://wiki.hpcloud.net/display/iaas/Bock+-+Block+Storage+Service+for+Nova)
-
-**Code Repo**:  [Link to the internal Github repo]()
-
-**API Lead Contact**: Tim Reddin
-
-## 6. Glossary
+## 5. Glossary
 
 *Put down definitions of terms and items that need explanation.*
 
