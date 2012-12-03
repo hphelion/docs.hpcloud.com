@@ -38,6 +38,7 @@ Some rules while writing the docs:
       code: fragment
     }
 * Tables needs to be formatted like so:
+
 ```
 | Header1 | Header2       | Header3 |
 | :------ | :------------ | :------ |
@@ -45,6 +46,7 @@ Some rules while writing the docs:
 | Value 1 | [Value 2]((#link_1)       | Value 3 |
 | Value 1 | [Value 2]((#link_1)       | Value 3 |
 ```
+
 * No links to internal wiki pages are allowed and needs to be removed.
 * Anchors needs to be (#anchor_text_here) instead of the HTML `<a id="anchor_text_here"></a>` style.
 
