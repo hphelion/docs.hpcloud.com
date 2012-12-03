@@ -1305,6 +1305,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API returns all subscribe able services that are available for the given {domainId} . It can also filter the result based on service name or endpoint template id. In request, either 'serviceName' filter or 'serviceEndpointId' filter is to be used. If both of filter values are provided, then error is returned back. This is essentially endpoint template data with some additional subscription specific attributes.
+Domain user can only list subcribeable services but cannot subscribe services so "canSubscribe" flag is returned as false. DA and SA both can list and subscribe services.
 
 **Request Data**
 
