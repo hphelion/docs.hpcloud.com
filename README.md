@@ -38,13 +38,13 @@ Some rules while writing the docs:
       code: fragment
     }
 * Tables needs to be formatted like so:
-| Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
-| :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
-|          | [List backups]((#list_backups))         | GET         | {BaseURI}              | Y/**N**           |                 |
-|          | [List backups details](#list_backup_details) | GET         | {BaseURI}/detail       | Y/**N**           |                 |
-|          | [Show backup details](#show_backup_details)  | GET         | {BaseURI}/{backup_id}  | Y/**N**           |                 |
+    | Resource | Operation            | HTTP Method | Path                   | JSON/XML Support? | Privilege Level |
+    | :------- | :------------------- | :---------- | :--------------------- | :---------------- | :-------------: |
+    |          | [List backups]((#list_backups))         | GET         | {BaseURI}              | Y/**N**           |                 |
+    |          | [List backups details](#list_backup_details) | GET         | {BaseURI}/detail       | Y/**N**           |                 |
+    |          | [Show backup details](#show_backup_details)  | GET         | {BaseURI}/{backup_id}  | Y/**N**           |                 |
 * No links to internal wiki pages are allowed and needs to be removed.
-* Anchors needs to be (#anchor_text_here) instead of the HTML <a id="anchor_text_here"></a> style.
+* Anchors needs to be (#anchor_text_here) instead of the HTML `<a id="anchor_text_here"></a>` style.
 
 # Markdown Editors
 
