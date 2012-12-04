@@ -411,6 +411,7 @@ JSON
 	         "attachments":[{}],
 	         "volumeType":null,
 	         "snapshotId":"",
+	         "imageRef":"",
 	         "size":1,
 	         "id":4183,
 	         "createdAt":"2012-06-27 19:20:35",
@@ -425,6 +426,7 @@ JSON
 	         "attachments":[{}],
 	         "volumeType":null,
 	         "snapshotId":"",
+	         "imageRef":"",
 	         "size":1,
 	         "id":4261,
 	         "createdAt":"2012-06-29 16:57:02",
@@ -476,7 +478,9 @@ None.
 ##### 4.4.2.2 Create new volume ##### {#create_new_volume}
 ###### POST /os-volumes
 
-Create a new block storage volume of a given size.
+Create a new block storage volume of a given size. If the snapshot_id attribute is not null then the volume created is a copy of the specified snapshot. If the imageRef parameter is not null then a bootable volume is created. The attribute 'availabilityZone' does not correspond to HP Cloud availability zones.
+
+The request is invalid if both the snapshot_id and the ImageRef parameters are specified and both are not null.
 
 **Request Data**
 
@@ -488,9 +492,12 @@ None.
 
 * *size* - integer - Size of the volume in GBs
 * *display_name* (Optional) - string - Name of the volume
-* *display_description* (Optional) - Description for the volume
+* *display_description* (Optional) - string - Description for the volume
 * *snapshot_id* (Optional) - integer - Id of the volume snapshot to create the volume from
+* *imageRef* (Optional) - string - The id of a Glance image from which to create the volume
 * *metadata* (Optional) - hash or dictionary - Metadata key/value pairs
+* *availability_zone* (Optional) - string - The nova zone
+* *volume_type* (Optional) - string - The volume type, this parameter is currently ignored
 
 JSON
 
