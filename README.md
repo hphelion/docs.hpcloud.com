@@ -24,6 +24,32 @@ Please visit the [Wiki page](https://wiki.hpcloud.net/display/iaas/API+Strategy+
 Please visit [api-publish](https://git.hpcloud.net/API-Specs/api-publish) project that showcases the publishing workflow for the API Specifications. 
 This is a work in progress and currently experimental in nature. 
 
+# Markdown Syntax
+
+Use [Markdown Basic](http://daringfireball.net/projects/markdown/syntax) and [Markdown Extra](http://michelf.ca/projects/php-markdown/extra/) formatting syntax.
+Some rules while writing the docs:
+
+* The document needs to start with a single top header, and then rest of the document should have headers from 2nd level onwards.
+* No HTML characters allowed in the document. So all &lt; and &gt; need to be < and >. No <p> tags etc.
+* Code blocks need to be 4 spaces (or 1 tab) indented like so:
+    <some xml code fragment>
+    {
+      some: json
+      code: fragment
+    }
+* Tables needs to be formatted like so:
+
+```
+| Header1 | Header2       | Header3 |
+| :------ | :------------ | :------ |
+| Value 1 | [Value 2]((#link_1)       | Value 3 |
+| Value 1 | [Value 2]((#link_1)       | Value 3 |
+| Value 1 | [Value 2]((#link_1)       | Value 3 |
+```
+
+* No links to internal wiki pages are allowed and needs to be removed.
+* Anchors needs to be {#anchor_text_here} instead of the HTML `<a id="anchor_text_here"></a>` style.
+
 # Markdown Editors
 
 The following free editors are recommended and use Live Preview:
