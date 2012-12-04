@@ -22,9 +22,9 @@ The Bock team is developing the Block Storage Service for Nova. The service prov
 *State the maturity level in which the API is in currently, based on the pre-defined stages i.e. Alpha, Beta, Public (Current), Deprecated, GA (Release to General Availability, SLAs defined.
 The versions schema, status field, supports an enumeration of ALPHA, BETA, CURRENT and DEPRECATED. The versions->status field should correspond to the Maturity Level for the API, i.e. ALPHA for Alpha stage, BETA for Beta stage, CURRENT for Public and GA stages, DEPRECATED for all other versions of the API that are not supported anymore.*
 
-**Maturity Level**: Beta stage - Bock is currently in restricted private beta in AW2/AZ2
+**Maturity Level**: Public stage - Bock is currently in public beta in all AZs of AW2, i.e. AW2 AZ[1-3].
 
-**Version API Status**: BETA
+**Version API Status**: CURRENT
 
 
 ## 2. Architecture View
