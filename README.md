@@ -48,7 +48,7 @@ Some rules while writing the docs:
 ```
 
 * No links to internal wiki pages are allowed and needs to be removed.
-* Anchors needs to be (#anchor_text_here) instead of the HTML `<a id="anchor_text_here"></a>` style.
+* Anchors needs to be {#anchor_text_here} instead of the HTML `<a id="anchor_text_here"></a>` style.
 
 # Markdown Editors
 
