@@ -637,7 +637,7 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 
 
 
-## Import User Access Key(s)
+## Import User Access Key
 #### PUT [HPKeystoneExtensionBaseURI]/accesskeys
 *Privilege Level: SA, DA, SS*
 

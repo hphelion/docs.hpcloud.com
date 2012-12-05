@@ -1,13 +1,12 @@
 ---
 layout: page
-title:
-title_section:
-description:
-group: apispec
-
+permalink: /api/identity/
+title: Identity Services API
+description: "HP Cloud Identity Services API documenation."
+keywords: "Keystone, Identity Services"
+product: identity
 ---
-{% include JB/setup %}
-
+# Identity Services API
 
 # 1. Overview
 
@@ -66,26 +65,26 @@ group: apispec
 The service is exposed in the service catalog, as shown in the following fragment:
 
 ```
-{
-    "name": "Identity",
-    "type": "identity",
-    "endpoints": [
-        {
-            "publicURL": "https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
-            "region": "region-b.geo-1",
-            "versionId": "2.0",
-            "versionInfo": "https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
-            "versionList": "https://region-b.geo-1.identity.hpcloudsvc.com:35357"
-        },
-        {
-            "publicURL": "https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
-            "region": "region-a.geo-1",
-            "versionId": "2.0",
-            "versionInfo": "https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
-            "versionList": "https://region-a.geo-1.identity.hpcloudsvc.com:35357"
-        }
-    ]
-}
+    {
+        "name": "Identity",
+        "type": "identity",
+        "endpoints": [
+            {
+                "publicURL": "https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
+                "region": "region-b.geo-1",
+                "versionId": "2.0",
+                "versionInfo": "https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
+                "versionList": "https://region-b.geo-1.identity.hpcloudsvc.com:35357"
+            },
+            {
+                "publicURL": "https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
+                "region": "region-a.geo-1",
+                "versionId": "2.0",
+                "versionInfo": "https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
+                "versionList": "https://region-a.geo-1.identity.hpcloudsvc.com:35357"
+            }
+        ]
+    }
 ```
 
 ---

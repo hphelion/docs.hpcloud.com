@@ -1,13 +1,12 @@
 ---
 layout: page
-title:
-title_section:
-description:
-group: apispec
-
+permalink: /api/identity/
+title: Identity Services API
+description: "HP Cloud Identity Services API documenation."
+keywords: "Keystone, Identity Services"
+product: identity
 ---
-{% include JB/setup %}
-
+# Identity Services API
 
 # 1. Overview
 
@@ -66,26 +65,26 @@ group: apispec
 The service is exposed in the service catalog, as shown in the following fragment:
 
 ```
-{
-    "name": "Identity",
-    "type": "identity",
-    "endpoints": [
-        {
-            "publicURL": "https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
-            "region": "region-b.geo-1",
-            "versionId": "2.0",
-            "versionInfo": "https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
-            "versionList": "https://region-b.geo-1.identity.hpcloudsvc.com:35357"
-        },
-        {
-            "publicURL": "https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
-            "region": "region-a.geo-1",
-            "versionId": "2.0",
-            "versionInfo": "https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
-            "versionList": "https://region-a.geo-1.identity.hpcloudsvc.com:35357"
-        }
-    ]
-}
+    {
+        "name": "Identity",
+        "type": "identity",
+        "endpoints": [
+            {
+                "publicURL": "https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
+                "region": "region-b.geo-1",
+                "versionId": "2.0",
+                "versionInfo": "https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
+                "versionList": "https://region-b.geo-1.identity.hpcloudsvc.com:35357"
+            },
+            {
+                "publicURL": "https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
+                "region": "region-a.geo-1",
+                "versionId": "2.0",
+                "versionInfo": "https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/",
+                "versionList": "https://region-a.geo-1.identity.hpcloudsvc.com:35357"
+            }
+        ]
+    }
 ```
 
 ---
@@ -117,7 +116,7 @@ The service is exposed in the service catalog, as shown in the following fragmen
 | User Access Keys | [Delete User Access Key](#delete_user_access_key) | DELETE | /HP-IDM/v1.0/accesskeys/{accesskeyId}  | Y/Y |
 | User Access Keys | [Get Access Keys](#get_access_keys) | GET | /HP-IDM/v1.0/accesskeys | Y/Y |
 | User Access Keys | [Get An Access Key](#get_an_access_key) | GET | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
-| User Access Keys | [Import User Access Key(s)](#import_user_access_key(s)) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y |
+| User Access Keys | [Import User Access Key](#import_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y |
 | User Access Keys | [Update User Access Key](#update_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
 
 ## 4.2 Common Request Headers
@@ -1813,7 +1812,7 @@ curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279b
 
 
 
-#### 4.4.3.5 <a id="import_user_access_key(s)"></a>Import User Access Key(s)####
+#### 4.4.3.5 <a id="import_user_access_key"></a>Import User Access Key####
 #### PUT /HP-IDM/v1.0/accesskeys
 
 Import one or more user access keys. 
