@@ -1,12 +1,12 @@
 ---
 layout: page
-permalink: /api/identity/
-title: Identity Services API
-description: "HP Cloud Identity Services API documenation."
+permalink: /api/identity/admin
+title: Identity Services Admin API
+description: "HP Cloud Identity Services Admin API documenation."
 keywords: "Keystone, Identity Services"
 product: identity
 ---
-# Identity Services API
+# Identity Services Admin API
 
 # 1. Overview
 
