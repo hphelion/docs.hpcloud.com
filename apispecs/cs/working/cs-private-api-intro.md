@@ -1,13 +1,12 @@
 ---
 layout: page
-title:
-title_section:
-description:
-group: apispec
-
+permalink: /api/identity/admin
+title: Identity Services Admin API
+description: "HP Cloud Identity Services Admin API documenation."
+keywords: "Keystone, Identity Services"
+product: identity
 ---
-{% include JB/setup %}
-
+# Identity Services Admin API
 
 # 1. Overview
 

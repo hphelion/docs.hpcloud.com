@@ -3154,4 +3154,172 @@ curl -k --cert dev_hpmiddleware.pem  -XPUT -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 **Additional Notes**
 
 
+## List Role Definitions
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/roleDefs?limit={pagesize}&marker={roleId}&public={true|false}&tenantId={tenantId}&serviceId={serviceId}&roleId={roleId}
+*Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
+
+This API is used to list all the roles defined in the specified {domainId} and takes several parameters including "marker", "limit", "serviceId", "tenantId", "roleId", and "public" to limit the number of role definitions in the response.
+
+**Request Data**
+
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+**URL Parameters**
+
+* *domainId* - string - The domainId representing the domain to return role definitions for.
+* *limit (Optional)* - integer - Represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker (Optional)* - string - The resource Id of the last item in the previous list.
+* *tenantId (Optional)* - string - Limit role definitions to the specified tenant id if provided.
+* *serviceId (Optional)* - string - Limit role definitions to the specified service id if provided.
+* *roleId (Optional)* - string - Limit role definitions to the specified role id if provided.
+* *public (Optional)* - boolean - If true, return only public role definitions.  If false, return only domain specific role definitions.  If not provided, return both.
+
+**Data Parameters**
+
+See schema file for more details on the response data structure.
+
+This call does not require a request body
+
+JSON
+
+```
+GET /v2.0/HP-IDM/v1.0/domains/641564254582/roleDefs HTTP/1.1
+Connection: close
+Accept: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
+```
+
+XML
+
+```
+GET /v2.0/HP-IDM/v1.0/domains/641564254582/roleDefs HTTP/1.1
+Connection: close
+Accept: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
+```
+
+Optional:
+
+
+**Success Response**
+
+List of roles with http status code 200.
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+
+JSON
+
+```
+{"roles": {"role": [
+      {
+      "roleId": "xxxxxxxxxxxxxx",
+      "roleName": "role01",
+      "description": "role01 - description",
+      "serviceId" : "xxxxxxxxxxxxxx",
+      "domainId": "xxxxxxxxxxxxxx",
+   }, {
+      "roleId": "xxxxxxxxxxxxxx",
+      "roleName": "role02",
+      "description": "role02 - description",
+      "serviceId" : "xxxxxxxxxxxxxx",
+      "domainId": "xxxxxxxxxxxxxx",
+   }, {
+      "roleId": "xxxxxxxxxxxxxx",
+      "roleName": "role03",
+      "description": "role03 - description",
+      "serviceId" : "xxxxxxxxxxxxxx",
+      "domainId": "xxxxxxxxxxxxxx",
+   },
+]}
+```
+
+XML
+
+```
+<roles xmlns="http://hpcloud.hp.com/identity/api/ext/hp/v1.0">
+   <role>
+      <roleId>xxxxxxxxxxxxxx</roleId>
+      <roleName>role01</roleName>
+      <description>role01 - description</description>
+      <serviceId>xxxxxxxxxxxxxx</serviceId>
+      <domainId>xxxxxxxxxxxxxx</domainId>
+   </role>
+   <role>
+      <roleId>xxxxxxxxxxxxxx</roleId>
+      <roleName>role02</roleName>
+      <description>role02 - description</description>
+      <serviceId>xxxxxxxxxxxxxx</serviceId>
+      <domainId>xxxxxxxxxxxxxx</domainId>
+   </role>
+   <role>
+      <roleId>xxxxxxxxxxxxxx</roleId>
+      <roleName>role03</roleName>
+      <description>role03 - description</description>
+      <serviceId>xxxxxxxxxxxxxx</serviceId>
+      <domainId>xxxxxxxxxxxxxx</domainId>
+   </role>
+</roles>
+```
+
+**Error Response**
+
+Please refer to error response body for additional details.
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The specified domainId, marker, serviceId or tenantId is not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roleDefs
+```
+
+Curl Example (public role definitions only)
+
+```
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roleDefs?public=true
+```
+
+Curl Example (domain specific role definitions only)
+
+```
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roleDefs?public=false
+```
 
