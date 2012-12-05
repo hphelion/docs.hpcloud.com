@@ -1,0 +1,19 @@
+<aside class="box section-navigation">
+	{% if site.navigation[page.product] %}
+	   {% assign menu = site.navigation[page.product] %}
+	{% else %}
+		{% assign menu = site.navigation.main %}
+	{% endif %}
+	<ul>
+		{% for link in menu %}
+      {% assign current = nil %}
+      {% capture brokenurl %}/content/documentation{{link.url}}{% endcapture %}
+      {% if page.url == link.url or page.url == brokenurl %}
+        {% assign current = 'highlighted' %}
+      {% endif %}
+      <li>
+        <a class="{{ current }}" href="{{ link.url }}"><span>{{ link.text }}</span></a>
+      </li>
+    {% endfor %}
+	</ul>
+</aside>
