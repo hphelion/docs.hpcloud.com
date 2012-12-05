@@ -46,7 +46,7 @@ navigation:
     url: /cli/unix/reference/
   - text: Release Notes
     url: /cli/unix/release-notes/
-  win-cli
+  win-cli:
   - text: Overview
     url: /cli/windows/
   - text: Installation
@@ -65,3 +65,29 @@ navigation:
     url: /cli/windows/help/
   - text: Release Notes
     url: /cli/windows/release-notes/
+  fog:
+  - text: Overview
+    url: /bindings/fog/
+  - text: Installation
+    url: /bindings/fog/install/
+  - text: Connecting to the Service
+    url: /bindings/fog/connect/
+  - text: Object Storage Examples
+    url: /bindings/fog/object-storage/
+  - text: Compute Examples
+    url: /bindings/fog/compute/
+  - text: CDN Examples
+    url: /bindings/fog/cdn/
+  - text: Block Storage Examples
+    url: /bindings/fog/block-storage/
+  - text: Release Notes
+    url: /bindings/fog/release-notes/
+  jclouds:
+  - text: Overview
+    url: /bindings/jclouds/
+  - text: Compute Examples
+    url: /bindings/jclouds/compute/
+  - text: CDN Examples
+    url: /bindings/jclouds/cdn/
+  - text: Object Storage Examples
+    url: /bindings/jclouds/object-storage/
