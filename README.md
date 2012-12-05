@@ -2,11 +2,22 @@
 This repository contains the generation and deployment functionality for docs.hpcloud.com.
 
 ## Content
-The documentation itself is stored as [Markdown](https://en.wikipedia.org/wiki/Markdown) and [reStructuredText](https://en.wikipedia.org/wiki/ReStructuredText) in the following projects:
+The documentation itself is stored as [Markdown](https://en.wikipedia.org/wiki/Markdown) (specifically [Markdown Extra](https://en.wikipedia.org/wiki/Markdown_Extra)) and [reStructuredText](https://en.wikipedia.org/wiki/ReStructuredText) in the following projects:
 
 * [documentation](https://git.hpcloud.net/DevExDocs/documentation) - The main source of documentation for product and services overviews, getting started guides, and general documentation.
 * [tutorials](https://git.hpcloud.net/DevExDocs/tutorials) - Product and service tutorials are separated into a different repo so this can be publicly contributed to.
-* API Docs - The public and private API documentation. This is managed by the service teams.
+* API Docs - The public and private API documentation. This is managed by the service teams. It is still being scheduled to be added.
+
+### YAML Front Matter
+Jekyll content needs to have [YAML front matter](https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter). We have some specifics around what should be used in here. This includes:
+
+* `permalink` should always be specificed and have the path including an ending /.
+* `description` is the meta description optionally injected into the page.
+* `keywords` is the meta keywords optionally injected into a page.
+* `product` is the product the content is associated with (e.g., object-storage). This is used for menus.
+
+### Menus
+Menus are simply YAML in the _congif.yml file. See that file for details.
 
 ## Project Structure
 The branch structure for this project is:
