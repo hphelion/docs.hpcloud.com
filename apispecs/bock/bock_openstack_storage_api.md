@@ -22,7 +22,7 @@ The Bock team is developing the Block Storage Service for Nova. The service prov
 *State the maturity level in which the API is in currently, based on the pre-defined stages i.e. Alpha, Beta, Public (Current), Deprecated, GA (Release to General Availability, SLAs defined.
 The versions schema, status field, supports an enumeration of ALPHA, BETA, CURRENT and DEPRECATED. The versions->status field should correspond to the Maturity Level for the API, i.e. ALPHA for Alpha stage, BETA for Beta stage, CURRENT for Public and GA stages, DEPRECATED for all other versions of the API that are not supported anymore.*
 
-**Maturity Level**: Public stage - Bock is currently in public beta in all AZs of AW2, i.e. AW2 AZ[1-3].
+**Maturity Level**: Public stage - Bock is currently in public beta in all AZs of AW2, i.e. AW2 AZ1, AZ2 and AZ3
 
 **Version API Status**: CURRENT
 
@@ -69,36 +69,36 @@ Example info. and documentation for Bock is available on the [Bock Wiki page](ht
 The Block Storage is exposed in the service catalog, as shown in the following fragment:
 
 
-	{
-	      "name": "Block Storage",
-	      "type": "volume",
-	      "endpoints": [
-	        {
-	          "tenantId": "{tenant_id}",
-	          "publicURL": "https:\/\/az-1.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/{tenant_id}",
-	          "region": "az-1.region-a.geo-1",
-	          "versionId": "1.1",
-	          "versionInfo": "https:\/\/az-1.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/",
-	          "versionList": "https:\/\/az-1.region-a.geo-1.compute.hpcloudsvc.com"
-	        },
-	        {
-	          "tenantId": "{tenant_id}",
-	          "publicURL": "https:\/\/az-3.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/{tenant_id}",
-	          "region": "az-3.region-a.geo-1",
-	          "versionId": "1.1",
-	          "versionInfo": "https:\/\/az-3.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/",
-	          "versionList": "https:\/\/az-3.region-a.geo-1.compute.hpcloudsvc.com"
-	        },
-	        {
-	          "tenantId": "{tenant_id}",
-	          "publicURL": "https:\/\/az-2.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/{tenant_id}",
-	          "region": "az-2.region-a.geo-1",
-	          "versionId": "1.1",
-	          "versionInfo": "https:\/\/az-2.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/",
-	          "versionList": "https:\/\/az-2.region-a.geo-1.compute.hpcloudsvc.com"
-	        }
-	      ]
-	}
+    {
+          "name": "Block Storage",
+          "type": "volume",
+          "endpoints": [
+            {
+              "tenantId": "{tenant_id}",
+              "publicURL": "https:\/\/az-1.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/{tenant_id}",
+              "region": "az-1.region-a.geo-1",
+              "versionId": "1.1",
+              "versionInfo": "https:\/\/az-1.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/",
+              "versionList": "https:\/\/az-1.region-a.geo-1.compute.hpcloudsvc.com"
+            },
+            {
+              "tenantId": "{tenant_id}",
+              "publicURL": "https:\/\/az-3.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/{tenant_id}",
+              "region": "az-3.region-a.geo-1",
+              "versionId": "1.1",
+              "versionInfo": "https:\/\/az-3.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/",
+              "versionList": "https:\/\/az-3.region-a.geo-1.compute.hpcloudsvc.com"
+            },
+            {
+              "tenantId": "{tenant_id}",
+              "publicURL": "https:\/\/az-2.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/{tenant_id}",
+              "region": "az-2.region-a.geo-1",
+              "versionId": "1.1",
+              "versionInfo": "https:\/\/az-2.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/",
+              "versionList": "https:\/\/az-2.region-a.geo-1.compute.hpcloudsvc.com"
+            }
+          ]
+    }
 
 
 ## 4. REST API Specifications
@@ -181,45 +181,45 @@ This call does not require a request body.
 
 JSON
 
-	{
-	   "version":{
-	      "status":"CURRENT",
-	      "updated":"2011-01-21T11:33:21Z",
-	      "media-types":[
-	         {
-	            "base":"application/xml",
-	            "type":"application/vnd.openstack.compute-v1.1+xml"
-	         },
-	         {
-	            "base":"application/json",
-	            "type":"application/vnd.openstack.compute-v1.1+json"
-	         }
-	      ],
-	      "id":"v1.1",
-	      "links":[
-	         {
-	            "href":"https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
-	            "rel":"self"
-	         },
-	         {
-	            "href":"http://docs.rackspacecloud.com/servers/api/v1.1/cs-devguide-20110125.pdf",
-	            "type":"application/pdf",
-	            "rel":"describedby"
-	         },
-	         {
-	            "href":"http://docs.rackspacecloud.com/servers/api/v1.1/application.wadl",
-	            "type":"application/vnd.sun.wadl+xml",
-	            "rel":"describedby"
-	         }
-	      ]
-	   }
-	}
+    {
+       "version":{
+          "status":"CURRENT",
+          "updated":"2011-01-21T11:33:21Z",
+          "media-types":[
+             {
+                "base":"application/xml",
+                "type":"application/vnd.openstack.compute-v1.1+xml"
+             },
+             {
+                "base":"application/json",
+                "type":"application/vnd.openstack.compute-v1.1+json"
+             }
+          ],
+          "id":"v1.1",
+          "links":[
+             {
+                "href":"https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+                "rel":"self"
+             },
+             {
+                "href":"http://docs.rackspacecloud.com/servers/api/v1.1/cs-devguide-20110125.pdf",
+                "type":"application/pdf",
+                "rel":"describedby"
+             },
+             {
+                "href":"http://docs.rackspacecloud.com/servers/api/v1.1/application.wadl",
+                "type":"application/vnd.sun.wadl+xml",
+                "rel":"describedby"
+             }
+          ]
+       }
+    }
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Error Response**
@@ -232,20 +232,20 @@ XML
 
 JSON
 
-	
-	{"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
+    
+    {"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
 
 
 XML
 
 
-	<xml data structure here>
+    <xml data structure here>
 
 
 **Curl Example**
 
 
-	curl -i -H "X-Auth-Token: {Auth_Token}" {BaseUri}/v1.1/
+    curl -i -H "X-Auth-Token: {Auth_Token}" {BaseUri}/v1.1/
 
 
 **Additional Notes**
@@ -280,37 +280,37 @@ This call does not require a request body.
 
 JSON
 
-	{
-	   "versions":[
-	      {
-	         "status":"CURRENT",
-	         "updated":"2011-01-21T11:33:21Z",
-	         "id":"v1.1",
-	         "links":[
-	            {
-	               "href":"https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
-	               "rel":"self"
-	            }
-	         ]
-	      },
-	      {
-	         "status":"DEPRECATED",
-	         "updated":"2011-01-21T11:33:21Z",
-	         "id":"v1.0",
-	         "links":[
-	            {
-	               "href":"https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.0/",
-	               "rel":"self"
-	            }
-	         ]
-	      }
-	   ]
-	}
+    {
+       "versions":[
+          {
+             "status":"CURRENT",
+             "updated":"2011-01-21T11:33:21Z",
+             "id":"v1.1",
+             "links":[
+                {
+                   "href":"https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/",
+                   "rel":"self"
+                }
+             ]
+          },
+          {
+             "status":"DEPRECATED",
+             "updated":"2011-01-21T11:33:21Z",
+             "id":"v1.0",
+             "links":[
+                {
+                   "href":"https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.0/",
+                   "rel":"self"
+                }
+             ]
+          }
+       ]
+    }
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Error Response**
@@ -324,19 +324,19 @@ None.
 JSON
 
 
-	{JSON format here}
+    {JSON format here}
 
 
 XML
 
 
-	<XML format here>
+    <XML format here>
 
 
 
 **Curl Example**
 
-	curl -i -H "X-Auth-Token: {Auth_Token}" {BaseUri}/
+    curl -i -H "X-Auth-Token: {Auth_Token}" {BaseUri}/
 
 
 **Additional Notes**
@@ -361,18 +361,18 @@ N/A
 The quota as configured for the tenant governs the size of the volume that can be created. An exception will be raised if quota is exceeded. Sample exception:
 
 
-	413 Entity Too Large
-	{
-	   "overLimit":{
-	      "message":"Volume quota exceeded. You cannot create a volume of size 1G",
-	      "code":413,
-	      "retryAfter":0
-	   }
-	}
+    413 Entity Too Large
+    {
+       "overLimit":{
+          "message":"Volume quota exceeded. You cannot create a volume of size 1G",
+          "code":413,
+          "retryAfter":0
+       }
+    }
 
 **Business Rules**
 
-1.	When creating a volume from an exsiting snapshot, passing in a size in the create volume call has no effect. The size of the snapshot is use to create the new volume. Currently, if you use the nova api, you have to specify a size. What will actually happen is that the size you specify will be recorded in
+1. When creating a volume from an exsiting snapshot, passing in a size in the create volume call has no effect. The size of the snapshot is use to create the new volume. Currently, if you use the nova api, you have to specify a size. What will actually happen is that the size you specify will be recorded in
 the database and used for describe and quota operations, but the actual bock volume will be the same size as the origin volume. This is a bug.
 
 ##### 4.4.2.1 List Volumes ##### {#list_volumes}
@@ -401,46 +401,46 @@ This call does not require a request body.
 JSON
 
 
-	{
-	   "volumes":[
-	      {
-	         "status":"available",
-	         "displayDescription":null,
-	         "availabilityZone":"nova",
-	         "displayName":"Test",
-	         "attachments":[{}],
-	         "volumeType":null,
-	         "snapshotId":"",
-	         "imageRef":"",
-	         "size":1,
-	         "id":4183,
-	         "createdAt":"2012-06-27 19:20:35",
-	         "metadata":{
-	         }
-	      },
-	      {
-	         "status":"available",
-	         "displayDescription":null,
-	         "availabilityZone":"nova",
-	         "displayName":null,
-	         "attachments":[{}],
-	         "volumeType":null,
-	         "snapshotId":"",
-	         "imageRef":"",
-	         "size":1,
-	         "id":4261,
-	         "createdAt":"2012-06-29 16:57:02",
-	         "metadata":{
-	         }
-	      }
-	   ]
-	}
+    {
+       "volumes":[
+          {
+             "status":"available",
+             "displayDescription":null,
+             "availabilityZone":"nova",
+             "displayName":"Test",
+             "attachments":[{}],
+             "volumeType":null,
+             "snapshotId":"",
+             "imageRef":"",
+             "size":1,
+             "id":4183,
+             "createdAt":"2012-06-27 19:20:35",
+             "metadata":{
+             }
+          },
+          {
+             "status":"available",
+             "displayDescription":null,
+             "availabilityZone":"nova",
+             "displayName":null,
+             "attachments":[{}],
+             "volumeType":null,
+             "snapshotId":"",
+             "imageRef":"",
+             "size":1,
+             "id":4261,
+             "createdAt":"2012-06-29 16:57:02",
+             "metadata":{
+             }
+          }
+       ]
+    }
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Error Response**
@@ -454,20 +454,20 @@ None.
 JSON
 
 
-	{JSON format here}
+    {JSON format here}
 
 
 XML
 
 
-	<XML format here>
+    <XML format here>
 
 
 **Curl Example**
 
 
-	curl -i -H "X-Auth-Token: {Auth_Token}" \
-	           {BaseUri}/v1.1/{tenant_id}/os-volumes
+    curl -i -H "X-Auth-Token: {Auth_Token}" \
+               {BaseUri}/v1.1/{tenant_id}/os-volumes
 
 
 **Additional Notes**
@@ -502,19 +502,19 @@ None.
 JSON
 
 
-	{
-	   "volume":{
-	      "size":1,
-	      "display_name":"Test Volume",
-	      "display_description":"Test Volume desc"
-	   }
-	}
+    {
+       "volume":{
+          "size":1,
+          "display_name":"Test Volume",
+          "display_description":"Test Volume desc"
+       }
+    }
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 Optional:
@@ -532,28 +532,28 @@ Metadata: Metadata can be added while creating a volume by passing a key/value p
 JSON
 
 
-	{
-	   "volume":{
-	      "status":"creating",
-	      "displayDescription":"Test Volume desc",
-	      "availabilityZone":"nova",
-	      "displayName":"Test Volume",
-	      "attachments":[{}],
-	      "volumeType":null,
-	      "snapshotId":"",
-	      "size":1,
-	      "id":4279,
-	      "createdAt":"2012-06-29 19:24:03",
-	      "metadata":{
-	      }
-	   }
-	}
+    {
+       "volume":{
+          "status":"creating",
+          "displayDescription":"Test Volume desc",
+          "availabilityZone":"nova",
+          "displayName":"Test Volume",
+          "attachments":[{}],
+          "volumeType":null,
+          "snapshotId":"",
+          "size":1,
+          "id":4279,
+          "createdAt":"2012-06-29 19:24:03",
+          "metadata":{
+          }
+       }
+    }
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Error Response**
@@ -567,22 +567,22 @@ None.
 JSON
 
 
-	JSON format here
+    JSON format here
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Curl Example**
 
 
-	curl -i -H "X-Auth-Token: {Auth_Token}" \
-	   -H "Content-Type: application/json" \
-	   {BaseUri}/v1.1/{tenant_id}/os-volumes \
-	   -X POST -d '{"volume": {"size": 1, "display_name": "Test Volume","display_description": "Test Volume desc"}}'
+    curl -i -H "X-Auth-Token: {Auth_Token}" \
+       -H "Content-Type: application/json" \
+       {BaseUri}/v1.1/{tenant_id}/os-volumes \
+       -X POST -d '{"volume": {"size": 1, "display_name": "Test Volume","display_description": "Test Volume desc"}}'
 
 
 **Optional: Example showing creating a Volume from a Snapshot**
@@ -598,20 +598,20 @@ None.
 JSON
 
 
-	{
-	   "volume":{
-	      "size":1,
-	      "snapshot_id":31,
-	      "display_name":"Test Volume from snapshot 31",
-	      "display_description":"Test Volume desc"
-	   }
-	}
+    {
+       "volume":{
+          "size":1,
+          "snapshot_id":31,
+          "display_name":"Test Volume from snapshot 31",
+          "display_description":"Test Volume desc"
+       }
+    }
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Success Response**
@@ -625,28 +625,28 @@ XML
 JSON
 
 
-	{
-	   "volume":{
-	      "status":"creating",
-	      "displayDescription":"Test Volume desc",
-	      "availabilityZone":"nova",
-	      "displayName":"Test Volume from snapshot 31",
-	      "attachments":[{}],
-	      "volumeType":null,
-	      "snapshotId":31,
-	      "size":1,
-	      "id":4279,
-	      "createdAt":"2012-06-29 19:24:03",
-	      "metadata":{
-	      }
-	   }
-	}
+    {
+       "volume":{
+          "status":"creating",
+          "displayDescription":"Test Volume desc",
+          "availabilityZone":"nova",
+          "displayName":"Test Volume from snapshot 31",
+          "attachments":[{}],
+          "volumeType":null,
+          "snapshotId":31,
+          "size":1,
+          "id":4279,
+          "createdAt":"2012-06-29 19:24:03",
+          "metadata":{
+          }
+       }
+    }
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Error Response**
@@ -660,22 +660,22 @@ None.
 JSON
 
 
-	JSON format here
+    JSON format here
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Curl Example**
 
 
-	curl -i -H "X-Auth-Token: {Auth_Token}" \
-	   -H "Content-Type: application/json" \
-	   {BaseUri}/v1.1/{tenant_id}/os-volumes \
-	   -X POST -d '{"volume": {"size": 1, "snapshot_id": 31, "display_name": "Test Volume from snapshot 31","display_description": "Test Volume desc"}}'
+    curl -i -H "X-Auth-Token: {Auth_Token}" \
+       -H "Content-Type: application/json" \
+       {BaseUri}/v1.1/{tenant_id}/os-volumes \
+       -X POST -d '{"volume": {"size": 1, "snapshot_id": 31, "display_name": "Test Volume from snapshot 31","display_description": "Test Volume desc"}}'
 
 
 **Optional: Example showing adding metadata**
@@ -691,22 +691,22 @@ None.
 JSON
 
 
-	{
-	   "volume":{
-	      "size":1,
-	      "display_name":"Test Volume",
-	      "display_description":"Test Volume desc",
-	      "metadata":{
-	         "VolMeta":"VolMetaValue"
-	      }
-	   }
-	}
+    {
+       "volume":{
+          "size":1,
+          "display_name":"Test Volume",
+          "display_description":"Test Volume desc",
+          "metadata":{
+             "VolMeta":"VolMetaValue"
+          }
+       }
+    }
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Success Response**
@@ -720,29 +720,29 @@ XML
 JSON
 
 
-	{
-	   "volume":{
-	      "status":"creating",
-	      "displayDescription":"Test Volume desc",
-	      "availabilityZone":"nova",
-	      "displayName":"Test Volume",
-	      "attachments":[{}],
-	      "volumeType":null,
-	      "snapshotId":"",
-	      "size":1,
-	      "id":4279,
-	      "createdAt":"2012-06-29 19:24:03",
-	      "metadata":{
-	         "VolMeta":"VolMetaValue"
-	      }
-	   }
-	}
+    {
+       "volume":{
+          "status":"creating",
+          "displayDescription":"Test Volume desc",
+          "availabilityZone":"nova",
+          "displayName":"Test Volume",
+          "attachments":[{}],
+          "volumeType":null,
+          "snapshotId":"",
+          "size":1,
+          "id":4279,
+          "createdAt":"2012-06-29 19:24:03",
+          "metadata":{
+             "VolMeta":"VolMetaValue"
+          }
+       }
+    }
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Error Response**
@@ -756,21 +756,21 @@ None.
 JSON
 
 
-	JSON format here
+    JSON format here
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Curl Example**
 
-	curl -i -H "X-Auth-Token: {Auth_Token}" \
-	   -H "Content-Type: application/json" \
-	   {BaseUri}/v1.1/{tenant_id}/os-volumes \
-	   -X POST -d '{"volume": {"size": "1", "display_name": "Test Volume","display_description": "Test Volume desc", "metadata":{"VolMeta" : "VolMetaValue"}}}'
+    curl -i -H "X-Auth-Token: {Auth_Token}" \
+       -H "Content-Type: application/json" \
+       {BaseUri}/v1.1/{tenant_id}/os-volumes \
+       -X POST -d '{"volume": {"size": "1", "display_name": "Test Volume","display_description": "Test Volume desc", "metadata":{"VolMeta" : "VolMetaValue"}}}'
 
 
 **Additional Notes**
@@ -804,28 +804,28 @@ This call does not require a request body.
 JSON
 
 
-	{
-	   "volume":{
-	      "status":"available",
-	      "displayDescription":"Test Volume desc",
-	      "availabilityZone":"nova",
-	      "displayName":"Test Volume",
-	      "attachments":[{}],
-	      "volumeType":null,
-	      "snapshotId":"",
-	      "size":1,
-	      "id":4279,
-	      "createdAt":"2012-06-29 19:24:03",
-	      "metadata":{
-	      }
-	   }
-	}
+    {
+       "volume":{
+          "status":"available",
+          "displayDescription":"Test Volume desc",
+          "availabilityZone":"nova",
+          "displayName":"Test Volume",
+          "attachments":[{}],
+          "volumeType":null,
+          "snapshotId":"",
+          "size":1,
+          "id":4279,
+          "createdAt":"2012-06-29 19:24:03",
+          "metadata":{
+          }
+       }
+    }
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Error Response**
@@ -839,20 +839,20 @@ None.
 JSON
 
 
-	JSON format here
+    JSON format here
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Curl Example**
 
 
-	curl -i -H "X-Auth-Token: {Auth_Token}" \
-	        {BaseUri}/v1.1/{tenant_id}/os-volumes/{volume_id}
+    curl -i -H "X-Auth-Token: {Auth_Token}" \
+            {BaseUri}/v1.1/{tenant_id}/os-volumes/{volume_id}
 
 
 **Additional Notes**
@@ -895,20 +895,20 @@ None.
 JSON
 
 
-	JSON format here
+    JSON format here
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Curl Example**
 
 
-	curl -i -H "X-Auth-Token: {Auth_Token}" \
-	        {BaseUri}/v1.1/{tenant_id}/os-volumes/{volume_id} -X DELETE
+    curl -i -H "X-Auth-Token: {Auth_Token}" \
+            {BaseUri}/v1.1/{tenant_id}/os-volumes/{volume_id} -X DELETE
 
 
 **Additional Notes**
@@ -939,13 +939,13 @@ None.
 
 **Business Rules**
 
-1.	A volume can only be attached when the status of the volume is “available".
-2.	A volume is attached when the status of the volume is “in-use”.
-3.	A volume can only be detached when the status of the volume is “in-use”.
-4.	A volume can be attached to only one server instance.
-5.	A server can have multiple volumes attached to it.
-6.	The device name should be see valid and same device name cannot be repeated.
-7.	The device needs to be mounted on the server, before it can be used.
+1.  A volume can only be attached when the status of the volume is “available".
+2.  A volume is attached when the status of the volume is “in-use”.
+3.  A volume can only be detached when the status of the volume is “in-use”.
+4.  A volume can be attached to only one server instance.
+5.  A server can have multiple volumes attached to it.
+6.  The device name should be see valid and same device name cannot be repeated.
+7.  The device needs to be mounted on the server, before it can be used.
 
 ##### 4.4.3.1 List attached volumes for a server ##### {#list_attached_volumes}
 ###### GET /servers/{server_id}/os-volume_attachments
@@ -973,22 +973,22 @@ This call does not require a request body.
 JSON
 
 
-	{
-	   "volumeAttachments":[
-	      {
-	         "device":"/dev/vdf",
-	         "serverId":258315,
-	         "id":5825,
-	         "volumeId":5825
-	      }
-	   ]
-	}
+    {
+       "volumeAttachments":[
+          {
+             "device":"/dev/vdf",
+             "serverId":258315,
+             "id":5825,
+             "volumeId":5825
+          }
+       ]
+    }
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Error Response**
@@ -1002,20 +1002,20 @@ None.
 JSON
 
 
-	JSON format here
+    JSON format here
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Curl Example**
 
 
-	curl -i -H "X-Auth-Token: {Auth_Token}" \
-	        {BaseUri}/v1.1/{tenant_id}/servers/{server_id}/os-volume_attachments
+    curl -i -H "X-Auth-Token: {Auth_Token}" \
+            {BaseUri}/v1.1/{tenant_id}/servers/{server_id}/os-volume_attachments
 
 
 **Additional Notes**
@@ -1041,17 +1041,17 @@ None.
 JSON
 
 
-	{
-	   "volumeAttachment":{
-	      "volumeId":"5825",
-	      "device":"/dev/sdf"
-	   }
-	}
+    {
+       "volumeAttachment":{
+          "volumeId":"5825",
+          "device":"/dev/sdf"
+       }
+    }
 
 
 XML
 
-	Not Supported.
+    Not Supported.
 
 
 **Success Response**
@@ -1065,18 +1065,18 @@ XML
 JSON
 
 
-	{
-	   "volumeAttachment":{
-	      "id":"5825",
-	      "volumeId":"5825"
-	   }
-	}
+    {
+       "volumeAttachment":{
+          "id":"5825",
+          "volumeId":"5825"
+       }
+    }
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Error Response**
@@ -1090,21 +1090,21 @@ None.
 JSON
 
 
-	JSON format here
+    JSON format here
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Curl Example**
 
 
-	curl -i -H "X-Auth-Token: {Auth_Token}" \
-	        {BaseUri}/v1.1/{tenant_id}/servers/{server_id}/os-volume_attachments \
-	        -X POST -d '{"volumeAttachment": {"volumeId": "5825","device": "/dev/sdf"}}'
+    curl -i -H "X-Auth-Token: {Auth_Token}" \
+            {BaseUri}/v1.1/{tenant_id}/servers/{server_id}/os-volume_attachments \
+            -X POST -d '{"volumeAttachment": {"volumeId": "5825","device": "/dev/sdf"}}'
 
 
 **Additional Notes**
@@ -1151,21 +1151,21 @@ None.
 JSON
 
 
-	JSON format here
+    JSON format here
 
 
 XML
 
 
-	Not Supported.
+    Not Supported.
 
 
 **Curl Example**
 
 
-	curl -i -H "X-Auth-Token: {Auth_Token}" \
-	        {BaseUri}/v1.1/{tenant_id}/servers/{server_id}/os-volume_attachments/{volume_id}
-	        -X DELETE
+    curl -i -H "X-Auth-Token: {Auth_Token}" \
+            {BaseUri}/v1.1/{tenant_id}/servers/{server_id}/os-volume_attachments/{volume_id}
+            -X DELETE
 
 
 **Additional Notes**
@@ -1176,7 +1176,215 @@ None.
 
 #### 4.4.4 Snapshots
 
-*Enumurate the various API calls for this resource*
+A snapshot is a readonly copy of a persistent-storage volume created by copying
+from an existing persistent-storage volume. A snapshot cannot be attached to a
+server and mounted, instead a standard persistent-storage volume must be created
+from the snapshot, and that volume can be attached to a server and mounted.
+
+**Status Lifecycle**
+
+“creating” => “available” (after creation)
+
+If an error occurs during any operation the status can be set to "error"
+
+**Rate Limits**
+
+**Quota Limits**
+
+**Business Rules**
+
+After you create a snapshot from a volume you can delete the volume and continue
+to work with the snapshot. Similarly, after you create a volume from a snapshot
+you can delete the snapshot and continue to work with the volume.
+
+You can not create a snapshot that is attached to a server.
+
+##### 4.4.4.1 List Snapshots ##### {#list_snapshots}
+##### GET /os-snapshots
+
+List all snapshots.
+
+**Request Data**
+
+**URL Parameters**
+
+None.
+
+**Data Parameters**
+
+This call does not require a request body.
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+    {
+        "snapshots":[
+            {
+                "status": "available",
+                "displayDescription": null,
+                "displayName": null,
+                "volumeId": 16474,
+                "id": 4482,
+                "createdAt": "2012-10-30 16:05:46",
+                "size": 1
+            },
+            {
+                "status": "available",
+                "displayDescription": "Snapshot of Volume 16750",
+                "displayName": "16750_snap",
+                "volumeId": 16750,
+                "id": 4512,
+                "createdAt": "2012-11-08 17:35:30",
+                "size": 1
+            }
+        ]
+    }
+
+XML
+
+    Not Supported.
+
+**Error Response**
+
+**Status Code**
+
+500 - Internal Server Error
+
+**Response Data**
+
+JSON
+
+    {"cloudServersFault": {"message": "Server Error, please try again later.",
+"code": 500}}
+
+XML
+
+_Not supported._
+
+**Curl Example**
+
+    curl -i -H "X-Auth-Token: <Auth_Token>" \
+                {BaseUri}/v1.1/{tenant_id}/os-snapshots
+
+**Additional Notes**
+
+None.
+
+
+##### 4.4.4.2 Create Snapshot ##### {#create_snapshot}
+##### POST /os-snapshots
+
+Create a snapshot from a specified volume.
+
+**Request Data**
+
+The request body specified the volume from which to create the snapshot,
+optionally specify display information for the snapshot.
+
+**URL Parameters**
+
+None.
+
+**Data Parameters**
+
+* *volume_id* - Integer - The id of the volume from which the snapshot will be generated.
+* *display_name* (Optional) - string - Name of the volume
+* *display_description* (Optional) - string - Description for the volume
+* *force* (Optional) - Boolean - Defaults to false.
+
+JSON
+
+    {
+        "snapshot": {
+            "force": false,
+            "display_name": "TestSnapshotName",
+            "display_description": "Test snapshot description",
+            "volume_id": 18818
+        }
+    }
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+    {
+        "snapshot": {
+            "status": "creating",
+            "displayDescription": "Test snapshot description",
+            "displayName": "TestSnapshotName",
+            "volumeId": 18818,
+            "id": 5018,
+            "createdAt": "2012-12-05 14:48:28.643980",
+            "size": 7
+        }
+    }
+
+XML
+
+    Not Supported.
+
+**Error Response**
+
+**Status Code**
+
+500 - Internal Server Error
+
+**Response Data**
+
+JSON
+
+    {
+        "cloudServersFault": {
+            "message": "Server Error, please try again later.",
+            "code": 500
+        }
+    }
+
+XML
+
+_Not supported._
+
+404 - Not Found
+
+JSON
+
+    {
+        "itemNotFound": {
+            "message": "Volume 18819 could not be found.", 
+            code": 404
+        }
+    }
+
+**Curl Example**
+
+    curl -i -H "X-Auth-Token: <Auth_Token>" \
+                {BaseUri}/v1.1/{tennant_id}/os-snapshots \
+            -X POST \
+            -d '{"snapshot": {"force": false, \
+                                "display_name": "TestSnapshot2", \
+                                "display_description": "Test description", \
+                                "volume_id": 18818}}' \
+            -H "Content-Type: application/json; charset=UTF-8"
+
+**Additional Notes**
+
+None.
+
+
+
 
 
 ## 5. Glossary
