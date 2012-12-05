@@ -25,3 +25,43 @@ navigation:
     url: /faq/
   - text: Site Overview
     url: /site-overview/
+  unix-cli:
+  - text: Overview
+    url: /cli/unix/
+  - text: Installation
+    url: /cli/unix/install/
+  - text: Account Configuration
+    url: /cli/unix/configuration/
+  - text: Managing Multiple Accounts
+    url: /cli/unix/account-management/
+  - text: Compute Examples
+    url: /cli/unix/compute/
+  - text: Object Storage Examples
+    url: /cli/unix/object-storage/
+  - text: CDN Examples
+    url: /cli/unix/cdn/
+  - text: Block Storage Examples
+    url: /cli/unix/block-storage/
+  - text: CLI Reference
+    url: /cli/unix/reference/
+  - text: Release Notes
+    url: /cli/unix/release-notes/
+  win-cli
+  - text: Overview
+    url: /cli/windows/
+  - text: Installation
+    url: /cli/windows/installation/
+  - text: Non-Service Specific Commands
+    url: /cli/windows/commands/
+  - text: Compute Examples
+    url: /cli/windows/compute/
+  - text: Object Storage Examples
+    url: /cli/windows/containers-and-folders/
+  - text: Block Storage Examples
+    url: /cli/windows/block-storage/
+  - text: Command Line Reference
+    url: /cli/windows/reference/
+  - text: Getting Help
+    url: /cli/windows/help/
+  - text: Release Notes
+    url: /cli/windows/release-notes/
