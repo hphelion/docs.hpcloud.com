@@ -60,3 +60,4 @@ Before using this project you need the following dependencies installed.
 * Docutils - Note, with pip or with easy_install. On linux don't use the apt version.
 * [RbST](http://rubygems.org/gems/RbST)
 * PHP5 (just the CLI portion - already on mac and `apt-get install php5-cli` on linux)
+* For deployments you need the [stackato client](https://api.stackato-prod-1-az2.devex.uswest.hpcloud.net/console/client/).
