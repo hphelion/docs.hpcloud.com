@@ -64,7 +64,6 @@ product: identity
 
 The service is exposed in the service catalog, as shown in the following fragment:
 
-```
     {
         "name": "Identity",
         "type": "identity",
@@ -85,7 +84,6 @@ The service is exposed in the service catalog, as shown in the following fragmen
             }
         ]
     }
-```
 
 ---
 

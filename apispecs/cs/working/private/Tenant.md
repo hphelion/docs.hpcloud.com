@@ -267,20 +267,11 @@ Date: Wed, 10 Aug 2011 22:36:32 GMT
 enabled="true" status="enabled" domainId="798477662343"
 tenantId="270316896886"
 description="Tenant for Sales Forecasting service" >
-<<<<<<< HEAD
    <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
    </billToAddress> 
    <soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
    </soldToAddress> 
 </tenant>
-
-=======
-<billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
- </billToAddress> 
-<soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
- </soldToAddress> 
-</tenant>
->>>>>>> 63ec6893386130c525995a33b73e6abe21e15ec2
 ```
 
 **Error Response**
@@ -697,17 +688,10 @@ Content-Length: 254
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" name="Time Warner Salesforce Services" domainId="27960688482075" status="enabled">
   <description>Tenant for hosting Time Warner Salesforce Applications</description>
-<<<<<<< HEAD
    <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
    </billToAddress> 
    <soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
    </soldToAddress> 
-=======
-<billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
- </billToAddress> 
-<soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
- </soldToAddress> 
->>>>>>> 63ec6893386130c525995a33b73e6abe21e15ec2
 </tenant>
 ```
 
