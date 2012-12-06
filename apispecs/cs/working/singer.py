@@ -185,7 +185,7 @@ def create_actions_appendix(rootdir, subdirs):
             action_name = line.strip()
             action_name_tag = create_anchor_tag(action_name)
             action_names.append((action_name, action_name_tag))
-            line = '### %s <a id="%s"></a>' % (action_name, action_name_tag)
+            line = '### %s {#%s}' % (action_name, action_name_tag)
         elif line.startswith('## '):
             line = line.replace('##', '####')
         api_content.append(line)
@@ -215,6 +215,9 @@ def create_cs_api_md(opt, outfile, rootdir, subdirs, chapter='4.4', private_api=
     priv_pattern = '^\**Privilege Level:\s*(?P<privilege>[^\*]+)\**$'
     re_priv = re.compile(priv_pattern)
     api_content = []
+    inquote=False
+    space_determined=False
+    need_spaces = False
     for line in contents.split('\n'):
         if line.startswith('# '):
             group_count = group_count + 1
@@ -226,8 +229,13 @@ def create_cs_api_md(opt, outfile, rootdir, subdirs, chapter='4.4', private_api=
             action_count = action_count + 1
             action_name = first_letter_cap(line[3:])
             action_name_tag = create_anchor_tag(action_name)
-            api_content.append('#### %s.%s.%s <a id="%s"></a>%s####' % (
-                chapter, group_count, action_count, action_name_tag, action_name))
+            api_content.append('#### %s.%s.%s %s#### {#%s}' % (
+                chapter, group_count, action_count, action_name, action_name_tag))
+        elif line.startswith('```') and line.rstrip() == '```':
+            inquote = (not inquote)
+            space_determined = False
+            need_spaces = False
+            api_content.append("%s" % (line))
         else:
             # remove private tag/content, depending on API type
             if line.startswith('{{PRIVATE}}'):
@@ -278,6 +286,13 @@ def create_cs_api_md(opt, outfile, rootdir, subdirs, chapter='4.4', private_api=
                     priv_lev))
                 if not private_api:
                     continue
+            if inquote:
+                if space_determined is False:
+                    space_determined = True
+                    if line[:1] != ' ':
+                        need_spaces = True
+                if need_spaces is True:
+                    line = "    " + line
             api_content.append("%s" % (line))
     intro_md = intro_md.replace('{API_INDEX_TABLE_PLACE_HOLDER}', get_api_index_table(api_table, private_api))
     output = open(outfile, 'w')
