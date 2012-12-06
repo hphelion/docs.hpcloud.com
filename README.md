@@ -37,6 +37,8 @@ This setup has a number of commands using Make to operate.
 * `make clear` - Cleans up a build.
 * `make update-docs` - Updates the docs to the latest.
 * `make update-tutorials` - Updates the tutorials to the latest.
+* `make deploy-qa` - Deploy to [QA](http://docs.qa.devex.uswest.hpcloud.net/). Note, you need credentials that will be asked for when deploying.
+* `make deploy-prod` -  Deploy to [production](http://docs.hpcloud.com/). Note, you need credentials that will be asked for when deploying.
 
 Additionally there are some commands that should rarely be used if at all:
 
@@ -44,6 +46,8 @@ Additionally there are some commands that should rarely be used if at all:
 * `make optimize` - Optimizes the contents of `_site`. This is used by the `build` step.
 * `make add-docs` - Adds the docs project to the site (via subtree).
 * `make add-tutorials` - Adds the tutorials project to the site (via subtree).
+* `make deploy-prod-az2` - Deploys an update to the cluster in AZ2 (the primary cluster).
+* `make deploy-prod-az1` - Deploy to the backup cluster in AZ1.
 
 ## Dependencies
 
