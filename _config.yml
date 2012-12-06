@@ -5,7 +5,7 @@ metrics: true
 
 navigation:
   main:
-  - text: Overview
+  - text: Getting Started
     url: /
   - text: Compute
     url: /compute/
