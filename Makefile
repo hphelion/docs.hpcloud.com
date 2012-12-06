@@ -29,4 +29,11 @@ clean:
 	@echo "Removing _site directory"
 	@rm -rf _site
 
-.PHONY: add-tutorials update-tutorials add-docs update-docs server prepare optimize build clean
+deploy-qa: build
+	@echo "Deploying to stackato QA cluster"
+	stackato target https://api.stackato-qa-1-az1.devex.uswest.hpcloud.net
+	stackato login
+	stackato --group Documentation update docs-site
+
+
+.PHONY: add-tutorials update-tutorials add-docs update-docs server prepare optimize build clean deploy-qa
