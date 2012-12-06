@@ -235,7 +235,6 @@ def create_cs_api_md(opt, outfile, rootdir, subdirs, chapter='4.4', private_api=
             inquote = (not inquote)
             space_determined = False
             need_spaces = False
-            api_content.append("%s" % (line))
         else:
             # remove private tag/content, depending on API type
             if line.startswith('{{PRIVATE}}'):

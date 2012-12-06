@@ -241,7 +241,6 @@ The parameters are dependent on the action being posted.  See documentation unde
 
 JSON
 
-```
     POST https://kswj2.fc.hp.com:8443/v2.0/HP-IDM/v1.0/action/updateDomain?timeOut=60000 HTTP/1.1
     X-Auth-Token: HPAuth_4e89f121318cd70066d68c2e
     Date: Mon, 3 Oct 2011 11:30:10 -0600
@@ -250,7 +249,6 @@ JSON
     Host: Pat Sajak
      
     {"JobTicket": {"actionParams":{"status": "SUSPENDED_3", "domainId": "92636548281306"}}}
-```
 
 **Success Response**
 
@@ -264,7 +262,6 @@ Examples below are illustrative only.  Actual results will depend on the action 
 
 JSON
 
-```
     {
       "JobTicket" : {
         "action" : "UpdateDomain",
@@ -289,7 +286,6 @@ JSON
         "ticketId" : "508ffdb9e4b0c294a11da454"
       }
     }
-```
 
 
 **Error Response**
@@ -306,7 +302,6 @@ JSON
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -316,19 +311,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X POST -H 'User-Agent: Jakarta Commons-HttpClient/3.1' -H 'Content-Type: application/json' --cert <cert-path> --cacert <ca-cert-path> --data '{"JobTicket": {"actionParams":{"status": "SUSPENDED_3", "domainId": "92636548281306"}}}' -H 'X-Auth-Token: <auth-token>' [HPKeystoneExtensionBaseURI]/action/UpdateDomain?timeOut=20000
-```
 
 #### 4.4.1.2 Get Jobs By Account#### {#get_jobs_by_account}
 #### GET /HP-IDM/v1.0/job
@@ -360,7 +350,6 @@ This call does not require a request body.
 
 JSON
 
-```
     {
       "TicketList" : {
         "Tickets" : [ {
@@ -390,7 +379,6 @@ JSON
         } ]
       }
     }
-```
 
 **Error Response**
 
@@ -406,7 +394,6 @@ JSON
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -416,19 +403,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy 127.0.0.1,localhost,hpcloud.net -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job?accountId=60809900579962
-```
 
 #### 4.4.1.3 Get A Job Ticket#### {#get_a_job_ticket}
 #### GET /HP-IDM/v1.0/job/{ticketId}
@@ -458,7 +440,6 @@ This call does not require a request body.
 
 JSON
 
-```
     {
       "JobTicket" : {
         "action" : "ActivateService",
@@ -536,11 +517,9 @@ JSON
         "ticketId" : "508e5325e4b02ace8d0d20e6"
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <JobTicket>
     	<actionParams />
@@ -643,7 +622,6 @@ XML
     	<submission>2012-10-29T09:57:57.082Z</submission>
     	<ticketId>508e5325e4b02ace8d0d20e6</ticketId>
     </JobTicket>
-```
 
 **Error Response**
 
@@ -659,7 +637,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -669,19 +646,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/{ticketId}
-```
 
 #### 4.4.1.4 Restart A TIMEDOUT Job#### {#restart_a_timedout_job}
 #### PUT /HP-IDM/v1.0/job/{ticketId}
@@ -711,7 +683,6 @@ This call does not require a request body.
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -720,7 +691,6 @@ JSON
     Content-Type: application/json
     Content-Length: 508
     Date: Thu, 06 Oct 2011 16:38:15 GMT
-```
 
 **Error Response**
 
@@ -736,7 +706,6 @@ JSON
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -746,19 +715,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy 127.0.0.1,localhost,hpcloud.net -m 30 -X PUT -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: HPAuth_07ea10efcbcd4a16441f45c7b4bc7aad0a657688576ec67a55ee6e2f00eea8b8" [HPKeystoneExtensionBaseURI]/job/508fa9bce4b0c294a11da398
-```
 
 #### 4.4.1.5 Delete A Job#### {#delete_a_job}
 #### DELETE HPKeystoneExtensionBaseURI/job/{ticketId}
@@ -770,13 +734,11 @@ Job Tickets for Actions which complete successfully are eventually removed from 
 
 **Request Data**
 
-```
     DELETE https://kswj2.fc.hp.com:8443/v2.0/HP-IDM/v1.0/job/4e8c7849318cf2e142e76ef4 HTTP/1.1
     X-Auth-Token: HPAuth_4e8c7849318cf2e142e76ef1
     Date: Wed, 5 Oct 2011 09:31:28 -0600
     User-Agent: Maxwell/Smart
     Host: Pat Sajak
-```
 
 **URL Parameters**
 
@@ -792,14 +754,12 @@ This call does not require a request body.
 
 **Response Data**
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
     Pragma: no-cache
     Expires: -1
     Date: Wed, 05 Oct 2011 15:31:25 GMT
-```
 
 **Error Response**
 
@@ -811,9 +771,7 @@ This call does not require a request body.
 
 **Curl Example**
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X DELETE -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/{ticketId}
-```
 
 #### 4.4.1.6 Get Error Jobs#### {#get_error_jobs}
 #### GET /HP-IDM/v1.0/job/error
@@ -841,7 +799,6 @@ This call does not require a request body.
 
 JSON
 
-```
     {
       "TicketList" : {
         "Tickets" : [ {
@@ -995,11 +952,9 @@ JSON
         } ]
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <TicketList>
     	<Tickets>
@@ -1205,7 +1160,6 @@ XML
     		<ticketId>508e53ace4b02ace8d0d20f7</ticketId>
     	</Tickets>
     </TicketList>
-```
 
 **Error Response**
 
@@ -1221,7 +1175,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -1231,19 +1184,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-excpetions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/error
-```
 
 #### 4.4.1.7 Get A Count Of Error Jobs#### {#get_a_count_of_error_jobs}
 #### GET /HP-IDM/v1.0/job/error/count
@@ -1263,7 +1211,6 @@ This call does not require a request body.
 
 **Success Response**
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -1274,7 +1221,6 @@ This call does not require a request body.
     Date: Thu, 06 Oct 2011 16:12:00 GMT
      
     7
-```
 
 **Status Code**
 
@@ -1282,9 +1228,7 @@ This call does not require a request body.
 
 **Response Data**
 
-```
     48
-```
 
 **Error Response**
 
@@ -1304,9 +1248,7 @@ This call does not require a request body.
 
 **Curl Example**
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/error/count
-```
 #### 4.4.1.8 Get Error Jobs By Category#### {#get_error_jobs_by_category}
 #### GET /HP-IDM/v1.0/job/error/{category}
 *Privilege Level: {Privilege Level}*
@@ -1335,7 +1277,6 @@ This call does not require a request body.
 
 JSON
 
-```
     {
       "TicketList" : {
         "Tickets" : [ {
@@ -1485,11 +1426,9 @@ JSON
         } ]
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <TicketList>
     	<Tickets>
@@ -1691,7 +1630,6 @@ XML
     		<ticketId>508e9111e4b02ace8d0d258b</ticketId>
     	</Tickets>
     </TicketList>
-```
 
 **Error Response**
 
@@ -1707,7 +1645,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -1717,19 +1654,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-excpetions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/error/USER_INPUT
-```
 
 #### 4.4.1.9 Delete Error Jobs By Category#### {#delete_error_jobs_by_category}
 #### DELETE HPKeystoneExtensionBaseURI/job/error/{category}
@@ -1739,13 +1671,11 @@ Job Tickets that are in the ERROR state will have an Action Exception attached t
 
 **Request Data**
 
-```
     DELETE https://kswj2.fc.hp.com:8443/v2.0/HP-IDM/v1.0/job/USER_INPUT HTTP/1.1
     X-Auth-Token: HPAuth_4e8c7849318cf2e142e76ef1
     Date: Wed, 5 Oct 2011 09:31:28 -0600
     User-Agent: Maxwell/Smart
     Host: Pat Sajak
-```
 
 **URL Parameters**
 
@@ -1774,20 +1704,16 @@ This call does not require a request body.
 
 **Response Data**
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
     Pragma: no-cache
     Expires: -1
     Date: Wed, 05 Oct 2011 15:31:25 GMT
-```
 
 **Curl Example**
 
-```
     {curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
-```
 
 #### 4.4.1.10 Get Jobs By Status#### {#get_jobs_by_status}
 #### GET /HP-IDM/v1.0/job/status/{status}
@@ -1819,7 +1745,6 @@ This call does not require a request body.
 
 JSON
 
-```
     {
       "TicketList" : {
         "Tickets" : [ {
@@ -1896,7 +1821,6 @@ JSON
         } ]
       }
     }
-```
 
 **Error Response**
 
@@ -1912,7 +1836,6 @@ JSON
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -1922,19 +1845,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exceptions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/status/COMPLETE
-```
 
 #### 4.4.1.11 Get Job Count By Status#### {#get_job_count_by_status}
 #### GET /HP-IDM/v1.0/job/status/{status}/count
@@ -1962,9 +1880,7 @@ This call does not require a request body.
 
 JSON
 
-```
     26
-```
 
 **Error Response**
 
@@ -1980,7 +1896,6 @@ JSON
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -1990,19 +1905,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exceptions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/status/COMPLETE/count
-```
 
 
 
@@ -2049,21 +1959,17 @@ This call does not require a request body
 
 JSON
 
-```
     HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/domains?name=DoMaiN_2012_08_21_11_01_30_565 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
-```
 
 XML
 
 Case-insensitive lookup of above domainName
 
-```
     HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/domains?name=domain_2012_08_21_11_01_30_565 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
-```
 
 Optional:
 
@@ -2071,19 +1977,15 @@ JSON
 
 When provided domainName not found
 
-```
     HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/domains?name=DoMaiN_2012_08_21565 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
-```
 
 When missing domainName in request
 
-```
     HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/domains HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
-```
 
 **Success Response**
 
@@ -2099,7 +2001,6 @@ This call does not return a response body and result is determined through retur
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -2107,13 +2008,11 @@ JSON
     Expires: -1
     Content-Length: 0
     Date: Tue, 21 Aug 2012 19:15:56 GMT
-```
 
 XML
 
 Response for case-insensitive lookup of above domainName
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -2121,7 +2020,6 @@ Response for case-insensitive lookup of above domainName
     Expires: -1
     Content-Length: 0
     Date: Tue, 21 Aug 2012 19:17:00 GMT
-```
 
 **Error Response**
 
@@ -2143,7 +2041,6 @@ JSON
 
 When provided domainName is not found
 
-```
     HTTP/1.1 404 Not Found
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -2152,25 +2049,20 @@ When provided domainName is not found
     Content-Type: text/html;charset=utf-8
     Content-Length: 952
     Date: Tue, 21 Aug 2012 19:17:43 GMT
-```
 
 When missing domainName in request
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
     Pragma: no-cache
     Expires: \-1
     Date: Tue, 21 Aug 2012 19:18:23 GMT
-```
 
 
 Curl Example
 
-```
     curl -k  --cert dev_hpmiddleware.pem  -I -H "Accept: application/json" "https://localhost:35357/v2.0/HP-IDM/v1.0/domains?name=DoMaiN_2012_08_21565"
-```
 
 **Additional Notes**
 
@@ -2215,7 +2107,6 @@ See schema file, domain.xsd, for more details on the request and response data s
 
 JSON
 
-```
     POST https://localhost:35357/v2.0/HP-IDM/v1.0/domains HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -2247,11 +2138,9 @@ JSON
         "zip" : "90210"
       }
     }
-```
 
 XML
 
-```
     POST /v2.0/HP-IDM/v1.0/domains HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -2267,7 +2156,6 @@ XML
       <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
        </billToAddress> 
     </domain>
-```
 
 Optional:
 
@@ -2286,7 +2174,6 @@ Response data structure is same as input domain data
 
 JSON
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=5A0C0E3AD8FBB574807901C3F1FB5741; Path=/; Secure
@@ -2315,11 +2202,9 @@ JSON
         "zip" : "90210"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -2335,7 +2220,6 @@ XML
       <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
        </billToAddress> 
     </domain>
-```
 
 **Error Response**
 
@@ -2359,7 +2243,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -2369,10 +2252,8 @@ JSON
         }
       }
     }
-```
 
 In case domain name already exists
-```
     HTTP/1.1 409 Conflict
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=8AD5634E0DBA2968E3136CDB8F3C6EB5; Path=/; Secure
@@ -2392,19 +2273,14 @@ In case domain name already exists
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XPOST -H "X-Auth-Token: HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -H "Content-type: application/json" -d '{  "domain" : {  "name" : "Sees Candies 6" } }'  https://localhost:35357/v2.0/HP-IDM/v1.0/domains
-```
 
 **Additional Notes**
 
@@ -2430,7 +2306,6 @@ This call does not require a request body
 
 JSON
 
-```
     DELETE https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -2438,13 +2313,11 @@ JSON
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 XML
 
 Now trying to delete previously deleted domain, expecting error.
 
-```
     DELETE https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -2452,7 +2325,6 @@ Now trying to delete previously deleted domain, expecting error.
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 Optional:
 
@@ -2472,7 +2344,6 @@ This call does not have a response body other than in case of errors.
 
 JSON
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=38FAFEF8E7816E6B717B1328FC6AFF49; Path=/; Secure
@@ -2480,13 +2351,11 @@ JSON
     Pragma: no-cache
     Expires: -1
     Date: Tue, 30 Oct 2012 21:30:16 GMT
-```
 
 XML
 
 Response for deleting previously deleted domain.
 
-```
     HTTP/1.1 404 Not Found
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=5E50B7163151DDF072B2B0E5AF5B33BF; Path=/; Secure
@@ -2498,7 +2367,6 @@ Response for deleting previously deleted domain.
     Date: Tue, 30 Oct 2012 21:31:04 GMT
     
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><itemNotFound xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="404"><message>Not found</message><details>Domain does not exist</details></itemNotFound>
-```
 
 **Error Response**
 
@@ -2521,7 +2389,6 @@ JSON
 
 Response for deleting previously deleted domain.
 
-```
     HTTP/1.1 404 Not Found
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=E58C6550A98478BD88C3392EB379F734; Path=/; Secure
@@ -2541,9 +2408,7 @@ Response for deleting previously deleted domain.
         }
       }
     }
-```
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -2553,19 +2418,14 @@ Response for deleting previously deleted domain.
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XDELETE -H "X-Auth-Token: HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -H "Content-type: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196
-```
 
 **Additional Notes**
 
@@ -2592,21 +2452,17 @@ This call does not require a request body
 
 JSON
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/63283648950838 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     X-Auth-Token: HPAuth_5032ad14957cb3caab6c33eb
-```
 
 XML
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/81132865245171 HTTP/1.1GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/63283648950838 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     X-Auth-Token: HPAuth_5032ad14957cb3caab6c33eb
-```
 
 Optional:
 
@@ -2626,7 +2482,6 @@ See schema file, domain.xsd, for more details on the domain response data struct
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -2659,11 +2514,9 @@ JSON
         "zip" : "90210"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -2678,7 +2531,6 @@ XML
        <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
        </billToAddress> 
     </domain>
-```
 
 **Error Response**
 
@@ -2702,7 +2554,6 @@ JSON
 
 When provided domainId is not found in the system
 
-```
     HTTP/1.1 404 Not Found
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=FFE0355EF1D55E4EC60754298955D53C; Path=/; Secure
@@ -2722,9 +2573,7 @@ When provided domainId is not found in the system
         }
       }
     }
-```
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -2734,19 +2583,14 @@ When provided domainId is not found in the system
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196
-```
 
 **Additional Notes**
 
@@ -2777,7 +2621,6 @@ JSON
 
 With limit parameter provided
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains?limit=2 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -2787,11 +2630,9 @@ With limit parameter provided
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
     
     
-```
 
 XML
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -2800,7 +2641,6 @@ XML
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
     
-```
 
 Optional:
 
@@ -2809,7 +2649,6 @@ JSON
 With marker and parameter both set
 
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains?limit=2&marker=23213441623236 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -2817,7 +2656,6 @@ With marker and parameter both set
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 
 **Success Response**
@@ -2836,7 +2674,6 @@ JSON
 
 Listing all domains response
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=9CE7501B1B4C569F720C15B6692C7DD2; Path=/; Secure
@@ -2943,10 +2780,8 @@ Listing all domains response
         }
       }
     }
-```
 
 Listing response with marker and parameter both set
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=587724ABE90EFF995115B4C07680F1F5; Path=/; Secure
@@ -2985,11 +2820,9 @@ Listing response with marker and parameter both set
         }
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=68E1E45A984F2747A98E2DF07E95B3E5; Path=/; Secure
@@ -3028,7 +2861,6 @@ XML
           </owners>
        </domain>
     </domains>
-```
 
 **Error Response**
 
@@ -3051,7 +2883,6 @@ JSON
 
 When invalid marker is provided
 
-```
     HTTP/1.1 404 Not Found
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=D3AC697EC1B71E03C6250E8EFDE8996E; Path=/; Secure
@@ -3071,9 +2902,7 @@ When invalid marker is provided
         }
       }
     }
-```
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -3083,19 +2912,14 @@ When invalid marker is provided
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains
-```
 
 **Additional Notes**
 
@@ -3137,20 +2961,17 @@ This call does not require a request body
 JSON
 
 Request without filters
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/groups HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 XML
 
 Request with marker and groupName
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/groups?marker=20249143710988&groupName=Domain%20Administrators HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -3158,7 +2979,6 @@ Request with marker and groupName
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 Optional:
 
@@ -3166,23 +2986,19 @@ XML
 
 Request with filters groupId and excludeRoles
 
-```
     GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/groupId=1234&excludeRoles=roleId1,roleId22 HTTP/1.1
     Connection: close
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 Request with filters tenantId and excludeRoles
 
-```
     GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/tenantId=1234&excludeRoles=roleId1,roleId22 HTTP/1.1
     Connection: close
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 **Success Response**
 
@@ -3197,7 +3013,6 @@ List groups for domain for given filter criteria and marker if there with http s
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=8DD402CDD89EF3A61D73B915F4B8BE42; Path=/; Secure
@@ -3229,13 +3044,11 @@ JSON
         }
       }
     }
-```
 
 XML
 
 Request with marker and groupName
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=10C0D5531A322E76410588242947F78D; Path=/; Secure
@@ -3247,7 +3060,6 @@ Request with marker and groupName
     Date: Wed, 31 Oct 2012 16:44:21 GMT
     
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><groups xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom"/>
-```  
 
 
 **Error Response**
@@ -3269,7 +3081,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "badRequest" : {
         "code" : 400,
@@ -3279,9 +3090,7 @@ JSON
         }
       }
     }
-```
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -3291,19 +3100,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/groups
-```
 
 **Additional Notes**
 
@@ -3335,7 +3139,6 @@ This call does not require a request body.
 
 JSON
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/subscribeableServices HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -3343,25 +3146,21 @@ JSON
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/domains/64521341789596/subscribeableServices HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4f46a309b0bebb59e36f663f
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 Optional:
 
 JSON
 
 With serviceName filter
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/subscribeableServices?serviceName=Compute HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -3369,7 +3168,6 @@ With serviceName filter
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 
 **Success Response**
@@ -3385,7 +3183,6 @@ The response is a list of subscribe able services for the domain. Results are fi
 
 JSON
 
-```
     {"subscribeableServices": {
        "otherAttributes": {},
        "subscribeableService":    [
@@ -3598,11 +3395,9 @@ JSON
           }
        ]
     }}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=4ADA3703B5E45F3C198E4E4F0CC9A4D8; Path=/; Secure
@@ -3654,7 +3449,6 @@ XML
           <version id="1.0"/>
        </subscribeableService>
     </subscribeableServices>
-```
 
 Optional
 
@@ -3662,7 +3456,6 @@ JSON
 
 With serviceName filter
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=57031777BBA23809F2B7B172E342A8F9; Path=/; Secure
@@ -3743,7 +3536,6 @@ With serviceName filter
         } ]
       }
     }
-```
 
 
 **Error Response**
@@ -3766,7 +3558,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     HTTP/1.1 400 Bad Request
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=670399F2C2059BD56F33D988AE8A2712; Path=/; Secure
@@ -3787,9 +3578,7 @@ JSON
         }
       }
     }
-```
 
-```
     HTTP/1.1 404 Not Found
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=274CFEB4593E9BB8D00C8DED21E3E75B; Path=/; Secure
@@ -3809,9 +3598,7 @@ JSON
         }
       }
     }
-```
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -3821,19 +3608,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/subscribeableServices?serviceName=Compute 
-```
 
 **Additional Notes**
 
@@ -3867,7 +3649,6 @@ JSON
 
 Request with tenantId 
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/90681825319071/services?tenantId=24290042003272 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -3875,13 +3656,11 @@ Request with tenantId
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 XML
 
 List all activated services
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/90681825319071/services HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -3889,7 +3668,6 @@ List all activated services
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 Optional:
 
@@ -3897,7 +3675,6 @@ JSON
 
 When limit is specified without any marker (4 total documents)
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/90681825319071/services?limit=4 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -3905,13 +3682,11 @@ When limit is specified without any marker (4 total documents)
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 XML
 
 When limit is specified with marker (4 total documents)
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/90681825319071/services?limit=2&marker=50a2a2ee957c4415121a2417 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -3919,13 +3694,11 @@ When limit is specified with marker (4 total documents)
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 XML 
 
 When no activated services are there for a domain
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/88812793023919/services HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -3933,7 +3706,6 @@ When no activated services are there for a domain
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 **Success Response**
 
@@ -3950,7 +3722,6 @@ JSON
 
 Response with tenantId filter
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=94C8007DACBD6F746B211CEF012F4E4A; Path=/; Secure
@@ -3980,13 +3751,11 @@ Response with tenantId filter
         }
       }
     }
-```
 
 XML
 
 Response for all activated services
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=4C4529A54A66517449F10A8F083E5570; Path=/; Secure
@@ -4003,7 +3772,6 @@ Response for all activated services
        <ns1:activatedService id="50a2a2ee957c4415121a241c" serviceId="110" serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2012-11-13T19:43:42.992Z" tenantId="24290042003272" status="enabled" endpointTemplateId="120"/>
        <ns1:activatedService id="50a2a2ef957c4415121a2421" serviceId="110" serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2012-11-13T19:43:43.221Z" tenantId="35383765754307" status="enabled" endpointTemplateId="120"/>
     </ns1:activatedServices>
-```
 
 Optional
 
@@ -4013,7 +3781,6 @@ JSON
 
 When limit is specified without any marker (4 total documents)
 
-```
     {"activatedServices": {
        "activatedService":    [
                 {
@@ -4067,13 +3834,11 @@ When limit is specified without any marker (4 total documents)
        ],
        "otherAttributes": {}
     }}
-```
 
 XML
 
 When limit is specified with marker (4 total documents)
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=6AE817EEDD2D62CF0217FD840AEC5393; Path=/; Secure
@@ -4088,12 +3853,10 @@ When limit is specified with marker (4 total documents)
        <ns1:activatedService id="50a2a2ee957c4415121a241c" serviceId="110" serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2012-11-13T19:43:42.992Z" tenantId="24290042003272" status="enabled" endpointTemplateId="120"/>
        <ns1:activatedService id="50a2a2ef957c4415121a2421" serviceId="110" serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2012-11-13T19:43:43.221Z" tenantId="35383765754307" status="enabled" endpointTemplateId="120"/>
     </ns1:activatedServices>
-```
 
 XML
 
 When no activated services are there for a domain
-```
     TTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=14E953B8EA880BC9A80AB77B9CE5F22B; Path=/; Secure
@@ -4105,7 +3868,6 @@ When no activated services are there for a domain
     Date: Tue, 13 Nov 2012 22:30:03 GMT
     
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns1:activatedServices xmlns:ns1="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom"/>
-```
 
 **Error Response**
 
@@ -4127,7 +3889,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "itemNotFound" : {
         "code" : 404,
@@ -4137,9 +3898,7 @@ JSON
         }
       }
     }
-```
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -4149,30 +3908,23 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 XML
 
 Invalid marker error
 
-```
     <itemNotFound code="404" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
        <message>NOT_FOUND</message>
        <details>Marker in request not found</details>
     </itemNotFound>
-``` 
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/services
-```
 
 **Additional Notes**
 
@@ -4206,7 +3958,6 @@ This call does not require a request body
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/domains/29649421790262/tenants HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -4214,18 +3965,15 @@ JSON
     X-Auth-Token: HPAuth_4e8f7d182cdcb96406c8c61b
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     GET /V2.0/HP-IDM/v1.0/domains/798477662343/tenants HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Optional:
 
@@ -4233,7 +3981,6 @@ JSON
 
 Request with tenantId filter
 
-```
     GET /v2.0/HP-IDM/v1.0/domains/29649421790262/tenants?tenantId=12345 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -4241,20 +3988,17 @@ Request with tenantId filter
     X-Auth-Token: HPAuth_4e8f7d182cdcb96406c8c61b
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
 Request with name filter
 
-```
     GET /V2.0/HP-IDM/v1.0/domains/798477662343/tenants?name=TENANTNAME1 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -4269,7 +4013,6 @@ The response is a list of tenant resources for the domain.
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -4299,11 +4042,9 @@ JSON
         ]
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -4326,7 +4067,6 @@ XML
       description="Tenant for Forecasting service"
       name="Sales Tenant" />
     </tenants>
-```
 
 **Error Response**
 
@@ -4348,7 +4088,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "itemNotFound" : {
         "code" : 404,
@@ -4358,9 +4097,7 @@ JSON
         }
       }
     }
-```
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -4370,19 +4107,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630362/tenants?tenantId=12345
-```
 
 **Additional Notes**
 
@@ -4424,7 +4156,6 @@ This call does not require a request body
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/domains/53615830984009/users HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -4432,25 +4163,21 @@ JSON
     X-Auth-Token: HPAuth_4e8ccde52cdc999e9328f761
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     GET /v2.0/HP-IDM/v1.0/domains/798477662343/users HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Optional:
 
 JSON
 
 Request with excludeRoles
-```
     GET /v2.0/HP-IDM/v1.0/domains/53615830984009/users?excludeRoles=RoleId1,RoleId2 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -4458,10 +4185,8 @@ Request with excludeRoles
     X-Auth-Token: HPAuth_4e8ccde52cdc999e9328f761
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Request with excludeGroups
-```
     GET /v2.0/HP-IDM/v1.0/domains/53615830984009/users?excludeGroups=GroupId1,GroupId22 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -4469,41 +4194,34 @@ Request with excludeGroups
     X-Auth-Token: HPAuth_4e8ccde52cdc999e9328f761
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
 Request with exclusion filter
-```
     GET /v2.0/HP-IDM/v1.0/domains/798477662343/users?excludeGroups=000002002,000002001 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 
 Request with userId filter
-```
     GET /v2.0/HP-IDM/v1.0/domains/798477662343/users?userId=12345 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 
 Request with tenantId and groupId filter
-```
     GET /v2.0/HP-IDM/v1.0/domains/798477662343/users?tenantId=1234&groupId=123455 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -4517,7 +4235,6 @@ List of users returned for given input criteria with http status code 200.
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -4556,11 +4273,9 @@ JSON
         } ]
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -4575,7 +4290,6 @@ XML
       <user domainId="798477662343" status="enabled" isDomainOwner="true" emailAddress="johndoe@papsi.com" website="http://www.pepsi.com" phone="1-800-555-1212" zip="89072" country="USA" state="GA" city="Atlanta" addressLine1="1, Pepsi Way" accountId="627893056455" username="johndoe@papsi.com" name="John Doe"/>
       <user domainId="798477662343" status="enabled" emailAddress="amymiller@papsi.com" website="http://www.pepsi.com" phone="1-800-555-1212" zip="89072" country="USA" state="GA" city="Atlanta" addressLine1="1, Pepsi Way" accountId="968754602297" username="amymiller@papsi.com" name="Amy Miller"/>
     </users>
-```
 
 **Error Response**
 
@@ -4597,7 +4311,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "itemNotFound" : {
         "code" : 404,
@@ -4607,9 +4320,7 @@ JSON
         }
       }
     }
-```
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -4619,19 +4330,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/798477662343/users?userId=12345
-```
 
 **Additional Notes**
 
@@ -4660,23 +4366,19 @@ This call does not require a request body
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/domains/641564254582/roles HTTP/1.1
     Connection: close
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 XML
 
-```
     GET /v2.0/HP-IDM/v1.0/domains/641564254582/roles HTTP/1.1
     Connection: close
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 Optional:
 
@@ -4695,7 +4397,6 @@ List of roles with http status code 200.
 
 JSON
 
-```
     {"roles": {"role": [
           {
           "roleId": "xxxxxxxxxxxxxx",
@@ -4720,11 +4421,9 @@ JSON
           "tenantId": "12345678909876"
        },
     ]}
-```
 
 XML
 
-```
     <roles xmlns="http://hpcloud.hp.com/identity/api/ext/hp/v1.0">
        <role>
           <roleId>xxxxxxxxxxxxxx</roleId>
@@ -4751,7 +4450,6 @@ XML
           <tenantId>12345678909876</tenantId>
        </role>
     </roles>
-```
 
 **Error Response**
 
@@ -4772,7 +4470,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -4782,19 +4479,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roles
-```
 
 **Additional Notes**
 
@@ -4825,7 +4517,6 @@ This call does not require a request body
 
 JSON
 
-```
     PUT /v2.0/HP-IDM/v1.0/domains/29649421790262/owner/60414337132139 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -4833,11 +4524,9 @@ JSON
     X-Auth-Token: HPAuth_4e8f7d182cdcb96406c8c61b
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     PUT /v2.0/HP-IDM/v1.0/domains/662648896689/owner/129024620458 HTTP/1.1
     Accept: application/xml
     account_id: 000000003001
@@ -4846,7 +4535,6 @@ XML
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Optional:
 
@@ -4864,7 +4552,6 @@ Transfer ownership of a Domain with http status code 200
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -4899,11 +4586,9 @@ JSON
         "zip": "90210"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -4915,7 +4600,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" name="Tom Riddle" username="tomriddle@timewarner.com" userId="129024620458" addressLine1="128, Hollywood Blvd" city="Los Angeles" state="CA" country="USA" zip="90210" phone="1-800-555-1212" website="http://www.timewarner.com" emailAddress="tomriddle@timewarner.com" status="enabled" domainId="662648896689"/>
-```
 
 **Error Response**
 
@@ -4936,7 +4620,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -4946,19 +4629,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/662648896689/owner/129024620458 
-```
 
 **Additional Notes**
 
@@ -4989,7 +4667,6 @@ The response is the updated Domain resource.
 
 JSON
 
-```
     PUT /v2.0/HP-IDM/v1.0/domains/91177319722637 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -5004,11 +4681,9 @@ JSON
         "phone": "1-800-NO-DISNEY"
       }
     }
-```
 
 XML
 
-```
     PUT /v2.0/HP-IDM/v1.0/domains/26856794720485 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -5020,7 +4695,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <domain xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" phone="1-800-NO-DISNEY" addressLine2="Studio Lanes"/>
-```
 
 Optional:
 
@@ -5039,7 +4713,6 @@ Updated domain resource is returned with http status code 200
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -5070,11 +4743,9 @@ JSON
         "zip" : "90210"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -5089,7 +4760,6 @@ XML
     <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
      </billToAddress> 
     </domain>
-```
 
 **Error Response**
 
@@ -5111,7 +4781,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "IdentityFault" : {
         "message" : "Conflict",
@@ -5121,9 +4790,7 @@ JSON
         }
       }
     }
-```
 
-```
     {
       "itemNotFound" : {
         "code" : 404,
@@ -5133,9 +4800,7 @@ JSON
         }
       }
     }
-```
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -5145,19 +4810,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XPUT -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" -H "Content-type: application/json" -d '{  "domain" : {  "name" : "Sees Candies 61", "phone": "1-800-NO-DISNEY"} }' https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361
-```
 
 **Additional Notes**
 
@@ -5190,23 +4850,19 @@ This call does not require a request body
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/domains/641564254582/roleDefs HTTP/1.1
     Connection: close
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 XML
 
-```
     GET /v2.0/HP-IDM/v1.0/domains/641564254582/roleDefs HTTP/1.1
     Connection: close
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 Optional:
 
@@ -5224,7 +4880,6 @@ List of roles with http status code 200.
 
 JSON
 
-```
     {"roles": {"role": [
           {
           "roleId": "xxxxxxxxxxxxxx",
@@ -5246,11 +4901,9 @@ JSON
           "domainId": "xxxxxxxxxxxxxx",
        },
     ]}
-```
 
 XML
 
-```
     <roles xmlns="http://hpcloud.hp.com/identity/api/ext/hp/v1.0">
        <role>
           <roleId>xxxxxxxxxxxxxx</roleId>
@@ -5274,7 +4927,6 @@ XML
           <domainId>xxxxxxxxxxxxxx</domainId>
        </role>
     </roles>
-```
 
 **Error Response**
 
@@ -5295,7 +4947,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -5305,31 +4956,22 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roleDefs
-```
 
 Curl Example (public role definitions only)
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roleDefs?public=true
-```
 
 Curl Example (domain specific role definitions only)
 
-```
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roleDefs?public=false
-```
 
 
 ### 4.4.3 Endpoint Templates
@@ -5386,7 +5028,6 @@ Request body includes the new endpoint template with required fields defined.
 
 JSON
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4f9ff1d3b0be1d0584f2a7aa
@@ -5421,11 +5062,9 @@ JSON
         "type" : "compute"
       }
     }
-```
 
 XML
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4f9ff1d3b0be1d0584f2a7aa
@@ -5447,7 +5086,6 @@ XML
     xmlns:ns5="http://www.w3.org/2005/Atom">
        <ns1:version id="1.1" list="https://az-3.region-a.geo-1.compute.hpcloudsvc.com"/>
     </ns1:endpointTemplate>
-```
 
 **Success Response**
 
@@ -5460,7 +5098,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=A6E1D38BE03CE5F52B1C30D61DE88271; Path=/; Secure
@@ -5496,11 +5133,9 @@ JSON
         "type" : "compute"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=30639D2AB6506F0C93DC6D4681AF069A; Path=/; Secure
@@ -5524,7 +5159,6 @@ XML
     xmlns:ns5="http://www.w3.org/2005/Atom">
        <ns1:version id="1.1" list="https://az-3.region-a.geo-1.compute.hpcloudsvc.com"/>
     </ns1:endpointTemplate>
-```
 
 **Error Response**
 
@@ -5543,7 +5177,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -5553,20 +5186,15 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" -d '{  "EndpointTemplate" : {  "name" : "Compute", "type":"compute", "id":"215","region":"az-3.region-a.geo-6","global":"false","enabled":"true",releaseState="public","publicURL": "https:\/\/az-3.region-a.geo-1.compute.hpcloudsvc.com\/v1.1\/", "adminURL": "https:\/\/https://nv-aw2az3-manage0009.uswest.hpcloud.net\/v1.1\/"} }' "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates"
     
-```
 
 **Additional Notes**
 
@@ -5623,7 +5251,6 @@ No content is expected in response body
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -5633,19 +5260,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/xml" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates/1200"
-```
 
 **Additional Notes**
 
@@ -5686,7 +5308,6 @@ This call does not require a request body.
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=AAB73BB788D3C4C074D29B7FDF0E5E86; Path=/; Secure
@@ -5793,11 +5414,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=D2D513368A8C87BB990F528CA809F59F; Path=/; Secure
@@ -5841,7 +5460,6 @@ XML
           <ns1:version id="1.0"/>
        </ns1:endpointTemplate>
     </ns1:endpointTemplates>
-```
 
 **Error Response**
 
@@ -5862,7 +5480,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -5872,19 +5489,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/xml" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates/enabled?limit=4"
-```
 
 **Additional Notes**
 
@@ -5917,7 +5529,6 @@ This operation does not require a request body.
 
 JSON
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates/111 HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4f9ff1d3b0be1d0584f2a7aa
@@ -5960,11 +5571,9 @@ JSON
         "type" : "compute"
       }
     }
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates/111 HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4f9ff1d3b0be1d0584f2a7aa
@@ -5994,7 +5603,6 @@ XML
     xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
        <ns1:version id="1.1" list="https://az-3.region-a.geo-1.compute.hpcloudsvc.com"/>
     </ns1:endpointTemplate>
-```
 
 **Error Response**
 
@@ -6014,7 +5622,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -6024,19 +5631,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/xml" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates/1200"
-```
 
 **Additional Notes**
 
@@ -6075,7 +5677,6 @@ This call does not require a request body.
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=DFCFC378DE6320D5C411461BD518902F; Path=/; Secure
@@ -6160,11 +5761,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=B982B0384A07FED4F9C0182501C7FFDF; Path=/; Secure
@@ -6193,7 +5792,6 @@ XML
           <ns1:version id="2.0" list="https://region-a.geo-1.identity.hpcloudsvc.com/extension"/>
        </ns1:endpointTemplate>
     </ns1:endpointTemplates>
-```
 
 **Error Response**
 
@@ -6214,7 +5812,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -6224,19 +5821,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/xml" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates?serviceName=Compute&limit=5"
-```
 
 **Additional Notes**
 
@@ -6270,7 +5862,6 @@ Request body contains the endpoint template to be updated.
 
 JSON
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates/111 HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4f9ff1d3b0be1d0584f2a7aa
@@ -6305,11 +5896,9 @@ JSON
         "type" : "compute"
       }
     }
-```
 
 XML
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/endpointTemplates/130 HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4e9c7424b0be3d7fd233fa60
@@ -6329,7 +5918,6 @@ XML
          <version id="2.0" info="https://region-a.geo-1.identity.hpcloudsvc.com/info/v2.0" 
                list="https://region-a.geo-1.identity.hpcloudsvc.com/allVersions"/>
     </endpointTemplate>
-```
 
 
 **Success Response**
@@ -6345,7 +5933,6 @@ Response body is the updated endpoint template.
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=3EA75781EBE573B3E9EA8490E9E20BD0; Path=/; Secure
@@ -6381,11 +5968,9 @@ JSON
         "type" : "compute"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -6411,7 +5996,6 @@ XML
       <version id="2.0" info="https://region-a.geo-1.identity.hpcloudsvc.com/info/v2.0"
              list="https://region-a.geo-1.identity.hpcloudsvc.com/allVersions"/>
     </endpointTemplate>
-```
 
 **Error Response**
 
@@ -6433,7 +6017,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -6443,19 +6026,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/endpointTemplates/111" -d '{  "EndpointTemplate" : {  "name" : "Compute",  "region":"az-3.region-a.geo-1",releaseState="preview"} }'
-```
 
 **Additional Notes**
 
@@ -6497,25 +6075,21 @@ This call does not require a request body.
 
 JSON
 
-```
     PUT https://localhost:35357/v2.0/HP-IDM/v1.0/groups/583891759678/users/993639569203 HTTP/1.1
     Connection: close
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
     Content-Length: 0
-```
 
 XML
 
-```
     PUT https://localhost:35357/v2.0/HP-IDM/v1.0/groups/583891759678/users/993639569203
     Connection: close
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
     Content-Length: 0
-```
 
 
 **Success Response**
@@ -6532,7 +6106,6 @@ The response body contains location of newly created group with http status code
 
 JSON
 
-```
     HTTP/1.1 303 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -6542,11 +6115,9 @@ JSON
     Content-Length: 0
     Date: Mon, 01 Aug 2011 18:27:33 GMT
     Connection: close
-```
 
 XML
 
-```
     HTTP/1.1 303 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -6556,7 +6127,6 @@ XML
     Content-Length: 0
     Date: Mon, 01 Aug 2011 18:27:33 GMT
     Connection: close
-```
 
 **Error Response**
 
@@ -6578,7 +6148,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -6588,11 +6157,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" ?>
     <unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
       <message>
@@ -6602,13 +6169,10 @@ XML
         Invalid credentials
       </details>
     </unauthorized>
-```
 
 Curl Example
 
-```
     curl -i -H "X-Auth-Token:HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -X PUT "https://localhost:35357/v2.0/HP-IDM/v1.0/groups/583891759678/users/993639569203"
-```
 
 **Additional Notes**
 
@@ -6630,7 +6194,6 @@ See schema file for more details on the request and response data structure.
 
 JSON
 
-```
     POST /v2.0/HP-IDM/v1.0/groups HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -6647,11 +6210,9 @@ JSON
         "name": "HP Software"
       }
     }
-```
 
 XML
 
-```
     POST /v2.0/HP-IDM/v1.0/groups HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -6666,7 +6227,6 @@ XML
     <group xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" domainId="69409986171623" name="HP Cloud Services Business Unit">
       <description>HP Cloud Services Business Unit Engineering and Marketing</description>
     </group>
-```
 
 
 **Success Response**
@@ -6683,7 +6243,6 @@ The response body contains data for newly created group with http status code of
 
 JSON
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -6700,11 +6259,9 @@ JSON
         "name": "HP Software"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -6718,7 +6275,6 @@ XML
     <group xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" id="68906974845076" domainId="69409986171623" name="HP Cloud Services Business Unit">
       <description>HP Cloud Services Business Unit Engineering and Marketing</description>
     </group>
-```
 
 **Error Response**
 
@@ -6741,7 +6297,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -6751,11 +6306,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" ?>
     <unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
       <message>
@@ -6765,13 +6318,10 @@ XML
         Invalid credentials
       </details>
     </unauthorized>
-```
 
 Curl Example
 
-```
     curl -k  -XPOST -H "X-Auth-Token: HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -H "Content-type: application/json" -d '{  "group": {   "description": "HP Software Group",    "domainId":"69409986171623",    "name": "HP Software"  }}'  https://localhost:35357/v2.0/HP-IDM/v1.0/groups
-```
 
 **Additional Notes**
 
@@ -6793,21 +6343,17 @@ See schema file for more details on the request and response data structure.
 
 JSON
 
-```
     DELETE https://localhost:35357/v2.0/HP-IDM/v1.0/groups/245398746613/ HTTP/1.1
     Connection: close
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
-```
 
 XML
 
-```
     DELETE https://localhost:35357/v2.0/HP-IDM/v1.0/groups/245398746613/ HTTP/1.1
     Connection: close
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
-```
 
 
 **Success Response**
@@ -6824,7 +6370,6 @@ This call doesn't have response body. It returns http code 204
 
 JSON
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=37BD6EDBDC2A58CD18201DFD2C21B6C2; Path=/; Secure
@@ -6832,11 +6377,9 @@ JSON
     Pragma: no-cache
     Expires: -1
     Date: Wed, 28 Dec 2011 19:14:46 GMT
-```
 
 XML
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=37BD6EDBDC2A58CD18201DFD2C21B6C2; Path=/; Secure
@@ -6844,7 +6387,6 @@ XML
     Pragma: no-cache
     Expires: -1
     Date: Wed, 28 Dec 2011 19:14:46 GMT
-```
 
 **Error Response**
 
@@ -6866,7 +6408,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -6876,11 +6417,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" ?>
     <unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
       <message>
@@ -6890,13 +6429,10 @@ XML
         Invalid credentials
       </details>
     </unauthorized>
-```
 
 Curl Example
 
-```
     curl -i -H "X-Auth-Token:HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -X DELETE "https://localhost:35357/v2.0/HP-IDM/v1.0/groups/583891759678/"
-```
 
 **Additional Notes**
 
@@ -6920,24 +6456,20 @@ This call does not require a request body
 
 JSON
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/groups/583891759678 HTTP/1.1
     Connection: close
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 XML
 
-```
     
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/groups/583891759678 HTTP/1.1
     Connection: close
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 **Success Response**
 
@@ -6953,7 +6485,6 @@ This call returns the corresponding group.
 
 JSON
 
-```
     HTTP/1.1 200 OKHTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=0872F482F66338B2E69820CF34D6BAB0; Path=/; Secure
@@ -6975,11 +6506,9 @@ JSON
       }
     }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -6996,7 +6525,6 @@ XML
         A Description of the group1
       </description>
     </group>
-```
 
 **Error Response**
 
@@ -7017,7 +6545,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -7027,11 +6554,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" ?>
     <unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
       <message>
@@ -7041,13 +6566,10 @@ XML
         Invalid credentials
       </details>
     </unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -H "X-Auth-Token:HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3"  "https://localhost:35357/v2.0/HP-IDM/v1.0/groups/583891759678/"
-```
 
 **Additional Notes**
 
@@ -7076,56 +6598,46 @@ This call does not require a request body
 
 JSON
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/hp/v1.0/groups/245398746613/users HTTP/1.1
     Connection: close
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
     
-```
 
 XML
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/hp/v1.0/groups/245398746613/users HTTP/1.1
     Connection: close
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 Optional: Sample requests using query parameters and filters 
 
 JSON :
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/hp/v1.0/groups/245398746613/users?userName=username HTTP/1.1
     Connection: close
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 XML
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/hp/v1.0/groups/245398746613/users?userId=412367 HTTP/1.1
     Connection: close
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 XML
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/hp/v1.0/groups/245398746613/users?limit=50?maker=34353535& HTTP/1.1
     Connection: close
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 **Success Response**
 
@@ -7140,7 +6652,6 @@ This call retuns list of users
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -7180,11 +6691,9 @@ JSON
      ]
      }
     
-```
 
 XML
 
-```
     
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
@@ -7200,11 +6709,9 @@ XML
     <users xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
       <user domainId="00000000001001" emailAddress="haneef.ali@hp.com" firstName="haneef" passwordResetRequired="true" status="enabled" userId="59587095111744" username="haneef"/>
     </users>
-```
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -7233,7 +6740,6 @@ JSON
      ]
      }
     
-```
 
 
 **Error Response**
@@ -7256,7 +6762,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -7266,11 +6771,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" ?>
     <unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
       <message>
@@ -7280,14 +6783,11 @@ XML
         Invalid credentials
       </details>
     </unauthorized>
-```
 
 Curl Example
 
-```
     curl -v -k -H "X-Auth-Token: HPAuth_b0846199b9d7c4aa0c7c86169ef693e6298da25c564adff6e002bea84f0b337f"   -H "Accept: application/json" https://csnode.ndd.aw1.hpcloud.net:35357/v2.0/HP-IDM/v1.0/groups/00000000002002/users?userName=haneef
     
-```
 
 **Additional Notes**
 
@@ -7310,23 +6810,19 @@ Remove a user from a group
 
 JSON
 
-```
     DELETE http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP-IDM/v1.0/groups/583891759678/users/993639569203 HTTP/1.1
     Connection: close
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 XML
 
-```
     DELETE http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP-IDM/v1.0/groups/583891759678/users/993639569203 HTTP/1.1
     Connection: close
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: haneef-desktop.americas.hpqcorp.net:8080
-```
 
 
 **Success Response**
@@ -7343,7 +6839,6 @@ The response doesn't have any content
 
 JSON
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -7351,11 +6846,9 @@ JSON
     Expires: -1
     Date: Mon, 01 Aug 2011 18:31:40 GMT
     Connection: close
-```
 
 XML
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -7363,7 +6856,6 @@ XML
     Expires: -1
     Date: Mon, 01 Aug 2011 18:31:40 GMT
     Connection: close
-```
 
 **Error Response**
 
@@ -7382,7 +6874,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -7392,11 +6883,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" ?>
     <unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
       <message>
@@ -7406,13 +6895,10 @@ XML
         Invalid credentials
       </details>
     </unauthorized>
-```
 
 Curl Example
 
-```
     curl -v -k -H "X-Auth-Token: HPAuth_b0846199b9d7c4aa0c7c86169ef693e6298da25c564adff6e002bea84f0b337f" -X DELETE  -H "Accept: application/json" https://csnode.ndd.aw1.hpcloud.net:35357/v2.0/HP-IDM/v1.0/groups/00000000002002/993639569203
-```
 
 **Additional Notes**
 
@@ -7435,7 +6921,6 @@ Update a group resource for the specified groupId.   Only description and name c
 
 JSON
 
-```
     PUT /v2.0/HP-IDM/v1.0/groups/68906974845076 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -7452,11 +6937,9 @@ JSON
         "name": "HP Software"
       }
     }
-```
 
 XML
 
-```
     PUT /v2.0/HP-IDM/v1.0/groups/68906974845076 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -7470,7 +6953,6 @@ XML
     <group xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" domainId="69409986171623" name="HP Software">
       <description>HP Software Group</description>
     </group>
-```
 
 
 
@@ -7488,7 +6970,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -7510,11 +6991,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -7527,7 +7006,6 @@ XML
     <group id="68906974845076" name="HP Software" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
        <description>HP Software Group</description>
     </group>
-```
 
 **Error Response**
 
@@ -7549,7 +7027,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -7559,11 +7036,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" ?>
     <unauthorized code="401" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
       <message>
@@ -7573,13 +7048,10 @@ XML
         Invalid credentials
       </details>
     </unauthorized>
-```
 
 Curl Example
 
-```
     curl -k  -X PUT -H "X-Auth-Token: HPAuth_769bcc02e0bf775aee3c7c5bbc647087a29e3da7103e2dde0d95beabb61f07e3" -H "Content-type: application/json" -d '{  "group": {   "description": "HP Software Group",      "name": "HP Software"  }}'  https://localhost:35357/v2.0/HP-IDM/v1.0/groups/68906974845076
-```
 
 **Additional Notes**
 
@@ -7646,7 +7118,6 @@ This call does not require a request body
 
 JSON
 
-```
     {"userDetails": {
        "bs": false,
        "domain":    {
@@ -7731,11 +7202,9 @@ JSON
        "version": 0
     }}
     
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <userDetails>
        <version>0</version>
@@ -7818,7 +7287,6 @@ XML
           <username>SW_12112012141901492</username>
        </user>
     </userDetails>
-```
 
 **Error Response**
 
@@ -7834,7 +7302,6 @@ XML
 
 An incorrect user id will result in a service unavailable response.
  
-```
     {
       "serviceUnavailable" : {
         "code" : 500,
@@ -7844,11 +7311,9 @@ An incorrect user id will result in a service unavailable response.
         }
       }
     }
-```
 
 An incorrect auth token will result in a service unavailable response.
 
-```
     {
       "serviceUnavailable" : {
         "code" : 500,
@@ -7858,19 +7323,14 @@ An incorrect auth token will result in a service unavailable response.
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 **Curl Example**
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/users/details/<user-id>
-```
 
 
 #### 4.4.5.2 User Preferences#### {#user_preferences}
@@ -7905,7 +7365,6 @@ This call does not require a request body.
 
 JSON
 
-```
     { "substore":
       [
         { "storeName":"Stuff",
@@ -7947,13 +7406,10 @@ JSON
       "bs":false,
       "immutable":null
     }
-```
 
 XML
 
-```
     {xml data structure here}
-```
 
 **Error Response**
 
@@ -7973,7 +7429,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -7983,11 +7438,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <userPreferences>
         <dateLastModified>2012-02-15T11:16:13.421-07:00</dateLastModified>
@@ -8039,13 +7492,10 @@ XML
         </substores>
         <preferences/>
     </userPreferences>
-```
 
 Curl Example
 
-```
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <path-to-cert> --cacert <path-to-cacert> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/preferences/<userId>
-```
 
 #### PUT /HP-IDM/v1.0/preferences/{userId}
 *Privilege Level: MC-CS Certificate*
@@ -8164,14 +7614,12 @@ The following HTTP headers must be specified.
 
 This call does not require a request body
 
-```
     GET /v2.0/HP-IDM/v1.0/tenants/11111111/roles?serviceId=120 HTTP/1.1
     Accept: application/json
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -8185,7 +7633,6 @@ This call does not require a request body
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -8248,11 +7695,9 @@ JSON
           "isCrossDomain": false
        }
     ]}}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -8316,7 +7761,6 @@ XML
           <isCrossDomain>false</isCrossDomain>
        </role>
     </roles>
-```
 
 **Error Response**
 
@@ -8334,7 +7778,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -8344,19 +7787,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -sk --cacert $CACERT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/98765733650021/roles?serviceId=xxx\&domainId=yyy\&limit=10\&marker=zzz
-```
 
 **Additional Notes**
 
@@ -8399,14 +7837,12 @@ The following HTTP headers must be specified.
 
 This call does not require a request body
 
-```
     GET /v2.0/HP-IDM/v1.0/tenants/11111111/users/345678902345/roles?serviceId=120 HTTP/1.1
     Accept: application/json
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -8419,7 +7855,6 @@ This call does not require a request body
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -8457,11 +7892,9 @@ JSON
           "isCrossDomain": false
        }
     ]}}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -8499,7 +7932,6 @@ XML
           <isCrossDomain>false</isCrossDomain>
        </role>
     </roles>
-```
 
 **Error Response**
 
@@ -8517,7 +7949,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -8527,19 +7958,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -sk --cacert $CACERT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/11111111/roles?serviceId=120
-```
 
 **Additional Notes**
 
@@ -8583,14 +8009,12 @@ The following HTTP headers must be specified.
 
 This call does not require a request body
 
-```
     HEAD /v2.0/HP-IDM/v1.0/tenants/777700000001/users/777700000003/roles/00000000004026 HTTP/1.1
     Accept: application/xml
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -8604,7 +8028,6 @@ This call does not require a request body
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=20DD4F9E1E3D2B0485DC81D93609DE30; Path=/; Secure
@@ -8613,11 +8036,9 @@ JSON
     Expires: -1
     Content-Length: 0
     Date: Wed, 26 Sep 2012 17:58:59 GMT
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=20DD4F9E1E3D2B0485DC81D93609DE30; Path=/; Secure
@@ -8626,7 +8047,6 @@ XML
     Expires: -1
     Content-Length: 0
     Date: Wed, 26 Sep 2012 17:58:59 GMT
-```
 
 **Error Response**
 
@@ -8644,7 +8064,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -8654,19 +8073,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -sk --cacert $CACERT -XHEAD -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/98765733650021/users/1234/roles/4567
-```
 
 **Additional Notes**
 
@@ -8711,13 +8125,11 @@ The following HTTP headers must be specified.
 
 This call does not require a request body
 
-```
     PUT /v2.0/HP-IDM/v1.0/tenants/11111111/users/12345678909876/roles/00000000004023 HTTP/1.1
     Accept: application/xml
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -8728,10 +8140,8 @@ This call does not require a request body
 
 **Response Data**
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
-```
 
 **Error Response**
 
@@ -8750,7 +8160,6 @@ This call does not require a request body
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -8760,19 +8169,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -sk --cacert $CACERT -XPUT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/98765733650021/users/1234/roles/4567
-```
 
 **Additional Notes**
 
@@ -8811,13 +8215,11 @@ The following HTTP headers must be specified.
 
 This call does not require a request body
 
-```
     DELETE /v2.0/HP-IDM/v1.0/tenants/11111111/users/12345678909876/roles/00000000004023 HTTP/1.1
     Accept: application/json
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -8827,14 +8229,12 @@ This call does not require a request body
 
 **Response Data**
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
     Pragma: no-cache
     Expires: -1
     Date: Tue, 09 Aug 2011 22:20:25 GMT
-```
 
 **Error Response**
 
@@ -8851,7 +8251,6 @@ This call does not require a request body
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -8861,19 +8260,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -sk --cacert $CACERT -XDELETE -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/11111111/users/12345678909876/roles/00000000004023
-```
 
 **Additional Notes**
 
@@ -8917,14 +8311,12 @@ The following HTTP headers must be specified.
 
 This call does not require a request body
 
-```
     GET /v2.0/HP-IDM/v1.0/tenants/11111111/groups/345678902345/roles?serviceId=120 HTTP/1.1
     Accept: application/xml
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -8937,7 +8329,6 @@ This call does not require a request body
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -8974,11 +8365,9 @@ JSON
           "isCrossDomain": false
        }
     ]}}
-```
 
 XML 
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -9015,7 +8404,6 @@ XML
           "isCrossDomain": false
        }
     ]}}
-```
 
 **Error Response**
 
@@ -9031,7 +8419,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -9041,19 +8428,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -sk --cacert $CACERT -XDELETE -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/11111111/groups/12345678909876/roles?serviceId=120\&limit=10\&marker=1234
-```
 
 **Additional Notes**
 
@@ -9098,13 +8480,11 @@ The following HTTP headers must be specified.
 
 This call does not require a request body
 
-```
     PUT /v2.0/HP-IDM/v1.0/tenants/11111111/groups/12345678909876/roles/00000000004023 HTTP/1.1
     Accept: application/xml
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -9115,10 +8495,8 @@ This call does not require a request body
 
 **Response Data**
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
-```
 
 **Error Response**
 
@@ -9137,7 +8515,6 @@ This call does not require a request body
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -9147,19 +8524,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -sk --cacert $CACERT -XPUT -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/98765733650021/groups/1234/roles/4567
-```
 
 **Additional Notes**
 
@@ -9198,13 +8570,11 @@ The following HTTP headers must be specified.
 
 This call does not require a request body
 
-```
     DELETE /v2.0/HP-IDM/v1.0/tenants/11111111/groups/12345678909876/roles/00000000004023 HTTP/1.1
     Accept: application/json
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -9215,14 +8585,12 @@ This call does not require a request body
 
 **Response Data**
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
     Pragma: no-cache
     Expires: -1
     Date: Tue, 09 Aug 2011 22:20:25 GMT
-```
 
 **Error Response**
 
@@ -9239,7 +8607,6 @@ This call does not require a request body
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -9249,19 +8616,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -sk --cacert $CACERT -XDELETE -H "X-Auth-Token: <Auth_Token>" $CS/HP-IDM/v1.0/tenants/11111111/groups/12345678909876/roles/00000000004023
-```
 
 **Additional Notes**
 
@@ -9390,7 +8752,6 @@ See schema file for more details on the request and response data structure.
 
 JSON
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4ee243692b88f9f72b19c1a3
@@ -9407,11 +8768,9 @@ JSON
         "description": "db-admin for xyz tenant"
       }
     }
-```
 
 XML
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4ee243692b88f9f72b19c1a3
@@ -9427,7 +8786,6 @@ XML
        <serviceId>140</serviceId>
        <tenantId>222</tenantId>
     </role>
-```
 
 Optional:
 
@@ -9445,7 +8803,6 @@ Response data should look as below
 
 JSON
 
-```
     {
       "role": {
         "roleId": "12121"
@@ -9456,11 +8813,9 @@ JSON
         "description": "db-admin for xyz tenant"
       }
     }
-```
 
 XML
 
-```
     <role xmlns=" http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
        <roleId>12121</roleId>
        <roleName>db-admin</roleName>
@@ -9469,7 +8824,6 @@ XML
        <serviceId>140</serviceId>
        <tenantId>222</tenantId>
     </role>
-```
 
 **Error Response**
 
@@ -9492,7 +8846,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -9502,20 +8855,15 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPOST -H "X-Auth-Token: HPAuth_TOCKEN" -H "Content-type: application/json" -d '{"role":{"roleName":"db-admin","tenantId":"58046189288043","domainId":"40527047618047","serviceId":"120","description":"role for db admin"}}'  https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs
     
-```
 
 **Additional Notes**
    * Role creation is a privileged operation. 
@@ -9578,7 +8926,6 @@ Please refer to error response body for additional details.
 JSON
 Response for deleting previously deleted domain.
 
-```
     HTTP/1.1 404 Not Found
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=FE74A50121DBE8B200CCA95E9B759EED; Path=/; Secure
@@ -9620,24 +8967,19 @@ Response for deleting previously deleted domain.
         }
       }
     }
-```
 
 XML
 
-```
     <forbidden code="403" xmlns="http://docs.openstack.org/identity/api/v2.0">
        <message>Invalid token</message>
     </forbidden>
     
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XDELETE -H "X-Auth-Token: HPAuth_TOCKEN" https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs/16159990324894
     
-```
 
 **Additional Notes**
 * Role deletion is a privileged operation.
@@ -9668,7 +9010,6 @@ See schema file for more details on the request and response data structure.
 
 JSON
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs/XXXXXXXXXXXXXX HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4ee243692b88f9f72b19c1a3
@@ -9682,11 +9023,9 @@ JSON
         "description": "mongo-db-admin for abc tenant"
       }
     }
-```
 
 XML 
 
-```
     
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs/XXXXXXXXXXXXXX HTTP/1.1
     Accept-Encoding: gzip,deflate
@@ -9700,7 +9039,6 @@ XML
        <roleName>mongo-db-admin</roleName>
        <description>mongo-db-admin for xyz tenant</description>
     </role>
-```
 
 **Success Response**
 
@@ -9714,7 +9052,6 @@ XML
 
 JSON
 
-```
     {
       "role": {
         "roleId": "12121"
@@ -9724,11 +9061,9 @@ JSON
         "serviceId": "140"
         "description": "mongo-db-admin for xyz tenant"
       }
-```
 
 XML
 
-```
     <role xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
        <roleId>12121</roleId>
        <roleName>mongo-db-admin</roleName>
@@ -9737,7 +9072,6 @@ XML
        <serviceId>140</serviceId>
        <tenantId>222</tenantId>
     </role>
-```
 
 **Error Response**
 
@@ -9760,7 +9094,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     HTTP/1.1 404 Not Found
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=42CC6D3F833AAB14A6E7B83B2267F251; Path=/; Secure
@@ -9788,19 +9121,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPUT -H "X-Auth-Token: HPAuth_TOCKEN" -H "Content-type: application/json" '{"role":{"roleName":"mongo-db-admin","description":"mongo-db-admin for abc tenant"}}'  https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs/123456789012
-```
 
 **Additional Notes**
 
@@ -9841,7 +9169,6 @@ See schema file for more details on the request and response data structure.
 
 JSON
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs/XXXXXXXXXXXXXX/scope HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4ee243692b88f9f72b19c1a3
@@ -9855,11 +9182,9 @@ JSON
         "roleScope": "Public_SAR"
       }
     }
-```
 
 XML
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/roleDefs/XXXXXXXXXXXXXX/scope HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4ee243692b88f9f72b19c1a3
@@ -9872,7 +9197,6 @@ XML
        <roleScope>Public_SAR</roleScope>
     </scope>
     
-```
 
 **Success Response**
 
@@ -9907,7 +9231,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     HTTP/1.1 404 Not Found
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=42CC6D3F833AAB14A6E7B83B2267F251; Path=/; Secure
@@ -9935,19 +9258,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPUT -H "X-Auth-Token: HPAuth_TOCKEN" -H "Content-type: application/json" '{"scope":{"roleScope":"Public_SAR"}}'  https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs/123456789012/scipe
-```
 
 **Additional Notes**
 
@@ -9986,7 +9304,6 @@ The role definition will be return.
 
 JSON
 
-```
     {
       "role": {
         "roleId": "xxxxxxxxxxxx",
@@ -9997,11 +9314,9 @@ JSON
         "serviceId": "xxxxxxxxxxxx"
       }
     }
-```
 
 XML
 
-```
     <role xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
         <roleId>xxxxxxxxxxxx</roleId>
         <roleName>db-admin</roleName>
@@ -10010,7 +9325,6 @@ XML
         <serviceId>xxxxxxxxxxxxxx</serviceId>
         <domainId>xxxxxxxxxxxx</domainId>
     </role>
-```
 
 **Error Response**
 
@@ -10031,7 +9345,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     HTTP/1.1 404 Not Found
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=3CF024C732444A0434F6632CA7C3C80A; Path=/; Secure
@@ -10059,19 +9372,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XGET -H "X-Auth-Token: HPAuth_TOCKEN" https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs/16159990324894
-```
 
 **Additional Notes**
 * Superadmin can get a role from any domain.
@@ -10116,7 +9424,6 @@ Returns list of roleDefs for given input with http status code 200.
 
 JSON
 
-```
     {"roles": {"role": [
           {
           "roleId": "001",
@@ -10141,11 +9448,9 @@ JSON
           "tenantId": "xxxxxxxxxxxx"
        },
     ]}
-```
 
 XML
 
-```
     <roles xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
     <role >
        <roleId>001</roleId>
@@ -10172,7 +9477,6 @@ XML
        <tenantId>xxxxxxxxxxxx</tenantId>
     </role>
     </roles>
-```
 
 **Error Response**
 
@@ -10193,7 +9497,6 @@ Please refer to error response body for additional details.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -10203,19 +9506,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XGET -H "X-Auth-Token: HPAuth_TOCKEN" https://<HOST>:35357/v2.0/HP-IDM/v1.0/roleDefs
-```
 
 **Additional Notes**
 
@@ -10276,7 +9574,6 @@ This call does not require a request body.
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -10294,11 +9591,9 @@ JSON
        "serviceName": "HP-Swift USWest Zone2",
        "serviceType": "object-store"
     }}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -10317,7 +9612,6 @@ XML
     description="Test Service Desc"
     xmlns="http://docs.openstack.org/identity/api/v2.0"
     xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0"/>
-```
 
 **Error Response**
 
@@ -10335,7 +9629,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -10345,19 +9638,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/services/18"
-```
 
 **Additional Notes**
 
@@ -10385,7 +9673,6 @@ This call does not require a request body.
 
 JSON
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/services HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -10393,11 +9680,9 @@ JSON
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 XML
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/services HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -10405,7 +9690,6 @@ XML
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 Optional:
 
@@ -10413,7 +9697,6 @@ Request With serviceType Filter:
 
 JSON
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/services?serviceType=compute HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -10421,11 +9704,9 @@ JSON
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 XML
 
-```
     GET https://localhost:35357/v2.0/HP-IDM/v1.0/services?serviceType=compute HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -10433,7 +9714,6 @@ XML
     Host: localhost:35357
     Connection: Keep-Alive
     User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-```
 
 
 **Success Response**
@@ -10446,7 +9726,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=B34844913BF641E4944208961C8413F5; Path=/; Secure
@@ -10527,11 +9806,9 @@ JSON
           }
        ]
     }}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=864B386D67CF39F3ADBE5CD8B8F41748; Path=/; Secure
@@ -10552,7 +9829,6 @@ XML
        <ns1:registerService id="150" description="HP Cloud Content Delivery Network" serviceName="CDN" serviceType="hpext:cdn" releaseState="public"/>
        <ns1:registerService id="160" description="HP Cloud Relational Database for MySQL" serviceName="Relational DB MySQL" serviceType="hpext:dbaas" releaseState="beta"/>
     </ns1:registerServices>
-```
 
 **Error Response**
 
@@ -10570,7 +9846,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -10580,19 +9855,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/services?serviceType=compute"
-```
 
 **Additional Notes**
 
@@ -10619,7 +9889,6 @@ See schema file for more details on the request and response data structure.
 
 JSON
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/services HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4f6a6aeab0be221be646e227
@@ -10637,11 +9906,9 @@ JSON
        "serviceName": "HP-Swift USWest Zone2",
        "serviceType": "object-store"
     }}
-```
 
 XML
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/services HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4f6a6aeab0be221be646e227
@@ -10658,7 +9925,6 @@ XML
     releaseState="preview" 
     serviceType="compute" 
     xmlns:hpext="http://www.hp.com/identity/api/ext/HP-IDM/v1.0"/>
-```
 
 **Success Response**
 
@@ -10674,7 +9940,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=700D7BA73D95F49792F50528D4A792B7; Path=/; Secure
@@ -10696,11 +9961,9 @@ JSON
         "serviceType" : "object-store"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=91B57CCC2DF15E35AD6BB6B6884AB1C2; Path=/; Secure
@@ -10718,7 +9981,6 @@ XML
     serviceType="compute"&nbsp;
     releaseState="preview"&nbsp;
     xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0"/>
-```
 
 **Error Response**
 
@@ -10736,7 +9998,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -10746,19 +10007,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" -H "Content-Type: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/services" -d '{"registerService": {"description": "Test Service Desc","id": "240","otherAttributes": {},"releaseState": "preview","serviceName": "HP-Swift USWest Zone2","serviceType": "object-store"}}'
-```
 
 **Additional Notes**
 
@@ -10787,7 +10043,6 @@ See schema file for more details on the request and response data structure.
 
 JSON
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/services/150 HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4e9c7424b0be3d7fd233fa60
@@ -10808,11 +10063,9 @@ JSON
         "serviceType" : "hpext:cdn"
       }
     }
-```
 
 XML
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/services/150 HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4e9c7424b0be3d7fd233fa60
@@ -10827,7 +10080,6 @@ XML
     serviceName="CDN" serviceType="hpext:cdn" 
     releaseState="preview"/>
     
-```
 
 **Success Response**
 
@@ -10839,7 +10091,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -10860,11 +10111,9 @@ JSON
         "serviceType" : "hpext:cdn"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -10882,7 +10131,6 @@ XML
     serviceName="CDN" 
     serviceType="hpext:cdn" 
     releaseState="preview"/>
-```
 
 **Error Response**
 
@@ -10900,7 +10148,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -10910,19 +10157,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" -H "Content-Type: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/services" -d '{"registerService": {"description": "HP Content Delivery Network Service","id": "150","otherAttributes": {},"releaseState": "preview","serviceName": "CDN","serviceType": "hpext:cdn"}}'
-```
 
 **Additional Notes**
 
@@ -11024,7 +10266,6 @@ See the signature details descriptions above for information on what data parame
 
 JSON Signature Version 2
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/ec2tokens?HP-IDM-serviceId=100%2C110 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -11057,13 +10298,11 @@ JSON Signature Version 2
             "path":"/"
         }
     }
-```
 
 Optional:
 
 JSON Signature Version 0
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/ec2tokens?HP-IDM-serviceId=100%2C110 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -11096,11 +10335,9 @@ JSON Signature Version 0
             "path":"/"
         }
     }
-```
 
 JSON Signature Version 1
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/ec2tokens?HP-IDM-serviceId=100%2C110 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -11129,7 +10366,6 @@ JSON Signature Version 1
             "path":"/"
         }
     }
-```
 
 **Success Response**
 
@@ -11142,7 +10378,6 @@ JSON Signature Version 1
 
 JSON - All signature versions
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=DA7240A00E59F8E371DE567D405EB085; Path=/; Secure
@@ -11185,7 +10420,6 @@ JSON - All signature versions
         ]
       }
     }}
-```
 
 **Error Response**
 
@@ -11206,7 +10440,6 @@ JSON - All signature versions
 
 JSON - Signature is not valid
 
-```
     HTTP/1.1 401 Unauthorized
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=82034D30BB39215596243EDD6B9F2BB7; Path=/; Secure
@@ -11227,11 +10460,9 @@ JSON - Signature is not valid
         }
       }
     }
-```
 
 JSON - No service specific role is found
 
-```
     HTTP/1.1 401 Unauthorized
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=10831C151368F11FE2F8A07EB6B34B87; Path=/; Secure
@@ -11252,17 +10483,13 @@ JSON - No service specific role is found
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -X POST -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/ec2tokens?HP-IDM-serviceId=100,110" -d '{
         "ec2Credentials":{
             "access":"77242319481696:M8RVSYL1HEAHP3L11DC5",
@@ -11287,7 +10514,6 @@ Curl Example
             "path":"/"
         }
     }'
-```
 
 **Additional Notes**
 
@@ -11342,7 +10568,6 @@ See schema file for more details on the request and response data structure.
 
 JSON - Validate signature with token returned
 
-```
     POST https://localhost:8443//v2.0/HP-IDM/v1.0/gstokens HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -11362,11 +10587,9 @@ JSON - Validate signature with token returned
         }
       }
     }
-```
 
 XML - Validate signature with token returned
 
-```
     POST https://localhost:8443//v2.0/HP-IDM/v1.0/gstokens HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -11381,11 +10604,9 @@ XML - Validate signature with token returned
     <signature>nxSnQgBxJ9kWzYzRNME8hILeHIE=</signature>
     </genericSignatureCredentials>
     </auth>
-```
 
 XML - Validate signature with token returned and "belongsTo" specified
 
-```
     POST https://localhost:8443//v2.0/HP-IDM/v1.0/gstokens?belongsTo=80471193132652 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -11400,11 +10621,9 @@ XML - Validate signature with token returned and "belongsTo" specified
     <signature>nxSnQgBxJ9kWzYzRNME8hILeHIE=</signature>
     </genericSignatureCredentials>
     </auth>
-```
 
 JSON - Validate signature only
 
-```
     POST https://localhost:8443//v2.0/HP-IDM/v1.0/gstokens?belongsTo=81321234014466&returnToken=false HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -11421,11 +10640,9 @@ JSON - Validate signature only
        "dataToSign": "Some Data to Sign",
        "signature": "OiEOOeciHUuXouFh6rX23p2RbE0="
     }   } }
-```
 
 XML - Validate signature only
 
-```
     POST https://localhost:8443//v2.0/HP-IDM/v1.0/gstokens?belongsTo=81321234014466&returnToken=false HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -11440,7 +10657,6 @@ XML - Validate signature only
     <signature>OiEOOeciHUuXouFh6rX23p2RbE0=</signature>
     </genericSignatureCredentials>
     </auth>
-```
 
 **Success Response**
 
@@ -11452,7 +10668,6 @@ XML - Validate signature only
 
 JSON - Validate signature with token and roles returned
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -11485,11 +10700,9 @@ JSON - Validate signature with token and roles returned
         ]
       }
     }}
-```
 
 XML - Validate signature with token returned and "belongsTo" specified
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -11511,11 +10724,9 @@ XML - Validate signature with token returned and "belongsTo" specified
           </roles>
        </user>
     </access>
-```
 
 JSON - Validate signature only
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -11553,11 +10764,9 @@ JSON - Validate signature only
         ]
       }
     }}
-```
 
 XML - Validate signature only
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -11579,7 +10788,6 @@ XML - Validate signature only
           </roles>
        </user>
     </access>
-```
 
 
 **Error Response**
@@ -11601,7 +10809,6 @@ XML - Validate signature only
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -11611,17 +10818,13 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -X POST -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/gstokens?belongsTo=30983299632008" -d '{
       "auth": {
           "genericSignatureCredentials": {
@@ -11633,7 +10836,6 @@ Curl Example
         }
       }
     }'
-```
 
 **Additional Notes**
 
@@ -11689,7 +10891,6 @@ This call does not require a request body.
 
 JSON
 
-```
     GET /v2.0/tenants HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -11697,11 +10898,9 @@ JSON
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     GET /v2.0/tenants/ HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -11709,7 +10908,6 @@ XML
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Optional:
 
@@ -11717,7 +10915,6 @@ JSON
 
 With *name* filter.
 
-```
     GET /v2.0/tenants?name=tenantName HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -11725,11 +10922,9 @@ With *name* filter.
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 With pagination.
 
-```
     GET /v2.0/tenants?limit=10 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -11737,13 +10932,11 @@ With pagination.
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-``` 
 
 XML
 
 With pagination.
 
-```
     GET /v2.0/tenants?limit=100&marker=S4DFJ123SF HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -11751,7 +10944,6 @@ With pagination.
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -11767,7 +10959,6 @@ A list of tenants in the specified format is returned.
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -11789,11 +10980,9 @@ JSON
         }
       ]
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -11809,7 +10998,6 @@ XML
         <description>Tenant for hosting Time Warner Applications & services</description>
       </tenant>
     </tenants>
-```
 
 **Error Response**
 
@@ -11828,7 +11016,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -11838,27 +11025,20 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
 ***List Tenants***
 
-```
     curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/tenants"
-```
 
 ***Get Tenant By Name***
 
-```
     curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/tenants?name=MyTenant"
-```
 
 **Additional Notes**
 
@@ -11888,7 +11068,6 @@ This call does not require a request body.
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/tenants/ HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -11896,11 +11075,9 @@ JSON
     X-Auth-Token: HPAuth_4ed5120a2cdc1f6ab057b22d
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     GET /v2.0/HP-IDM/v1.0/tenants/ HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -11908,7 +11085,6 @@ XML
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Optional:
 
@@ -11916,7 +11092,6 @@ Request With Name Filter:
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/tenants?name=tenantName HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -11924,11 +11099,9 @@ JSON
     X-Auth-Token: HPAuth_4ed5120a2cdc1f6ab057b22d
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     GET /v2.0/HP-IDM/v1.0/tenants?name=tenantName HTTP/1.1
     Accept: application/json
     Content-Type: application/xml
@@ -11936,7 +11109,6 @@ XML
     X-Auth-Token: HPAuth_4ed5120a2cdc1f6ab057b22d
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -11948,7 +11120,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -11979,11 +11150,9 @@ JSON
         ]
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -11999,7 +11168,6 @@ XML
           <description>Tenant for hosting Time Warner Applications and services</description>
        </tenant>
     </tenant>
-```
 
 **Error Response**
 
@@ -12017,7 +11185,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -12027,19 +11194,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants"
-```
 
 #### 4.4.10.3 Get A Tenant#### {#get_a_tenant}
 #### GET /HP-IDM/v1.0/tenants/{tenantId} 
@@ -12059,7 +11221,6 @@ This call does not require a request body.
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/tenants/48164969660120 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -12067,11 +11228,9 @@ JSON
     X-Auth-Token: HPAuth_4e9767412cdcb18069188479
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     GET /v2.0/HP-IDM/v1.0/tenants/270316896886 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -12079,7 +11238,6 @@ XML
     X-Auth-Token: HPAuth_4e9767412cdcb18069188479
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -12091,7 +11249,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -12112,11 +11269,9 @@ JSON
         "tenantId" : "48164969660120"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -12131,21 +11286,11 @@ XML
     enabled="true" status="enabled" domainId="798477662343"
     tenantId="270316896886"
     description="Tenant for Sales Forecasting service" >
-    <<<<<<< HEAD
        <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
        </billToAddress> 
        <soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
        </soldToAddress> 
     </tenant>
-    
-    =======
-    <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
-     </billToAddress> 
-    <soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
-     </soldToAddress> 
-    </tenant>
-    >>>>>>> 63ec6893386130c525995a33b73e6abe21e15ec2
-```
 
 **Error Response**
 
@@ -12164,7 +11309,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -12174,19 +11318,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
-```
 
 #### 4.4.10.4 Check For Existence Of Tenant Name#### {#check_for_existence_of_tenant_name}
 #### HEAD [HPKeystoneExtensionBaseURI]/tenants?name=tenantName
@@ -12209,7 +11348,6 @@ This call does not require a request body.
 
 XML/JSON Request and Response
 
-```
     HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/tenants?name=HP%20Cloud%20System%20Domain's-Tenant01 HTTP/1.1
     Accept-Encoding: gzip,deflate
      
@@ -12221,11 +11359,9 @@ XML/JSON Request and Response
     Expires: -1
     Content-Length: 0
     Date: Tue, 21 Aug 2012 19:29:46 GMT
-```
 
 XML/JSON Request and Response (case-insensitive lookup of above tenantName)
 
-```
     HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/tenants?name=hP%20ClOUD%20SYstem%20Domain's-Tenant01 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -12238,11 +11374,9 @@ XML/JSON Request and Response (case-insensitive lookup of above tenantName)
     Expires: -1
     Content-Length: 0
     Date: Tue, 21 Aug 2012 19:30:54 GMT
-```
 
 XML/JSON Request and Response (provided tenantName not found)
 
-```
     HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/tenants HTTP/1.1HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/tenants HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -12256,11 +11390,9 @@ XML/JSON Request and Response (provided tenantName not found)
     Content-Type: text/html;charset=utf-8
     Content-Length: 952
     Date: Tue, 21 Aug 2012 19:31:40 GMT
-```
 
 XML/JSON Request Response (missing tenantName in request)
 
-```
     HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/tenants HTTP/1.1
     Accept-Encoding: gzip,deflate
      
@@ -12271,7 +11403,6 @@ XML/JSON Request Response (missing tenantName in request)
     Pragma: no-cache
     Expires: -1
     Date: Tue, 21 Aug 2012 19:32:10 GMT
-```
 
 **Success Response**
 
@@ -12302,9 +11433,7 @@ This call does not return a response body.
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X HEAD -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants?name=tenantName"
-```
 
 **Additional Notes**
 
@@ -12330,7 +11459,6 @@ This call does not require a request body.
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/tenants/96488406679080/users HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -12338,11 +11466,9 @@ JSON
     X-Auth-Token: HPAuth_4e8b5dea2cdc3d29c14604d5
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     GET /v2.0/HP-IDM/v1.0/tenants/96488406679080/users HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -12350,7 +11476,6 @@ XML
     X-Auth-Token: HPAuth_4e8b6e4c2cdc999e9328f727
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -12362,7 +11487,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -12436,11 +11560,9 @@ JSON
         ]
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -12459,7 +11581,6 @@ XML
         <roles id="00000000004004" description="Group 55207359871951 has role null in 29649421790262 domain"/>
       </user>
     </users>
-```
 
 **Error Response**
 
@@ -12478,7 +11599,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -12488,19 +11608,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/users"
-```
 
 #### 4.4.10.6 Create A Tenant#### {#create_a_tenant}
 #### POST /HP-IDM/v1.0/tenants 
@@ -12527,7 +11642,6 @@ See schema file for more details on the request and response data structure.
 
 JSON
 
-```
     POST /v2.0/HP-IDM/v1.0/tenants HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -12545,11 +11659,9 @@ JSON
         "status": "enabled"
       }
     }
-```
 
 XML
 
-```
     POST /v2.0/HP-IDM/v1.0/tenants HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -12561,19 +11673,11 @@ XML
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://docs.openstack.org/common/api/v1.0" name="Time Warner Salesforce Services" domainId="27960688482075" status="enabled">
       <description>Tenant for hosting Time Warner Salesforce Applications</description>
-    <<<<<<< HEAD
        <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
        </billToAddress> 
        <soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
        </soldToAddress> 
-    =======
-    <billToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
-     </billToAddress> 
-    <soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
-     </soldToAddress> 
-    >>>>>>> 63ec6893386130c525995a33b73e6abe21e15ec2
     </tenant>
-```
 
 **Success Response**
 
@@ -12585,7 +11689,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -12607,11 +11710,9 @@ JSON
         "tenantId": "34159634776038"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -12630,11 +11731,9 @@ XML
     domainId="77759980331221" 
     status="enabled" 
     swiftAccountHash="1234bcdefgh"/>
-```
 
 XML response with swift account hash
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -12646,7 +11745,6 @@ XML response with swift account hash
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" name="HR Tenant Services" description="Tenant for hosting HR Applications &amp; services" tenantId="309492202938" domainId="798477662343" status="enabled"/>
-```
 
 **Error Response**
 
@@ -12665,7 +11763,6 @@ XML response with swift account hash
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -12675,19 +11772,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants" -d '{"tenant":{"description":"Payroll Tenant Services for TimeWarner","domainId":"47826457774667","name":"Payroll Tenant Services","status":"enabled"}}'
-```
 
 #### 4.4.10.7 Update A Tenant#### {#update_a_tenant}
 #### PUT /HP-IDM/v1.0/tenants/{tenantID} 
@@ -12707,7 +11799,6 @@ See tenant schema file for more details on the request and response data structu
 
 JSON
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/37942731773710 HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4ecab298b0be470b008da2ab
@@ -12721,11 +11812,9 @@ JSON
        "description": "Tenant for Market forecasting service",
        "otherAttributes": {"swiftAccountHash": "abcd23456"}
     }}
-```
 
 XML
 
-```
     PUT /v2.0/HP-IDM/v1.0/tenants/33841725750480 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -12742,11 +11831,9 @@ XML
     <soldToAddress addressLine1="123 Smoke Test Lane" city="The Smoky City" state="SmokyState" zip="90909" country="USA">
      </soldToAddress> 
     </tenant>
-```
 
 XML (with swift account hash)
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/76063089090850 HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4e8397c5b0bedc2f5c932a15
@@ -12761,7 +11848,6 @@ XML (with swift account hash)
     status="enabled" 
     swiftAccountHash="abcdefgh123456" 
     xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"/>
-```
 
 **Success Response**
 
@@ -12773,7 +11859,6 @@ XML (with swift account hash)
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=C869D386993E9F92B3E2FC1935B00154; Path=/; Secure
@@ -12797,11 +11882,9 @@ JSON
         "tenantId" : "37942731773710"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -12816,11 +11899,9 @@ XML
     <tenant xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" xmlns:ns5="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" name="EMail Service" tenantId="33841725750480" domainId="36528361097134" status="disabled">
       <description>Tenant for Email and Chat Service</description>
     </tenant>
-```
 
 XML (with swift account hash)
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -12839,7 +11920,6 @@ XML (with swift account hash)
     domainId="77759980331221" 
     status="enabled" 
     swiftAccountHash="abcdefgh123456"/>
-```
 
 **Error Response**
 
@@ -12859,7 +11939,6 @@ XML (with swift account hash)
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -12869,19 +11948,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/37942731773710" -d '{"tenant":{"description":"Tenant for Market forecasting service","otherAttributes":{"swiftAccountHash":"abcd23456"}}}'
-```
 
 #### 4.4.10.8 Delete A Tenant#### {#delete_a_tenant}
 #### DELETE /HP-IDM/v1.0/tenants/{tenantId}
@@ -12901,23 +11975,19 @@ This call does not require a request body.
 
 XML
 
-```
     DELETE /v2.0/HP-IDM/v1.0/tenants/270316896886 HTTP/1.1
     Accept: application/xml
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 JSON
 
-```
     DELETE /v2.0/HP-IDM/v1.0/tenants/270316896886 HTTP/1.1
     Accept: application/json
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -12931,7 +12001,6 @@ This call does not return a response body.
 
 (No JSON/XML format differences)
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -12939,7 +12008,6 @@ This call does not return a response body.
     Expires: -1
     Set-Cookie: JSESSIONID=74ADEBA6F2523478A1700D664FD70C75; Path=/v2.0; Secure
     Date: Wed, 12 Oct 2011 22:02:16 GMT
-```
 
 **Error Response**
 
@@ -12958,7 +12026,6 @@ This call does not return a response body.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -12968,19 +12035,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
-```
 
 #### 4.4.10.9 Get Endpoints For A Tenant#### {#get_endpoints_for_a_tenant}
 #### GET /HP-IDM/v1.0/tenants/{tenantId}/endpoints
@@ -13006,25 +12068,21 @@ This call does not require a request body.
 
 JSON
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4e9605ffb0be70f2f7118b6a
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4e9605ffb0be70f2f7118b6a
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 **Success Response**
 
@@ -13036,7 +12094,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -13092,11 +12149,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints HTTP/1.1HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -13126,7 +12181,6 @@ XML
        </endpoint>
     </endpoints>
     Accept-Encoding: gzip,deflate
-```
 
 **Error Response**
 
@@ -13145,7 +12199,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -13155,19 +12208,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints"
-```
 
 **Additional Notes**
 
@@ -13198,7 +12246,6 @@ See schema file for more details on the request and response data structure.
 
 JSON
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4e9605ffb0be70f2f7118b6a
@@ -13213,11 +12260,9 @@ JSON
             "id":120
         }
     }
-```
 
 XML
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4e9605ffb0be70f2f7118b6a
@@ -13232,7 +12277,6 @@ XML
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:type="EndpointTemplateWithOnlyId"
       id="110"/>
-```
 
 **Success Response**
 
@@ -13244,7 +12288,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 201 CreatedHTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -13276,11 +12319,9 @@ JSON
         "type" : "object-store"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -13303,7 +12344,6 @@ XML
        <version id="1.1" info="http://127.0.0.1:9292/info/v1.1" 
             list="http://127.0.0.1:9292/allVersions"/>
     </endpoint>
-```
 
 **Error Response**
 
@@ -13322,7 +12362,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -13332,19 +12371,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints" -d '{"endpointTemplate":{"id":120}}'
-```
 
 #### 4.4.10.11 Remove Endpoints From A Tenant#### {#remove_endpoints_from_a_tenant}
 #### DELETE /HP-IDM/v1.0/tenants/{tenantId}/endpoints/{endpointId}
@@ -13365,23 +12399,19 @@ This call does not require a request body.
 
 XML
 
-```
     DELETE https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints/543 HTTP/1.1
     Accept: application/xml
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 JSON
 
-```
     DELETE https://localhost:8443/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints/543 HTTP/1.1
     Accept: application/json
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -13395,7 +12425,6 @@ This call does not return a response body.
 
 (No JSON/XML format differences)
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -13403,7 +12432,6 @@ This call does not return a response body.
     Expires: -1
     Set-Cookie: JSESSIONID=74ADEBA6F2523478A1700D664FD70C75; Path=/v2.0; Secure
     Date: Wed, 12 Oct 2011 22:02:16 GMT
-```
 
 **Error Response**
 
@@ -13422,7 +12450,6 @@ This call does not return a response body.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -13432,19 +12459,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints/543"
-```
 
 ### 4.4.11 Tokens
 
@@ -13502,7 +12524,6 @@ JSON
 
 Authenticate using password credential for an unscoped token.
 
-```
     Accept-Encoding: gzip,deflate
     Accept: application/json
     Content-Type: application/json
@@ -13516,11 +12537,9 @@ Authenticate using password credential for an unscoped token.
             }
         }
     }
-```
 
 Authenticate using password credential for a scoped token.
 
-```
     Accept-Encoding: gzip,deflate
     Accept: application/json
     Content-Type: application/json
@@ -13535,11 +12554,9 @@ Authenticate using password credential for a scoped token.
             "tenantId":"95096564413950"
         }
     }
-```
 
 Authenticate using access key credential.
 
-```
     POST https://localhost:8443/v2.0/tokens HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -13556,13 +12573,11 @@ Authenticate using access key credential.
             }       
         }
     }
-```
 
 XML
 
 Authenticate using password credential for a scoped token.
 
-```
     ccept-Encoding: gzip,deflate
     Accept: application/xml
     Content-Type: application/xml
@@ -13571,11 +12586,9 @@ Authenticate using password credential for a scoped token.
     <auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://docs.openstack.org/identity/api/v2.0" tenantName="HP5 Tenant Services">
       <passwordCredentials username="arunkant" password="changeme"/>
     </auth>
-```
 
 Authenticate using access key credential.
 
-```
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     Content-Type: application/xml
@@ -13584,7 +12597,6 @@ Authenticate using access key credential.
     <auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0">
       <apiAccessKeyCredentials secretKey="vpGCFNzFZ8BMP1g8r3J6Cy7/ACOQUYyS9mXJDlxc" accessKey="9N488ACAF3859DW9AFS9"/>
     </auth>
-```
 
 **Success Response**
 
@@ -13596,7 +12608,6 @@ Authenticate using access key credential.
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -13706,11 +12717,9 @@ JSON
           }
        ]
     }}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -13760,7 +12769,6 @@ XML
           </service>
        </serviceCatalog>
     </access>
-```
 
 **Error Response**
 
@@ -13777,7 +12785,6 @@ XML
 
 JSON
 
-```
     {
       "identityFault": {
         "message": "Fault",
@@ -13785,37 +12792,30 @@ JSON
         "code": 500
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8"?>
     <identityFault xmlns="http://docs.openstack.org/identity/api/v2.0"
               code="500">
             <message>Fault</message>
             <details>Error Details...</details>
     </identityFault>
-```
 
 Curl Example
 
 ***Authenticate with Username/Password and Tenant ID***
 
-```
     curl -X POST -H "Content-Type: application/json"
          https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens
          -d '{"auth":{"passwordCredentials":{"username":"falken@wg.com",          "password":"J0shua!"}, "tenantId":"72020596871800"}}'
     
-```
 
 ***Authenticate with Access Keys and Tenant ID***
 
-```
     curl -X POST -H "Content-Type: application/json"
             https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens
         -d '{"auth":{"apiAccessKeyCredentials":{"accessKey":"B5VKMNLEZ7YUN9BTFDZC", "secretKey":"CQSp+KsLQGFz6+V/S1s4XXpE42q472pD9VhIBFsn"}, "tenantId":"72020596871800"}}'
-```
 
 **Additional Notes**
 
@@ -13845,7 +12845,6 @@ See schema file for more details on the request and response data structure.
 
 JSON
 
-```
     Accept-Encoding: gzip,deflate
     Accept: application/json
     Content-Type: application/json
@@ -13859,11 +12858,9 @@ JSON
             }
         }
     }
-```
 
 XML
 
-```
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     Content-Type: application/xml
@@ -13872,7 +12869,6 @@ XML
     <auth xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://docs.openstack.org/identity/api/v2.0" tenantId="19694547081948">
       <token id="HPAuth_4e934043b0be09f52fb4c29d" />
     </auth>
-```
 
 **Success Response**
 
@@ -13886,7 +12882,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -13943,11 +12938,9 @@ JSON
         }]
       }]
     }}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -13977,7 +12970,6 @@ XML
           </service>
        </serviceCatalog>
     </access>
-```
 
 **Error Response**
 
@@ -13995,7 +12987,6 @@ XML
 
 JSON
 
-```
     {
       "identityFault": {
         "message": "Fault",
@@ -14003,24 +12994,19 @@ JSON
         "code": 500
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8"?>
     <identityFault xmlns="http://docs.openstack.org/identity/api/v2.0"
               code="500">
             <message>Fault</message>
             <details>Error Details...</details>
     </identityFault>
-```
 
 Curl Example
 
-```
     curl -k -H "Content-Type: application/json" -d '{"auth":{"tenantName":"HP Swift Tenant Services","token":{"id":"HPAuth_4ea80da3b0be73fc0385eceb"}}}' -XPOST https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens
-```
 
 **Additional Notes**
 
@@ -14068,21 +13054,15 @@ This call does not require a request body.
 
 JSON
 
-```
     {"forbidden":{"message":"Full authentication is required to access this resource","code":403}}
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8"?><forbidden xmlns="http://docs.openstack.org/identity/api/v2.0" code="403"><message>Full authentication is required to access this resource</message></forbidden>
-```
 
 Curl Example
 
-```
     curl -k -XDELETE https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/HPAuth_123456789
-```
 
 **Additional Notes**
 
@@ -14134,7 +13114,6 @@ In addition to the token access response, the following response HTTP headers ar
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -14216,11 +13195,9 @@ JSON
         ]
       }
     }}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -14233,7 +13210,6 @@ XML
     Date: Tue, 03 Jan 2012 20:47:43 GMT
     
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><access xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:hpext="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom"><token id="HPAuth_767eaf4d50bee574eefb8e3b1081bde75edf31c59f806e35a8793296247aa7f9" expires="2012-10-10T11:09:38.813Z"><tenant id="62424047631429" name="conser4301_swift"/></token><user id="97539030347757" name="conser4301"><roles><role id="00000000004004" name="domainuser" serviceId="100"/><role id="00000000004022" name="Admin" serviceId="110" tenantId="62424047631429"/><role id="00000000004003" name="domainadmin" serviceId="100"/></roles></user></access>
-```
 
 **Error Response**
 
@@ -14252,7 +13228,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -14262,19 +13237,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -s -k -H "X-Auth-User: 62424047631429:jdoe" -H "X-Auth-Key: secrete" -H "Accept: application/xml" -D /tmp/headers.txt https://region-a.geo-1.identity.hpcloudsvc.com:35357/v1.0
-```
 
 **Additional Notes**
 
@@ -14343,23 +13313,19 @@ This call does not require a request body.
 
 JSON
 
-```
     GET https://localhost:8443/v2.0/tokens/HPAuth_4f5a7fe06a25ab00f896bee4 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/tokens/HPAuth_4f5a7fe06a25ab00f896bee4 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 Optional:
 
@@ -14367,45 +13333,37 @@ JSON
 
 ValidateToken  Request for JSON (unscoped token where HP-IDM-serviceId parameter value is ignored)
 
-```
     GET https://localhost:8443/v2.0/tokens/HPAuth_4f5a82d4b0be3c45af828494?HP-IDM-serviceId=110 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 ValidateToken JSON Request ( HP-IDM-serviceId parameter with 120 service id value)
 
-```
     GET https://localhost:8443/v2.0/tokens/HPAuth_4f5a7fe06a25ab00f896bee4?HP-IDM-serviceId=120 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 ValidateToken XML Request  (HP-IDM-serviceId parameter with 110 (Object Storage service) value and HP-IDM-endpointTemplateId parameter with 110 (Compute - AZ2) value)
 
-```
     GET https://localhost:8443/v2.0/tokens/HPAuth_4f5a7fe06a25ab00f896bee4?HP-IDM-serviceId=110&HP-IDM-endpointTemplateId=110 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
 ValidateToken  XML Request ( HP-IDM-serviceId parameter with 'global' only)
 
-```
     GET https://localhost:8443/v2.0/tokens/HPAuth_4f5a7fe06a25ab00f896bee4?HP-IDM-serviceId=global HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 **Success Response**
 
@@ -14418,7 +13376,6 @@ ValidateToken  XML Request ( HP-IDM-serviceId parameter with 'global' only)
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=D63D9FAC8FA835321F36E51CE07F2485; Path=/; Secure
@@ -14451,11 +13408,9 @@ JSON
         }]
       }
     }}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=451446B2BE922152AD41799AC7453A0B; Path=/; Secure
@@ -14478,7 +13433,6 @@ XML
           </roles>
        </user>
     </access>
-```
 
 **Error Response**
 
@@ -14493,7 +13447,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -14503,19 +13456,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com:35357/v2.0/tokens/HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c"
-```
 
 **Additional Notes**
 
@@ -14544,23 +13492,19 @@ This call does not require a request body.
 
 JSON
 
-```
     HEAD https://localhost:8443/v2.0/tokens/HPAuth_4f5a7fe06a25ab00f896bee4 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
-```
     HEAD https://localhost:8443/v2.0/tokens/HPAuth_4f5a7fe06a25ab00f896bee4 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 Optional:
 
@@ -14568,23 +13512,19 @@ JSON
 
 With belongsTo filtering.
 
-```
     HEAD https://localhost:8443/v2.0/tokens/HPAuth_4f5a7fe06a25ab00f896bee4?belongsTo=345234435 HTTP/1.1
     Accept-Encoding: gzip,deflate
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
 With belongsTo filtering.
 
-```
     HEAD https://localhost:8443/v2.0/tokens/HPAuth_4f5a7fe06a25ab00f896bee4?belongsTo=345234435 HTTP/1.1
     Accept-Encoding: gzip,deflate
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 **Success Response**
 
@@ -14609,7 +13549,6 @@ This call does not return a response body.
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -14619,19 +13558,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -XHEAD "https://az-1.region-a.geo-1.compute.hpcloudsvc.com:35357/v2.0/tokens/HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c"
-```
 
 **Additional Notes**
 
@@ -14662,7 +13596,6 @@ This call does not require a request body.
 
 JSON
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/tokens/HPAuth_4e934043b0be09f52fb4c29d HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4e934043b0be09f52fb4c29d
@@ -14671,11 +13604,9 @@ JSON
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
     Content-Length: 0
-```
 
 XML
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/tokens/HPAuth_4e934043b0be09f52fb4c29d HTTP/1.1
     Accept-Encoding: gzip,deflate
     X-Auth-Token: HPAuth_4e934043b0be09f52fb4c29d
@@ -14684,7 +13615,6 @@ XML
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
     Content-Length: 0
-```
 
 **Success Response**
 
@@ -14696,7 +13626,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -14722,11 +13651,9 @@ JSON
        "anies": null,
        "otherAttributes": {}
     }}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -14742,7 +13669,6 @@ XML
           <tenant id="95096564413950" name="HP5 Tenant Services"/>
        </token>
     </access>
-```
 
 **Error Response**
 
@@ -14757,7 +13683,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -14767,19 +13692,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -XPOST --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tokens/HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c
-```
 
 **Additional Notes**
 
@@ -14830,7 +13750,6 @@ This call does not require a request body.
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/users HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -14838,11 +13757,9 @@ JSON
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     GET /v2.0/HP-IDM/v1.0/users HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -14850,7 +13767,6 @@ XML
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Optional:
 
@@ -14858,7 +13774,6 @@ JSON
 
 Return 50 users at a time.
 
-```
     GET /v2.0/HP-IDM/v1.0/users?limit=50 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -14866,11 +13781,9 @@ Return 50 users at a time.
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Return 10 users at a time, starting with user ID `345367`
 
-```
     GET /v2.0/HP-IDM/v1.0/users?limit=10&marker=345367 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -14878,11 +13791,9 @@ Return 10 users at a time, starting with user ID `345367`
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Lookup users by name.
 
-```
     GET /v2.0/HP-IDM/v1.0/users?name=jdoe HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -14890,11 +13801,9 @@ Lookup users by name.
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Lookup users by email.
 
-```
     GET /v2.0/HP-IDM/v1.0/users?emailAddress=jdoe@acme.com HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -14902,14 +13811,12 @@ Lookup users by email.
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     Host: localhost:9999
     Connection: keep-alive
-```
 
 
 XML
 
 Lookup users by name.
 
-```
     GET /v2.0/HP-IDM/v1.0/users?name=jdoe HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -14917,11 +13824,9 @@ Lookup users by name.
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Lookup users by email.
 
-```
     GET /v2.0/HP-IDM/v1.0/users?emailAddress=jdoe@acme.com HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -14929,7 +13834,6 @@ Lookup users by email.
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     Host: localhost:9999
     Connection: keep-alive
-```
 
 
 **Success Response**
@@ -14943,7 +13847,6 @@ Lookup users by email.
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15029,11 +13932,9 @@ JSON
         ]
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15049,7 +13950,6 @@ XML
       <user domainId="798477662343" emailAddress="amymiller@papsi.com" website="http://www.pepsi.com" phone="1-800-555-1212" zip="89072" country="USA" state="GA" city="Atlanta" addressLine1="1, Pepsi Way" accountId="968754602297" username="amymiller@papsi.com" name="Amy Miller"/>
       <user domainId="980913511718" isDomainOwner="true" emailAddress="janedoe@timewarner.com" website="http://www.timewarner.com" phone="1-800-555-1212" zip="90210" country="USA" state="CA" city="Los Angeles" addressLine1="128, Hollywood Blvd" accountId="559855934411" username="janedoe@timewarner.com" name="Jane Doe"/>
     </users>
-```
 
 **Error Response**
 
@@ -15067,7 +13967,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -15077,33 +13976,24 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
 ***List Users***
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users"
-```
 
 ***Lookup Users By Name***
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users?name=jdoe"
-```
 
 ***Lookup Users By Email***
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users?emailAddress=jdoe@acme.com"
-```
 
 **Additional Notes**
 
@@ -15131,7 +14021,6 @@ This call does not require a request body.
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/users/96015523000467 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -15139,11 +14028,9 @@ JSON
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     GET /v2.0/HP-IDM/v1.0/users/96015523000467 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -15151,7 +14038,6 @@ XML
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -15163,7 +14049,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15198,11 +14083,9 @@ JSON
         "zip": "90210"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15215,7 +14098,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" domainId="980913511718" isDomainOwner="true" emailAddress="janedoe@timewarner.com" website="http://www.timewarner.com" phone="1-800-555-1212" zip="90210" country="USA" state="CA" city="Los Angeles" addressLine1="128, Hollywood Blvd" accountId="559855934411" username="janedoe@timewarner.com" name="Jane Doe" "passwordResetRequired"="true"/>
-```
 
 **Error Response**
 
@@ -15234,7 +14116,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -15244,19 +14125,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/96015523000467
-```
 
 **Additional Notes**
 
@@ -15292,18 +14168,14 @@ This call does not require a request body.
 
 JSON
 
-```
     HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/users?name=User1_2012_08_21_11_01_30_565 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
-```
 
 XML
 
-```
     HEAD https://localhost:35357/v2.0/HP-IDM/v1.0/users?name=user1_2012_08_21_11_01_30_565 HTTP/1.1
     Accept-Encoding: gzip,deflate
-```
 
 **Success Response**
 
@@ -15322,7 +14194,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15330,11 +14201,9 @@ JSON
     Expires: -1
     Content-Length: 0
     Date: Tue, 21 Aug 2012 18:49:33 GMT
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15342,7 +14211,6 @@ XML
     Expires: -1
     Content-Length: 0
     Date: Tue, 21 Aug 2012 18:49:33 GMT
-```
 
 **Error Response**
 
@@ -15362,7 +14230,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -15372,19 +14239,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users?name=user1_2012_08_21_11_01_30_565"
-```
 
 **Additional Notes**
 
@@ -15412,7 +14274,6 @@ A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 
 
 JSON
 
-```
     POST /v2.0/HP-IDM/v1.0/users HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -15438,11 +14299,9 @@ JSON
         "zip": "90210"
       }
     }
-```
 
 XML
 
-```
     POST /v2.0/HP-IDM/v1.0/users HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -15454,7 +14313,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" emailAddress="XmlUser9@timewarner.com" website="http://www.timewarner.com" phone="1-800-555-1212" zip="90210" country="USA" state="CA" city="Los Angeles" addressLine1="128, Hollywood Blvd" password="changeme" username="XmlUser9@timewarner.com" lastName="Last" firstName="First"/>
-```
 
 **Success Response**
 
@@ -15470,7 +14328,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15505,11 +14362,9 @@ JSON
         "zip": "90210"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15522,7 +14377,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" firstName="First" lastName="Last" username="XmlUser9@timewarner.com" userId="20489940157791" addressLine1="128, Hollywood Blvd" city="Los Angeles" state="CA" country="USA" zip="90210" phone="1-800-555-1212" website="http://www.timewarner.com" emailAddress="XmlUser9@timewarner.com" status="enabled" domainId="34315693600572" passwordResetRequired="true"/>
-```
 
 **Error Response**
 
@@ -15544,7 +14398,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -15554,19 +14407,15 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
 Assuming there exist a file "new_user.json" with the following content:
 
-```
     {
       "user": {
         "addressLine1": "128, Hollywood Blvd",
@@ -15583,11 +14432,8 @@ Assuming there exist a file "new_user.json" with the following content:
         "zip": "90210"
       }
     }
-```
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" -XPOST -d @new_user.json "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users"
-```
 
 **Additional Notes**
 
@@ -15615,7 +14461,6 @@ A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 
 
 JSON
 
-```
     PUT /v2.0/HP-IDM/v1.0/users/96015523000467 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -15630,11 +14475,9 @@ JSON
         "emailAddress": "larrykinglive@timewarner.com"
       }
     }
-```
 
 XML
 
-```
     PUT /v2.0/HP-IDM/v1.0/users/559855934411 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -15645,7 +14488,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" emailAddress="janedoe2@timewarner.com" status="enabled"/>
-```
 
 **Success Response**
 
@@ -15661,7 +14503,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15696,11 +14537,9 @@ JSON
         "zip": "90210"
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15712,7 +14551,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" domainId="980913511718" isDomainOwner="true" emailAddress="janedoe2@timewarner.com" website="http://www.timewarner.com" phone="1-800-555-1212" zip="90210" country="USA" state="CA" city="Los Angeles" addressLine1="128, Hollywood Blvd" accountId="559855934411" username="janedoe@timewarner.com" name="Jane Doe"/>
-```
 
 **Error Response**
 
@@ -15736,7 +14574,6 @@ tem |
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -15746,29 +14583,22 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
 Assuming there exist a file "update_user.json" with the following content:
 
-```
     {
       "user": {
         "emailAddress": "larrykinglive@timewarner.com"
       }
     }
-```
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" -XPUT -d @update_user.json "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/96015523000467"
-```
 
 **Additional Notes**
 
@@ -15800,7 +14630,6 @@ This call does not require a request body.
 
 JSON
 
-```
     DELETE /v2.0/HP-IDM/v1.0/users/96015523000467 HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -15808,11 +14637,9 @@ JSON
     X-Auth-Token: HPAuth_4e7b95f52cdcd8e4c569ca44
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     DELETE /v2.0/HP-IDM/v1.0/users/96015523000467 HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -15820,7 +14647,6 @@ XML
     X-Auth-Token: HPAuth_4e7b95f52cdcd8e4c569ca44
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -15836,7 +14662,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15844,11 +14669,9 @@ JSON
     Expires: -1
     Set-Cookie: JSESSIONID=A17A0BD786F05FEC1AE4E25BF8680323; Path=/v2.0
     Date: Thu, 22 Sep 2011 20:10:44 GMT
-```
 
 XML
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -15856,7 +14679,6 @@ XML
     Expires: -1
     Set-Cookie: JSESSIONID=A17A0BD786F05FEC1AE4E25BF8680323; Path=/v2.0
     Date: Thu, 22 Sep 2011 20:10:44 GMT
-```
 
 **Error Response**
 
@@ -15879,7 +14701,6 @@ tem |
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -15889,19 +14710,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -XDELETE "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/96015523000467"
-```
 
 **Additional Notes**
 
@@ -15934,7 +14750,6 @@ This call does not require a request body.
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/users/627893056455/groups HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -15942,11 +14757,9 @@ JSON
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     GET /v2.0/HP-IDM/v1.0/users/627893056455/groups HTTP/1.1
     Accept: application/xml
     Content-Type: application/xml
@@ -15954,7 +14767,6 @@ XML
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -15970,7 +14782,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=DAC25DAF81622AC8A4854FA4687879F7; Path=/; Secure
@@ -15997,11 +14808,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -16023,7 +14832,6 @@ XML
         <description>johndoe@papsi.com-DOMAIN Users</description>
       </group>
     </groups>
-```
 
 **Error Response**
 
@@ -16045,7 +14853,6 @@ tem |
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -16055,27 +14862,20 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
 Return all the groups for a given user.
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/96015523000467/groups"
-```
 
 Return maximum of 10 groups at a time, starting with groupId '1234556', for a given user.
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/96015523000467/groups?limit=10&marker=1234556"
-```
 
 
 **Additional Notes**
@@ -16110,7 +14910,6 @@ A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 
 
 JSON
 
-```
     PUT /v2.0/HP-IDM/v1.0/users/53382673413858/password HTTP/1.1
     Accept: application/json
     Content-Type: application/json
@@ -16125,11 +14924,9 @@ JSON
         "newPassword": "changed$pwd"
       }
     }
-```
 
 XML
 
-```
     PUT /v2.0/HP-IDM/v1.0/users/53382673413858/password HTTP/1.1
     Accept: application/json
     Content-Type: application/xml
@@ -16141,7 +14938,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <passwordUpdate xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" newPassword="changed$pwd"/>
-```
 
 **Success Response**
 
@@ -16157,7 +14953,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -16165,11 +14960,9 @@ JSON
     Expires: -1
     Set-Cookie: JSESSIONID=4470C4AB8BD315EAAC0156F5AF822442; Path=/
     Date: Fri, 18 Nov 2011 18:03:03 GMT
-```
 
 XML
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -16177,7 +14970,6 @@ XML
     Expires: -1
     Set-Cookie: JSESSIONID=8C6A602EB93E746CCE4B6F173E6FA484; Path=/
     Date: Fri, 18 Nov 2011 17:58:24 GMT
-```
 
 **Error Response**
 
@@ -16199,7 +14991,6 @@ tem |
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -16209,29 +15000,22 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
 Assuming there exist a file "new_password.json" with the following content:
 
-```
     {
       "passwordUpdate": {
         "newPassword": "changed$pwd"
       }
     }
-```
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" -XPUT -d @new_password.json "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/53382673413858/password"
-```
 
 **Additional Notes**
 
@@ -16261,7 +15045,6 @@ This call does not require a request body.
 
 JSON
 
-```
     POST /v2.0/HP-IDM/v1.0/users/password/reset?userName=jschmo HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -16270,11 +15053,9 @@ JSON
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8080
     Content-Length: 0
-```
 
 XML
 
-```
     POST /v2.0/HP-IDM/v1.0/users/password/reset?userName=jschmo HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -16283,7 +15064,6 @@ XML
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8080
     Content-Length: 0
-```
 
 **Success Response**
 
@@ -16299,25 +15079,21 @@ XML
 
 JSON
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
     Pragma: no-cache
     Expires: -1
     Date: Mon, 22 Aug 2011 04:55:08 GMT
-```
 
 XML
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
     Pragma: no-cache
     Expires: -1
     Date: Mon, 22 Aug 2011 04:55:08 GMT
-```
 
 **Error Response**
 
@@ -16338,7 +15114,6 @@ tem |
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -16348,19 +15123,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -XPOST "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/password/reset?usernName=jschmo"
-```
 
 **Additional Notes**
 
@@ -16394,7 +15164,6 @@ See schema file for more details on the request and response data structure.
 
 JSON
 
-```
     PUT /v2.0/HP-IDM/v1.0/users/password/reset/UlZacHJ4a2V2LzFyNENSMW1vdlhONGJxK2hWMmgxcGVqd0FvVURtOC9jZz1FUA HTTP/1.1
     Accept-Encoding: gzip,deflate
     Content-Type: application/json
@@ -16407,11 +15176,9 @@ JSON
         "newPassword": "changeme"
       }
     }
-```
 
 XML
 
-```
     PUT /v2.0/HP-IDM/v1.0/users/password/reset/azEyRGpxK3l3QmdRYmYwZlVBQ0VxUWRncnVScFM4SEJSN3BVUTZ2akJ6OD1Neg HTTP/1.1
     Accept-Encoding: gzip,deflate
     Content-Type: application/xml
@@ -16420,7 +15187,6 @@ XML
     Content-Length: 155
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?> <passwordUpdate xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" newPassword="newpwd"  />
-```
 
 **Success Response**
 
@@ -16436,7 +15202,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OKHTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=005BC8D3F99AB57DF8CC7A913672E991; Path=/; Secure
@@ -16471,11 +15236,9 @@ JSON
         "zip" : null
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=0D4F1347839350183EFE2A3553C4FF61; Path=/; Secure
@@ -16487,7 +15250,6 @@ XML
     Date: Tue, 29 Nov 2011 17:42:30 GMT
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" firstName="firstName" lastName="lastName" username="haneef" userId="62327210706778" emailAddress="haneef.ali@hp.com" status="enabled" domainId="00000000001001"/>
-```
 
 **Error Response**
 
@@ -16508,7 +15270,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -16518,29 +15279,22 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
 Assuming there exist a file "mypasword.json" with the following content:
 
-```
     {
       "passwordUpdate": {
         "newPassword": "changeme"
       }
     }
-```
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "Content-Type: application/json" -H "Accept: application/json" -XPUT -d @mypassword.json "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/password/reset/UlZacHJ4a2V2LzFyNENSMW1vdlhONGJxK2hWMmgxcGVqd0FvVURtOC9jZz1FUA"
-```
 
 **Additional Notes**
 
@@ -16571,25 +15325,21 @@ This call does not require a request body.
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/users/345678902345/roles HTTP/1.1
     Accept: application/json
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     GET /v2.0/HP-IDM/v1.0/users/345678902345/roles HTTP/1.1
     Accept: application/xml
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Optional:
 
@@ -16597,49 +15347,41 @@ JSON
 
 Filtered by service ID:
 
-```
     GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?serviceId=100 HTTP/1.1
     Accept: application/json
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Return maximum of 10 roles at a time, starting with role ID `123456`:
 
-```
     GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?limit=10&marker=123456 HTTP/1.1
     Accept: application/json
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
 Filtered by service ID:
 
-```
     GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?serviceId=100 HTTP/1.1
     Accept: application/xml
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 Return maximum of 10 roles at a time, starting with role ID `123456`:
 
-```
     GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?limit=10&marker=123456 HTTP/1.1
     Accept: application/xml
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 
 **Success Response**
@@ -16652,7 +15394,6 @@ Return maximum of 10 roles at a time, starting with role ID `123456`:
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -16688,11 +15429,9 @@ JSON
           "isCrossDomain": false
        }
     ]}}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -16728,7 +15467,6 @@ XML
           <isCrossDomain>false</isCrossDomain>
        </role>
     </roles>
-```
 
 **Error Response**
 
@@ -16746,7 +15484,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -16756,19 +15493,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/345678902345/roles?serviceId=100"
-```
 
 **Additional Notes**
 
@@ -16800,25 +15532,21 @@ This call does not require a request body.
 
 JSON
 
-```
     GET /v2.0/HP-IDM/v1.0/users/345678902345/roles/00000000004003 HTTP/1.1
     Accept: application/json
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     HEAD /v2.0/HP-IDM/v1.0/users/345678902345/roles/00000000004003 HTTP/1.1
     Accept: application/xml
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -16833,7 +15561,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=20DD4F9E1E3D2B0485DC81D93609DE30; Path=/; Secure
@@ -16842,11 +15569,9 @@ JSON
     Expires: -1
     Content-Length: 0
     Date: Wed, 26 Sep 2012 17:58:59 GMT
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Set-Cookie: JSESSIONID=20DD4F9E1E3D2B0485DC81D93609DE30; Path=/; Secure
@@ -16855,7 +15580,6 @@ XML
     Expires: -1
     Content-Length: 0
     Date: Wed, 26 Sep 2012 17:58:59 GMT
-```
 
 **Error Response**
 
@@ -16873,7 +15597,6 @@ tatus Code | Description | Reasons |
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -16883,19 +15606,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" -XHEAD "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/345678902345/roles/00000000004003"
-```
 
 **Additional Notes**
 
@@ -16930,25 +15648,21 @@ This call does not require a request body.
 
 JSON
 
-```
     PUT /v2.0/HP-IDM/v1.0/users/12345678909876/roles/334343434 HTTP/1.1
     Accept: application/json
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     PUT /v2.0/HP-IDM/v1.0/users/12345678909876/roles/334343434 HTTP/1.1
     Accept: application/xml
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -16961,17 +15675,13 @@ XML
 
 JSON
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
-```
 
 XML
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
-```
 
 **Error Response**
 
@@ -16991,7 +15701,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -17001,19 +15710,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" -XPUT "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/12345678909876/roles/334343434"
-```
 
 **Additional Notes**
 
@@ -17044,25 +15748,21 @@ This call does not require a request body.
 
 JSON
 
-```
     DELETE /v2.0/HP-IDM/v1.0/users/559855934411/roles/07568653986543 HTTP/1.1
     Accept: application/json
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 XML
 
-```
     DELETE /v2.0/HP-IDM/v1.0/users/559855934411/roles/07568653986543 HTTP/1.1
     Accept: application/json
     X-Auth-Token: HPAuth_4e7b8ddf2cdcd8e4c569ca3a
     User-Agent: Wink Client v1.1.2
     Host: localhost:9999
     Connection: keep-alive
-```
 
 **Success Response**
 
@@ -17075,25 +15775,21 @@ XML
 
 JSON
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
     Pragma: no-cache
     Expires: -1
     Date: Tue, 09 Aug 2011 22:20:25 GMT
-```
 
 XML
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
     Pragma: no-cache
     Expires: -1
     Date: Tue, 09 Aug 2011 22:20:25 GMT
-```
 
 **Error Response**
 
@@ -17112,7 +15808,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -17122,19 +15817,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" -XDELETE "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/12345678909876/roles/334343434"
-```
 
 **Additional Notes**
 
@@ -17191,7 +15881,6 @@ A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 40
 
 JSON
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -17211,11 +15900,9 @@ JSON
              "userId": "00000000003002"
            }
     }
-```
 
 XML
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -17230,7 +15917,6 @@ XML
     <algorithm>HmacSHA1</algorithm>
     <keyLength>64</keyLength>
     </accessKey>
-```
 
 **Success Response**
 
@@ -17242,7 +15928,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -17268,11 +15953,9 @@ JSON
         "validTo" : 1632074474000
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -17288,7 +15971,6 @@ XML
        <keyLength>64</keyLength>
        <secretKey>iwv//jFjJ2E</secretKey>
     </accessKey>
-```
 
 **Error Response**
 
@@ -17308,7 +15990,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -17318,17 +15999,13 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -X POST -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys" -d '{
       "accessKey" : {
         "algorithm" : "HmacSHA1",
@@ -17339,7 +16016,6 @@ Curl Example
         "status" : "active",
         "userId" : "84463950217213"
       }}'
-```
 
 **Additional Notes**
 
@@ -17378,7 +16054,6 @@ This call does not return a response body on success.
 
 JSON
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -17386,11 +16061,9 @@ JSON
     Expires: -1
     Set-Cookie: JSESSIONID=90D365930EDDB20FF49CC2DDA4B7C925; Path=/v2.0; Secure
     Date: Thu, 22 Sep 2011 22:15:42 GMT
-```
 
 XML
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -17398,7 +16071,6 @@ XML
     Expires: -1
     Set-Cookie: JSESSIONID=7F457E3037CCB2DEC6C33D408F544EA8; Path=/v2.0; 
     SecureDate: Fri, 09 Sep 2011 04:25:47 GMT 
-```
 
 **Error Response**
 
@@ -17417,7 +16089,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -17427,19 +16098,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -X DELETE -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/ZNFNCA1JJL3T7XY12V2F" 
-```
 
 **Additional Notes**
 
@@ -17474,25 +16140,21 @@ A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 40
 
 JSON
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=false HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     X-Auth-Token: HPAuth_4e7b71f5e4b0600fec3d2a20
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=false HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     X-Auth-Token: HPAuth_4e699292e4b0a8f279022d4d
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 **Success Response**
 
@@ -17504,7 +16166,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -17546,11 +16207,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -17579,7 +16238,6 @@ XML
           <keyLength>64</keyLength>
        </accessKey>
     </accessKeys>
-```
 
 **Error Response**
 
@@ -17599,7 +16257,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -17609,19 +16266,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -H "X-Auth-Token: HPAuth_21805c02da2661574e46235bd8c27c10623bddc09a7cf4c67004771628e5453c" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys?export=true"
-```
 
 **Additional Notes**
 
@@ -17653,7 +16305,6 @@ A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 40
 
 JSON
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/V7TEGGSZZ4NJK9UR4UFE?export=true HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -17661,18 +16312,15 @@ JSON
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443 
     
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/3D76NSUB49C96DFBRUF9?export=false HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     X-Auth-Token: HPAuth_4e699292e4b0a8f279022d4d
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 **Success Response**
 
@@ -17684,7 +16332,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -17711,11 +16358,9 @@ JSON
        }
     } 
     
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -17730,7 +16375,6 @@ XML
       <algorithm>HmacSHA1</algorithm>
       <keyLength>64</keyLength>
     </accessKey> 
-```
 
 **Error Response**
 
@@ -17750,7 +16394,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -17760,19 +16403,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/HAJ5LLHHTKHBXB6MK3TL?export=true"
-```
 
 **Additional Notes**
 
@@ -17808,7 +16446,6 @@ A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 40
 
 JSON
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -17850,11 +16487,9 @@ JSON
         ],
        "otherAttributes": {}
     }}
-```
 
 XML
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -17871,7 +16506,6 @@ XML
           <secretKey>HyGB2QRiOu7</secretKey>
        </accessKey>
     </accessKeys>
-```
 
 **Success Response**
 
@@ -17883,7 +16517,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -17925,11 +16558,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -17947,7 +16578,6 @@ XML
           <keyLength>64</keyLength>
        </accessKey>
     </accessKeys>
-```
 
 **Error Response**
 
@@ -17967,7 +16597,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -17977,17 +16606,13 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys" -d '{"accessKeys": {
        "anies": null,
        "accessKey":    [
@@ -18021,7 +16646,6 @@ Curl Example
        "otherAttributes": {}
     }}'
     
-```
 
 **Additional Notes**
 
@@ -18051,7 +16675,6 @@ A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 40
 
 JSON
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/KNGTV6EFKLPYE8LXF4VL HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -18066,11 +16689,9 @@ JSON
         "status" : "inactive"
       }
     }
-```
 
 XML
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/2SL748X97NEP7B6MVXPS HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -18082,7 +16703,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <accessKey status="inactive" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"/>
-```
 
 **Success Response**
 
@@ -18094,7 +16714,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -18119,11 +16738,9 @@ JSON
         "validTo" : 1632074474000
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -18135,7 +16752,6 @@ XML
     Date: Sat, 10 Sep 2011 01:16:12 GMT
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><accessKey xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" accessKeyId="2SL748X97NEP7B6MVXPS" userId="000000003002" domainId="000000001001" status="inactive" validFrom="2011-09-08T15:20:20.000-07:00" validTo="2021-09-05T15:20:20.000-07:00" createdOn="2011-09-08T15:20:20.275-07:00"><algorithm>HmacSHA1</algorithm><keyLength>64</keyLength></accessKey>
-```
 
 **Error Response**
 
@@ -18155,7 +16771,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -18165,23 +16780,18 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/accesskeys/V7TEGGSZZ4NJK9UR4998" -d '{
       "accessKey" : {
         "status" : "active"
       }
     }'
-```
 
 **Additional Notes**
 
@@ -18239,25 +16849,21 @@ This call does not require a request body.
 
 JSON
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/certificates?export=false HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     X-Auth-Token: HPAuth_4e7bdbcee4b0600fec3d2a4d
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/certificates?export=false HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     X-Auth-Token: HPAuth_4e6eb9b9e4b0100a2619f0c5
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 Optional:
 
@@ -18265,25 +16871,21 @@ Request With issue name and serial number and :
 
 JSON
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/certificates?issuerName=ABC&serialNumber=DEF HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     X-Auth-Token: HPAuth_4e7bdbcee4b0600fec3d2a4d
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/certificates?issuerName=ABC&serialNumber=DEF HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     X-Auth-Token: HPAuth_4e6eb9b9e4b0100a2619f0c5
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 **Success Response**
 
@@ -18295,7 +16897,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -18373,11 +16974,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -18392,7 +16991,6 @@ XML
        <certificate userId="000000003002" domainId="000000001001" issuerName="CN=Joe Test" serialNumber="16c13be6" subject="CN=Joe Test" subjectKeyId="326dd2ab79ddc98cf4620b7df0f557501fdd3dd4" status="active" validFrom="2011-09-12T18:32:03.000-07:00" validTo="2021-09-09T18:32:03.000-07:00" signatureAlgorithm="SHA1WithRSA" publicKeyAlgorithm="RSA" publicKeyLength="1024" keyUsage="Digital Signature" enhancedKeyUsage="Client Authentication"/>
        <certificate userId="000000003002" domainId="000000001001" issuerName="CN=Joe Test" serialNumber="1239dac6" subject="CN=Joe Test" subjectKeyId="504744e8c29d8bf417c01e8fb6c779a23749cf80" status="active" validFrom="2011-09-12T18:34:42.000-07:00" validTo="2021-09-09T18:34:42.000-07:00" signatureAlgorithm="SHA1WithRSA" publicKeyAlgorithm="RSA" publicKeyLength="1024" keyUsage="Digital Signature" enhancedKeyUsage="Client Authentication"/>
     </certificates>
-```
 
 **Error Response**
 
@@ -18410,7 +17008,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -18420,19 +17017,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/certificates"
-```
 
 **Additional Notes**
 
@@ -18461,25 +17053,21 @@ This call does not require a request body.
 
 JSON
 
-```
     DELETE https://localhost:8443/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test1/5669954f HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     X-Auth-Token: HPAuth_4e7bde38e4b0600fec3d2a54
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
-```
     DELETE https://localhost:8443/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test/1239dac6 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     X-Auth-Token: HPAuth_4e6edf2ee4b03cd3901e21e5
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 Optional:
 
@@ -18494,7 +17082,6 @@ Optional:
 
 JSON
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -18502,11 +17089,9 @@ JSON
     Expires: -1
     Set-Cookie: JSESSIONID=24830D918D66DC787E1510E8385F1623; Path=/v2.0; Secure
     Date: Fri, 23 Sep 2011 01:22:57 GMT
-```
 
 XML
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -18514,7 +17099,6 @@ XML
     Expires: -1
     Set-Cookie: JSESSIONID=AB5C4E673D143F25DE6EFC024E1A2ED9; Path=/v2.0; Secure
     Date: Tue, 13 Sep 2011 04:45:19 GMT
-```
 
 **Error Response**
 
@@ -18532,7 +17116,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -18542,19 +17125,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test1/5669954f" -XDELETE
-```
 
 **Additional Notes**
 
@@ -18583,39 +17161,31 @@ This call does not require a request body.
 
 JSON
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test1/5669954f?export=true HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     X-Auth-Token: HPAuth_4e7bde38e4b0600fec3d2a54
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test/16c13be6?export=true HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     X-Auth-Token: HPAuth_4e6eb9b9e4b0100a2619f0c5
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 Optional:
 
 JSON
 
-```
     {json data structure here}
-```
 
 XML
 
-```
     {xml data structure here}
-```
 
 **Success Response**
 
@@ -18628,7 +17198,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -18665,11 +17234,9 @@ JSON
         "validTo" : 1632100274000
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -18698,7 +17265,6 @@ XML
     -----END CERTIFICATE-----</data>
        </certificateFile>
     </certificate>
-```
 
 **Error Response**
 
@@ -18716,7 +17282,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -18726,19 +17291,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test1/5669954f?export=true"
-```
 
 **Additional Notes**
 
@@ -18763,7 +17323,6 @@ This call requires a request body.
 
 JSON
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/certificates HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -18774,11 +17333,9 @@ JSON
     Content-Length: 114
      
     {"certificate":{"userId":"00000000003002","domainId":"00000000001001","subject":"CN=Joe Test1","status":"active"}}
-```
 
 XML
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/certificates HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -18790,7 +17347,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <certificate userId="000000003002" domainId="000000001001" subject="CN=Joe Test" status="active" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"/>
-```
 
 Optional:
 
@@ -18805,7 +17361,6 @@ Optional:
 
 JSON
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -18846,11 +17401,9 @@ JSON
         "validTo" : 1632100274000
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -18902,7 +17455,6 @@ XML
     </data>
        </privateKeyFile>
     </certificate>
-```
 
 **Error Response**
 
@@ -18920,7 +17472,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -18930,19 +17481,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/certificates" -XPOST -d "\{"certificate\":\{"userId\":\"00000000003002\",\"domainId\":\"00000000001001\",\"subject\":\"CN=Joe Test1\",\"status\":\"active\"}}"
-```
 
 **Additional Notes**
 
@@ -18967,7 +17513,6 @@ The request body contains a certificates object with the certificates to be impo
 
 JSON
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/certificates HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -18990,11 +17535,9 @@ JSON
         } ]
       }
     }
-```
 
 XML
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/certificates HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -19026,7 +17569,6 @@ XML
           </certificateFile>
        </certificate>
     </certificates>
-```
 
 Optional:
 
@@ -19042,7 +17584,6 @@ Optional:
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -19084,11 +17625,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -19121,7 +17660,6 @@ XML
           </certificateFile>
        </certificate>
     </certificates>
-```
 
 **Error Response**
 
@@ -19139,7 +17677,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -19149,17 +17686,13 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/certificates" -XPUT -d "{
       "certificates" : {
         "certificate" : [ {
@@ -19174,7 +17707,6 @@ Curl Example
       }
     }"
     
-```
 
 **Additional Notes**
 
@@ -19199,7 +17731,6 @@ The request body contains a certificate object. The status attribute is required
 
 JSON
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test2/0a5b1864 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -19214,11 +17745,9 @@ JSON
         "status" : "inactive"
       }
     }
-```
 
 XML
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test/1239dac6 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -19230,7 +17759,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <certificate xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" status="active"/>
-```
 
 Optional:
 
@@ -19245,7 +17773,6 @@ Optional:
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -19278,11 +17805,9 @@ JSON
         "validTo" : 1632100386000
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -19294,7 +17819,6 @@ XML
     Date: Tue, 13 Sep 2011 03:59:59 GMT
      
     <certificate userId="000000003002" domainId="000000001001" issuerName="CN=Joe Test" serialNumber="1239dac6" subject="CN=Joe Test" subjectKeyId="504744e8c29d8bf417c01e8fb6c779a23749cf80" status="active" validFrom="2011-09-12T18:34:42.000-07:00" validTo="2021-09-09T18:34:42.000-07:00" signatureAlgorithm="SHA1WithRSA" publicKeyAlgorithm="RSA" publicKeyLength="1024" keyUsage="Digital Signature" enhancedKeyUsage="Client Authentication" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/v2.0" xmlns:ns3="http://www.w3.org/2005/Atom"/>
-```
 
 **Error Response**
 
@@ -19313,7 +17837,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -19323,19 +17846,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/certificates/CN=Joe%20Test/1239dac6" -XPUT -d '{"certificate": {"status": "inactive"} }'
-```
 
 **Additional Notes**
 
@@ -19394,7 +17912,6 @@ A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 40
 
 JSON
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -19405,11 +17922,9 @@ JSON
     Content-Length: 85
      
     {"keyPair":{"userId":"00000000003002","domainId":"00000000001001","status":"active"}}
-```
 
 XML
 
-```
     POST https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -19424,7 +17939,6 @@ XML
     <publicKeyAlgorithm>DSA</publicKeyAlgorithm>
     <publicKeyLength>1024</publicKeyLength>
     </keyPair>
-```
 
 
 **Success Response**
@@ -19438,7 +17952,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -19473,11 +17986,9 @@ JSON
         "validTo" : 1634250700000
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 201 Created
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -19520,7 +18031,6 @@ XML
     -----END PRIVATE KEY-----</data>
        </privateKeyFile>
     </keyPair>
-```
 
 **Error Response**
 
@@ -19541,7 +18051,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -19551,19 +18060,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -X POST -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs" -d '{"keyPair":{"publicKeyAlgorithm" : "RSA", "userId":"84463950217213","domainId":"11180052618906","status":"active"}}'
-```
 
 **Additional Notes**
 
@@ -19593,25 +18097,21 @@ A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 40
 
 JSON
 
-```
     DELETE https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/6616KAAUK6L9HJGUT6Z7 HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     X-Auth-Token: HPAuth_4e9caa84e4b0ea896133e05e
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
-```
     DELETE https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/3K3A3FJSC9YRX5LVJCES HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     X-Auth-Token: HPAuth_4e81f502e4b078454c0c31bf
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 **Success Response**
 
@@ -19623,7 +18123,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -19631,11 +18130,9 @@ JSON
     Expires: -1
     Set-Cookie: JSESSIONID=06BB563F31C6543DE13C39F82290764C; Path=/v2.0; Secure
     Date: Mon, 17 Oct 2011 22:35:05 GMT
-```
 
 XML
 
-```
     HTTP/1.1 204 No Content
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -19643,7 +18140,6 @@ XML
     Expires: -1
     Set-Cookie: JSESSIONID=C1E6F9C41377350F6C6236CD0923BAC8; Path=/v2.0; Secure
     Date: Tue, 27 Sep 2011 16:22:36 GMT
-```
 
 **Error Response**
 
@@ -19663,7 +18159,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -19673,20 +18168,15 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -X DELETE -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/HX6K62WXLNAMZCKKDJSM" 
     
-```
 
 **Additional Notes**
 
@@ -19717,25 +18207,21 @@ A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 40
 
 JSON
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/ZZPADZV9LPZCLZJ1GDEK?export=true HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     X-Auth-Token: HPAuth_4e9caa84e4b0ea896133e05e
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/3K3A3FJSC9YRX5LVJCES?export=false HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     X-Auth-Token: HPAuth_4e815f48e4b0459717485fba
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 **Success Response**
 
@@ -19747,7 +18233,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -19775,11 +18260,9 @@ JSON
        "validFrom": 1318870262000,
        "validTo": 1634230262000
     }}
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -19794,7 +18277,6 @@ XML
        <publicKeyAlgorithm>RSA</publicKeyAlgorithm>
        <publicKeyLength>1024</publicKeyLength>
     </keyPair>
-```
 
 **Error Response**
 
@@ -19814,7 +18296,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -19824,19 +18305,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/XX1ZH9BT8U4CK86ZWPVK?export=true"
-```
 
 **Additional Notes**
 
@@ -19869,25 +18345,21 @@ A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 40
 
 JSON
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs?export=false HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
     X-Auth-Token: HPAuth_4e9caa84e4b0ea896133e05e
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 XML
 
-```
     GET https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs?export=false HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
     X-Auth-Token: HPAuth_4e815f48e4b0459717485fba
     User-Agent: Jakarta Commons-HttpClient/3.1
     Host: localhost:8443
-```
 
 **Success Response**
 
@@ -19899,7 +18371,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -20085,11 +18556,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -20110,7 +18579,6 @@ XML
           <publicKeyLength>1024</publicKeyLength>
        </keyPair>
     </keyPairs>
-```
 
 **Error Response**
 
@@ -20129,7 +18597,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -20139,19 +18606,14 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs?export=true"
-```
 
 **Additional Notes**
 
@@ -20189,7 +18651,6 @@ A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 40
 
 JSON
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -20243,11 +18704,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -20291,7 +18750,6 @@ XML
        </publicKeyFile>
     </keyPair>
     </keyPairs>
-```
 
 **Success Response**
 
@@ -20303,7 +18761,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -20357,11 +18814,9 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -20407,7 +18862,6 @@ XML
           </publicKeyFile>
        </keyPair>
     </keyPairs>
-```
 
 **Error Response**
 
@@ -20429,7 +18883,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -20439,17 +18892,13 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs" -d '{
       "keyPairs" : {
         "anies" : null,
@@ -20494,7 +18943,6 @@ Curl Example
         }
       }
     }'
-```
 
 **Additional Notes**
 
@@ -20527,7 +18975,6 @@ A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 40
 
 JSON
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/NY2JZ58MAWKGF6ZL4ETY HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/json
@@ -20542,11 +18989,9 @@ JSON
         "status" : "active"
       }
     }
-```
 
 XML
 
-```
     PUT https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/3K3A3FJSC9YRX5LVJCES HTTP/1.1
     Accept-Encoding: gzip,deflate
     Accept: application/xml
@@ -20558,7 +19003,6 @@ XML
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <keyPair status="inactive" xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0"/>
-```
 
 **Success Response**
 
@@ -20571,7 +19015,6 @@ XML
 
 JSON
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -20598,11 +19041,9 @@ JSON
         "validTo" : 1633998866000
       }
     }
-```
 
 XML
 
-```
     HTTP/1.1 200 OK
     Server: Apache-Coyote/1.1
     Cache-Control: no-cache
@@ -20618,7 +19059,6 @@ XML
        <publicKeyAlgorithm>RSA</publicKeyAlgorithm>
        <publicKeyLength>1024</publicKeyLength>
     </keyPair>
-```
 
 **Error Response**
 
@@ -20638,7 +19078,6 @@ XML
 
 JSON
 
-```
     {
       "unauthorized" : {
         "code" : 401,
@@ -20648,23 +19087,18 @@ JSON
         }
       }
     }
-```
 
 XML
 
-```
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
-```
 
 Curl Example
 
-```
     curl -k -X PUT -H "X-Auth-Token: HPAuth_1661578e273d107d38b732849173e00d0a60d46d9bc279bee31565fd39be48a8" -H "Content-Type: application/json" -H "Accept: application/json" "https://localhost:8443/v2.0/HP-IDM/v1.0/keypairs/74HVY65RF5WTPS3KW999" -d '{
       "keyPair" : {
         "status" : "active"
       }
     }'
-```
 
 **Additional Notes**
 
