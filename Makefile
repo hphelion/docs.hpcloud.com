@@ -35,5 +35,17 @@ deploy-qa: build
 	stackato login
 	stackato --group Documentation update docs-site
 
+deploy-prod-az2: build
+	stackato target https://api.stackato-prod-1-az2.devex.uswest.hpcloud.net
+	stackato login
+	stackato --group Documentation update docs-site
 
-.PHONY: add-tutorials update-tutorials add-docs update-docs server prepare optimize build clean deploy-qa
+deploy-prod-az1: build
+	stackato target https://api.stackato-prod-2-az1.devex.uswest.hpcloud.net
+	stackato login
+	stackato --group Documentation update docs-site
+
+deploy-prod: deploy-prod-az2 deploy-prod-az1
+
+
+.PHONY: add-tutorials update-tutorials add-docs update-docs server prepare optimize build clean deploy-qa deploy-prod-az1 deploy-prod-az2 deploy-prod
