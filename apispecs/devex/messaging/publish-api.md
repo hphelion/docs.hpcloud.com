@@ -10,7 +10,6 @@ group: apispec
 
 
 # 1. Overview
-*Brief introduction and overview of the service and its intended use.*
 
 The HP Cloud Message Pub is a lightweight message publishing platform that allows the Network Operations Center (NOC) and the Support group to initiate messages to HPCS clients. These messages will target Management Console users via the web UI.
 
@@ -21,8 +20,10 @@ The first iteration is essentially a prototype and will implement the following 
 
 
 ## 1.1 API Maturity Level
+<!---
 *State the maturity level in which the API is in currently, based on the pre-defined stages i.e. Experimental (early Alpha, available internally only), Exploratory (Private-beta ready), Public (Public-beta ready), GA (Release to General Availability, SLAs defined.*  
 *The versions schema, status field, supports an enumeration of ALPHA, BETA, CURRENT and DEPRECATED. The versions->status field should correspond to the Maturity Level for the API, i.e. ALPHA for Experimental, BETA for Exploratory, CURRENT for Public and GA, DEPRECATED for all other versions of the API that are not supported anymore.*
+-->
 
 **Maturity Level**: *Experimental*
 
@@ -37,30 +38,41 @@ The first iteration is essentially a prototype and will implement the following 
 Documentation for MessagePub is available on the [MessagePub](https://wiki.hpcloud.net/display/iaas/MessagePub+-+Message+Publishing) Wiki page.
 
 ## 2.1 Overview
+<!---
 *References to architectural details of the service.*
+-->
 
 ## 2.2 Conceptual/Logical Architecture View
+<!---
 *Describe the logical components of the system and their responsibilities*
+-->
 
 ## 2.3 Infrastructure Architecture View
+<!---
 *Describe how the API fits into the overall HPCS Infrastructure*
+-->
 
 ## 2.4 Entity Relationship Diagram
+<!---
 *Describe the relationships between the various entities (resources) involved in the API*
-
+-->
 
 ---
 
 # 3. Account-level View
+<!---
 *Describe the relationship of the API with respect to the accounts, groups, tenants, regions, availability zones etc.*
-
+-->
 
 ## 3.1 Accounts
+<!---
 *Describe the structure of the user accounts, groups and tenants. Currently this might be described separately in context of Control Services, but in future each service API needs to state their usage. In future CS might support complex group hierarchies, enterprise account structures while there maybe a phased adoption by individual service APIs*
-
+-->
 
 ## 3.2 Regions and Availability Zones
+<!---
 *Describe the availability of the service API in different regions and availability zones. State plans for future expansion as well.*
+-->
 
 **Region(s)**: region-a
 
@@ -70,14 +82,18 @@ Documentation for MessagePub is available on the [MessagePub](https://wiki.hpclo
 
 
 ## 3.3 Service Catalog
+<!---
 *Describe if the service API is exposed via the service catalog. Reference the fragment of the service catalog showing the structure.*
+-->
 
 N/A
 
 ---
 
 # 4. REST API Specifications
+<!---
 *Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.*
+-->
 
 ## 4.1 Service API Operations
 
@@ -96,21 +112,29 @@ Note: The "mgmtconsole-admin" role is a temporary role created to allow initial 
 
 
 ## 4.2 Common Request Headers
+<!---
 *List the common request headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
+-->
 
 Content-Type: application/json
 X-Auth-Token: <Auth_Token>
 
 
 ## 4.3 Common Response Headers
+<!---
 *List the common response headers i.e. Content-Type, Content-Length, Connection, Date, ETag, Server, etc.*
+-->
 
 
 ## 4.4 Service API Operation Details
+<!---
 *The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
+-->
 
 ### 4.4.1 Platform Alert
+<!---
 *Describe the resource and what information they provide. Then enumerate all the API method calls below.*
+-->
 
 The Platform Alert provides critical platform feedback to both internal and external users of the Management Console. 
 More information is on the wiki - [Messaging Characteristics](https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics)
@@ -134,29 +158,35 @@ None.
 
 #### 4.4.1.1 Create a Platform Alert
 #### HTTP Verb: POST /external_platform_alert
-
+<!---
 *Description about the method call*
+-->
 
 The creation of a Platform Alert will post a message containing a title and message content to this Publish API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
 
 **Request Data**
-
+<!---
 *Specify all the required/optional url and data parameters for the given method call.*
+-->
 
 **URL Parameters**
-
+<!---
 *Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
+-->
 
 None.
 
 **Data Parameters**
-
+<!---
 *List all the attributes that comprise the data structure*
+-->
 
 * title - string - brief title of the message to convey significance
 * message - string - message to be sent (4096 char limit)
 
+<!---
 *Either put 'This call does not require a request body' or include JSON/XML request data structure*
+-->
 
 JSON
 
@@ -167,22 +197,25 @@ JSON
 ```
 
 **Success Response**
-
+<!---
 *Specify the status code and any content that is returned.*
+-->
 
 **Status Code**
 
 200 - OK
 
 **Response Data**
-
+<!---
 *Either put 'This call does not require a response body' or include JSON/XML response data structure*
+-->
 
 A successful response does not require a response body.
 
 **Error Response**
-
+<!---
 *Enumerate all the possible error status codes and any content that is returned.*
+-->
 
 **Status Code**
 
@@ -221,8 +254,12 @@ curl -v -H "X-Auth-Token: <Auth_Token>;Content-Type: application/json" \
 ```
 
 **Additional Notes**
-
+<!---
 *Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
+-->
+
+The 'message' attribute can include a number of HTML markup tags. A whitelist of allowed tags are noted on the [HPCS Wiki](https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist).
+
 
 ---
 
@@ -231,9 +268,11 @@ curl -v -H "X-Auth-Token: <Auth_Token>;Content-Type: application/json" \
 ## 5.1 Resources
 
 **Wiki Page**: 
+
 https://wiki.hpcloud.net/display/iaas/MessagePub+-+Message+Publishing
 https://wiki.hpcloud.net/display/iaas/Implementation+Phases+and+Scope
 https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics
+https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist
 
 **Code Repo**:  https://git.hpcloud.net/ManagementConsole/message_pub.git
 
@@ -242,7 +281,8 @@ https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics
 ---
 
 # 6. Glossary
-
+<!---
 {Put down definitions of terms and items that need explanation.}
+-->
 
 ---
