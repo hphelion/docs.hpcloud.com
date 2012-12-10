@@ -5,7 +5,9 @@ title: Identity Services Admin API
 description: "HP Cloud Identity Services Admin API documenation."
 keywords: "Keystone, Identity Services"
 product: identity
+private: true
 ---
+
 # Identity Services Admin API
 
 # 1. Overview
@@ -13258,8 +13260,9 @@ the token belongs to a particular user and it has not expired.  On
 successful validation, the response contains permissions relevant to a
 particular client. If the query parameter, belongTo, is provided the
 call will check the corresponding TenantId to ensure that token belongs
-to that tenant. If there is no tenantId then it is globally scoped. In
-the event a token is not valid, a 404 (item not found) will be returned.
+to that tenant. 
+Unscoped token is not scoped to any tenant and is primarily used for interacting with some of 
+CS APIs. In the event a token is not valid, a 404 (item not found) will be returned.
 
 Filter Roles:
 
@@ -21488,6 +21491,7 @@ Note that the **EmailVerification** action must handle validations from this act
 | emailValidationType 	| xs:string 	| false 	| None	|
 | customerType 	| xs:string 	| false 	| Self Service 	|
 | homeRegion	| xs:string 	| false 	| 	|
+| optIntoCloudServicesEmails	| xs:boolean   	| false 	| 	|
 
 
 **emailValidationType Values**
