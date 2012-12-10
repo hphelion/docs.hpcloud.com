@@ -27,32 +27,14 @@ private: true
 ---
 
 
-# 2. Architecture View
-
-
-## 2.1 Overview
-*References to architectural details of the service.*
-
-## 2.2 Conceptual/Logical Architecture View
-*Describe the logical components of the system and their responsibilities*
-
-## 2.3 Infrastructure Architecture View
-*Describe how the API fits into the overall HPCS Infrastructure*
-
-## 2.4 Entity Relationship Diagram
-*Describe the relationships between the various entities (resources) involved in the API*
-
-
----
-
-# 3. Account-level View
+# 2. Account-level View
 *Describe the relationship of the API with respect to the accounts, groups, tenants, regions, availability zones etc.*
 
 
-# 4. REST API Specifications
+# 3. REST API Specifications
 *Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
-## 4.1 Admin API Operations
+## 3.1 Admin API Operations
 
 
 **Host**: https://az-1.region-a.geo-1.compute.hpcloudsvc.com
@@ -177,17 +159,17 @@ private: true
 | User Key Pairs | [Import User Key Pair(s)](#import_user_key_pair(s)) | PUT | /HP-IDM/v1.0/keypairs | Y/Y | SA, DA, SS |
 | User Key Pairs | [Update User Key Pair](#update_user_key_pair) | PUT | /HP-IDM/v1.0/keypairs/{keypairId} | Y/Y | SA, DA, SS |
 
-## 4.2 Common Request Headers
+## 3.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
 
-## 4.3 Common Response Headers
+## 3.3 Common Response Headers
 *List the common response headers i.e. Content-Type, Content-Length, Connection, Date, ETag, Server, etc. *
 
-## 4.4 Admin API Operation Details
+## 3.4 Admin API Operation Details
 *The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
 
-### 4.4.1 Action
+### 3.4.1 Action
 
 This page contains information about the 8 available Action Service REST APIs.
 
@@ -219,7 +201,7 @@ N/A
 
 None.
 
-#### 4.4.1.1 Post Action#### {#post_action}
+#### 3.4.1.1 Post Action#### {#post_action}
 #### POST /HP-IDM/v1.0/action/{action}
 Privilege Level: {Privilege Level}*
 
@@ -322,7 +304,7 @@ Curl Example
 
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X POST -H 'User-Agent: Jakarta Commons-HttpClient/3.1' -H 'Content-Type: application/json' --cert <cert-path> --cacert <ca-cert-path> --data '{"JobTicket": {"actionParams":{"status": "SUSPENDED_3", "domainId": "92636548281306"}}}' -H 'X-Auth-Token: <auth-token>' [HPKeystoneExtensionBaseURI]/action/UpdateDomain?timeOut=20000
 
-#### 4.4.1.2 Get Jobs By Account#### {#get_jobs_by_account}
+#### 3.4.1.2 Get Jobs By Account#### {#get_jobs_by_account}
 #### GET /HP-IDM/v1.0/job
 *Privilege Level: {Privilege Level}*
 
@@ -414,7 +396,7 @@ Curl Example
 
     curl -k -s -S --connect-timeout 2 --noproxy 127.0.0.1,localhost,hpcloud.net -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job?accountId=60809900579962
 
-#### 4.4.1.3 Get A Job Ticket#### {#get_a_job_ticket}
+#### 3.4.1.3 Get A Job Ticket#### {#get_a_job_ticket}
 #### GET /HP-IDM/v1.0/job/{ticketId}
 *Privilege Level: {Privilege Level}*
 
@@ -657,7 +639,7 @@ Curl Example
 
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/{ticketId}
 
-#### 4.4.1.4 Restart A TIMEDOUT Job#### {#restart_a_timedout_job}
+#### 3.4.1.4 Restart A TIMEDOUT Job#### {#restart_a_timedout_job}
 #### PUT /HP-IDM/v1.0/job/{ticketId}
 *Privilege Level: {Privilege Level}*
 
@@ -726,7 +708,7 @@ Curl Example
 
     curl -k -s -S --connect-timeout 2 --noproxy 127.0.0.1,localhost,hpcloud.net -m 30 -X PUT -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: HPAuth_07ea10efcbcd4a16441f45c7b4bc7aad0a657688576ec67a55ee6e2f00eea8b8" [HPKeystoneExtensionBaseURI]/job/508fa9bce4b0c294a11da398
 
-#### 4.4.1.5 Delete A Job#### {#delete_a_job}
+#### 3.4.1.5 Delete A Job#### {#delete_a_job}
 #### DELETE HPKeystoneExtensionBaseURI/job/{ticketId}
 *Privilege Level: {Privilege Level}*
 
@@ -775,7 +757,7 @@ This call does not require a request body.
 
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X DELETE -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/{ticketId}
 
-#### 4.4.1.6 Get Error Jobs#### {#get_error_jobs}
+#### 3.4.1.6 Get Error Jobs#### {#get_error_jobs}
 #### GET /HP-IDM/v1.0/job/error
 *Privilege Level: {Privilege Level}*
 
@@ -1195,7 +1177,7 @@ Curl Example
 
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-excpetions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/error
 
-#### 4.4.1.7 Get A Count Of Error Jobs#### {#get_a_count_of_error_jobs}
+#### 3.4.1.7 Get A Count Of Error Jobs#### {#get_a_count_of_error_jobs}
 #### GET /HP-IDM/v1.0/job/error/count
 *Privilege Level: {Privilege Level}*
 
@@ -1251,7 +1233,7 @@ This call does not require a request body.
 **Curl Example**
 
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/error/count
-#### 4.4.1.8 Get Error Jobs By Category#### {#get_error_jobs_by_category}
+#### 3.4.1.8 Get Error Jobs By Category#### {#get_error_jobs_by_category}
 #### GET /HP-IDM/v1.0/job/error/{category}
 *Privilege Level: {Privilege Level}*
 
@@ -1665,7 +1647,7 @@ Curl Example
 
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-excpetions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/error/USER_INPUT
 
-#### 4.4.1.9 Delete Error Jobs By Category#### {#delete_error_jobs_by_category}
+#### 3.4.1.9 Delete Error Jobs By Category#### {#delete_error_jobs_by_category}
 #### DELETE HPKeystoneExtensionBaseURI/job/error/{category}
 *Privilege Level: {Privilege Level}*
 
@@ -1717,7 +1699,7 @@ This call does not require a request body.
 
     {curl -i -H "X-Auth-Token: <Auth_Token>" [BaseUri][path]}
 
-#### 4.4.1.10 Get Jobs By Status#### {#get_jobs_by_status}
+#### 3.4.1.10 Get Jobs By Status#### {#get_jobs_by_status}
 #### GET /HP-IDM/v1.0/job/status/{status}
 *Privilege Level: {Privilege Level}*
 
@@ -1856,7 +1838,7 @@ Curl Example
 
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exceptions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "Accept: application/json" -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/job/status/COMPLETE
 
-#### 4.4.1.11 Get Job Count By Status#### {#get_job_count_by_status}
+#### 3.4.1.11 Get Job Count By Status#### {#get_job_count_by_status}
 #### GET /HP-IDM/v1.0/job/status/{status}/count
 *Privilege Level: {Privilege Level}*
 
@@ -1918,7 +1900,7 @@ Curl Example
 
 
 
-### 4.4.2 Domains
+### 3.4.2 Domains
 
 The entity that serves as a collection of users, groups, roles, and tenants. It represents the primary relationship between the customer and HP.  A Domain can be an individual or company.
 
@@ -1939,7 +1921,7 @@ N/A
 None.
 
 
-#### 4.4.2.1 Check For Existence Of Domain Name#### {#check_for_existence_of_domain_name}
+#### 3.4.2.1 Check For Existence Of Domain Name#### {#check_for_existence_of_domain_name}
 #### HEAD [HPKeystoneExtensionBaseURI]/domains?name=domainName 
 *Privilege Level: Anonymous*
 
@@ -2071,7 +2053,7 @@ Curl Example
 
 
 
-#### 4.4.2.2 Create A Domain#### {#create_a_domain}
+#### 3.4.2.2 Create A Domain#### {#create_a_domain}
 #### GET /HP-IDM/v1.0/domains 
 *Privilege Level: System Adminstrator (SA)*
 
@@ -2288,7 +2270,7 @@ Curl Example
 
 
 
-#### 4.4.2.3 Delete A Domain#### {#delete_a_domain}
+#### 3.4.2.3 Delete A Domain#### {#delete_a_domain}
 #### DELETE /HP-IDM/v1.0/domains/{domainId} 
 *Privilege Level: System Adminstrator (SA)*
 
@@ -2433,7 +2415,7 @@ Curl Example
 
 
 
-#### 4.4.2.4 Get A Domain#### {#get_a_domain}
+#### 3.4.2.4 Get A Domain#### {#get_a_domain}
 #### GET /HP-IDM/v1.0/domains/{domainId} 
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
@@ -2597,7 +2579,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.2.5 Get All Domains#### {#get_all_domains}
+#### 3.4.2.5 Get All Domains#### {#get_all_domains}
 #### GET /HP-IDM/v1.0/domains
 *Privilege Level: System Adminstrator (SA)*
 
@@ -2926,7 +2908,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.2.6 Get Groups For A Domain#### {#get_groups_for_a_domain}
+#### 3.4.2.6 Get Groups For A Domain#### {#get_groups_for_a_domain}
 #### GET /HP-IDM/v1.0/domains/{domainId}/groups
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
@@ -3114,7 +3096,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.2.7 Get Subscribe Able Services For A Domain#### {#get_subscribe_able_services_for_a_domain}
+#### 3.4.2.7 Get Subscribe Able Services For A Domain#### {#get_subscribe_able_services_for_a_domain}
 #### GET /HP-IDM/v1.0/domains/{domainId}/subscribeableServices
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
@@ -3623,7 +3605,7 @@ Curl Example
 
 
 
-#### 4.4.2.8 Get Service Activations For A Domain#### {#get_service_activations_for_a_domain}
+#### 3.4.2.8 Get Service Activations For A Domain#### {#get_service_activations_for_a_domain}
 #### GET /HP-IDM/v1.0/domains/{domainId}/services
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
@@ -3932,7 +3914,7 @@ Curl Example
 
 
 
-#### 4.4.2.9 Get Tenants For A Domain#### {#get_tenants_for_a_domain}
+#### 3.4.2.9 Get Tenants For A Domain#### {#get_tenants_for_a_domain}
 #### GET /HP-IDM/v1.0/domains/{domainId}/tenants
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
@@ -4121,7 +4103,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.2.10 Get Users For A Domain#### {#get_users_for_a_domain}
+#### 3.4.2.10 Get Users For A Domain#### {#get_users_for_a_domain}
 #### {HTTP Verb: GET, POST, DELETE, PUT} [HPKeystoneExtensionBaseURI]/domains/{domainId}/users?limit=pagesize&marker=userId&excludeGroups=groupid1,groupdid2&excludeRoles=roleId1,roleId2&userId=userId&userName=userName&tenantId=t1&groupId=12345&excludeTenantId=tenantid1,tenantId2
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA)*
 
@@ -4345,7 +4327,7 @@ Curl Example
 
 
 
-#### 4.4.2.11 List Role Definitions (Deprecated)#### {#list_role_definitions_(deprecated)}
+#### 3.4.2.11 List Role Definitions (Deprecated)#### {#list_role_definitions_(deprecated)}
 #### GET /HP-IDM/v1.0/domains/{domainId}/roles
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
@@ -4494,7 +4476,7 @@ Curl Example
 
 
 
-#### 4.4.2.12 Transfer Ownership Of A Domain#### {#transfer_ownership_of_a_domain}
+#### 3.4.2.12 Transfer Ownership Of A Domain#### {#transfer_ownership_of_a_domain}
 #### PUT /HP-IDM/v1.0/domains/{domainId}/owner/{userId}	
 *Privilege Level: System Adminstrator (SA)*
 
@@ -4643,7 +4625,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.2.13 Update A Domain#### {#update_a_domain}
+#### 3.4.2.13 Update A Domain#### {#update_a_domain}
 #### PUT /HP-IDM/v1.0/domains/{domainId}
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA**)
 
@@ -4824,7 +4806,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.2.14 List Role Definitions#### {#list_role_definitions}
+#### 3.4.2.14 List Role Definitions#### {#list_role_definitions}
 #### GET /HP-IDM/v1.0/domains/{domainId}/roleDefs
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
@@ -4976,7 +4958,7 @@ Curl Example (domain specific role definitions only)
     curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roleDefs?public=false
 
 
-### 4.4.3 Endpoint Templates
+### 3.4.3 Endpoint Templates
 
 The Endpoint Template REST API provides the ability to manage service endpoints.
 
@@ -4997,7 +4979,7 @@ N/A
 None.
 
 
-#### 4.4.3.1 Add Endpoint Template#### {#add_endpoint_template}
+#### 3.4.3.1 Add Endpoint Template#### {#add_endpoint_template}
 #### POST /HP-IDM/v1.0/endpointTemplates
 *Privilege Level: SA, SVC*
 
@@ -5201,7 +5183,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.3.2 Delete Endpoint Template#### {#delete_endpoint_template}
+#### 3.4.3.2 Delete Endpoint Template#### {#delete_endpoint_template}
 #### DELETE /HP-IDM/v1.0/endpointTemplates/ {endpointTemplateId} 
 *Privilege Level: SA, SVC*
 
@@ -5274,7 +5256,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.3.3 Get Enabled Endpoint Templates#### {#get_enabled_endpoint_templates}
+#### 3.4.3.3 Get Enabled Endpoint Templates#### {#get_enabled_endpoint_templates}
 #### GET /HP-IDM/v1.0/endpointTemplates/enabled
 *Privilege Level: SA, SVC, DA, DU *
 
@@ -5503,7 +5485,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.3.4 Get Endpoint Template By Id#### {#get_endpoint_template_by_id}
+#### 3.4.3.4 Get Endpoint Template By Id#### {#get_endpoint_template_by_id}
 #### GET /HP-IDM/v1.0/endpointTemplates/{endpointTemplateId}
 *Privilege Level: SA, SVC, DA, DU*
 
@@ -5645,7 +5627,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.3.5 Get Endpoint Templates#### {#get_endpoint_templates}
+#### 3.4.3.5 Get Endpoint Templates#### {#get_endpoint_templates}
 #### GET /HP-IDM/v1.0/endpointTemplates
 *Privilege Level: SA, SVC, DA, DU *
 
@@ -5835,7 +5817,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.3.6 Update Endpoint Template#### {#update_endpoint_template}
+#### 3.4.3.6 Update Endpoint Template#### {#update_endpoint_template}
 #### PUT HPKeystoneExtensionBaseURI]/endpointTemplates/{endpointTemplateId} 
 *Privilege Level: SA, SVC *
 
@@ -6041,7 +6023,7 @@ Curl Example
 
 
 
-### 4.4.4 Groups
+### 3.4.4 Groups
 
 Group is a collection of users. The primary purpose of group is to provide multiple users with the same privillages
 
@@ -6056,7 +6038,7 @@ Group is a collection of users. The primary purpose of group is to provide multi
 None.
 
 
-#### 4.4.4.1 Add A User To A Group#### {#add_a_user_to_a_group}
+#### 3.4.4.1 Add A User To A Group#### {#add_a_user_to_a_group}
 ####  PUT /HP-IDM/v1.0/groups/{groupId}/users/{userId}
 *Privilege Level: SA, DA*
 
@@ -6179,7 +6161,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.4.2 Create A Group#### {#create_a_group}
+#### 3.4.4.2 Create A Group#### {#create_a_group}
 ####  POST /HP-IDM/v1.0/groups
 *Privilege Level: SA,DA*
 
@@ -6328,7 +6310,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.4.3 Delates A Group#### {#delates_a_group}
+#### 3.4.4.3 Delates A Group#### {#delates_a_group}
 ####  DELETE /HP-IDM/v1.0/groups/{groupId}
 *Privilege Level: SA ,DA*
 
@@ -6440,7 +6422,7 @@ Curl Example
 
 
 
-#### 4.4.4.4 Get A Specific Group#### {#get_a_specific_group}
+#### 3.4.4.4 Get A Specific Group#### {#get_a_specific_group}
 ####  GET /HP-IDM/v1.0/groups/{groupId}
 *Privilege Level: SA,DA, DU *
 
@@ -6577,7 +6559,7 @@ Curl Example
 
 
 
-#### 4.4.4.5 List Users For The Group#### {#list_users_for_the_group}
+#### 3.4.4.5 List Users For The Group#### {#list_users_for_the_group}
 ####  GET /HP-IDM/v1.0/groups/{groupId}/users
 *Privilege Level: SA,DA*
 
@@ -6795,7 +6777,7 @@ Curl Example
 
 
 
-#### 4.4.4.6 Delete User From The Group#### {#delete_user_from_the_group}
+#### 3.4.4.6 Delete User From The Group#### {#delete_user_from_the_group}
 #### DELETE 	/HP-IDM/v1.0/groups/{groupId}/users/{userId}
 *Privilege Level: SA,DA*
 
@@ -6905,7 +6887,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.4.7 Update Group#### {#update_group}
+#### 3.4.4.7 Update Group#### {#update_group}
 ####  PUT 	/HP-IDM/v1.0/groups/{groupId}
 *Privilege Level: SA, DA*
 
@@ -7061,7 +7043,7 @@ Curl Example
 
 
 
-### 4.4.5 Management Console
+### 3.4.5 Management Console
 
 Hitherto the MC has stored data in its own Mongo service and defined its own database and set of collections. Control Services was added to the HP Cloud deployment in the Maine release. CS also maintains its own Mongo service and database. 
 
@@ -7094,7 +7076,7 @@ N/A
 
 None.
 
-#### 4.4.5.1 User Details#### {#user_details}
+#### 3.4.5.1 User Details#### {#user_details}
 #### GET /HP-IDM/v1.0/users/details/{userId}
 *Privilege Level: MC-CS Certificate*
 
@@ -7335,7 +7317,7 @@ XML
     curl -k -s -S --connect-timeout 2 --noproxy <proxy-exclusions> -m 30 -X GET -H "User-Agent: Jakarta Commons-HttpClient/3.1" --cert <cert-path> --cacert <cacert-path> -H "X-Auth-Token: <auth-token>" [HPKeystoneExtensionBaseURI]/users/details/<user-id>
 
 
-#### 4.4.5.2 User Preferences#### {#user_preferences}
+#### 3.4.5.2 User Preferences#### {#user_preferences}
 #### GET /HP-IDM/v1.0/preferences/{userId}
 *Privilege Level: MC-CS Certificate*
 
@@ -7556,7 +7538,7 @@ Not yet documented.
 
 
 
-### 4.4.6 Role Assignment
+### 3.4.6 Role Assignment
 
 API to create, update, list and delete CS role assignments
 
@@ -7577,7 +7559,7 @@ N/A
 None.
 
 
-#### 4.4.6.1 List Role Assignments Made On A Tenant#### {#list_role_assignments_made_on_a_tenant}
+#### 3.4.6.1 List Role Assignments Made On A Tenant#### {#list_role_assignments_made_on_a_tenant}
 #### GET /tenants/{tenantId}/roles
 *Privilege Level: SA, DA, DU*
 
@@ -7803,7 +7785,7 @@ Curl Example
 None
 
 
-#### 4.4.6.2 List Tenant Role Assignments For A User#### {#list_tenant_role_assignments_for_a_user}
+#### 3.4.6.2 List Tenant Role Assignments For A User#### {#list_tenant_role_assignments_for_a_user}
 #### GET {path only, no root path} tenants/{tenantId}/users/{userId}/roles?serviceId=xxx&limit=pagesize&marker=roleId
 *Privilege Level: SA, DA, DU*
 
@@ -7974,7 +7956,7 @@ Curl Example
 None
 
 
-#### 4.4.6.3 Check Tenant Role Assignment For A User#### {#check_tenant_role_assignment_for_a_user}
+#### 3.4.6.3 Check Tenant Role Assignment For A User#### {#check_tenant_role_assignment_for_a_user}
 #### HEAD /tenants/{tenantId}/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA, DU*
 
@@ -8089,7 +8071,7 @@ Curl Example
 None
 
 
-#### 4.4.6.4 Create Tenant Role Assignments For A User#### {#create_tenant_role_assignments_for_a_user}
+#### 3.4.6.4 Create Tenant Role Assignments For A User#### {#create_tenant_role_assignments_for_a_user}
 #### PUT /tenants/{tenantId}/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -8185,7 +8167,7 @@ Curl Example
 None
 
 
-#### 4.4.6.5 Delete Tenant Role Assignment For A User#### {#delete_tenant_role_assignment_for_a_user}
+#### 3.4.6.5 Delete Tenant Role Assignment For A User#### {#delete_tenant_role_assignment_for_a_user}
 #### DELETE /tenants/{tenantId}/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -8276,7 +8258,7 @@ Curl Example
 None
 
 
-#### 4.4.6.6 List Tenant Role Assignments For A Group#### {#list_tenant_role_assignments_for_a_group}
+#### 3.4.6.6 List Tenant Role Assignments For A Group#### {#list_tenant_role_assignments_for_a_group}
 #### GET /tenants/{tenantId}/groups/{groupId}/roles
 *Privilege Level: SA, DA, DU*
 
@@ -8444,7 +8426,7 @@ Curl Example
 None
 
 
-#### 4.4.6.7 Create Tenant Role Assignments For A Group#### {#create_tenant_role_assignments_for_a_group}
+#### 3.4.6.7 Create Tenant Role Assignments For A Group#### {#create_tenant_role_assignments_for_a_group}
 #### PUT /tenants/{tenantId}/groups/{groupId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -8540,7 +8522,7 @@ Curl Example
 None
 
 
-#### 4.4.6.8 Delete Tenant Role Assignment For A Group#### {#delete_tenant_role_assignment_for_a_group}
+#### 3.4.6.8 Delete Tenant Role Assignment For A Group#### {#delete_tenant_role_assignment_for_a_group}
 #### DELETE /tenants/{tenantId}/groups/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -8632,7 +8614,7 @@ Curl Example
 None
 
 
-### 4.4.7 Role Defs
+### 3.4.7 Role Defs
 
 Roles are entities defined in system to support notion of capability (e.g. SuperAdmin, block-admin, projectmanager etc...), subjects (users/groups) are associated with role to form a logical grouping, subjects with same role have similar capabilities in system. Roles are associated with security policies which provides capability to a role on a particular target as defined in the policy.
 
@@ -8728,7 +8710,7 @@ N/A
 None.
 
 
-#### 4.4.7.1 Create Role Definition#### {#create_role_definition}
+#### 3.4.7.1 Create Role Definition#### {#create_role_definition}
 #### POST /HP-IDM/v1.0/roleDefs
 *Privilege Level: SA, SVC, DA*
 
@@ -8879,7 +8861,7 @@ Curl Example
    * ServiceId is a mandatory field, if serviceId is 100 then tenantId field should be empty or if serviceId is not equal to 100 then there must be a tenantId  provided in request.
 
 
-#### 4.4.7.2 Delete Role Definition#### {#delete_role_definition}
+#### 3.4.7.2 Delete Role Definition#### {#delete_role_definition}
 #### DELETE /HP-IDM/v1.0/roleDefs/{roleId}
 *Privilege Level: SA, SVC, DA*
 
@@ -8991,7 +8973,7 @@ Curl Example
 
 
 
-#### 4.4.7.3 Update Role Definition#### {#update_role_definition}
+#### 3.4.7.3 Update Role Definition#### {#update_role_definition}
 #### PUT /HP-IDM/v1.0/roleDefs/{roleId}
 *Privilege Level: SA, SVC, DA*
 
@@ -9145,7 +9127,7 @@ Curl Example
 
 
 
-#### 4.4.7.4 Update Role Scope#### {#update_role_scope}
+#### 3.4.7.4 Update Role Scope#### {#update_role_scope}
 #### PUT /HP-IDM/v1.0/roleDefs/{roleId}/scope
 *Privilege Level: SA, SVC*
 
@@ -9275,7 +9257,7 @@ Curl Example
 * Update role scope is not allowed if there is an existing role assignments in the system for a role.
 
 
-#### 4.4.7.5 Get A Role Definition#### {#get_a_role_definition}
+#### 3.4.7.5 Get A Role Definition#### {#get_a_role_definition}
 #### GET /HP-IDM/v1.0/roleDefs/{roleId}
 *Privilege Level: SA, SVC, DA, DU*
 
@@ -9389,7 +9371,7 @@ Curl Example
 
 
 
-#### 4.4.7.6 List Role Definitions#### {#list_role_definitions}
+#### 3.4.7.6 List Role Definitions#### {#list_role_definitions}
 #### GET /HP-IDM/v1.0/roleDefs
 
 *Privilege Level: SA, SVC*
@@ -9525,7 +9507,7 @@ Curl Example
 
 
 
-### 4.4.8 Services
+### 3.4.8 Services
 
 The Service REST API provides the ability to manage registered services.
 
@@ -9546,7 +9528,7 @@ N/A
 None.
 
 
-#### 4.4.8.1 Get Service By Id#### {#get_service_by_id}
+#### 3.4.8.1 Get Service By Id#### {#get_service_by_id}
 #### GET /HP-IDM/v1.0/services/{serviceId}   
 *Privilege Level: SA, SVC*
 
@@ -9651,7 +9633,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 4.4.8.2 List Registered Services#### {#list_registered_services}
+#### 3.4.8.2 List Registered Services#### {#list_registered_services}
 #### GET /HP-IDM/v1.0/services
 *Privilege Level: SA, SVC, DA, DU*
 
@@ -9868,7 +9850,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 4.4.8.3 Register New Service#### {#register_new_service}
+#### 3.4.8.3 Register New Service#### {#register_new_service}
 #### POST /HP-IDM/v1.0/services  	
 *Privilege Level: SA, SVC*
 
@@ -10020,7 +10002,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 4.4.8.4 Update Service#### {#update_service}
+#### 3.4.8.4 Update Service#### {#update_service}
 #### PUT /HP-IDM/v1.0/services/{serviceId}  	
 *Privilege Level: SA, SVC*
 
@@ -10172,7 +10154,7 @@ Curl Example
 
 
 
-### 4.4.9 Signature
+### 3.4.9 Signature
 
 The Signature APIs enable the requester to obtain a token by using a signature for authentication.
 
@@ -10194,7 +10176,7 @@ N/A
 None.
 
 
-#### 4.4.9.1 EC2 Signature#### {#ec2_signature}
+#### 3.4.9.1 EC2 Signature#### {#ec2_signature}
 #### POST /HP-IDM/v1.0/ec2Tokens
 *Privilege Level: Anon*
 
@@ -10521,7 +10503,7 @@ Curl Example
 
 
 
-#### 4.4.9.2 Generic Signature#### {#generic_signature}
+#### 3.4.9.2 Generic Signature#### {#generic_signature}
 #### POST /HP-IDM/v1.0/gstokens
 *Privilege Level: Anon*
 
@@ -10844,7 +10826,7 @@ Curl Example
 
 
 
-### 4.4.10 Tenants
+### 3.4.10 Tenants
 
 Tenant is a collection of services, and associated with zero or more users who have access to these services via role references.
 
@@ -10865,7 +10847,7 @@ N/A
 None.
 
 
-#### 4.4.10.1 List Tenants#### {#list_tenants}
+#### 3.4.10.1 List Tenants#### {#list_tenants}
 #### GET /tenants
 *Privilege Level: SS*
 
@@ -11045,7 +11027,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.10.2 Get All Tenants#### {#get_all_tenants}
+#### 3.4.10.2 Get All Tenants#### {#get_all_tenants}
 #### GET /HP-IDM/v1.0/tenants
 *Privilege Level: SA*
 
@@ -11205,7 +11187,7 @@ Curl Example
 
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants"
 
-#### 4.4.10.3 Get A Tenant#### {#get_a_tenant}
+#### 3.4.10.3 Get A Tenant#### {#get_a_tenant}
 #### GET /HP-IDM/v1.0/tenants/{tenantId} 
 *Privilege Level: SA, DA, DU*
 
@@ -11329,7 +11311,7 @@ Curl Example
 
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 
-#### 4.4.10.4 Check For Existence Of Tenant Name#### {#check_for_existence_of_tenant_name}
+#### 3.4.10.4 Check For Existence Of Tenant Name#### {#check_for_existence_of_tenant_name}
 #### HEAD [HPKeystoneExtensionBaseURI]/tenants?name=tenantName
 *Privilege Level: Anon*
 
@@ -11441,7 +11423,7 @@ Curl Example
 
 There is no response body returned in API response data. This API does not require http header X-Auth-Token and is protected by client certificate authentication.
 
-#### 4.4.10.5 Get A List Of Users For A Tenant (includes Role Assignments)#### {#get_a_list_of_users_for_a_tenant_(includes_role_assignments)}
+#### 3.4.10.5 Get A List Of Users For A Tenant (includes Role Assignments)#### {#get_a_list_of_users_for_a_tenant_(includes_role_assignments)}
 #### GET /HP-IDM/v1.0/tenants/{tenantId}/users
 *Privilege Level: SA, DA*
 
@@ -11619,7 +11601,7 @@ Curl Example
 
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/users"
 
-#### 4.4.10.6 Create A Tenant#### {#create_a_tenant}
+#### 3.4.10.6 Create A Tenant#### {#create_a_tenant}
 #### POST /HP-IDM/v1.0/tenants 
 *Privilege Level: SA, DA*
 
@@ -11783,7 +11765,7 @@ Curl Example
 
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants" -d '{"tenant":{"description":"Payroll Tenant Services for TimeWarner","domainId":"47826457774667","name":"Payroll Tenant Services","status":"enabled"}}'
 
-#### 4.4.10.7 Update A Tenant#### {#update_a_tenant}
+#### 3.4.10.7 Update A Tenant#### {#update_a_tenant}
 #### PUT /HP-IDM/v1.0/tenants/{tenantID} 
 *Privilege Level: SA, DA*
 
@@ -11959,7 +11941,7 @@ Curl Example
 
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X PUT -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/37942731773710" -d '{"tenant":{"description":"Tenant for Market forecasting service","otherAttributes":{"swiftAccountHash":"abcd23456"}}}'
 
-#### 4.4.10.8 Delete A Tenant#### {#delete_a_tenant}
+#### 3.4.10.8 Delete A Tenant#### {#delete_a_tenant}
 #### DELETE /HP-IDM/v1.0/tenants/{tenantId}
 *Privilege Level: SA, DA*
 
@@ -12046,7 +12028,7 @@ Curl Example
 
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 
-#### 4.4.10.9 Get Endpoints For A Tenant#### {#get_endpoints_for_a_tenant}
+#### 3.4.10.9 Get Endpoints For A Tenant#### {#get_endpoints_for_a_tenant}
 #### GET /HP-IDM/v1.0/tenants/{tenantId}/endpoints
 *Privilege Level: SA, DA, DU*
 
@@ -12228,7 +12210,7 @@ Current Impl: We don't filter by enabled flag so include all of them.
 1. Do we need to include global endpoints (endpoint templates with global flag as true) in this call? In keystone reference code base, it does not include them.  Current Impl: We don't include global endpoint templates in the response.
 
 
-#### 4.4.10.10 Add Endpoint To A Tenant#### {#add_endpoint_to_a_tenant}
+#### 3.4.10.10 Add Endpoint To A Tenant#### {#add_endpoint_to_a_tenant}
 #### POST /HP-IDM/v1.0/tenants/{tenantId]}/endpoints
 *Privilege Level: SA, DA*
 
@@ -12382,7 +12364,7 @@ Curl Example
 
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints" -d '{"endpointTemplate":{"id":120}}'
 
-#### 4.4.10.11 Remove Endpoints From A Tenant#### {#remove_endpoints_from_a_tenant}
+#### 3.4.10.11 Remove Endpoints From A Tenant#### {#remove_endpoints_from_a_tenant}
 #### DELETE /HP-IDM/v1.0/tenants/{tenantId}/endpoints/{endpointId}
 *Privilege Level: DA, SA*
 
@@ -12470,7 +12452,7 @@ Curl Example
 
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X DELETE -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/95096564413950/endpoints/543"
 
-### 4.4.11 Tokens
+### 3.4.11 Tokens
 
 A yummy cookie one uses to bribe the authorization monster.
 
@@ -12491,7 +12473,7 @@ N/A
 None.
 
 
-#### 4.4.11.1 Authenticate#### {#authenticate}
+#### 3.4.11.1 Authenticate#### {#authenticate}
 #### POST /tokens
 *Privilege Level: Anon*
 
@@ -12822,7 +12804,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.11.2 Rescope Token#### {#rescope_token}
+#### 3.4.11.2 Rescope Token#### {#rescope_token}
 #### POST /tokens
 *Privilege Level: SS*
 
@@ -13013,7 +12995,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.11.3 Revoke Token#### {#revoke_token}
+#### 3.4.11.3 Revoke Token#### {#revoke_token}
 #### DELETE /HP-IDM/v1.0/tokens/{tokenId}
 *Privilege Level: SA,DA,SS*
 
@@ -13071,7 +13053,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.11.4 Swift Legacy Authentication#### {#swift_legacy_authentication}
+#### 3.4.11.4 Swift Legacy Authentication#### {#swift_legacy_authentication}
 #### GET /v1.0
 *Privilege Level: Anon*
 
@@ -13251,7 +13233,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.11.5 Validate Token#### {#validate_token}
+#### 3.4.11.5 Validate Token#### {#validate_token}
 #### GET /tokens/{tokenId}
 *Privilege Level: Anon*
 
@@ -13471,7 +13453,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.11.6 Quick Token Validation#### {#quick_token_validation}
+#### 3.4.11.6 Quick Token Validation#### {#quick_token_validation}
 #### HEAD /tokens/\<tokenId\>?belongsTo=tenantId
 *Privilege Level: Anon*
 
@@ -13573,7 +13555,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.11.7 Refresh Token#### {#refresh_token}
+#### 3.4.11.7 Refresh Token#### {#refresh_token}
 #### [HPKeystoneExtensionBaseURI]/tokens/\<tokenId\>
 *Privilege Level: SS*
 
@@ -13707,7 +13689,7 @@ Curl Example
 **Additional Notes**
 
 
-### 4.4.12 Users
+### 3.4.12 Users
 
 Cloud users.
 
@@ -13728,7 +13710,7 @@ N/A
 None.
 
 
-#### 4.4.12.1 List Users#### {#list_users}
+#### 3.4.12.1 List Users#### {#list_users}
 #### GET /HP-IDM/v1.0/users
 *Privilege Level: SA, SS*
 
@@ -14001,7 +13983,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.12.2 Get A User#### {#get_a_user}
+#### 3.4.12.2 Get A User#### {#get_a_user}
 #### GET /HP-IDM/v1.0/users/{userId} 
 *Privilege Level: SA, DA, SS*
 
@@ -14140,7 +14122,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.12.3 Check For Existence Of User#### {#check_for_existence_of_user}
+#### 3.4.12.3 Check For Existence Of User#### {#check_for_existence_of_user}
 #### HEAD [HPKeystoneExtensionBaseURI]/users?name=username
 *Privilege Level: Anon*
 
@@ -14253,7 +14235,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 4.4.12.4 Create A New User#### {#create_a_new_user}
+#### 3.4.12.4 Create A New User#### {#create_a_new_user}
 #### POST /HP-IDM/v1.0/users
 *Privilege Level: SA, DA, SR*
 
@@ -14442,7 +14424,7 @@ Assuming there exist a file "new_user.json" with the following content:
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.12.5 Update A User#### {#update_a_user}
+#### 3.4.12.5 Update A User#### {#update_a_user}
 #### PUT /HP-IDM/v1.0/users/{userId} 
 *Privilege Level: SA, DA\*, SS*
 
@@ -14607,7 +14589,7 @@ Assuming there exist a file "update_user.json" with the following content:
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.12.6 Delete A User#### {#delete_a_user}
+#### 3.4.12.6 Delete A User#### {#delete_a_user}
 #### DELETE /HP-IDM/v1.0/users/{userId}
 *Privilege Level: SA, DA*
 
@@ -14726,7 +14708,7 @@ Curl Example
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.12.7 Get All Groups For A User#### {#get_all_groups_for_a_user}
+#### 3.4.12.7 Get All Groups For A User#### {#get_all_groups_for_a_user}
 #### GET /HP-IDM/v1.0/users/{userId}/groups
 *Privilege Level: SA, DA, SS*
 
@@ -14885,7 +14867,7 @@ Return maximum of 10 groups at a time, starting with groupId '1234556', for a gi
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.12.8 Update Password For A User#### {#update_password_for_a_user}
+#### 3.4.12.8 Update Password For A User#### {#update_password_for_a_user}
 #### PUT /HP-IDM/v1.0/users/{userId}/password
 *Privilege Level: SA, DA, SS*
 
@@ -15024,7 +15006,7 @@ Assuming there exist a file "new_password.json" with the following content:
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.12.9 Initial Password Reset#### {#initial_password_reset}
+#### 3.4.12.9 Initial Password Reset#### {#initial_password_reset}
 #### POST /HP-IDM/v1.0/users/password/reset
 *Privilege Level: SA, DA, Anon*
 
@@ -15139,7 +15121,7 @@ Curl Example
 
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
-#### 4.4.12.10 Validate Password ResetId And Update Password#### {#validate_password_resetid_and_update_password}
+#### 3.4.12.10 Validate Password ResetId And Update Password#### {#validate_password_resetid_and_update_password}
 #### PUT /HP-IDM/v1.0/users/password/reset/{resetId}
 *Privilege Level: Anon*
 
@@ -15304,7 +15286,7 @@ Assuming there exist a file "mypasword.json" with the following content:
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.12.11 List A User's Non Tenant Role Assignments#### {#list_a_users_non_tenant_role_assignments}
+#### 3.4.12.11 List A User's Non Tenant Role Assignments#### {#list_a_users_non_tenant_role_assignments}
 #### GET /HP-IDM/v1.0/users/{userId}/username}/roles
 *Privilege Level: SA, DA, DU*
 
@@ -15507,7 +15489,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 4.4.12.12 Check User's Non Tenant Role Assignment#### {#check_users_non_tenant_role_assignment}
+#### 3.4.12.12 Check User's Non Tenant Role Assignment#### {#check_users_non_tenant_role_assignment}
 #### HEAD [HPKeystoneExtensionBaseURI]/users/\<userId\>/roles/\<roleId\> 
 *Privilege Level: SA, DA, DU*
 
@@ -15620,7 +15602,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 4.4.12.13 Create A User's Non Tenant Role Assignment#### {#create_a_users_non_tenant_role_assignment}
+#### 3.4.12.13 Create A User's Non Tenant Role Assignment#### {#create_a_users_non_tenant_role_assignment}
 #### PUT /HP-IDM/v1.0/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -15724,7 +15706,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 4.4.12.14 Delete A User's Non Tenant Role Assignment#### {#delete_a_users_non_tenant_role_assignment}
+#### 3.4.12.14 Delete A User's Non Tenant Role Assignment#### {#delete_a_users_non_tenant_role_assignment}
 #### DELETE /HP-IDM/v1.0/users/{userId}/roles/{roleId}
 *Privilege Level: SA, DA*
 
@@ -15832,7 +15814,7 @@ Curl Example
 **Additional Notes**
 
 
-### 4.4.13 User Access Keys
+### 3.4.13 User Access Keys
 
 The User Access Key REST API provides the ability to manage user access keys.
 
@@ -15853,7 +15835,7 @@ N/A
 None.
 
 
-#### 4.4.13.1 Create User Access Key#### {#create_user_access_key}
+#### 3.4.13.1 Create User Access Key#### {#create_user_access_key}
 #### POST /HP-IDM/v1.0/accesskeys
 
 *Privilege Level: SA, DA, SS*
@@ -16024,7 +16006,7 @@ Curl Example
 
 
 
-#### 4.4.13.2 Delete User Access Key#### {#delete_user_access_key}
+#### 3.4.13.2 Delete User Access Key#### {#delete_user_access_key}
 #### DELETE /HP-IDM/v1.0/accesskeys/{accesskeyId} 
 *Privilege Level: SA, DA, SS*
 
@@ -16114,7 +16096,7 @@ Curl Example
 
 
 
-#### 4.4.13.3 Get Access Keys#### {#get_access_keys}
+#### 3.4.13.3 Get Access Keys#### {#get_access_keys}
 #### GET /HP-IDM/v1.0/accesskeys
 
 *Privilege Level: SA,DA, SS*
@@ -16282,7 +16264,7 @@ Curl Example
 
 
 
-#### 4.4.13.4 Get An Access Key#### {#get_an_access_key}
+#### 3.4.13.4 Get An Access Key#### {#get_an_access_key}
 #### GET /HP-IDM/v1.0/accesskeys/{accesskeyId}
 
 *Privilege Level: SA,DA,SS*
@@ -16419,7 +16401,7 @@ Curl Example
 
 
 
-#### 4.4.13.5 Import User Access Key#### {#import_user_access_key}
+#### 3.4.13.5 Import User Access Key#### {#import_user_access_key}
 #### PUT /HP-IDM/v1.0/accesskeys
 *Privilege Level: SA, DA, SS*
 
@@ -16653,7 +16635,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.13.6 Update User Access Key#### {#update_user_access_key}
+#### 3.4.13.6 Update User Access Key#### {#update_user_access_key}
 #### PUT /HP-IDM/v1.0/accesskeys/{accesskeyId}
 *Privilege Level: SA, DA, SS*
 
@@ -16801,7 +16783,7 @@ Curl Example
 
 
 
-### 4.4.14 User Certificates
+### 3.4.14 User Certificates
 
 User Certificate Operations.
 
@@ -16822,7 +16804,7 @@ N/A
 None.
 
 
-#### 4.4.14.1 Get User Certificates#### {#get_user_certificates}
+#### 3.4.14.1 Get User Certificates#### {#get_user_certificates}
 #### GET /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS* 
 
@@ -17032,7 +17014,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.14.2 Delete User Certificate#### {#delete_user_certificate}
+#### 3.4.14.2 Delete User Certificate#### {#delete_user_certificate}
 #### DELETE /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	D
 *Privilege Level: SA, DA, SS*
 
@@ -17140,7 +17122,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.14.3 Get User Certificate#### {#get_user_certificate}
+#### 3.4.14.3 Get User Certificate#### {#get_user_certificate}
 #### GET /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber}
 *Privilege Level: SA, DA, SS*
 
@@ -17305,7 +17287,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 4.4.14.4 Create A User Certificate#### {#create_a_user_certificate}
+#### 3.4.14.4 Create A User Certificate#### {#create_a_user_certificate}
 #### POST /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS*
 
@@ -17496,7 +17478,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.14.5 Import User Certificate(s)#### {#import_user_certificate(s)}
+#### 3.4.14.5 Import User Certificate(s)#### {#import_user_certificate(s)}
 #### PUT /HP-IDM/v1.0/certificates
 *Privilege Level: SA, DA, SS*
 
@@ -17713,7 +17695,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 4.4.14.6 Update User Certificate#### {#update_user_certificate}
+#### 3.4.14.6 Update User Certificate#### {#update_user_certificate}
 #### PUT /HP-IDM/v1.0/certificates/{issuerName}/{serialNumber} 	
 *Privilege Level: SA,DA,SS*
 
@@ -17863,7 +17845,7 @@ Curl Example
 
 
 
-### 4.4.15 User Key Pairs
+### 3.4.15 User Key Pairs
 
 The User Key Pair REST API provides the ability to manage user access keys.
 
@@ -17885,7 +17867,7 @@ N/A
 None.
 
 
-#### 4.4.15.1 Create User Key Pair#### {#create_user_key_pair}
+#### 3.4.15.1 Create User Key Pair#### {#create_user_key_pair}
 #### POST /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
@@ -18076,7 +18058,7 @@ Curl Example
 
 
 
-#### 4.4.15.2 Delete User Key Pair#### {#delete_user_key_pair}
+#### 3.4.15.2 Delete User Key Pair#### {#delete_user_key_pair}
 #### DELETE /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 
@@ -18184,7 +18166,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.15.3 Get User Key Pair#### {#get_user_key_pair}
+#### 3.4.15.3 Get User Key Pair#### {#get_user_key_pair}
 #### GET /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 
@@ -18321,7 +18303,7 @@ Curl Example
 
 
 
-#### 4.4.15.4 Get User Key Pairs#### {#get_user_key_pairs}
+#### 3.4.15.4 Get User Key Pairs#### {#get_user_key_pairs}
 #### GET /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
@@ -18621,7 +18603,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.15.5 Import User Key Pair(s)#### {#import_user_key_pair(s)}
+#### 3.4.15.5 Import User Key Pair(s)#### {#import_user_key_pair(s)}
 #### PUT /HP-IDM/v1.0/keypairs
 *Privilege Level: SA, DA, SS*
 
@@ -18951,7 +18933,7 @@ Curl Example
 
 
 
-#### 4.4.15.6 Update User Key Pair#### {#update_user_key_pair}
+#### 3.4.15.6 Update User Key Pair#### {#update_user_key_pair}
 #### PUT /HP-IDM/v1.0/keypairs/{keypairId}
 *Privilege Level: SA, DA, SS*
 
@@ -19107,9 +19089,9 @@ Curl Example
 
 
 
-# 5. Additional References
+# 4. Additional References
 
-## 5.1 Resources
+## 4.1 Resources
 
 **Wiki Page**: {Link to Wiki page}
 
@@ -19119,7 +19101,7 @@ Curl Example
 
 ---
 
-# 6. Glossary
+# 5. Glossary
 
 {Put down definitions of terms and items that need explanation.}
 

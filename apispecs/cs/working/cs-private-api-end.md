@@ -1,6 +1,6 @@
-# 5. Additional References
+# 4. Additional References
 
-## 5.1 Resources
+## 4.1 Resources
 
 **Wiki Page**: {Link to Wiki page}
 
@@ -10,7 +10,7 @@
 
 ---
 
-# 6. Glossary
+# 5. Glossary
 
 {Put down definitions of terms and items that need explanation.}
 
