@@ -51,8 +51,10 @@ Additionally there are some commands that should rarely be used if at all:
 
 ## Dependencies
 
-Before using this project you need the following dependencies installed.
+Before using this project you need the following dependencies installed. Some of these are for deployments while others are used for the build package or managing sub-projects.
 
+* Make
+* Java
 * [Jekyll](jekyllrb.com)
 * [jekyll_ext (a.k.a ejekyll)](https://github.com/rfelix/jekyll_ext)
 * Git
