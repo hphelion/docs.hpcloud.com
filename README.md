@@ -70,7 +70,7 @@ where,
 * keywords - is a set of comma separated text that will be used for searching and tagging.
 * product - is the name of the service that relates to the document.
 * private - is a flag that determines if the document needs to be ONLY published internally and NOT available publicly.
-* publish - is an optional flag that determines if a document should be published or not. By default, the value is 'true', but in case of a need to stop publishing a particular document, this flag can be set to 'false'.
+* published - is an optional flag that determines if a document should be published or not. By default, the value is 'true', but in case of a need to stop publishing a particular document, this flag can be set to 'false'.
 
  ---
 

@@ -5,7 +5,7 @@ title: Relational Database for MySQL (dbaas) API
 description: "Relational Database for MySQL API Documentation."
 keywords: "MySQL, RDB, DBaaS"
 product: dbaas
-publish: false
+published: false
 
 ---
 # Relational Database for MySQL (dbaas) API
