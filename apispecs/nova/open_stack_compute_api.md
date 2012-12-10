@@ -13,23 +13,23 @@ keywords: Compute, Nova, OpenStack
 **Document Version:** 1.0
 
 
-# 1. <a id="Section1_"></a> Overview
+# 1. Overview # {#Section1_}
 
 This document describes the HP Cloud Compute Service. HP Cloud Compute is based on OpenStack Nova.
 
-## 1.1 <a id="Section1_1"></a> API Maturity Level
+## 1.1 API Maturity Level ## {#Section1_1}
 
 **Maturity Level**: HP Cloud Compute is currently in General Availability.
 
 **Version API Status**: The HP Cloud Compute Service is based on OpenStack Nova v1.1 The OpenStack v1.0  Nova API is deprecated.
 
-# 2. <a id="Section2_"></a> HP Cloud Compute Service
+# 2. HP Cloud Compute Service # {#Section2_}
 
 The HP Cloud Compute Service provides a scalable compute infrastructure on which users can run applications.
-## 2.1 <a id="Server"></a> Servers
+## 2.1 Servers ## {#Server}
 A Server (also sometimes referred to as an instance) is the fundamental resource provided by HP Cloud Compute. A Server is a virtual machine capable of running a variety of operating system *image*s. The HP Cloud Compute API provided operations that allow users to control the life cycle of a server. The current status of a server is reported by the API as its *state*.  Characteristics of the server, such memory, amount of disk space, and number of CPUs are determined by the server's *flavor* which is specified at the time the server is created. A server is referred to by its *name*. Metadata can be associated with a server and accessed in a number of ways as described in the section [Personalizing a server](#Personalizing). These concepts are described further in the sections below.
 
-### 2.1.1 <a id="Section2_1_1"></a> Server Operations
+### 2.1.1 Server Operations ### {#Section2_1_1}
 
 The APIs support a number of operations that can be performed on servers. These include:
 
@@ -44,7 +44,7 @@ For a complete list of server operations, see section 4.1, [Service API Operatio
 
 The following operations are part of the OpenStack Nova V1.1 API, but are not supported by HP Cloud Compute: Change Administrator Password, Resize Server, Confirm Resized Server, Revert Resized Server
 
-### 2.1.2 <a id="Flavors"></a> Flavors
+### 2.1.2 Flavors ### {#Flavors}
 A flavor determines the primary characteristics of a server. It includes the amount of memory to be allocated to the server, the size of the disk to be created for ephemeral storage and the number of VCPUs to be allocated.
 Flavors can be listed using the nova client flavor-list command as shown below. Also see the [List Flavors](#listFlavors) API method. 
 
@@ -61,7 +61,7 @@ Flavors can be listed using the nova client flavor-list command as shown below. 
     +-----+------------------+-----------+------+----------+-------+------------+----------+
     
 
-### 2.1.3 <a id="ServerStates"></a> Server States
+### 2.1.3 Server States ### {#ServerStates}
 The state of a server is maintained in two values: the VM State and the Task State. The VM State is the state of the server as maintained by Nova.  The possible values for VM State are `ACTIVE, BUILD, REBUILD, STOPPED, MIGRATING, RESIZING, PAUSED, SUSPENDED, RESCUE, ERROR` and `DELETED`. A server is running when it is in the `ACTIVE` state. The Task State is essentially a sub-state of the VM State. The status of a server as returned by the Create Server and Get Server Details API is a combination of the VM State and the Task State.
 
 The following shows the sequence of states that a newly created server goes through when a user invokes Create Server. The Task state is shown following the VM state in parentheses.
@@ -112,7 +112,7 @@ The output of the nova list and nova show commands include the server status as 
 The [List Servers Detail](#listDetailServers) and [Get Server Details](#getServer) API operations include server status in the information they return.
 
 
-### 2.1.4 <a id="serverNames"></a> Server Names
+### 2.1.4 Server Names ### {#serverNames}
 There are four different ways to refer to a server using the OpenStack native API:
 
 1. The Server is assigned an *id* when it is created. This is an integer and is guaranteed to be unique within the Availability Zone in which the server was created.
@@ -129,14 +129,14 @@ The OpenStack API operations require that the server be identified using either 
 
 Nova client supports the use of the display name in commands, but this is not recommended as it may cause confusion when a display name is also a UUID.
 
-### 2.1.5 <a id="Personalizing"></a> Personalizing a server
+### 2.1.5 Personalizing a server ### {#Personalizing}
 A number of mechanisms exist which allow a user to retrieve information about a server and to associate meta-data with the server.
 
-#### 2.1.5.1 <a id="ServerMetadata"></a> Server Metadata
+#### 2.1.5.1 Server Metadata #### {#ServerMetadata}
 
 A server can have metadata in the form of key/value pairs. The initial value of a servers metadata is provided as a parameter to [Create Server](#createServer). Metadata provided when the server is created is available as a json object in the image's root filesystem at /meta.js. If the server has a [Configuration Drive](#ConfigurationDrive), the metadata will be in the file /meta.js at the root of the file system on the configuration drive. A server's metadata can also be retrieved and updated using the [Server Metadata](#ServerMetadata) and [Server Metadata Item](#ServerMetadataItem) resources. Updates to a server's metadata are only available using subsequent calls to [Server List Metadata](#ServerMetadata_listMetadata) and [Server Get Metadata Item](#ServerMetadataItem_getMetadataItem).
 
-#### 2.1.5.2 <a id="EC2Metadata"></a> EC2 Metadata
+#### 2.1.5.2 EC2 Metadata #### {#EC2Metadata}
 A server can retrieve system defined metadata by querying the interface `http://169.254.169.254/latest/metadata`. This interface is only available on a server and returns the available meta-data as shown below.
 
     ubuntu@nserver:~$ curl http://169.254.169.254/latest/meta-data
@@ -166,7 +166,7 @@ To get information about a specific meta-data item, just append the item to the 
 
 It is also possible to provide additional meta-data at the time the server is created by supplying a Base64 encoded string as the *user_data* parameter to [Create Server](#createServer). This string can be retrieved using the URL `http://169.254.169.254/latest/meta-data/user-data`. All linux public images in the HP Cloud contain a package called CloudInit which can be used for early initialization of the instance from *user_data*.
 
-#### 2.1.5.3 <a id="Section2_1_5_3"></a> CloudInit
+#### 2.1.5.3 CloudInit #### {#Section2_1_5_3}
 [CloudInit](https://help.ubuntu.com/community/CloudInit) is a set of scripts that are run when an image boots. These scripts are provided by an Ubuntu package that is installed  in the public Linux images provided by HP Cloud. (CloudInit is not supported for Windows images.) The scripts are controlled by a configuration which is described in [cloud-config](http://bazaar.launchpad.net/~cloud-init-dev/cloud-init/trunk/view/head:/doc/examples/cloud-config.txt). The configuration is the result of a merge of information from multiple sources including config files stored in the image, configuration parameters on the kernel command line, configuration information provided by Nova and configuration information provided by the user when creating the instance. In the HP Cloud, the latter two sources of information come from the EC2 metadata service which provides information, such as the hostname, determined by the environment along with *user_data* specified by the user at the time an instance is created.
 
 The scripts that are run by CloudInit perform a number of different tasks including:
@@ -181,7 +181,7 @@ As mentioned above, the behavior of CloudInit is determined by its configuration
 
 One of the tasks that CloudInit performs is to run user provided scripts when an instance is booted. These scripts are provided by the user at the time the instance is booted using the *user_data* argument to [Create Server](#createServer). For more information on the format of user_data see the [CloudInit - Community Ubuntu Documentation](https://help.ubuntu.com/community/CloudInit).
 
-#### 2.1.5.4 <a id="FileInjection"></a> File Injection
+#### 2.1.5.4 File Injection #### {#FileInjection}
 The [Create Server](#createServer) API has a parameter named *personality* which allows the specification of files to be injected into an image. For each file to be injected the file path in the root filesystem of the server being created is specified along with the base64 encoded contents of the file. The following json object is a the body of a Create Server request which includes a file to be injected.
 
     {
@@ -208,7 +208,7 @@ The maximum length of the file path is limited to 255 bytes.
 
 File injection is not supported for Windows images.
 
-#### 2.1.5.5 <a id="ConfigurationDrive"></a> Configuration Drive
+#### 2.1.5.5 Configuration Drive #### {#ConfigurationDrive}
 
 A configuration drive is a disk contains a FAT filesystem with configuration data that is accessible to a server. The configuration drive is created at the same time the server is created by specifying the [Create Server](#createServer) parameter *config_drive* with a value of true. This will cause a configuration drive to be created and items that are normally injected into the root filesystem of the newly created server are injected into the configuration drive instead. The items that are written to the configuration drive are:
 
@@ -224,7 +224,7 @@ Note that the configuration drive is an API extension in later versions of OpenS
 
 The configuration drive is not supported for servers running Windows images.
 
-### 2.1.6 <a id="Images"></a> Images
+### 2.1.6 Images ### {#Images}
 Servers are booted from disk images which are specified at the time the server is created. There are three different types of disk images: machine images, kernel images and ramdisk images. The machine image contains the root file system for the image. The kernel image is that image that is loaded when the server is launched and the ramdisk contains drivers used to boot the server. The latter two image types are optional. The machine image is always required, but the kernel and ramdisk may or may not be required depending on how the images were built.
 
 The listing below shows the output of `nova image-list`. For kernel and ramdisk images, the image type is given in parentheses after the full image name for images provided by HP. Machine images do not include the image type in the image's name. Any image that is marked as `(deprecated)' should not be used.
@@ -273,19 +273,19 @@ The listing below shows the output of `nova image-list`. For kernel and ramdisk 
 
 Images may be public or private. Public images are provided by HP and are available to all users. Private images are created by taking a snapshot of the root file system of a running server using the [Create Image](#createImage) API method. Images have an attribute which distinguishes public images provided by HP from private images (snapshots) created by the user. A user can access all the public images and any private images he owns.
 
-#### 2.1.6.1 <a id="Section2_1_6_1"></a> Snapshots
+#### 2.1.6.1 Snapshots #### {#Section2_1_6_1}
 
 Image snapshots are copies of the (virtual) disk partition containing the root file system that can be created from a running VM using [Create Image](#createImage). A snapshot is linked to the same kernel and ramdisk as the image which was originally booted on the VM.  In the listing above, foo100-snap and foo-snap are snapshots created by the user.
 
-#### 2.1.6.2 <a id="ImageMetadata"></a> Image Metadata
+#### 2.1.6.2 Image Metadata #### {#ImageMetadata}
 Images can have metadata in the form of key/value pairs. This metadata can be queried and modified using operations of the [Image Metadata](#ImageMetadata) and [Image Metadata Item](#ImageMetadataItem) resources.
 
-## 2.2 <a id="Section2_2"></a> Volumes
+## 2.2 Volumes ## {#Section2_2}
 Nova volumes are persistent virtual images that can be attached to servers (similar to Amazon Elastic Block Store (EBS)). When attached to a server, the volume appears as a disk device on which a file system can be created. See XXX for more information on volumes.
 
-## 2.3 <a id="Section2_3"></a> Network
+## 2.3 Network ## {#Section2_3}
 
-### 2.3.1 <a id="NetworkModel"></a> Network Model
+### 2.3.1 Network Model ### {#NetworkModel}
 
 Each server gets both an internal and an external IPv4 address at the time it's created. 
 Internal addresses are allocated in the 10.0.0.0/8 address range and can be used by other servers in the same Availability Zone to communicate with the server. All communication with and between servers takes place across a private network. This network is referred to as the "private" network in responses to HP Cloud Compute API operations. Broadcast and multicast between servers is not supported. Internal addresses are sometimes referred to as "fixed IPs".
@@ -295,7 +295,7 @@ A single external address is automatically assigned to each server when it is cr
 
 Each server has a single (virtual) nic to which the server's internal address is bound using dhcp. External addresses are mapped to internal addresses using Network Address Translation. API operations which list the addresses by which a server may be accessed list both the internal and external addresses as belonging to the "private" network mentioned above.
 
-### 2.3.2 <a id="securityGroups"></a> Security Groups
+### 2.3.2 Security Groups ### {#securityGroups}
 Access to servers is controlled by security groups which are a collection of rules about which sources, protocols and ports a server can receive traffic from. No traffic can be received by a server unless a security group rule explicitly allows it.
 
 The HP Cloud Compute service creates the default security group shown below when an account is activated.
@@ -324,7 +324,7 @@ Any change to a security groups rules take immediate effect for any server assoc
 
 When a security group is deleted it is effectively removed from all servers with which it was previously associated. If access to a server was previously allowed by one of the rules in the deleted security group, and no other security group associated with the server allows similar access, it will no longer be possible to access the server. For example, if the deleted security group allowed ping access (icmp) to the server from a particular source, and none of the rules in the remaining security groups associated with the server allow icmp from the same source, then it will no longer be possible to ping the server from that source.
 
-## 2.4 <a id="Tenants"></a> Tenants
+## 2.4 Tenants ## {#Tenants}
 
 A tenant has access to a collection of resources uniquely associated with the tenant.  Resources that are associated with a tenant include:
 
@@ -338,19 +338,19 @@ All resources are uniquely allocated in an Availability Zone. However, the tenan
 
 Users are created separately from tenants; a given user can be associated with no tenants or with one or more tenants.
 
-# 3. <a id="Section3_"></a> General API Information
+# 3. General API Information # {#Section3_}
 
-## 3.1 <a id="Authorization"></a>  Authorization
+## 3.1  Authorization ## {#Authorization}
 
 Access to HP Cloud Compute is controlled on a per tenant basis. All HP Cloud Compute API operations have a `tenantId` parameter which identifies the particular collection of resources the user will be accessing. (See [Tenants](#Tenants).) In order to perform an API operation, the user must first obtain an authorization token scoped to the particular tenant he will be accessing. This authorization process is described in [HP Cloud Identity Service Overview](https://docs.hpcloud.com/identity). The token obtained must be included in the `X-Auth-Token` header of any subsequent HP Cloud Compute API request. Tokens are valid for a limited period of time (on the order of 24 hours). When the token expires, subsequent attempts to access the API will return authorization failures and a new token must be obtained to continue using the API.
 
-## 3.2 <a id="Section3_2"></a> Regions and Availability Zones
+## 3.2 Regions and Availability Zones ## {#Section3_2}
 
 In order to access HP Cloud Compute, the user must specify the endpoint for one of the HP Cloud Availability Zones (AZs). Availability Zones provide separate fault domains for HP Cloud. Failures in one AZ should not affect any resources in another AZ. Highly available applications will therefore deploy resources in more than one AZ.
 
 Availability Zones are further clustered into regions and geographies. HP Cloud Compute is currently available in a single region (`region-a`) in a single geography (`geo-1`). The set of endpoints that a tenant can access are returned in a Service Catalog when the user calls the Identity Service to get a token.
 
-## 3.3 <a id="ServiceCatalog"></a>  Service Catalog
+## 3.3  Service Catalog ## {#ServiceCatalog}
 
 The listing below shows a fragment of the Service Catalog returned by the Identity Service which contains the endpoints for HP Cloud Compute. Note that a set of endpoints is returned for each AZ. (The string which identifies the AZ is called `"region"` in the Service Catalog.
 
@@ -385,7 +385,7 @@ The listing below shows a fragment of the Service Catalog returned by the Identi
    	u 'type' : u 'compute'
 	}
 
-## 3.4 <a id="Section3_4"></a> Request/Response Types
+## 3.4 Request/Response Types ## {#Section3_4}
 
 The OpenStack Compute API supports both the JSON and XML data
 serialization formats. The request format is specified using the
@@ -450,7 +450,7 @@ Example Request with .xml Extension - JSON
     {"server":{"name":"dbserver","imageRef":5579,"flavorRef":100}}
     
 
-## 3.5 <a id="Section3_5"></a> Links and References
+## 3.5 Links and References ## {#Section3_5}
 
 Responses to several API operations include links which refer to HP Cloud Compute resources. For example, here is the response to a call on the [Get Server](#getServer) method.
 
@@ -488,7 +488,7 @@ List Servers (limit=1) Response: JSON
 
 The link elements in the response give references to the resource, in this case a server, which include the full URI of the server. This URI could be used at a later time to perform some server action (for example, to reboot the server) and capture both the AZ and the id of the server withing the AZ.
 
-## 3.6 <a id="Pagination"></a> Paginated Collections
+## 3.6 Paginated Collections ## {#Pagination}
 
 To reduce load on the service, list operations limit the number of items that can be returned by
 a single call.
@@ -501,7 +501,7 @@ ID. The `limit` parameter sets the page size. A maximum of 1000 items are return
 a single call. Setting `limit` to a value greater than 1000 has no effect.
 A marker with an invalid ID will return a badRequest (400) fault.
 
-## 3.7 <a id="Polling"></a> Efficient Polling with the Changes-Since Parameter
+## 3.7 Efficient Polling with the Changes-Since Parameter ## {#Polling}
 
 The REST API allows you to poll for the status of certain operations by
 performing a GET on various elements. Rather than re-downloading and
@@ -528,9 +528,9 @@ been removed. Implementations are not required to keep track of deleted
 resources indefinitely, so sending a changes since time in the distant
 past may miss deletions.
 
-## 3.8 <a id="Limits"></a> Limits
+## 3.8 Limits ## {#Limits}
 
-### 3.8.1 <a id="Section3_8_1"></a> Absolute Limits
+### 3.8.1 Absolute Limits ### {#Section3_8_1}
 
 Limits are established for the following resources on a per tenant basis:
 
@@ -546,17 +546,17 @@ Limits are established for the following resources on a per tenant basis:
 
 The limits are applied per AZ. [List Limits](#listLimits) can be used to retrieve the current value of these limits within an AZ for a tenant.
 
-### 3.8.2 <a id="Section3_8_2"></a> Rate Limits
+### 3.8.2 Rate Limits ### {#Section3_8_2}
 
 In order to ensure fair sharing of cloud resources, limits are placed on the rate at which an individual tenant can make requests to the HP Cloud Compute API servers. The rate limits are specified in terms of HTTP verbs (GET, PUT, POST, DELETE) and are further qualified by URL. Stricter limits are place on operations that can affect servers than on queries. This allows users to monitor the status of the environment while guaranteeing equitable sharing of resources. The rate limits are applied per tenant and apply to API calls using both the EC2 and OSAPI interfaces. Rate limiting is enforced per AZ - a tenant has a separate allowance in each AZ.
 
 [List Limits](#listLimits) can be used to retrieve the current value of these limits within an AZ for a tenant.
 
-## 3.9 <a id="Section3_9"></a> Versions
+## 3.9 Versions ## {#Section3_9}
 
 The HP Cloud Compute Service is based on OpenStack Nova v1.1 The OpenStack v1.0  Nova API is deprecated.
 
-## 3.10 <a id="Section3_10"></a> Extensions
+## 3.10 Extensions ## {#Section3_10}
 
 The OpenStack Compute API is extensible. Extensions serve two purposes: They allow the introduction of new features in the API without requiring a version change and they allow the introduction of vendor specific niche functionality. Applications can programmatically determine what extensions are available by using the [List Extensions](#listExtensions) and [Get Extension](#getExtension) API methods. HP Cloud Compute supports the following extensions:
 
@@ -571,7 +571,7 @@ The OpenStack Compute API is extensible. Extensions serve two purposes: They all
 The resources and methods of these extensions are described in section 4.1, [ServiceAPIOperations](#ServiceAPIOperations).
 
 
-## 3.11 <a id="Section3_11"></a> Faults
+## 3.11 Faults ## {#Section3_11}
 
 When an error occurs at request time, the system will return an HTTP
 error response code denoting the type of error. The system will also
@@ -667,7 +667,7 @@ Fault Response, Over Limit: JSON
     }
 
 
-# 4. <a id="Section4_"></a> REST API Specifications
+# 4. REST API Specifications # {#Section4_}
 
 ##<a id="ServiceAPIOperations"></a>4.1 Service API Operations
 
@@ -678,7 +678,7 @@ Fault Response, Over Limit: JSON
 **Admin URI**: N/A
 
 
-## 4.1 <a id="Section4_1"></a> HP Cloud Compute API Operations
+## 4.1 HP Cloud Compute API Operations ## {#Section4_1}
 
 
 ###Core Compute API
@@ -759,7 +759,7 @@ Fault Response, Over Limit: JSON
 | **Security Group Rules** | [Create Security Group Rule](#createSecGroupRule) | POST | v1.1/{tenant_id}/os-security-group-rules | Y/Y |  |
 | **Security Group Rule** | [Delete Security Group Rule](#deleteSecGroupRule) | DELETE | v1.1/{tenant_id}/os-security-group-rules/{security_group_rule_id} | Y/Y |  |
 
-## 4.2 <a id="Section4_2"></a> Common Request Headers
+## 4.2 Common Request Headers ## {#Section4_2}
 
 *Http standard request headers*
 
@@ -784,7 +784,7 @@ Fault Response, Over Limit: JSON
     Content-Type: application/json
     Content-Length: 85
 
-## 4.3 <a id="Section4_3"></a> Common Response Headers
+## 4.3 Common Response Headers ## {#Section4_3}
 
 *Http standard response headers*
 
@@ -806,15 +806,15 @@ Fault Response, Over Limit: JSON
     Date: Tue, 30 Oct 2012 16:22:35 GMT
 
 
-## 4.4 <a id="Section4_4"></a> OpenStack API Operation Details
+## 4.4 OpenStack API Operation Details ## {#Section4_4}
 The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.
 
-### 4.4.1 <a id="version"></a> Versions
+### 4.4.1 Versions ### {#version}
 
 <p> A list of available API versions </p>
 
 
-#### 4.4.1.1 <a id="versionDetails"></a> Get Version Info
+#### 4.4.1.1 Get Version Info #### {#versionDetails}
 #### GET v1.1
 
 <p> Returns detailed information about this
@@ -874,12 +874,12 @@ JSON
 
 
 
-### 4.4.2 <a id="extensions"></a> Extensions
+### 4.4.2 Extensions ### {#extensions}
 
 <p> A list of supported extensions. </p>
 
 
-#### 4.4.2.1 <a id="listExtensions"></a> List Extensions
+#### 4.4.2.1 List Extensions #### {#listExtensions}
 #### GET v1.1/{tenant_id}/extensions
 
 <p> Lists all available extensions. </p>
@@ -955,12 +955,12 @@ JSON
 
 
 
-### 4.4.3 <a id="extension"></a> Extension
+### 4.4.3 Extension ### {#extension}
 
 <p> Extension </p>
 
 
-#### 4.4.3.1 <a id="getExtension"></a> Get Extension
+#### 4.4.3.1 Get Extension #### {#getExtension}
 #### GET v1.1/{tenant_id}/extensions/{alias}
 
 **Template Parameters**
@@ -1002,12 +1002,12 @@ JSON
 
 
 
-### 4.4.4 <a id="limits"></a> Limits
+### 4.4.4 Limits ### {#limits}
 
 <p> Limits </p>
 
 
-#### 4.4.4.1 <a id="listLimits"></a> List Limits
+#### 4.4.4.1 List Limits #### {#listLimits}
 #### GET v1.1/{tenant_id}/limits
 
 <p> Returns current limits for the account. </p>
@@ -1117,13 +1117,13 @@ JSON
 
 
 
-### 4.4.5 <a id="Servers"></a> Servers
+### 4.4.5 Servers ### {#Servers}
 
 <p> A list of servers. Each server contains IDs,
                 names, and links -- other attributes are omitted. </p>
 
 
-#### 4.4.5.1 <a id="listServers"></a> List Servers
+#### 4.4.5.1 List Servers #### {#listServers}
 #### GET v1.1/{tenant_id}/servers
 
 <p> Lists IDs, names, and links associated with the account.
@@ -1219,7 +1219,7 @@ JSON
 
 
 
-#### 4.4.5.2 <a id="createServer"></a> Create Server
+#### 4.4.5.2 Create Server #### {#createServer}
 #### POST v1.1/{tenant_id}/servers
 
 <p> 
@@ -1369,7 +1369,7 @@ JSON
 
 
 
-#### 4.4.5.3 <a id="listDetailServers"></a> List Servers Detail
+#### 4.4.5.3 List Servers Detail #### {#listDetailServers}
 #### GET v1.1/{tenant_id}/servers/detail
 
 <p> 
@@ -1527,10 +1527,10 @@ JSON
 
 
 
-### 4.4.6 <a id="Server"></a> Server
+### 4.4.6 Server ### {#Server}
 
 
-#### 4.4.6.1 <a id="getServer"></a> Get Server Details
+#### 4.4.6.1 Get Server Details #### {#getServer}
 #### GET v1.1/{tenant_id}/servers/{server_id}
 
 <p> Lists details for the specified server. </p>
@@ -1665,7 +1665,7 @@ JSON
 
 
 
-#### 4.4.6.2 <a id="updateServer"></a> Update Server Name
+#### 4.4.6.2 Update Server Name #### {#updateServer}
 #### PUT v1.1/{tenant_id}/servers/{server_id}
 
 <p> Updates the display name for the specified server. </p>
@@ -1822,7 +1822,7 @@ JSON
 
 
 
-#### 4.4.6.3 <a id="deleteServer"></a> Delete Server
+#### 4.4.6.3 Delete Server #### {#deleteServer}
 #### DELETE v1.1/{tenant_id}/servers/{server_id}
 
 <p> Terminates the specified server. </p>
@@ -1849,10 +1849,10 @@ This call does not require a request body
 
 
 
-### 4.4.7 <a id="ServerAction"></a> Server Action
+### 4.4.7 Server Action ### {#ServerAction}
 
 
-#### 4.4.7.1 <a id="rebootServer"></a> Reboot Server
+#### 4.4.7.1 Reboot Server #### {#rebootServer}
 #### POST v1.1/{tenant_id}/servers/{server_id}/action
 
 <p> Reboots the specified server. Specify the
@@ -1904,7 +1904,7 @@ JSON
 
 
 
-#### 4.4.7.2 <a id="rebuildServer"></a> Rebuild Server
+#### 4.4.7.2 Rebuild Server #### {#rebuildServer}
 #### POST v1.1/{tenant_id}/servers/{server_id}/action
 
 <p> Rebuilds the specified server by rebooting it from a
@@ -2074,7 +2074,7 @@ JSON
 
 
 
-#### 4.4.7.3 <a id="createImage"></a> Create Image
+#### 4.4.7.3 Create Image #### {#createImage}
 #### POST v1.1/{tenant_id}/servers/{server_id}/action
 
 <p> Creates a new image. Specify the
@@ -2130,7 +2130,7 @@ JSON
 
 
 
-#### 4.4.7.4 <a id="getConsoleOutput"></a> Get Console Output.
+#### 4.4.7.4 Get Console Output. #### {#getConsoleOutput}
 #### POST v1.1/{tenant_id}/servers/{server_id}/action
 
 <p>
@@ -2242,7 +2242,7 @@ JSON
 
 
 
-#### 4.4.7.5 <a id="addFloatingIp"></a> Add Floating Ip
+#### 4.4.7.5 Add Floating Ip #### {#addFloatingIp}
 #### POST v1.1/{tenant_id}/servers/{server_id}/action
 
 <p> 
@@ -2294,7 +2294,7 @@ JSON
 
 
 
-#### 4.4.7.6 <a id="removeFloatingIp"></a> Remove Floating Ip
+#### 4.4.7.6 Remove Floating Ip #### {#removeFloatingIp}
 #### POST v1.1/{tenant_id}/servers/{server_id}/action
 
 <p>
@@ -2346,7 +2346,7 @@ JSON
 
 
 
-#### 4.4.7.7 <a id="addSecurityGroup"></a> Add Security Group
+#### 4.4.7.7 Add Security Group #### {#addSecurityGroup}
 #### POST v1.1/{tenant_id}/servers/{server_id}/action
 
 <p> 
@@ -2395,7 +2395,7 @@ JSON
 
 
 
-#### 4.4.7.8 <a id="removeSecurityGroup"></a> Remove Security Group
+#### 4.4.7.8 Remove Security Group #### {#removeSecurityGroup}
 #### POST v1.1/{tenant_id}/servers/{server_id}/action
 
 <p>
@@ -2444,10 +2444,10 @@ JSON
 
 
 
-### 4.4.8 <a id="ServerMetadata"></a> Server Metadata
+### 4.4.8 Server Metadata ### {#ServerMetadata}
 
 
-#### 4.4.8.1 <a id="ServerMetadata_listMetadata"></a> List Metadata
+#### 4.4.8.1 List Metadata #### {#ServerMetadata_listMetadata}
 #### GET v1.1/{tenant_id}/servers/{server_id}/metadata
 
 <p> Lists metadata associated with the resource.
@@ -2488,7 +2488,7 @@ JSON
 
 
 
-#### 4.4.8.2 <a id="ServerMetadata_updateMetadata"></a> Update Metadata
+#### 4.4.8.2 Update Metadata #### {#ServerMetadata_updateMetadata}
 #### POST v1.1/{tenant_id}/servers/{server_id}/metadata
 
 <p> Updates resource metadata. Updates will replace
@@ -2552,7 +2552,7 @@ JSON
 
 
 
-#### 4.4.8.3 <a id="ServerMetadata_setMetadata"></a> Create or Replace Metadata
+#### 4.4.8.3 Create or Replace Metadata #### {#ServerMetadata_setMetadata}
 #### PUT v1.1/{tenant_id}/servers/{server_id}/metadata
 
 <p>The metadata items set on the resource are those
@@ -2620,10 +2620,10 @@ JSON
 
 
 
-### 4.4.9 <a id="ServerMetadataItem"></a> Server Metadata Item
+### 4.4.9 Server Metadata Item ### {#ServerMetadataItem}
 
 
-#### 4.4.9.1 <a id="ServerMetadataItem_getMetadataItem"></a> Get Metadata Item
+#### 4.4.9.1 Get Metadata Item #### {#ServerMetadataItem_getMetadataItem}
 #### GET v1.1/{tenant_id}/servers/{server_id}/metadata/{key}
 
 <p> Retrieves a single metadata item by key. </p>
@@ -2659,7 +2659,7 @@ JSON
     }
 
 
-#### 4.4.9.2 <a id="ServerMetadataItem_setMetadataItem"></a> Create or Update Metadata Item
+#### 4.4.9.2 Create or Update Metadata Item #### {#ServerMetadataItem_setMetadataItem}
 #### PUT v1.1/{tenant_id}/servers/{server_id}/metadata/{key}
 
 <p> Sets a metadata item by its key. An overLimit
@@ -2714,7 +2714,7 @@ JSON
 
 
 
-#### 4.4.9.3 <a id="ServerMetadataItem_deleteMetadataItem"></a> Delete Metadata Item
+#### 4.4.9.3 Delete Metadata Item #### {#ServerMetadataItem_deleteMetadataItem}
 #### DELETE v1.1/{tenant_id}/servers/{server_id}/metadata/{key}
 
 <p> Deletes a metadata item. </p>
@@ -2743,7 +2743,7 @@ This call does not require a request body
 
 
 
-### 4.4.10 <a id="ServerAddresses"></a> Server Addresses
+### 4.4.10 Server Addresses ### {#ServerAddresses}
 
 <p>
                                     A list of addresses associated with a server by network. All servers in 
@@ -2755,7 +2755,7 @@ This call does not require a request body
 </p>
 
 
-#### 4.4.10.1 <a id="listServerAddresses"></a> List Server Addresses
+#### 4.4.10.1 List Server Addresses #### {#listServerAddresses}
 #### GET v1.1/{tenant_id}/servers/{server_id}/ips
 
 <p> Lists all server addresses by network. </p>
@@ -2809,7 +2809,7 @@ JSON
 
 
 
-#### 4.4.10.2 <a id="listServerAddressesbyNetwork"></a> List Addresses by Network
+#### 4.4.10.2 List Addresses by Network #### {#listServerAddressesbyNetwork}
 #### GET v1.1/{tenant_id}/servers/{server_id}/ips/{network_id}
 
 <p> Lists server addresses for the specified network.
@@ -2870,13 +2870,13 @@ JSON
 
 
 
-### 4.4.11 <a id="Images"></a> Images
+### 4.4.11 Images ### {#Images}
 
 <p> A list of images. Each image contains IDs,
                 names, and links -- other attributes are omitted. </p>
 
 
-#### 4.4.11.1 <a id="listImages"></a> List Images
+#### 4.4.11.1 List Images #### {#listImages}
 #### GET v1.1/{tenant_id}/images
 
 <p> Lists IDs, names, and links for images
@@ -2974,7 +2974,7 @@ JSON
 
 
 
-#### 4.4.11.2 <a id="listDetailImages"></a> List Images Detail
+#### 4.4.11.2 List Images Detail #### {#listDetailImages}
 #### GET v1.1/{tenant_id}/images/detail
 
 **Template Parameters**
@@ -3181,10 +3181,10 @@ JSON
 
 
 
-### 4.4.12 <a id="Image"></a> Image
+### 4.4.12 Image ### {#Image}
 
 
-#### 4.4.12.1 <a id="getImage"></a> Get Image Details
+#### 4.4.12.1 Get Image Details #### {#getImage}
 #### GET v1.1/{tenant_id}/images/{image_id}
 
 <p> Returns detailed information about the specified image. </p>
@@ -3266,7 +3266,7 @@ JSON
 
 
 
-#### 4.4.12.2 <a id="deleteImage"></a> Delete Image
+#### 4.4.12.2 Delete Image #### {#deleteImage}
 #### DELETE v1.1/{tenant_id}/images/{image_id}
 
 <p> Deletes the specified image. </p>
@@ -3293,10 +3293,10 @@ This call does not require a request body
 
 
 
-### 4.4.13 <a id="ImageMetadata"></a> Image Metadata
+### 4.4.13 Image Metadata ### {#ImageMetadata}
 
 
-#### 4.4.13.1 <a id="ImageMetadata_listMetadata"></a> List Metadata
+#### 4.4.13.1 List Metadata #### {#ImageMetadata_listMetadata}
 #### GET v1.1/{tenant_id}/images/{image_id}/metadata
 
 <p> Lists metadata associated with the resource.
@@ -3337,7 +3337,7 @@ JSON
 
 
 
-#### 4.4.13.2 <a id="ImageMetadata_updateMetadata"></a> Update Metadata
+#### 4.4.13.2 Update Metadata #### {#ImageMetadata_updateMetadata}
 #### POST v1.1/{tenant_id}/images/{image_id}/metadata
 
 <p> Updates resource metadata. Updates will replace
@@ -3401,7 +3401,7 @@ JSON
 
 
 
-#### 4.4.13.3 <a id="ImageMetadata_setMetadata"></a> Create or Replace Metadata
+#### 4.4.13.3 Create or Replace Metadata #### {#ImageMetadata_setMetadata}
 #### PUT v1.1/{tenant_id}/images/{image_id}/metadata
 
 <p>The metadata items set on the resource are those
@@ -3469,10 +3469,10 @@ JSON
 
 
 
-### 4.4.14 <a id="ImageMetadataItem"></a> Image Metadata Item
+### 4.4.14 Image Metadata Item ### {#ImageMetadataItem}
 
 
-#### 4.4.14.1 <a id="ImageMetadataItem_getMetadataItem"></a> Get Metadata Item
+#### 4.4.14.1 Get Metadata Item #### {#ImageMetadataItem_getMetadataItem}
 #### GET v1.1/{tenant_id}/images/{image_id}/metadata/{key}
 
 <p> Retrieves a single metadata item by key. </p>
@@ -3513,7 +3513,7 @@ JSON
 
 
 
-#### 4.4.14.2 <a id="ImageMetadataItem_setMetadataItem"></a> Create or Update Metadata Item
+#### 4.4.14.2 Create or Update Metadata Item #### {#ImageMetadataItem_setMetadataItem}
 #### PUT v1.1/{tenant_id}/images/{image_id}/metadata/{key}
 
 <p> Sets a metadata item by its key. An overLimit
@@ -3568,7 +3568,7 @@ JSON
 
 
 
-#### 4.4.14.3 <a id="ImageMetadataItem_deleteMetadataItem"></a> Delete Metadata Item
+#### 4.4.14.3 Delete Metadata Item #### {#ImageMetadataItem_deleteMetadataItem}
 #### DELETE v1.1/{tenant_id}/images/{image_id}/metadata/{key}
 
 <p> Deletes a metadata item. </p>
@@ -3597,13 +3597,13 @@ This call does not require a request body
 
 
 
-### 4.4.15 <a id="Flavors"></a> Flavors
+### 4.4.15 Flavors ### {#Flavors}
 
 <p> A list of flavors. Each flavor contains IDs,
                 names, and links -- other attributes are omitted. </p>
 
 
-#### 4.4.15.1 <a id="listFlavors"></a> List Flavors
+#### 4.4.15.1 List Flavors #### {#listFlavors}
 #### GET v1.1/{tenant_id}/flavors
 
 <p> Lists IDs, names, and links for available
@@ -3759,7 +3759,7 @@ JSON
 
 
 
-#### 4.4.15.2 <a id="listDetailFlavors"></a> List Flavors Detail
+#### 4.4.15.2 List Flavors Detail #### {#listDetailFlavors}
 #### GET v1.1/{tenant_id}/flavors/detail
 
 <p> Lists all details for available flavors. </p>
@@ -3913,10 +3913,10 @@ JSON
 
 
 
-### 4.4.16 <a id="Flavor"></a> Flavor
+### 4.4.16 Flavor ### {#Flavor}
 
 
-#### 4.4.16.1 <a id="getFlavor"></a> Get Flavor Details
+#### 4.4.16.1 Get Flavor Details #### {#getFlavor}
 #### GET v1.1/{tenant_id}/flavors/{flavor_id}
 
 <p> Lists details for the specified flavor. </p>
@@ -3976,10 +3976,10 @@ JSON
 
 
 
-### 4.4.17 <a id="floating-ips"></a> Floating Ips
+### 4.4.17 Floating Ips ### {#floating-ips}
 
 
-#### 4.4.17.1 <a id="listFloatingIPs"></a> List Floating IPs
+#### 4.4.17.1 List Floating IPs #### {#listFloatingIPs}
 #### GET v1.1/{tenant_id}/os-floating-ips
 
 <p>Lists floating IP addresses associated with the
@@ -4058,7 +4058,7 @@ XML
 
 
 
-#### 4.4.17.2 <a id="allocateFloatingIP"></a> Allocate Floating IP
+#### 4.4.17.2 Allocate Floating IP #### {#allocateFloatingIP}
 #### POST v1.1/{tenant_id}/os-floating-ips
 
 <p>Allocate a new floating IP address to a tenant
@@ -4113,10 +4113,10 @@ XML
 
 
 
-### 4.4.18 <a id="floating-ip"></a> Floating IP
+### 4.4.18 Floating IP ### {#floating-ip}
 
 
-#### 4.4.18.1 <a id="getFloatingIP"></a> Get Floating Ip
+#### 4.4.18.1 Get Floating Ip #### {#getFloatingIP}
 #### GET v1.1/{tenant_id}/os-floating-ips/{id}
 
 <p>Get information about the specified floating
@@ -4173,7 +4173,7 @@ JSON
 
 
 
-#### 4.4.18.2 <a id="deallocateFloatingIP"></a> Deallocate Floating IP
+#### 4.4.18.2 Deallocate Floating IP #### {#deallocateFloatingIP}
 #### DELETE v1.1/{tenant_id}/os-floating-ips/{id}
 
 <p>Deallocates the floating IP address associated
@@ -4201,10 +4201,10 @@ This call does not require a request body
 
 
 
-### 4.4.19 <a id="os-keypairs"></a> Keypairs
+### 4.4.19 Keypairs ### {#os-keypairs}
 
 
-#### 4.4.19.1 <a id="listKeypairs"></a> List Keypairs
+#### 4.4.19.1 List Keypairs #### {#listKeypairs}
 #### GET v1.1/{tenant_id}/os-keypairs
 
 <p>Lists keypairs associated with the tenant or
@@ -4324,7 +4324,7 @@ JSON
 
 
 
-#### 4.4.19.2 <a id="createKeypair"></a> Create Keypair
+#### 4.4.19.2 Create Keypair #### {#createKeypair}
 #### POST v1.1/{tenant_id}/os-keypairs
 
 <p> Generate or import a keypair. </p>
@@ -4418,10 +4418,10 @@ JSON
 
 
 
-### 4.4.20 <a id="Unknown"></a> Keypair
+### 4.4.20 Keypair ### {#Unknown}
 
 
-#### 4.4.20.1 <a id="getKeypair"></a> Get Keypair
+#### 4.4.20.1 Get Keypair #### {#getKeypair}
 #### GET v1.1/{tenant_id}/os-keypairs/{keypair_name}
 
 <p> Get the public key and fingerprint for the
@@ -4474,7 +4474,7 @@ JSON
 
 
 
-#### 4.4.20.2 <a id="deleteKeypair"></a> Delete Keypair
+#### 4.4.20.2 Delete Keypair #### {#deleteKeypair}
 #### DELETE v1.1/{tenant_id}/os-keypairs/{keypair_name}
 
 <p>Delete the specified keypair.</p>
@@ -4501,10 +4501,10 @@ This call does not require a request body
 
 
 
-### 4.4.21 <a id="security_groups"></a> Security Groups
+### 4.4.21 Security Groups ### {#security_groups}
 
 
-#### 4.4.21.1 <a id="listSecGroups"></a> List Security Groups
+#### 4.4.21.1 List Security Groups #### {#listSecGroups}
 #### GET v1.1/{tenant_id}/os-security-groups
 
 <p>List security groups.</p>
@@ -4684,7 +4684,7 @@ JSON
 
 
 
-#### 4.4.21.2 <a id="createSecGroup"></a> Create Security Group
+#### 4.4.21.2 Create Security Group #### {#createSecGroup}
 #### POST v1.1/{tenant_id}/os-security-groups
 
 <p>
@@ -4758,10 +4758,10 @@ JSON
 
 
 
-### 4.4.22 <a id="security_group"></a> Security group
+### 4.4.22 Security group ### {#security_group}
 
 
-#### 4.4.22.1 <a id="getSecGroup"></a> Get Security Group
+#### 4.4.22.1 Get Security Group #### {#getSecGroup}
 #### GET v1.1/{tenant_id}/os-security-groups/{security_group_id}
 
 <p>
@@ -4842,7 +4842,7 @@ JSON
 
 
 
-#### 4.4.22.2 <a id="deleteSecGroup"></a> Delete Security Group
+#### 4.4.22.2 Delete Security Group #### {#deleteSecGroup}
 #### DELETE v1.1/{tenant_id}/os-security-groups/{security_group_id}
 
 <p>Delete a security group.</p>
@@ -4869,10 +4869,10 @@ This call does not require a request body
 
 
 
-### 4.4.23 <a id="security_group_rules"></a> Security Group Rules
+### 4.4.23 Security Group Rules ### {#security_group_rules}
 
 
-#### 4.4.23.1 <a id="createSecGroupRule"></a> Create Security Group Rule
+#### 4.4.23.1 Create Security Group Rule #### {#createSecGroupRule}
 #### POST v1.1/{tenant_id}/os-security-group-rules
 
 <p>
@@ -4984,10 +4984,10 @@ JSON
 
 
 
-### 4.4.24 <a id="security_group_rule"></a> Security Group Rule
+### 4.4.24 Security Group Rule ### {#security_group_rule}
 
 
-#### 4.4.24.1 <a id="deleteSecGroupRule"></a> Delete Security Group Rule
+#### 4.4.24.1 Delete Security Group Rule #### {#deleteSecGroupRule}
 #### DELETE v1.1/{tenant_id}/os-security-group-rules/{security_group_rule_id}
 
 <p>
@@ -5017,12 +5017,12 @@ This call does not require a request body
 
 
 
-# 5. <a id="Section5_"></a> Additional References
+# 5. Additional References # {#Section5_}
 
 1. [OpenStack API Documentation](http://api.openstack.org)
 2. [OpenStack Compute Developer Guide - API v2](http://docs.openstack.org/api/openstack-compute/2/content/)
 
-# 6. <a id="Section6_"></a> Glossary
+# 6. Glossary # {#Section6_}
 
 **Server:** A server is a a virtual machine instance within HP Cloud Compute. See [Servers](#Servers).
 
