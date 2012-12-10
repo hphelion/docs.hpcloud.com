@@ -10,6 +10,12 @@ add-docs:
 update-docs:
 	git subtree pull -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git master
 
+add-api:
+	git subtree add -P content/api git@git.hpcloud.net:DevExDocs/apihome.git master
+
+update-api:
+	git subtree pull -P content/api git@git.hpcloud.net:DevExDocs/apihome.git master
+
 server:
 	@ejekyll --server --auto
 
@@ -48,4 +54,4 @@ deploy-prod-az1: build
 deploy-prod: deploy-prod-az2 deploy-prod-az1
 
 
-.PHONY: add-tutorials update-tutorials add-docs update-docs server prepare optimize build clean deploy-qa deploy-prod-az1 deploy-prod-az2 deploy-prod
+.PHONY: add-tutorials update-tutorials add-docs update-docs server prepare optimize build clean deploy-qa deploy-prod-az1 deploy-prod-az2 deploy-prod add-api update-api
