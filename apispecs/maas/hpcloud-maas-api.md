@@ -93,8 +93,8 @@ Provides information about the supported Monitoring API versions.
 	      "id": "v1.0",
 	      "links" : [
 	        {
-	          "rel": "self"
-	          "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0",
+	          "rel": "self",
+	          "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0"
 	        }
 	      ],
 	      "status": "CURRENT",
@@ -102,29 +102,40 @@ Provides information about the supported Monitoring API versions.
 	    }
 	  ]
 	}**Error Response**
-**Status Code*** 400 - Bad Request* 500 - Internal Server Error**Curl Example**	$ curl -X GET https://region-a.geo-1.maas.hpcloudsvc.com ##### 4.4.1.2 Get a Specific Version###### GET /{version_id}Gets the details of a specific version identified by {version_id}.**Request Data**	GET /v1.0 HTTP/1.1
+**Status Code**
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET https://region-a.geo-1.maas.hpcloudsvc.com ##### 4.4.1.2 Get a Specific Version###### GET /{version_id}Gets the details of a specific version identified by {version_id}.**Request Data**	GET /v1.0 HTTP/1.1
 	Host: https://region-a.geo-1.maas.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**JSON	{  
-	  "versions": {
+	  "version": {
 	    "id": "v1.0",
 	    "links" : [
 	      {
-	        "rel": "self"
-	        "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0",
+	        "rel": "self",
+	        "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0"
 	      }
 	    ],
 	    "status": "CURRENT",
 	    "updated": "2012-09-25T00:00:00Z"
 	  }
 	}**Error Response**
-**Status Code*** 400 - Bad Request* 401 - Unauthorized* 403 - Forbidden* 404 - Not Found* 500 - Internal Server Error**Curl Example**	$ curl -X GET \
+**Status Code**
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 404 | Not Found | Requested resource cannot be found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/#### 4.4.2 Endpoint
 The endpoint resource represents an endpoint from which metrics can be consumed.**Status Lifecycle**N/A**Rate Limits**N/A**Quota Limits**N/A**Business Rules**None.##### 4.4.2.1 Create a New Endpoint###### POST /endpointsCreates a new endpoint for metric consumption. **Request Data**	POST /v1.0/endpoints HTTP/1.1
 	Host: https://region-a.geo-1.maas.hpcloudsvc.com
 	Accept: application/json
-	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**201 - Created**Response Data**JSON	{
+	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**201 - Created**Response Data**JSON	{
 	  "endpoint" : {
 	    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
 	    "links": [
@@ -140,7 +151,13 @@ Provides information about the supported Monitoring API versions.
 	      "amqp_exchange": "metrics"
 	    }
 	  }
-	}**Error Response****Status Code*** 400 - Bad Request* 401 - Unauthorized* 403 - Forbidden* 409 - Conflict* 500 - Internal Server Error**Curl Example**	$ curl -X POST \
+	}**Error Response****Status Code**| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 409 | Conflict | An endpoint for this tenant already exists. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints ##### 4.4.2.2 List All Endpoints###### GET /endpointsLists all endpoints. Password information is not present.**Request Data**	GET /v1.0/endpoints HTTP/1.1
 	Host: https://region-a.geo-1.maas.hpcloudsvc.com
@@ -177,7 +194,12 @@ Provides information about the supported Monitoring API versions.
 	    }
 	  ]
 	}**Error Response**
-**Status Code*** 400 - Bad Request* 401 - Unauthorized* 403 - Forbidden* 500 - Internal Server Error**Curl Example**	$ curl -X GET \
+**Status Code**| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints ##### 4.4.2.3 Get a Specific Endpoint###### GET /endpoints/{endpoint_id}Gets the details of a specific endpoint identified by {endpoint_id}. Password information is not present.**Request Data**	GET /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
 	Host: https://region-a.geo-1.maas.hpcloudsvc.com
@@ -198,13 +220,25 @@ Provides information about the supported Monitoring API versions.
 	    }
 	  }
 	}**Error Response**
-**Status Code*** 400 - Bad Request* 401 - Unauthorized* 403 - Forbidden* 404 - Not Found* 500 - Internal Server Error**Curl Example**	$ curl -X GET \
+**Status Code**| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 404 | Not Found | Requested resource cannot be found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c##### 4.4.2.4 Delete a Specific Endpoint###### DELETE /endpoints/{endpoint_id}Deletes a specific endpoint identified by {endpoint_id}.**Request Data**	DELETE /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
 	Host: https://region-a.geo-1.maas.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**204 - No Content**Response Data**This call does not provide a response body.**Error Response**
-**Status Code*** 400 - Bad Request* 401 - Unauthorized* 403 - Forbidden* 404 - Not Found* 500 - Internal Server Error**Curl Example**	$ curl -X DELETE \
+**Status Code**| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 404 | Not Found | Requested resource cannot be found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X DELETE \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c##### 4.4.2.4 Reset the Password for a Specific Endpoint###### POST /endpoints/{endpoint_id}/reset-passwordResets the password for a specific endpoint identified by {endpoint_id}.**Request Data**	POST /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password HTTP/1.1
 	Host: https://region-a.geo-1.maas.hpcloudsvc.com
@@ -212,7 +246,13 @@ Provides information about the supported Monitoring API versions.
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**	{
 	  "password": "mEfOy34qJV"
 	}**Error Response**
-**Status Code*** 400 - Bad Request* 401 - Unauthorized* 403 - Forbidden* 404 - Not Found* 500 - Internal Server Error**Curl Example**	$ curl -X POST \
+**Status Code**| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 404 | Not Found | Requested resource cannot be found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password#### 4.4.3 Subscription
 
@@ -281,10 +321,12 @@ JSON
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -332,7 +374,7 @@ JSON
 	      "namespace": "nova",
 	      "dimensions": {
 	        "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
-	    }
+	      },
 	      "meta": {
 	        "amqp_routing_key": "nova.server-1234363615-az-2-region-a-geo-1"
 	      }
@@ -349,7 +391,7 @@ JSON
 	      "namespace": "nova",
 	      "dimensions": {
 	        "instance_id": "490dcc20-3ff3-11e2-a25f-0800200c9a66"
-	    }
+	      },
 	      "meta": {
 	        "amqp_routing_key": "nova.server-1234363615-az-2-region-a-geo-1"
 	      }
@@ -360,10 +402,12 @@ JSON
 **Error Response**
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -410,7 +454,7 @@ JSON
 	    "namespace": "nova",
 	    "dimensions": {
 	      "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
-	  }
+	    },
 	    "meta": {
 	      "amqp_routing_key": "nova.server-1234363615-az-2-region-a-geo-1"
 	    }
@@ -420,11 +464,13 @@ JSON
 **Error Response**
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 404 | Not Found | Requested resource cannot be found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -461,11 +507,13 @@ This call does not provide a response body.
 **Error Response**
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 404 | Not Found | Requested resource cannot be found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -513,9 +561,12 @@ JSON
 	{
 	  "notification_method": {
 	    "id": "acb8ad2b-6ce0-4a36-9750-a78bc7da87a2",
-	    "links": {
-	      "self": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
-	    },
+	    "links" : [
+	      {
+	        "rel": "self",
+	        "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
+	      }
+	    ],
 	    "type": "EMAIL",
 	    "address": "joe@mail.com"
 	  }
@@ -525,10 +576,12 @@ JSON
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -565,18 +618,24 @@ JSON
 	{
 	  "notification_methods": [
 	    {
-	      "id": "eabe9e32-6ce0-4a36-9750-df415606b44c"
-	      "links": {
-	        "self": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
-	      },
+	      "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+	      "links" : [
+	        {
+	          "rel": "self",
+	          "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
+	        }
+	      ],	      
 	      "type": "EMAIL",
 	      "address": "joe@mail.com"
 	    },
 	    {
 	      "id": "acb8ad2b-6ce0-4a36-9750-a78bc7da87a2",
-	      "links": {
-	        "self": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
-	      },
+	      "links" : [
+	        {
+	          "rel": "self",
+	          "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
+	        }
+	      ],
 	      "type": "PHONE",
 	      "address": "12063823454"
 	    }
@@ -586,10 +645,12 @@ JSON
 **Error Response**
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -625,10 +686,13 @@ JSON
 
 	{
 	  "notification_method": {
-	    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c"
-	    "links": {
-	      "self": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
-	    },
+	    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+	    "links" : [
+	      {
+	        "rel": "self",
+	        "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
+	      }
+	    ],
 	    "type": "EMAIL",
 	    "address": "joe@mail.com"
 	  }
@@ -637,11 +701,13 @@ JSON
 **Error Response**
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 404 | Not Found | Requested resource cannot be found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -678,11 +744,13 @@ This call does not provide a response body.
 **Error Response**
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 404 | Not Found | Requested resource cannot be found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -771,10 +839,12 @@ JSON
 
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -838,10 +908,12 @@ JSON
 **Error Response**
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -903,11 +975,13 @@ JSON
 **Error Response**
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 404 | Not Found | Requested resource cannot be found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -944,11 +1018,13 @@ This call does not provide a response body.
 **Error Response**
 **Status Code**
 
-* 400 - Bad Request
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 500 - Internal Server Error
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI or request body. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
+| 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
+| 404 | Not Found | Requested resource cannot be found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
