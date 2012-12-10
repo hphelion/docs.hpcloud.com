@@ -555,12 +555,10 @@ The value for the Authorization header is constructed as follows:
         Content-MD5 + "\n" +
         Content-Type + "\n" +
         Date + "\n" +
-        CanonicalizedHeaders +
+        "\n" +
         CanonicalizedResource;
  
     CanonicalizedResource = (described below)
- 
-    CanonicalizedHeaders = (described below) 
 
 The CanonicalizedResource is the path of the account, container or object you are accessing. However, you must observe some conventions in constructing the path used in the signing process. Specifically:
 
@@ -570,23 +568,7 @@ The CanonicalizedResource is the path of the account, container or object you ar
 
 * The remaining path up to but not including a query is included in your CanonicalizedResource. For example, if your path is `/v1/12345678912345/images?prefix=snow`, then your CanonicalizedResource is `/v1/12345678912345/images`.
 
-The CanonicalizedHeaders are constructed as follows:
-
-1. The Content-Type and Content-MD5 are not included in the CanonicalizedHeaders and are skipped. However, their values are included in the StringToSign. If you plan to omit these headers from the request, the values of Content-Type, Date and Content-MD5 in the StringToSign must be set to the empty string.
-
-2. Convert each HTTP header name to lower case. For example, X-Meta-Container-One becomes x-meta-container-one.
-
-3.	If the header spans multiple lines, replace trailing whitespace (including newline) with a single space character.
-
-4.	Trim any whitespace around the colon. For example, "x-meta-container-blah: &nbsp;&nbsp;&nbsp;&nbsp;blah" becomes "x-meta-container-blah:blah"
-
-5.	Append a newline character to each header
-
-6.	Sort the collection of headers in lexicographical order by header name.
- 
-7.	Concatenate the resulting list into a single string
-
-> Note: You must include a [Date](#date_request) header in your request – and include it when constructing the CanonicalizedHeaders
+> Note: You must include a [Date](#date_request) header in your request.
 
 ##### 2.6.7.2 Using Signature Based Authentication
 
