@@ -19,24 +19,21 @@ If you have any concerns or questions, please contact Rupak Ganguly.
 
 Please visit the [Wiki page](https://wiki.hpcloud.net/display/iaas/API+Strategy+-+Listing%2C+Standards+and+Verification) to see details.
 
-# Publishing 
-
-Please visit [api-publish](https://git.hpcloud.net/API-Specs/api-publish) project that showcases the publishing workflow for the API Specifications. 
-This is a work in progress and currently experimental in nature. 
-
 # Markdown Syntax
 
 Use [Markdown Basic](http://daringfireball.net/projects/markdown/syntax) and [Markdown Extra](http://michelf.ca/projects/php-markdown/extra/) formatting syntax.
-Some rules while writing the docs:
+Some rules while authoring the docs in Markdown:
 
-* The document needs to start with a single top header, and then rest of the document should have headers from 2nd level onwards.
-* No HTML characters allowed in the document. So all &lt; and &gt; need to be < and >. No <p> tags etc.
+* The document needs to start with a single 1st level header, and then rest of the document should have headers from 2nd level onwards.
+* No HTML characters allowed in the document. So all `&lt;` and `&gt;` need to be < and >. No `<p>` tags etc.
 * Code blocks need to be 4 spaces (or 1 tab) indented like so:
+```
     <some xml code fragment>
     {
       some: json
       code: fragment
     }
+```
 * Tables needs to be formatted like so:
 
 ```
@@ -49,6 +46,33 @@ Some rules while writing the docs:
 
 * No links to internal wiki pages are allowed and needs to be removed.
 * Anchors needs to be {#anchor_text_here} instead of the HTML `<a id="anchor_text_here"></a>` style.
+
+The publishing mechanism uses a Yaml front matter section to manage configuration, as shown below.
+The tags inside the --- markers enclose the Yaml front matter.
+
+```
+---
+layout: page
+permalink: /api/identity/admin/
+title: Identity Services Admin API
+description: "HP Cloud Identity Services Admin API documenation."
+keywords: "Keystone, Identity Services"
+product: identity
+private: true
+---
+```
+where,
+
+* layout - is always specified as 'page' in our context.
+* permalink - is the permalink to the document. The trailing '/' is required. Note the name of the document is not required.
+* title - is a title for the document.
+* description - is some text that describes the document.
+* keywords - is a set of comma separated text that will be used for searching and tagging.
+* product - is the name of the service that relates to the document.
+* private - is a flag that determines if the document needs to be ONLY published internally and NOT available publicly.
+* publish - is an optional flag that determines if a document should be published or not. By default, the value is 'true', but in case of a need to stop publishing a particular document, this flag can be set to 'false'.
+
+ ---
 
 # Markdown Editors
 
