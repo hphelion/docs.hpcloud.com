@@ -132,7 +132,7 @@ Provides information about the supported Monitoring API versions.
 | 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/#### 4.4.2 Endpoint
-The endpoint resource represents an endpoint from which metrics can be consumed.**Status Lifecycle**N/A**Rate Limits**N/A**Quota Limits**N/A**Business Rules**None.##### 4.4.2.1 Create a New Endpoint###### POST /endpointsCreates a new endpoint for metric consumption. **Request Data**	POST /v1.0/endpoints HTTP/1.1
+The endpoint resource represents an endpoint from which metrics can be consumed.##### 4.4.2.1 Create a New Endpoint###### POST /endpointsCreates a new endpoint for metric consumption. **Request Data**	POST /v1.0/endpoints HTTP/1.1
 	Host: https://region-a.geo-1.maas.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**201 - Created**Response Data**JSON	{
@@ -762,6 +762,8 @@ The alarm resource identifies a particular metric scoped by namespace, type and 
 **State Lifecycle**
 
 UNDETERMINED => OK | ALARM
+OK => UNDETERMINED | ALARM
+ALARM => OK | UNDETERMINED
 
 ##### 4.4.5.1 Create a New Alarm
 ###### POST /alarms
