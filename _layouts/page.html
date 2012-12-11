@@ -1,4 +1,26 @@
 ---
-layout: default
+layout: wrapper
 ---
-{{ content }}
+<div id="content" class="grid_10 suffix_1">
+	<article>
+		{{ content }}
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="https://console.hpcloud.com/signup" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	{% include api-sidebar-nav.html %}
+	<aside class="block block-boxes box block-boxes-simple">
+	  <p>Having trouble finding the info you need? Try one of the following helpful links:</p>
+		<ul>
+			<li><a href="/sitemap">Site Map</a></li>
+			<li><a href="https://community.hpcloud.com/knowledge-base">Knowledge Base</a></li>
+			<li><a href="https://community.hpcloud.com/forum">Forums</a></li>
+		</ul>
+	</aside>
+</div>

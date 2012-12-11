@@ -91,3 +91,17 @@ navigation:
     url: /bindings/jclouds/cdn/
   - text: Object Storage Examples
     url: /bindings/jclouds/object-storage/
+
+apinavigation:
+- text: API Overview
+  url: /api/
+- text: Identity Service
+  url: /api/identity/
+- text: Compute
+  url: /api/compute/
+- text: Block Storage
+  url: http://api-docs.hpcloud.com/hpcloud-compute/1.0/content/ch_dev-api-block-storage.html
+- text: Object Storage
+  url: /api/object-storage/
+- text: CDN
+  url: https://api-docs.hpcloud.com/hpcloud-cdn-storage/1.0/content/ch_cdn-dev-overview.html
