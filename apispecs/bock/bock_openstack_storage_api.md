@@ -1208,7 +1208,7 @@ List all snapshots.
 
 **URL Parameters**
 
-None.
+* *tenant_id* - The unique identifier of the tenant or account.
 
 **Data Parameters**
 
@@ -1290,7 +1290,7 @@ optionally specify display information for the snapshot.
 
 **URL Parameters**
 
-None.
+* *tenant_id* - The unique identifier of the tenant or account.
 
 **Data Parameters**
 
@@ -1382,6 +1382,128 @@ JSON
 **Additional Notes**
 
 None.
+
+##### 4.4.4.3 View information about a single snapshot ##### {#view_snapshot}
+##### GET /os-snapshots
+
+View all information about a single snapshot.
+
+**Request Data**
+
+**URL Parameters**
+
+* *tenant_id* - The unique identifier of the tenant or account.
+* *snapshot_id* - The unique identifier of an existing Snapshot.
+
+**Data Parameters**
+
+This call does not require a request body.
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+
+    {
+        "snapshots": {
+                "status": "available",
+                "displayDescription": null,
+                "displayName": null,
+                "volumeId": 16474,
+                "id": 4482,
+                "createdAt": "2012-10-30 16:05:46",
+                "size": 1
+            }
+    }
+
+XML
+
+    Not Supported.
+
+**Error Response**
+
+**Status Code**
+
+500 - Internal Server Error
+
+**Response Data**
+
+JSON
+
+    {"cloudServersFault": {"message": "Server Error, please try again later.",
+"code": 500}}
+
+XML
+
+_Not supported._
+
+**Curl Example**
+
+    curl -i -H "X-Auth-Token: <Auth_Token>" \
+                {BaseUri}/v1.1/{tenant_id}/os-snapshots/{snapshot_id}
+
+**Additional Notes**
+
+None.
+
+
+##### 4.4.4.4 Delte a snapshot ##### {#delete_snapshot}
+##### DELETE /os-snapshots
+
+Delete a single snapshot.
+
+**Request Data**
+
+**URL Parameters**
+
+* *tenant_id* - The unique identifier of the tenant or account.
+* *snapshot_id* - The unique identifier of an existing Snapshot.
+
+**Data Parameters**
+
+This call does not require a request body.
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+This operation does not return a response body.
+
+**Error Response**
+
+**Status Code**
+
+500 - Internal Server Error
+
+**Response Data**
+
+JSON
+
+    {"cloudServersFault": {"message": "Server Error, please try again later.",
+"code": 500}}
+
+XML
+
+_Not supported._
+
+**Curl Example**
+
+    curl -i -H "X-Auth-Token: <Auth_Token>" -X DELETE \
+                {BaseUri}/v1.1/{tenant_id}/os-snapshots/{snapshot_id}
+
+**Additional Notes**
+
+None.
+
 
 
 
