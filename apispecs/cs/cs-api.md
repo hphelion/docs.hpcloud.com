@@ -25,33 +25,14 @@ product: identity
 
 ---
 
-
-# 2. Architecture View
-
-
-## 2.1 Overview
-*References to architectural details of the service.*
-
-## 2.2 Conceptual/Logical Architecture View
-*Describe the logical components of the system and their responsibilities*
-
-## 2.3 Infrastructure Architecture View
-*Describe how the API fits into the overall HPCS Infrastructure*
-
-## 2.4 Entity Relationship Diagram
-*Describe the relationships between the various entities (resources) involved in the API*
-
-
----
-
-# 3. Account-level View
+# 2. Account-level View
 *Describe the relationship of the API with respect to the accounts, groups, tenants, regions, availability zones etc.*
 
 
-## 3.1 Accounts
+## 2.1 Accounts
 *Describe the structure of the user accounts, groups and tenants. Currently this might be described separately in context of Control Services, but in future each service API needs to state their usage. In future CS might support complex group hierarchies, enterprise account structures while there maybe a phased adoption by individual service APIs*
 
-## 3.2 Regions and Availability Zones
+## 2.2 Regions and Availability Zones
 *Describe the availability of the service API in different regions and availability zones. State plans for future expansion as well.*
 
 **Region(s)**: region-a, region-b
@@ -61,7 +42,7 @@ product: identity
 **Future Expansion**:
 
 
-## 3.3 Service Catalog
+## 2.3 Service Catalog
 
 The service is exposed in the service catalog, as shown in the following fragment:
 
@@ -89,10 +70,10 @@ The service is exposed in the service catalog, as shown in the following fragmen
 ---
 
 
-# 4. REST API Specifications
+# 3. REST API Specifications
 *Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
-## 4.1 Service API Operations
+## 3.1 Service API Operations
 
 
 **Host**: https://az-1.region-a.geo-1.compute.hpcloudsvc.com
@@ -118,17 +99,17 @@ The service is exposed in the service catalog, as shown in the following fragmen
 | User Access Keys | [Import User Access Key](#import_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys | Y/Y |
 | User Access Keys | [Update User Access Key](#update_user_access_key) | PUT | /HP-IDM/v1.0/accesskeys/{accesskeyId} | Y/Y |
 
-## 4.2 Common Request Headers
+## 3.2 Common Request Headers
 *List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
 
-## 4.3 Common Response Headers
+## 3.3 Common Response Headers
 *List the common response headers i.e. Content-Type, Content-Length, Connection, Date, ETag, Server, etc. *
 
-## 4.4 Service API Operation Details
+## 3.4 Service API Operation Details
 *The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
 
-### 4.4.1 Tenants
+### 3.4.1 Tenants
 
 Tenant is a collection of services, and associated with zero or more users who have access to these services via role references.
 
@@ -149,7 +130,7 @@ N/A
 None.
 
 
-#### 4.4.1.1 List Tenants#### {#list_tenants}
+#### 3.4.1.1 List Tenants#### {#list_tenants}
 #### GET /tenants
 
 This API returns a listing of all tenants for which the holder of the provided token has a role assignment. If the user is not a valid, an error is returned.
@@ -328,7 +309,7 @@ Curl Example
 **Additional Notes**
 
 
-### 4.4.2 Tokens
+### 3.4.2 Tokens
 
 A yummy cookie one uses to bribe the authorization monster.
 
@@ -349,7 +330,7 @@ N/A
 None.
 
 
-#### 4.4.2.1 Authenticate#### {#authenticate}
+#### 3.4.2.1 Authenticate#### {#authenticate}
 #### POST /tokens
 
 This API is used to authenticate a user to be able to use an OpenStack service. The result of a successful authentication is a token to be used with service requests. A username and password or access/secret key credentials are given as input to this interface. If authentication succeeds, the response will include an authentication token and service catalog ( list of available services for that user ). Tokens are valid for 12 hours. Issued tokens can become invalid in two cases:
@@ -679,7 +660,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.2.2 Rescope Token#### {#rescope_token}
+#### 3.4.2.2 Rescope Token#### {#rescope_token}
 #### POST /tokens
 
 This API provides the ability to re-scope a valid token with another tenant. An existing unexpired token, regardless of its currently scoped or not, can be scoped to another tenant as long as the user has valid association with that tenant.
@@ -869,7 +850,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.2.3 Revoke Token#### {#revoke_token}
+#### 3.4.2.3 Revoke Token#### {#revoke_token}
 #### DELETE /HP-IDM/v1.0/tokens/{tokenId}
 
 This API is used to revoke an authentication token. This operation does not require a request body. Once a token has been revoked, attempts to validate the token via GET /tokens/tokenId will fail with a 404 (item not found) as the token no longer exists. Trying revoke a non existing token, including one which has expired will also return a 404 (item not found).
@@ -926,7 +907,7 @@ Curl Example
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 4.4.2.4 Swift Legacy Authentication#### {#swift_legacy_authentication}
+#### 3.4.2.4 Swift Legacy Authentication#### {#swift_legacy_authentication}
 #### GET /v1.0
 
 #### GET /v1.1
@@ -1102,7 +1083,7 @@ Curl Example
 **Additional Notes**
 
 
-### 4.4.3 User Access Keys
+### 3.4.3 User Access Keys
 
 The User Access Key REST API provides the ability to manage user access keys.
 
@@ -1123,7 +1104,7 @@ N/A
 None.
 
 
-#### 4.4.3.1 Create User Access Key#### {#create_user_access_key}
+#### 3.4.3.1 Create User Access Key#### {#create_user_access_key}
 #### POST /HP-IDM/v1.0/accesskeys
 
 
@@ -1293,7 +1274,7 @@ Curl Example
 
 
 
-#### 4.4.3.2 Delete User Access Key#### {#delete_user_access_key}
+#### 3.4.3.2 Delete User Access Key#### {#delete_user_access_key}
 #### DELETE /HP-IDM/v1.0/accesskeys/{accesskeyId} 
 
 Delete a user access key.
@@ -1382,7 +1363,7 @@ Curl Example
 
 
 
-#### 4.4.3.3 Get Access Keys#### {#get_access_keys}
+#### 3.4.3.3 Get Access Keys#### {#get_access_keys}
 #### GET /HP-IDM/v1.0/accesskeys
 
 
@@ -1549,7 +1530,7 @@ Curl Example
 
 
 
-#### 4.4.3.4 Get An Access Key#### {#get_an_access_key}
+#### 3.4.3.4 Get An Access Key#### {#get_an_access_key}
 #### GET /HP-IDM/v1.0/accesskeys/{accesskeyId}
 
 
@@ -1685,7 +1666,7 @@ Curl Example
 
 
 
-#### 4.4.3.5 Import User Access Key#### {#import_user_access_key}
+#### 3.4.3.5 Import User Access Key#### {#import_user_access_key}
 #### PUT /HP-IDM/v1.0/accesskeys
 
 Import one or more user access keys. 
@@ -1918,7 +1899,7 @@ Curl Example
 **Additional Notes**
 
 
-#### 4.4.3.6 Update User Access Key#### {#update_user_access_key}
+#### 3.4.3.6 Update User Access Key#### {#update_user_access_key}
 #### PUT /HP-IDM/v1.0/accesskeys/{accesskeyId}
 
 Update a user access key. This method may be used to modify the key status only.
@@ -2064,9 +2045,9 @@ Curl Example
 
 
 
-# 5. Additional References
+# 4. Additional References
 
-## 5.1 Resources
+## 4.1 Resources
 
 **Wiki Page**: {Link to Wiki page}
 
@@ -2076,7 +2057,7 @@ Curl Example
 
 ---
 
-# 6. Glossary
+# 5. Glossary
 
 {Put down definitions of terms and items that need explanation.}
 

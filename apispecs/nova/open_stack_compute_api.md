@@ -134,7 +134,7 @@ A number of mechanisms exist which allow a user to retrieve information about a 
 
 #### 2.1.5.1 Server Metadata #### {#ServerMetadata}
 
-A server can have metadata in the form of key/value pairs. The initial value of a servers metadata is provided as a parameter to [Create Server](#createServer). Metadata provided when the server is created is available as a json object in the image's root filesystem at /meta.js. If the server has a [Configuration Drive](#ConfigurationDrive), the metadata will be in the file /meta.js at the root of the file system on the configuration drive. A server's metadata can also be retrieved and updated using the [Server Metadata](#ServerMetadata) and [Server Metadata Item](#ServerMetaDataItem) resources. Updates to a server's metadata are only available using subsequent calls to [Server List Metadata](#ServerMetadata_listMetadata) and [Server Get Metadata Item](#ServerMetadata_getMetadataItem).
+A server can have metadata in the form of key/value pairs. The initial value of a servers metadata is provided as a parameter to [Create Server](#createServer). On Linux servers metadata provided when the server is created is available as a json object in the server's root filesystem at /meta.js. If the server has a [Configuration Drive](#ConfigurationDrive), the metadata will be in the file /meta.js at the root of the file system on the configuration drive. A server's metadata can also be retrieved and updated using the [Server Metadata](#ServerMetadata) and [Server Metadata Item](#ServerMetadataItem) resources. Updates to a server's metadata are only available using subsequent calls to [Server List Metadata](#ServerMetadata_listMetadata) and [Server Get Metadata Item](#ServerMetadataItem_getMetadataItem).
 
 #### 2.1.5.2 EC2 Metadata #### {#EC2Metadata}
 A server can retrieve system defined metadata by querying the interface `http://169.254.169.254/latest/metadata`. This interface is only available on a server and returns the available meta-data as shown below.
@@ -167,7 +167,7 @@ To get information about a specific meta-data item, just append the item to the 
 It is also possible to provide additional meta-data at the time the server is created by supplying a Base64 encoded string as the *user_data* parameter to [Create Server](#createServer). This string can be retrieved using the URL `http://169.254.169.254/latest/meta-data/user-data`. All linux public images in the HP Cloud contain a package called CloudInit which can be used for early initialization of the instance from *user_data*.
 
 #### 2.1.5.3 CloudInit #### {#Section2_1_5_3}
-[CloudInit](https://help.ubuntu.com/community/CloudInit) is a set of scripts that are run when an image boots. These scripts are provided by an Ubuntu package that is installed  in the public images provided by HP Cloud. The scripts are controlled by a configuration which is described in [cloud-config](http://bazaar.launchpad.net/~cloud-init-dev/cloud-init/trunk/view/head:/doc/examples/cloud-config.txt). The configuration is the result of a merge of information from multiple sources including config files stored in the image, configuration parameters on the kernel command line, configuration information provided by Nova and configuration information provided by the user when creating the instance. In the HP Cloud, the latter two sources of information come from the EC2 metadata service which provides information, such as the hostname, determined by the environment along with *user_data* specified by the user at the time an instance is created.
+[CloudInit](https://help.ubuntu.com/community/CloudInit) is a set of scripts that are run when an image boots. These scripts are provided by an Ubuntu package that is installed  in the public Linux images provided by HP Cloud. (CloudInit is not supported for Windows images.) The scripts are controlled by a configuration which is described in [cloud-config](http://bazaar.launchpad.net/~cloud-init-dev/cloud-init/trunk/view/head:/doc/examples/cloud-config.txt). The configuration is the result of a merge of information from multiple sources including config files stored in the image, configuration parameters on the kernel command line, configuration information provided by Nova and configuration information provided by the user when creating the instance. In the HP Cloud, the latter two sources of information come from the EC2 metadata service which provides information, such as the hostname, determined by the environment along with *user_data* specified by the user at the time an instance is created.
 
 The scripts that are run by CloudInit perform a number of different tasks including:
 
@@ -192,7 +192,7 @@ The [Create Server](#createServer) API has a parameter named *personality* which
             "metadata" : {
                 "My Server Name" : "Apache1"
             },
-            "personality" : [
+            "personality" : [.fotw
                 {
                     "path" : "/etc/banner.txt",
                     "contents" : "ICAgICAgDQoiQSBjbG91ZCBkb2VzIG5vdCBrbm93IHdoeSBp dCBtb3ZlcyBpbiBqdXN0IHN1Y2ggYSBkaXJlY3Rpb24gYW5k IGF0IHN1Y2ggYSBzcGVlZC4uLkl0IGZlZWxzIGFuIGltcHVs c2lvbi4uLnRoaXMgaXMgdGhlIHBsYWNlIHRvIGdvIG5vdy4g QnV0IHRoZSBza3kga25vd3MgdGhlIHJlYXNvbnMgYW5kIHRo ZSBwYXR0ZXJucyBiZWhpbmQgYWxsIGNsb3VkcywgYW5kIHlv dSB3aWxsIGtub3csIHRvbywgd2hlbiB5b3UgbGlmdCB5b3Vy c2VsZiBoaWdoIGVub3VnaCB0byBzZWUgYmV5b25kIGhvcml6 b25zLiINCg0KLVJpY2hhcmQgQmFjaA=="
@@ -206,6 +206,8 @@ The path must specify a directory in the root file system - otherwise the file w
 The *maxPersonality* quota limits the number of files which can be injected into a servers file system. The maximum size of the decoded file contents is restricted by the *maxPersonalitySize* quota.
 The maximum length of the file path is limited to 255 bytes.
 
+File injection is not supported for Windows images.
+
 #### 2.1.5.5 Configuration Drive #### {#ConfigurationDrive}
 
 A configuration drive is a disk contains a FAT filesystem with configuration data that is accessible to a server. The configuration drive is created at the same time the server is created by specifying the [Create Server](#createServer) parameter *config_drive* with a value of true. This will cause a configuration drive to be created and items that are normally injected into the root filesystem of the newly created server are injected into the configuration drive instead. The items that are written to the configuration drive are:
@@ -218,7 +220,9 @@ The server metadata is just the metadata that is provided as the value *metadata
 
 It is also possible to provide an imageRef as the value of the *config_drive* parameter. However, this is not useful in the HP Cloud environment as all images are either HP publicly available images or snapshots, neither of which can be usefully used as a configuration drive.
 
-Note that the configuration drive is an API extension in later versions of OpenStack Nova. 
+Note that the configuration drive is an API extension in later versions of OpenStack Nova.
+
+The configuration drive is not supported for servers running Windows images.
 
 ### 2.1.6 Images ### {#Images}
 Servers are booted from disk images which are specified at the time the server is created. There are three different types of disk images: machine images, kernel images and ramdisk images. The machine image contains the root file system for the image. The kernel image is that image that is loaded when the server is launched and the ramdisk contains drivers used to boot the server. The latter two image types are optional. The machine image is always required, but the kernel and ramdisk may or may not be required depending on how the images were built.
@@ -277,17 +281,17 @@ Image snapshots are copies of the (virtual) disk partition containing the root f
 Images can have metadata in the form of key/value pairs. This metadata can be queried and modified using operations of the [Image Metadata](#ImageMetadata) and [Image Metadata Item](#ImageMetadataItem) resources.
 
 ## 2.2 Volumes ## {#Section2_2}
-Nova volumes are persistent virtual images that can be attached to servers (similar to Amazon Elastic Block Store (EBS)). When attached to a server, the volume appears as a disk device on which a file system can be created. See XXX for more information on volumes.
+Nova volumes are persistent virtual images that can be attached to servers (similar to Amazon Elastic Block Store (EBS)). When attached to a server, the volume appears as a disk device on which a file system can be created. The Volumes extension to the Compute API is described by a separate document.
 
 ## 2.3 Network ## {#Section2_3}
 
-### 2.3.1 Network Model ### {#Section2_3_1}
+### 2.3.1 Network Model ### {#NetworkModel}
 
 Each server gets both an internal and an external IPv4 address at the time it's created. 
 Internal addresses are allocated in the 10.0.0.0/8 address range and can be used by other servers in the same Availability Zone to communicate with the server. All communication with and between servers takes place across a private network. This network is referred to as the "private" network in responses to HP Cloud Compute API operations. Broadcast and multicast between servers is not supported. Internal addresses are sometimes referred to as "fixed IPs".
 
 External addresses in the 15.0.0.0/8 address range provide access to servers from the internet. 
-A single external address is automatically assigned to each server when it is created. Servers can also be assigned one or more additional external addresses after being created. These addresses are referred to as "floating IPs" and are attached to a server using the [Add Floating Ip](#addFloatingIp) method. Floating IPs assigned to servers in this way must be allocated using [Allocate Floating Ip](#allocateFloatingIp). The total number of floating IPs that can be allocated to a project is limited by a per tenant quota. This quota can be retrieved using [List Limits](#listLimits).
+A single external address is automatically assigned to each server when it is created. Servers can also be assigned one or more additional external addresses after being created. These addresses are referred to as "floating IPs" and are attached to a server using the [Add Floating Ip](#addFloatingIp) method. Floating IPs assigned to servers in this way must be allocated using [Allocate Floating Ip](#allocateFloatingIP). The total number of floating IPs that can be allocated to a project is limited by a per tenant quota. This quota can be retrieved using [List Limits](#listLimits).
 
 Each server has a single (virtual) nic to which the server's internal address is bound using dhcp. External addresses are mapped to internal addresses using Network Address Translation. API operations which list the addresses by which a server may be accessed list both the internal and external addresses as belonging to the "private" network mentioned above.
 
@@ -312,15 +316,15 @@ The HP Cloud Compute service creates the default security group shown below when
 
 The first four rules of this default security group allow ssh, http, https and ping from all sources. Note in particular, that the IP range 0.0.0.0/0 means these rules apply to traffic from all sources. The remaining three rules allow tcp and udp on all ports, and ping from any server in the `default` security group.
 
-Additional security groups can be created for a tenant using [Create Security Group](#createSecurityGroup). A security group can be associated with a server when the server is created by including its name in the list of security groups provided as the *security_groups* parameter of [Create Server](#createServer). If no security group is specified at the time a server is created, the server is associated with the default security group. You can also add/remove security groups to/from a server after it has been created using the server actions [Add Security Group](#addSecurityGroup) and [Remove Security Group](#removeSecurityGroup).
+Additional security groups can be created for a tenant using [Create Security Group](#createSecGroup). A security group can be associated with a server when the server is created by including its name in the list of security groups provided as the *security_groups* parameter of [Create Server](#createServer). If no security group is specified at the time a server is created, the server is associated with the default security group. You can also add/remove security groups to/from a server after it has been created using the server actions [Add Security Group](#addSecurityGroup) and [Remove Security Group](#removeSecurityGroup).
 
-Additional rules can be added to a security group using [Create Security Group Rule](#createSecurityGroupRule). As shown in the example above, the source address for traffic can be specified as either a CIDR or as any server associated with a security group. (In the example above, the security group that is specified is the default security group itself.) Traffic within a security group is not automatically enabled. If you want to allow ports (or all traffic) within a given security group, you can create a rule using the same source and destination group as is done in the default security group created at account activation.
+Additional rules can be added to a security group using [Create Security Group Rule](#createSecGroupRule). As shown in the example above, the source address for traffic can be specified as either a CIDR or as any server associated with a security group. (In the example above, the security group that is specified is the default security group itself.) Traffic within a security group is not automatically enabled. If you want to allow ports (or all traffic) within a given security group, you can create a rule using the same source and destination group as is done in the default security group created at account activation.
 
 Any change to a security groups rules take immediate effect for any server associated with the group when the change is made. Changes will also applied to any server subsequently associated with the security group containing the rule.
 
 When a security group is deleted it is effectively removed from all servers with which it was previously associated. If access to a server was previously allowed by one of the rules in the deleted security group, and no other security group associated with the server allows similar access, it will no longer be possible to access the server. For example, if the deleted security group allowed ping access (icmp) to the server from a particular source, and none of the rules in the remaining security groups associated with the server allow icmp from the same source, then it will no longer be possible to ping the server from that source.
 
-## 2.4 Tenants ## {#Section2_4}
+## 2.4 Tenants ## {#Tenants}
 
 A tenant has access to a collection of resources uniquely associated with the tenant.  Resources that are associated with a tenant include:
 
@@ -338,7 +342,7 @@ Users are created separately from tenants; a given user can be associated with n
 
 ## 3.1  Authorization ## {#Authorization}
 
-Access to HP Cloud Compute is controlled on a per tenant basis. All HP Cloud Compute API operations have a `tenantId` parameter which identifies the particular collection of resources the user will be accessing. (See [Tenants](#Tenants).) In order to perform an API operation, the user must first obtain an authorization token scoped to the particular tenant he will be accessing. This authorization process is described in [HP Cloud Identity Service Overview](#HPCloudIdentityServiceOverview). The token obtained must be included in the `X-Auth-Token` header of any subsequent HP Cloud Compute API request. Tokens are valid for a limited period of time (on the order of 24 hours). When the token expires, subsequent attempts to access the API will return authorization failures and a new token must be obtained to continue using the API.
+Access to HP Cloud Compute is controlled on a per tenant basis. All HP Cloud Compute API operations have a `tenantId` parameter which identifies the particular collection of resources the user will be accessing. (See [Tenants](#Tenants).) In order to perform an API operation, the user must first obtain an authorization token scoped to the particular tenant he will be accessing. This authorization process is described in [HP Cloud Identity Service Overview](https://docs.hpcloud.com/identity). The token obtained must be included in the `X-Auth-Token` header of any subsequent HP Cloud Compute API request. Tokens are valid for a limited period of time (on the order of 24 hours). When the token expires, subsequent attempts to access the API will return authorization failures and a new token must be obtained to continue using the API.
 
 ## 3.2 Regions and Availability Zones ## {#Section3_2}
 
@@ -530,15 +534,17 @@ past may miss deletions.
 
 Limits are established for the following resources on a per tenant basis:
 
-+ metadata_items: number of metadata items allowed per instance
-+ instances: the maximum number of VM instances that can be created for the tenant
-+ injected_file_content_bytes: the maximum size of an injected file
-+ injected_files: the number of injected files that can be specified when a new VM instance is created
++ metadata_items (maxServerMeta, maxImageMeta): number of metadata items allowed per instance
++ instances (maxTotalInstances): the maximum number of VM instances that can be created for the tenant
++ injected_files (maxPersonality): the number of injected files that can be specified when a new VM instance is created
++ injected_file_content_bytes (maxPersonalitySize): the maximum size of an injected file
++ cores (maxTotalCores): the maximum of the total number of cores for project VM instances
++ ram (maxTotalRAMSize): the maximum number of megabytes of instance RAM for the project
++ security_groups (maxSecurityGroups): the maximum number of security groups
++ security_group_rules (maxSecurityGroupRules): the maximum number of rules in a security group
++ floating_ip: the maximum number of floating ips that can be assigned to the project
 + volumes: the number of volumes which can be created
 + gigabytes: the maximum total size of all volumes associated with the project
-+ cores: the maximum of the total number of cores for project VM instances
-+ ram: the maximum number of megabytes of instance RAM for the project
-+ floating_ip: the maximum number of floating ips that can be assigned to the project
 
 The limits are applied per AZ. [List Limits](#listLimits) can be used to retrieve the current value of these limits within an AZ for a tenant.
 
@@ -638,8 +644,8 @@ Fault Response, Item Not Found: JSON
     	"code": 404}}
     
 
-The OverLimit fault is generated when a rate limit threshold is
-exceeded. When an OverLimit fault occurs, the time in seconds after which another request is allowed in returned in the `Retry-After` response header. An explanation of why the request was rate   in the `details` attribute of the response.
+The OverLimit fault is generated when any limit threshold is
+exceeded. When an OverLimit fault occurs, the time in seconds after which another request is allowed in returned in the `Retry-After` response header. An explanation of why the request was rejected is returned in the `details` attribute of the response.
 
 Fault Response, Over Limit: XML
 
@@ -674,7 +680,7 @@ Fault Response, Over Limit: JSON
 **Admin URI**: N/A
 
 
-### Compute API
+## 4.1 HP Cloud Compute API Operations ## {#Section4_1}
 
 
 ###Core Compute API
@@ -700,6 +706,8 @@ Fault Response, Over Limit: JSON
 | **Server Metadata Item** | [Get Metadata Item](#ServerMetadataItem_getMetadataItem) | GET | v1.1/{tenant_id}/servers/{server_id}/metadata/{key} | Y/Y |  |
 |  | [Create or Update Metadata Item](#ServerMetadataItem_setMetadataItem) | PUT | v1.1/{tenant_id}/servers/{server_id}/metadata/{key} | Y/Y |  |
 |  | [Delete Metadata Item](#ServerMetadataItem_deleteMetadataItem) | DELETE | v1.1/{tenant_id}/servers/{server_id}/metadata/{key} | Y/Y |  |
+| **Server Addresses** | [List Server Addresses](#listServerAddresses) | GET | v1.1/{tenant_id}/servers/{server_id}/ips | Y/Y |  |
+|  | [List Addresses by Network](#listServerAddressesbyNetwork) | GET | v1.1/{tenant_id}/servers/{server_id}/ips/{network_id} | Y/Y |  |
 | **Images** | [List Images](#listImages) | GET | v1.1/{tenant_id}/images | Y/Y |  |
 |  | [List Images Detail](#listDetailImages) | GET | v1.1/{tenant_id}/images/detail | Y/Y |  |
 | **Image** | [Get Image Details](#getImage) | GET | v1.1/{tenant_id}/images/{image_id} | Y/Y |  |
@@ -1903,7 +1911,9 @@ JSON
 
 <p> Rebuilds the specified server by rebooting it from a
                 specified image. Other attributes of the server, such as its network configuration
-                are not changed. Specify the <code>rebuild</code> action in the request body.
+                are not changed. Servers running licensed images, such as windows, can only be rebuilt from
+                the same image.
+                To rebuild a server, specify the <code>rebuild</code> action in the request body.
 </p>
 
 **Template Parameters**
@@ -2735,13 +2745,140 @@ This call does not require a request body
 
 
 
-### 4.4.10 Images ### {#Images}
+### 4.4.10 Server Addresses ### {#ServerAddresses}
+
+<p>
+                                    A list of addresses associated with a server by network. All servers in 
+                                    HP Cloud Compute are on the <em>private</em> network. (See 
+        <a href="#NetworkModel">
+            Network Model
+        </a>
+          .)
+</p>
+
+
+#### 4.4.10.1 List Server Addresses #### {#listServerAddresses}
+#### GET v1.1/{tenant_id}/servers/{server_id}/ips
+
+<p> Lists all server addresses by network. </p>
+
+**Template Parameters**
+
+<ul>
+<li><p><em>tenant_id</em> - xsd:string</p><p> The tenantId. (See <a href="#Authorization"> Authorization </a> .) </p>
+</li>
+<li><p><em>server_id</em> - csapi:ID_or_UUID</p><p> Server ID. This parameter can be an integer ID or a UUID. In either case, the specified server must be in the addressed Availability Zone. </p>
+</li>
+</ul>
+######Request
+
+This call does not require a request body
+
+######Response
+
+**Status Code(s)** 200, 203
+
+XML
+
+    <addresses xmlns="http://docs.openstack.org/compute/api/v1.1">
+        <network id="private">
+            <ip addr="10.4.15.127" version="4"/>
+            <ip addr="15.185.99.229" version="4"/>
+        </network>
+    </addresses>
+
+
+JSON
+
+    {
+        "addresses": {
+            "private": [
+                {
+                    "addr": "10.4.15.127", 
+                    "version": 4
+                }, 
+                {
+                    "addr": "15.185.99.229", 
+                    "version": 4
+                }
+            ]
+        }
+    }
+
+######Example(s)
+
+    curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_8734fa79bea983a8f20d0d8279d7b815da60ce70837547eb775f72cdae54ced6" 'https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772/servers/330579/ips'
+
+
+
+#### 4.4.10.2 List Addresses by Network #### {#listServerAddressesbyNetwork}
+#### GET v1.1/{tenant_id}/servers/{server_id}/ips/{network_id}
+
+<p> Lists server addresses for the specified network.
+                All servers in HP Cloud Compute are on the <em>private</em> network. (See 
+        <a href="#NetworkModel">
+            Network Model
+        </a>
+          .)</p>
+
+**Template Parameters**
+
+<ul>
+<li><p><em>tenant_id</em> - xsd:string</p><p> The tenantId. (See <a href="#Authorization"> Authorization </a> .) </p>
+</li>
+<li><p><em>server_id</em> - csapi:ID_or_UUID</p><p> Server ID. This parameter can be an integer ID or a UUID. In either case, the specified server must be in the addressed Availability Zone. </p>
+</li>
+<li><p><em>network_id</em> - xsd:string</p><p> Network ID. </p>
+<p>Legal values are:<ul>
+<li><em>private</em>  - This is the only network in HP Cloud Compute.
+</li>
+</ul></p>
+</li>
+</ul>
+######Request
+
+This call does not require a request body
+
+######Response
+
+**Status Code(s)** 200, 203
+
+XML
+
+    <network id="private" xmlns="http://docs.openstack.org/compute/api/v1.1">
+        <ip addr="10.4.15.127" version="4"/>
+        <ip addr="15.185.99.229" version="4"/>
+    </network>
+
+
+JSON
+
+    {
+        "private": [
+            {
+                "addr": "10.4.15.127", 
+                "version": 4
+            }, 
+            {
+                "addr": "15.185.99.229", 
+                "version": 4
+            }
+        ]
+    }
+
+######Example(s)
+
+    curl -i -X 'GET'  -H "Content-type: application/json" -H "X-Auth-Token: HPAuth_8734fa79bea983a8f20d0d8279d7b815da60ce70837547eb775f72cdae54ced6" 'https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772/servers/330579/ips/private'
+
+
+
+### 4.4.11 Images ### {#Images}
 
 <p> A list of images. Each image contains IDs,
                 names, and links -- other attributes are omitted. </p>
 
 
-#### 4.4.10.1 List Images #### {#listImages}
+#### 4.4.11.1 List Images #### {#listImages}
 #### GET v1.1/{tenant_id}/images
 
 <p> Lists IDs, names, and links for images
@@ -2839,7 +2976,7 @@ JSON
 
 
 
-#### 4.4.10.2 List Images Detail #### {#listDetailImages}
+#### 4.4.11.2 List Images Detail #### {#listDetailImages}
 #### GET v1.1/{tenant_id}/images/detail
 
 **Template Parameters**
@@ -3046,10 +3183,10 @@ JSON
 
 
 
-### 4.4.11 Image ### {#Image}
+### 4.4.12 Image ### {#Image}
 
 
-#### 4.4.11.1 Get Image Details #### {#getImage}
+#### 4.4.12.1 Get Image Details #### {#getImage}
 #### GET v1.1/{tenant_id}/images/{image_id}
 
 <p> Returns detailed information about the specified image. </p>
@@ -3131,7 +3268,7 @@ JSON
 
 
 
-#### 4.4.11.2 Delete Image #### {#deleteImage}
+#### 4.4.12.2 Delete Image #### {#deleteImage}
 #### DELETE v1.1/{tenant_id}/images/{image_id}
 
 <p> Deletes the specified image. </p>
@@ -3158,10 +3295,10 @@ This call does not require a request body
 
 
 
-### 4.4.12 Image Metadata ### {#ImageMetadata}
+### 4.4.13 Image Metadata ### {#ImageMetadata}
 
 
-#### 4.4.12.1 List Metadata #### {#ImageMetadata_listMetadata}
+#### 4.4.13.1 List Metadata #### {#ImageMetadata_listMetadata}
 #### GET v1.1/{tenant_id}/images/{image_id}/metadata
 
 <p> Lists metadata associated with the resource.
@@ -3202,7 +3339,7 @@ JSON
 
 
 
-#### 4.4.12.2 Update Metadata #### {#ImageMetadata_updateMetadata}
+#### 4.4.13.2 Update Metadata #### {#ImageMetadata_updateMetadata}
 #### POST v1.1/{tenant_id}/images/{image_id}/metadata
 
 <p> Updates resource metadata. Updates will replace
@@ -3266,7 +3403,7 @@ JSON
 
 
 
-#### 4.4.12.3 Create or Replace Metadata #### {#ImageMetadata_setMetadata}
+#### 4.4.13.3 Create or Replace Metadata #### {#ImageMetadata_setMetadata}
 #### PUT v1.1/{tenant_id}/images/{image_id}/metadata
 
 <p>The metadata items set on the resource are those
@@ -3334,10 +3471,10 @@ JSON
 
 
 
-### 4.4.13 Image Metadata Item ### {#ImageMetadataItem}
+### 4.4.14 Image Metadata Item ### {#ImageMetadataItem}
 
 
-#### 4.4.13.1 Get Metadata Item #### {#ImageMetadataItem_getMetadataItem}
+#### 4.4.14.1 Get Metadata Item #### {#ImageMetadataItem_getMetadataItem}
 #### GET v1.1/{tenant_id}/images/{image_id}/metadata/{key}
 
 <p> Retrieves a single metadata item by key. </p>
@@ -3378,7 +3515,7 @@ JSON
 
 
 
-#### 4.4.13.2 Create or Update Metadata Item #### {#ImageMetadataItem_setMetadataItem}
+#### 4.4.14.2 Create or Update Metadata Item #### {#ImageMetadataItem_setMetadataItem}
 #### PUT v1.1/{tenant_id}/images/{image_id}/metadata/{key}
 
 <p> Sets a metadata item by its key. An overLimit
@@ -3433,7 +3570,7 @@ JSON
 
 
 
-#### 4.4.13.3 Delete Metadata Item #### {#ImageMetadataItem_deleteMetadataItem}
+#### 4.4.14.3 Delete Metadata Item #### {#ImageMetadataItem_deleteMetadataItem}
 #### DELETE v1.1/{tenant_id}/images/{image_id}/metadata/{key}
 
 <p> Deletes a metadata item. </p>
@@ -3462,13 +3599,13 @@ This call does not require a request body
 
 
 
-### 4.4.14 Flavors ### {#Flavors}
+### 4.4.15 Flavors ### {#Flavors}
 
 <p> A list of flavors. Each flavor contains IDs,
                 names, and links -- other attributes are omitted. </p>
 
 
-#### 4.4.14.1 List Flavors #### {#listFlavors}
+#### 4.4.15.1 List Flavors #### {#listFlavors}
 #### GET v1.1/{tenant_id}/flavors
 
 <p> Lists IDs, names, and links for available
@@ -3624,7 +3761,7 @@ JSON
 
 
 
-#### 4.4.14.2 List Flavors Detail #### {#listDetailFlavors}
+#### 4.4.15.2 List Flavors Detail #### {#listDetailFlavors}
 #### GET v1.1/{tenant_id}/flavors/detail
 
 <p> Lists all details for available flavors. </p>
@@ -3778,10 +3915,10 @@ JSON
 
 
 
-### 4.4.15 Flavor ### {#Flavor}
+### 4.4.16 Flavor ### {#Flavor}
 
 
-#### 4.4.15.1 Get Flavor Details #### {#getFlavor}
+#### 4.4.16.1 Get Flavor Details #### {#getFlavor}
 #### GET v1.1/{tenant_id}/flavors/{flavor_id}
 
 <p> Lists details for the specified flavor. </p>
@@ -3841,10 +3978,10 @@ JSON
 
 
 
-### 4.4.16 Floating Ips ### {#floating-ips}
+### 4.4.17 Floating Ips ### {#floating-ips}
 
 
-#### 4.4.16.1 List Floating IPs #### {#listFloatingIPs}
+#### 4.4.17.1 List Floating IPs #### {#listFloatingIPs}
 #### GET v1.1/{tenant_id}/os-floating-ips
 
 <p>Lists floating IP addresses associated with the
@@ -3923,7 +4060,7 @@ XML
 
 
 
-#### 4.4.16.2 Allocate Floating IP #### {#allocateFloatingIP}
+#### 4.4.17.2 Allocate Floating IP #### {#allocateFloatingIP}
 #### POST v1.1/{tenant_id}/os-floating-ips
 
 <p>Allocate a new floating IP address to a tenant
@@ -3978,10 +4115,10 @@ XML
 
 
 
-### 4.4.17 Floating IP ### {#floating-ip}
+### 4.4.18 Floating IP ### {#floating-ip}
 
 
-#### 4.4.17.1 Get Floating Ip #### {#getFloatingIP}
+#### 4.4.18.1 Get Floating Ip #### {#getFloatingIP}
 #### GET v1.1/{tenant_id}/os-floating-ips/{id}
 
 <p>Get information about the specified floating
@@ -4038,7 +4175,7 @@ JSON
 
 
 
-#### 4.4.17.2 Deallocate Floating IP #### {#deallocateFloatingIP}
+#### 4.4.18.2 Deallocate Floating IP #### {#deallocateFloatingIP}
 #### DELETE v1.1/{tenant_id}/os-floating-ips/{id}
 
 <p>Deallocates the floating IP address associated
@@ -4066,10 +4203,10 @@ This call does not require a request body
 
 
 
-### 4.4.18 Keypairs ### {#os-keypairs}
+### 4.4.19 Keypairs ### {#os-keypairs}
 
 
-#### 4.4.18.1 List Keypairs #### {#listKeypairs}
+#### 4.4.19.1 List Keypairs #### {#listKeypairs}
 #### GET v1.1/{tenant_id}/os-keypairs
 
 <p>Lists keypairs associated with the tenant or
@@ -4189,7 +4326,7 @@ JSON
 
 
 
-#### 4.4.18.2 Create Keypair #### {#createKeypair}
+#### 4.4.19.2 Create Keypair #### {#createKeypair}
 #### POST v1.1/{tenant_id}/os-keypairs
 
 <p> Generate or import a keypair. </p>
@@ -4283,10 +4420,10 @@ JSON
 
 
 
-### 4.4.19 Keypair ### {#Unknown}
+### 4.4.20 Keypair ### {#Unknown}
 
 
-#### 4.4.19.1 Get Keypair #### {#getKeypair}
+#### 4.4.20.1 Get Keypair #### {#getKeypair}
 #### GET v1.1/{tenant_id}/os-keypairs/{keypair_name}
 
 <p> Get the public key and fingerprint for the
@@ -4339,7 +4476,7 @@ JSON
 
 
 
-#### 4.4.19.2 Delete Keypair #### {#deleteKeypair}
+#### 4.4.20.2 Delete Keypair #### {#deleteKeypair}
 #### DELETE v1.1/{tenant_id}/os-keypairs/{keypair_name}
 
 <p>Delete the specified keypair.</p>
@@ -4366,10 +4503,10 @@ This call does not require a request body
 
 
 
-### 4.4.20 Security Groups ### {#security_groups}
+### 4.4.21 Security Groups ### {#security_groups}
 
 
-#### 4.4.20.1 List Security Groups #### {#listSecGroups}
+#### 4.4.21.1 List Security Groups #### {#listSecGroups}
 #### GET v1.1/{tenant_id}/os-security-groups
 
 <p>List security groups.</p>
@@ -4549,7 +4686,7 @@ JSON
 
 
 
-#### 4.4.20.2 Create Security Group #### {#createSecGroup}
+#### 4.4.21.2 Create Security Group #### {#createSecGroup}
 #### POST v1.1/{tenant_id}/os-security-groups
 
 <p>
@@ -4623,10 +4760,10 @@ JSON
 
 
 
-### 4.4.21 Security group ### {#security_group}
+### 4.4.22 Security group ### {#security_group}
 
 
-#### 4.4.21.1 Get Security Group #### {#getSecGroup}
+#### 4.4.22.1 Get Security Group #### {#getSecGroup}
 #### GET v1.1/{tenant_id}/os-security-groups/{security_group_id}
 
 <p>
@@ -4707,7 +4844,7 @@ JSON
 
 
 
-#### 4.4.21.2 Delete Security Group #### {#deleteSecGroup}
+#### 4.4.22.2 Delete Security Group #### {#deleteSecGroup}
 #### DELETE v1.1/{tenant_id}/os-security-groups/{security_group_id}
 
 <p>Delete a security group.</p>
@@ -4734,10 +4871,10 @@ This call does not require a request body
 
 
 
-### 4.4.22 Security Group Rules ### {#security_group_rules}
+### 4.4.23 Security Group Rules ### {#security_group_rules}
 
 
-#### 4.4.22.1 Create Security Group Rule #### {#createSecGroupRule}
+#### 4.4.23.1 Create Security Group Rule #### {#createSecGroupRule}
 #### POST v1.1/{tenant_id}/os-security-group-rules
 
 <p>
@@ -4849,10 +4986,10 @@ JSON
 
 
 
-### 4.4.23 Security Group Rule ### {#security_group_rule}
+### 4.4.24 Security Group Rule ### {#security_group_rule}
 
 
-#### 4.4.23.1 Delete Security Group Rule #### {#deleteSecGroupRule}
+#### 4.4.24.1 Delete Security Group Rule #### {#deleteSecGroupRule}
 #### DELETE v1.1/{tenant_id}/os-security-group-rules/{security_group_rule_id}
 
 <p>
