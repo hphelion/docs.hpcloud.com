@@ -5,6 +5,7 @@ title: HP Block Storage API
 description: "HP Cloud Block Storage API Specifications"
 keywords: "bock, block storage, volumes"
 product: block-storage
+published: false
 
 ---
 
