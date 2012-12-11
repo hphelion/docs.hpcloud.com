@@ -65,3 +65,19 @@ Before using this project you need the following dependencies installed. Some of
 * [RbST](http://rubygems.org/gems/RbST)
 * PHP5 (just the CLI portion - already on mac and `apt-get install php5-cli` on linux)
 * For deployments you need the [stackato client](https://api.stackato-prod-1-az2.devex.uswest.hpcloud.net/console/client/).
+
+## Notes
+
+### Layouts
+
+There are two main layouts that can be used for pages:
+
+1. default: used for general documentation pages.
+2. page: used for api pages (meant for /api/*)
+
+### Menus
+
+There are two menu structures in the _config.yml file:
+
+1. navigation: This menu is broken down by main or product name. When no product is present main is used.
+2. apinavigation: This is used on all page layouts and is meant for the api navigation.
