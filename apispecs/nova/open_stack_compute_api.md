@@ -134,7 +134,7 @@ A number of mechanisms exist which allow a user to retrieve information about a 
 
 #### 2.1.5.1 Server Metadata #### {#ServerMetadata}
 
-A server can have metadata in the form of key/value pairs. The initial value of a servers metadata is provided as a parameter to [Create Server](#createServer). Metadata provided when the server is created is available as a json object in the image's root filesystem at /meta.js. If the server has a [Configuration Drive](#ConfigurationDrive), the metadata will be in the file /meta.js at the root of the file system on the configuration drive. A server's metadata can also be retrieved and updated using the [Server Metadata](#ServerMetadata) and [Server Metadata Item](#ServerMetadataItem) resources. Updates to a server's metadata are only available using subsequent calls to [Server List Metadata](#ServerMetadata_listMetadata) and [Server Get Metadata Item](#ServerMetadataItem_getMetadataItem).
+A server can have metadata in the form of key/value pairs. The initial value of a servers metadata is provided as a parameter to [Create Server](#createServer). On Linux servers metadata provided when the server is created is available as a json object in the server's root filesystem at /meta.js. If the server has a [Configuration Drive](#ConfigurationDrive), the metadata will be in the file /meta.js at the root of the file system on the configuration drive. A server's metadata can also be retrieved and updated using the [Server Metadata](#ServerMetadata) and [Server Metadata Item](#ServerMetadataItem) resources. Updates to a server's metadata are only available using subsequent calls to [Server List Metadata](#ServerMetadata_listMetadata) and [Server Get Metadata Item](#ServerMetadataItem_getMetadataItem).
 
 #### 2.1.5.2 EC2 Metadata #### {#EC2Metadata}
 A server can retrieve system defined metadata by querying the interface `http://169.254.169.254/latest/metadata`. This interface is only available on a server and returns the available meta-data as shown below.
@@ -281,7 +281,7 @@ Image snapshots are copies of the (virtual) disk partition containing the root f
 Images can have metadata in the form of key/value pairs. This metadata can be queried and modified using operations of the [Image Metadata](#ImageMetadata) and [Image Metadata Item](#ImageMetadataItem) resources.
 
 ## 2.2 Volumes ## {#Section2_2}
-Nova volumes are persistent virtual images that can be attached to servers (similar to Amazon Elastic Block Store (EBS)). When attached to a server, the volume appears as a disk device on which a file system can be created. See XXX for more information on volumes.
+Nova volumes are persistent virtual images that can be attached to servers (similar to Amazon Elastic Block Store (EBS)). When attached to a server, the volume appears as a disk device on which a file system can be created. The Volumes extension to the Compute API is described by a separate document.
 
 ## 2.3 Network ## {#Section2_3}
 
@@ -534,15 +534,17 @@ past may miss deletions.
 
 Limits are established for the following resources on a per tenant basis:
 
-+ metadata_items: number of metadata items allowed per instance
-+ instances: the maximum number of VM instances that can be created for the tenant
-+ injected_file_content_bytes: the maximum size of an injected file
-+ injected_files: the number of injected files that can be specified when a new VM instance is created
++ metadata_items (maxServerMeta, maxImageMeta): number of metadata items allowed per instance
++ instances (maxTotalInstances): the maximum number of VM instances that can be created for the tenant
++ injected_files (maxPersonality): the number of injected files that can be specified when a new VM instance is created
++ injected_file_content_bytes (maxPersonalitySize): the maximum size of an injected file
++ cores (maxTotalCores): the maximum of the total number of cores for project VM instances
++ ram (maxTotalRAMSize): the maximum number of megabytes of instance RAM for the project
++ security_groups (maxSecurityGroups): the maximum number of security groups
++ security_group_rules (maxSecurityGroupRules): the maximum number of rules in a security group
++ floating_ip: the maximum number of floating ips that can be assigned to the project
 + volumes: the number of volumes which can be created
 + gigabytes: the maximum total size of all volumes associated with the project
-+ cores: the maximum of the total number of cores for project VM instances
-+ ram: the maximum number of megabytes of instance RAM for the project
-+ floating_ip: the maximum number of floating ips that can be assigned to the project
 
 The limits are applied per AZ. [List Limits](#listLimits) can be used to retrieve the current value of these limits within an AZ for a tenant.
 
