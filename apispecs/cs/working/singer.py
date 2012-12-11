@@ -193,7 +193,7 @@ def create_actions_appendix(rootdir, subdirs):
                string.join(api_content, '\n'))
 
             
-def create_cs_api_md(opt, outfile, rootdir, subdirs, chapter='4.4', private_api=None):
+def create_cs_api_md(opt, outfile, rootdir, subdirs, chapter='3.4', private_api=None):
     if opt.outfile:
         outfile = opt.outfile
     intro_md = read_file('cs-api-intro.md')
