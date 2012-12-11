@@ -156,7 +156,7 @@ N/A
 
 None.
 
-##### 4.4.1.1 Get Version Info ##### {#version_info}
+##### 4.4.1.1 Get Version Info {#version_info}
 ###### GET /v1.1/
 
 Lists the information about the current version of the API, like media types (json and xml), links to the public endpoint url, links to the WADL (if any), and links to the API documentation.
@@ -939,7 +939,7 @@ None.
 
 **Business Rules**
 
-1.  A volume can only be attached when the status of the volume is “available".
+1.  A volume can only be attached when the status of the volume is “available”.
 2.  A volume is attached when the status of the volume is “in-use”.
 3.  A volume can only be detached when the status of the volume is “in-use”.
 4.  A volume can be attached to only one server instance.
@@ -1113,7 +1113,85 @@ None.
 
 
 
-##### 4.4.3.3 Detach volume from a server ##### {#detach_volume}
+##### 4.4.3.3 List Details for specified attachment ##### {#detach_volume}
+###### GET /servers/{server_id}/os-volume_attachments/{attachment_id}
+
+Lists volume details for the specified volume attachment ID.
+
+**Request Data**
+
+**URL Parameters**
+
+* *tenant_id* - The unique identifier of the tenant or account.
+* *server_id* - The identifier for the server.
+* *volume_id* - The volume id.
+
+**Data Parameters**
+
+This call does not require a request body.
+
+None.
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+JSON
+    {
+        "volumeAttachment": {
+            "device": "/dev/sdf",
+            "serverId": 646675,
+            "id": 73989,
+             "volumeId": 73989
+        }
+    }        
+
+XML
+
+    Not supported
+
+**Error Response**
+
+**Status Code**
+
+404 Not Found
+
+**Response Data**
+
+JSON
+
+
+    {
+        "itemNotFound": {
+            "message": "The resource could not be found.",
+            "code": 404
+        }
+    }
+
+
+XML
+
+
+    Not Supported.
+
+
+**Curl Example**
+
+
+    curl -i -H "X-Auth-Token: {Auth_Token}" \
+            {BaseUri}/v1.1/{tenant_id}/servers/{server_id}/ \
+            os-volume_attachments/{volume_id}
+
+
+**Additional Notes**
+
+None.
+
+##### 4.4.3.4 Detach volume from a server ##### {#detach_volume}
 ###### DELETE /servers/{server_id}/os-volume_attachments/{volume_id}
 
 Detach the block storage volume specified by {volume_id} from the server instance specified by {server_id}.
@@ -1122,7 +1200,9 @@ Detach the block storage volume specified by {volume_id} from the server instanc
 
 **URL Parameters**
 
-None.
+* *tenant_id* - The unique identifier of the tenant or account.
+* *server_id* - The identifier for the server.
+* *volume_id* - The volume id.
 
 **Data Parameters**
 
@@ -1261,8 +1341,12 @@ XML
 
 JSON
 
-    {"cloudServersFault": {"message": "Server Error, please try again later.",
-"code": 500}}
+    {
+        "cloudServersFault": {
+            "message": "Server Error, please try again later.",
+            "code": 500
+        }
+    }
 
 XML
 
@@ -1435,8 +1519,12 @@ XML
 
 JSON
 
-    {"cloudServersFault": {"message": "Server Error, please try again later.",
-"code": 500}}
+    {
+        "cloudServersFault": {
+            "message": "Server Error, please try again later.",
+            "code": 500
+        }
+    }
 
 XML
 
@@ -1452,7 +1540,7 @@ _Not supported._
 None.
 
 
-##### 4.4.4.4 Delte a snapshot ##### {#delete_snapshot}
+##### 4.4.4.4 Delete a snapshot ##### {#delete_snapshot}
 ##### DELETE /os-snapshots
 
 Delete a single snapshot.
@@ -1488,8 +1576,12 @@ This operation does not return a response body.
 
 JSON
 
-    {"cloudServersFault": {"message": "Server Error, please try again later.",
-"code": 500}}
+    {
+        "cloudServersFault": {
+            "message": "Server Error, please try again later.",
+            "code": 500
+        }
+    }
 
 XML
 
