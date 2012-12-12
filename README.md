@@ -11,10 +11,14 @@ The documentation itself is stored as [Markdown](https://en.wikipedia.org/wiki/M
 ### YAML Front Matter
 Jekyll content needs to have [YAML front matter](https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter). We have some specifics around what should be used in here. This includes:
 
+* `layout` is either _default_ for standard pages or _page_ for api pages.
+* `title` contains the title for the page shared in places like the title tag for the page.
 * `permalink` should always be specificed and have the path including an ending /.
 * `description` is the meta description optionally injected into the page.
 * `keywords` is the meta keywords optionally injected into a page.
 * `product` is the product the content is associated with (e.g., object-storage). This is used for menus.
+* `private` should be set to _false_ if this is an api document that can be displayed internally but not on the public site.
+* `published` can be set to _false_ for a page to not be published in the html form.
 
 ### Menus
 Menus are simply YAML in the _congif.yml file. See that file for details.
