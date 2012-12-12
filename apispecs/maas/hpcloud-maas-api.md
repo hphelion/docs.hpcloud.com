@@ -172,11 +172,7 @@ Provides information about the supported Monitoring API versions.
 	          "href": "https://az-2.region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	        }
 	      ],
-	      "uri": "amqp://host:5672/385937540",
-	      "meta" : {
-	        "amqp_username": "385937540",
-	        "amqp_exchange": "metrics"
-	      }
+	      "uri": "amqp://host:5672/385937540"
 	    },
 	    {
 	      "id": "abce9e32-6ce0-4a36-9750-df415606babc",
@@ -186,11 +182,7 @@ Provides information about the supported Monitoring API versions.
 	          "href": "https://az-2.region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints/abce9e32-6ce0-4a36-9750-df415606babc"
 	        }
 	      ]
-	      "uri": "amqp://host:5672/473077483",
-	      "meta" : {
-	        "amqp_username": "473077483",
-	        "amqp_exchange": "metrics"
-	      }
+	      "uri": "amqp://host:5672/473077483"
 	    }
 	  ]
 	}**Error Response**
@@ -374,9 +366,6 @@ JSON
 	      "namespace": "nova",
 	      "dimensions": {
 	        "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
-	      },
-	      "meta": {
-	        "amqp_routing_key": "nova.server-1234363615-az-2-region-a-geo-1"
 	      }
 	    },
 	    {
@@ -391,9 +380,6 @@ JSON
 	      "namespace": "nova",
 	      "dimensions": {
 	        "instance_id": "490dcc20-3ff3-11e2-a25f-0800200c9a66"
-	      },
-	      "meta": {
-	        "amqp_routing_key": "nova.server-1234363615-az-2-region-a-geo-1"
 	      }
 	    }
 	  ]
