@@ -32,6 +32,11 @@ The branch structure for this project is:
 
 _Note: this project uses git flow with the addition of a QA branch._
 
+## Deployment Process
+When working on updates they should all happen on the _develop_ or _feature_ branches. When the site is ready for QA the _develop_ branch should be merged into the _QA_ branch. This should be built and deployed to QA. When what is on QA is ready for production the _QA_ branch should be merged into _master_ and _master_ should be deployed to production.
+
+At any time someone can check the contents of _master_ and see what is running on production or _QA_ and see what is in QA.
+
 ## Usage
 
 This setup has a number of commands using Make to operate.
