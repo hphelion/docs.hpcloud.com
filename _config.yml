@@ -34,7 +34,7 @@ navigation:
     url: /cli/unix/install/
   - text: Account Configuration
     url: /cli/unix/configuration/
-  - text: Managing Multiple Accounts
+  - text: Advanced Account Management
     url: /cli/unix/account-management/
   - text: Compute Examples
     url: /cli/unix/compute/
