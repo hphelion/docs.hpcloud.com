@@ -12,15 +12,12 @@ product: block-storage
 
 ## 1. Overview
 
-*Brief introduction and overview of the service and its intended use.*
-
-The Bock team is developing the Block Storage Service for Nova. The service provides Virtual Block devices for virtual machines executing in Nova. The capability is derived form the original DM-Cache capability implemented as part of the Service Utility Platform (SUP). Bock volumes can store boot images, user data or both. We will target Nova-Diablo for the initial release of Bock. In the Nova architecture Bock is implemented as a set of nova volume driver classes. These classes provide a set of methods that allow different types of storage plugins.
-
+This document describes the Block Storage Service for Nova. The service
+provides Virtual Block devices for virtual machines executing in Nova.
+Bock volumes can store boot images, user data or both.
 
 ### 1.1 API Maturity Level
 
-*State the maturity level in which the API is in currently, based on the pre-defined stages i.e. Alpha, Beta, Public (Current), Deprecated, GA (Release to General Availability, SLAs defined.
-The versions schema, status field, supports an enumeration of ALPHA, BETA, CURRENT and DEPRECATED. The versions->status field should correspond to the Maturity Level for the API, i.e. ALPHA for Alpha stage, BETA for Beta stage, CURRENT for Public and GA stages, DEPRECATED for all other versions of the API that are not supported anymore.*
 
 **Maturity Level**: Public stage - Bock is currently in public beta in all AZs of AW2, i.e. AW2 AZ1, AZ2 and AZ3
 
@@ -29,42 +26,45 @@ The versions schema, status field, supports an enumeration of ALPHA, BETA, CURRE
 
 ## 2. Architecture View
 
+### 2.1 Overview
+
 Example info. and documentation for Bock is available on the [Bock Wiki page](https://wiki.hpcloud.net/download/attachments/131820/Bock+review.pdf?version=1&modificationDate=1326461253000).
 
-### 2.1 Overview
-*References to architectural details of the service.*
-
 ### 2.2 Conceptual/Logical Architecture View
-*Describe the logical components of the system and their responsibilities*
+The Nova volume service consists of an extension to the Nova API and an
+additional API entry point. The API extension allows the caller to create
+volumes that persist independently of Nova Virtual Machines. One or more of
+these volumes can be attached to a Nova Virtual Machine, then they can be
+mounted and used as standard block storage devices.
+
+The API also provides an interface to create a read-only snapshot of an
+existing Volume, and to create standard volumes from these snapshots.
 
 ### 2.3 Infrastructure Architecture View
-*Describe how the API fits into the overall HPCS Infrastructure*
+
+This API is implemented as a Nova API Resource Extension and leverages the
+existing infrastructure to deliver the service.
 
 ### 2.4 Entity Relationship Diagram
-*Describe the relationships between the various entities (resources) involved in the API*
 
+See the Overview above for details of the entities involved in the API.
 
 
 ## 3. Account-level View
-*Describe the relationship of the API with respect to the accounts, groups, tenants, regions, availability zones etc.*
-
 
 ### 3.1 Accounts
-*Describe the structure of the user accounts, groups and tenants. Currently this might be described separately in context of Control Services, but in future each service API needs to state their usage. In future CS might support complex group hierarchies, enterprise account structures while there maybe a phased adoption by individual service APIs*
+
+The volumes API is an extension to the existing nova-volumes API and as such,
+requires no additional user accounts.
+
 
 ### 3.2 Regions and Availability Zones
-*Describe the availability of the service API in different regions and availability zones. State plans for future expansion as well.*
 
-**Region(s)**: region-a
-
-**Availability Zone(s)**: az-1, az-2, az-3
-
-**Future Expansion**: region-b
-
+It is expected that the volumes service will be provided in all
+regions and zones which provide the Nova compute service.
 
 
 ### 3.3 Service Catalog
-*Describe if the service API is exposed via the service catalog. Reference the fragment of the service catalog showing the structure.*
 
 The Block Storage is exposed in the service catalog, as shown in the following fragment:
 
@@ -102,7 +102,6 @@ The Block Storage is exposed in the service catalog, as shown in the following f
 
 
 ## 4. REST API Specifications
-*Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
 ### 4.1 Service API Operations
 
@@ -129,10 +128,10 @@ The Block Storage is exposed in the service catalog, as shown in the following f
 |           | Delete volume snapshot  | DELETE  | {BaseUri}/os-snapshots/{snapshot_id} | Y/**N**  |  |
 
 ### 4.2 Common Request Headers
-*List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
+The common request headers are defined in the Nova Compute documentation.
 
 ### 4.3 Common Response Headers
-*List the common response headers i.e. Content-Type, Content-Length, Connection, Date, ETag, Server, etc.*
+The common response hearders are defined in the Nova Compute documentation.
 
 ### 4.4 Service API Operation Details
 *The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
@@ -239,7 +238,7 @@ JSON
 XML
 
 
-    <xml data structure here>
+    Not Supported
 
 
 **Curl Example**
@@ -384,7 +383,7 @@ Lists the block storage volumes.
 
 **URL Parameters**
 
-None.
+* *tenant_id* - The unique identifier of the tenant or account.
 
 **Data Parameters**
 
@@ -415,8 +414,7 @@ JSON
              "size":1,
              "id":4183,
              "createdAt":"2012-06-27 19:20:35",
-             "metadata":{
-             }
+             "metadata": {}
           },
           {
              "status":"available",
@@ -430,8 +428,7 @@ JSON
              "size":1,
              "id":4261,
              "createdAt":"2012-06-29 16:57:02",
-             "metadata":{
-             }
+             "metadata": {}
           }
        ]
     }
@@ -447,20 +444,24 @@ XML
 
 **Status Code**
 
-None.
+404 Not Found
 
 **Response Data**
 
 JSON
 
-
-    {JSON format here}
+    {
+        "itemNotFound": {
+            "message": "The resource could not be found.",
+            "code": 404
+        }
+    }
 
 
 XML
 
 
-    <XML format here>
+    Not Supported
 
 
 **Curl Example**
@@ -544,8 +545,7 @@ JSON
           "size":1,
           "id":4279,
           "createdAt":"2012-06-29 19:24:03",
-          "metadata":{
-          }
+          "metadata": {}
        }
     }
 
@@ -637,8 +637,7 @@ JSON
           "size":1,
           "id":4279,
           "createdAt":"2012-06-29 19:24:03",
-          "metadata":{
-          }
+          "metadata": {}
        }
     }
 
@@ -787,7 +786,8 @@ Gets the details of the block storage volume specified by {volume_id}.
 
 **URL Parameters**
 
-None.
+* *tenant_id* - The unique identifier of the tenant or account.
+* *server_id* - The identifier for the server.
 
 **Data Parameters**
 
@@ -832,14 +832,19 @@ XML
 
 **Status Code**
 
-None.
+404 Not Found
 
 **Response Data**
 
 JSON
 
 
-    JSON format here
+    {
+        "itemNotFound": {
+            "message": "The resource could not be found.",
+            "code": 404
+        }
+    }
 
 
 XML
@@ -868,7 +873,8 @@ Delete the block storage volume specified by {volume_id}.
 
 **URL Parameters**
 
-None.
+* *tenant_id* - The unique identifier of the tenant or account.
+* *server_id* - The identifier for the server.
 
 **Data Parameters**
 
@@ -888,14 +894,19 @@ This call does not return a response body.
 
 **Status Code**
 
-None.
+404 Not Found
 
 **Response Data**
 
 JSON
 
 
-    JSON format here
+    {
+        "itemNotFound": {
+            "message": "The resource could not be found.",
+            "code": 404
+        }
+    }
 
 
 XML
@@ -919,21 +930,25 @@ None.
 
 #### 4.4.3 Servers
 
-*Describe the role of the server resource with respect to the Block Storage service*
+A server is a Nova VM instance to which a volume can be attached. When a
+volume is attached to a VM, the VM can mount the volume and use it as it would
+use any block storage device.
 
 **Status Lifecycle**
 
-“creating” => “available” (after creation) => “in-use” (after attach) => “available” (after detach)
+“creating” => “available” (after creation)
+"available" => “in-use” (after attach)
+"in-use" => “available” (after detach)
 
 **Rate Limits**
 
-*Describe Rate-limits with respect to the attach and detach calls that involve servers*
+There are no specific rate limits for volume attachments or detachments.
 
 None.
 
 **Quota Limits**
 
-*Describe Quota-limits with respect block storage that involve servers*
+There are no quotas or limits specific volume attachment or detachment.
 
 None.
 
@@ -944,7 +959,7 @@ None.
 3.  A volume can only be detached when the status of the volume is “in-use”.
 4.  A volume can be attached to only one server instance.
 5.  A server can have multiple volumes attached to it.
-6.  The device name should be see valid and same device name cannot be repeated.
+6.  The device name should be valid and same device name cannot be repeated.
 7.  The device needs to be mounted on the server, before it can be used.
 
 ##### 4.4.3.1 List attached volumes for a server ##### {#list_attached_volumes}
@@ -956,7 +971,8 @@ Gets the block storage volumes attached to the server instance specified by {ser
 
 **URL Parameters**
 
-None.
+* *tenant_id* - The unique identifier of the tenant or account.
+* *server_id* - The identifier for the server.
 
 **Data Parameters**
 
@@ -995,14 +1011,19 @@ XML
 
 **Status Code**
 
-None.
+404 Not Found
 
 **Response Data**
 
 JSON
 
 
-    JSON format here
+    {
+        "itemNotFound": {
+            "message": "The resource could not be found.",
+            "code": 404
+        }
+    }
 
 
 XML
@@ -1025,13 +1046,15 @@ None.
 ##### 4.4.3.2 Attach volume to a server ##### {#attach_volume}
 ###### POST /servers/{server_id}/os-volume_attachments
 
-Attach the block storage volume specified in the request body to the server instance specified by {server_id}.
+Attach the block storage volume specified in the request body to the server instance
+specified by {server_id}.
 
 **Request Data**
 
 **URL Parameters**
 
-None.
+* *tenant_id* - The unique identifier of the tenant or account.
+* *server_id* - The identifier for the server.
 
 **Data Parameters**
 
@@ -1083,14 +1106,19 @@ XML
 
 **Status Code**
 
-None.
+400 Bad Request
 
 **Response Data**
 
 JSON
 
 
-    JSON format here
+    {
+        "badRequest": {
+            "message": "Volume status must be available",
+            "code": 400
+        }
+    }
 
 
 XML
@@ -1148,7 +1176,7 @@ JSON
             "id": 73989,
              "volumeId": 73989
         }
-    }        
+    }
 
 XML
 
