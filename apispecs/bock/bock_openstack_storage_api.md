@@ -1141,10 +1141,10 @@ None.
 
 
 
-##### 4.4.3.3 List Details for specified attachment ##### {#detach_volume}
-###### GET /servers/{server_id}/os-volume_attachments/{attachment_id}
+##### 4.4.3.3 List Details for specified attached volume ##### {#attached_volume_details}
+###### GET /servers/{server_id}/os-volume_attachments/{volume_id}
 
-Lists volume details for the specified volume attachment ID.
+Lists volume details for the specified volume ID.
 
 **Request Data**
 
