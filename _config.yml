@@ -7,18 +7,20 @@ navigation:
   main:
   - text: Getting Started
     url: /
-  - text: Compute
-    url: /compute/
-  - text: Object Storage
-    url: /object-storage/
-  - text: Block Storage
-    url: /block-storage/
   - text: Identity Services
     url: /identity/
+  - text: Object Storage
+    url: /object-storage/
+  - text: Compute
+    url: /compute/
+  - text: Block Storage
+    url: /block-storage/
   - text: Relational Database
     url: /dbaas/
   - text: Language Bindings
     url: /bindings/
+  - text: APIs
+    url: /api/
   - text: CLIs
     url: /cli/
   - text: FAQ
