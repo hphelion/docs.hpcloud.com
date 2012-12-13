@@ -52,6 +52,8 @@ When you enable CDN, the [X-CDN-URI](#x_cdn_uri_response) attribute would be a U
 `http://h1dbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com` (i.e., the CNAME `h1dbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com` has been assigned to this container). 
 
 To access the object via the HP Cloud Content Delivery Network (CDN) service, use this URL: `http://h1dbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com/mose.jpg`.
+If you prefer to use SSL (i.e., HTTPS) to acccess the object, the HP Cloud CDN service also assignes a URI to the [X-CDN-SSL-URI](#x_cdn_ssl_uri) attribute. This
+has a different format than the X-CDN-URI attribute, but is otherwise used in the same way i.e., append your object name to the URI to access it.
 
 When you CDN-enable a container, all objects in the container become public when accessed via the 
 X-CDN-URI endpoint; there are no authentication tokens or other access controls needed to give 
@@ -97,6 +99,49 @@ will stay populated on HP Cloud Content Delivery Network edge servers for
 the entire five-year period. The most popular
 objects stay cached based on the edge servers logic. 
 
+If you change the Time to Live (TTL), disable or delete a CDN-enabled container, objects
+will remain in the cache until the TTL has expired. Contact HP Cloud Support if
+you have an urgent need to purge objects from the HP Cloud Content Delivery Network.
+
+
+#### 2.2.3 Accessing Objects via the Content Data Network #### {#cdn_response}
+
+As mentioned above, when a HP Cloud Object Storage container is CDN-enabled, the URI is in the [X-CDN-URI](#x_cdn_uri_response) (HTTP)
+and [X-CDN-SSL-URI](#x_cdn_ssl_uri) (HTTPS) response headers. You can append the object name to create a URL for the object. 
+For example, if X-CDN-SSL-URI is, `https://a248.e.akamai.net/cdn.hpcloudsvc.com/hfca975d1c4bdcd674a70d36b24552607/prodaw2` and
+your object is called `mose.jpg`, URL is `https://a248.e.akamai.net/cdn.hpcloudsvc.com/hfca975d1c4bdcd674a70d36b24552607/prodaw2/mode.jpg`.
+You may embed this URL in web pages. When a browser opens this URL, it is accessing the HP Cloud Content Data Network -- not the
+underlying HP Cloud Object Storage service.
+
+When you access the object via the HP Cloud Content Data Network, the GET operation includes the following response headers:
+
+* Last-Modified. This is the date and time at which the object was last modified
+ 
+* ETag. This is the MD5sum checksum of the contents of the object. You can compare this to the
+body of the response (i.e. to the downloaded content) to verify end-to-end integrity.
+
+* Content-Length. This is the length of the object contents.
+
+* Content-Type. This is the type of content.
+
+* Cache-Control. This contains a value such as `public, max-age=86392`, where the `max-age` is the [Time to Live (TTL)](#ttl)
+of the CDN-enabled container.
+
+* Expires. If you access the object after this date and time, the HP Cloud Content Data Network will
+fetch a new
+copy from the HP Cloud Object Storage service. 
+
+The following example, shows how you could use curl to download an object from a CDN-enabled container.
+
+    curl -i http://h1dbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com/mose.jpg -X GET
+    HTTP/1.1 200 OK
+    Last-Modified: Wed, 12 Dec 2012 18:12:38 GMT
+    ETag: "d82f932e50cec6c5b2c5a502dc3840bf"
+    Content-Length: 21
+    Content-Type: text/plain; charset=UTF-8
+    Cache-Control: public, max-age=86392
+    Expires: Wed, 12 Dec 2012 18:27:48 GMT
+
 ### 2.3 Authentication ###
 
 Using the HP Cloud Identity Service API, you can authenticate yourself for a specific tenant. 
@@ -129,7 +174,7 @@ The credentials can either be:
 
 * Username and password, i.e., the same username and password they would use to log into the HP Cloud Management Console
 
-* Access Key ID and Access Key Secret. You can see your Access Keys on the API Keys section under you Account information in the HP Cloud Management Console. Access Keys are more suitable for use in APIs because you can create them for use in a specific application. However, if you suspect that an application's Access Keys have been compromised, you can delete the Access Key. This is more convenient that changing your password credentials. However, not all API bindings support Access Keys.
+* Access Key ID and Access Key Secret. You can see your Access Keys on the API Keys section under your Account information in the HP Cloud Management Console. Access Keys are more suitable for use in APIs because you can create them for use in a specific application. However, if you suspect that an application's Access Keys have been compromised, you can delete the Access Key. This is more convenient than changing your password credentials. However, not all API bindings support Access Keys.
 
 In addition, to credentials, you also specify a tenant -- either the Id or tenant Name. 
 With your credentials and tenant, the HP Cloud Identity Service checks to see whether 
@@ -155,7 +200,7 @@ URL encoded string.
 
 ### 2.5 HTTP Status Codes ### {#http_codes}
 
-The following HTTP codes are used by HP Cloud Object Storage.
+The following HTTP codes are used by HP Cloud CDN service.
 
 |Code      | Description    | Notes   |
 |:-------- | :------------  | :------ |
@@ -172,7 +217,7 @@ The following HTTP codes are used by HP Cloud Object Storage.
 
 ### 3.1 Accounts
 
-There is a one-to-one relationship between an account and the _tenant_. In fact, for most users, the HP Cloud CDN service account and tenant _Id_ are the same. There is a one-to-one correspondance between the HP Cloud CDN and Object Storage service accounts. The HP Cloud CDN service endpoint
+There is a one-to-one relationship between an account and the _tenant_. In fact, for most users, the HP Cloud CDN service account and tenant _Id_ are the same. There is a one-to-one correspondence between the HP Cloud CDN and Object Storage service accounts. The HP Cloud CDN service endpoint
 in the [Service Catalog] contains the *account* in the URL.
 
 ### 3.2 Regions and Availability Zones
@@ -270,16 +315,19 @@ This is the value of the [Time to Live (TTL)](#ttl). The value is in seconds.
 The URI of the CDN-Enabled container. Objects stored in that container are publicly
 accessible over the HP Cloud Content Data Network by combining the 
 container's CDN URI with the object name.
-See [CDN Enabled Containers](#cdn_uri) for more information.
+See [Accessing Objects via the Content Data Network](#cdn_response) for more information.
 
 #### 4.3.2 X-CDN-SSL-URI #### {#x_cdn_ssl_uri_response}
 
-If present, the SSL CDN URI of the container.
+The SSL (HTTPS) URI of the CDN-Enabled container. Objects stored in that container are publicly
+accessible over the HP Cloud Content Data Network by combining the
+container's CDN URI with the object name.
+See [Accessing Objects via the Content Data Network](#cdn_response) for more information.
 
 #### 4.3.3 X-TTL #### {x_ttl_response}
 
 The Time to Live (TTL) attribute of the CDN-enabled container. See [Time to Live (TTL)](#ttl)
-for more informaiton.
+for more information.
 
 ### 4.4 Service API Operation Details
 
@@ -308,7 +356,7 @@ Retrieve a list of existing CDN-enabled containers.
 
 There is also support for filtering the list to return only the list of containers that are
 currently CDN-enabled. Passing in a query parameter of `?enabled_only=true` will
-suppress any private containers from appearing in the list.
+suppress containers that have X-CDN-Enabled set to `False` so they will not appear appear in the list.
 
 When doing a GET request against an account or container, the service returns a maximum of 10,000 names per request. 
 To retrieve subsequent names, you must make another request with
@@ -361,9 +409,11 @@ See [HTTP Status Codes](#http_codes) for more information.
 If there are containers, their names are returned in the response body in the requested format as
 shown in the following examples. The JSON and XML formats return additional information
 about the container as follows:
-* cdn_enabled - Whether the container is currently CDN-Enabled or not.
+* cdn_enabled - Whether the container is currently CDN-Enabled or not
 * ttl - The Time to Live (TTL) for objects in the container
 * x-cdn-uri - The CDN URI you can use to access objects in the container
+* x-cdn-ssl-uri - The CDN USI you can use to access objects in the container via SSL (HTTPS)
+* log_retention - Reserved for future use
 
 Text/Plain
 
@@ -375,21 +425,27 @@ JSON
 
     {
       "name":"beets",
-      "cdn_enabled":"true",
+      "cdn_enabled":true,
       "ttl":86400,
-      "x-cdn-uri":"http://h1dbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com"
+      "x-cdn-uri":"http://h1dbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com",
+      "x-cdn-ssl-uri" : "https://a248.e.akamai.net/cdn.hpcloudsvc.com/h1dbbb5c59541c721905ae1a7a433b50c/prodaw2",
+      "log_retention":false
     },
     {
       "name":"firebird",
-      "cdn_enabled":"true",
+      "cdn_enabled":true,
       "ttl":86400,
-      "x-cdn-uri":"http://abcbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com"
+      "x-cdn-uri":"http://abcbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com",
+      "x-cdn-ssl-uri" : "https://a248.e.akamai.net/cdn.hpcloudsvc.com/abcbbb5c59541c721905ae1a7a433b50c/prodaw2",
+      "log_retention":false
     },
     {
       "name":"surveillance",
-      "cdn_enabled":"false",
+      "cdn_enabled":false,
       "ttl":1024,
-      "x-cdn-uri":"http://defbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com"
+      "x-cdn-uri":"http://defbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com",
+      "x-cdn-ssl-uri" : "https://a248.e.akamai.net/cdn.hpcloudsvc.com/defbbb5c59541c721905ae1a7a433b50c/prodaw2",
+      "log_retention":false
     }
 
 XML
@@ -401,6 +457,8 @@ XML
         <cdn_enabled>True</cdn_enabled>
         <ttl>86400</ttl>
         <x-cdn-uri>http://h1dbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com</x-cdn-uri>
+        <x-cdn-ssl-uri>https://a248.e.akamai.net/cdn.hpcloudsvc.com/h1dbbb5c59541c721905ae1a7a433b50c/prodaw2</<x-cdn-ssl-uri>
+        <log_retention>False</log_retention>
       </container>
       <container>
       <container>
@@ -408,11 +466,15 @@ XML
         <cdn_enabled>True</cdn_enabled>
         <ttl>86400</ttl>
         <x-cdn-uri>http://abcbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com</x-cdn-uri>
+        <x-cdn-ssl-uri>https://a248.e.akamai.net/cdn.hpcloudsvc.com/abcbbb5c59541c721905ae1a7a433b50c/prodaw2</x-cdn-ssl-uri>
+        <log_retention>False</log_retention>
       </container>
         <name>surveillance</name>
         <cdn_enabled>False</cdn_enabled>
         <ttl>1024</ttl>
         <x-cdn-uri>http://defbbb5c59541c721905ae1a7a433b50c.cdn.hpcloudsvc.com</x-cdn-uri>
+        <x-cdn-ssl-uri>https://a248.e.akamai.net/cdn.hpcloudsvc.com/defbbb5c59541c721905ae1a7a433b50c/prodaw2</x-cdn-ssl-uri>
+        <log_retention>False</log_retention>
       </container>
     </account>
 
@@ -506,6 +568,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 The following response headers are returned:
 
 * [X-CDN-URI](#x_cdn_uri_response) - The URI for the CDN-Enabled container
+* [X-CDN-SSL-URI](#x_cdn_ssl_uri_response) - The SSL (HTTPS) URI for the CDN-Enabled container
 
 No response body is returned.
 
@@ -563,8 +626,8 @@ See [HTTP Status Codes](#http_codes) for more information.
 The following response headers are returned:
 
 * [X-CDN-URI](#x_cdn_uri_response) - The URI for the CDN-Enabled container
+* [X-CDN-SSL-URI](#x_cdn_ssl_uri_response) - The SSL (HTTPS) URI for the CDN-Enabled container
 * [X-TTL](#x_ttl_response) - The Time to Live (TTL) value
-* [X-CDN-SSL-URI](#x_cdn_ssl_uri_response) - If present, the SSL CDN URI of the container.
 
 No response body is returned.
 
@@ -612,6 +675,7 @@ If you have content currently cached
 in the HP Cloud Content Delivery Network, disabling your container 
 or changing the Time to Live (TTL) attribute will *not* purge the CDN cache; you will
 have to wait for the original TTL to expire.
+Contact HP Cloud Support if you urgently need to purge the CDN cache.
 
 **Request Data**
 
@@ -644,7 +708,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 The following response headers are returned:
 
 * [X-CDN-Uri](#x_cdn_uri_response) - The URI for the CDN-Enabled container
-* [X-CDN-SSL-URI](#x_cdn_ssl_uri_response) - If present, the SSL CDN URI of the container.
+* [X-CDN-SSL-URI](#x_cdn_ssl_uri_response) - The SSL (HTTPS) URI for the CDN-Enabled container
 
 No response body is returned.
 
@@ -678,8 +742,9 @@ containers. Use this operation when you do not expect to CDN-enable the containe
 Instead if you anticipate CND-enabling the container, you can temporarily disable it with the
 [Update CDN Metadata](#container_post) operation.
 
-When you delete a CDN-enabled container, the operation will only take affect on any content
+When you delete a CDN-enabled container, the operation will only take effect on any content
 cached by the HP Cloud Content Delivery Network when the [Time to Live (TTL)](#ttl) has expired.
+Contact HP Cloud Support if you urgently need to purge the CDN cache.
 
 This operation does not delete the underlying container in the HP Cloud
 Object Storage service.
