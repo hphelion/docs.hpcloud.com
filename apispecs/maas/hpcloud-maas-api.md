@@ -529,6 +529,7 @@ JSON
 
 	{
 	  "notification_method": {
+	    "name": "Joe's Email",
 	    "type": "EMAIL",
 	    "address": "joe@mail.com"
 	  }
@@ -553,6 +554,7 @@ JSON
 	        "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
 	      }
 	    ],
+	    "name": "Joe's Email",
 	    "type": "EMAIL",
 	    "address": "joe@mail.com"
 	  }
@@ -610,7 +612,8 @@ JSON
 	          "rel": "self",
 	          "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	        }
-	      ],	      
+	      ],
+	      "name": "Joe's Email",
 	      "type": "EMAIL",
 	      "address": "joe@mail.com"
 	    },
@@ -622,6 +625,7 @@ JSON
 	          "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
 	        }
 	      ],
+	      "name": "Joe's Phone",
 	      "type": "PHONE",
 	      "address": "12063823454"
 	    }
@@ -679,6 +683,7 @@ JSON
 	        "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	      }
 	    ],
+	    "name": "Joe's Email",
 	    "type": "EMAIL",
 	    "address": "joe@mail.com"
 	  }
