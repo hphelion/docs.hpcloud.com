@@ -1,0 +1,13 @@
+<aside class="box section-navigation">
+  <ul>
+    {% for link in site.apinavigation %}
+      {% assign current = nil %}
+      {% if page.permalink == link.url %}
+        {% assign current = 'highlighted' %}
+      {% endif %}
+      <li>
+        <a class="{{ current }}" href="{{ link.url }}"><span>{{ link.text }}</span></a>
+      </li>
+    {% endfor %}
+  </ul>
+</aside>
