@@ -59,15 +59,15 @@ Additionally there are some commands that should rarely be used if at all:
 
 Before using this project you need the following dependencies installed. Some of these are for deployments while others are used for the build package or managing sub-projects.
 
-* Make
-* Java
-* [Jekyll](jekyllrb.com)
-* [jekyll_ext (a.k.a ejekyll)](https://github.com/rfelix/jekyll_ext)
-* Git
-* Git Subtree
-* Docutils - Note, with pip or with easy_install. On linux don't use the apt version.
-* [RbST](http://rubygems.org/gems/RbST)
-* PHP5 (just the CLI portion - already on mac and `apt-get install php5-cli` on linux)
+* Make (If you are on a Mac, install XCode via the App Store, then follow [these instructions on installing the XCode command line tools](http://slashusr.wordpress.com/2012/07/27/os-x-mountain-lion-need-to-reinstall-xcode-command-line-tools/)}.
+* Java runtime
+* [Jekyll](jekyllrb.com) (Easist is to install using the gem package: `gem install jekyll`.)
+* [jekyll_ext (a.k.a ejekyll)](https://github.com/rfelix/jekyll_ext)  (Easiest to install using the gem package: `gem install jekyll_ext`.)
+* Git  (Easiest is to install using [Homebrew](http://mxcl.github.com/homebrew/): `brew install git`.)
+* Git Subtree  (From the command line just `cd /usr/local/share/git-core/contrib/' and then run `make`.)
+* Docutils - **Note**:  If you have installed Pyton, install using `easy_install` or [pip](http://www.pip-installer.org/en/latest/index.html): `sudo pip install docutils`.  On Linux don't use the apt version.
+* [RbST](http://rubygems.org/gems/RbST)  (Easiest is to install using the gem package:  `gem install RbST'.)
+* PHP5 (just the CLI portion - already on Mac and `apt-get install php5-cli` on linux)
 * For deployments you need the [stackato client](https://api.stackato-prod-1-az2.devex.uswest.hpcloud.net/console/client/).
 
 ## Notes
