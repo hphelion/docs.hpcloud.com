@@ -13,7 +13,7 @@ product: block-storage
 ## 1. Overview
 
 This document describes the Block Storage Service for Nova. The service
-provides Virtual Block devices for virtual machines executing in Nova.
+provides persistent block devices for virtual machines executing in Nova.
 Bock volumes can store boot images, user data or both.
 
 ### 1.1 API Maturity Level
@@ -54,7 +54,7 @@ See the Overview above for details of the entities involved in the API.
 
 ### 3.1 Accounts
 
-The volumes API is an extension to the existing nova-volumes API and as such,
+The volumes API is an extension to the existing Nova API and as such,
 requires no additional user accounts.
 
 
@@ -100,6 +100,14 @@ The Block Storage is exposed in the service catalog, as shown in the following f
           ]
     }
 
+### 3.4 Faults
+
+When an error occurs at request time, the system will return an HTTP error
+response code denoting the type of error. The system will also return
+additional information about the fault in the body of the response.
+
+The error codes and error messages returned are dscribed in the Nova Compute
+documentation.
 
 ## 4. REST API Specifications
 
@@ -221,38 +229,15 @@ XML
     Not Supported.
 
 
-**Error Response**
-
-**Status Code**
-
-500 - Internal Server Error
-
-**Response Data**
-
-JSON
-
-    
-    {"cloudServersFault": {"message": "Server Error, please try again later.", "code": 500}}
-
-
-XML
-
-
-    Not Supported
-
-
 **Curl Example**
 
 
     curl -i -H "X-Auth-Token: {Auth_Token}" {BaseUri}/v1.1/
 
 
-**Additional Notes**
-
-None.
 
 
-##### 4.4.1.2 List Versions ##### {#list_versions}
+##### 4.4.1.2 List Versions
 ###### GET /
 
 *The versions schema, status field, supports an enumeration of ALPHA, BETA, CURRENT and DEPRECATED. The versions->status field should correspond to the Maturity Level for the API, i.e. ALPHA for Experimental, BETA for Exploratory, CURRENT for Public and GA, DEPRECATED for all other versions of the API that are not supported anymore.*
@@ -312,40 +297,19 @@ XML
     Not Supported.
 
 
-**Error Response**
-
-**Status Code**
-
-None.
-
-**Response Data**
-
-JSON
-
-
-    {JSON format here}
-
-
-XML
-
-
-    <XML format here>
-
-
-
 **Curl Example**
 
     curl -i -H "X-Auth-Token: {Auth_Token}" {BaseUri}/
 
 
-**Additional Notes**
-
-None.
 
 
 
 #### 4.4.2 Volumes
-*Describe volumes and how they relate to the overall Compute API.*
+
+A *Volume* represents a persistent block storage device, which can be attached 
+to a Nova virtual machine. Then it can be mounted on the virtual machine and
+used as a standard block device.
 
 **Status Lifecycle**
 
@@ -371,10 +335,14 @@ The quota as configured for the tenant governs the size of the volume that can b
 
 **Business Rules**
 
-1. When creating a volume from an exsiting snapshot, passing in a size in the create volume call has no effect. The size of the snapshot is use to create the new volume. Currently, if you use the nova api, you have to specify a size. What will actually happen is that the size you specify will be recorded in
-the database and used for describe and quota operations, but the actual bock volume will be the same size as the origin volume. This is a bug.
+When creating a volume from an existing snapshot, passing in a size in the
+create volume call has no effect. The size of the snapshot is use to create
+the new volume. Currently, if you use the nova api, you have to specify a
+size. What will actually happen is that the size you specify will be recorded
+in the database and used for describe and quota operations, but the actual
+bock volume will be the same size as the origin volume. This is a bug.
 
-##### 4.4.2.1 List Volumes ##### {#list_volumes}
+##### 4.4.2.1 List Volumes
 ###### GET /os-volumes
 
 Lists the block storage volumes.
@@ -440,30 +408,6 @@ XML
     Not Supported.
 
 
-**Error Response**
-
-**Status Code**
-
-404 Not Found
-
-**Response Data**
-
-JSON
-
-    {
-        "itemNotFound": {
-            "message": "The resource could not be found.",
-            "code": 404
-        }
-    }
-
-
-XML
-
-
-    Not Supported
-
-
 **Curl Example**
 
 
@@ -471,12 +415,9 @@ XML
                {BaseUri}/v1.1/{tenant_id}/os-volumes
 
 
-**Additional Notes**
-
-None.
 
 
-##### 4.4.2.2 Create new volume ##### {#create_new_volume}
+##### 4.4.2.2 Create new volume
 ###### POST /os-volumes
 
 Create a new block storage volume of a given size. If the snapshot_id attribute is not null then the volume created is a copy of the specified snapshot. If the imageRef parameter is not null then a bootable volume is created. The attribute 'availabilityZone' does not correspond to HP Cloud availability zones.
@@ -556,26 +497,6 @@ XML
     Not Supported.
 
 
-**Error Response**
-
-**Status Code**
-
-None.
-
-**Response Data**
-
-JSON
-
-
-    JSON format here
-
-
-XML
-
-
-    Not Supported.
-
-
 **Curl Example**
 
 
@@ -640,26 +561,6 @@ JSON
           "metadata": {}
        }
     }
-
-
-XML
-
-
-    Not Supported.
-
-
-**Error Response**
-
-**Status Code**
-
-None.
-
-**Response Data**
-
-JSON
-
-
-    JSON format here
 
 
 XML
@@ -744,26 +645,6 @@ XML
     Not Supported.
 
 
-**Error Response**
-
-**Status Code**
-
-None.
-
-**Response Data**
-
-JSON
-
-
-    JSON format here
-
-
-XML
-
-
-    Not Supported.
-
-
 **Curl Example**
 
     curl -i -H "X-Auth-Token: {Auth_Token}" \
@@ -772,12 +653,9 @@ XML
        -X POST -d '{"volume": {"size": "1", "display_name": "Test Volume","display_description": "Test Volume desc", "metadata":{"VolMeta" : "VolMetaValue"}}}'
 
 
-**Additional Notes**
-
-None.
 
 
-##### 4.4.2.3 Get Volume details ##### {#get_volume_details}
+##### 4.4.2.3 Get Volume details
 ###### GET /os-volumes/{volume_id}
 
 Gets the details of the block storage volume specified by {volume_id}.
@@ -787,7 +665,7 @@ Gets the details of the block storage volume specified by {volume_id}.
 **URL Parameters**
 
 * *tenant_id* - The unique identifier of the tenant or account.
-* *server_id* - The identifier for the server.
+* *volume_id* - The identifier for the volume.
 
 **Data Parameters**
 
@@ -828,31 +706,6 @@ XML
     Not Supported.
 
 
-**Error Response**
-
-**Status Code**
-
-404 Not Found
-
-**Response Data**
-
-JSON
-
-
-    {
-        "itemNotFound": {
-            "message": "The resource could not be found.",
-            "code": 404
-        }
-    }
-
-
-XML
-
-
-    Not Supported.
-
-
 **Curl Example**
 
 
@@ -860,11 +713,8 @@ XML
             {BaseUri}/v1.1/{tenant_id}/os-volumes/{volume_id}
 
 
-**Additional Notes**
 
-None.
-
-##### 4.4.2.4 Delete Volume ##### {#delete_volume}
+##### 4.4.2.4 Delete Volume
 ###### DELETE /os-volumes/{volume_id}
 
 Delete the block storage volume specified by {volume_id}.
@@ -874,7 +724,7 @@ Delete the block storage volume specified by {volume_id}.
 **URL Parameters**
 
 * *tenant_id* - The unique identifier of the tenant or account.
-* *server_id* - The identifier for the server.
+* *volume_id* - The identifier for the volume.
 
 **Data Parameters**
 
@@ -890,31 +740,6 @@ This call does not require a request body.
 
 This call does not return a response body.
 
-**Error Response**
-
-**Status Code**
-
-404 Not Found
-
-**Response Data**
-
-JSON
-
-
-    {
-        "itemNotFound": {
-            "message": "The resource could not be found.",
-            "code": 404
-        }
-    }
-
-
-XML
-
-
-    Not Supported.
-
-
 **Curl Example**
 
 
@@ -922,9 +747,6 @@ XML
             {BaseUri}/v1.1/{tenant_id}/os-volumes/{volume_id} -X DELETE
 
 
-**Additional Notes**
-
-None.
 
 
 
@@ -962,7 +784,7 @@ None.
 6.  The device name should be valid and same device name cannot be repeated.
 7.  The device needs to be mounted on the server, before it can be used.
 
-##### 4.4.3.1 List attached volumes for a server ##### {#list_attached_volumes}
+##### 4.4.3.1 List attached volumes for a server
 ###### GET /servers/{server_id}/os-volume_attachments
 
 Gets the block storage volumes attached to the server instance specified by {server_id}.
@@ -1007,31 +829,6 @@ XML
     Not Supported.
 
 
-**Error Response**
-
-**Status Code**
-
-404 Not Found
-
-**Response Data**
-
-JSON
-
-
-    {
-        "itemNotFound": {
-            "message": "The resource could not be found.",
-            "code": 404
-        }
-    }
-
-
-XML
-
-
-    Not Supported.
-
-
 **Curl Example**
 
 
@@ -1039,11 +836,8 @@ XML
             {BaseUri}/v1.1/{tenant_id}/servers/{server_id}/os-volume_attachments
 
 
-**Additional Notes**
 
-None.
-
-##### 4.4.3.2 Attach volume to a server ##### {#attach_volume}
+##### 4.4.3.2 Attach volume to a server
 ###### POST /servers/{server_id}/os-volume_attachments
 
 Attach the block storage volume specified in the request body to the server instance
@@ -1102,31 +896,6 @@ XML
     Not Supported.
 
 
-**Error Response**
-
-**Status Code**
-
-400 Bad Request
-
-**Response Data**
-
-JSON
-
-
-    {
-        "badRequest": {
-            "message": "Volume status must be available",
-            "code": 400
-        }
-    }
-
-
-XML
-
-
-    Not Supported.
-
-
 **Curl Example**
 
 
@@ -1135,13 +904,10 @@ XML
             -X POST -d '{"volumeAttachment": {"volumeId": "5825","device": "/dev/sdf"}}'
 
 
-**Additional Notes**
-
-None.
 
 
 
-##### 4.4.3.3 List Details for specified attached volume ##### {#attached_volume_details}
+##### 4.4.3.3 List Details for specified attached volume
 ###### GET /servers/{server_id}/os-volume_attachments/{volume_id}
 
 Lists volume details for the specified volume ID.
@@ -1182,31 +948,6 @@ XML
 
     Not supported
 
-**Error Response**
-
-**Status Code**
-
-404 Not Found
-
-**Response Data**
-
-JSON
-
-
-    {
-        "itemNotFound": {
-            "message": "The resource could not be found.",
-            "code": 404
-        }
-    }
-
-
-XML
-
-
-    Not Supported.
-
-
 **Curl Example**
 
 
@@ -1215,11 +956,8 @@ XML
             os-volume_attachments/{volume_id}
 
 
-**Additional Notes**
 
-None.
-
-##### 4.4.3.4 Detach volume from a server ##### {#detach_volume}
+##### 4.4.3.4 Detach volume from a server
 ###### DELETE /servers/{server_id}/os-volume_attachments/{volume_id}
 
 Detach the block storage volume specified by {volume_id} from the server instance specified by {server_id}.
@@ -1248,26 +986,6 @@ None.
 
 This call does not return a response body.
 
-**Error Response**
-
-**Status Code**
-
-None.
-
-**Response Data**
-
-JSON
-
-
-    JSON format here
-
-
-XML
-
-
-    Not Supported.
-
-
 **Curl Example**
 
 
@@ -1276,9 +994,6 @@ XML
             -X DELETE
 
 
-**Additional Notes**
-
-None.
 
 
 
@@ -1307,7 +1022,7 @@ you can delete the snapshot and continue to work with the volume.
 
 You can not create a snapshot that is attached to a server.
 
-##### 4.4.4.1 List Snapshots ##### {#list_snapshots}
+##### 4.4.4.1 List Snapshots
 ##### GET /os-snapshots
 
 List all snapshots.
@@ -1359,38 +1074,14 @@ XML
 
     Not Supported.
 
-**Error Response**
-
-**Status Code**
-
-500 - Internal Server Error
-
-**Response Data**
-
-JSON
-
-    {
-        "cloudServersFault": {
-            "message": "Server Error, please try again later.",
-            "code": 500
-        }
-    }
-
-XML
-
-_Not supported._
-
 **Curl Example**
 
     curl -i -H "X-Auth-Token: <Auth_Token>" \
                 {BaseUri}/v1.1/{tenant_id}/os-snapshots
 
-**Additional Notes**
-
-None.
 
 
-##### 4.4.4.2 Create Snapshot ##### {#create_snapshot}
+##### 4.4.4.2 Create Snapshot
 ##### POST /os-snapshots
 
 Create a snapshot from a specified volume.
@@ -1448,38 +1139,6 @@ XML
 
     Not Supported.
 
-**Error Response**
-
-**Status Code**
-
-500 - Internal Server Error
-
-**Response Data**
-
-JSON
-
-    {
-        "cloudServersFault": {
-            "message": "Server Error, please try again later.",
-            "code": 500
-        }
-    }
-
-XML
-
-_Not supported._
-
-404 - Not Found
-
-JSON
-
-    {
-        "itemNotFound": {
-            "message": "Volume 18819 could not be found.", 
-            code": 404
-        }
-    }
-
 **Curl Example**
 
     curl -i -H "X-Auth-Token: <Auth_Token>" \
@@ -1491,11 +1150,8 @@ JSON
                                 "volume_id": 18818}}' \
             -H "Content-Type: application/json; charset=UTF-8"
 
-**Additional Notes**
 
-None.
-
-##### 4.4.4.3 View information about a single snapshot ##### {#view_snapshot}
+##### 4.4.4.3 View information about a single snapshot
 ##### GET /os-snapshots
 
 View all information about a single snapshot.
@@ -1537,38 +1193,14 @@ XML
 
     Not Supported.
 
-**Error Response**
-
-**Status Code**
-
-500 - Internal Server Error
-
-**Response Data**
-
-JSON
-
-    {
-        "cloudServersFault": {
-            "message": "Server Error, please try again later.",
-            "code": 500
-        }
-    }
-
-XML
-
-_Not supported._
-
 **Curl Example**
 
     curl -i -H "X-Auth-Token: <Auth_Token>" \
                 {BaseUri}/v1.1/{tenant_id}/os-snapshots/{snapshot_id}
 
-**Additional Notes**
-
-None.
 
 
-##### 4.4.4.4 Delete a snapshot ##### {#delete_snapshot}
+##### 4.4.4.4 Delete a snapshot
 ##### DELETE /os-snapshots
 
 Delete a single snapshot.
@@ -1594,35 +1226,11 @@ This call does not require a request body.
 
 This operation does not return a response body.
 
-**Error Response**
-
-**Status Code**
-
-500 - Internal Server Error
-
-**Response Data**
-
-JSON
-
-    {
-        "cloudServersFault": {
-            "message": "Server Error, please try again later.",
-            "code": 500
-        }
-    }
-
-XML
-
-_Not supported._
-
 **Curl Example**
 
     curl -i -H "X-Auth-Token: <Auth_Token>" -X DELETE \
                 {BaseUri}/v1.1/{tenant_id}/os-snapshots/{snapshot_id}
 
-**Additional Notes**
-
-None.
 
 
 
