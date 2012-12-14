@@ -889,11 +889,7 @@ JSON
 	      },
 	      "operator": "GTE",
 	      "threshold": "90",
-	      "state": "OK",
-	      "alarm_actions": [
-	        "036609b0-3d6b-11e2-a25f-0800200c9a66",
-	        "1221dba0-3d6b-11e2-a25f-0800200c9a66"
-	      ]
+	      "state": "OK"
 	    }
 	  ]
 	}
