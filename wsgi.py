@@ -8,6 +8,7 @@ lookup['/file/hpcloud-1.0.1.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.co
 lookup['/file/hpcloud-1.1.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/v1.1.0/hpcloud-1.1.0.gem'
 lookup['/file/hpcloud-1.2.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/v1.2.0/hpcloud-1.2.0.gem'
 lookup['/file/hpcloud-1.3.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/v1.3.0/hpcloud-1.3.0.gem'
+lookup['/file/hpcloud-1.4.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/v1.4.0/hpcloud-1.4.0.gem'
 lookup['/file/hpcloud.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpcloud-0.0.15.gem'
 lookup['/file/hpcloud.tar'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpcloud_5.tar'
 lookup['/file/hpfog-0.0.16.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog-0.0.16.gem'
