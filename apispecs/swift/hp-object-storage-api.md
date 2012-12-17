@@ -290,7 +290,7 @@ The credentials can either be:
 
 * Access Key ID and Access Key Secret. You can see your Access Keys on the *API Keys* section under you *Account* information in the HP Cloud Management Console.
 Access Keys are more suitable for use in APIs because you can create them for use in a specific application. However, if you suspect that an application's Access Keys
-have been compromised, you can delete the Access Key. This is more convenient that changing your password credentials. However, not all API bindings support Access Keys.
+have been compromised, you can delete the Access Key. This is more convenient than changing your password credentials. However, not all API bindings support Access Keys.
 
 In addition, to credentials, you also specify a tenant -- either the Id or tenant Name. With your credentials and tenant, the HP Cloud Identity Service checks to see
 whether you have activated the HP Cloud Object Storage service. If so, it returns an authentication token and the endpoints to all instances of the HP Cloud Object Storage service that you are activated for. See [Service Catalog](#service_catalog) for an example of how the authentication token and endpoints are returned.
@@ -537,13 +537,13 @@ the HP Cloud Management Console.
 
 #### 2.6.7 Signature Based Authentication #### {#signature_auth}
 
-Signature based authentication provides an alternate way of authenticating your request. Normally, you obtain a token from the HP Cloud Identity service and include the token in the  X-Auth-Token header. With signature based authentication you use an Access Key to “sign” a request. The resulting signature is then included in the Authorization header (instead of X-Auth-Token).
+Signature based authentication provides an alternate way of authenticating your request. Normally, you obtain a token from the HP Cloud Identity service and include the token in the  X-Auth-Token header. With signature based authentication you use an Access Key to "sign" a request. The resulting signature is then included in the Authorization header (instead of X-Auth-Token).
 
 ##### 2.6.7.1 Creating a Signature for the Authorization Header
 
 To create a signature you need a Tenant Id and Access Key. You can see your Tenant Id and Access Keys by accessing the API Keys section of the HP Cloud Management Console. You may create additional Access Keys. You may also delete Access Keys. This can be used if you suspect that an Access Key has been compromised. When you delete an Access Key, signature based authentication requests that were signed using the deleted Access Key will fail.
 
-An Access Key has two parts – an Access Key ID and a Secret Key. As you can see below, the Access Key ID appears in the Authorization header. However, the Secret Key does not. Obviously, you should only reveal the Secret Key to trusted parties.
+An Access Key has two parts - an Access Key ID and a Secret Key. As you can see below, the Access Key ID appears in the Authorization header. However, the Secret Key does not. Obviously, you should only reveal the Secret Key to trusted parties.
 
 The value for the Authorization header is constructed as follows:
 
@@ -670,48 +670,48 @@ In this example, we will use the slash ('/') character as the delimiter.
 
 Here is a full listing of the container in plain text:
 
-	GET /v1/12345678912345/test_container
-	X-Container-Object-Count: 7
-	
-	dir1/obj1
-	dir2/dir3/obj2
-	dir2/dir3/obj3
-	dir4/obj4
-	dir4/obj5
-	obj6
-	obj7
+    GET /v1/12345678912345/test_container
+    X-Container-Object-Count: 7
+
+    dir1/obj1
+    dir2/dir3/obj2
+    dir2/dir3/obj3
+    dir4/obj4
+    dir4/obj5
+    obj6
+    obj7
 
 
 Notice that there are 7 objects. The first object has a name of `dir1/obj1` -- not `obj1`, i.e., the name contains the hierarchical structure.
 
 By adding the `format=json` query parameter, we can see the objects in more detail.
 
-	GET /v1/12345678912345/test_container?format=json
-	X-Container-Object-Count: 7
+    GET /v1/12345678912345/test_container?format=json
+    X-Container-Object-Count: 7
 
-	[
-	  {"name":"dir1/obj1","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:18:09.788760"},
-	  {"name":"dir2/dir3/obj2","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:40:48.596260"},
-	  {"name":"dir2/dir3/obj3","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:04.902890"},
-	  {"name":"dir4/obj4","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:20.756000"},
-	  {"name":"dir4/obj5","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:42:49.804350"},
-	  {"name":"obj6","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:26.524310"},
-	  {"name":"obj7","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:33.865370"}
-	]
+    [
+        {"name":"dir1/obj1","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:18:09.788760"},
+        {"name":"dir2/dir3/obj2","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:40:48.596260"},
+        {"name":"dir2/dir3/obj3","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:04.902890"},
+        {"name":"dir4/obj4","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:20.756000"},
+        {"name":"dir4/obj5","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:42:49.804350"},
+        {"name":"obj6","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:26.524310"},
+        {"name":"obj7","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:33.865370"}
+    ]
 
 
 To list only the objects in the first "level" of our pseudo hierarchy, we can use the `delimiter=/` query parameter as follows:
 
-	GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&delimiter=/
-	X-Container-Object-Count: 7
+    GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&delimiter=/
+    X-Container-Object-Count: 7
 
-	[
-	  {"subdir":"dir1/"},
-	  {"subdir":"dir2/"},
-	  {"subdir":"dir4/"},
-	  {"name":"obj6","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:26.524310"},
-	  {"name":"obj7","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:33.865370"}
-	]
+    [
+        {"subdir":"dir1/"},
+        {"subdir":"dir2/"},
+        {"subdir":"dir4/"},
+        {"name":"obj6","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:26.524310"},
+        {"name":"obj7","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:33.865370"}
+    ]
 
 
 The effect of delimiter is to examine all object names up to the `/` character and to collapse all common or duplicate elements. Where common/duplicate name parts are found,
@@ -721,23 +721,23 @@ elements are *not* objects -- an attempt to `GET /v1/12345678912345/test_contain
 To descend into one of the "directories", we use the `prefix` query parameter as follows. Note the shash ("/") at the end of the prefix:
 
 
-	GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&delimiter=/&prefix=dir2/
-	X-Container-Object-Count: 7
-	
-	[
-	  {"subdir":"dir2/dir3/"}
-	]
+    GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&delimiter=/&prefix=dir2/
+    X-Container-Object-Count: 7
+
+    [
+        {"subdir":"dir2/dir3/"}
+    ]
 
 
 Descending further, we add `dir3/` to the `prefix` as follows:
 
-	GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&delimiter=/&prefix=dir2/dir3
-	X-Container-Object-Count: 7
-	
-	[
-	  {"name":"dir2/dir3/obj2","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:40:48.596260"},
-	  {"name":"dir2/dir3/obj3","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:04.902890"}
-	]
+    GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&delimiter=/&prefix=dir2/dir3
+    X-Container-Object-Count: 7
+
+    [
+        {"name":"dir2/dir3/obj2","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:40:48.596260"},
+        {"name":"dir2/dir3/obj3","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:04.902890"}
+    ]
 
 
 #### 2.9.2 Using path query parameter
@@ -750,49 +750,49 @@ with a [Content-Type](#content_type_request) of `application/directory`.
 If we do this for each of the "directories" in the [prefix/delimiter](#prefix_delimiter) example, and then
 list the contents of the container, we get:
 
-	GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json
-	X-Container-Object-Count: 11
+    GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json
+    X-Container-Object-Count: 11
 
-	[
-	  {"name":"dir1/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:45:47.669580"},
-	  {"name":"dir1/obj1","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:18:09.788760"},
-	  {"name":"dir2/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:46:14.239280"},
-	  {"name":"dir2/dir3/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:46:14.239280"},
-	  {"name":"dir2/dir3/obj2","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:40:48.596260"},
-	  {"name":"dir2/dir3/obj3","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:04.902890"},
-	  {"name":"dir4/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:46:41.420930"},
-	  {"name":"dir4/obj4","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:20.756000"},
-	  {"name":"dir4/obj5","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:42:49.804350"},
-	  {"name":"obj6","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:26.524310"},
-	  {"name":"obj7","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:33.865370"}
-	]
+    [
+        {"name":"dir1/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:45:47.669580"},
+        {"name":"dir1/obj1","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:18:09.788760"},
+        {"name":"dir2/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:46:14.239280"},
+        {"name":"dir2/dir3/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:46:14.239280"},
+        {"name":"dir2/dir3/obj2","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:40:48.596260"},
+        {"name":"dir2/dir3/obj3","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:04.902890"},
+        {"name":"dir4/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:46:41.420930"},
+        {"name":"dir4/obj4","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:20.756000"},
+        {"name":"dir4/obj5","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:42:49.804350"},
+        {"name":"obj6","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:26.524310"},
+        {"name":"obj7","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:33.865370"}
+    ]
 
 
 Now `dir1/`, `dir2/`, `dir2/dir3/`, and `dir4/` are real objects. The [X-Container-Object-Count](#x_container_object_count_response) response header now shows 10 objects in the system.
 
 Here we query to top level of the container (where path is empty sting):
 
-	GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&path=
-	X-Container-Object-Count: 11
+    GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&path=
+    X-Container-Object-Count: 11
 
-	[
-	  {"name":"dir1/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:45:47.669580"},
-	  {"name":"dir2/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:45:47.669580"},
-	  {"name":"dir4/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:46:41.420930"},
-	  {"name":"obj6","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:26.524310"},
-	  {"name":"obj7","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:33.865370"}
-	]
+    [
+        {"name":"dir1/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:45:47.669580"},
+        {"name":"dir2/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:45:47.669580"},
+        {"name":"dir4/","hash":"d41d8cd98f00b204e9800998ecf8427e","bytes":0,"content_type":"application/directory", "last_modified":"2012-11-22T16:46:41.420930"},
+        {"name":"obj6","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:26.524310"},
+        {"name":"obj7","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:19:33.865370"}
+    ]
 
 
 Here we descend into `dir4/`:
 
-	GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&path=dir4
-	X-Container-Object-Count: 10
-	
-	[
-	  {"name":"dir4/obj4","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:20.756000"},
-	  {"name":"dir4/obj5","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:42:49.804350"}
-	]
+    GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&path=dir4
+    X-Container-Object-Count: 10
+
+    [
+        {"name":"dir4/obj4","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:41:20.756000"},
+        {"name":"dir4/obj5","hash":"b917968b8ad501a40af22c0bf4d83ee0","bytes":377,"content_type":"application/octet-stream", "last_modified":"2012-11-22T15:42:49.804350"}
+    ]
 
 
 Notice that path was set to `dir4`. It could also have been set to `dir4/` -- the effect is the same.
@@ -874,29 +874,29 @@ response headers.
 
 
 
-	$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/image-segments/world-seg-1 -X PUT -T world-seg.1
-	HTTP/1.1 201 Created
-	Content-Length: 100
-	Content-Type: application/octet-stream
-	Etag: 9eee6548e45382ffa8f93d574d35274f
-	
-	$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/image-segments/world-seg-2 -X PUT -T world-seg.2
-	HTTP/1.1 201 Created
-	Content-Length: 200
-	Content-Type: application/octet-stream
-	Etag: 318ea6d6a0aa0567246f2de90c470fcd
-	
-	$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/images/maps/world.jpg -X PUT -H 'content-length: 0' -H 'x-object-manifest: image-segments/world-seg-' -H 'content-type: image/jpeg'
-	HTTP/1.1 201 Created
-	
-	$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/images/maps/world.jpg -X GET
-	HTTP/1.1 200 OK
-	X-Object-Manifest: image-segments/world-seg-
-	Content-Type: image/jpeg
-	Content-Length: 300
-	ETag: "4e12eb0effb78728966205d154967a67"
-	
-	[ .. ]
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/image-segments/world-seg-1 -X PUT -T world-seg.1
+    HTTP/1.1 201 Created
+    Content-Length: 100
+    Content-Type: application/octet-stream
+    Etag: 9eee6548e45382ffa8f93d574d35274f
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/image-segments/world-seg-2 -X PUT -T world-seg.2
+    HTTP/1.1 201 Created
+    Content-Length: 200
+    Content-Type: application/octet-stream
+    Etag: 318ea6d6a0aa0567246f2de90c470fcd
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/images/maps/world.jpg -X PUT -H 'content-length: 0' -H 'x-object-manifest: image-segments/world-seg-' -H 'content-type: image/jpeg'
+    HTTP/1.1 201 Created
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/images/maps/world.jpg -X GET
+    HTTP/1.1 200 OK
+    X-Object-Manifest: image-segments/world-seg-
+    Content-Type: image/jpeg
+    Content-Length: 300
+    ETag: "4e12eb0effb78728966205d154967a67"
+
+    [ .. ]
 
 
 
@@ -947,11 +947,11 @@ In the example, the content-encoding header is assigned with an
 attachment type that indicates how the file should be downloaded:
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/vid -X PUT -T vid -H 'Content-Type: video/mp4' -H 'Content-Encoding: gzip'
-	HTTP/1.1 201 Created
-	ETag: 4281c348eaf83e70ddce0e07221c3d28
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/vid -X PUT -T vid -H 'Content-Type: video/mp4' -H 'Content-Encoding: gzip'
+    HTTP/1.1 201 Created
+    ETag: 4281c348eaf83e70ddce0e07221c3d28
 
-           
+
 
 ### 2.15 Enabling Browser Bypass with the Content-Disposition Header ###(#content_disposition_header)
 
@@ -963,9 +963,9 @@ In the example, the content-encoding header is assigned with an
 attachment type that indicates how the file should be downloaded.
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/image.tif -X PUT -T image1.tif -H 'Content-Type: image/tiff' -H 'Content-Disposition: attachment; filename=image.tif'
-	HTTP/1.1 201 Created
-	ETag: 4281c348eaf83e70ddce0e07221c3d28
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/image.tif -X PUT -T image1.tif -H 'Content-Type: image/tiff' -H 'Content-Disposition: attachment; filename=image.tif'
+    HTTP/1.1 201 Created
+    ETag: 4281c348eaf83e70ddce0e07221c3d28
 
 
 ### 2.16 Container Synchronization
@@ -1011,7 +1011,7 @@ So far, the discussion has been about synchronizing between a source and destina
 * Two or more source containers could copy data to a single destination
 
 
-#### 2.16.2 Configuring Containers to Synchronize #### {#container_sync_request}
+#### 2.16.2 Configuring Containers to Synchronize #### {#container_sync}
 
 This section describes how to set up synchronization between a source and destination container. To set up a chain, or two-way synchronization, simply repeat the operation
 for the new source and destination. To set up synchronization between containers you need to know or agree:
@@ -1039,21 +1039,21 @@ Here, the source is set up:
 
 
 
-	curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/src -H 'x-auth-token: HPAUTH_4321' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest' -H 'x-container-sync-secret: our-secret'
+    curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/src -H 'x-auth-token: HPAUTH_4321' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest' -H 'x-container-sync-secret: our-secret'
 
 
 Here, the destination is setup with a secret value:
 
-	curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-secret: our-secret'
+    curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-secret: our-secret'
 
 
 The following example shows setting up two-way synchronization where the account and container names are the same on both systems.
 Notice that the commands are nearly identical except for the "region-a" and "region-b" strings in the paths.
 
 
-	curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-secret: my-secret'
-	
-	curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-secret: my-secret'
+    curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-secret: my-secret'
+
+    curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-secret: my-secret'
 
 
 
@@ -1123,62 +1123,62 @@ user has the Admin role and is activated for two instances of the HP Cloud
 Object Storage service.
 
 
-	{"access": {
-	  "token": {
-	    "expires": "2012-11-21T23:14:30.559Z",
-	    "id": "HPAuth_1234",
-	    "tenant": {
-	      "id": "12345678912345",
-	      "name": "sally"
-	    }
-	  },
-	  "user": {
-	    "id": "4321987654321",
-	    "name": "sally",
-	    "roles": [
-	     .
-	     .
-	     .
-	      {
-	        "id": "00000000004022",
-	        "serviceId": "110",
-	        "name": "Admin",
-	        "tenantId": "87135022548315"
-	      },
-	      .
-	      .
-	      .
-	    ]
-	  },
-	  "serviceCatalog": [
-	    .
-	    .
-	    .
-	    {
-	      "name": "Object Storage",
-	      "type": "object-store",
-	      "endpoints": [
-	        {
-	          "tenantId": "12345678912345",
-	          "publicURL": "https:\/\/region-a.geo-1.objects.hpcloudsvc.com\/v1\/12345678912345",
-	          "region": "region-a.geo-1",
-	          "versionId": "1.0",
-	          "versionInfo": "https:\/\/region-a.geo-1.objects.hpcloudsvc.com\/v1.0\/",
-	          "versionList": "https:\/\/region-a.geo-1.objects.hpcloudsvc.com"
-	        },
-	        {
-	          "tenantId": "1234567891234",
-	          "publicURL": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com:443\/v1\/12345678912345",
-	          "region": "region-b.geo-1",
-	          "versionId": "1",
-	          "versionInfo": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com:443\/v1\/",
-	          "versionList": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com:443"
-	        }
-	      ]
-	    },
-	    .
-	    .
-	    .
+    {"access": {
+        "token": {
+            "expires": "2012-11-21T23:14:30.559Z",
+            "id": "HPAuth_1234",
+            "tenant": {
+                "id": "12345678912345",
+                 "name": "sally"
+             }
+        },
+        "user": {
+            "id": "4321987654321",
+            "name": "sally",
+            "roles": [
+            .
+            .
+            .
+                {
+                    "id": "00000000004022",
+                    "serviceId": "110",
+                    "name": "Admin",
+                    "tenantId": "87135022548315"
+                },
+            .
+            .
+            .
+            ]
+        },
+        "serviceCatalog": [
+        .
+        .
+        .
+            {
+                "name": "Object Storage",
+                "type": "object-store",
+                "endpoints": [
+                    {
+                        "tenantId": "12345678912345",
+                        "publicURL": "https:\/\/region-a.geo-1.objects.hpcloudsvc.com\/v1\/12345678912345",
+                        "region": "region-a.geo-1",
+                        "versionId": "1.0",
+                        "versionInfo": "https:\/\/region-a.geo-1.objects.hpcloudsvc.com\/v1.0\/",
+                        "versionList": "https:\/\/region-a.geo-1.objects.hpcloudsvc.com"
+                    },
+                    {
+                        "tenantId": "1234567891234",
+                        "publicURL": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com:443\/v1\/12345678912345",
+                        "region": "region-b.geo-1",
+                        "versionId": "1",
+                        "versionInfo": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com:443\/v1\/",
+                        "versionList": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com:443"
+                    }
+                ]
+            },
+        .
+        .
+        .
 
 
 
@@ -1279,6 +1279,12 @@ Do not use this request header when uploading manifest objectsbecause the
 system will dynamically create an ETag value when you download the manifast. See the [ETag](#etag_request) response header
 and [Large Object Creation](#large_objects) for more information.
 
+#### 4.3.14 X-Account-Meta-{name} #### {#x_account_meta_request}
+
+This allows you to set custom metadata on an account using a header name with a prefix of X-Account-Meta-. After this prefix, you can
+pick any name meaningful to you.
+
+
 ### 4.3 Common Response Headers
 
 #### 4.3.1 Date #### {#date_response}
@@ -1348,6 +1354,11 @@ For objects smaller than 5GB and [manifest objects](#large_objects), this is the
 
 For [manifest objects](#large_objects), this is the MD5 checksum of the concatenated string of MD5 checksums/ETags
 for each of the segments in the manifest - not the MD5 checksum of the content that was downloaded. Also the value is enclosed in double-quote characters.
+
+#### 4.3.14 X-Account-Meta-{name} #### {#x_account_meta_response}
+
+This contains the value of X-Account-Meta-{name} metadata that was previously set on an account, where {name} is
+an arbitrary name meaningful to you.
 
 
 
@@ -1426,6 +1437,7 @@ The following response headers are returned:
 * [X-Account-Object-Count](#x_account_object_count_response)
 * [X-Account-Bytes-Used](#x_account_bytes_used_response)
 * [X-Account-Container-Count](#x_account_container_count_response)
+* [X-Account-Meta-{name}](#x_account_meta_response)
 
 A list of containers is returned in the response body. With JSON and XML formats, you can also see the number (count)
 and size (bytes) of all objects in the listed container.
@@ -1475,18 +1487,18 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -X GET
-	
-	HTTP/1.1 200 OK
-	X-Account-Object-Count: 21280
-	X-Account-Bytes-Used: 3044371826
-	X-Account-Container-Count: 2
-	Content-Length: 34
-	Content-Type: text/plain; charset=utf-8
-	Date: Fri, 16 Nov 2012 11:18:45 GMT
-	
-	test_container_1
-	test_container_2
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -X GET
+
+    HTTP/1.1 200 OK
+    X-Account-Object-Count: 21280
+    X-Account-Bytes-Used: 3044371826
+    X-Account-Container-Count: 2
+    Content-Length: 34
+    Content-Type: text/plain; charset=utf-8
+    Date: Fri, 16 Nov 2012 11:18:45 GMT
+
+    test_container_1
+    test_container_2
 
 
 
@@ -1581,8 +1593,8 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -H 'x-account-meta-one: 1' -H 'x-remove-account-meta-two: -' -X POST
-	HTTP/1.1 204 No Content
+    curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -H 'x-account-meta-one: 1' -H 'x-remove-account-meta-two: -' -X POST
+    HTTP/1.1 204 No Content
 
 
 
@@ -1662,12 +1674,12 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -X HEAD
-	HTTP/1.1 200 OK
-	X-Account-Object-Count: 21280
-	X-Account-Bytes-Used: 3044371826
-	X-Account-Container-Count: 2
-	Content-Length: 0
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -X HEAD
+    HTTP/1.1 200 OK
+    X-Account-Object-Count: 21280
+    X-Account-Bytes-Used: 3044371826
+    X-Account-Container-Count: 2
+    Content-Length: 0
 
 
 **Additional Notes**
@@ -1754,7 +1766,7 @@ The following request headers apply to this operation:
 * [X-Auth-Token](#x_auth_token_request) - Optional - Authentication token
 * [Authorization](#signature_auth) - Optional - Use Signature Based Authentication instead of [X-Auth-Token](#x_auth_token_request)
 * [X-Container-Read](#x_container_read_request) - Optional - Sets an ACL that grants read access
-* [X-Container-Write](#x_container_write) - Optional - Sets an ACL that grants write access
+* [X-Container-Write](#x_container_write_request) - Optional - Sets an ACL that grants write access
 * [X-Container-Sync-To](#container_sync) - Optional - See [Container Synchronization](#container_sync)
 * [X-Container-Sync-Secret](#container_sync) - Optional - See [Container Synchronization](#container_sync)
 
@@ -1768,7 +1780,7 @@ This operation does not require a request body.
 
 **Success Response**
 
-On success, the container is created. See [Creation Guarantees](#creation_guarantees) for more information.
+On success, the container is created.
 
 **Status Code**
 
@@ -1789,8 +1801,8 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -H 'x-container-meta-one: one' -X PUT
-	HTTP/1.1 201 Created
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -H 'x-container-meta-one: one' -X PUT
+    HTTP/1.1 201 Created
 
 
 
@@ -1836,7 +1848,7 @@ The following request headers apply to this operation:
 * [X-Auth-Token](#x_auth_token_request) - Optional - Authentication token
 * [Authorization](#signature_auth) - Optional - Use Signature Based Authentication instead of [X-Auth-Token](#x_auth_token_request)
 * [X-Container-Read](#x_container_read_request) - Optional - Sets an ACL that grants read access
-* [X-Container-Write](#x_container_write) - Optional - Sets an ACL that grants write access
+* [X-Container-Write](#x_container_write_request) - Optional - Sets an ACL that grants write access
 * [X-Container-Sync-To](#container_sync) - Optional - See [Container Synchronization](#container_sync)
 * [X-Container-Sync-Secret](#container_sync) - Optional - See [Container Synchronization](#container_sync)
 
@@ -1871,8 +1883,8 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -H 'x-container-meta-one: one' -X POST
-	HTTP/1.1 204 No Content
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -H 'x-container-meta-one: one' -X POST
+    HTTP/1.1 204 No Content
 
 
 **Additional Notes**
@@ -1995,23 +2007,23 @@ JSON
 XML
 
 
-	<?xml version="1.0" encoding="UTF-8"?>
-	<container name="test_container_1">
-	 <object>
-	   <name>test_object_1</name>
-	   <hash>4281c348eaf83e70ddce0e07221c3d28</hash>
-	   <bytes>14</bytes>
-	   <content_type>application/octet-stream</content_type>
-	   <last_modified>2009-02-03T05:26:32.612278</last_modified>
-	 </object>
-	 <object>
-	   <name>test_object_2</name>
-	   <hash>b039efe731ad111bc1b0ef221c3849d0</hash>
-	   <bytes>64</bytes>
-	   <content_type>application/octet-stream</content_type>
-	   <last_modified>2009-02-03T05:26:32.612278</last_modified>
-	 </object>
-	</container>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <container name="test_container_1">
+        <object>
+            <name>test_object_1</name>
+            <hash>4281c348eaf83e70ddce0e07221c3d28</hash>
+            <bytes>14</bytes>
+            <content_type>application/octet-stream</content_type>
+            <last_modified>2009-02-03T05:26:32.612278</last_modified>
+        </object>
+        <object>
+            <name>test_object_2</name>
+            <hash>b039efe731ad111bc1b0ef221c3849d0</hash>
+            <bytes>64</bytes>
+            <content_type>application/octet-stream</content_type>
+            <last_modified>2009-02-03T05:26:32.612278</last_modified>
+        </object>
+    </container>
 
 
 The following response headers are returned:
@@ -2022,7 +2034,7 @@ The following response headers are returned:
 * [X-Container-Object-Count](#x_container_object_count_response)
 * [X-Container-Bytes-Used](#x_container_bytes_used_response)
 * [X-Container-Sync-To](#container_sync)
-* [X-Container-Sync-Secret](#container_sync)
+* [X-Container-Sync-Secret](#container_synct)
 
 **Error Response**
 
@@ -2035,16 +2047,16 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X GET
-	HTTP/1.1 200 OK
-	X-Container-Object-Count: 2
-	X-Container-Meta-One: one
-	X-Container-Bytes-Used: 378
-	Content-Length: 28
-	Content-Type: text/plain; charset=utf-8
-	
-	test_object_1
-	test_object_2
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X GET
+    HTTP/1.1 200 OK
+    X-Container-Object-Count: 2
+    X-Container-Meta-One: one
+    X-Container-Bytes-Used: 378
+    Content-Length: 28
+    Content-Type: text/plain; charset=utf-8
+
+    test_object_1
+    test_object_2
 
 
 **Additional Notes**
@@ -2116,11 +2128,11 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X HEAD
-	HTTP/1.1 204 No Content
-	X-Container-Object-Count: 2
-	X-Container-Meta-One: one
-	X-Container-Bytes-Used: 378
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X HEAD
+    HTTP/1.1 204 No Content
+    X-Container-Object-Count: 2
+    X-Container-Meta-One: one
+    X-Container-Bytes-Used: 378
 
 
 **Additional Notes**
@@ -2190,8 +2202,8 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X DELETE
-	HTTP/1.1 204 No Content
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X DELETE
+    HTTP/1.1 204 No Content
 
 
 **Additional Notes**
@@ -2335,15 +2347,15 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X GET
-	HTTP/1.1 200 OK
-	Last-Modified: Fri, 16 Nov 2012 15:34:56 GMT
-	ETag: 4281c348eaf83e70ddce0e07221c3d28
-	Content_Type: text/plain
-	Content-Length: 12
-	X-Object-Meta-Reviewed: Yes
-	
-	Hello World!
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X GET
+    HTTP/1.1 200 OK
+    Last-Modified: Fri, 16 Nov 2012 15:34:56 GMT
+    ETag: 4281c348eaf83e70ddce0e07221c3d28
+    Content_Type: text/plain
+    Content-Length: 12
+    X-Object-Meta-Reviewed: Yes
+
+    Hello World!
 
 
 **Additional Notes**
@@ -2422,13 +2434,13 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X HEAD
-	HTTP/1.1 200 OK
-	Last-Modified: Fri, 16 Nov 2012 15:34:56 GMT
-	ETag: 4281c348eaf83e70ddce0e07221c3d28
-	Content_Type: text/plain
-	Content-Length: 12
-	X-Object-Meta-Reviewed: Yes
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X HEAD
+    HTTP/1.1 200 OK
+    Last-Modified: Fri, 16 Nov 2012 15:34:56 GMT
+    ETag: 4281c348eaf83e70ddce0e07221c3d28
+    Content_Type: text/plain
+    Content-Length: 12
+    X-Object-Meta-Reviewed: Yes
 
 
 **Additional Notes**
@@ -2547,13 +2559,13 @@ See [HTTP Status Codes](#http_codes) for more information.
 
 **Curl Example**
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/ -X PUT -H 'content-type: application/directory' -H 'content-length: 0'
-	HTTP/1.1 201 Created
-	ETag: d41d8cd98f00b204e9800998ecf8427e
-	
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/test_obj_1.gif -X PUT -T image1.gif
-	HTTP/1.1 201 Created
-	ETag: 4281c348eaf83e70ddce0e07221c3d28
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/ -X PUT -H 'content-type: application/directory' -H 'content-length: 0'
+    HTTP/1.1 201 Created
+    ETag: d41d8cd98f00b204e9800998ecf8427e
+
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/test_obj_1.gif -X PUT -T image1.gif
+    HTTP/1.1 201 Created
+    ETag: 4281c348eaf83e70ddce0e07221c3d28
 
 
 **Additional Notes**
@@ -2672,18 +2684,18 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	$ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/cont15/obj6' -X COPY -H 'destination: cont15/obj6-copy1'
-	HTTP/1.1 201 Created
-	Etag: b917968b8ad501a40af22c0bf4d83ee0
-	X-Copied-From: cont15/obj6
-	X-Copied-From-Last-Modified: Thu, 22 Nov 2012 15:19:26 GMT
-	
-	$ curl -i -H 'x-auth-token: HPAuth_1234' 'https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/cont15/obj6-copy2' -X PUT -H 'content-length: 0' -H 'x-copy-from: cont15/obj6'
-	HTTP/1.1 201 Created
-	Content-Type: text/html; charset=UTF-8
-	Etag: b917968b8ad501a40af22c0bf4d83ee0
-	X-Copied-From: cont15/obj6
-	X-Copied-From-Last-Modified: Thu, 22 Nov 2012 15:19:26 GMT
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/cont15/obj6' -X COPY -H 'destination: cont15/obj6-copy1'
+    HTTP/1.1 201 Created
+    Etag: b917968b8ad501a40af22c0bf4d83ee0
+    X-Copied-From: cont15/obj6
+    X-Copied-From-Last-Modified: Thu, 22 Nov 2012 15:19:26 GMT
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' 'https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/cont15/obj6-copy2' -X PUT -H 'content-length: 0' -H 'x-copy-from: cont15/obj6'
+    HTTP/1.1 201 Created
+    Content-Type: text/html; charset=UTF-8
+    Etag: b917968b8ad501a40af22c0bf4d83ee0
+    X-Copied-From: cont15/obj6
+    X-Copied-From-Last-Modified: Thu, 22 Nov 2012 15:19:26 GMT
 
 
 **Additional Notes**
@@ -2759,8 +2771,8 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-	curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X DELETE
-	HTTP/1.1 204 No Content
+    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X DELETE
+    HTTP/1.1 204 No Content
 
 
 **Additional Notes**
@@ -2874,8 +2886,8 @@ See [HTTP Status Codes](#http_codes) for more information.
 
 **Curl Example**
 
-	curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1 -X POST -H 'x-object-meta-reviewed: Yes'
-	HTTP/1.1 202 Accepted
+    curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1 -X POST -H 'x-object-meta-reviewed: Yes'
+    HTTP/1.1 202 Accepted
 
 
 **Additional Notes**                     
