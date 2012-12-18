@@ -8,7 +8,7 @@ add-docs:
 	git subtree add -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git master
 
 update-docs:
-	git subtree pull -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git master
+	git subtree pull -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git develop
 
 add-api:
 	git subtree add -P content/api git@git.hpcloud.net:DevExDocs/apihome.git master
