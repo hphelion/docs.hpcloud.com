@@ -135,7 +135,10 @@ Provides information about the supported Monitoring API versions.
 The endpoint resource represents an endpoint from which metrics can be consumed.##### 4.4.2.1 Create a New Endpoint###### POST /endpointsCreates a new endpoint for metric consumption. **Request Data**	POST /v1.0/endpoints HTTP/1.1
 	Host: https://region-a.geo-1.maas.hpcloudsvc.com
 	Accept: application/json
-	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**201 - Created**Response Data**JSON	{
+	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response**	HTTP/1.1 201 Created
+	Content-Type: application/son
+	Content-Length: 337
+	Location: /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c**Status Code**201 - Created**Response Data**JSON	{
 	  "endpoint" : {
 	    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
 	    "links": [
@@ -280,6 +283,11 @@ JSON
 	}
 
 **Success Response**
+
+	HTTP/1.1 201 Created
+	Content-Type: application/son
+	Content-Length: 337
+	Location: /v1.0/subscriptions/cdace7b4-8bea-404c-848c-860754a76fb7
 
 **Status Code**
 
@@ -536,6 +544,11 @@ JSON
 	}
 
 **Success Response**
+
+	HTTP/1.1 201 Created
+	Content-Type: application/son
+	Content-Length: 337
+	Location: /v1.0/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2
 
 **Status Code**
 
@@ -795,6 +808,11 @@ JSON
 
 **Success Response**
 
+	HTTP/1.1 201 Created
+	Content-Type: application/son
+	Content-Length: 337
+	Location: /v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c
+
 **Status Code**
 
 201 - Created
@@ -889,7 +907,7 @@ JSON
 	      },
 	      "operator": "GTE",
 	      "threshold": "90",
-	      "state": "OK"
+	      "state": "OK"	
 	    }
 	  ]
 	}
