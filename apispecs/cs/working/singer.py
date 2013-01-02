@@ -210,7 +210,7 @@ def create_cs_api_md(opt, outfile, rootdir, subdirs, chapter='3.4', private_api=
     action_name_tag = None
     verb = None
     path = None
-    pattern = '^####\s+(?P<verb>[GPD][A-Z]+)\s+(?P<path>[\[/].+)'
+    pattern = '^####\s+(?P<verb>[GPDHU][A-Z]+)\s+(?P<path>[\[/].+)'
     re_http = re.compile(pattern)
     priv_pattern = '^\**Privilege Level:\s*(?P<privilege>[^\*]+)\**$'
     re_priv = re.compile(priv_pattern)
