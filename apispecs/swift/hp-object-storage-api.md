@@ -1024,10 +1024,10 @@ You then:
 
 1. Set the following metadata on the source container:
   * X-Container-Sync-To. This is the full path name of the destination, e.g.  https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest
-  * X-Container-Sync-Secret. This is the value of the shared secret value, e.g. "our-secret"
+  * X-Container-Sync-Key. This is the value of the shared secret value, e.g. "our-secret"
 
 2. Set the following metadata on the destination container:
-  * X-Container-Sync-Secret. This is the value of the shared secret value, e.g. "our-secret"
+  * X-Container-Sync-Key. This is the value of the shared secret value, e.g. "our-secret"
 
 Notice that you do not need to tell the destination container the name of the source container.
 
@@ -1039,21 +1039,21 @@ Here, the source is set up:
 
 
 
-    curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/src -H 'x-auth-token: HPAUTH_4321' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest' -H 'x-container-sync-secret: our-secret'
+    curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/src -H 'x-auth-token: HPAUTH_4321' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest' -H 'x-container-sync-key: our-secret'
 
 
 Here, the destination is setup with a secret value:
 
-    curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-secret: our-secret'
+    curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-key: our-secret'
 
 
 The following example shows setting up two-way synchronization where the account and container names are the same on both systems.
 Notice that the commands are nearly identical except for the "region-a" and "region-b" strings in the paths.
 
 
-    curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-secret: my-secret'
+    curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-key: my-secret'
 
-    curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-secret: my-secret'
+    curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-key: my-secret'
 
 
 
@@ -1768,7 +1768,7 @@ The following request headers apply to this operation:
 * [X-Container-Read](#x_container_read_request) - Optional - Sets an ACL that grants read access
 * [X-Container-Write](#x_container_write_request) - Optional - Sets an ACL that grants write access
 * [X-Container-Sync-To](#container_sync) - Optional - See [Container Synchronization](#container_sync)
-* [X-Container-Sync-Secret](#container_sync) - Optional - See [Container Synchronization](#container_sync)
+* [X-Container-Sync-Key](#container_sync) - Optional - See [Container Synchronization](#container_sync)
 
 **URL Parameters**
 
@@ -1850,7 +1850,7 @@ The following request headers apply to this operation:
 * [X-Container-Read](#x_container_read_request) - Optional - Sets an ACL that grants read access
 * [X-Container-Write](#x_container_write_request) - Optional - Sets an ACL that grants write access
 * [X-Container-Sync-To](#container_sync) - Optional - See [Container Synchronization](#container_sync)
-* [X-Container-Sync-Secret](#container_sync) - Optional - See [Container Synchronization](#container_sync)
+* [X-Container-Sync-Key](#container_sync) - Optional - See [Container Synchronization](#container_sync)
 
 **URL Parameters**
 
@@ -2034,7 +2034,7 @@ The following response headers are returned:
 * [X-Container-Object-Count](#x_container_object_count_response)
 * [X-Container-Bytes-Used](#x_container_bytes_used_response)
 * [X-Container-Sync-To](#container_sync)
-* [X-Container-Sync-Secret](#container_synct)
+* [X-Container-Sync-Key](#container_sync)
 
 **Error Response**
 
@@ -2115,7 +2115,7 @@ The following response headers are returned:
 * [X-Container-Meta-{name}](#x_container_meta_response)
 * [X-Container-Bytes-Used](#x_container_bytes_used)
 * [X-Container-Sync-To](#container_sync)
-* [X-Container-Sync-Secret](#container_sync)
+* [X-Container-Sync-Key](#container_sync)
       
 **Error Response**
 
