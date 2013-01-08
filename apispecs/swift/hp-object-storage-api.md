@@ -718,7 +718,7 @@ The effect of delimiter is to examine all object names up to the `/` character a
 it uses the "subdir" JSON element. The same happens for XML. Notice that X-Container-Object-Count is still 7, even though there are only 5 names shown. The "subdir"
 elements are *not* objects -- an attempt to `GET /v1/12345678912345/test_container/dir1/` would fail with `403 Not Found`.
 
-To descend into one of the "directories", we use the `prefix` query parameter as follows. Note the shash ("/") at the end of the prefix:
+To descend into one of the "directories", we use the `prefix` query parameter as follows. Note the slash ("/") at the end of the prefix:
 
 
     GET https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container?format=json&delimiter=/&prefix=dir2/
