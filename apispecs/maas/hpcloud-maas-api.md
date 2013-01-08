@@ -765,9 +765,10 @@ The alarm resource identifies a particular metric scoped by namespace, type and 
 
 **State Lifecycle**
 
-UNDETERMINED => OK | ALARM
-OK => UNDETERMINED | ALARM
-ALARM => OK | UNDETERMINED
+* UNDETERMINED => OK | ALARM
+* OK => UNDETERMINED | ALARM
+* ALARM => OK | UNDETERMINED | FLAPPING
+* FLAPPING => OK | UNDETERMINED | ALARM
 
 ##### 4.4.5.1 Create a New Alarm
 ###### POST /alarms
