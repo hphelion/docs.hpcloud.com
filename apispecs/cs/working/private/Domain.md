@@ -1093,7 +1093,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 
 
 ## Get Groups For a Domain 
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&tenantId=t1&tenantName=tName&excludeRoles=r1}
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&tenantId=t1&tenantName=tName&excludeRoles=r1&excludeUsers=u1,u2}
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API is used to get list of groups for a given domain. Api results can be filtered by using parameters. Query parameters "marker" and "limit" can be used for pagination
@@ -1111,14 +1111,16 @@ A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 
 Following filters can be used to filter the response data.
 
 *Inclusion Filters*
+
 * *groupId (Optional)* - string - include results for given groupId. Filters groupId and groupName are mutually exclusive. You can filter either using groupId or using groupName.
 * *groupName (Optional)* - string - include results for given groupName. Filters groupId and groupName are mutually exclusive. You can filter either using groupId or using groupName  
 * *tenantId (Optional)* - string - include results for given tenantId. Filters tenantId and tenantName are mutually exclusive. You can filter either using tenantId or using tenantName
 * *tenantName (Optional)* - string - include results for given tenantName. Filters tenantId and tenantName are mutually exclusive. You can filter either using tenantId or using tenantName    
 
 *Exclusion Filters*
-* *excludeRoles (Optional)* - string - comma separated roleId to exclude 
 
+* *excludeRoles (Optional)* - string - comma separated roleId to exclude 
+* *excludeUsers (Optional)* - string - comma separated userId to exclude
 
 **Data Parameters**
 
@@ -1159,7 +1161,17 @@ XML
 Request with filters groupId and excludeRoles
 
 ```
-GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/groupId=1234&excludeRoles=roleId1,roleId22 HTTP/1.1
+GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/groupId=1234&excludeRoles=roleId1,roleId2 HTTP/1.1
+Connection: close
+Accept: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
+```
+
+Request with filters excludeUsers
+
+```
+GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups?excludeUsers=userId1,userId2 HTTP/1.1
 Connection: close
 Accept: application/xml
 User-Agent: Jakarta Commons-HttpClient/3.1
@@ -1169,7 +1181,7 @@ Host: haneef-desktop.americas.hpqcorp.net:8080
 Request with filters tenantId and excludeRoles
 
 ```
-GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/tenantId=1234&excludeRoles=roleId1,roleId22 HTTP/1.1
+GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/tenantId=1234&excludeRoles=roleId1,roleId2 HTTP/1.1
 Connection: close
 Accept: application/xml
 User-Agent: Jakarta Commons-HttpClient/3.1
