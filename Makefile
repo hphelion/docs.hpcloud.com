@@ -5,16 +5,16 @@ update-tutorials:
 	git subtree pull -P content/tutorials git@git01.hpcloud.net:DevExDocs/tutorials.git master
 
 add-docs:
-	git subtree add -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git master
+	git subtree add -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git develop
 
 update-docs:
-	git subtree pull -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git master
+	git subtree pull -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git develop
 
 add-api:
-	git subtree add -P content/api git@git.hpcloud.net:DevExDocs/apihome.git master
+	git subtree add -P content/api git@git.hpcloud.net:DevExDocs/apihome.git develop
 
 update-api:
-	git subtree pull -P content/api git@git.hpcloud.net:DevExDocs/apihome.git master
+	git subtree pull -P content/api git@git.hpcloud.net:DevExDocs/apihome.git develop
 
 server:
 	@ejekyll --server --auto
