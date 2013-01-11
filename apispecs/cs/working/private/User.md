@@ -645,6 +645,7 @@ Content-Length: 354
     "emailAddress": "larryking@timewarner.com",
     "firstName": "Larry",
     "lastName": "King",
+    "displayName": "User Forum Dislay Name",
     "password": "changeme",
     "phone": "1-800-555-1212",
     "state": "CA",
@@ -667,7 +668,7 @@ Connection: keep-alive
 Content-Length: 399
  
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" emailAddress="XmlUser9@timewarner.com" website="http://www.timewarner.com" phone="1-800-555-1212" zip="90210" country="USA" state="CA" city="Los Angeles" addressLine1="128, Hollywood Blvd" password="changeme" username="XmlUser9@timewarner.com" lastName="Last" firstName="First"/>
+<user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" emailAddress="XmlUser9@timewarner.com" website="http://www.timewarner.com" phone="1-800-555-1212" zip="90210" country="USA" state="CA" city="Los Angeles" addressLine1="128, Hollywood Blvd" password="changeme" username="XmlUser9@timewarner.com" displayName="userForumDisplayName" lastName="Last" firstName="First"/>
 ```
 
 **Success Response**
@@ -842,6 +843,7 @@ Content-Length: 58
 {
   "user": {
     "emailAddress": "larrykinglive@timewarner.com"
+    "displayName": "newDisplayName"
   }
 }
 ```
@@ -858,7 +860,7 @@ Connection: keep-alive
 Content-Length: 177
  
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" emailAddress="janedoe2@timewarner.com" status="enabled"/>
+<user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" emailAddress="janedoe2@timewarner.com" displayName="NewDisplayName" status="enabled"/>
 ```
 
 **Success Response**
