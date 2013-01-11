@@ -354,36 +354,39 @@ Availability Zones are further clustered into regions and geographies. HP Cloud 
 
 The listing below shows a fragment of the Service Catalog returned by the Identity Service which contains the endpoints for HP Cloud Compute. Note that a set of endpoints is returned for each AZ. (The string which identifies the AZ is called `"region"` in the Service Catalog.
 
-	{
-   	u 'endpoints' : [{
-   			u 'publicURL' : u 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737',
-   			u 'publicURL2' : u 'https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud',
-   			u 'region' : u 'az-3.region-a.geo-1',
-   			u 'tenantId' : u '36991859863737',
-   			u 'versionId' : u '1.1',
-   			u 'versionInfo' : u 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/',
-   			u 'versionList' : u 'https://az-3.region-a.geo-1.compute.hpcloudsvc.com'
-   		}, {
-   			u 'publicURL' : u 'https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737',
-   			u 'publicURL2' : u 'https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud',
-   			u 'region' : u 'az-2.region-a.geo-1',
-   			u 'tenantId' : u '36991859863737',
-   			u 'versionId' : u '1.1',
-   			u 'versionInfo' : u 'https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/',
-   			u 'versionList' : u 'https://az-2.region-a.geo-1.compute.hpcloudsvc.com'
-   		}, {
-   			u 'publicURL' : u 'https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/36991859863737',
-   			u 'publicURL2' : u 'https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud',
-   			u 'region' : u 'az-1.region-a.geo-1',
-   			u 'tenantId' : u '36991859863737',
-   			u 'versionId' : u '1.1',
-   			u 'versionInfo' : u 'https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/',
-   			u 'versionList' : u 'https://az-1.region-a.geo-1.compute.hpcloudsvc.com'
-   		}
-   	],
-   	u 'name' : u 'Compute',
-   	u 'type' : u 'compute'
-	}
+    {
+        "endpoints": [
+            {
+                "publicURL": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772", 
+                "publicURL2": "https://az-3.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud", 
+                "region": "az-3.region-a.geo-1", 
+                "tenantId": "11692683195772", 
+                "versionId": "1.1", 
+                "versionInfo": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com/v1.1/", 
+                "versionList": "https://az-3.region-a.geo-1.compute.hpcloudsvc.com"
+            }, 
+            {
+                "publicURL": "https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772", 
+                "publicURL2": "https://az-2.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud", 
+                "region": "az-2.region-a.geo-1", 
+                "tenantId": "11692683195772", 
+                "versionId": "1.1", 
+                "versionInfo": "https://az-2.region-a.geo-1.compute.hpcloudsvc.com/v1.1/", 
+                "versionList": "https://az-2.region-a.geo-1.compute.hpcloudsvc.com"
+            }, 
+            {
+                "publicURL": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/11692683195772", 
+                "publicURL2": "https://az-1.region-a.geo-1.ec2-compute.hpcloudsvc.com/services/Cloud", 
+                "region": "az-1.region-a.geo-1", 
+                "tenantId": "11692683195772", 
+                "versionId": "1.1", 
+                "versionInfo": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v1.1/", 
+                "versionList": "https://az-1.region-a.geo-1.compute.hpcloudsvc.com"
+            }
+        ], 
+        "name": "Compute", 
+        "type": "compute"
+    }
 
 ## 3.4 Request/Response Types ## {#Section3_4}
 
@@ -671,16 +674,13 @@ Fault Response, Over Limit: JSON
 
 # 4. REST API Specifications # {#Section4_}
 
-##<a id="ServiceAPIOperations"></a>4.1 Service API Operations
+## 4.1 HP Cloud Compute API Operations ## {#ServiceAPIOperations}
 
 **Host**: https://az-1.region-a.geo-1.compute.hpcloudsvc.com
 
 **Base URI**: [Host]/
 
 **Admin URI**: N/A
-
-
-## 4.1 HP Cloud Compute API Operations ## {#Section4_1}
 
 
 ###Core Compute API
@@ -958,8 +958,6 @@ JSON
 
 
 ### 4.4.3 Extension ### {#extension}
-
-<p> Extension </p>
 
 
 #### 4.4.3.1 Get Extension #### {#getExtension}
