@@ -5,15 +5,27 @@ update-tutorials:
 	git subtree pull -P content/tutorials git@git01.hpcloud.net:DevExDocs/tutorials.git master
 
 add-docs:
-	git subtree add -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git develop
+	git subtree add -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git master
 
 update-docs:
+	git subtree pull -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git master
+
+qa-add-docs:
+	git subtree add -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git develop
+
+qa-update-docs:
 	git subtree pull -P content/documentation git@git.hpcloud.net:DevExDocs/documentation.git develop
 
 add-api:
-	git subtree add -P content/api git@git.hpcloud.net:DevExDocs/apihome.git develop
+	git subtree add -P content/api git@git.hpcloud.net:DevExDocs/apihome.git master
 
 update-api:
+	git subtree pull -P content/api git@git.hpcloud.net:DevExDocs/apihome.git master
+
+qa-add-api:
+	git subtree add -P content/api git@git.hpcloud.net:DevExDocs/apihome.git develop
+
+qa-update-api:
 	git subtree pull -P content/api git@git.hpcloud.net:DevExDocs/apihome.git develop
 
 server:
