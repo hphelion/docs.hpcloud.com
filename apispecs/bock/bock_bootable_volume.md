@@ -6,6 +6,7 @@ title_section: The API specifications for the HP Bootable Volume service.
 description: "Bootable Volume API Specifications"
 keywords: "bock, block storage, boot, bootable volume"
 product: block-storage
+published: false
 
 ---
 # HP Bootable Volume API

@@ -59,6 +59,7 @@ Note that the **EnterpriseUserEmailVerification** action must handle validations
 | highRiskEmail	| xs:boolean 	| false 	| 	|
 | sendWelcomeEmail 	| xs:boolean 	| false	| false	|
 | emailValidationType 	| xs:string 	| false 	| None	|
+| displayName 	| xs:string 	| false 	| 	|
 | homeRegion	| xs:string 	| false 	| 	|
 
 **emailValidationType Values**

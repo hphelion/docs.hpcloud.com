@@ -81,6 +81,8 @@ Note that the **EmailVerification** action must handle validations from this act
 | emailValidationType 	| xs:string 	| false 	| None	|
 | customerType 	| xs:string 	| false 	| Self Service 	|
 | homeRegion	| xs:string 	| false 	| 	|
+| displayName	| xs:string 	| false 	| 	|
+| optIntoCloudServicesEmails	| xs:boolean   	| false 	| 	|
 
 
 **emailValidationType Values**

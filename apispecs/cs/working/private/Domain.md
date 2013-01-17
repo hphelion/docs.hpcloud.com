@@ -1093,7 +1093,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_769bcc02e0bf
 
 
 ## Get Groups For a Domain 
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&tenantId=t1&tenantName=tName&excludeRoles=r1}
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/groups?{groupId=groupId&groupName=groupName&tenantId=t1&tenantName=tName&excludeRoles=r1&excludeUsers=u1,u2}
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API is used to get list of groups for a given domain. Api results can be filtered by using parameters. Query parameters "marker" and "limit" can be used for pagination
@@ -1111,14 +1111,16 @@ A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 
 Following filters can be used to filter the response data.
 
 *Inclusion Filters*
+
 * *groupId (Optional)* - string - include results for given groupId. Filters groupId and groupName are mutually exclusive. You can filter either using groupId or using groupName.
 * *groupName (Optional)* - string - include results for given groupName. Filters groupId and groupName are mutually exclusive. You can filter either using groupId or using groupName  
 * *tenantId (Optional)* - string - include results for given tenantId. Filters tenantId and tenantName are mutually exclusive. You can filter either using tenantId or using tenantName
 * *tenantName (Optional)* - string - include results for given tenantName. Filters tenantId and tenantName are mutually exclusive. You can filter either using tenantId or using tenantName    
 
 *Exclusion Filters*
-* *excludeRoles (Optional)* - string - comma separated roleId to exclude 
 
+* *excludeRoles (Optional)* - string - comma separated roleId to exclude 
+* *excludeUsers (Optional)* - string - comma separated userId to exclude
 
 **Data Parameters**
 
@@ -1159,7 +1161,17 @@ XML
 Request with filters groupId and excludeRoles
 
 ```
-GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/groupId=1234&excludeRoles=roleId1,roleId22 HTTP/1.1
+GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/groupId=1234&excludeRoles=roleId1,roleId2 HTTP/1.1
+Connection: close
+Accept: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
+```
+
+Request with filters excludeUsers
+
+```
+GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups?excludeUsers=userId1,userId2 HTTP/1.1
 Connection: close
 Accept: application/xml
 User-Agent: Jakarta Commons-HttpClient/3.1
@@ -1169,7 +1181,7 @@ Host: haneef-desktop.americas.hpqcorp.net:8080
 Request with filters tenantId and excludeRoles
 
 ```
-GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/tenantId=1234&excludeRoles=roleId1,roleId22 HTTP/1.1
+GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/tenantId=1234&excludeRoles=roleId1,roleId2 HTTP/1.1
 Connection: close
 Accept: application/xml
 User-Agent: Jakarta Commons-HttpClient/3.1
@@ -1832,7 +1844,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 
 
 ## Get Service Activations for a Domain 
-#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/services?tenantId={tenantId}
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/services?tenantId={tenantId}&limit=pagesize&marker=domainId
 *Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
 
 This API returns all services that have been activated for the given {domainId} . It can also filter the result based on tenantId. 
@@ -1845,6 +1857,8 @@ A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 
 
 
 * *tenantId (Optional)* - string - tenantId to list service activation for that tenant
+* *limit (Optional)* - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker (Optional)* - string - the resource Id of the last item in the previous list. 'id' value in 'activatedService' response
 
 **Data Parameters**
 
@@ -1855,42 +1869,75 @@ This call does not require a request body.
 
 JSON
 
+Request with tenantId 
+
 ```
-GET https://localhost:8443/v2.0/HP-IDM/v1.0/domains/23268133247776/services?tenantId=35871429575842 HTTP/1.1
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/90681825319071/services?tenantId=24290042003272 HTTP/1.1
 Accept-Encoding: gzip,deflate
-X-Auth-Token: HPAuth_4ea802a5b0be7e989230032e
 Accept: application/json
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: localhost:8443
+X-Auth-Token: HPAuth_a46a8b6ddef111f44d569089564e2ee6efbe11f91cc04e0f7f3d26048e04df2d
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
 ```
 
 XML
 
+List all activated services
+
 ```
-GET https://localhost:8443/v2.0/HP-IDM/v1.0/domains/23268133247776/services HTTP/1.1
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/90681825319071/services HTTP/1.1
 Accept-Encoding: gzip,deflate
-X-Auth-Token: HPAuth_4ea802a5b0be7e989230032e
 Accept: application/xml
-User-Agent: Jakarta Commons-HttpClient/3.1
-Host: localhost:8443
+X-Auth-Token: HPAuth_a46a8b6ddef111f44d569089564e2ee6efbe11f91cc04e0f7f3d26048e04df2d
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
 ```
 
 Optional:
 
 JSON
 
-When no activated services are there for a domain
+When limit is specified without any marker (4 total documents)
+
 ```
-GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/66751536630361/services HTTP/1.1
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/90681825319071/services?limit=4 HTTP/1.1
 Accept-Encoding: gzip,deflate
 Accept: application/json
-X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776
+X-Auth-Token: HPAuth_a46a8b6ddef111f44d569089564e2ee6efbe11f91cc04e0f7f3d26048e04df2d
 Host: localhost:35357
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
 ```
 
+XML
 
+When limit is specified with marker (4 total documents)
+
+```
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/90681825319071/services?limit=2&marker=50a2a2ee957c4415121a2417 HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_a46a8b6ddef111f44d569089564e2ee6efbe11f91cc04e0f7f3d26048e04df2d
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
+```
+
+XML 
+
+When no activated services are there for a domain
+
+```
+GET https://localhost:35357/v2.0/HP-IDM/v1.0/domains/88812793023919/services HTTP/1.1
+Accept-Encoding: gzip,deflate
+Accept: application/xml
+X-Auth-Token: HPAuth_a46a8b6ddef111f44d569089564e2ee6efbe11f91cc04e0f7f3d26048e04df2d
+Host: localhost:35357
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
+```
 
 **Success Response**
 
@@ -1905,41 +1952,33 @@ The response is a list of activated services for the domain (filtered by tenantI
 
 JSON
 
+Response with tenantId filter
+
 ```
 HTTP/1.1 200 OK
 Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=94C8007DACBD6F746B211CEF012F4E4A; Path=/; Secure
 Cache-Control: no-cache
 Pragma: no-cache
 Expires: -1
 Content-Type: application/json
-Content-Length: 686
-Date: Wed, 26 Oct 2011 13:14:07 GMT
- 
+Content-Length: 472
+Date: Tue, 13 Nov 2012 22:16:51 GMT
+
 {
   "activatedServices" : {
-    "anies" : null,
     "activatedService" : [ {
-      "id" : null,
+      "endpointTemplateId" : "120",
+      "id" : "50a2a2ee957c4415121a241c",
       "otherAttributes" : {
       },
-      "region" : "az-1.region-a.geo-1",
-      "serviceName" : "Compute",
-      "serviceType" : "compute",
+      "region" : "region-a.geo-1",
+      "serviceId" : "110",
+      "serviceName" : "Object Storage",
+      "serviceType" : "object-store",
       "status" : "enabled",
-      "subscribedOn" : "2011-10-25T20:50:13.000Z",
-      "tenantId" : "35871429575842",
-      "endpointTemplateId" : "100"
-    }, {
-      "id" : null,
-      "otherAttributes" : {
-      },
-      "region" : "az-2.region-a.geo-1",
-      "serviceName" : "Compute",
-      "serviceType" : "compute",
-      "status" : "enabled",
-      "subscribedOn" : "2011-10-25T20:50:28.000Z",
-      "tenantId" : "35871429575842",
-      "endpointTemplateId" : "110"
+      "subscribedOn" : "2012-11-13T19:43:42.992Z",
+      "tenantId" : "24290042003272"
     } ],
     "otherAttributes" : {
     }
@@ -1949,50 +1988,127 @@ Date: Wed, 26 Oct 2011 13:14:07 GMT
 
 XML
 
+Response for all activated services
+
 ```
 HTTP/1.1 200 OK
 Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=4C4529A54A66517449F10A8F083E5570; Path=/; Secure
 Cache-Control: no-cache
 Pragma: no-cache
 Expires: -1
-Set-Cookie: JSESSIONID=12934DBA01E8E9F9A3E783F34C75F700; Path=/; Secure
 Content-Type: application/xml
-Content-Length: 894
-Date: Wed, 26 Oct 2011 13:20:14 GMT
- 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<activatedServices xmlns="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" 
-xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" 
-xmlns:ns4="http://docs.openstack.org/common/api/v1.0" 
-xmlns:ns5="http://www.w3.org/2005/Atom">
-<activatedService serviceName="Compute" serviceType="compute" region="az-1.region-a.geo-1" subscribedOn="2011-10-25T20:50:13.000Z" tenantId="35871429575842" status="enabled" endpointTemplateId="100"/>
-<activatedService serviceName="Compute" serviceType="compute" region="az-2.region-a.geo-1" subscribedOn="2011-10-25T20:50:28.000Z" tenantId="35871429575842" status="enabled" endpointTemplateId="110"/>
-<activatedService serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2011-10-25T20:51:49.000Z" tenantId="90260810095453" status="enabled" endpointTemplateId="120"/>
-</activatedServices>
+Content-Length: 1402
+Date: Tue, 13 Nov 2012 22:24:47 GMT
+
+<ns1:activatedServices xmlns:ns1="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
+   <ns1:activatedService id="50a2a2ee957c4415121a2412" serviceId="110" serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2012-11-13T19:43:42.283Z" tenantId="45289935905449" status="enabled" endpointTemplateId="120"/>
+   <ns1:activatedService id="50a2a2ee957c4415121a2417" serviceId="110" serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2012-11-13T19:43:42.422Z" tenantId="28729687685789" status="enabled" endpointTemplateId="120"/>
+   <ns1:activatedService id="50a2a2ee957c4415121a241c" serviceId="110" serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2012-11-13T19:43:42.992Z" tenantId="24290042003272" status="enabled" endpointTemplateId="120"/>
+   <ns1:activatedService id="50a2a2ef957c4415121a2421" serviceId="110" serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2012-11-13T19:43:43.221Z" tenantId="35383765754307" status="enabled" endpointTemplateId="120"/>
+</ns1:activatedServices>
 ```
 
 Optional
 
+
+
 JSON
 
-When no activated services are there for a domain
+When limit is specified without any marker (4 total documents)
+
+```
+{"activatedServices": {
+   "activatedService":    [
+            {
+         "endpointTemplateId": "120",
+         "id": "50a2a2ee957c4415121a2412",
+         "otherAttributes": {},
+         "region": "region-a.geo-1",
+         "serviceId": "110",
+         "serviceName": "Object Storage",
+         "serviceType": "object-store",
+         "status": "enabled",
+         "subscribedOn": "2012-11-13T19:43:42.283Z",
+         "tenantId": "45289935905449"
+      },
+            {
+         "endpointTemplateId": "120",
+         "id": "50a2a2ee957c4415121a2417",
+         "otherAttributes": {},
+         "region": "region-a.geo-1",
+         "serviceId": "110",
+         "serviceName": "Object Storage",
+         "serviceType": "object-store",
+         "status": "enabled",
+         "subscribedOn": "2012-11-13T19:43:42.422Z",
+         "tenantId": "28729687685789"
+      },
+            {
+         "endpointTemplateId": "120",
+         "id": "50a2a2ee957c4415121a241c",
+         "otherAttributes": {},
+         "region": "region-a.geo-1",
+         "serviceId": "110",
+         "serviceName": "Object Storage",
+         "serviceType": "object-store",
+         "status": "enabled",
+         "subscribedOn": "2012-11-13T19:43:42.992Z",
+         "tenantId": "24290042003272"
+      },
+            {
+         "endpointTemplateId": "120",
+         "id": "50a2a2ef957c4415121a2421",
+         "otherAttributes": {},
+         "region": "region-a.geo-1",
+         "serviceId": "110",
+         "serviceName": "Object Storage",
+         "serviceType": "object-store",
+         "status": "enabled",
+         "subscribedOn": "2012-11-13T19:43:43.221Z",
+         "tenantId": "35383765754307"
+      }
+   ],
+   "otherAttributes": {}
+}}
+```
+
+XML
+
+When limit is specified with marker (4 total documents)
+
 ```
 HTTP/1.1 200 OK
 Server: Apache-Coyote/1.1
-Set-Cookie: JSESSIONID=F7E5F28138F5A7337CA8434B4FEA17BE; Path=/; Secure
+Set-Cookie: JSESSIONID=6AE817EEDD2D62CF0217FD840AEC5393; Path=/; Secure
 Cache-Control: no-cache
 Pragma: no-cache
 Expires: -1
-Content-Type: application/json
-Content-Length: 65
-Date: Wed, 31 Oct 2012 16:06:04 GMT
+Content-Type: application/xml
+Content-Length: 888
+Date: Tue, 13 Nov 2012 22:13:36 GMT
 
-{
-  "activatedServices" : {
-    "otherAttributes" : {
-    }
-  }
-}
+<ns1:activatedServices xmlns:ns1="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom">
+   <ns1:activatedService id="50a2a2ee957c4415121a241c" serviceId="110" serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2012-11-13T19:43:42.992Z" tenantId="24290042003272" status="enabled" endpointTemplateId="120"/>
+   <ns1:activatedService id="50a2a2ef957c4415121a2421" serviceId="110" serviceName="Object Storage" serviceType="object-store" region="region-a.geo-1" subscribedOn="2012-11-13T19:43:43.221Z" tenantId="35383765754307" status="enabled" endpointTemplateId="120"/>
+</ns1:activatedServices>
+```
+
+XML
+
+When no activated services are there for a domain
+```
+TTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Set-Cookie: JSESSIONID=14E953B8EA880BC9A80AB77B9CE5F22B; Path=/; Secure
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Content-Type: application/xml
+Content-Length: 351
+Date: Tue, 13 Nov 2012 22:30:03 GMT
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns1:activatedServices xmlns:ns1="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns2="http://docs.openstack.org/identity/api/ext/hp/v1.0" xmlns:ns3="http://docs.openstack.org/identity/api/v2.0" xmlns:ns4="http://docs.openstack.org/common/api/v1.0" xmlns:ns5="http://www.w3.org/2005/Atom"/>
 ```
 
 **Error Response**
@@ -2006,7 +2122,7 @@ Please refer to error response body for additional details.
 | 400 | Bad Request | Malformed request in URI   |  
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.    |  
 | 403 | Forbidden | Disabled or suspended user making the request |  
-| 404 | Not Found | The specified domainId or tenantId filter is not found   |  
+| 404 | Not Found | The specified domainId, tenantId filter or marker is not found   |  
 | 500 | Internal Server Error | The server encountered a problem while processing the request|  
 | 503 | Service Unavailable | The server is unavailable to process the request |  
 
@@ -2045,6 +2161,17 @@ XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
 ```
 
+XML
+
+Invalid marker error
+
+```
+<itemNotFound code="404" xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom">
+   <message>NOT_FOUND</message>
+   <details>Marker in request not found</details>
+</itemNotFound>
+``` 
+
 Curl Example
 
 ```
@@ -2052,6 +2179,7 @@ curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 ```
 
 **Additional Notes**
+
 
 
 ## Get Tenants for a Domain
@@ -3038,4 +3166,172 @@ curl -k --cert dev_hpmiddleware.pem  -XPUT -H "X-Auth-Token: HPAuth_b4d1cf88adb2
 **Additional Notes**
 
 
+## List Role Definitions
+#### GET [HPKeystoneExtensionBaseURI]/domains/{domainId}/roleDefs?limit={pagesize}&marker={roleId}&public={true|false}&tenantId={tenantId}&serviceId={serviceId}&roleId={roleId}
+*Privilege Level: System Adminstrator (SA), Domain Admin (DA), Domain User (DU)*
+
+This API is used to list all the roles defined in the specified {domainId} and takes several parameters including "marker", "limit", "serviceId", "tenantId", "roleId", and "public" to limit the number of role definitions in the response.
+
+**Request Data**
+
+A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
+
+**URL Parameters**
+
+* *domainId* - string - The domainId representing the domain to return role definitions for.
+* *limit (Optional)* - integer - Represents the maximum number of elements which will be returned in the request. Default is 100.
+* *marker (Optional)* - string - The resource Id of the last item in the previous list.
+* *tenantId (Optional)* - string - Limit role definitions to the specified tenant id if provided.
+* *serviceId (Optional)* - string - Limit role definitions to the specified service id if provided.
+* *roleId (Optional)* - string - Limit role definitions to the specified role id if provided.
+* *public (Optional)* - boolean - If true, return only public role definitions.  If false, return only domain specific role definitions.  If not provided, return both.
+
+**Data Parameters**
+
+See schema file for more details on the response data structure.
+
+This call does not require a request body
+
+JSON
+
+```
+GET /v2.0/HP-IDM/v1.0/domains/641564254582/roleDefs HTTP/1.1
+Connection: close
+Accept: application/json
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
+```
+
+XML
+
+```
+GET /v2.0/HP-IDM/v1.0/domains/641564254582/roleDefs HTTP/1.1
+Connection: close
+Accept: application/xml
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: haneef-desktop.americas.hpqcorp.net:8080
+```
+
+Optional:
+
+
+**Success Response**
+
+List of roles with http status code 200.
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+
+JSON
+
+```
+{"roles": {"role": [
+      {
+      "roleId": "xxxxxxxxxxxxxx",
+      "roleName": "role01",
+      "description": "role01 - description",
+      "serviceId" : "xxxxxxxxxxxxxx",
+      "domainId": "xxxxxxxxxxxxxx",
+   }, {
+      "roleId": "xxxxxxxxxxxxxx",
+      "roleName": "role02",
+      "description": "role02 - description",
+      "serviceId" : "xxxxxxxxxxxxxx",
+      "domainId": "xxxxxxxxxxxxxx",
+   }, {
+      "roleId": "xxxxxxxxxxxxxx",
+      "roleName": "role03",
+      "description": "role03 - description",
+      "serviceId" : "xxxxxxxxxxxxxx",
+      "domainId": "xxxxxxxxxxxxxx",
+   },
+]}
+```
+
+XML
+
+```
+<roles xmlns="http://hpcloud.hp.com/identity/api/ext/hp/v1.0">
+   <role>
+      <roleId>xxxxxxxxxxxxxx</roleId>
+      <roleName>role01</roleName>
+      <description>role01 - description</description>
+      <serviceId>xxxxxxxxxxxxxx</serviceId>
+      <domainId>xxxxxxxxxxxxxx</domainId>
+   </role>
+   <role>
+      <roleId>xxxxxxxxxxxxxx</roleId>
+      <roleName>role02</roleName>
+      <description>role02 - description</description>
+      <serviceId>xxxxxxxxxxxxxx</serviceId>
+      <domainId>xxxxxxxxxxxxxx</domainId>
+   </role>
+   <role>
+      <roleId>xxxxxxxxxxxxxx</roleId>
+      <roleName>role03</roleName>
+      <description>role03 - description</description>
+      <serviceId>xxxxxxxxxxxxxx</serviceId>
+      <domainId>xxxxxxxxxxxxxx</domainId>
+   </role>
+</roles>
+```
+
+**Error Response**
+
+Please refer to error response body for additional details.
+
+**Status Code**
+
+| Status Code | Description | Reasons |
+| :-----------| :-----------| :-------|
+| 400 | Bad Request | Malformed request in URI. |
+| 401 | Unauthorized | The caller does not have the privilege required to perform the operation. |
+| 403 | Forbidden | Disabled or suspended user making the request. |
+| 404 | Not Found | The specified domainId, marker, serviceId or tenantId is not found. |
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 503 | Service Unavailable | The server is unavailable to process the request. |
+
+**Response Data**
+
+JSON
+
+```
+{
+  "unauthorized" : {
+    "code" : 401,
+    "details" : "Invalid credentials",
+    "message" : "UNAUTHORIZED",
+    "otherAttributes" : {
+    }
+  }
+}
+```
+
+XML
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><unauthorized xmlns="http://docs.openstack.org/identity/api/v2.0" xmlns:ns2="http://www.hp.com/identity/api/ext/HP-IDM/v1.0" xmlns:ns3="http://docs.openstack.org/common/api/v1.0" xmlns:ns4="http://www.w3.org/2005/Atom" code="401"><message>UNAUTHORIZED</message><details>Invalid credentials</details></unauthorized>
+```
+
+Curl Example
+
+```
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roleDefs
+```
+
+Curl Example (public role definitions only)
+
+```
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roleDefs?public=true
+```
+
+Curl Example (domain specific role definitions only)
+
+```
+curl -k --cert dev_hpmiddleware.pem  -XGET -H "X-Auth-Token: HPAuth_b4d1cf88adb2b9eb97766444958a24ff2ee8b2f8e7d2e26500c5133f9e8ec776" -H "Accept: application/json" https://localhost:35357/v2.0/HP-IDM/v1.0/domains/27999842874196/roleDefs?public=false
+```
 
