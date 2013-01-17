@@ -250,8 +250,10 @@ JSON - 500 Exception example
 Here's an example in the RDD environment: 
 
 ```
-curl -v -H "X-Auth-Token: <Auth_Token>;Content-Type: application/json" \
-  -X POST -d '{"title":"test message","message":"test message"}' \
+curl -v -H "Content-Type: application/json" \
+  -H "X-Auth-Token: <Auth_Token>" \
+  -X POST \
+  -d '{"title":"test message","message":"test message"}' \
   https://mp.rndd.aw1.hpcloud.net/external_platform_alert
 ```
 
@@ -383,8 +385,10 @@ JSON - 500 Exception example
 Here's an example in the RDD environment: 
 
 ```
-curl -v -H "X-Auth-Token: <Auth_Token>;Content-Type: application/json" \
-  -X POST -d '{"title":"test message","message":"test message"}' \
+curl -v -H "Content-Type: application/json" \
+  -H "X-Auth-Token: <Auth_Token>" \
+  -X POST \
+  -d '{"title":"test message","message":"test message"}' \
   https://mp.rndd.aw1.hpcloud.net/public_platform_status
 ```
 
@@ -516,9 +520,12 @@ JSON - 500 Exception example
 Here's an example in the RDD environment: 
 
 ```
-curl -v -H "X-Auth-Token: <Auth_Token>;Content-Type: application/json" \
-  -X POST -d '{"title":"test message","message":"test message"}' \
+curl -v -H "Content-Type: application/json" \
+  -H "X-Auth-Token: <Auth_Token>" \
+  -X POST \
+  -d '{"title":"test message","message":"private test message"}' \
   https://mp.rndd.aw1.hpcloud.net/private_platform_status
+
 ```
 
 **Additional Notes**
