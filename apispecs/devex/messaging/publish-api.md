@@ -106,6 +106,8 @@ N/A
 | Resource | Operation                 | HTTP Method           | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------ | :----------           | :--------------------- | :---------------- | :-------------: |
 | Platform Alert | Create a new Platform Alert | POST | {BaseURI}/external_platform_alert | JSON only | mgmtconsole-admin |
+| Public Platform Status | Create a new public Platform Status | POST | {BaseURI}/public_platform_status | JSON only | mgmtconsole-admin |
+| Private Platform Status | Create a new public Platform Status | POST | {BaseURI}/private_platform_status | JSON only | mgmtconsole-admin |
 
 
 Note: The "mgmtconsole-admin" role is a temporary role created to allow initial development of this API to progress without hindrance. This initial role will be assigned both to Management Console, NOC and Support personnel as needed to enable publishing of messages across environments (RDD, ST1/ST2/PRO). Later, one or more specific roles will be created to allow sending of specific kinds of messages.
@@ -150,7 +152,7 @@ N/A
 
 **Quota Limits**
 
-There is a 4096 character limit on the "message" attribute.
+N/A
 
 **Business Rules**
 
@@ -182,7 +184,7 @@ None.
 -->
 
 * title - string - brief title of the message to convey significance
-* message - string - message to be sent (4096 char limit)
+* message - string - message to be sent
 
 <!---
 *Either put 'This call does not require a request body' or include JSON/XML request data structure*
@@ -260,6 +262,274 @@ curl -v -H "X-Auth-Token: <Auth_Token>;Content-Type: application/json" \
 
 The 'message' attribute can include a number of HTML markup tags. A whitelist of allowed tags are noted on the [HPCS Wiki](https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist).
 
+A 400 exception will be thrown if the content length of the request exceeds 4096 characters.
+
+
+
+### 4.4.2 Public Platform Status
+<!---
+*Describe the resource and what information they provide. Then enumerate all the API method calls below.*
+-->
+
+The Public Platform Status provides platform status information to all users of the Management Console. 
+More information is on the wiki - [Messaging Characteristics](https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics)
+
+
+**Status Lifecycle**
+
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
+
+#### 4.4.2.1 Create a Public Platform status
+#### HTTP Verb: POST /public_platform_status
+<!---
+*Description about the method call*
+-->
+
+The creation of a Public Platform Status message will post a message containing a title and message content to this API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
+
+**Request Data**
+<!---
+*Specify all the required/optional url and data parameters for the given method call.*
+-->
+
+**URL Parameters**
+<!---
+*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
+-->
+
+None.
+
+**Data Parameters**
+<!---
+*List all the attributes that comprise the data structure*
+-->
+
+* title - string - brief title of the message to convey significance
+* message - string - message to be sent
+
+<!---
+*Either put 'This call does not require a request body' or include JSON/XML request data structure*
+-->
+
+JSON
+
+```
+{ :title => 'Test Message', 
+  :message => 'This is a <strong>test</strong> message'
+}
+```
+
+**Success Response**
+<!---
+*Specify the status code and any content that is returned.*
+-->
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+<!---
+*Either put 'This call does not require a response body' or include JSON/XML response data structure*
+-->
+
+A successful response does not require a response body.
+
+**Error Response**
+<!---
+*Enumerate all the possible error status codes and any content that is returned.*
+-->
+
+**Status Code**
+
+400 - Malformed request, normally because of missing required data.
+401 - Unauthorized access has been attempted.
+500 - Internal Server Error of an unspecified nature.
+
+**Response Data**
+
+JSON - 400 Exception example
+
+```
+{"PlatformStatusException": {"message": "Malformed Request - missing message title.", "code": 400}}
+```
+
+JSON - 401 Exception example
+
+```
+{"PlatformStatusException": {"message": "Unauthorized Request - invalid CS token.", "code": 401}}
+```
+
+JSON - 500 Exception example
+
+```
+{"PlatformStatusException": {"message": "Server Error of an unknown nature.", "code": 500}}
+```
+
+**Curl Example**
+
+Here's an example in the RDD environment: 
+
+```
+curl -v -H "X-Auth-Token: <Auth_Token>;Content-Type: application/json" \
+  -X POST -d '{"title":"test message","message":"test message"}' \
+  https://mp.rndd.aw1.hpcloud.net/public_platform_status
+```
+
+**Additional Notes**
+<!---
+*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
+-->
+
+The 'message' attribute can include a number of HTML markup tags. A whitelist of allowed tags are noted on the [HPCS Wiki](https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist).
+
+A 400 exception will be thrown if the content length of the request exceeds 4096 characters.
+
+
+
+### 4.4.3 Private Platform Status
+<!---
+*Describe the resource and what information they provide. Then enumerate all the API method calls below.*
+-->
+
+The Private Platform Status provides platform status information to all HPCS users of the Management Console.
+More information is on the wiki - [Messaging Characteristics](https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics)
+
+
+**Status Lifecycle**
+
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
+
+#### 4.4.3.1 Create a Private Platform Status
+#### HTTP Verb: POST /private_platform_status
+<!---
+*Description about the method call*
+-->
+
+The creation of a Private Platform Status message will post a message containing a title and message content to this API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
+
+**Request Data**
+<!---
+*Specify all the required/optional url and data parameters for the given method call.*
+-->
+
+**URL Parameters**
+<!---
+*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
+-->
+
+None.
+
+**Data Parameters**
+<!---
+*List all the attributes that comprise the data structure*
+-->
+
+* title - string - brief title of the message to convey significance
+* message - string - message to be sent
+
+<!---
+*Either put 'This call does not require a request body' or include JSON/XML request data structure*
+-->
+
+JSON
+
+```
+{ :title => 'Test Message', 
+  :message => 'This is a <strong>test</strong> message'
+}
+```
+
+**Success Response**
+<!---
+*Specify the status code and any content that is returned.*
+-->
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+<!---
+*Either put 'This call does not require a response body' or include JSON/XML response data structure*
+-->
+
+A successful response does not require a response body.
+
+**Error Response**
+<!---
+*Enumerate all the possible error status codes and any content that is returned.*
+-->
+
+**Status Code**
+
+400 - Malformed request, normally because of missing required data.
+401 - Unauthorized access has been attempted.
+500 - Internal Server Error of an unspecified nature.
+
+**Response Data**
+
+JSON - 400 Exception example
+
+```
+{"PlatformStatusException": {"message": "Malformed Request - missing message title.", "code": 400}}
+```
+
+JSON - 401 Exception example
+
+```
+{"PlatformStatusException": {"message": "Unauthorized Request - invalid CS token.", "code": 401}}
+```
+
+JSON - 500 Exception example
+
+```
+{"PlatformStatusException": {"message": "Server Error of an unknown nature.", "code": 500}}
+```
+
+**Curl Example**
+
+Here's an example in the RDD environment: 
+
+```
+curl -v -H "X-Auth-Token: <Auth_Token>;Content-Type: application/json" \
+  -X POST -d '{"title":"test message","message":"test message"}' \
+  https://mp.rndd.aw1.hpcloud.net/private_platform_status
+```
+
+**Additional Notes**
+<!---
+*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
+-->
+
+The 'message' attribute can include a number of HTML markup tags. A whitelist of allowed tags are noted on the [HPCS Wiki](https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist).
+
+A 400 exception will be thrown if the content length of the request exceeds 4096 characters.
+
 
 ---
 
@@ -274,9 +544,14 @@ https://wiki.hpcloud.net/display/iaas/Implementation+Phases+and+Scope
 https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics
 https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist
 
-**Code Repo**:  https://git.hpcloud.net/ManagementConsole/message_pub.git
+**Code Repo**: 
 
-**API Lead Contact**: Chris Johnson (wchrisjohnson@hp.com), Travis Longoris (travis.longoria@hp.com)
+https://git.hpcloud.net/ManagementConsole/message_pub.git
+
+**API Lead Contacts**: 
+
+Chris Johnson (wchrisjohnson@hp.com)
+Travis Longoris (travis.longoria@hp.com)
 
 ---
 
