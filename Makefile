@@ -53,7 +53,8 @@ deploy-qa: build
 	stackato login
 	stackato --group Documentation map OffLineApp docs.qa.devex.uswest.hpcloud.net
 	-stackato --group Documentation unmap docs-site docs.qa.devex.uswest.hpcloud.net
-	stackato --group Documentation update docs-site
+	stackato --group Documentation update --no-start docs-site
+	stackato --group Documentation start docs-site
 	stackato --group Documentation map docs-site docs.qa.devex.uswest.hpcloud.net
 	stackato --group Documentation unmap OffLineApp docs.qa.devex.uswest.hpcloud.net
 
@@ -62,7 +63,8 @@ deploy-prod-az2: build
 	stackato login
 	stackato --group Documentation map OffLineApp docs.hpcloud.com
 	-stackato --group Documentation unmap docs-site docs.hpcloud.com
-	stackato --group Documentation update docs-site
+	stackato --group Documentation update --no-start docs-site
+	stackato --group Documentation start docs-site
 	stackato --group Documentation map docs-site docs.hpcloud.com
 	stackato --group Documentation unmap OffLineApp docs.hpcloud.com
 
@@ -71,7 +73,8 @@ deploy-prod-az1: build
 	stackato login
 	stackato --group Documentation map OffLineApp docs.hpcloud.com
 	-stackato --group Documentation unmap docs-site docs.hpcloud.com
-	stackato --group Documentation update docs-site
+	stackato --group Documentation update --no-start docs-site
+	stackato --group Documentation start docs-site
 	stackato --group Documentation map docs-site docs.hpcloud.com
 	stackato --group Documentation unmap OffLineApp docs.hpcloud.com
 
