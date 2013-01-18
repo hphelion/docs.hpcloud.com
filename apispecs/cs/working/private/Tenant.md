@@ -12,6 +12,9 @@ Allows reading a list of all tenants across domains. This API supports paginatio
 * *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
 * *marker* (Optional) - string - the resource Id of the last item in the previous list.
 * *name* (Optional) - string - name of the tenant to be returned.
+* *swiftAccountHash* (Optional) - string - swiftAccountHash of the tenant to be returned.
+
+name and swiftAccountHash filters as mutually exclusive. So both filter values cannot be present within one API request.
 
 **Data Parameters**
 
@@ -66,6 +69,32 @@ XML
 
 ```
 GET /v2.0/HP-IDM/v1.0/tenants?name=tenantName HTTP/1.1
+Accept: application/json
+Content-Type: application/xml
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4ed5120a2cdc1f6ab057b22d
+Host: localhost:9999
+Connection: keep-alive
+```
+
+Request With swiftAccountHash Filter:
+
+JSON
+
+```
+GET /v2.0/HP-IDM/v1.0/tenants?swiftAccountHash=accountHash HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+User-Agent: Wink Client v1.1.2
+X-Auth-Token: HPAuth_4ed5120a2cdc1f6ab057b22d
+Host: localhost:9999
+Connection: keep-alive
+```
+
+XML
+
+```
+GET /v2.0/HP-IDM/v1.0/tenants?swiftAccountHash=accountHash HTTP/1.1
 Accept: application/json
 Content-Type: application/xml
 User-Agent: Wink Client v1.1.2
