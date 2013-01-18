@@ -82,3 +82,7 @@ There are two menu structures in the _config.yml file:
 
 1. navigation: This menu is broken down by main or product name. When no product is present main is used.
 2. apinavigation: This is used on all page layouts and is meant for the api navigation.
+
+## Development Workflow
+
+For details on the writing and publishing process, please see [the wiki page for instructions](https://wiki.hpcloud.net/display/iaas/Documentation+Site).
