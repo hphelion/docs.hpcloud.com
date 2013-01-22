@@ -687,7 +687,7 @@ curl -k -s --cert <CERT_FILE> --cacert <CACERT_FILE>  -XPUT -H "X-Auth-Token: HP
 
 ## Get a Role Definition
 #### GET [HPKeystoneExtensionBaseURI]/roleDefs/{roleId}
-*Privilege Level: SA, SVC, DA, DU*
+*Privilege Level: SA, SVC*
 
 This API is used to get a role definition specified by a roleId.
 
