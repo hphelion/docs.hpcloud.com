@@ -30,7 +30,9 @@ lookup['/file/WinCLI-1.3.0.6.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.c
 lookup['/file/WinCLI-1.3.1.8.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.1.8.zip'
 lookup['/file/WinCLI-1.3.1.9.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.1.9.zip'
 lookup['/file/WinCLI-1.3.2.2.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.2.2.zip'
+lookup['/file/WinCLI-1.3.2.4.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.2.4.zip'
 lookup['/file/WinCLI.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-3.zip'
+lookup['/file/Python2.6.8.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp14.zip'
 
 
 def handle_no_file(env, start_response):
