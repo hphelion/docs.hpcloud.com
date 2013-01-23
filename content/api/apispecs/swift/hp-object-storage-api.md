@@ -464,9 +464,8 @@ normally use to access objects - there is no need to change or modify it in any 
 
 Let's say the signature ends up equaling "12345678912345:GP54NNRN2TKBVWH449AG:da39a3ee5e6b4b0d3255bfef95601890afd80709" and expires ends up "1323479485". Then, for example, the website could provide a link to:
 
-```
     https://swift-cluster.example.com/v1/12345678912345/container/object?temp_url_sig=12345678912345%3AGP54NNRN2TKBVWH449AG%3Ada39a3ee5e6b4b0d3255bfef95601890afd80709&temp_url_expires=1323479485
-```
+
 Any alteration of the resource path or query arguments will cause an "401 Unauthorized" error to be returned. Similarly, a PUT where GET was the allowed method will also fail. HEAD is allowed if GET or PUT is allowed.
 
 #### 2.6.6 FormPOST #### {#formpost}
