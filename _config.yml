@@ -60,12 +60,19 @@ navigation:
     url: /cli/windows/containers-and-folders/
   - text: Block Storage Examples
     url: /cli/windows/block-storage/
-  - text: Command Line Reference
+  - text: CLI Reference
     url: /cli/windows/reference/
   - text: Getting Help
     url: /cli/windows/help/
   - text: Release Notes
     url: /cli/windows/release-notes/
+  python-novaclient:
+  - text: Overview
+    url: /cli/nova
+  - text: Installation
+    url: /cli/nova/install
+  - text: CLI Reference
+    url: /cli/nova/reference
   fog:
   - text: Overview
     url: /bindings/fog/
