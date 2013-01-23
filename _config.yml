@@ -112,6 +112,6 @@ apinavigation:
 - text: Block Storage
   url: http://api-docs.hpcloud.com/hpcloud-compute/1.0/content/ch_dev-api-block-storage.html
 - text: CDN
-  url: /file/CDN
+  url: /api/CDN
 - text: RDB for MySQL
   url: http://api-docs.hpcloud.com/hpcloud-rdb-mysql/1.0/content/index.html
