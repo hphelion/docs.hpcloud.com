@@ -66,6 +66,13 @@ navigation:
     url: /cli/windows/help/
   - text: Release Notes
     url: /cli/windows/release-notes/
+  python-novaclient:
+  - text: Overview
+    url: /cli/nova
+  - text: Installation
+    url: /cli/nova/install
+  - text: CLI Reference
+    url: /cli/nova/reference
   fog:
   - text: Overview
     url: /bindings/fog/
