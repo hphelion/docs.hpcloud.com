@@ -15,6 +15,7 @@ lookup['/file/hpcloud.tar'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0
 lookup['/file/hpfog-0.0.16.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog-0.0.16.gem'
 lookup['/file/hpfog-0.0.17.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog-0.0.17.gem'
 lookup['/file/hpfog-0.0.18.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog-0.0.18.gem'
+lookup['/file/hpfog-0.0.19.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog-0.0.19.gem'
 lookup['/file/hpfog.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog-0.0.15.gem'
 lookup['/file/hpfog.tar'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog_3.tar'
 lookup['/file/hpNET-1.3.0.6.nupkg'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/HPCloud-API.1.3.0.6.nupkg'
