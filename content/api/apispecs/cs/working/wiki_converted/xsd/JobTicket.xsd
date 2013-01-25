@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="JobTicket" type="actionJobTicket"/>
+
+  <xs:element name="jobEntry" type="jobEntry"/>
+
+  <xs:element name="jobMap" type="jobMap"/>
+
+  <xs:complexType name="jobMap" final="extension restriction">
+    <xs:sequence>
+      <xs:element name="entry" type="jobEntry" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="jobEntry" final="extension restriction">
+    <xs:sequence>
+      <xs:element name="key" type="xs:string" minOccurs="0"/>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="actionJobTicket">
+    <xs:sequence>
+      <xs:element name="actionParams" type="jobMap" minOccurs="0"/>
+      <xs:element name="stepStatus" type="jobMap" minOccurs="0"/>
+      <xs:element name="actionResults" type="jobMap" minOccurs="0"/>
+      <xs:element name="action" type="xs:string" minOccurs="0"/>
+      <xs:element name="completion" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="errorDescription" type="xs:string" minOccurs="0"/>
+      <xs:element name="status" type="jobStatus" minOccurs="0"/>
+      <xs:element name="submission" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="ticketId" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="jobStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PENDING"/>
+      <xs:enumeration value="ACTIVE"/>
+      <xs:enumeration value="COMPLETE"/>
+      <xs:enumeration value="ERROR"/>
+      <xs:enumeration value="CANCELLED"/>
+      <xs:enumeration value="TIMEDOUT"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+
