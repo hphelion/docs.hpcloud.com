@@ -26,11 +26,7 @@ Bock volumes can store boot images, user data or both.
 
 ## 2. Architecture View
 
-### 2.1 Overview
-
-Example info. and documentation for Bock is available on the [Bock Wiki page](https://wiki.hpcloud.net/download/attachments/131820/Bock+review.pdf?version=1&modificationDate=1326461253000).
-
-### 2.2 Conceptual/Logical Architecture View
+### 2.1 Conceptual/Logical Architecture View
 The Nova volume service consists of an extension to the Nova API and an
 additional API entry point. The API extension allows the caller to create
 volumes that persist independently of Nova Virtual Machines. One or more of
@@ -40,15 +36,10 @@ mounted and used as standard block storage devices.
 The API also provides an interface to create a read-only snapshot of an
 existing Volume, and to create standard volumes from these snapshots.
 
-### 2.3 Infrastructure Architecture View
+### 2.2 Infrastructure Architecture View
 
 This API is implemented as a Nova API Resource Extension and leverages the
 existing infrastructure to deliver the service.
-
-### 2.4 Entity Relationship Diagram
-
-See the Overview above for details of the entities involved in the API.
-
 
 ## 3. Account-level View
 
