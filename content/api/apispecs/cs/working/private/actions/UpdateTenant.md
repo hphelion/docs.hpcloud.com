@@ -2,7 +2,7 @@
 
 ## Description ##
 
-Change the name and/or description for an existing Tenant in both UMS and Zuora.
+Change the name and/or description for an existing Tenant in both UMS and Zuora. This action can also be used to update the soldTo address of tenant account (CS and Zuora).
 
 ## PrivilegeLevel ##
 
@@ -20,6 +20,12 @@ Change the name and/or description for an existing Tenant in both UMS and Zuora.
 | tenantName 	| xs:string 	| false 	|
 | description 	| xs:string 	| false 	|
 | status 	| xs:string 	| false	|
+| addressLine1	| xs:string	|false	|
+| addressLine2	| xs:string	|false	|
+| city		| xs:string	|false	|
+| state		| xs:string	|false	|
+| country	| xs:string	|false	|
+| zip		| xs:string	|false	|
 
 ## Action Steps ##
 | Step Name 	| Step Description 	| Is Retryable 	|
@@ -34,6 +40,8 @@ Change the name and/or description for an existing Tenant in both UMS and Zuora.
 1. tenantId must be valid.
 1. tenantName must be unique.
 1. If Zuora cannot be accessed than this Action Step will be retried at a future time.
+1. By default address is not a mandatory parameter but if provided it should have all the components (e.g. addressLine1, city, state, country and zip) only addressLine2 is an optional argument.
+1. BillTo address of tenant (CS and Zuora) account should always mapped to the billTo address of domain account.
 
 ## JobTicket Results ##
 

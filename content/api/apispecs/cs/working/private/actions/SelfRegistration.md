@@ -97,10 +97,10 @@ Note that the **EmailVerification** action must handle validations from this act
 
 | Value	| Effect 	|
 | :---------------	| :---------------	|
-| Gratis Account	| 	|
-| Self Service	| 	|
-| HP Internal	| 	|
-| Corporate	| Causes the Zuora defaultPaymentMethod to be set to "Other" and tax exemption to "No" on the Zuora account.	|
+| Gratis Account | The permissions of the caller are must be able to register the new account. |
+| Self Service	| Allows an anonomous user to register themselves. |
+| HP Internal | The permissions of the caller are must be able to register the new account. |
+| Corporate	| Causes the Zuora defaultPaymentMethod to be set to "Other" and tax exemption to "No" on the Zuora account.  Also, the permissions of the caller are must be able to register the new account. |
 
 ## Action Steps ##
 

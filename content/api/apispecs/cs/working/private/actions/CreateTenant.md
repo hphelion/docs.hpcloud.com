@@ -2,12 +2,9 @@
 ## POST [HPKeystoneExtensionBaseURI]/action/createtenant
 *Privilege Level: System Admin, Domain Admin*  
  
-*Constraints:*  
-
-1.  Tenant Name must be unique.
-2.  If Zuora cannot be accessed than this Action Step will be retried at a future time.
-
 This Action is used to create a new Tenant for an existing Domain in Control Services. Once successfully created in CS, a new Account is created in Zuora which is linked to the Tenant. Later, when the tenant activates services, the corresponding Zuora Account will subscribe to products in order to support customer billing.
+
+This action can also be used to set the soldTo address of tenant (CS and Zuora) account.
 
 **Request Data**  
 
@@ -23,6 +20,19 @@ None
 |domainId|xs:string|true|
 |description|xs:string|false|
 |homeRegion|xs:string|false|
+|addressLine1|xs:string|false|
+|addressLine2|xs:string|false|
+|city|xs:string|false|
+|state|xs:string|false|
+|country|xs:string|false|
+|zip|xs:string|false|
+
+## Constraints ##
+1. Tenant Name must be unique.
+1. If Zuora cannot be accessed than this Action Step will be retried at a future time.
+1. By default address is not a mandatory parameter but if provided it should have all the components (e.g. addressLine1, city, state, country and zip) only addressLine2 is an optional argument.
+1. If no address is provided in parameter this action will use the domain's soldTo address to map to tenant's soldTo address.
+1. BillTo address of tenant (CS and Zuora) account should always mapped to the billTo address of domain account.
 
 JSON
 
