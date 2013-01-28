@@ -130,10 +130,10 @@ documentation.
 | **Servers**  | [List attached volumes](#list_attached_volumes) | GET    | {BaseUri}/servers/{server_id}/os-volume_attachments | Y/**N**  |  |
 |          | [Attach a volume](#attach_volume)  | POST            | {BaseUri}/servers/{server_id}/os-volume_attachments/{volume_id} | Y/**N**  |  |
 |          | [Detach a volume](#detach_volume)  | DELETE          | {BaseUri}/servers/{server_id}/os-volume_attachments/{volume_id} | Y/**N**  |  |
-| **Snapshots** | List volume snapshots  | GET  | {BaseUri}/os-snapshots | Y/**N**  |  |
-|           | Create new volume snapshot | POST | {BaseUri}/os-snapshots | Y/**N**  |  |
-|           | Get volume snapshot details | GET | {BaseUri}/os-snapshots/{snapshot_id} | Y/**N**  |  |
-|           | Delete volume snapshot  | DELETE  | {BaseUri}/os-snapshots/{snapshot_id} | Y/**N**  |  |
+| **Snapshots** | [List volume snapshots](#list_snapshots)  | GET  | {BaseUri}/os-snapshots | Y/**N**  |  |
+|           | [Create new volume snapshot](#create_snapshot) | POST | {BaseUri}/os-snapshots | Y/**N**  |  |
+|           | [Get volume snapshot details](#get_snapshot_details) | GET | {BaseUri}/os-snapshots/{snapshot_id} | Y/**N**  |  |
+|           | [Delete volume snapshot](#delete_snapshot)  | DELETE  | {BaseUri}/os-snapshots/{snapshot_id} | Y/**N**  |  |
 
 ### 4.2 Common Request Headers
 The common request headers are defined in the Nova Compute documentation.
@@ -1022,7 +1022,7 @@ you can delete the snapshot and continue to work with the volume.
 
 You can not create a snapshot that is attached to a server.
 
-##### 4.4.4.1 List Snapshots
+##### 4.4.4.1 List Snapshots ##### {#list_snapshots}
 ##### GET /os-snapshots
 
 List all snapshots.
@@ -1081,7 +1081,7 @@ XML
 
 
 
-##### 4.4.4.2 Create Snapshot
+##### 4.4.4.2 Create Snapshot ##### {#create_snapshot}
 ##### POST /os-snapshots
 
 Create a snapshot from a specified volume.
@@ -1151,7 +1151,7 @@ XML
             -H "Content-Type: application/json; charset=UTF-8"
 
 
-##### 4.4.4.3 View information about a single snapshot
+##### 4.4.4.3 View information about a single snapshot ##### {#get_snapshot_details}
 ##### GET /os-snapshots
 
 View all information about a single snapshot.
@@ -1200,7 +1200,7 @@ XML
 
 
 
-##### 4.4.4.4 Delete a snapshot
+##### 4.4.4.4 Delete a snapshot ##### {#delete_snapshot}
 ##### DELETE /os-snapshots
 
 Delete a single snapshot.
