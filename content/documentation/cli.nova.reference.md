@@ -2,10 +2,10 @@
 layout: default
 title: "Python Novaclient CLI: Command Line Reference"
 permalink: /cli/nova/reference/
-product: cli-nova
+product: nova-cli
 
 ---
-#Python Novaclient CLI: Command Line Reference
+#Python Novaclient CLI: Command Line Reference#
 
 Below you can find a full reference of supported Python Novaclient command-line interface (CLI) commands. The commands are alphabetized.  You can also use the <font face="Courier">nova help [<em>command</em>]</font> tool (where <em>command</em> is the name of the command on which you want help, for example:
 
@@ -13,37 +13,6 @@ Below you can find a full reference of supported Python Novaclient command-line 
     
 provides you the usage, description, and option information for the [`volume-create`](#volume-create) command.  `nova help` without any arguments provides you a list of all the available Novaclient commands.
 
-
------------CLI sample-----------
-
-##account## {#account}
-List your accounts and account settings.
-
-###Syntax
-`hpcloud account {<account_name>}`
-
-###Description
-List your accounts and your account settings.
-
-###Examples
-List your accounts and account settings:
-
-    hpcloud account
-
-List your accounts and account settings:
-
-    hpcloud account:list
-
-List your accounts and account settings for domain `useast`:
-
-    hpcloud account:list useast
-
-###Aliases
-`account:list`
-
-For more information on the Novaclient commands, go ahead and surf on over to [our Knowledge Base article](https://community.hpcloud.com/article/python-novaclient-commands)!  Upon closer examination, this page in the kb is basically useless.  All it is is a list of commands--no syntax, no examples, etc.  Useless.
-
-----------------From the KB page------------------
 
 ##add-floating-ip## {#add-floating-ip}
 Add a floating IP address to a server
