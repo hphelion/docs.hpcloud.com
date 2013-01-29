@@ -6,7 +6,7 @@ keywords: "Monitoring, Maas"
 product: maas---# HP Cloud Monitoring API Specifications
 **Date:**  January 17, 2013
 **Document Version:** 1.0
-## 1. Overview # {#Section1_}This document describes the HP Cloud Monitoring API, which allows you to monitor resources in HP's Cloud.### 1.1 API Maturity Level ## {#Section1_1}**Maturity Level**: HP Cloud Monitoring API is currently in Exploratory level.**Version API Status**: The HP Cloud Monitoring API is currently in BETA.## 2. Architecture View # {#Section2_}Monitoring as a Service provides APIs for managing metric consumption endpoints, metric subscriptions, alarms, and contact methods.### 2.1 Overview ## {#ArchitectureOverview}The MaaS API provides a RESTful JSON interface for interacting with Monitoring as a Service and managing monitoring related resources.
+## 1. Overview # {#Section1_}This document describes the HP Cloud Monitoring API, which allows you to monitor resources in HP's Cloud.### 1.1 API Maturity Level ## {#Section1_1}**Maturity Level**: HP Cloud Monitoring API is currently in Exploratory level.**Version API Status**: The HP Cloud Monitoring API is currently in BETA.## 2. Architecture View # {#Section2_}Monitoring as a Service provides APIs for managing metric consumption endpoints, metric subscriptions, alarms, and contact methods.### 2.1 Overview ## {#ArchitectureOverview}The Monitoring API provides a RESTful JSON interface for interacting with Monitoring as a Service and managing monitoring related resources.
 The API supports a number of operations. These include:
 + [Version Operations](#ServiceVersionOps) - Provides information about the supported Monitoring API versions.
 + [Version Operations Details](#ServiceDetailsVersion)+ [Endpoint Operations](#ServiceEndpointOps) - The endpoint resource represents an endpoint from which metrics can be consumed.
@@ -14,9 +14,12 @@ product: maas---# HP Cloud Monitoring API Specifications
 + [Subscription Operations Details](#ServiceDetailsSubscription)+ [Notification Operations](#ServiceNotificationOps) - The notification method resource represents a method through which notifications can be sent.
 + [Notification Operations Details](#ServiceDetailsNotification)+ [Alarm Operations](#ServiceAlarmOps) - The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
 + [Alarm Operations Details](#ServiceDetailsAlarm)#### 2.1.1 High Level Usage ### {#HighLevelUsage}
-
+There are 4 major operations (besides Version information):
++ Endpoints specify the connection for consuming metric data to the AMQP message queue.
++ Subscriptions specify what monitoring data is to be streamed.  You must create an endpoint to use with the subscription.
++ Notifications specify the method(s) in which a user is contacted by alarms.+ Alarms specify user defined exceptional conditions that the user feels the need to be notified about.  You must create a Notification method to use with the Alarm.
 #### 2.1.2 Metric Constants ### {#Constants}
-The MaaS API makes use of several metric related pre-defined constants throughout. Foremost is the namespace constant. Support namespaces are:
+The Monitoring API makes use of several metric related pre-defined constants throughout. Foremost is the namespace constant. Support namespaces are:
 
 + Compute
 + Volume
@@ -59,7 +62,7 @@ JSON	{
 			"internal_code" : "Internal error log code"
     	}
 	}The error code is returned in the body of the response for convenience. The message section returns a human-readable message that is appropriate for display to the end user. The details section is optional and may contain extra information. The internal_code is optional to further identify the internal cause of an error.
-## 3. Account-level View # {#Section3_}Requests to the MaaS API are required to present a valid token which must be obtained from Keystone prior to making a MaaS API request.### 3.1 Accounts ## {#Accounts}**Requesting a Token**
+## 3. Account-level View # {#Section3_}Requests to the Monitoring API are required to present a valid token which must be obtained from Keystone prior to making a Monitoring API request.### 3.1 Accounts ## {#Accounts}**Requesting a Token**
 ***Request URL***
 	curl -i https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens -X POST -H "Content-Type: application/json" -H "User-Agent: python-novaclient"
 ***Request Body***
@@ -99,13 +102,13 @@ JSON	{
 	]
 	}}
 	
-***Accessing MaaS***
+***Accessing Monitoring***
 
-The endpoint for accessing the MaaS API can be obtained from the service catalog returned in your Keystone authentication request.
+The endpoint for accessing the Monitoring API can be obtained from the service catalog returned in your Keystone authentication request.
 
 	https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/
 	
-A request can then be made against resources at that endpoint by supplying the access/token/id from your Keystone authentication request as in your MaaS API request header as an X-Auth-Token:
+A request can then be made against resources at that endpoint by supplying the access/token/id from your Keystone authentication request as in your Monitoring API request header as an X-Auth-Token:
 
 *Sample Request*
 
@@ -198,7 +201,7 @@ A request can then be made against resources at that endpoint by supplying the a
 Provides information about the supported Monitoring API versions.
 
 ##### 4.4.1.1 List All Versions #### {#ServiceDetailsListVersion}###### GET /Lists all versions. **Request Data**	GET / HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**JSON	{  
 	  "versions": [
 	    {
@@ -206,7 +209,7 @@ Provides information about the supported Monitoring API versions.
 	      "links" : [
 	        {
 	          "rel": "self",
-	          "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0"
+	          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0"
 	        }
 	      ],
 	      "status": "CURRENT",
@@ -218,8 +221,8 @@ Provides information about the supported Monitoring API versions.
 | Status Code | Description | Reasons |
 | :-----------| :-----------| :-------|
 | 400 | Bad Request | Malformed request in URI or request body. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET https://region-a.geo-1.maas.hpcloudsvc.com ##### 4.4.1.2 Get a Specific Version #### {#ServiceDetailsSpecificVersion}###### GET /{version_id}Gets the details of a specific version identified by {version_id}.**Request Data**	GET /v1.0 HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET https://region-a.geo-1.monitoring.hpcloudsvc.com ##### 4.4.1.2 Get a Specific Version #### {#ServiceDetailsSpecificVersion}###### GET /{version_id}Gets the details of a specific version identified by {version_id}.**Request Data**	GET /v1.0 HTTP/1.1
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**JSON	{  
 	  "version": {
@@ -227,7 +230,7 @@ Provides information about the supported Monitoring API versions.
 	    "links" : [
 	      {
 	        "rel": "self",
-	        "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0"
+	        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0"
 	      }
 	    ],
 	    "status": "CURRENT",
@@ -243,10 +246,10 @@ Provides information about the supported Monitoring API versions.
 | 404 | Not Found | Requested resource cannot be found. |
 | 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/#### 4.4.2 Endpoint ### {#ServiceDetailsEndpoint}
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/#### 4.4.2 Endpoint ### {#ServiceDetailsEndpoint}
 The endpoint resource represents an endpoint from which metrics can be consumed.
 *Note: The amqp_password is not retrievable after endpoint creation. If the password is lost, then the password reset operation must be performed.*##### 4.4.2.1 Create a New Endpoint #### {#ServiceDetailsCreateEndpoint}###### POST /endpointsCreates a new endpoint for metric consumption. **Request Data**	POST /v1.0/endpoints HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response**	HTTP/1.1 201 Created
 	Content-Type: application/son
@@ -275,8 +278,8 @@ Provides information about the supported Monitoring API versions.
 | 409 | Conflict | An endpoint for this tenant already exists. |
 | 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints ##### 4.4.2.2 List All Endpoints #### {#ServiceDetailsListEndpoint}###### GET /endpointsLists all endpoints. Password information is not present.**Request Data**	GET /v1.0/endpoints HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints ##### 4.4.2.2 List All Endpoints #### {#ServiceDetailsListEndpoint}###### GET /endpointsLists all endpoints. Password information is not present.**Request Data**	GET /v1.0/endpoints HTTP/1.1
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**JSON	{
 	  "endpoints": [
@@ -309,8 +312,8 @@ Provides information about the supported Monitoring API versions.
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints ##### 4.4.2.3 Get a Specific Endpoint #### {#ServiceDetailsSpecificEndpoint}###### GET /endpoints/{endpoint_id}Gets the details of a specific endpoint identified by {endpoint_id}. Password information is not present.**Request Data**	GET /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints ##### 4.4.2.3 Get a Specific Endpoint #### {#ServiceDetailsSpecificEndpoint}###### GET /endpoints/{endpoint_id}Gets the details of a specific endpoint identified by {endpoint_id}. Password information is not present.**Request Data**	GET /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**JSON	{
 	  "endpoint": {
@@ -336,8 +339,8 @@ Provides information about the supported Monitoring API versions.
 | 404 | Not Found | Requested resource cannot be found. |
 | 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c##### 4.4.2.4 Delete a Specific Endpoint #### {#ServiceDetailsDeleteEndpoint}###### DELETE /endpoints/{endpoint_id}Deletes a specific endpoint identified by {endpoint_id}.**Request Data**	DELETE /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c##### 4.4.2.4 Delete a Specific Endpoint #### {#ServiceDetailsDeleteEndpoint}###### DELETE /endpoints/{endpoint_id}Deletes a specific endpoint identified by {endpoint_id}.**Request Data**	DELETE /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**204 - No Content**Response Data**This call does not provide a response body.**Error Response**
 **Status Code**| Status Code | Description | Reasons |
@@ -348,8 +351,8 @@ Provides information about the supported Monitoring API versions.
 | 404 | Not Found | Requested resource cannot be found. |
 | 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X DELETE \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c##### 4.4.2.4 Reset the Password for a Specific Endpoint #### {#ServiceDetailsResetPasswordEndpoint}###### POST /endpoints/{endpoint_id}/reset-passwordResets the password for a specific endpoint identified by {endpoint_id}.**Request Data**	POST /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c##### 4.4.2.4 Reset the Password for a Specific Endpoint #### {#ServiceDetailsResetPasswordEndpoint}###### POST /endpoints/{endpoint_id}/reset-passwordResets the password for a specific endpoint identified by {endpoint_id}.**Request Data**	POST /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password HTTP/1.1
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**	{
 	  "password": "mEfOy34qJV"
@@ -362,7 +365,7 @@ Provides information about the supported Monitoring API versions.
 | 404 | Not Found | Requested resource cannot be found. |
 | 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password#### 4.4.3 Subscription ### {#ServiceDetailsSubscription}
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password#### 4.4.3 Subscription ### {#ServiceDetailsSubscription}
 
 The subscription resource represents a subscription to consume metrics.
 
@@ -374,7 +377,7 @@ Creates a new subscription to consume metrics.
 **Request Data**
 
 	POST /v1.0/subscriptions HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Content-Type: application/json
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
@@ -416,7 +419,7 @@ JSON
 	    "links": [
 	      {
 	        "rel": "self",
-	        "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/subscriptions/cdace7b4-8bea-404c-848c-860754a76fb7"
+	        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions/cdace7b4-8bea-404c-848c-860754a76fb7"
 	      }
 	    ]
 	    "endpoint_id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
@@ -445,7 +448,7 @@ JSON
 
 	$ curl -X POST \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/subscriptions 
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions 
 
 ##### 4.4.3.2 List All Subscriptions #### {#ServiceDetailsListSubscription}
 ###### GET /subscriptions
@@ -455,7 +458,7 @@ Lists all subscriptions.
 **Request Data**
 
 	GET /v1.0/subscriptions HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
 
@@ -480,7 +483,7 @@ JSON
 	      "links": [
 	        {
 	          "rel": "self",
-	          "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/subscriptions/cdace7b4-8bea-404c-848c-860754a76fb7"
+	          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions/cdace7b4-8bea-404c-848c-860754a76fb7"
 	        }
 	      ]
 	      "endpoint_id": "36351ef0-3ff3-11e2-a25f-0800200c9a66",
@@ -494,7 +497,7 @@ JSON
 	      "links": [
 	        {
 	          "rel": "self",
-	          "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/subscriptions/abce9e32-6ce0-4a36-9750-df415606babc"
+	          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions/abce9e32-6ce0-4a36-9750-df415606babc"
 	        }
 	      ]
 	      "endpoint_id": "3d713b90-3ff3-11e2-a25f-0800200c9a66",
@@ -520,7 +523,7 @@ JSON
 
 	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/subscriptions 
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions 
 
 ##### 4.4.3.3 Get a Specific Subscription #### {#ServiceDetailsSpecificSubscription}
 ###### GET /subscriptions/{subscription_id}
@@ -530,7 +533,7 @@ Gets the details of a specific subscription identified by {subscription_id}.
 **Request Data**
 
 	GET /v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
 
@@ -554,7 +557,7 @@ JSON
 	    "links": [
 	      {
 	        "rel": "self",
-	        "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c"
+	        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	      }
 	    ]
 	    "endpoint_id": "36351ef0-3ff3-11e2-a25f-0800200c9a66",
@@ -583,7 +586,7 @@ JSON
 
 	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c
 
 ##### 4.4.3.4 Delete a Specific Subscription #### {#ServiceDetailsDeleteSubscription}
 ###### DELETE /subscriptions/{subscription_id}
@@ -593,7 +596,7 @@ Deletes a specific subscription identified by {subscription_id}.
 **Request Data**
 
 	DELETE /v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
 
@@ -626,7 +629,7 @@ This call does not provide a response body.
 
 	$ curl -X DELETE \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c#### 4.4.4 Notification Method ### {#ServiceDetailsNotification}
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c#### 4.4.4 Notification Method ### {#ServiceDetailsNotification}
 The notification method resource represents a method through which notifications can be sent.
 
 ##### 4.4.4.1 Create a New Notification Method #### {#ServiceDetailsCreateNotification}
@@ -637,7 +640,7 @@ Creates a new notification method through which notifications can be sent when a
 **Request Data**
 
 	POST /v1.0/notification-methods HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Content-Type: application/json
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
@@ -677,7 +680,7 @@ JSON
 	    "links" : [
 	      {
 	        "rel": "self",
-	        "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
+	        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
 	      }
 	    ],
 	    "name": "Joe's Email",
@@ -701,7 +704,7 @@ JSON
 
 	$ curl -X POST \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods 
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods 
 
 ##### 4.4.4.2 List All Notification Methods #### {#ServiceDetailsListNotification}
 ###### GET /notification-methods
@@ -711,7 +714,7 @@ Lists all notification methods.
 **Request Data**
 
 	GET /v1.0/notification-methods HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
 
@@ -736,7 +739,7 @@ JSON
 	      "links" : [
 	        {
 	          "rel": "self",
-	          "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
+	          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	        }
 	      ],
 	      "name": "Joe's Email",
@@ -748,7 +751,7 @@ JSON
 	      "links" : [
 	        {
 	          "rel": "self",
-	          "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
+	          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
 	        }
 	      ],
 	      "name": "Joe's Phone",
@@ -772,7 +775,7 @@ JSON
 
 	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods 
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods 
 
 ##### 4.4.4.3 Get a Specific Notification Methods #### {#ServiceDetailsSpecificNotification}
 ###### GET /notification-methods/{notification_method_id}
@@ -782,7 +785,7 @@ Gets the details of a specific notification method identified by {notification_m
 **Request Data**
 
 	GET /v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
 
@@ -806,7 +809,7 @@ JSON
 	    "links" : [
 	      {
 	        "rel": "self",
-	        "href": "https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
+	        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	      }
 	    ],
 	    "name": "Joe's Email",
@@ -830,7 +833,7 @@ JSON
 
 	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c
 
 ##### 4.4.4.4 Delete a Specific Notification Method #### {#ServiceDetailsDeleteNotification}
 ###### DELETE /notification-methods /{notification_method_id}
@@ -840,7 +843,7 @@ Deletes a specific notification method identified by {notification_method_id}.
 **Request Data**
 
 	DELETE /v1.0/notification-methods /eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
 
@@ -873,7 +876,7 @@ This call does not provide a response body.
 
 	$ curl -X DELETE \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c#### 4.4.5 Alarm ### {#ServiceDetailsAlarm}
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c#### 4.4.5 Alarm ### {#ServiceDetailsAlarm}
 The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
 
 **State Lifecycle**
@@ -891,7 +894,7 @@ Creates a new alarm.
 **Request Data**
 
 	POST /v1.0/alarms HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Content-Type: application/json
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
@@ -975,7 +978,7 @@ JSON
 
 	$ curl -X POST \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/alarms 
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms 
 
 ##### 4.4.5.2 List All Alarms #### {#ServiceDetailsListAlarm}
 ###### GET /alarms
@@ -985,7 +988,7 @@ Lists all alarms.
 **Request Data**
 
 	GET /v1.0/alarms HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
 
@@ -1040,7 +1043,7 @@ JSON
 
 	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/alarms 
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms 
 
 ##### 4.4.5.3 Get a Specific Alarm #### {#ServiceDetailsSpecificAlarm}
 ###### GET /alarms/{alarm_id}
@@ -1050,7 +1053,7 @@ Gets the details of a specific alarms identified by {alarm_id}.
 **Request Data**
 
 	GET /v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
 
@@ -1108,7 +1111,7 @@ JSON
 
 	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c
 
 ##### 4.4.5.4 Delete a Specific Alarm #### {#ServiceDetailsDeleteAlarm}
 ###### DELETE /alarms/{alarm_id}
@@ -1118,7 +1121,7 @@ Deletes a specific alarm identified by {alarm_id}.
 **Request Data**
 
 	DELETE /v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
-	Host: https://region-a.geo-1.maas.hpcloudsvc.com
+	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}
 
@@ -1151,8 +1154,8 @@ This call does not provide a response body.
 
 	$ curl -X DELETE \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.maas.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c## 5. Glossary # {#Section5_}* Namespace - A required classification for a metric.* Dimension - An optional classification for a metric. A metric may be classified by multiple dimensions.* MaaSEndpoint - The base HTTP endpoint through which the MaaS API can be accessed. 
-* MaaSBaseURI - The base URI through which a specific version of the MaaS API can be accessed.
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c## 5. Glossary # {#Section5_}* Namespace - A required classification for a metric.* Dimension - An optional classification for a metric. A metric may be classified by multiple dimensions.* MaaSEndpoint - The base HTTP endpoint through which the Monitoring API can be accessed. 
+* MaaSBaseURI - The base URI through which a specific version of the Monitoring API can be accessed.
 
 
 
