@@ -1,18 +1,18 @@
 ---
 layout: page
 permalink: /api/block-storage/
-title: Volume API Overview
-description: "An overview of the volume api."
+title: HP Cloud Block Storage API Overview
+description: "An overview of the HP Cloud Block Storage APIs."
 keywords: "bock, volumes, block storage"
 product: block-storage
-published: false
 
 ---
-# Volume API Overview
+# HP Cloud Block Storage API Overview
 
-This document is a stub page that should contain an api overview of bock.
+An overview of the various APIs for the HP Cloud Block Storage services.
 
 ## Sub-pages
 
-* [Backup API](/api/block-storage/backup/)
-* [Bootable Volume](/api/block-storage/boot/)
+* [Block Storage API](/api/block-storage/storage/)
+* [Volumes Backup API](/api/block-storage/backup/)
+* [Bootable Volumes API](/api/block-storage/boot/)

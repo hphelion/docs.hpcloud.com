@@ -1,14 +1,14 @@
 ---
 layout: page
-permalink: /api/block-storage/
-title: HP Block Storage API
+permalink: /api/block-storage/storage/
+title: HP Cloud Block Storage API
 description: "HP Cloud Block Storage API Specifications"
 keywords: "bock, block storage, volumes"
 product: block-storage
 
 ---
 
-# HP Block Storage API Specifications
+# HP Cloud Block Storage API Specifications
 
 ## 1. Overview
 
