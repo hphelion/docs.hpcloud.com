@@ -1,14 +1,13 @@
 ---
 layout: page
 permalink: /api/block-storage/backup/
-title: Volume Backup API
-description: "Volume Backup API Specifications"
+title: HP Cloud Block Storage Volume Backup API
+description: "HP Cloud Block Storage Volume Backup API Specifications"
 keywords: "bock, volumes, block storage, backup"
 product: block-storage
-published: false
 
 ---
-# Volume Backup API
+# HP Cloud Block Storage Volume Backup API
 
 # 1. Overview
 
