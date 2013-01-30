@@ -120,6 +120,7 @@ documentation.
 |          | [Delete volume](#delete_volume)        | GET         | {BaseUri}/os-volumes/{volume_id}  | Y/**N**  |  |
 | **Servers**  | [List attached volumes](#list_attached_volumes) | GET    | {BaseUri}/servers/{server_id}/os-volume_attachments | Y/**N**  |  |
 |          | [Attach a volume](#attach_volume)  | POST            | {BaseUri}/servers/{server_id}/os-volume_attachments/{volume_id} | Y/**N**  |  |
+|          | [Get attached volume details](#get_attached_volume_details)  | GET            | {BaseUri}/servers/{server_id}/os-volume_attachments/{volume_id} | Y/**N**  |  |
 |          | [Detach a volume](#detach_volume)  | DELETE          | {BaseUri}/servers/{server_id}/os-volume_attachments/{volume_id} | Y/**N**  |  |
 | **Snapshots** | [List volume snapshots](#list_snapshots)  | GET  | {BaseUri}/os-snapshots | Y/**N**  |  |
 |           | [Create new volume snapshot](#create_snapshot) | POST | {BaseUri}/os-snapshots | Y/**N**  |  |
@@ -133,10 +134,8 @@ The common request headers are defined in the Nova Compute documentation.
 The common response hearders are defined in the Nova Compute documentation.
 
 ### 4.4 Service API Operation Details
-*The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
 #### 4.4.1 Versions
-*Describe versions and what information they provide.*
 
 **Status Lifecycle**
 
@@ -154,7 +153,7 @@ N/A
 
 None.
 
-##### 4.4.1.1 Get Version Info {#version_info}
+##### 4.4.1.1 Get Version Info ##### {#version_info}
 ###### GET /v1.1/
 
 Lists the information about the current version of the API, like media types (json and xml), links to the public endpoint url, links to the WADL (if any), and links to the API documentation.
@@ -228,10 +227,8 @@ XML
 
 
 
-##### 4.4.1.2 List Versions
+##### 4.4.1.2 List Versions ##### {#list_versions}
 ###### GET /
-
-*The versions schema, status field, supports an enumeration of ALPHA, BETA, CURRENT and DEPRECATED. The versions->status field should correspond to the Maturity Level for the API, i.e. ALPHA for Experimental, BETA for Exploratory, CURRENT for Public and GA, DEPRECATED for all other versions of the API that are not supported anymore.*
 
 Lists the information about all supported and deprecated versions with links to the public endpoint urls.
 
@@ -333,7 +330,7 @@ size. What will actually happen is that the size you specify will be recorded
 in the database and used for describe and quota operations, but the actual
 bock volume will be the same size as the origin volume. This is a bug.
 
-##### 4.4.2.1 List Volumes
+##### 4.4.2.1 List Volumes ##### {#list_volumes}
 ###### GET /os-volumes
 
 Lists the block storage volumes.
@@ -408,7 +405,7 @@ XML
 
 
 
-##### 4.4.2.2 Create new volume
+##### 4.4.2.2 Create new volume ##### {#create_new_volume}
 ###### POST /os-volumes
 
 Create a new block storage volume of a given size. If the snapshot_id attribute is not null then the volume created is a copy of the specified snapshot. If the imageRef parameter is not null then a bootable volume is created. The attribute 'availabilityZone' does not correspond to HP Cloud availability zones.
@@ -646,7 +643,7 @@ XML
 
 
 
-##### 4.4.2.3 Get Volume details
+##### 4.4.2.3 Get Volume details ##### {#get_volume_details}
 ###### GET /os-volumes/{volume_id}
 
 Gets the details of the block storage volume specified by {volume_id}.
@@ -705,7 +702,7 @@ XML
 
 
 
-##### 4.4.2.4 Delete Volume
+##### 4.4.2.4 Delete Volume ##### {#delete_volume}
 ###### DELETE /os-volumes/{volume_id}
 
 Delete the block storage volume specified by {volume_id}.
@@ -775,7 +772,7 @@ None.
 6.  The device name should be valid and same device name cannot be repeated.
 7.  The device needs to be mounted on the server, before it can be used.
 
-##### 4.4.3.1 List attached volumes for a server
+##### 4.4.3.1 List attached volumes for a server ##### {#list_attached_volumes}
 ###### GET /servers/{server_id}/os-volume_attachments
 
 Gets the block storage volumes attached to the server instance specified by {server_id}.
@@ -828,7 +825,7 @@ XML
 
 
 
-##### 4.4.3.2 Attach volume to a server
+##### 4.4.3.2 Attach volume to a server ##### {#attach_volume}
 ###### POST /servers/{server_id}/os-volume_attachments
 
 Attach the block storage volume specified in the request body to the server instance
@@ -898,7 +895,7 @@ XML
 
 
 
-##### 4.4.3.3 List Details for specified attached volume
+##### 4.4.3.3 List Details for specified attached volume ##### {#get_attached_volume_details}
 ###### GET /servers/{server_id}/os-volume_attachments/{volume_id}
 
 Lists volume details for the specified volume ID.
@@ -948,7 +945,7 @@ XML
 
 
 
-##### 4.4.3.4 Detach volume from a server
+##### 4.4.3.4 Detach volume from a server ##### {#detach_volume}
 ###### DELETE /servers/{server_id}/os-volume_attachments/{volume_id}
 
 Detach the block storage volume specified by {volume_id} from the server instance specified by {server_id}.
@@ -1222,14 +1219,5 @@ This operation does not return a response body.
     curl -i -H "X-Auth-Token: <Auth_Token>" -X DELETE \
                 {BaseUri}/v1.1/{tenant_id}/os-snapshots/{snapshot_id}
 
-
-
-
-
-
-
-## 5. Glossary
-
-*Put down definitions of terms and items that need explanation.*
 
 
