@@ -1,59 +1,41 @@
 ---
 layout: page
 permalink: /api/block-storage/backup/
-title: Volume Backup API
-description: "Volume Backup API Specifications"
+title: HP Cloud Block Storage Volume Backup API
+description: "HP Cloud Block Storage Volume Backup API Specifications"
 keywords: "bock, volumes, block storage, backup"
 product: block-storage
-published: false
 
 ---
-# Volume Backup API
+# HP Cloud Block Storage Volume Backup API
 
 # 1. Overview
 
-The HP Volume Backup service is an extension to the OpenStack Nova API
-which allows users to create backups of Nova volumes to Openstack Swift.
-The service is handled by one or more Backup service managers which are
-expected to run on the same servers as the Nova volume service. Backups are
-created in userspace on Swift and can be manipulated by the user directly if
-they wish.
+The HP Volume Backup service is an extension to the HP Cloud Block Storage API
+which allows users to create backups of HP Cloud Block Storage Volumes to
+HP Cloud Object Storage. The service is handled by one or more Backup service
+managers running on HP Cloud Block Storage servers. Backups are created in
+userspace on HP Cloud Object Storage and can be accessed by the user via the
+documented HP Cloud Object Storage API if required.
 
 ## 1.1 API Maturity Level
 
-**Maturity Level**: Beta stage - Volume Backup is currently under development 
-and planned to be made available in the Beastie Boys release
+**Maturity Level**: *Public* (HP Cloud Block Storage is currently in Public Beta)
 
-**Version API Status**: *BETA*
-
+**Version API Status**: *CURRENT*
 
 ---
 
 
 # 2. Architecture View
 
-
-## 2.1 Overview
-
-An overview of the backups service is available in [HP Volume Backups (overview)](https://wiki.hpcloud.net/display/iaas/HP+Volume+Backups+%28BOCK-1756%29#HPVolumeBackups%28BOCK-1756%29-Overview)
-
-## 2.2 Conceptual/Logical Architecture View
-The backups service consists of an extension to the Nova API and an additional 
-Nova service which runs on volume nodes. The API extension is responsible for processing 
-client requests and despatching them to the appropriate component in Nova. Information
-requests (show backup, list backups, list backup details) retrieve information
-directly from the Nova database. Requests which require operations on volumes or Swift
-are routed to one of the Backup services. Requests on a specific volume are routed 
-directly to the appropriate volume node (create backup, restore backup) while
-requests that do not involve a specific volume are routed via the Nova scheduler
-(delete backup).
-
-## 2.3 Infrastructure Architecture View
-This API is implemented as a Nova API Resource Extension and leverages the existing
-infrastructure to deliver the service.
-
-## 2.4 Entity Relationship Diagram
-See the Overview above for details of the entities involved in the API.
+The backups service consists of an extension to the HP Cloud Block Storage API
+and an additional HP Cloud Block Storage service. The API extension is
+responsible for processing client requests and despatching them to the
+appropriate component. Information requests (_show backup_, _list backups_,
+_list backup details_) retrieve information directly from the database.
+Requests which require operations on volumes or object storage are routed to 
+one of the Backup services via the scheduler service.
 
 ---
 
@@ -62,16 +44,17 @@ See the Overview above for details of the entities involved in the API.
 
 ## 3.1 Accounts
 
-The backups service sits on top of and uses the existing Volumes and Swift APIs. Users can perform
-backup operations on volumes they already have access to and can only perform
-backup operations to Swift which their existing Swift permissions allow. The backup service does
-not add any additional relationships and relies on the underlying Volumes and Swift APIs to
-control access.
+The backups service sits on top of and uses the existing HP Cloud Block Storage
+and HP Cloud Object Storage APIs. Users can perform backup operations on
+volumes they already have access to and can only perform backup operations to 
+object storage which their existing object storage permissions allow. The backup
+service does not add any additional relationships and relies on the underlying APIs
+to control access.
 
 ## 3.2 Regions and Availability Zones
 
-It is expected that the backups service will be provided in all regions and zones which 
-provide a volumes service.
+The backups service is provided in all regions and zones which 
+provide a block storage service.
 
 **Region(s)**: region-a
 
@@ -82,18 +65,9 @@ provide a volumes service.
 
 ## 3.3 Service Catalog
 
-*[TBD](https://wiki.hpcloud.net/display/iaas/Service+Registration+with+CS)* 
-
-*Describe if the service API is exposed via the service catalog. Reference the fragment of the service catalog showing the structure.*
-
-The service is exposed in the service catalog, as shown in the following fragment:
-
-    {
-       service catalog fragment here
-    }
+Same as parent [API](/api/block-storage/storage/)
 
 ---
-
 
 # 4. REST API Specifications
 
@@ -117,22 +91,20 @@ The service is exposed in the service catalog, as shown in the following fragmen
 
 
 ## 4.2 Common Request Headers
-*List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
 
-Same as parent API
+Same as parent [API](/api/block-storage/storage/)
 
 ## 4.3 Common Response Headers
 
-Same as parent API
+Same as parent [API](/api/block-storage/storage/)
 
 ## 4.4 Service API Operation Details
 
 ### 4.4.1 Backups
 
-Backups are point in time dumps of the contents of Nova volumes to Swift. They can be restored
-at any time to an available Nova volume (either the same volume original used for the backup
-or a different one).
-
+Backups are point in time dumps of the contents of block storage volumes to 
+object storage. They can be restored at any time to an available block storage
+volume (either the same volume original used for the backup or a different one).
 
 **Status Lifecycle**
 
@@ -148,12 +120,9 @@ N/A
 
 **Quota Limits**
 
-The backup service does not enforce any quota limits. The backup service interfaces with the volumes service and swift,
-both of which enforce their own quota limits. 
-
-**Business Rules**
-
-None.
+The backup service does not enforce any quota limits. The backup service uses
+the block storage and object storage services both of which enforce their own
+quota limits. 
 
 #### 4.4.1.1 List backups
 #### GET /hp-volume-backups
@@ -390,7 +359,7 @@ None.
 #### 4.4.1.4 Create backup
 #### POST /hp-volume-backups
 
-Creates a volume backup by backing the volume up to Swift.
+Creates a volume backup by backing the volume up to object storage.
 
 **Request Data**
 
@@ -403,7 +372,7 @@ None.
 * *volume_id* - integer - Id of the volume to be backed up.
 * *display_name* (Optional) - string - User defined name for the backup.
 * *display_description* (Optional) - string - User defined description for the backup.
-* *container* (Optional) - string - The name of the swift container to which the volume is to be backed up.
+* *container* (Optional) - string - The name of the object storage container to which the volume is to be backed up.
 
 JSON
 
@@ -512,7 +481,7 @@ If the container is not specified a default container will be used. If a contain
 #### 4.4.1.5 Delete backup
 #### DELETE /hp-volume-backups/[backup_id]
 
-Delete a previous volume backup from Swift.
+Delete a previous volume backup.
 
 **Request Data**
 
@@ -736,25 +705,3 @@ _Not supported._
 **Additional Notes**
 
 If the volume is not specified, this operation will create a new volume for the restore. This operation is asynchronous. To check the status of the restore operation, the user should *show volume* for the [volume_id] returned in the response (status will be set to *restoring* while the the restore operation runs, *error_restoring* if the restore operation fails and *available* if the restore operation succeeds).
-
----
-
-# 5. Additional References
-
-## 5.1 Resources
-
-**Wiki Page**: https://wiki.hpcloud.net/display/iaas/HP+Volume+Backups+%28BOCK-1756%29
-
-**Code Repo**: git@keg.dev.uswest.hpcloud.net:nova
-
-**API Lead Contact**: Francis Moorehead / Stephen Mulcahy
-
----
-
-# 6. Glossary
-
-{Put down definitions of terms and items that need explanation.}
-
----
-
-
