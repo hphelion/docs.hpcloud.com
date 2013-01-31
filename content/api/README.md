@@ -89,3 +89,4 @@ The following paid editors are good as well:
 
 * [Mastering Markdown](http://designshack.net/articles/html/mastering-markdown-30-resources-apps-and-tutorials-to-get-you-started/) - Tutorials and Resources
 * [Markdown Syntax](http://daringfireball.net/projects/markdown/syntax)
+
