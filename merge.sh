@@ -16,7 +16,7 @@ rm -rf api-site
 git clone git@git.hpcloud.net:DevExDocs/api-site.git
 cd api-site
 git checkout -b ${BRANCH} || git checkout ${BRANCH}
-git merge remotes/origin/${BRANCH}
+git pull origin ${BRANCH}
 git subtree pull -P content/api git@git.hpcloud.net:DevExDocs/apihome.git ${BRANCH}
 git push origin ${BRANCH}
 
@@ -24,6 +24,6 @@ rm -rf docs.hpcloud.com
 git clone git@git.hpcloud.net:DevExDocs/docs.hpcloud.com.git
 cd docs.hpcloud.com
 git checkout -b ${BRANCH} || git checkout ${BRANCH}
-git merge remotes/origin/${BRANCH}
+git pull origin ${BRANCH}
 git subtree pull -P content/api git@git.hpcloud.net:DevExDocs/apihome.git ${BRANCH}
 git push origin ${BRANCH}
