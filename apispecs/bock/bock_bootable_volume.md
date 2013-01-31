@@ -12,34 +12,25 @@ product: block-storage
 
 # 1. Overview
 
-The HP Bootable Volume API is an extension to the OpenStack Nova API
+The HP Bootable Volume API is an extension to the HP Cloud Block Storage API
 which allows users to create persistent volumes which are pre-initialized
-with a bootable image (from Glance). The API changes are implemented in two
-separate facilities. The first, is a simple extension to the volume-create
+with a bootable image (from image service). The API changes are implemented in
+two separate facilities. The first, is a simple extension to the volume-create
 API call, and the second is a new API call to retrieve those volumes which
 are bootable.
 
 ## 1.1 API Maturity Level
 
-**Maturity Level**: Beta stage - Bootable Volumes are currently under
-development and planned to be made available in the Beastie Boys release
+**Maturity Level**: *Public* (HP Cloud Block Storage is currently in Public Beta)
 
-**Version API Status**: *BETAP*
-
+**Version API Status**: *CURRENT*
 
 ---
 
-
 # 2. Architecture View
 
-
-## 2.1 Overview
-
-An overview of the bootable volume service is available in [Persistent Instances](https://wiki.hpcloud.net/display/iaas/Persistent+instances+aka+Boot-able+volumes)
-
-## 2.2 Conceptual/Logical Architecture View
-The bootable volume service consists of an extension to the Nova API and an
-additional API entry point, specific to HP. The API extension allows the
+The bootable volume service consists of an extension to the HP Cloud Block
+Storage API and an additional API entry point. The API extension allows the
 caller to create a volume with an Operating System image pre-initialized on
 the new volume.
 
@@ -48,31 +39,29 @@ on a new instance, so that the file system is both resilient and persistent.
 Specifically, the volume is stored in an external RAID disk array, and can
 outlive the instance.
 
-## 2.3 Infrastructure Architecture View
-This API is implemented as a Nova API Resource Extension and leverages the
-existing infrastructure to deliver the service.
-
-## 2.4 Entity Relationship Diagram
-See the Overview above for details of the entities involved in the API.
-
 ---
 
 # 3. Account-level View
 
 ## 3.1 Accounts
 
-The bootable volumes API is an extension to the existing nova-volumes API and
-as such, requires no additional user accounts.
+The bootable volumes API is an extension to the existing HP Cloud Block Storage
+API and requires no additional user accounts.
 
 ## 3.2 Regions and Availability Zones
 
-It is expected that the bootable volumes service will be provided in all
-regions and zones which provide a volumes service.
+The bootable volumes service is provided in all regions and zones which 
+provide a block storage service.
+
+**Region(s)**: region-a
+
+**Availability Zone(s)**: az-1, az-2, az-3 
+
+**Future Expansion**: region-b
 
 ## 3.3 Service Catalog
 
-The service catalog is unaltered.
-
+Same as parent [API](/api/block-storage/storage/)
 
 ---
 
@@ -326,23 +315,4 @@ All of the data output is identical to that displayed for the regular
 volume-show API with the exception of sourceImageRef which refers to the
 original imageRef (image_id) used to create the volume. It is this parameter
 which indicates that the volume can be used to boot an instance.
-
-# 5. Additional References
-
-## 5.1 Resources
-
-**Wiki Page**: https://wiki.hpcloud.net/display/iaas/Persistent+instances+aka+Boot-able+volumes
-
-**Code Repo**: git@keg.dev.uswest.hpcloud.net:nova
-
-**API Lead Contact**: Dermot Tynan
-
----
-
-# 6. Glossary
-
-{Put down definitions of terms and items that need explanation.}
-
----
-
 
