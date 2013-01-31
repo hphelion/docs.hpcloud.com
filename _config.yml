@@ -66,7 +66,7 @@ navigation:
     url: /cli/windows/help/
   - text: Release Notes
     url: /cli/windows/release-notes/
-  python-novaclient:
+  nova-cli:
   - text: Overview
     url: /cli/nova
   - text: Installation
@@ -110,7 +110,7 @@ apinavigation:
 - text: Compute
   url: /api/compute/
 - text: Block Storage
-  url: http://api-docs.hpcloud.com/hpcloud-compute/1.0/content/ch_dev-api-block-storage.html
+  url: /api/block-storage/
 - text: CDN
   url: /api/CDN
 - text: RDB for MySQL
