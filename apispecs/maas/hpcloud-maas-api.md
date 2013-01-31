@@ -1,9 +1,9 @@
 ---layout: page
-permalink: /api/maas/
-title: HP Monitoring API
-description: "Monitoring API Documentation."
-keywords: "Monitoring, Maas"
-product: maas---# HP Cloud Monitoring API Specifications
+permalink: /api/monitoring/
+title: HP Cloud Monitoring API
+description: "HP Cloud Monitoring API Specifications"
+keywords: "monitoring, maas"
+product: monitoring---# HP Cloud Monitoring API Specifications
 **Date:**  January 17, 2013
 **Document Version:** 1.0
 ## 1. Overview # {#Section1_}This document describes the HP Cloud Monitoring API, which allows you to monitor resources in HP's Cloud.### 1.1 API Maturity Level ## {#Section1_1}**Maturity Level**: HP Cloud Monitoring API is currently in Exploratory level.**Version API Status**: The HP Cloud Monitoring API is currently in BETA.## 2. Architecture View # {#Section2_}Monitoring as a Service provides APIs for managing metric consumption endpoints, metric subscriptions, alarms, and contact methods.### 2.1 Overview ## {#ArchitectureOverview}The Monitoring API provides a RESTful JSON interface for interacting with Monitoring as a Service and managing monitoring related resources.
@@ -13,36 +13,36 @@ product: maas---# HP Cloud Monitoring API Specifications
 + [Endpoint Operations Details](#ServiceDetailsEndpoint)+ [Subscription Operations](#ServiceSubscriptionOps) - The subscription resource represents a subscription to consume metrics.
 + [Subscription Operations Details](#ServiceDetailsSubscription)+ [Notification Operations](#ServiceNotificationOps) - The notification method resource represents a method through which notifications can be sent.
 + [Notification Operations Details](#ServiceDetailsNotification)+ [Alarm Operations](#ServiceAlarmOps) - The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
-+ [Alarm Operations Details](#ServiceDetailsAlarm)#### 2.1.1 High Level Usage ### {#HighLevelUsage}
++ [Alarm Operations Details](#ServiceDetailsAlarm)#### 2.1.1 High Level ### {#HighLevel}
 There are 4 major operations (besides Version information):
 + Endpoints specify the connection for consuming metric data to the AMQP message queue.
 + Subscriptions specify what monitoring data is to be streamed.  You must create an endpoint to use with the subscription.
 + Notifications specify the method(s) in which a user is contacted by alarms.+ Alarms specify user defined exceptional conditions that the user feels the need to be notified about.  You must create a Notification method to use with the Alarm.
-#### 2.1.2 Metric Constants ### {#Constants}
-The Monitoring API makes use of several metric related pre-defined constants throughout. Foremost is the namespace constant. Support namespaces are:
+#### 2.1.2 Namespaces, Metrics and Dimensions ### {#Metrics}
+The Monitoring API makes use of several metric related pre-defined constants throughout. Foremost is the namespace constant. Supported namespaces are:
 
 + Compute
-+ Volume
 
-Each namespace represents a service that has its own constants. These are described below:
+Each namespace represents a service that has its own metric types. These are described below:
 
 *Compute Metric Types*
 
-|Metric Type|Unit|Description|
-|:----------|:---|:----------|
-|cpu_total_time|nanoseconds|Total CPU time used in nanoseconds|
-|disk_read_ops|count|Number of read requests from a disk|
-|disk_write_ops|count|Number of write requests from a disk|
-|disk_read_bytes|bytes|Number of bytes read from a disk|
-|disk_write_bytes|bytes|Number of bytes written to a disk|
-|net_in_bytes|bytes|Number of receive bytes on a network interface |
-|net_out_bytes|bytes|Number of transfer bytes on a network interface |
-|net_in_packets|packets|Number of receive packets on a network interface|
-|net_out_packets|packets|Number of transfer packets on a network interface |
-|net_in_dropped|packets|Number of receive packets dropped on a network interface|
-|net_out_dropped|packets|Number of transfer packets dropped on a network interface|
-|net_in_errors|count|Number of receive packet errors on a network interface|
-|net_out_errors|count|Number of transfer packet errors on a network interface|
+|Metric Type|Type|Unit|Description|
+|:----------|:---|:---|:----------|
+|cpu_total_time|counter|nanoseconds|Total CPU time used in nanoseconds|
+|disk_read_ops|counter|count|Number of read requests from a disk|
+|disk_write_ops|counter|count|Number of write requests from a disk|
+|disk_read_bytes|counter|bytes|Number of bytes read from a disk|
+|disk_write_bytes|counter|bytes|Number of bytes written to a disk|
+|net_in_bytes|counter|bytes|Number of receive bytes on a network interface |
+|net_out_bytes|counter|bytes|Number of transfer bytes on a network interface |
+|net_in_packets|counter|packets|Number of receive packets on a network interface|
+|net_out_packets|counter|packets|Number of transfer packets on a network interface |
+|net_in_dropped|counter|packets|Number of receive packets dropped on a network interface|
+|net_out_dropped|counter|packets|Number of transfer packets dropped on a network interface|
+|net_in_errors|counter|count|Number of receive packet errors on a network interface|
+|net_out_errors|counter|count|Number of transfer packet errors on a network interface|
+
 
 *Compute Dimensions*
 
@@ -68,34 +68,35 @@ JSON	{
 ***Request Body***
 	{"auth": {"tenantName": "tenant@domain.com", "passwordCredentials": {"username": "tenant@domain.com", "password": "changeit"}}}
 ***Response Body***
-	{"access": {
-	  "token": {
-	    "expires": "2012-04-05T04:28:29.405Z",
-	    "id": "HPAuth_4f7c6456e4b01a25ab011e74",
-	    "tenant": {
-	    	"id": "123456789",
-			"name": "tenant@domain.com"
-			}
-		},
-	"user": {
-	"id": "987654321",
-	"name": "tenant@hp.com",
-	"roles": [
-		{
-			...
-		},
-	},
-	"serviceCatalog": [
-			...
-		{
-		"name": "MaaS",
-		"type": "maas",
-		"endpoints": [
+	{
+		"access": {
+	  		"token": {
+	    		"expires": "2012-04-05T04:28:29.405Z",
+	    		"id": "HPAuth_4f7c6456e4b01a25ab011e74",
+	    		"tenant": {
+					"id": "123456789",
+					"name": "tenant@domain.com"
+				}
+			},
+			"user": {
+			"id": "987654321",
+			"name": "tenant@hp.com",
+			"roles": [
 			{
-			"tenantId": "12345678901234",
-			"publicURL": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/",
-			"region": "az-1.region-a.geo-1",
-			"versionId": "1.0",
+				...
+			},
+		},
+		"serviceCatalog": [
+			...
+		{
+			"name": "MaaS",
+			"type": "maas",
+			"endpoints": [
+			{
+				"tenantId": "12345678901234",
+				"publicURL": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/",
+				"region": "az-1.region-a.geo-1",
+				"versionId": "1.0",
 			}
 		]
 		}
@@ -123,7 +124,7 @@ A request can then be made against resources at that endpoint by supplying the a
 | Resource | Operation                                          | HTTP Method | Path                            | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------------------------------- | :---------- | :------------------------------ | :---------------- | :-------------- |
 | Version | List all versions | GET | {Host}/ | Y/N ||
-| Version | Get a specific version | GET | {Host}]/*version_id* | Y/N ||### Endpoint Operations ## {#ServiceEndpointOps}
+| Version | Get a specific version | GET | {Host}/*version_id* | Y/N ||### Endpoint Operations ## {#ServiceEndpointOps}
 
 | Resource | Operation                                          | HTTP Method | Path                            | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------------------------------- | :---------- | :------------------------------ | :---------------- | :-------------- |
@@ -1154,9 +1155,4 @@ This call does not provide a response body.
 
 	$ curl -X DELETE \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c## 5. Glossary # {#Section5_}* Namespace - A required classification for a metric.* Dimension - An optional classification for a metric. A metric may be classified by multiple dimensions.* MaaSEndpoint - The base HTTP endpoint through which the Monitoring API can be accessed. 
-* MaaSBaseURI - The base URI through which a specific version of the Monitoring API can be accessed.
-
-
-
-
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c## 5. Glossary # {#Section5_}* Namespace - A required classification for a metric.* Dimension - An optional classification for a metric. A metric may be classified by multiple dimensions.
