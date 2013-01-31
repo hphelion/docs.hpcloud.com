@@ -117,7 +117,7 @@ documentation.
 | **Volumes**  | [List volumes](#list_volumes)         | GET     | {BaseUri}/os-volumes   | Y/**N**  |  |
 |          | [Create new volume](#create_new_volume)    | POST        | {BaseUri}/os-volumes   | Y/**N**  |  |
 |          | [Get volume details](#get_volume_details)   | GET         | {BaseUri}/os-volumes/{volume_id}  | Y/**N**  |  |
-|          | [Delete volume](#delete_volume)        | GET         | {BaseUri}/os-volumes/{volume_id}  | Y/**N**  |  |
+|          | [Delete volume](#delete_volume)        | DELETE         | {BaseUri}/os-volumes/{volume_id}  | Y/**N**  |  |
 | **Servers**  | [List attached volumes](#list_attached_volumes) | GET    | {BaseUri}/servers/{server_id}/os-volume_attachments | Y/**N**  |  |
 |          | [Attach a volume](#attach_volume)  | POST            | {BaseUri}/servers/{server_id}/os-volume_attachments/{volume_id} | Y/**N**  |  |
 |          | [Get attached volume details](#get_attached_volume_details)  | GET            | {BaseUri}/servers/{server_id}/os-volume_attachments/{volume_id} | Y/**N**  |  |
@@ -143,7 +143,9 @@ N/A
 
 **Rate Limits**
 
-N/A
+See [HP Cloud Compute Rate Limits](/api/compute#Section3_8_2) for details
+of limits placed on the rate at which an individual tenant can make 
+requests to the HP Cloud Block Storage API servers.
 
 **Quota Limits**
 
@@ -305,7 +307,9 @@ used as a standard block device.
 
 **Rate Limits**
 
-N/A
+See [HP Cloud Compute Rate Limits](/api/compute#Section3_8_2) for details
+of limits placed on the rate at which an individual tenant can make
+requests to the HP Cloud Block Storage API servers.
 
 **Quota Limits**
 
@@ -735,9 +739,6 @@ This call does not return a response body.
             {BaseUri}/v1.1/{tenant_id}/os-volumes/{volume_id} -X DELETE
 
 
-
-
-
 #### 4.4.3 Servers
 
 A server is a Nova VM instance to which a volume can be attached. When a
@@ -752,9 +753,9 @@ use any block storage device.
 
 **Rate Limits**
 
-There are no specific rate limits for volume attachments or detachments.
-
-None.
+See [HP Cloud Compute Rate Limits](/api/compute#Section3_8_2) for details
+of limits placed on the rate at which an individual tenant can make
+requests to the HP Cloud Compute API servers.
 
 **Quota Limits**
 
@@ -1000,7 +1001,13 @@ If an error occurs during any operation the status can be set to "error"
 
 **Rate Limits**
 
+See [HP Cloud Compute Rate Limits](/api/compute#Section3_8_2) for details
+of limits placed on the rate at which an individual tenant can make
+requests to the HP Cloud Block Storage API servers.
+
 **Quota Limits**
+
+N/A
 
 **Business Rules**
 
