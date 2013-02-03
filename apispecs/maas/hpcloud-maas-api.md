@@ -19,9 +19,13 @@ product: monitoring---# HP Cloud Monitoring API Specifications
 + Subscriptions specify what monitoring data is to be streamed.  You must create an endpoint to use with the subscription.
 + Notifications specify the method(s) in which a user is contacted by alarms.+ Alarms specify user defined exceptional conditions that the user feels the need to be notified about.  You must create a Notification method to use with the Alarm.
 #### 2.1.2 Namespaces, Metrics and Dimensions ### {#Metrics}
+
+##### 2.1.2.1 Namespaces #### {#Namespaces}
 The Monitoring API makes use of several metric related pre-defined constants throughout. Foremost is the namespace constant. Supported namespaces are:
 
 + Compute
+
+##### 2.1.2.2 Metrics #### {#Metrics}
 
 Each namespace represents a service that has its own metric types. These are described below:
 
@@ -43,6 +47,7 @@ Each namespace represents a service that has its own metric types. These are des
 |net_in_errors|counter|count|Number of receive packet errors on a network interface|
 |net_out_errors|counter|count|Number of transfer packet errors on a network interface|
 
+##### 2.1.2.3 Dimensions #### {#Dimensions}
 
 *Compute Dimensions*
 
@@ -392,7 +397,7 @@ JSON
 	{
 	  "subscription": {
 	    "endpoint_id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
-	    "namespace": "nova",
+	    "namespace": "compute",
 	    "dimensions": {
 	      "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
 	    }
@@ -424,7 +429,7 @@ JSON
 	      }
 	    ]
 	    "endpoint_id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
-	    "namespace": "nova",
+	    "namespace": "compute",
 	    "dimensions": {
 	      "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
 	    }
@@ -488,7 +493,7 @@ JSON
 	        }
 	      ]
 	      "endpoint_id": "36351ef0-3ff3-11e2-a25f-0800200c9a66",
-	      "namespace": "nova",
+	      "namespace": "compute",
 	      "dimensions": {
 	        "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
 	      }
@@ -502,7 +507,7 @@ JSON
 	        }
 	      ]
 	      "endpoint_id": "3d713b90-3ff3-11e2-a25f-0800200c9a66",
-	      "namespace": "nova",
+	      "namespace": "compute",
 	      "dimensions": {
 	        "instance_id": "490dcc20-3ff3-11e2-a25f-0800200c9a66"
 	      }
@@ -562,7 +567,7 @@ JSON
 	      }
 	    ]
 	    "endpoint_id": "36351ef0-3ff3-11e2-a25f-0800200c9a66",
-	    "namespace": "nova",
+	    "namespace": "compute",
 	    "dimensions": {
 	      "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
 	    },
@@ -909,14 +914,14 @@ JSON
 
 	{
 	  "alarm": {
-	    "name": "My service CPU exceeds 90%",
-	    "namespace": "nova",
-	    "metric_type": "CPU",
+	    "name": "Disk Exceeds 1k Operations",
+	    "namespace": "compute",
+	    "metric_type": "disk_read_ops",
 	    "dimensions": {
 	      "instance_id": "cdace7b4-8bea-404c-848c-860754a76fb7"
 	    },
 	    "operator": "GTE",
-	    "threshold": "90",
+	    "threshold": "1000",
 	    "alarm_actions": [
 	      "036609b0-3d6b-11e2-a25f-0800200c9a66",
 	      "1221dba0-3d6b-11e2-a25f-0800200c9a66"
@@ -948,14 +953,14 @@ JSON
 	        "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	      }
 	    ],
-	    "name": "My service CPU exceeds 90%",
-	    "namespace": "nova",
-	    "metric_type": "CPU",
+	    "name": "Disk Exceeds 1k Operations",
+	    "namespace": "compute",
+	    "metric_type": "disk_read_ops",
 	    "dimensions": {
 	      "instance_id": "cdace7b4-8bea-404c-848c-860754a76fb7"
 	    },
 	    "operator": "GTE",
-	    "threshold": "90",
+	    "threshold": "1000",
 	    "state": "UNDETERMINED",
 	    "alarm_actions": [
 	      "036609b0-3d6b-11e2-a25f-0800200c9a66",
@@ -1017,14 +1022,14 @@ JSON
 	          "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	        }
 	      ],
-	      "name": "My service CPU exceeds 90%",
-	      "namespace": "nova",
-	      "metric_type": "CPU",
+	      "name": "Disk Exceeds 1k Operations",
+	      "namespace": "compute",
+	      "metric_type": "disk_read_ops",
 	      "dimensions": {
 	        "instance_id": "cdace7b4-8bea-404c-848c-860754a76fb7"
 	      },
 	      "operator": "GTE",
-	      "threshold": "90",
+	      "threshold": "1000",
 	      "state": "OK"	
 	    }
 	  ]
@@ -1081,14 +1086,14 @@ JSON
 	        "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	      }
 	    ],
-	    "name": "My service cpu exceeds 90%",
-	    "namespace": "nova",
-	    "metric_type": "cpu",
+	    "name": "Disk Exceeds 1k Operations",
+	    "namespace": "compute",
+	    "metric_type": "disk_read_ops",
 	    "dimensions": {
 	      "instance_id": "cdace7b4-8bea-404c-848c-860754a76fb7"
 	    },
 	    "operator": "GTE",
-	    "threshold": "90",
+	    "threshold": "1000",
 	    "state": "OK",
 	    "alarm_actions": [
 	      "036609b0-3d6b-11e2-a25f-0800200c9a66",
