@@ -15,13 +15,14 @@ product: monitoring---# HP Cloud Monitoring API Specifications
 + [Notification Operations Details](#ServiceDetailsNotification)+ [Alarm Operations](#ServiceAlarmOps) - The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
 + [Alarm Operations Details](#ServiceDetailsAlarm)#### 2.1.1 High Level ### {#HighLevel}
 There are 4 major operations (besides Version information):
-+ Endpoints specify the connection for consuming metric data to the AMQP message queue.
-+ Subscriptions specify what monitoring data is to be streamed.  You must create an endpoint to use with the subscription.
-+ Notifications specify the method(s) in which a user is contacted by alarms.+ Alarms specify user defined exceptional conditions that the user feels the need to be notified about.  You must create a Notification method to use with the Alarm.
++ Endpoints specify the connection for consuming metric data to the AMQP message queue. (Endpoints can only be created once per tenant. At least one Dimension must be specified.)
++ Subscriptions specify what monitoring data is to be streamed. (You must create an endpoint to use with the subscription.)
++ Notifications specify the method(s) in which a user is contacted by alarms.+ Alarms specify user defined exceptional conditions that the user feels the need to be notified about. (You must create a Notification method to use with the Alarm. At least one Dimension must be specified.
 #### 2.1.2 Namespaces, Metrics and Dimensions ### {#Metrics}
+The Monitoring API makes use of several metric related pre-defined constants throughout.
 
 ##### 2.1.2.1 Namespaces #### {#Namespaces}
-The Monitoring API makes use of several metric related pre-defined constants throughout. Foremost is the namespace constant. Supported namespaces are:
+*Supported Namespaces*
 
 + Compute
 
@@ -49,7 +50,7 @@ Each namespace represents a service that has its own metric types. These are des
 
 ##### 2.1.2.3 Dimensions #### {#Dimensions}
 
-*Compute Dimensions*
+*Supported Compute Dimensions*
 
 + instance_id
 
@@ -254,7 +255,8 @@ Provides information about the supported Monitoring API versions.
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/#### 4.4.2 Endpoint ### {#ServiceDetailsEndpoint}
 The endpoint resource represents an endpoint from which metrics can be consumed.
-*Note: The amqp_password is not retrievable after endpoint creation. If the password is lost, then the password reset operation must be performed.*##### 4.4.2.1 Create a New Endpoint #### {#ServiceDetailsCreateEndpoint}###### POST /endpointsCreates a new endpoint for metric consumption. **Request Data**	POST /v1.0/endpoints HTTP/1.1
+*Note: The amqp_password is not retrievable after endpoint creation. If the password is lost, then the password reset operation must be performed.*
+*Note: Endpoints can only be created once per tenant.*##### 4.4.2.1 Create a New Endpoint #### {#ServiceDetailsCreateEndpoint}###### POST /endpointsCreates a new endpoint for metric consumption. **Request Data**	POST /v1.0/endpoints HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response**	HTTP/1.1 201 Created
@@ -269,7 +271,7 @@ Provides information about the supported Monitoring API versions.
 	        "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	      }
 	    ]
-	    "uri": "amqp://host:5672/385937540",
+	    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
 	    "meta" : {
 	      "amqp_username": "385937540",
 	      "amqp_password": "mEfOy34qJV",
@@ -297,7 +299,7 @@ Provides information about the supported Monitoring API versions.
 	          "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	        }
 	      ],
-	      "uri": "amqp://host:5672/385937540"
+	      "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540"
 	    },
 	    {
 	      "id": "abce9e32-6ce0-4a36-9750-df415606babc",
@@ -307,7 +309,7 @@ Provides information about the supported Monitoring API versions.
 	          "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/abce9e32-6ce0-4a36-9750-df415606babc"
 	        }
 	      ]
-	      "uri": "amqp://host:5672/473077483"
+	      "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/473077483"
 	    }
 	  ]
 	}**Error Response**
@@ -330,7 +332,7 @@ Provides information about the supported Monitoring API versions.
 	        "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	      }
 	    ],
-	    "uri": "amqp://host:5672/385937540",
+	    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
 	    "meta" : {
 	      "amqp_username": "385937540",
 	      "amqp_exchange": "metrics"
@@ -908,7 +910,8 @@ Creates a new alarm.
 **Data Parameters**
 
 * *name* - string - A descriptive name for the alarm* *namespace* - string - Namespace of metric to alarm on
-* *metric_type* - string - Type of metric to alarm on* *dimensions* - dictionary - Dimensions of metrics to alarm on* *operator* - string - Comparison operator for which threshold and metric values are compared* *threshold* - long - Threshold which triggers an alarm when exceeded* *alarm_actions* - array - Methods through which notifications should be sent when transitioning to an ALARM state
+* *metric_type* - string - Type of metric to alarm on
+* *metric_subject* - string - (Optional) Subject of metric to alarm on* *dimensions* - dictionary - Dimensions of metrics to alarm on* *operator* - string - Comparison operator for which threshold and metric values are compared* *threshold* - long - Threshold which triggers an alarm when exceeded* *alarm_actions* - array - Methods through which notifications should be sent when transitioning to an ALARM state
 
 JSON
 
@@ -917,6 +920,7 @@ JSON
 	    "name": "Disk Exceeds 1k Operations",
 	    "namespace": "compute",
 	    "metric_type": "disk_read_ops",
+	    "metric_subject": "VDA",
 	    "dimensions": {
 	      "instance_id": "cdace7b4-8bea-404c-848c-860754a76fb7"
 	    },
@@ -1161,3 +1165,4 @@ This call does not provide a response body.
 	$ curl -X DELETE \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c## 5. Glossary # {#Section5_}* Namespace - A required classification for a metric.* Dimension - An optional classification for a metric. A metric may be classified by multiple dimensions.
+* Tenant - 
