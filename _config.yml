@@ -43,6 +43,8 @@ navigation:
     url: /cli/unix/cdn/
   - text: Block Storage Examples
     url: /cli/unix/block-storage/
+  - text: Volume Management
+    url: /block-storage/volume/
   - text: CLI Reference
     url: /cli/unix/reference/
   - text: Release Notes
