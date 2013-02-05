@@ -49,34 +49,43 @@ clean:
 
 deploy-qa: build
 	@echo "Deploying to stackato QA cluster"
-	stackato target https://api.stackato-qa-1-az1.devex.uswest.hpcloud.net
+	stackato target https://api.qa1-stackato.cx.hpcloud.net
 	stackato login
-	stackato --group Documentation map OffLineApp docs.qa.devex.uswest.hpcloud.net
-	-stackato --group Documentation unmap docs-site docs.qa.devex.uswest.hpcloud.net
-	stackato --group Documentation update -n --nostart docs-site
-	stackato --group Documentation start docs-site
-	stackato --group Documentation map docs-site docs.qa.devex.uswest.hpcloud.net
-	stackato --group Documentation unmap OffLineApp docs.qa.devex.uswest.hpcloud.net
+	stackato group Documentation
+	-stackato map docs-two docs.qa.devex.uswest.hpcloud.net
+	-stackato unmap docs-one docs.qa.devex.uswest.hpcloud.net
+	cp stackato-one.yml stackato.yml
+	stackato update -n --nostart docs-one
+	stackato start docs-one
+	stackato map docs-one docs.qa.devex.uswest.hpcloud.net
+	-stackato unmap docs-two docs.qa.devex.uswest.hpcloud.net
+	cp stackato-two.yml stackato.yml
+	stackato update -n --nostart docs-two
+	stackato start docs-two
+	stackato map docs-two docs.qa.devex.uswest.hpcloud.net
+	rm -f stackato.yml
 
 deploy-prod-az2: build
 	stackato target https://api.stackato-prod-1-az2.devex.uswest.hpcloud.net
 	stackato login
-	stackato --group Documentation map OffLineApp docs.hpcloud.com
-	-stackato --group Documentation unmap docs-site docs.hpcloud.com
-	stackato --group Documentation update -n --nostart docs-site
-	stackato --group Documentation start docs-site
-	stackato --group Documentation map docs-site docs.hpcloud.com
-	stackato --group Documentation unmap OffLineApp docs.hpcloud.com
+	stackato group Documentation
+	stackato map OffLineApp docs.hpcloud.com
+	-stackato unmap docs-site docs.hpcloud.com
+	stackato update -n --nostart docs-site
+	stackato start docs-site
+	stackato map docs-site docs.hpcloud.com
+	stackato unmap OffLineApp docs.hpcloud.com
 
 deploy-prod-az1: build
 	stackato target https://api.stackato-prod-2-az1.devex.uswest.hpcloud.net
 	stackato login
-	stackato --group Documentation map OffLineApp docs.hpcloud.com
-	-stackato --group Documentation unmap docs-site docs.hpcloud.com
-	stackato --group Documentation update -n --nostart docs-site
-	stackato --group Documentation start docs-site
-	stackato --group Documentation map docs-site docs.hpcloud.com
-	stackato --group Documentation unmap OffLineApp docs.hpcloud.com
+	stackato group Documentation
+	stackato map OffLineApp docs.hpcloud.com
+	-stackato unmap docs-site docs.hpcloud.com
+	stackato update -n --nostart docs-site
+	stackato start docs-site
+	stackato map docs-site docs.hpcloud.com
+	stackato unmap OffLineApp docs.hpcloud.com
 
 deploy-prod: deploy-prod-az2 deploy-prod-az1
 

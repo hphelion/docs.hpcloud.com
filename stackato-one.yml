@@ -1,5 +1,4 @@
-# Static HTML site for OFFLINE messages.
-name: docs-site
+name: docs-one
 framework:
   type: python
 mem: 40M
