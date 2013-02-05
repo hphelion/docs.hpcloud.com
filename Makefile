@@ -47,47 +47,11 @@ clean:
 	@echo "Removing _site directory"
 	@rm -rf _site
 
-deploy-qa: build
-	@echo "Deploying to stackato QA cluster"
-	stackato target https://api.qa1-stackato.cx.hpcloud.net
-	stackato login
-	stackato group Documentation
-	-stackato map docs-two docs.qa.devex.uswest.hpcloud.net
-	-stackato unmap docs-one docs.qa.devex.uswest.hpcloud.net
-	cp stackato-one.yml stackato.yml
-	stackato update -n --nostart docs-one
-	stackato start docs-one
-	stackato map docs-one docs.qa.devex.uswest.hpcloud.net
-	-stackato unmap docs-two docs.qa.devex.uswest.hpcloud.net
-	cp stackato-two.yml stackato.yml
-	stackato update -n --nostart docs-two
-	stackato start docs-two
-	stackato map docs-two docs.qa.devex.uswest.hpcloud.net
-	rm -f stackato.yml
+deploy-qa:
+	./deploy.sh qa1-stackato.cx.hpcloud.net
 
-deploy-prod-az2: build
-	stackato target https://api.stackato-prod-1-az2.devex.uswest.hpcloud.net
-	stackato login
-	stackato group Documentation
-	stackato map OffLineApp docs.hpcloud.com
-	-stackato unmap docs-site docs.hpcloud.com
-	stackato update -n --nostart docs-site
-	stackato start docs-site
-	stackato map docs-site docs.hpcloud.com
-	stackato unmap OffLineApp docs.hpcloud.com
-
-deploy-prod-az1: build
-	stackato target https://api.stackato-prod-2-az1.devex.uswest.hpcloud.net
-	stackato login
-	stackato group Documentation
-	stackato map OffLineApp docs.hpcloud.com
-	-stackato unmap docs-site docs.hpcloud.com
-	stackato update -n --nostart docs-site
-	stackato start docs-site
-	stackato map docs-site docs.hpcloud.com
-	stackato unmap OffLineApp docs.hpcloud.com
-
-deploy-prod: deploy-prod-az2 deploy-prod-az1
+deploy-pro: build
+	./deploy.sh prod1-stackato.cx.hpcloud.net hpcloud.com
 
 
-.PHONY: add-tutorials update-tutorials add-docs update-docs server prepare optimize build clean deploy-qa deploy-prod-az1 deploy-prod-az2 deploy-prod add-api update-api
+.PHONY: add-tutorials update-tutorials add-docs update-docs server prepare optimize build clean deploy-qa deploy-pro add-api update-api
