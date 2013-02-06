@@ -16,7 +16,7 @@ product: monitoring---# HP Cloud Monitoring API Specifications
 + [Alarm Operations Details](#ServiceDetailsAlarm)#### 2.1.1 High Level ### {#HighLevel}
 There are 4 major operations (besides Version information):
 + Endpoints specify the connection for consuming metric data to the AMQP message queue. (Endpoints can only be created one per tenant. At least one Dimension must be specified.)
-+ Subscriptions specify what monitoring data is to be streamed. (You must create an endpoint to use with the subscription.)
++ Subscriptions specify what monitoring data is to be streamed. (You must create an Endpoint to use with the subscription.)
 + Notifications specify the method(s) in which a user is contacted by alarms.+ Alarms specify user defined exceptional conditions that the user feels the need to be notified about. (You must create a Notification method to use with the Alarm. At least one Dimension must be specified.
 #### 2.1.2 Namespaces, Dimensions, and Metrics ### {#Metrics}
 The Monitoring API makes use of several metric related pre-defined constants throughout.
