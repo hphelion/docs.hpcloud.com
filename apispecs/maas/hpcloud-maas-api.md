@@ -15,18 +15,28 @@ product: monitoring---# HP Cloud Monitoring API Specifications
 + [Notification Operations Details](#ServiceDetailsNotification)+ [Alarm Operations](#ServiceAlarmOps) - The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
 + [Alarm Operations Details](#ServiceDetailsAlarm)#### 2.1.1 High Level ### {#HighLevel}
 There are 4 major operations (besides Version information):
-+ Endpoints specify the connection for consuming metric data to the AMQP message queue. (Endpoints can only be created once per tenant. At least one Dimension must be specified.)
++ Endpoints specify the connection for consuming metric data to the AMQP message queue. (Endpoints can only be created one per tenant. At least one Dimension must be specified.)
 + Subscriptions specify what monitoring data is to be streamed. (You must create an endpoint to use with the subscription.)
 + Notifications specify the method(s) in which a user is contacted by alarms.+ Alarms specify user defined exceptional conditions that the user feels the need to be notified about. (You must create a Notification method to use with the Alarm. At least one Dimension must be specified.
-#### 2.1.2 Namespaces, Metrics and Dimensions ### {#Metrics}
-The Monitoring API makes use of several metric related pre-defined constants throughout.
+#### 2.1.2 Namespaces, Dimensions, and Metrics ### {#Metrics}
+The Monitoring API makes use of several metric related pre-defined constants throughout.
 
 ##### 2.1.2.1 Namespaces #### {#Namespaces}
+
+Defines the high level logical partition to monitor.  This restricts what metrics will be used.
 *Supported Namespaces*
 
-+ Compute
++ compute
 
-##### 2.1.2.2 Metrics #### {#Metrics}
+##### 2.1.2.2 Dimensions #### {#Dimensions}
+
+Places restrictions on the namespace to further narrow what is monitored.
+
+*Supported Compute Dimensions*
+
++ instance_id
+
+##### 2.1.2.3 Metrics #### {#Metrics}
 
 Each namespace represents a service that has its own metric types. These are described below:
 
@@ -48,13 +58,7 @@ Each namespace represents a service that has its own metric types. These are des
 |net_in_errors|counter|count|Number of receive packet errors on a network interface|
 |net_out_errors|counter|count|Number of transfer packet errors on a network interface|
 
-##### 2.1.2.3 Dimensions #### {#Dimensions}
-
-*Supported Compute Dimensions*
-
-+ instance_id
-
-#### 2.1.3 Faults ### {#Faults}
+### 2.2 Faults ## {#Faults}
 
 When an error occurs at request time, the system will return an HTTP error response code denoting the type of error. The system will also return additional information about the fault in the body of the response.
 
@@ -62,7 +66,7 @@ When an error occurs at request time, the system will return an HTTP error respo
 
 JSON	{  
 		"messaging_fault" : {
-			"code" : 500,
+			"code" : http error value (integer),
 			"message" : "Fault information...",
 			"details" : "Error Details…",
 			"internal_code" : "Internal error log code"
@@ -256,7 +260,7 @@ Provides information about the supported Monitoring API versions.
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/#### 4.4.2 Endpoint ### {#ServiceDetailsEndpoint}
 The endpoint resource represents an endpoint from which metrics can be consumed.
 *Note: The amqp_password is not retrievable after endpoint creation. If the password is lost, then the password reset operation must be performed.*
-*Note: Endpoints can only be created once per tenant.*##### 4.4.2.1 Create a New Endpoint #### {#ServiceDetailsCreateEndpoint}###### POST /endpointsCreates a new endpoint for metric consumption. **Request Data**	POST /v1.0/endpoints HTTP/1.1
+*Note: Endpoints can only be created once per tenant.*##### 4.4.2.1 Create a New Endpoint #### {#ServiceDetailsCreateEndpoint}###### POST /endpointsCreates a new endpoint for metric consumption. AMQP and URI information needs to be retained for accessing the message queue.**Request Data**	POST /v1.0/endpoints HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response**	HTTP/1.1 201 Created
@@ -278,7 +282,8 @@ Provides information about the supported Monitoring API versions.
 	      "amqp_exchange": "metrics"
 	    }
 	  }
-	}**Error Response****Status Code**| Status Code | Description | Reasons |
+	}
+	**Error Response****Status Code**| Status Code | Description | Reasons |
 | :-----------| :-----------| :-------|
 | 400 | Bad Request | Malformed request in URI or request body. |
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
@@ -286,7 +291,13 @@ Provides information about the supported Monitoring API versions.
 | 409 | Conflict | An endpoint for this tenant already exists. |
 | 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \
 	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints ##### 4.4.2.2 List All Endpoints #### {#ServiceDetailsListEndpoint}###### GET /endpointsLists all endpoints. Password information is not present.**Request Data**	GET /v1.0/endpoints HTTP/1.1
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints 
+	  
+*Extended Curl Example*
+
+	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints \
+	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
+	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74"##### 4.4.2.2 List All Endpoints #### {#ServiceDetailsListEndpoint}###### GET /endpointsLists all endpoints. Password information is not present.**Request Data**	GET /v1.0/endpoints HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**JSON	{
@@ -458,6 +469,12 @@ JSON
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions 
 
+*Extended Curl Example*
+
+	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions \
+	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
+	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
+	  -d '{"subscription": 	{"endpoint_id": "4d159ef6-0b6a-439b-a5bf-07459e1005b8", "namespace": "compute", "dimensions": {"instance_id": "5570"}}}'
 ##### 4.4.3.2 List All Subscriptions #### {#ServiceDetailsListSubscription}
 ###### GET /subscriptions
 
@@ -655,7 +672,8 @@ Creates a new notification method through which notifications can be sent when a
 
 **Data Parameters**
 
-* *type* - string - The type of notification method (PHONE, EMAIL)* *address* - string - The address to notify
+* *name* - string - A descriptive name for the notification
+* *type* - string - The type of notification method (SMS, EMAIL)* *address* - string - The address/number to notify 
 
 JSON
 
@@ -714,7 +732,12 @@ JSON
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods 
 
-##### 4.4.4.2 List All Notification Methods #### {#ServiceDetailsListNotification}
+*Extended Curl Example*
+
+	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods \
+	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
+	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
+	  -d '{"notification_method": {"name": "Joe'\''s Email", "type": "EMAIL", "address": "joe@mail.com"}}'##### 4.4.4.2 List All Notification Methods #### {#ServiceDetailsListNotification}
 ###### GET /notification-methods
 
 Lists all notification methods.
@@ -763,7 +786,7 @@ JSON
 	        }
 	      ],
 	      "name": "Joe's Phone",
-	      "type": "PHONE",
+	      "type": "SMS",
 	      "address": "12063823454"
 	    }
 	  ]
@@ -911,7 +934,7 @@ Creates a new alarm.
 
 * *name* - string - A descriptive name for the alarm* *namespace* - string - Namespace of metric to alarm on
 * *metric_type* - string - Type of metric to alarm on
-* *metric_subject* - string - (Optional) Subject of metric to alarm on* *dimensions* - dictionary - Dimensions of metrics to alarm on* *operator* - string - Comparison operator for which threshold and metric values are compared* *threshold* - long - Threshold which triggers an alarm when exceeded* *alarm_actions* - array - Methods through which notifications should be sent when transitioning to an ALARM state
+* *metric_subject* - string - (Optional) Descriptive subject name of metric to alarm on* *dimensions* - dictionary - Dimensions of metrics to alarm on* *operator* - string - Comparison operator for which threshold and metric values are compared (LT, LTE, GT, GTE) corresponding to less than, less than or equal, greater than, and greater than or equal* *threshold* - long - Threshold which triggers an alarm when exceeded (see metric descriptions)* *alarm_actions* - array - Methods through which notifications (notification id) should be sent when transitioning to an ALARM state
 
 JSON
 
@@ -990,7 +1013,12 @@ JSON
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms 
 
-##### 4.4.5.2 List All Alarms #### {#ServiceDetailsListAlarm}
+*Extended Curl Example*
+
+	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms \
+	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
+	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
+	  -d '{"alarm": {"name": "Disk Exceeds 1k Operations", "namespace": "compute", "metric_type": "disk_read_ops", "metric_subject": "VDA", "dimensions": {"instance_id": "cdace7b4-8bea-404c-848c-860754a76fb7"}, "operator": "GTE", "threshold": "1000", "alarm_actions": ["036609b0-3d6b-11e2-a25f-0800200c9a66", "1221dba0-3d6b-11e2-a25f-0800200c9a66"]}}'##### 4.4.5.2 List All Alarms #### {#ServiceDetailsListAlarm}
 ###### GET /alarms
 
 Lists all alarms.
@@ -1165,4 +1193,4 @@ This call does not provide a response body.
 	$ curl -X DELETE \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c## 5. Glossary # {#Section5_}* Namespace - A required classification for a metric.* Dimension - An optional classification for a metric. A metric may be classified by multiple dimensions.
-* Tenant - 
+* Tenant - The cloud name/id of the customer.
