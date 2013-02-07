@@ -1,10 +1,10 @@
 ---
 layout: page
-permalink: /api/block-storage/
-title: HP Block Storage API
-description: "HP Cloud Block Storage API Specifications"
-keywords: "bock, block storage, volumes"
-product: block-storage
+permalink: /api/my-service/
+title: HP Cloud My Service API
+description: "HP Cloud My Service API Specifications"
+keywords: "k1, k2, k3"
+product: my-service
 published: false
 
 ---
