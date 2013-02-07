@@ -446,9 +446,7 @@ JSON
 	    "dimensions": {
 	      "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
 	    }
-	    "meta": {
-	      "amqp_routing_key": "nova.server-1234363615-az-1-region-a-geo-1"
-	    }
+	    "meta": {}
 	  }
 	}
 
@@ -590,9 +588,7 @@ JSON
 	    "dimensions": {
 	      "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
 	    },
-	    "meta": {
-	      "amqp_routing_key": "nova.server-1234363615-az-1-region-a-geo-1"
-	    }
+	    "meta": {}
 	  }
 	}
 
