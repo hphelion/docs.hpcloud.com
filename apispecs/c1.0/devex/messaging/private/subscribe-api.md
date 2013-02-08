@@ -107,12 +107,12 @@ N/A
 
 | Resource | Operation                 | HTTP Method           | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------ | :----------           | :--------------------- | :---------------- | :-------------: |
-| Private Platform Alert | Get all private Platform Alert messages | GET | {BaseURI}/api/private/platform/alert | Y/N | mgmtconsole-admin (?) |
-| Public Platform Alert | Get all public Platform Alert messages | GET | {BaseURI}/api/public/platform/alert | Y/N | mgmtconsole-admin (?) |
-| Private Platform Status | Get all private Platform Status messages | GET | {BaseURI}/api/private/platform/status | Y/N | mgmtconsole-admin (?) |
-| Public Platform Status | Get all public Platform Status messages | GET | {BaseURI}/api/public/platform/status | Y/N | mgmtconsole-admin (?) |
-| Private Platform | Get all private Platform messages | GET | {BaseURI}/api/private/platform | Y/N | mgmtconsole-admin (?) |
-| Public Platform | Get all public Platform messages | GET | {BaseURI}/api/public/platform | Y/N | mgmtconsole-admin (?) |
+| Private Platform Alert | Get all private Platform Alert messages | GET | {BaseURI}/api/private/platform/alert | Y/N | L3 Role |
+| Public Platform Alert | Get all public Platform Alert messages | GET | {BaseURI}/api/public/platform/alert | Y/N | L3 Role |
+| Private Platform Status | Get all private Platform Status messages | GET | {BaseURI}/api/private/platform/status | Y/N | L3 Role |
+| Public Platform Status | Get all public Platform Status messages | GET | {BaseURI}/api/public/platform/status | Y/N | L3 Role |
+| Private Platform | Get all private Platform messages | GET | {BaseURI}/api/private/platform | Y/N | L3 Role |
+| Public Platform | Get all public Platform messages | GET | {BaseURI}/api/public/platform | Y/N | L3 Role |
 
 
 Note: The "mgmtconsole-admin" role is a temporary role created to allow initial development of this API to progress without hindrance. This initial role will be assigned both to Management Console, NOC and Support personnel as needed to enable publishing of messages across environments (RDD, ST1/ST2/PRO). Later, one or more specific roles will be created to allow sending of specific kinds of messages.
