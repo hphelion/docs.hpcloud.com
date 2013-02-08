@@ -372,7 +372,7 @@ JSON - 401 Exception example
 ```
 {"PlatformStatusException": {"message": "Unauthorized Request - invalid CS token.", "code": 401}}
 {"PlatformStatusException": {"message": "Unauthorized Request - user doesn't have sufficient access to perform this operation.", "code": 401}}
-
+```
 
 JSON - 500 Exception example
 
