@@ -21,16 +21,15 @@ The first iteration is essentially a prototype that supports archive retrieval f
 - Public Platform Status
 
 
-
 ## 1.1 API Maturity Level
 <!---
 *State the maturity level in which the API is in currently, based on the pre-defined stages i.e. Experimental (early Alpha, available internally only), Exploratory (Private-beta ready), Public (Public-beta ready), GA (Release to General Availability, SLAs defined.*
 *The versions schema, status field, supports an enumeration of ALPHA, BETA, CURRENT and DEPRECATED. The versions->status field should correspond to the Maturity Level for the API, i.e. ALPHA for Experimental, BETA for Exploratory, CURRENT for Public and GA, DEPRECATED for all other versions of the API that are not supported anymore.*
 -->
 
-**Maturity Level**: *Experimental*
+**Maturity Level**: *Testing*
 
-**Version API Status**: *ALPHA*
+**Version API Status**: *Version 1.0*
 
 
 ---
@@ -108,12 +107,12 @@ N/A
 
 | Resource | Operation                 | HTTP Method           | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------ | :----------           | :--------------------- | :---------------- | :-------------: |
-| Private Platform Alert | Get all private Platform Alert messages | GET | {BaseURI}/api/private/platform/alert | JSON | mgmtconsole-admin (?) |
-| Public Platform Alert | Get all public Platform Alert messages | GET | {BaseURI}/api/public/platform/alert | JSON | mgmtconsole-admin (?) |
-| Private Platform Status | Get all private Platform Status messages | GET | {BaseURI}/api/private/platform/status | JSON | mgmtconsole-admin (?) |
-| Public Platform Status | Get all public Platform Status messages | GET | {BaseURI}/api/public/platform/status | JSON | mgmtconsole-admin (?) |
-| Private Platform | Get all private Platform messages | GET | {BaseURI}/api/private/platform | JSON | mgmtconsole-admin (?) |
-| Public Platform | Get all public Platform messages | GET | {BaseURI}/api/public/platform | JSON | mgmtconsole-admin (?) |
+| Private Platform Alert | Get all private Platform Alert messages | GET | {BaseURI}/api/private/platform/alert | Y/N | mgmtconsole-admin (?) |
+| Public Platform Alert | Get all public Platform Alert messages | GET | {BaseURI}/api/public/platform/alert | Y/N | mgmtconsole-admin (?) |
+| Private Platform Status | Get all private Platform Status messages | GET | {BaseURI}/api/private/platform/status | Y/N | mgmtconsole-admin (?) |
+| Public Platform Status | Get all public Platform Status messages | GET | {BaseURI}/api/public/platform/status | Y/N | mgmtconsole-admin (?) |
+| Private Platform | Get all private Platform messages | GET | {BaseURI}/api/private/platform | Y/N | mgmtconsole-admin (?) |
+| Public Platform | Get all public Platform messages | GET | {BaseURI}/api/public/platform | Y/N | mgmtconsole-admin (?) |
 
 
 Note: The "mgmtconsole-admin" role is a temporary role created to allow initial development of this API to progress without hindrance. This initial role will be assigned both to Management Console, NOC and Support personnel as needed to enable publishing of messages across environments (RDD, ST1/ST2/PRO). Later, one or more specific roles will be created to allow sending of specific kinds of messages.
