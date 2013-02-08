@@ -105,12 +105,9 @@ N/A
 
 | Resource | Operation                 | HTTP Method           | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------ | :----------           | :--------------------- | :---------------- | :-------------: |
-| Platform Alert | Create a new Platform Alert | POST | {BaseURI}/external_platform_alert | JSON only | mgmtconsole-admin |
-| Public Platform Status | Create a new public Platform Status | POST | {BaseURI}/public_platform_status | JSON only | mgmtconsole-admin |
-| Private Platform Status | Create a new public Platform Status | POST | {BaseURI}/private_platform_status | JSON only | mgmtconsole-admin |
-
-
-Note: The "mgmtconsole-admin" role is a temporary role created to allow initial development of this API to progress without hindrance. This initial role will be assigned both to Management Console, NOC and Support personnel as needed to enable publishing of messages across environments (RDD, ST1/ST2/PRO). Later, one or more specific roles will be created to allow sending of specific kinds of messages.
+| Platform Alert | Create a new Platform Alert | POST | {BaseURI}/external_platform_alert | Y/N | L3 Support Role |
+| Public Platform Status | Create a new public Platform Status | POST | {BaseURI}/public_platform_status | Y/N | L3 Support Role |
+| Private Platform Status | Create a new public Platform Status | POST | {BaseURI}/private_platform_status | Y/N | L3 Support Role |
 
 
 ## 4.2 Common Request Headers
@@ -237,7 +234,9 @@ JSON - 401 Exception example
 
 ```
 {"PlatformAlertException": {"message": "Unauthorized Request - invalid CS token.", "code": 401}}
+{"PlatformAlertException": {"message": "Unauthorized Request - user doesn't have sufficient access to perform this operation.", "code": 401}}
 ```
+
 
 JSON - 500 Exception example
 
@@ -372,7 +371,8 @@ JSON - 401 Exception example
 
 ```
 {"PlatformStatusException": {"message": "Unauthorized Request - invalid CS token.", "code": 401}}
-```
+{"PlatformStatusException": {"message": "Unauthorized Request - user doesn't have sufficient access to perform this operation.", "code": 401}}
+
 
 JSON - 500 Exception example
 
@@ -507,6 +507,7 @@ JSON - 401 Exception example
 
 ```
 {"PlatformStatusException": {"message": "Unauthorized Request - invalid CS token.", "code": 401}}
+{"PlatformStatusException": {"message": "Unauthorized Request - user doesn't have sufficient access to perform this operation.", "code": 401}}
 ```
 
 JSON - 500 Exception example

@@ -16,7 +16,7 @@ The HP Cloud Message Hub is a lightweight message subscription platform that all
 The first iteration is essentially a prototype that supports archive retrieval for the following message types:
 
 - Private Platform Alerts
-- Public Platfrom Alerts
+- Public Platform Alerts
 - Private Platform Status
 - Public Platform Status
 
@@ -27,9 +27,9 @@ The first iteration is essentially a prototype that supports archive retrieval f
 *The versions schema, status field, supports an enumeration of ALPHA, BETA, CURRENT and DEPRECATED. The versions->status field should correspond to the Maturity Level for the API, i.e. ALPHA for Experimental, BETA for Exploratory, CURRENT for Public and GA, DEPRECATED for all other versions of the API that are not supported anymore.*
 -->
 
-**Maturity Level**: *Testing*
+**Maturity Level**: *Experimental*
 
-**Version API Status**: *Version 1.0*
+**Version API Status**: *ALPHA*
 
 
 ---
@@ -37,7 +37,7 @@ The first iteration is essentially a prototype that supports archive retrieval f
 
 # 2. Architecture View
 
-Documentation for MessageHub is available on the [MessagePub](https://wiki.hpcloud.net/display/iaas/MessagePub+-+Message+Publishing) Wiki page. (TODO: fix link)
+Documentation for MessageHub is available on the [MessagePub](https://wiki.hpcloud.net/display/iaas/MessageHub+-+Message+Subscriptions) Wiki page.
 
 ## 2.1 Overview
 <!---
@@ -115,15 +115,12 @@ N/A
 | Public Platform | Get all public Platform messages | GET | {BaseURI}/api/public/platform | Y/N | None |
 
 
-Note: The "mgmtconsole-admin" role is a temporary role created to allow initial development of this API to progress without hindrance. This initial role will be assigned both to Management Console, NOC and Support personnel as needed to enable publishing of messages across environments (RDD, ST1/ST2/PRO). Later, one or more specific roles will be created to allow sending of specific kinds of messages.
-
-
 ## 4.2 Common Request Headers
 <!---
 *List the common request headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
 -->
 
-Accept: application/vnd.messagehub-v2+json
+Accept: application/vnd.messagehub-v1+json
 Content-Type: application/json
 
 For all private messages, you need to have a valid Auth Token.
@@ -491,8 +488,15 @@ A successful response does not require a response body.
 **Status Code**
 
 500 - Internal Server Error of an unspecified nature.
+401 - Unauthorized access has been attempted.
 
 **Response Data**
+
+JSON - 401 Exception example
+
+```
+{"message": "Unauthorized Request - invalid CS token.", "code": 401}
+```
 
 JSON - 500 Exception example
 
@@ -573,8 +577,15 @@ A successful response does not require a response body.
 **Status Code**
 
 500 - Internal Server Error of an unspecified nature.
+401 - Unauthorized access has been attempted.
 
 **Response Data**
+
+JSON - 401 Exception example
+
+```
+{"message": "Unauthorized Request - invalid CS token.", "code": 401}
+```
 
 JSON - 500 Exception example
 
@@ -599,7 +610,7 @@ https://sp.rndd.aw1.hpcloud.net/api/private/platform/alert
 None.
 
 
-#### 4.4.2.3 Get Public Platform Status
+#### 4.4.2.3 Get Private Platform Status
 #### HTTP Verb: GET /api/private/platform/status
 <!---
 *Description about the method call*
@@ -655,8 +666,15 @@ A successful response does not require a response body.
 **Status Code**
 
 500 - Internal Server Error of an unspecified nature.
+401 - Unauthorized access has been attempted.
 
 **Response Data**
+
+JSON - 401 Exception example
+
+```
+{"message": "Unauthorized Request - invalid CS token.", "code": 401}
+```
 
 JSON - 500 Exception example
 
@@ -688,7 +706,7 @@ None.
 
 **Wiki Page**:
 
-https://wiki.hpcloud.net/display/iaas/MessagePub+-+Message+Publishing
+https://wiki.hpcloud.net/display/iaas/MessageHub+-+Message+Subscriptions
 https://wiki.hpcloud.net/display/iaas/Implementation+Phases+and+Scope
 https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics
 https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist
