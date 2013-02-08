@@ -37,7 +37,7 @@ The first iteration is essentially a prototype that supports archive retrieval f
 
 # 2. Architecture View
 
-Documentation for MessageHub is available on the [MessagePub](https://wiki.hpcloud.net/display/iaas/MessageHub+-+Message+Subscriptions) Wiki page.
+Documentation for MessageHub is available on the [MessageHub](https://wiki.hpcloud.net/display/iaas/MessageHub+-+Message+Subscriptions) Wiki page.
 
 ## 2.1 Overview
 <!---
@@ -120,12 +120,11 @@ N/A
 *List the common request headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
 -->
 
-Accept: application/vnd.messagehub-v1+json
-Content-Type: application/json
+Accept: application/vnd.messagehub-v1+json   
+Content-Type: application/json   
 
-For all private messages, you need to have a valid Auth Token.
+For all private messages, you need to have a valid Auth Token.  
 X-Auth-Token: <Auth_Token>
-
 
 ## 4.3 Common Response Headers
 <!---
@@ -224,7 +223,7 @@ A successful response does not require a response body.
 JSON - 500 Exception example
 
 ```
-{"Error": {"message": "Server Error of an unknown nature.", "code": 500}}
+{"message": "Server Error of an unknown nature.", "code": 500}
 ```
 
 **Curl Example**
@@ -388,7 +387,7 @@ A successful response does not require a response body.
 JSON - 500 Exception example
 
 ```
-{"Error": {"message": "Server Error of an unknown nature.", "code": 500}}
+{"message": "Server Error of an unknown nature.", "code": 500}
 ```
 
 **Curl Example**
@@ -487,7 +486,7 @@ A successful response does not require a response body.
 
 **Status Code**
 
-500 - Internal Server Error of an unspecified nature.
+500 - Internal Server Error of an unspecified nature.  
 401 - Unauthorized access has been attempted.
 
 **Response Data**
@@ -501,7 +500,7 @@ JSON - 401 Exception example
 JSON - 500 Exception example
 
 ```
-{"Error": {"message": "Server Error of an unknown nature.", "code": 500}}
+{"message": "Server Error of an unknown nature.", "code": 500}
 ```
 
 **Curl Example**
@@ -576,7 +575,7 @@ A successful response does not require a response body.
 
 **Status Code**
 
-500 - Internal Server Error of an unspecified nature.
+500 - Internal Server Error of an unspecified nature.  
 401 - Unauthorized access has been attempted.
 
 **Response Data**
@@ -590,7 +589,7 @@ JSON - 401 Exception example
 JSON - 500 Exception example
 
 ```
-{"Error": {"message": "Server Error of an unknown nature.", "code": 500}}
+{"message": "Server Error of an unknown nature.", "code": 500}
 ```
 
 **Curl Example**
@@ -665,7 +664,7 @@ A successful response does not require a response body.
 
 **Status Code**
 
-500 - Internal Server Error of an unspecified nature.
+500 - Internal Server Error of an unspecified nature.  
 401 - Unauthorized access has been attempted.
 
 **Response Data**
@@ -679,7 +678,7 @@ JSON - 401 Exception example
 JSON - 500 Exception example
 
 ```
-{"Error": {"message": "Server Error of an unknown nature.", "code": 500}}
+{"message": "Server Error of an unknown nature.", "code": 500}
 ```
 
 **Curl Example**
@@ -709,7 +708,6 @@ None.
 https://wiki.hpcloud.net/display/iaas/MessageHub+-+Message+Subscriptions
 https://wiki.hpcloud.net/display/iaas/Implementation+Phases+and+Scope
 https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics
-https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist
 
 **Code Repo**:
 

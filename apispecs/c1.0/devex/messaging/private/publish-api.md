@@ -115,7 +115,7 @@ N/A
 *List the common request headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
 -->
 
-Content-Type: application/json
+Content-Type: application/json  
 X-Auth-Token: <Auth_Token>
 
 
@@ -218,9 +218,9 @@ A successful response does not require a response body.
 
 **Status Code**
 
-400 - Malformed request, normally because of missing required data.
-401 - Unauthorized access has been attempted.
-500 - Internal Server Error of an unspecified nature.
+400 - Malformed request, normally because of missing required data.   
+401 - Unauthorized access has been attempted.  
+500 - Internal Server Error of an unspecified nature.  
 
 **Response Data**
 
@@ -355,9 +355,9 @@ A successful response does not require a response body.
 
 **Status Code**
 
-400 - Malformed request, normally because of missing required data.
-401 - Unauthorized access has been attempted.
-500 - Internal Server Error of an unspecified nature.
+400 - Malformed request, normally because of missing required data.  
+401 - Unauthorized access has been attempted.  
+500 - Internal Server Error of an unspecified nature.  
 
 **Response Data**
 
@@ -491,9 +491,9 @@ A successful response does not require a response body.
 
 **Status Code**
 
-400 - Malformed request, normally because of missing required data.
-401 - Unauthorized access has been attempted.
-500 - Internal Server Error of an unspecified nature.
+400 - Malformed request, normally because of missing required data.  
+401 - Unauthorized access has been attempted.  
+500 - Internal Server Error of an unspecified nature.  
 
 **Response Data**
 
