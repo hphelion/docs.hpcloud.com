@@ -2,7 +2,7 @@
 layout: page
 permalink: /api
 title: Message Publish API
-description: "Management Console Message Publish API documenation."
+description: "Management Console Message Publish API documentation."
 keywords: "Messaging, MessagePub"
 product: identity
 private: true
@@ -558,7 +558,7 @@ https://git.hpcloud.net/ManagementConsole/message_pub.git
 
 **API Lead Contacts**:
 
-Chris Johnson (wchrisjohnson@hp.com)
+Chris Johnson (wchrisjohnson@hp.com)  
 Travis Longoris (travis.longoria@hp.com)
 
 ---

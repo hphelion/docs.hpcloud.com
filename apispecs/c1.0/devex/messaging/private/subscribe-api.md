@@ -2,7 +2,7 @@
 layout: page
 permalink: /api
 title: Message Subscribe API
-description: "Management Console Message Subscribe API documenation."
+description: "Management Console Message Subscribe API documentation."
 keywords: "Messaging, MessageHub"
 product: identity
 private: true
@@ -305,7 +305,7 @@ A successful response does not require a response body.
 JSON - 500 Exception example
 
 ```
-{"Error": {"message": "Server Error of an unknown nature.", "code": 500}}
+{"message": "Server Error of an unknown nature.", "code": 500}
 ```
 
 **Curl Example**
@@ -715,7 +715,7 @@ https://git.hpcloud.net/ManagementConsole/message_hub.git
 
 **API Lead Contacts**:
 
-Chris Johnson (wchrisjohnson@hp.com)
+Chris Johnson (wchrisjohnson@hp.com)  
 Travis Longoris (travis.longoria@hp.com)
 
 ---
