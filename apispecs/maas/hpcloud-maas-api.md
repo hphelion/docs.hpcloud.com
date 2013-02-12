@@ -42,21 +42,21 @@ Each namespace represents a service that has its own metric types. These are des
 
 *Compute Metric Types*
 
-|Metric Type|Type|Unit|Description|
-|:----------|:---|:---|:----------|
-|cpu_total_time|counter|nanoseconds|Total CPU time used in nanoseconds|
-|disk_read_ops|counter|count|Number of read requests from a disk|
-|disk_write_ops|counter|count|Number of write requests from a disk|
-|disk_read_bytes|counter|bytes|Number of bytes read from a disk|
-|disk_write_bytes|counter|bytes|Number of bytes written to a disk|
-|net_in_bytes|counter|bytes|Number of receive bytes on a network interface |
-|net_out_bytes|counter|bytes|Number of transfer bytes on a network interface |
-|net_in_packets|counter|packets|Number of receive packets on a network interface|
-|net_out_packets|counter|packets|Number of transfer packets on a network interface |
-|net_in_dropped|counter|packets|Number of receive packets dropped on a network interface|
-|net_out_dropped|counter|packets|Number of transfer packets dropped on a network interface|
-|net_in_errors|counter|count|Number of receive packet errors on a network interface|
-|net_out_errors|counter|count|Number of transfer packet errors on a network interface|
+|Metric Type|Type|Unit|Subject|Description|
+|:----------|:---|:---|:------|:----------|
+|cpu_total_time|Counter|Nanoseconds||Total CPU time used in nanoseconds|
+|disk_read_ops|Counter|Operations|Disk Name|Number of read requests from a disk|
+|disk_write_ops|Counter|Operations|Disk Name|Number of write requests from a disk|
+|disk_read_bytes|Counter|Bytes|Disk Name|Number of bytes read from a disk|
+|disk_write_bytes|Counter|Bytes|Disk Name|Number of bytes written to a disk|
+|net_in_bytes|Counter|Bytes|Interface Name|Number of receive bytes on a network interface |
+|net_out_bytes|Counter|Bytes|Interface Name|Number of transfer bytes on a network interface |
+|net_in_packets|Counter|Packets|Interface Name|Number of receive packets on a network interface|
+|net_out_packets|Counter|Packets|Interface Name|Number of transfer packets on a network interface |
+|net_in_dropped|Counter|Packets|Interface Name|Number of receive packets dropped on a network interface|
+|net_out_dropped|Counter|Packets|Interface Name|Number of transfer packets dropped on a network interface|
+|net_in_errors|Counter|Errors|Interface Name|Number of receive packet errors on a network interface|
+|net_out_errors|Counter|Errors|Interface Name|Number of transfer packet errors on a network interface|
 
 ### 2.2 Faults ## {#Faults}
 
@@ -421,7 +421,7 @@ JSON
 	    "endpoint_id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
 	    "namespace": "compute",
 	    "dimensions": {
-	      "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
+	      "instance_id": "392633"
 	    }
 	  }
 	}
@@ -453,7 +453,7 @@ JSON
 	    "endpoint_id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
 	    "namespace": "compute",
 	    "dimensions": {
-	      "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
+	      "instance_id": "392633"
 	    }
 	    "meta": {}
 	  }
@@ -481,7 +481,7 @@ JSON
 	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions \
 	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
 	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
-	  -d '{"subscription": 	{"endpoint_id": "4d159ef6-0b6a-439b-a5bf-07459e1005b8", "namespace": "compute", "dimensions": {"instance_id": "5570"}}}'
+	  -d '{"subscription": 	{"endpoint_id": "4d159ef6-0b6a-439b-a5bf-07459e1005b8", "namespace": "compute", "dimensions": {"instance_id": "392633"}}}'
 ##### 4.4.3.2 List All Subscriptions #### {#ServiceDetailsListSubscription}
 ###### GET /subscriptions
 
@@ -521,7 +521,7 @@ JSON
 	      "endpoint_id": "36351ef0-3ff3-11e2-a25f-0800200c9a66",
 	      "namespace": "compute",
 	      "dimensions": {
-	        "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
+	        "instance_id": "392633"
 	      }
 	    },
 	    {
@@ -535,7 +535,7 @@ JSON
 	      "endpoint_id": "3d713b90-3ff3-11e2-a25f-0800200c9a66",
 	      "namespace": "compute",
 	      "dimensions": {
-	        "instance_id": "490dcc20-3ff3-11e2-a25f-0800200c9a66"
+	        "instance_id": "392633"
 	      }
 	    }
 	  ]
@@ -595,7 +595,7 @@ JSON
 	    "endpoint_id": "36351ef0-3ff3-11e2-a25f-0800200c9a66",
 	    "namespace": "compute",
 	    "dimensions": {
-	      "instance_id": "ca7251f7-8220-42f8-abef-af43739249ad"
+	      "instance_id": "392633"
 	    },
 	    "meta": {}
 	  }
@@ -950,7 +950,7 @@ JSON
 	    "metric_type": "disk_read_ops",
 	    "metric_subject": "VDA",
 	    "dimensions": {
-	      "instance_id": "cdace7b4-8bea-404c-848c-860754a76fb7"
+	      "instance_id": "392633"
 	    },
 	    "operator": "GTE",
 	    "threshold": "1000",
@@ -989,7 +989,7 @@ JSON
 	    "namespace": "compute",
 	    "metric_type": "disk_read_ops",
 	    "dimensions": {
-	      "instance_id": "cdace7b4-8bea-404c-848c-860754a76fb7"
+	      "instance_id": "392633"
 	    },
 	    "operator": "GTE",
 	    "threshold": "1000",
@@ -1023,7 +1023,7 @@ JSON
 	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms \
 	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
 	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
-	  -d '{"alarm": {"name": "Disk Exceeds 1k Operations", "namespace": "compute", "metric_type": "disk_read_ops", "metric_subject": "VDA", "dimensions": {"instance_id": "cdace7b4-8bea-404c-848c-860754a76fb7"}, "operator": "GTE", "threshold": "1000", "alarm_actions": ["036609b0-3d6b-11e2-a25f-0800200c9a66", "1221dba0-3d6b-11e2-a25f-0800200c9a66"]}}'##### 4.4.5.2 List All Alarms #### {#ServiceDetailsListAlarm}
+	  -d '{"alarm": {"name": "Disk Exceeds 1k Operations", "namespace": "compute", "metric_type": "disk_read_ops", "metric_subject": "VDA", "dimensions": {"instance_id": "392633"}, "operator": "GTE", "threshold": "1000", "alarm_actions": ["036609b0-3d6b-11e2-a25f-0800200c9a66", "1221dba0-3d6b-11e2-a25f-0800200c9a66"]}}'##### 4.4.5.2 List All Alarms #### {#ServiceDetailsListAlarm}
 ###### GET /alarms
 
 Lists all alarms.
@@ -1063,7 +1063,7 @@ JSON
 	      "namespace": "compute",
 	      "metric_type": "disk_read_ops",
 	      "dimensions": {
-	        "instance_id": "cdace7b4-8bea-404c-848c-860754a76fb7"
+	        "instance_id": "392633"
 	      },
 	      "operator": "GTE",
 	      "threshold": "1000",
@@ -1127,7 +1127,7 @@ JSON
 	    "namespace": "compute",
 	    "metric_type": "disk_read_ops",
 	    "dimensions": {
-	      "instance_id": "cdace7b4-8bea-404c-848c-860754a76fb7"
+	      "instance_id": "392633"
 	    },
 	    "operator": "GTE",
 	    "threshold": "1000",
