@@ -60,18 +60,27 @@ Each namespace represents a service that has its own metric types. These are des
 
 ### 2.2 Faults ## {#Faults}
 
-When an error occurs at request time, the system will return an HTTP error response code denoting the type of error. The system will also return additional information about the fault in the body of the response.
+When an fault occurs at request time, the system will return an HTTP error response code denoting the type of fault. The system will also return additional information about the fault in the body of the response.
 
 *Fault Response*
 
 JSON	{  
-		"messaging_fault" : {
-			"code" : http error value (integer),
+		"fault_element" : {
+			"code" : HTTP error code (integer),
 			"message" : "Fault information...",
-			"details" : "Error Details…",
+			"details" : "Fault Details…",
 			"internal_code" : "Internal error log code"
     	}
-	}The error code is returned in the body of the response for convenience. The message section returns a human-readable message that is appropriate for display to the end user. The details section is optional and may contain extra information. The internal_code is optional to further identify the internal cause of an error.
+	}The error code is returned in the body of the response for convenience. The message section returns a human-readable message that is appropriate for display to the end user. The details section is optional and may contain extra information. The internal_code section is optional internal to monitoring information to further identify the cause of the fault.
+
+The root element of the fault (the fault_element value) may change depending on the type of fault. The following is a list of possible elements along with their associated HTTP error codes.|Fault Element|HTTP Error Code|
+|:------------|:--------------|
+|server_error|500|
+|bad_request|400|
+|unauthorized|401|
+|not_found|404|
+|conflict|409|
+|unprocessable_entity|422|
 ## 3. Account-level View # {#Section3_}Requests to the Monitoring API are required to present a valid token which must be obtained from Keystone prior to making a Monitoring API request.### 3.1 Accounts ## {#Accounts}**Requesting a Token**
 ***Request URL***
 	curl -i https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens -X POST -H "Content-Type: application/json" -H "User-Agent: python-novaclient"
