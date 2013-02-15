@@ -1,10 +1,10 @@
 ---
 layout: page
-permalink: /api
+permalink: /api/devex/messaging/
 title: Message Subscribe API
 description: "Management Console Message Subscribe API documentation."
 keywords: "Messaging, MessageHub"
-product: identity
+product: devex_messaging
 private: true
 ---
 
@@ -22,10 +22,6 @@ The first iteration is essentially a prototype that supports archive retrieval f
 
 
 ## 1.1 API Maturity Level
-<!---
-*State the maturity level in which the API is in currently, based on the pre-defined stages i.e. Experimental (early Alpha, available internally only), Exploratory (Private-beta ready), Public (Public-beta ready), GA (Release to General Availability, SLAs defined.*
-*The versions schema, status field, supports an enumeration of ALPHA, BETA, CURRENT and DEPRECATED. The versions->status field should correspond to the Maturity Level for the API, i.e. ALPHA for Experimental, BETA for Exploratory, CURRENT for Public and GA, DEPRECATED for all other versions of the API that are not supported anymore.*
--->
 
 **Maturity Level**: *Experimental*
 
@@ -39,42 +35,13 @@ The first iteration is essentially a prototype that supports archive retrieval f
 
 Documentation for MessageHub is available on the [MessageHub](https://wiki.hpcloud.net/display/iaas/MessageHub+-+Message+Subscriptions) Wiki page.
 
-## 2.1 Overview
-<!---
-*References to architectural details of the service.*
--->
-
-## 2.2 Conceptual/Logical Architecture View
-<!---
-*Describe the logical components of the system and their responsibilities*
--->
-
-## 2.3 Infrastructure Architecture View
-<!---
-*Describe how the API fits into the overall HPCS Infrastructure*
--->
-
-## 2.4 Entity Relationship Diagram
-<!---
-*Describe the relationships between the various entities (resources) involved in the API*
--->
 
 ---
 
 # 3. Account-level View
-<!---
-*Describe the relationship of the API with respect to the accounts, groups, tenants, regions, availability zones etc.*
--->
 
-## 3.1 Accounts
-<!---
-*Describe the structure of the user accounts, groups and tenants. Currently this might be described separately in context of Control Services, but in future each service API needs to state their usage. In future CS might support complex group hierarchies, enterprise account structures while there maybe a phased adoption by individual service APIs*
--->
 
-## 3.2 Regions and Availability Zones
-<!---
-*Describe the availability of the service API in different regions and availability zones. State plans for future expansion as well.*
--->
+## 3.1 Regions and Availability Zones
 
 **Region(s)**: region-a
 
@@ -82,20 +49,11 @@ Documentation for MessageHub is available on the [MessageHub](https://wiki.hpclo
 
 **Future Expansion**: region-b
 
-
-## 3.3 Service Catalog
-<!---
-*Describe if the service API is exposed via the service catalog. Reference the fragment of the service catalog showing the structure.*
--->
-
-N/A
-
 ---
 
+
 # 4. REST API Specifications
-<!---
-*Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.*
--->
+
 
 ## 4.1 Service API Operations
 
@@ -103,44 +61,35 @@ N/A
 
 **BaseUri**: /
 
-**Admin URI**: N/A
-
 | Resource | Operation                 | HTTP Method           | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------ | :----------           | :--------------------- | :---------------- | :-------------: |
-| Private Platform Alert | Get all private Platform Alert messages | GET | {BaseURI}/api/private/platform/alert | Y/N | HP Cloud Domain |
-| Public Platform Alert | Get all public Platform Alert messages | GET | {BaseURI}/api/public/platform/alert | Y/N | None |
-| Private Platform Status | Get all private Platform Status messages | GET | {BaseURI}/api/private/platform/status | Y/N | HP Cloud Domain |
-| Public Platform Status | Get all public Platform Status messages | GET | {BaseURI}/api/public/platform/status | Y/N | None |
-| Private Platform | Get all private Platform messages | GET | {BaseURI}/api/private/platform | Y/N | HP Cloud Domain |
-| Public Platform | Get all public Platform messages | GET | {BaseURI}/api/public/platform | Y/N | None |
+| Private Platform | [Retrieve all Private Platform messages](#get_private_platform) | GET | {BaseURI}/api/private/platform | Y/N | HP Cloud Domain |
+| Private Platform Alert | [Retrieve all Private Platform Alert messages](#get_private_platform_alert) | GET | {BaseURI}/api/private/platform/alert | Y/N | HP Cloud Domain |
+| Private Platform Status | [Retrieve all Private Platform Status messages](#get_private_platform_status) | GET | {BaseURI}/api/private/platform/status | Y/N | HP Cloud Domain |
+| Public Platform | [Retrieve all Public Platform messages](#get_public_platform) | GET | {BaseURI}/api/public/platform | Y/N | None |
+| Public Platform Alert | [Retrieve all Public Platform Alert messages](#get_public_platform_alert) | GET | {BaseURI}/api/public/platform/alert | Y/N | None |
+| Public Platform Status | [Retrieve all Public Platform Status messages](#get_public_platform_status) | GET | {BaseURI}/api/public/platform/status | Y/N | None |
 
 
 ## 4.2 Common Request Headers
-<!---
-*List the common request headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
--->
 
-Accept: application/vnd.messagehub-v1+json   
-Content-Type: application/json   
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
 
-For all private messages, you need to have a valid Auth Token.  
-X-Auth-Token: <Auth_Token>
 
 ## 4.3 Common Response Headers
-<!---
-*List the common response headers i.e. Content-Type, Content-Length, Connection, Date, ETag, Server, etc.*
--->
+
+    Content-Type: application/json
+    Content-Length: 2940
+    Connection: keep-alive
+    Server: thin 1.5.0 codename Knife
 
 
 ## 4.4 Service API Operation Details
-<!---
-*The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
--->
+
 
 ### 4.4.1 Public Platform
-<!---
-*Describe the resource and what information they provide. Then enumerate all the API method calls below.*
--->
 
 Public Platform messages represents raw message data for messages targeted towards public/external users of the Management Console.
 
@@ -161,53 +110,62 @@ N/A
 
 None.
 
-#### 4.4.1.1 Get Public Platform
-#### HTTP Verb: GET /api/public/platform
-<!---
-*Description about the method call*
--->
+#### 4.4.1.1 Get Public Platform {#get_public_platform}
+#### GET /api/public/platform
+
 Returns all the public platform alert and status messages.
 
 **Request Data**
-<!---
-*Specify all the required/optional url and data parameters for the given method call.*
--->
+
+    GET /api/public/platform HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
 
 **URL Parameters**
-<!---
-*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
--->
 
 None.
 
 **Data Parameters**
-<!---
-*List all the attributes that comprise the data structure*
--->
-
-None.
-
-<!---
-*Either put 'This call does not require a request body' or include JSON/XML request data structure*
--->
 
 This call does not require a request body.
 
 **Success Response**
-<!---
-*Specify the status code and any content that is returned.*
--->
 
 **Status Code**
 
 200 - OK
 
 **Response Data**
-<!---
-*Either put 'This call does not require a response body' or include JSON/XML response data structure*
--->
 
-A successful response does not require a response body.
+Header
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    Content-Length: 2940
+    Connection: keep-alive
+    Server: thin 1.5.0 codename Knife
+
+JSON Body
+
+    [
+        {
+        "_id":"5112ac8834ce3857d500000c", 
+        "created_at":"2013-02-06T19:18:32+00:00", 
+        "message":"Platform alert test message.", 
+        "scope":"public", 
+        "title":"Alert Message", 
+        "type":"platform_alert"
+        }, 
+        {
+        "_id":"51155e0b34ce3857d500000d", 
+        "created_at":"2013-02-08T20:20:27+00:00", 
+        "message":"Platform status test message.", 
+        "scope":"public", 
+        "title":"Status Message", 
+        "type":"platform_status"
+        }
+    ]
 
 **Error Response**
 <!---
@@ -222,18 +180,16 @@ A successful response does not require a response body.
 
 JSON - 500 Exception example
 
-```
-{"message": "Server Error of an unknown nature.", "code": 500}
-```
+    {"message": "Server Error of an unknown nature.", "code": 500}
 
 **Curl Example**
 
 Here's an example in the RDD environment:
 
-```
-curl -v -H "Accept=application/vnd.messagehub-v1+json" \
-https://sp.rndd.aw1.hpcloud.net/api/public/platform
-```
+    curl -v -H "Accept=application/vnd.messagehub-v1+json" 
+            -H X-Auth-Token:<HPAuthToken> 
+            https://sp.rndd.aw1.hpcloud.net/api/public/platform
+
 
 **Additional Notes**
 <!---
@@ -244,57 +200,56 @@ None.
 
 
 #### 4.4.1.2 Get Public Platform Alert
-#### HTTP Verb: GET /api/public/platform/alert
-<!---
-*Description about the method call*
--->
+#### GET /api/public/platform/alert {#get_public_platform_alert}
+
 Returns all the public platform alert messages.
 
 **Request Data**
-<!---
-*Specify all the required/optional url and data parameters for the given method call.*
--->
+
+    GET /api/public/platform HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
 
 **URL Parameters**
-<!---
-*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
--->
 
 None.
 
 **Data Parameters**
-<!---
-*List all the attributes that comprise the data structure*
--->
 
 None.
-
-<!---
-*Either put 'This call does not require a request body' or include JSON/XML request data structure*
--->
 
 This call does not require a request body.
 
 **Success Response**
-<!---
-*Specify the status code and any content that is returned.*
--->
 
 **Status Code**
 
 200 - OK
 
 **Response Data**
-<!---
-*Either put 'This call does not require a response body' or include JSON/XML response data structure*
--->
 
-A successful response does not require a response body.
+Header
+
+    GET /api/public/platform HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
+
+JSON Body
+
+    [
+        {
+        "_id":"5112ac8834ce3857d500000c", 
+        "created_at":"2013-02-06T19:18:32+00:00", 
+        "message":"Platform alert test message.", 
+        "scope":"public", 
+        "title":"Alert Message", 
+        "type":"platform_alert"
+        }
+    ]
 
 **Error Response**
-<!---
-*Enumerate all the possible error status codes and any content that is returned.*
--->
 
 **Status Code**
 
@@ -304,79 +259,75 @@ A successful response does not require a response body.
 
 JSON - 500 Exception example
 
-```
-{"message": "Server Error of an unknown nature.", "code": 500}
-```
+
+    {"message": "Server Error of an unknown nature.", "code": 500}
+
 
 **Curl Example**
 
 Here's an example in the RDD environment:
 
-```
-curl -v -H "Accept=application/vnd.messagehub-v1+json" \
-https://sp.rndd.aw1.hpcloud.net/api/public/platform/alert
-```
+    curl -v -H "Accept=application/vnd.messagehub-v1+json"
+            -H X-Auth-Token:<HPAuthToken>
+            https://sp.rndd.aw1.hpcloud.net/api/public/platform/alert
+
 
 **Additional Notes**
-<!---
-*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
--->
 
 None.
 
 
-#### 4.4.1.3 Get Public Platform Status
-#### HTTP Verb: GET /api/public/platform/status
-<!---
-*Description about the method call*
--->
+#### 4.4.1.3 Get Public Platform Status {#get_public_platform_status}
+#### GET /api/public/platform/status
+
 Returns all the public platform status messages.
 
 **Request Data**
-<!---
-*Specify all the required/optional url and data parameters for the given method call.*
--->
+
+    GET /api/public/platform HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
 
 **URL Parameters**
-<!---
-*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
--->
 
 None.
 
 **Data Parameters**
-<!---
-*List all the attributes that comprise the data structure*
--->
 
 None.
-
-<!---
-*Either put 'This call does not require a request body' or include JSON/XML request data structure*
--->
 
 This call does not require a request body.
 
 **Success Response**
-<!---
-*Specify the status code and any content that is returned.*
--->
 
 **Status Code**
 
 200 - OK
 
 **Response Data**
-<!---
-*Either put 'This call does not require a response body' or include JSON/XML response data structure*
--->
 
-A successful response does not require a response body.
+Header
+
+    GET /api/public/platform HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
+
+JSON Body
+
+    [
+        {
+        "_id":"51155e0b34ce3857d500000d", 
+        "created_at":"2013-02-08T20:20:27+00:00", 
+        "message":"Platform status test message.", 
+        "scope":"public", 
+        "title":"Status Message", 
+        "type":"platform_status"
+        }
+    ]
 
 **Error Response**
-<!---
-*Enumerate all the possible error status codes and any content that is returned.*
--->
 
 **Status Code**
 
@@ -386,34 +337,24 @@ A successful response does not require a response body.
 
 JSON - 500 Exception example
 
-```
-{"message": "Server Error of an unknown nature.", "code": 500}
-```
+    {"message": "Server Error of an unknown nature.", "code": 500}
 
 **Curl Example**
 
 Here's an example in the RDD environment:
 
-```
-curl -v -H "Accept=application/vnd.messagehub-v1+json" \
-https://sp.rndd.aw1.hpcloud.net/api/public/platform/status
-```
+    curl -v -H "Accept=application/vnd.messagehub-v1+json"
+            -H "X-Auth-Token:<HPAuthToken>"
+            https://sp.rndd.aw1.hpcloud.net/api/public/platform/status
 
 **Additional Notes**
-<!---
-*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
--->
 
 None.
 
 
 ### 4.4.2 Private Platform
-<!---
-*Describe the resource and what information they provide. Then enumerate all the API method calls below.*
--->
 
 Public Platform messages represents raw message data for messages targeted towards public/internal users of the Cloud Admin Console.
-
 
 **Status Lifecycle**
 
@@ -431,58 +372,65 @@ N/A
 
 None.
 
-#### 4.4.1.1 Get Private Platform
-#### HTTP Verb: GET /api/private/platform
-<!---
-*Description about the method call*
--->
+#### 4.4.1.1 Get Private Platform {#get_private_platform}
+#### GET /api/private/platform
+
 Returns all the private platform alert and status messages.
 
 **Request Data**
-<!---
-*Specify all the required/optional url and data parameters for the given method call.*
--->
+
+    GET /api/public/platform HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
 
 **URL Parameters**
-<!---
-*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
--->
 
 None.
 
 **Data Parameters**
-<!---
-*List all the attributes that comprise the data structure*
--->
 
 None.
-
-<!---
-*Either put 'This call does not require a request body' or include JSON/XML request data structure*
--->
 
 This call does not require a request body.
 
 **Success Response**
-<!---
-*Specify the status code and any content that is returned.*
--->
 
 **Status Code**
 
 200 - OK
 
 **Response Data**
-<!---
-*Either put 'This call does not require a response body' or include JSON/XML response data structure*
--->
 
-A successful response does not require a response body.
+Header
+
+    GET /api/public/platform HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
+
+JSON Body
+
+    [
+        {
+        "_id":"5112ac8834ce3857d500000c", 
+        "created_at":"2013-02-06T19:18:32+00:00", 
+        "message":"Platform alert test message.", 
+        "scope":"private", 
+        "title":"Alert Message", 
+        "type":"platform_alert"
+        }, 
+        {
+        "_id":"51155e0b34ce3857d500000d", 
+        "created_at":"2013-02-08T20:20:27+00:00", 
+        "message":"Platform status test message.", 
+        "scope":"private", 
+        "title":"Status Message", 
+        "type":"platform_status"
+        }
+    ]
 
 **Error Response**
-<!---
-*Enumerate all the possible error status codes and any content that is returned.*
--->
 
 **Status Code**
 
@@ -493,85 +441,74 @@ A successful response does not require a response body.
 
 JSON - 401 Exception example
 
-```
-{"message": "Unauthorized Request - invalid CS token.", "code": 401}
-```
+    {"message": "Unauthorized Request - invalid CS token.", "code": 401}
 
 JSON - 500 Exception example
 
-```
-{"message": "Server Error of an unknown nature.", "code": 500}
-```
+    {"message": "Server Error of an unknown nature.", "code": 500}
 
 **Curl Example**
 
 Here's an example in the RDD environment:
 
-```
-curl -v -H "Accept=application/vnd.messagehub-v1+json" \
-https://sp.rndd.aw1.hpcloud.net/api/private/platform
-```
+    curl -v -H "Accept=application/vnd.messagehub-v1+json"
+            -H "X-Auth-Token:<HPAuthToken>"
+            https://sp.rndd.aw1.hpcloud.net/api/private/platform
 
 **Additional Notes**
-<!---
-*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
--->
 
 None.
 
 
-#### 4.4.1.2 Get Private Platform Alert
-#### HTTP Verb: GET /api/private/platform/alert
-<!---
-*Description about the method call*
--->
+#### 4.4.1.2 Get Private Platform Alert {#get_private_platform_alert}
+#### GET /api/private/platform/alert
+
 Returns all the private platform alert messages.
 
 **Request Data**
-<!---
-*Specify all the required/optional url and data parameters for the given method call.*
--->
+
+    GET /api/public/platform HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
 
 **URL Parameters**
-<!---
-*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
--->
 
 None.
 
 **Data Parameters**
-<!---
-*List all the attributes that comprise the data structure*
--->
-
-None.
-
-<!---
-*Either put 'This call does not require a request body' or include JSON/XML request data structure*
--->
 
 This call does not require a request body.
 
 **Success Response**
-<!---
-*Specify the status code and any content that is returned.*
--->
 
 **Status Code**
 
 200 - OK
 
 **Response Data**
-<!---
-*Either put 'This call does not require a response body' or include JSON/XML response data structure*
--->
 
-A successful response does not require a response body.
+Header
+
+    GET /api/public/platform HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
+
+JSON Body
+
+    [
+        {
+        "_id":"5112ac8834ce3857d500000c", 
+        "created_at":"2013-02-06T19:18:32+00:00", 
+        "message":"Platform alert test message.", 
+        "scope":"private", 
+        "title":"Alert Message", 
+        "type":"platform_alert"
+        }
+    ]
 
 **Error Response**
-<!---
-*Enumerate all the possible error status codes and any content that is returned.*
--->
 
 **Status Code**
 
@@ -582,85 +519,74 @@ A successful response does not require a response body.
 
 JSON - 401 Exception example
 
-```
-{"message": "Unauthorized Request - invalid CS token.", "code": 401}
-```
+    {"message": "Unauthorized Request - invalid CS token.", "code": 401}
 
 JSON - 500 Exception example
 
-```
-{"message": "Server Error of an unknown nature.", "code": 500}
-```
+    {"message": "Server Error of an unknown nature.", "code": 500}
 
 **Curl Example**
 
 Here's an example in the RDD environment:
 
-```
-curl -v -H "Accept=application/vnd.messagehub-v1+json" \
-https://sp.rndd.aw1.hpcloud.net/api/private/platform/alert
-```
+    curl -v -H "Accept=application/vnd.messagehub-v1+json"
+            -H "X-Auth-Token:<HPAuthToken>"
+            https://sp.rndd.aw1.hpcloud.net/api/private/platform/alert
 
 **Additional Notes**
-<!---
-*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
--->
 
 None.
 
 
-#### 4.4.2.3 Get Private Platform Status
-#### HTTP Verb: GET /api/private/platform/status
-<!---
-*Description about the method call*
--->
+#### 4.4.2.3 Get Private Platform Status {#get_private_platform_status}
+#### GET /api/private/platform/status
+
 Returns all the private platform status messages.
 
 **Request Data**
-<!---
-*Specify all the required/optional url and data parameters for the given method call.*
--->
+
+    GET /api/public/platform HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
 
 **URL Parameters**
-<!---
-*Pagination concepts can be described here, i.e. marker, limit, count etc. Filtering concepts can be described as well i.e. prefix, delimiter etc.*
--->
 
 None.
 
 **Data Parameters**
-<!---
-*List all the attributes that comprise the data structure*
--->
-
-None.
-
-<!---
-*Either put 'This call does not require a request body' or include JSON/XML request data structure*
--->
 
 This call does not require a request body.
 
 **Success Response**
-<!---
-*Specify the status code and any content that is returned.*
--->
 
 **Status Code**
 
 200 - OK
 
 **Response Data**
-<!---
-*Either put 'This call does not require a response body' or include JSON/XML response data structure*
--->
 
-A successful response does not require a response body.
+Header
+
+    GET /api/public/platform HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    X-Auth-Token:HPAuth_XXXXX
+
+JSON Body
+
+    [ 
+        {
+        "_id":"51155e0b34ce3857d500000d", 
+        "created_at":"2013-02-08T20:20:27+00:00", 
+        "message":"Platform status test message.", 
+        "scope":"private", 
+        "title":"Status Message", 
+        "type":"platform_status"
+        }
+    ]
 
 **Error Response**
-<!---
-*Enumerate all the possible error status codes and any content that is returned.*
--->
 
 **Status Code**
 
@@ -671,29 +597,21 @@ A successful response does not require a response body.
 
 JSON - 401 Exception example
 
-```
-{"message": "Unauthorized Request - invalid CS token.", "code": 401}
-```
+    {"message": "Unauthorized Request - invalid CS token.", "code": 401}
 
 JSON - 500 Exception example
 
-```
-{"message": "Server Error of an unknown nature.", "code": 500}
-```
+    {"message": "Server Error of an unknown nature.", "code": 500}
 
 **Curl Example**
 
 Here's an example in the RDD environment:
 
-```
-curl -v -H "Accept=application/vnd.messagehub-v1+json" \
-https://sp.rndd.aw1.hpcloud.net/api/private/platform/status
-```
+    curl -v -H "Accept=application/vnd.messagehub-v1+json"
+            -H "X-Auth-Token:<HPAuthToken>"
+            https://sp.rndd.aw1.hpcloud.net/api/private/platform/status
 
 **Additional Notes**
-<!---
-*Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.*
--->
 
 None.
 
