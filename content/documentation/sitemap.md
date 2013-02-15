@@ -4,7 +4,7 @@ title: "HP Cloud Service Documentation Site Map"
 permalink: /sitemap/
 
 ---
-# HP Cloud Service Documentation Site Map
+# HP Cloud Service Documentation Site Map#
 
 Having a bit of trouble navigating our site, and so you're looking for a single list of what we cover?  You've come to the right place!
 
@@ -12,6 +12,7 @@ Having a bit of trouble navigating our site, and so you're looking for a single 
 &nbsp;&nbsp;&nbsp;&nbsp;[Documentation Site Overview](/site-overview)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;[HP Cloud Services FAQ](/faq)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;[Compute Services Overview](/compute)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[HP Cloud Services Activity Stream](/activity-stream)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Compute Services API](/compute/api)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Using the Compute Service](/compute/using)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;[Object Storage Overview](/object-storage)<br>
@@ -73,6 +74,4 @@ Having a bit of trouble navigating our site, and so you're looking for a single 
 &nbsp;&nbsp;&nbsp;&nbsp;[Glossary of Terms](/glossary)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;[Software Downloads](/downloads)<br>
 
-
-
-__Note__: If you find that there are pages that aren't listed here, or unresolved links, please be sure to tell us!
+**Note**: If you find that there are pages that aren't listed here, or unresolved links, please be sure to tell us!
