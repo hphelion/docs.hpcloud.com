@@ -32,6 +32,8 @@ Defines the high level logical partition to monitor.  This restricts what metric
 
 Places restrictions on the namespace to further narrow what is monitored.
 
+*Note: each Dimension type can only be used once per call.*
+
 *Supported Compute Dimensions*
 
 + instance_id
@@ -413,7 +415,7 @@ Creates a new subscription to consume metrics.
 
 **Data Parameters**
 
-* *endpoint_id* - string - The id of the endpoint to subscribe to* *namespace* - string - The namespace of metrics to receive* *dimensions* - dictionary - The dimensions of metrics to receive
+* *endpoint_id* - string - The id of the endpoint to subscribe to* *namespace* - string - The namespace of metrics to receive* *dimensions* - dictionary - The dimensions of metrics to receive (each dimension type can only be used once in this call)
 
 JSON
 
@@ -941,7 +943,7 @@ Creates a new alarm.
 
 * *name* - string - A descriptive name for the alarm* *namespace* - string - Namespace of metric to alarm on
 * *metric_type* - string - Type of metric to alarm on
-* *metric_subject* - string - (Optional) Descriptive subject name of metric to alarm on* *dimensions* - dictionary - Dimensions of metrics to alarm on* *operator* - string - Comparison operator for which threshold and metric values are compared (LT, LTE, GT, GTE) corresponding to less than, less than or equal, greater than, and greater than or equal* *threshold* - long - Threshold which triggers an alarm when exceeded (see metric descriptions)* *alarm_actions* - array - Methods through which notifications (notification id) should be sent when transitioning to an ALARM state
+* *metric_subject* - string - (Optional) Descriptive subject name of metric to alarm on* *dimensions* - dictionary - Dimensions of metrics to alarm on (each dimension type can only be used once in this call)* *operator* - string - Comparison operator for which threshold and metric values are compared (LT, LTE, GT, GTE) corresponding to less than, less than or equal, greater than, and greater than or equal* *threshold* - long - Threshold which triggers an alarm when exceeded (see metric descriptions)* *alarm_actions* - array - Methods through which notifications (notification id) should be sent when transitioning to an ALARM state
 
 JSON
 
