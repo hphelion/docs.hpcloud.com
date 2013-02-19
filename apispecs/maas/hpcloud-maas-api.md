@@ -78,6 +78,7 @@ The root element of the fault (the fault_element value) may change depending on 
 |server_error|500|
 |bad_request|400|
 |unauthorized|401|
+|forbidden|403|
 |not_found|404|
 |conflict|409|
 |unprocessable_entity|422|
@@ -241,7 +242,7 @@ Provides information about the supported Monitoring API versions.
 | Status Code | Description | Reasons |
 | :-----------| :-----------| :-------|
 | 400 | Bad Request | Malformed request in URI or request body. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET https://region-a.geo-1.monitoring.hpcloudsvc.com ##### 4.4.1.2 Get a Specific Version #### {#ServiceDetailsSpecificVersion}###### GET /{version_id}Gets the details of a specific version identified by {version_id}.**Request Data**	GET /v1.0 HTTP/1.1
+| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET https://region-a.geo-1.monitoring.hpcloudsvc.com ##### 4.4.1.2 Get a Specific Version #### {#ServiceDetailsSpecificVersion}###### GET /{version_id}Gets the details of a specific version identified by {version_id}.**Request Data**	GET /v1.0 HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**JSON	{  
@@ -264,7 +265,7 @@ Provides information about the supported Monitoring API versions.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
+| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/#### 4.4.2 Endpoint ### {#ServiceDetailsEndpoint}
 The endpoint resource represents an endpoint from which metrics can be consumed.
@@ -298,7 +299,7 @@ Provides information about the supported Monitoring API versions.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 409 | Conflict | An endpoint for this tenant already exists. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \
+| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints 
 	  
@@ -338,7 +339,7 @@ Provides information about the supported Monitoring API versions.
 | 400 | Bad Request | Malformed request in URI or request body. |
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
+| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints ##### 4.4.2.3 Get a Specific Endpoint #### {#ServiceDetailsSpecificEndpoint}###### GET /endpoints/{endpoint_id}Gets the details of a specific endpoint identified by {endpoint_id}. Password information is not present.**Request Data**	GET /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
@@ -365,7 +366,7 @@ Provides information about the supported Monitoring API versions.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
+| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c##### 4.4.2.4 Delete a Specific Endpoint #### {#ServiceDetailsDeleteEndpoint}###### DELETE /endpoints/{endpoint_id}Deletes a specific endpoint identified by {endpoint_id}.**Request Data**	DELETE /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
@@ -377,7 +378,7 @@ Provides information about the supported Monitoring API versions.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X DELETE \
+| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X DELETE \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c##### 4.4.2.4 Reset the Password for a Specific Endpoint #### {#ServiceDetailsResetPasswordEndpoint}###### POST /endpoints/{endpoint_id}/reset-passwordResets the password for a specific endpoint identified by {endpoint_id}.**Request Data**	POST /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
@@ -391,7 +392,7 @@ Provides information about the supported Monitoring API versions.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \
+| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password#### 4.4.3 Subscription ### {#ServiceDetailsSubscription}
 
@@ -468,7 +469,8 @@ JSON
 | 400 | Bad Request | Malformed request in URI or request body. |
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 409 | Conflict | A Subscription for this combination of endpoint_id, namespace, and dimension already exists for this tenant. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -549,7 +551,7 @@ JSON
 | 400 | Bad Request | Malformed request in URI or request body. |
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -610,7 +612,7 @@ JSON
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -653,7 +655,7 @@ This call does not provide a response body.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -729,7 +731,7 @@ JSON
 | 400 | Bad Request | Malformed request in URI or request body. |
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -805,7 +807,7 @@ JSON
 | 400 | Bad Request | Malformed request in URI or request body. |
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -863,7 +865,7 @@ JSON
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -906,7 +908,7 @@ This call does not provide a response body.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -953,7 +955,7 @@ JSON
 	      "instance_id": "392633"
 	    },
 	    "operator": "GTE",
-	    "threshold": "1000",
+	    "threshold": 1000,
 	    "alarm_actions": [
 	      "036609b0-3d6b-11e2-a25f-0800200c9a66",
 	      "1221dba0-3d6b-11e2-a25f-0800200c9a66"
@@ -992,7 +994,7 @@ JSON
 	      "instance_id": "392633"
 	    },
 	    "operator": "GTE",
-	    "threshold": "1000",
+	    "threshold": 1000,
 	    "state": "UNDETERMINED",
 	    "alarm_actions": [
 	      "036609b0-3d6b-11e2-a25f-0800200c9a66",
@@ -1010,7 +1012,8 @@ JSON
 | 400 | Bad Request | Malformed request in URI or request body. |
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 409 | Conflict | An Alarm for this combination of values already exists for this tenant. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -1023,7 +1026,7 @@ JSON
 	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms \
 	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
 	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
-	  -d '{"alarm": {"name": "Disk Exceeds 1k Operations", "namespace": "compute", "metric_type": "disk_read_ops", "metric_subject": "VDA", "dimensions": {"instance_id": "392633"}, "operator": "GTE", "threshold": "1000", "alarm_actions": ["036609b0-3d6b-11e2-a25f-0800200c9a66", "1221dba0-3d6b-11e2-a25f-0800200c9a66"]}}'##### 4.4.5.2 List All Alarms #### {#ServiceDetailsListAlarm}
+	  -d '{"alarm": {"name": "Disk Exceeds 1k Operations", "namespace": "compute", "metric_type": "disk_read_ops", "metric_subject": "VDA", "dimensions": {"instance_id": "392633"}, "operator": "GTE", "threshold": 1000, "alarm_actions": ["036609b0-3d6b-11e2-a25f-0800200c9a66", "1221dba0-3d6b-11e2-a25f-0800200c9a66"]}}'##### 4.4.5.2 List All Alarms #### {#ServiceDetailsListAlarm}
 ###### GET /alarms
 
 Lists all alarms.
@@ -1066,7 +1069,7 @@ JSON
 	        "instance_id": "392633"
 	      },
 	      "operator": "GTE",
-	      "threshold": "1000",
+	      "threshold": 1000,
 	      "state": "OK"	
 	    }
 	  ]
@@ -1080,7 +1083,7 @@ JSON
 | 400 | Bad Request | Malformed request in URI or request body. |
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -1130,7 +1133,7 @@ JSON
 	      "instance_id": "392633"
 	    },
 	    "operator": "GTE",
-	    "threshold": "1000",
+	    "threshold": 1000,
 	    "state": "OK",
 	    "alarm_actions": [
 	      "036609b0-3d6b-11e2-a25f-0800200c9a66",
@@ -1148,7 +1151,7 @@ JSON
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
@@ -1191,7 +1194,7 @@ This call does not provide a response body.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Internal Server Error | The server encountered a problem while processing the request. |
+| 500 | Server Error | The server encountered a problem while processing the request. |
 
 **Curl Example**
 
