@@ -67,11 +67,11 @@ When an fault occurs at request time, the system will return an HTTP error respo
 *Fault Response*
 
 JSON	{  
-		"fault_element" : {
-			"code" : HTTP error code (integer),
-			"message" : "Fault information...",
-			"details" : "Fault Details…",
-			"internal_code" : "Internal error log code"
+		"fault_element": {
+			"code": HTTP error code (integer),
+			"message": "Fault information...",
+			"details": "Fault Details…",
+			"internal_code": "Internal error log code"
     	}
 	}The error code is returned in the body of the response for convenience. The message section returns a human-readable message that is appropriate for display to the end user. The details section is optional and may contain extra information. The internal_code section is optional internal to monitoring information to further identify the cause of the fault.
 
@@ -279,7 +279,7 @@ Provides information about the supported Monitoring API versions.
 	Content-Type: application/son
 	Content-Length: 337
 	Location: /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c**Status Code**201 - Created**Response Data**JSON	{
-	  "endpoint" : {
+	  "endpoint": {
 	    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
 	    "links": [
 	      {
@@ -288,7 +288,7 @@ Provides information about the supported Monitoring API versions.
 	      }
 	    ]
 	    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
-	    "meta" : {
+	    "meta": {
 	      "amqp_username": "385937540",
 	      "amqp_password": "mEfOy34qJV",
 	      "amqp_exchange": "metrics"
@@ -356,7 +356,7 @@ Provides information about the supported Monitoring API versions.
 	      }
 	    ],
 	    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
-	    "meta" : {
+	    "meta": {
 	      "amqp_username": "385937540",
 	      "amqp_exchange": "metrics"
 	    }
@@ -981,7 +981,7 @@ JSON
 JSON
 
 	{
-	  "alarm" {
+	  "alarm": {
 	    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
 	    "links": [
 	      {
@@ -1055,7 +1055,7 @@ This call does not require a request body.
 JSON
 
 	{
-	  "alarms": [
+	  "alarm": [
 	    {
 	      "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
 	      "links": [
