@@ -47,7 +47,7 @@ clean:
 	@echo "Removing _site directory"
 	@rm -rf _site
 
-deploy-qa:
+deploy-qa: build
 	./deploy.sh qa1-stackato.cx.hpcloud.net
 
 deploy-pro: build
