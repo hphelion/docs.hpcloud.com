@@ -1,12 +1,10 @@
 ---
 layout: page
 permalink: /api/lbaas/
-title: HP Cloud My Service API
+title: HP Cloud Load Balancer Service API
 description: "HP Cloud Load Balancer Service API Specification"
 keywords: "lbaas,loadbalancer"
 product: LoadBalancer
-published: false
-author:Peter Mellquist, pemellquist@gmail.com
 
 ---
 
@@ -63,7 +61,7 @@ Once the account is activated, the HP Cloud LBaaS service will show up in the se
 ### 3.1 Service Catalog
 Once logged into the HP Cloud, a service catalog will list the availability of the LBaaS service, roles  and endpoints for the region you have logged into and in which you are activated for.
 
-*The following is an example of LBaaS service information within the service catalog including roles and endpoints:* 
+*The following is an example of LBaaS service information within the service catalog including roles and endpoints:*
 
 	 "user": {
 	    "id": "59267322167978",
@@ -146,7 +144,6 @@ Absolute limits are limits which prohibit a user from creating too many LBaaS re
 |maxVIPsPerLoadBalancer    |Maximum number of Virtual IPs for each load balancer     |
 
 
-
 ### 4.7 Faults
 When issuing a LBaaS API request, it is possible that an error can occur. In these cases, the system will return an HTTP error response code denoting the type of error and a LBaaS response body with additional details regarding the error. Specific HTTP status codes possible are listed in each API definition.
 
@@ -163,8 +160,7 @@ When issuing a LBaaS API request, it is possible that an error can occur. In the
 Tenant identifiers with LBaaS API URIs are not required. The tenant identifier is derived from the Openstack Keystone authentication token provided with each API call. This simplifies the REST URIs to only include the base URI and the resource. For example, to retrieve a list of load balancers the request would be 'GET https://<endpoint>/loadbalancers'. The tenant identifier is derived from the authentication token which is provided wi the API call. All LBaaS calls behave in this manner.
 
 
-
-## 5. LBaaS API Resources and Methods 
+## 5. REST API Specifications 
 The following is a summary of all supported LBaaS API resources and methods. Each resource and method is defined in detail in the subsequent sections. 
 
 **Derived resource identifiers:**
@@ -177,25 +173,25 @@ The following is a summary of all supported LBaaS API resources and methods. Eac
 
 **{nodeId}** is the unique identifier for a load balancer node returned by the LBaaS service.
 
-### 5.1 LBaaS API Summary Table
+### 5.1 HP Cloud LBaaS API Operations
 
 |Resource            |Operation                                 |Method |Path                                                          |
 |:-------------------|:-----------------------------------------|:------|:-------------------------------------------------------------|
 |Versions            |Get list of all API versions              |GET    |{baseURI}/                                                    | 
-|Versions            |Get specific API version                  |GET    |{baseURI}/{ver}                                               |
+|            |Get specific API version                  |GET    |{baseURI}/{ver}                                               |
 |Limits              |Get list of LBaaS limits                  |GET    |{baseURI}/{ver}/limits                                        |
 |Protocols           |Get list of supported protocols           |GET    |{baseURI}/{ver}/protocols                                     |
 |Algorithms          |Get list of supported algorithms          |GET    |{baseURI}/{ver}/algorithms                                    |
 |Load Balancer       |Get list of all load balancers            |GET    |{baseURI}/{ver}/loadbalancers                                 | 
-|Load Balancer       |Get load balancer details                 |GET    |{baseURI}/{ver}/loadbalancers/{loadbalancerId}                |
-|Load Balancer       |Create a new load balancer                |POST   |{baseURI}/{ver}/loadbalancers                                 |
-|Load Balancer       |Update load balancer attributes           |PUT    |{baseURI}/{ver}/loadbalancers/{loadbalancerId}                | 
-|Load Balancer       |Delete an existing load balancer          |DELETE |{baseURI}/{ver}/loadbalancers/{loadbalancerId}                | 
+|       |Get load balancer details                 |GET    |{baseURI}/{ver}/loadbalancers/{loadbalancerId}                |
+|       |Create a new load balancer                |POST   |{baseURI}/{ver}/loadbalancers                                 |
+|       |Update load balancer attributes           |PUT    |{baseURI}/{ver}/loadbalancers/{loadbalancerId}                | 
+|       |Delete an existing load balancer          |DELETE |{baseURI}/{ver}/loadbalancers/{loadbalancerId}                | 
 |Node                |Get list of load balancer nodes           |GET    |{baseURI}/{ver}/loadbalancers/{loadbalancerId}/nodes          |
-|Node                |Get a specific load balancer node         |GET    |{baseURI}/{ver}/loadbalancers/{loadbalancerId}/nodes/{nodeId} |
-|Node                |Create a new load balancer node           |POST   |{baseURI}/{ver}/loadbalancers/{loadbalancerId}/nodes          |
-|Node                |Update a load balancer node               |PUT    |{baseURI}/{ver}/loadbalancers/{loadbalancerId}/nodes/{nodeId} |
-|Node                |Delete a load balancer node               |DELETE |{baseURI}/{ver}/loadbalancers/{loadbalancerId}/nodes/{nodeId} |
+|                |Get a specific load balancer node         |GET    |{baseURI}/{ver}/loadbalancers/{loadbalancerId}/nodes/{nodeId} |
+|                |Create a new load balancer node           |POST   |{baseURI}/{ver}/loadbalancers/{loadbalancerId}/nodes          |
+|                |Update a load balancer node               |PUT    |{baseURI}/{ver}/loadbalancers/{loadbalancerId}/nodes/{nodeId} |
+|                |Delete a load balancer node               |DELETE |{baseURI}/{ver}/loadbalancers/{loadbalancerId}/nodes/{nodeId} |
 |Virtual IP          |Get list of virtual IPs                   |GET    |{baseURI}/{ver}/loadbalancers/{loadbalancerId}/virtualips     |
 
 
