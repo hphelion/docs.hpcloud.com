@@ -24,20 +24,20 @@ product: monitoring---# HP Cloud Monitoring API Specifications
 
 [Account Creation Details](#Accounts)
 
-Before creating Alarms or Subscriptions, you must first get a valid auth token. Go to the above link and use the Extended Curl Example. Replace both the tenantName and username values with your account username/email. Replace password with your account password.
+Before creating Alarms or Subscriptions, you must first get a valid auth token. Go to the above link and use the Curl Example. Replace both the tenantName and username values with your account username/email. Replace password with your account password.
 
 Save the returned information. The access:token:id value is required to access the API.
 ##### 2.1.1.2 Setting Up an Alarm Example #### {#AlarmSetup}
 Alarms give direct notification on if a measured value passes a user defined threshold.[Notification Creation Details](#ServiceDetailsCreateNotification)
-Before setting up an Alarm, you first need to set up a Notification so that the Alarm knows how to contact you.From the above link, use the Extended Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Change "name" to your descriptive name, "type" with how you are to be accessed (this is a strict enumeration value, use only the values given in the Data Parameters section), and "address" with your email address or phone number. Save the returned json output.	    
+Before setting up an Alarm, you first need to set up a Notification so that the Alarm knows how to contact you.From the above link, use the Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Change "name" to your descriptive name, "type" with how you are to be accessed (this is a strict enumeration value, use only the values given in the Data Parameters section), and "address" with your email address or phone number. Save the returned json output.	    
 [Alarm Creation Details](#ServiceDetailsCreateAlarm)
 
-From the above link, use the Extended Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Changes: "name" to a description of the alarm. "namespace" to one of the listed ones in [Namespaces](#Namespaces). "metric_type" to a type listed in [Metrics](#Metrics) that corresponds to the namespace selected. "metric_subject" (optional) to a descriptive subject name. "instance_id" to your compute instance id. "az" to your availability zone number. "instance_uuid" to the UUID for the instance. "operator" to the relation between the current internal value and the threshold (this is a strict enumeration value, use only the values given in the Data Parameters section). "threshold" is an integer (long) value that can be an absolute value or a percentage based on the metric_type selected. "alarm_actions" is a list of id values retrieved from creating notifications and will be the notifications activated if the threshold value is met. The alarm should be active immediately after.
+From the above link, use the Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Changes: "name" to a description of the alarm. "namespace" to one of the listed ones in [Namespaces](#Namespaces). "metric_type" to a type listed in [Metrics](#Metrics) that corresponds to the namespace selected. "metric_subject" (optional) to a descriptive subject name. "instance_id" to your compute instance id. "az" to your availability zone number. "instance_uuid" to the UUID for the instance. "operator" to the relation between the current internal value and the threshold (this is a strict enumeration value, use only the values given in the Data Parameters section). "threshold" is an integer (long) value that can be an absolute value or a percentage based on the metric_type selected. "alarm_actions" is a list of id values retrieved from creating notifications and will be the notifications activated if the threshold value is met. The alarm should be active immediately after.
 ##### 2.1.1.3 Setting Up a Subscription Example #### {#SubscriptionSetup}
 Subscriptions give a continuous feed of monitoring metrics data.
 [Endpoint Creation Details](#ServiceDetailsCreateEndpoint)
-Before setting up a Subscription, you first need to set up an Endpoint for access.From the above link, use the Extended Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Save the returned json output. "uri", "amqp_username", "amqp_exchange", "amqp_queue" are the required values for accessing the AMQP router. (How to setup the AMQP router connection is beyond the scope of this document. There are tutorials at [RabbitMQ](http://www.rabbitmq.com).)[Subscription Creation Details](#ServiceDetailsCreateSubscription)
-From the above link, use the Extended Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Change "endpoint_id" to the id value returned from the Endpoint call, "instance_id" with your compute instance id, "az" with your availability zone number, and "instance_uuid" with the UUID for the instance. The data feed should start soon after.#### 2.1.2 Namespaces, Dimensions, and Metrics ### {#Metrics}
+Before setting up a Subscription, you first need to set up an Endpoint for access.From the above link, use the Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Save the returned json output. "uri", "amqp_username", "amqp_exchange", "amqp_queue" are the required values for accessing the AMQP router. (How to setup the AMQP router connection is beyond the scope of this document. There are tutorials at [RabbitMQ](http://www.rabbitmq.com).)[Subscription Creation Details](#ServiceDetailsCreateSubscription)
+From the above link, use the Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Change "endpoint_id" to the id value returned from the Endpoint call, "instance_id" with your compute instance id, "az" with your availability zone number, and "instance_uuid" with the UUID for the instance. The data feed should start soon after.#### 2.1.2 Namespaces, Dimensions, and Metrics ### {#Metrics}
 The Monitoring API makes use of several metric related pre-defined constants throughout.
 
 ##### 2.1.2.1 Namespaces #### {#Namespaces}
@@ -162,9 +162,10 @@ A request can then be made against resources at that endpoint by supplying the a
 	> Content-Type: application/json
 	> X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74
 	
-*Extended Curl Example*
+*Curl Example*
 
-	$ curl -i https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens -X POST \
+	$ curl -X POST \
+	  -i https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens \
 	  -H "Content-Type: application/json" -H "User-Agent: python-novaclient" \
 	  -d '{"auth": {"tenantName": "tenant@domain.com", "passwordCredentials": {"username": "tenant@domain.com", "password": "changeit"}}}'
 ### 3.2 Regions and Availability Zones ## {#AccountsRegions}**Region(s)**: region-a**Future Expansion**: region-b## 4. REST API Specifications # {#Section4_}The HP Cloud Monitoring API is implemented using a RESTful web service interface. All requests to authenticate and operate against the Monitoring API should be performed using SSL over HTTP (HTTPS) on TCP port 443.### 4.1 Service API Operations ## {#Service}**Host**: https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com**BaseUri**: {Host}/v1.0### Version Operations ## {#ServiceVersionOps}
@@ -294,8 +295,9 @@ Provides information about the supported Monitoring API versions.
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
 | 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/#### 4.4.2 Endpoint ### {#ServiceDetailsEndpoint}
+	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0 \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74"
+	  #### 4.4.2 Endpoint ### {#ServiceDetailsEndpoint}
 The endpoint resource represents an endpoint from which metrics can be consumed.
 *Note: The amqp_password is not retrievable after endpoint creation. If the password is lost, then the password reset operation must be performed.*
 *Note: Only one Endpoint can be created at a time per tenant.*##### 4.4.2.1 Create a New Endpoint #### {#ServiceDetailsCreateEndpoint}###### POST /endpointsCreates a new endpoint for metric consumption. AMQP and URI information needs to be retained for accessing the message queue.**Request Data**	POST /v1.0/endpoints HTTP/1.1
@@ -317,7 +319,7 @@ Provides information about the supported Monitoring API versions.
 	    "meta": {
 	      "amqp_username": "385937540",
 	      "amqp_exchange": "metrics",
-	      "amqp_queue": "metrics-6789223 6969703",
+	      "amqp_queue": "metrics-67892236969703",
 	    }
 	  }
 	}
@@ -327,14 +329,9 @@ Provides information about the supported Monitoring API versions.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 409 | Conflict | An endpoint for this tenant already exists. |
-| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints 
-	  
-*Extended Curl Example*
-
-	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints \
-	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
+| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**
+	$ curl -X POST \
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints \
 	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74"##### 4.4.2.2 List All Endpoints #### {#ServiceDetailsListEndpoint}###### GET /endpointsLists all endpoints. Password information is not present.**Request Data**	GET /v1.0/endpoints HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
@@ -368,8 +365,9 @@ Provides information about the supported Monitoring API versions.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints ##### 4.4.2.3 Get a Specific Endpoint #### {#ServiceDetailsSpecificEndpoint}###### GET /endpoints/{endpoint_id}Gets the details of a specific endpoint identified by {endpoint_id}. Password information is not present.**Request Data**	GET /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
+##### 4.4.2.3 Get a Specific Endpoint #### {#ServiceDetailsSpecificEndpoint}###### GET /endpoints/{endpoint_id}Gets the details of a specific endpoint identified by {endpoint_id}. Password information is not present.**Request Data**	GET /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**JSON	{
@@ -385,7 +383,7 @@ Provides information about the supported Monitoring API versions.
 	    "meta": {
 	      "amqp_username": "385937540",
 	      "amqp_exchange": "metrics",
-	      "amqp_queue": "metrics-6789223 6969703"
+	      "amqp_queue": "metrics-67892236969703"
 	    }
 	  }
 	}**Error Response**
@@ -395,9 +393,9 @@ Provides information about the supported Monitoring API versions.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c##### 4.4.2.4 Delete a Specific Endpoint #### {#ServiceDetailsDeleteEndpoint}###### DELETE /endpoints/{endpoint_id}Deletes a specific endpoint identified by {endpoint_id}.**Request Data**	DELETE /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
+| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X GET \	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" 
+	  ##### 4.4.2.4 Delete a Specific Endpoint #### {#ServiceDetailsDeleteEndpoint}###### DELETE /endpoints/{endpoint_id}Deletes a specific endpoint identified by {endpoint_id}.**Request Data**	DELETE /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**204 - No Content**Response Data**This call does not provide a response body.**Error Response**
@@ -407,9 +405,9 @@ Provides information about the supported Monitoring API versions.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X DELETE \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c##### 4.4.2.4 Reset the Password for a Specific Endpoint #### {#ServiceDetailsResetPasswordEndpoint}###### POST /endpoints/{endpoint_id}/reset-passwordResets the password for a specific endpoint identified by {endpoint_id}.**Request Data**	POST /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password HTTP/1.1
+| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X DELETE \	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" 
+##### 4.4.2.4 Reset the Password for a Specific Endpoint #### {#ServiceDetailsResetPasswordEndpoint}###### POST /endpoints/{endpoint_id}/reset-passwordResets the password for a specific endpoint identified by {endpoint_id}.**Request Data**	POST /v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**	{
@@ -421,9 +419,9 @@ Provides information about the supported Monitoring API versions.
 | 401 | Unauthorized | The caller does not have the privilege required to perform the operation.      |
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 404 | Not Found | Requested resource cannot be found. |
-| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password#### 4.4.3 Subscription ### {#ServiceDetailsSubscription}
+| 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**	$ curl -X POST \	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" 
+	  #### 4.4.3 Subscription ### {#ServiceDetailsSubscription}
 
 The subscription resource represents a subscription to consume metrics.
 
@@ -508,13 +506,8 @@ JSON
 **Curl Example**
 
 	$ curl -X POST \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions 
-
-*Extended Curl Example*
-
-	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions \
-	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions \
+	  -H "Content-Type:application/json" -H "Accept:application/json" \
 	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
 	  -d '{"subscription": 	{"endpoint_id": "4d159ef6-0b6a-439b-a5bf-07459e1005b8", "namespace": "compute", "dimensions": {"instance_id": "392633","az": 2,"instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"}}}'
 ##### 4.4.3.2 List All Subscriptions #### {#ServiceDetailsListSubscription}
@@ -593,9 +586,9 @@ JSON
 **Curl Example**
 
 	$ curl -X GET \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions 
-
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" 
+	  
 ##### 4.4.3.3 Get a Specific Subscription #### {#ServiceDetailsSpecificSubscription}
 ###### GET /subscriptions/{subscription_id}
 
@@ -656,9 +649,9 @@ JSON
 **Curl Example**
 
 	$ curl -X GET \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c
-
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" 
+	  
 ##### 4.4.3.4 Delete a Specific Subscription #### {#ServiceDetailsDeleteSubscription}
 ###### DELETE /subscriptions/{subscription_id}
 
@@ -699,8 +692,9 @@ This call does not provide a response body.
 **Curl Example**
 
 	$ curl -X DELETE \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c#### 4.4.4 Notification Method ### {#ServiceDetailsNotification}
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" 
+	  #### 4.4.4 Notification Method ### {#ServiceDetailsNotification}
 The notification method resource represents a method through which notifications can be sent.
 
 ##### 4.4.4.1 Create a New Notification Method #### {#ServiceDetailsCreateNotification}
@@ -775,13 +769,8 @@ JSON
 **Curl Example**
 
 	$ curl -X POST \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods 
-
-*Extended Curl Example*
-
-	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods \
-	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods \
+	  -H "Content-Type:application/json" -H "Accept:application/json" \
 	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
 	  -d '{"notification_method": {"name": "Joe'\''s Email", "type": "EMAIL", "address": "joe@mail.com"}}'##### 4.4.4.2 List All Notification Methods #### {#ServiceDetailsListNotification}
 ###### GET /notification-methods
@@ -851,10 +840,9 @@ JSON
 **Curl Example**
 
 	$ curl -X GET \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods 
-
-##### 4.4.4.3 Get a Specific Notification Methods #### {#ServiceDetailsSpecificNotification}
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" 
+	  ##### 4.4.4.3 Get a Specific Notification Methods #### {#ServiceDetailsSpecificNotification}
 ###### GET /notification-methods/{notification_method_id}
 
 Gets the details of a specific notification method identified by {notification_method_id}.
@@ -909,10 +897,9 @@ JSON
 **Curl Example**
 
 	$ curl -X GET \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c
-
-##### 4.4.4.4 Delete a Specific Notification Method #### {#ServiceDetailsDeleteNotification}
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74"
+##### 4.4.4.4 Delete a Specific Notification Method #### {#ServiceDetailsDeleteNotification}
 ###### DELETE /notification-methods /{notification_method_id}
 
 Deletes a specific notification method identified by {notification_method_id}.
@@ -952,8 +939,10 @@ This call does not provide a response body.
 **Curl Example**
 
 	$ curl -X DELETE \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c#### 4.4.5 Alarm ### {#ServiceDetailsAlarm}
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74"
+
+#### 4.4.5 Alarm ### {#ServiceDetailsAlarm}
 The alarm resource identifies a particular metric scoped by namespace, metric type, and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
 
 **State Lifecycle**
@@ -1061,13 +1050,8 @@ JSON
 **Curl Example**
 
 	$ curl -X POST \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms 
-
-*Extended Curl Example*
-
-	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms \
-	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms \
+	  -H "Content-Type:application/json" -H "Accept:application/json" \
 	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
 	  -d '{"alarm": {"name": "Disk Exceeds 1k Operations", "namespace": "compute", "metric_type": "disk_read_ops", "metric_subject": "VDA", "dimensions": {"instance_id": "392633","az": 2,"instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"}, "operator": "GTE", "threshold": 1000, "alarm_actions": ["036609b0-3d6b-11e2-a25f-0800200c9a66", "1221dba0-3d6b-11e2-a25f-0800200c9a66"]}}'##### 4.4.5.2 List All Alarms #### {#ServiceDetailsListAlarm}
 ###### GET /alarms
@@ -1133,9 +1117,9 @@ JSON
 **Curl Example**
 
 	$ curl -X GET \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms 
-
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74"
+	  
 ##### 4.4.5.3 Get a Specific Alarm #### {#ServiceDetailsSpecificAlarm}
 ###### GET /alarms/{alarm_id}
 
@@ -1203,9 +1187,9 @@ JSON
 **Curl Example**
 
 	$ curl -X GET \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c
-
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" 
+	  
 ##### 4.4.5.4 Delete a Specific Alarm #### {#ServiceDetailsDeleteAlarm}
 ###### DELETE /alarms/{alarm_id}
 
@@ -1245,7 +1229,8 @@ This call does not provide a response body.
 
 **Curl Example**
 
-	$ curl -X DELETE \
-	  -H "X-Auth-Token: {Auth_Token}" \
-	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c## 5. Glossary # {#Section5_}* Namespace - A required classification for a metric.* Dimension - An optional classification for a metric. A metric may be classified by multiple dimensions.
+	$ curl -X DELETE \ 
+	  -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74"
+## 5. Glossary # {#Section5_}* Namespace - A required classification for a metric.* Dimension - An optional classification for a metric. A metric may be classified by multiple dimensions.
 * Tenant - The cloud name/id of the customer.
