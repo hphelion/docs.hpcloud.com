@@ -15,9 +15,10 @@ product: monitoring---# HP Cloud Monitoring API Specifications
 + [Notification Operations Details](#ServiceDetailsNotification)+ [Alarm Operations](#ServiceAlarmOps) - The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
 + [Alarm Operations Details](#ServiceDetailsAlarm)#### 2.1.1 High Level ### {#HighLevel}
 There are 4 major operations (besides Version information):
-+ Endpoints specify the connection for consuming metric data to the AMQP message queue. (Endpoints can only be created one per tenant. At least one Dimension must be specified.)
++ Endpoints specify the connection for consuming metric data to the AMQP message queue. (Only one Endpoint can be created at a time per tenant. At least one Dimension must be specified.)
 + Subscriptions specify what monitoring data is to be streamed. (You must create an Endpoint to use with the subscription.)
-+ Notifications specify the method(s) in which a user is contacted by alarms.+ Alarms specify user defined exceptional conditions that the user feels the need to be notified about. (You must create a Notification method to use with the Alarm. At least one Dimension must be specified.
++ Notifications specify the method(s) in which a user is contacted by alarms.+ Alarms specify user defined exceptional conditions that the user feels the need to be notified about. (You must create a Notification method to use with the Alarm. At least one Dimension must be specified.)
+
 #### 2.1.2 Namespaces, Dimensions, and Metrics ### {#Metrics}
 The Monitoring API makes use of several metric related pre-defined constants throughout.
 
@@ -32,11 +33,13 @@ Defines the high level logical partition to monitor.  This restricts what metric
 
 Places restrictions on the namespace to further narrow what is monitored.
 
-*Note: each Dimension type can only be used once per call.*
+*Note: each Dimension type can only be used once per call. Currently all 3 types are required to be used for compute dimensions.*
 
 *Supported Compute Dimensions*
 
-+ instance_id
++ instance_id (compute instance id)
++ az (zone)
++ instance_uuid (nova instance unique id)
 
 ##### 2.1.2.3 Metrics #### {#Metrics}
 
@@ -272,7 +275,7 @@ Provides information about the supported Monitoring API versions.
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/#### 4.4.2 Endpoint ### {#ServiceDetailsEndpoint}
 The endpoint resource represents an endpoint from which metrics can be consumed.
 *Note: The amqp_password is not retrievable after endpoint creation. If the password is lost, then the password reset operation must be performed.*
-*Note: Endpoints can only be created once per tenant.*##### 4.4.2.1 Create a New Endpoint #### {#ServiceDetailsCreateEndpoint}###### POST /endpointsCreates a new endpoint for metric consumption. AMQP and URI information needs to be retained for accessing the message queue.**Request Data**	POST /v1.0/endpoints HTTP/1.1
+*Note: Only one Endpoint can be created at a time per tenant.*##### 4.4.2.1 Create a New Endpoint #### {#ServiceDetailsCreateEndpoint}###### POST /endpointsCreates a new endpoint for metric consumption. AMQP and URI information needs to be retained for accessing the message queue.**Request Data**	POST /v1.0/endpoints HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response**	HTTP/1.1 201 Created
@@ -415,7 +418,7 @@ Creates a new subscription to consume metrics.
 
 **Data Parameters**
 
-* *endpoint_id* - string - The id of the endpoint to subscribe to* *namespace* - string - The namespace of metrics to receive* *dimensions* - dictionary - The dimensions of metrics to receive (each dimension type can only be used once in this call)
+* *endpoint_id* - string - The id of the endpoint to subscribe to* *namespace* - string - The namespace of metrics to receive* *dimensions* - dictionary - The dimensions of metrics to receive (each dimension type can only be used once in this call). Currently all 3 types are required to be used for compute dimensions
 
 JSON
 
@@ -424,7 +427,9 @@ JSON
 	    "endpoint_id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
 	    "namespace": "compute",
 	    "dimensions": {
-	      "instance_id": "392633"
+	      "instance_id": "392633",
+	      "az": 2,
+	      "instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"
 	    }
 	  }
 	}
@@ -456,7 +461,9 @@ JSON
 	    "endpoint_id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
 	    "namespace": "compute",
 	    "dimensions": {
-	      "instance_id": "392633"
+	      "instance_id": "392633",
+	      "az": 2,
+	      "instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"
 	    }
 	    "meta": {}
 	  }
@@ -485,7 +492,7 @@ JSON
 	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions \
 	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
 	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
-	  -d '{"subscription": 	{"endpoint_id": "4d159ef6-0b6a-439b-a5bf-07459e1005b8", "namespace": "compute", "dimensions": {"instance_id": "392633"}}}'
+	  -d '{"subscription": 	{"endpoint_id": "4d159ef6-0b6a-439b-a5bf-07459e1005b8", "namespace": "compute", "dimensions": {"instance_id": "392633","az": 2,"instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"}}}'
 ##### 4.4.3.2 List All Subscriptions #### {#ServiceDetailsListSubscription}
 ###### GET /subscriptions
 
@@ -525,7 +532,9 @@ JSON
 	      "endpoint_id": "36351ef0-3ff3-11e2-a25f-0800200c9a66",
 	      "namespace": "compute",
 	      "dimensions": {
-	        "instance_id": "392633"
+	        "instance_id": "392633",
+	        "az": 2,
+	        "instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"
 	      }
 	    },
 	    {
@@ -539,7 +548,9 @@ JSON
 	      "endpoint_id": "3d713b90-3ff3-11e2-a25f-0800200c9a66",
 	      "namespace": "compute",
 	      "dimensions": {
-	        "instance_id": "392633"
+	        "instance_id": "392633",
+	        "az": 2,
+	        "instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"
 	      }
 	    }
 	  ]
@@ -599,7 +610,9 @@ JSON
 	    "endpoint_id": "36351ef0-3ff3-11e2-a25f-0800200c9a66",
 	    "namespace": "compute",
 	    "dimensions": {
-	      "instance_id": "392633"
+	      "instance_id": "392633",
+	      "az": 2,
+	      "instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"
 	    },
 	    "meta": {}
 	  }
@@ -917,7 +930,7 @@ This call does not provide a response body.
 	$ curl -X DELETE \
 	  -H "X-Auth-Token: {Auth_Token}" \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c#### 4.4.5 Alarm ### {#ServiceDetailsAlarm}
-The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
+The alarm resource identifies a particular metric scoped by namespace, metric type, and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
 
 **State Lifecycle**
 
@@ -943,7 +956,7 @@ Creates a new alarm.
 
 * *name* - string - A descriptive name for the alarm* *namespace* - string - Namespace of metric to alarm on
 * *metric_type* - string - Type of metric to alarm on
-* *metric_subject* - string - (Optional) Descriptive subject name of metric to alarm on* *dimensions* - dictionary - Dimensions of metrics to alarm on (each dimension type can only be used once in this call)* *operator* - string - Comparison operator for which threshold and metric values are compared (LT, LTE, GT, GTE) corresponding to less than, less than or equal, greater than, and greater than or equal* *threshold* - long - Threshold which triggers an alarm when exceeded (see metric descriptions)* *alarm_actions* - array - Methods through which notifications (notification id) should be sent when transitioning to an ALARM state
+* *metric_subject* - string - (Optional) Descriptive subject name of metric to alarm on* *dimensions* - dictionary - Dimensions of metrics to alarm on (each dimension type can only be used once in this call). Currently all 3 types are required to be used for compute dimensions* *operator* - string - Comparison operator for which threshold and metric values are compared (LT, LTE, GT, GTE) corresponding to less than, less than or equal, greater than, and greater than or equal* *threshold* - long - Threshold which triggers an alarm when exceeded (see metric descriptions)* *alarm_actions* - array - Methods through which notifications (notification id) should be sent when transitioning to an ALARM state
 
 JSON
 
@@ -954,7 +967,9 @@ JSON
 	    "metric_type": "disk_read_ops",
 	    "metric_subject": "VDA",
 	    "dimensions": {
-	      "instance_id": "392633"
+	      "instance_id": "392633",
+	      "az": 2,
+	      "instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"
 	    },
 	    "operator": "GTE",
 	    "threshold": 1000,
@@ -993,7 +1008,9 @@ JSON
 	    "namespace": "compute",
 	    "metric_type": "disk_read_ops",
 	    "dimensions": {
-	      "instance_id": "392633"
+	      "instance_id": "392633",
+	      "az": 2,
+	      "instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"
 	    },
 	    "operator": "GTE",
 	    "threshold": 1000,
@@ -1028,7 +1045,7 @@ JSON
 	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms \
 	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
 	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
-	  -d '{"alarm": {"name": "Disk Exceeds 1k Operations", "namespace": "compute", "metric_type": "disk_read_ops", "metric_subject": "VDA", "dimensions": {"instance_id": "392633"}, "operator": "GTE", "threshold": 1000, "alarm_actions": ["036609b0-3d6b-11e2-a25f-0800200c9a66", "1221dba0-3d6b-11e2-a25f-0800200c9a66"]}}'##### 4.4.5.2 List All Alarms #### {#ServiceDetailsListAlarm}
+	  -d '{"alarm": {"name": "Disk Exceeds 1k Operations", "namespace": "compute", "metric_type": "disk_read_ops", "metric_subject": "VDA", "dimensions": {"instance_id": "392633","az": 2,"instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"}, "operator": "GTE", "threshold": 1000, "alarm_actions": ["036609b0-3d6b-11e2-a25f-0800200c9a66", "1221dba0-3d6b-11e2-a25f-0800200c9a66"]}}'##### 4.4.5.2 List All Alarms #### {#ServiceDetailsListAlarm}
 ###### GET /alarms
 
 Lists all alarms.
@@ -1068,7 +1085,9 @@ JSON
 	      "namespace": "compute",
 	      "metric_type": "disk_read_ops",
 	      "dimensions": {
-	        "instance_id": "392633"
+	        "instance_id": "392633",
+	        "az": 2,
+	        "instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"
 	      },
 	      "operator": "GTE",
 	      "threshold": 1000,
@@ -1132,7 +1151,9 @@ JSON
 	    "namespace": "compute",
 	    "metric_type": "disk_read_ops",
 	    "dimensions": {
-	      "instance_id": "392633"
+	      "instance_id": "392633",
+	      "az": 2,
+	      "instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"
 	    },
 	    "operator": "GTE",
 	    "threshold": 1000,
