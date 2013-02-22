@@ -36,7 +36,7 @@ From the above link, use the Extended Curl Example, changing the X-Auth-Token va
 ##### 2.1.1.3 Setting Up a Subscription Example #### {#SubscriptionSetup}
 Subscriptions give a continuous feed of monitoring metrics data.
 [Endpoint Creation Details](#ServiceDetailsCreateEndpoint)
-Before setting up a Subscription, you first need to set up an Endpoint for access.From the above link, use the Extended Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Save the returned json output. "uri", "amqp_username", "amqp_password", "amqp_exchange" are the required values for accessing the AMQP router. (How to setup the AMQP router connection is beyond the scope of this document. There are tutorials at [RabbitMQ](http://www.rabbitmq.com).)[Subscription Creation Details](#ServiceDetailsCreateSubscription)
+Before setting up a Subscription, you first need to set up an Endpoint for access.From the above link, use the Extended Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Save the returned json output. "uri", "amqp_username", "amqp_exchange", "amqp_queue" are the required values for accessing the AMQP router. (How to setup the AMQP router connection is beyond the scope of this document. There are tutorials at [RabbitMQ](http://www.rabbitmq.com).)[Subscription Creation Details](#ServiceDetailsCreateSubscription)
 From the above link, use the Extended Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Change "endpoint_id" to the id value returned from the Endpoint call, "instance_id" with your compute instance id, "az" with your availability zone number, and "instance_uuid" with the UUID for the instance. The data feed should start soon after.#### 2.1.2 Namespaces, Dimensions, and Metrics ### {#Metrics}
 The Monitoring API makes use of several metric related pre-defined constants throughout.
 
@@ -51,9 +51,9 @@ Defines the high level logical partition to monitor.  This restricts what metric
 
 Places restrictions on the namespace to further narrow what is monitored.
 
-*Note: each Dimension type can only be used once per call. Currently all 3 types are required to be used for compute dimensions.*
+*Note: each Dimension type can only be used once per call.  All 3 types are required to be used for compute dimensions.*
 
-*Supported Compute Dimensions*
+*Required Compute Dimensions*
 
 + instance_id (compute instance id)
 + az (avaliability zone)
@@ -316,8 +316,8 @@ Provides information about the supported Monitoring API versions.
 	    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
 	    "meta": {
 	      "amqp_username": "385937540",
-	      "amqp_password": "mEfOy34qJV",
-	      "amqp_exchange": "metrics"
+	      "amqp_exchange": "metrics",
+	      "amqp_queue": "metrics-6789223 6969703",
 	    }
 	  }
 	}
@@ -384,7 +384,8 @@ Provides information about the supported Monitoring API versions.
 	    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
 	    "meta": {
 	      "amqp_username": "385937540",
-	      "amqp_exchange": "metrics"
+	      "amqp_exchange": "metrics",
+	      "amqp_queue": "metrics-6789223 6969703"
 	    }
 	  }
 	}**Error Response**
@@ -573,7 +574,7 @@ JSON
 	      "dimensions": {
 	        "instance_id": "392633",
 	        "az": 2,
-	        "instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"
+	        "instance_uuid": "42ff1110-7c86-12e2-b92a-0800200c9a65"
 	      }
 	    }
 	  ]
