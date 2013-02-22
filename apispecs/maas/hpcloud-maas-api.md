@@ -13,13 +13,31 @@ product: monitoring---# HP Cloud Monitoring API Specifications
 + [Endpoint Operations Details](#ServiceDetailsEndpoint)+ [Subscription Operations](#ServiceSubscriptionOps) - The subscription resource represents a subscription to consume metrics.
 + [Subscription Operations Details](#ServiceDetailsSubscription)+ [Notification Operations](#ServiceNotificationOps) - The notification method resource represents a method through which notifications can be sent.
 + [Notification Operations Details](#ServiceDetailsNotification)+ [Alarm Operations](#ServiceAlarmOps) - The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
-+ [Alarm Operations Details](#ServiceDetailsAlarm)#### 2.1.1 High Level ### {#HighLevel}
++ [Alarm Operations Details](#ServiceDetailsAlarm)#### 2.1.1 High Level and Usage ### {#HighLevel}
 There are 4 major operations (besides Version information):
 + Endpoints specify the connection for consuming metric data to the AMQP message queue. (Only one Endpoint can be created at a time per tenant. At least one Dimension must be specified.)
 + Subscriptions specify what monitoring data is to be streamed. (You must create an Endpoint to use with the subscription.)
 + Notifications specify the method(s) in which a user is contacted by alarms.+ Alarms specify user defined exceptional conditions that the user feels the need to be notified about. (You must create a Notification method to use with the Alarm. At least one Dimension must be specified.)
-
-#### 2.1.2 Namespaces, Dimensions, and Metrics ### {#Metrics}
+With those 4 operations, there are 2 different activities (shown in [Alarm Setup](#AlarmSetup) and [Subscription Setup](#SubscriptionSetup)): setting an alarm to report on a logged metric and setting up a subscription feed to locally log monitoring data.
+
+##### 2.1.1.1 Activating Your Account Example #### {#AccountActivation}
+
+[Account Creation Details](#Accounts)
+
+Before creating Alarms or Subscriptions, you must first get a valid auth token. Go to the above link and use the Extended Curl Example. Replace both the tenantName and username values with your account username/email. Replace password with your account password.
+
+Save the returned information. The access:token:id value is required to access the API.
+##### 2.1.1.2 Setting Up an Alarm Example #### {#AlarmSetup}
+Alarms give direct notification on if a measured value passes a user defined threshold.[Notification Creation Details](#ServiceDetailsCreateNotification)
+Before setting up an Alarm, you first need to set up a Notification so that the Alarm knows how to contact you.From the above link, use the Extended Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Change "name" to your descriptive name, "type" with how you are to be accessed (this is a strict enumeration value, use only the values given in the Data Parameters section), and "address" with your email address or phone number. Save the returned json output.	    
+[Alarm Creation Details](#ServiceDetailsCreateAlarm)
+
+From the above link, use the Extended Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Changes: "name" to a description of the alarm. "namespace" to one of the listed ones in [Namespaces](#Namespaces). "metric_type" to a type listed in [Metrics](#Metrics) that corresponds to the namespace selected. "metric_subject" (optional) to a descriptive subject name. "instance_id" to your compute instance id. "az" to your availability zone number. "instance_uuid" to the UUID for the instance. "operator" to the relation between the current internal value and the threshold (this is a strict enumeration value, use only the values given in the Data Parameters section). "threshold" is an integer (long) value that can be an absolute value or a percentage based on the metric_type selected. "alarm_actions" is a list of id values retrieved from creating notifications and will be the notifications activated if the threshold value is met. The alarm should be active immediately after.
+##### 2.1.1.3 Setting Up a Subscription Example #### {#SubscriptionSetup}
+Subscriptions give a continuous feed of monitoring metrics data.
+[Endpoint Creation Details](#ServiceDetailsCreateEndpoint)
+Before setting up a Subscription, you first need to set up an Endpoint for access.From the above link, use the Extended Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Save the returned json output. "uri", "amqp_username", "amqp_password", "amqp_exchange" are the required values for accessing the AMQP router. (How to setup the AMQP router connection is beyond the scope of this document. There are tutorials at [RabbitMQ](http://www.rabbitmq.com).)[Subscription Creation Details](#ServiceDetailsCreateSubscription)
+From the above link, use the Extended Curl Example, changing the X-Auth-Token value with the access:token:id value you retrieved when activating your account. Change "endpoint_id" to the id value returned from the Endpoint call, "instance_id" with your compute instance id, "az" with your availability zone number, and "instance_uuid" with the UUID for the instance. The data feed should start soon after.#### 2.1.2 Namespaces, Dimensions, and Metrics ### {#Metrics}
 The Monitoring API makes use of several metric related pre-defined constants throughout.
 
 ##### 2.1.2.1 Namespaces #### {#Namespaces}
@@ -38,7 +56,7 @@ Places restrictions on the namespace to further narrow what is monitored.
 *Supported Compute Dimensions*
 
 + instance_id (compute instance id)
-+ az (zone)
++ az (avaliability zone)
 + instance_uuid (nova instance unique id)
 
 ##### 2.1.2.3 Metrics #### {#Metrics}
@@ -76,7 +94,7 @@ JSON	{
 			"details": "Fault Details…",
 			"internal_code": "Internal error log code"
     	}
-	}The error code is returned in the body of the response for convenience. The message section returns a human-readable message that is appropriate for display to the end user. The details section is optional and may contain extra information. The internal_code section is optional internal to monitoring information to further identify the cause of the fault.
+	}The error code is returned in the body of the response for convenience. The message section returns a human-readable message that is appropriate for display to the end user. The details section is optional and may contain extra information. The internal_code section is optional monitoring logging information to further identify the cause of the fault.
 
 The root element of the fault (the fault_element value) may change depending on the type of fault. The following is a list of possible elements along with their associated HTTP error codes.|Fault Element|HTTP Error Code|
 |:------------|:--------------|
@@ -144,7 +162,12 @@ A request can then be made against resources at that endpoint by supplying the a
 	> Content-Type: application/json
 	> X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74
 	
-### 3.2 Regions and Availability Zones ## {#AccountsRegions}**Region(s)**: region-a**Future Expansion**: region-b## 4. REST API Specifications # {#Section4_}The HP Cloud Monitoring API is implemented using a RESTful web service interface. All requests to authenticate and operate against the Monitoring API should be performed using SSL over HTTP (HTTPS) on TCP port 443.### 4.1 Service API Operations ## {#Service}**Host**: https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com**BaseUri**: {Host}/v1.0### Version Operations ## {#ServiceVersionOps}
+*Extended Curl Example*
+
+	$ curl -i https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens -X POST \
+	  -H "Content-Type: application/json" -H "User-Agent: python-novaclient" \
+	  -d '{"auth": {"tenantName": "tenant@domain.com", "passwordCredentials": {"username": "tenant@domain.com", "password": "changeit"}}}'
+### 3.2 Regions and Availability Zones ## {#AccountsRegions}**Region(s)**: region-a**Future Expansion**: region-b## 4. REST API Specifications # {#Section4_}The HP Cloud Monitoring API is implemented using a RESTful web service interface. All requests to authenticate and operate against the Monitoring API should be performed using SSL over HTTP (HTTPS) on TCP port 443.### 4.1 Service API Operations ## {#Service}**Host**: https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com**BaseUri**: {Host}/v1.0### Version Operations ## {#ServiceVersionOps}
 
 | Resource | Operation                                          | HTTP Method | Path                            | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------------------------------- | :---------- | :------------------------------ | :---------------- | :-------------- |
@@ -312,7 +335,7 @@ Provides information about the supported Monitoring API versions.
 
 	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints \
 	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
-	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74"##### 4.4.2.2 List All Endpoints #### {#ServiceDetailsListEndpoint}###### GET /endpointsLists all endpoints. Password information is not present.**Request Data**	GET /v1.0/endpoints HTTP/1.1
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74"##### 4.4.2.2 List All Endpoints #### {#ServiceDetailsListEndpoint}###### GET /endpointsLists all endpoints. Password information is not present.**Request Data**	GET /v1.0/endpoints HTTP/1.1
 	Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
 	Accept: application/json
 	X-Auth-Token: {Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**JSON	{
@@ -491,7 +514,7 @@ JSON
 
 	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions \
 	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
-	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
 	  -d '{"subscription": 	{"endpoint_id": "4d159ef6-0b6a-439b-a5bf-07459e1005b8", "namespace": "compute", "dimensions": {"instance_id": "392633","az": 2,"instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"}}}'
 ##### 4.4.3.2 List All Subscriptions #### {#ServiceDetailsListSubscription}
 ###### GET /subscriptions
@@ -758,7 +781,7 @@ JSON
 
 	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods \
 	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
-	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
 	  -d '{"notification_method": {"name": "Joe'\''s Email", "type": "EMAIL", "address": "joe@mail.com"}}'##### 4.4.4.2 List All Notification Methods #### {#ServiceDetailsListNotification}
 ###### GET /notification-methods
 
@@ -1044,7 +1067,7 @@ JSON
 
 	$ curl -i https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms \
 	  -X POST -H "Content-Type:application/json" -H "Accept:application/json" \
-	  -H "X-Tenant-Id:21908171893702" -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
+	  -H "X-Auth-Token: HPAuth_4f7c6456e4b01a25ab011e74" \
 	  -d '{"alarm": {"name": "Disk Exceeds 1k Operations", "namespace": "compute", "metric_type": "disk_read_ops", "metric_subject": "VDA", "dimensions": {"instance_id": "392633","az": 2,"instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"}, "operator": "GTE", "threshold": 1000, "alarm_actions": ["036609b0-3d6b-11e2-a25f-0800200c9a66", "1221dba0-3d6b-11e2-a25f-0800200c9a66"]}}'##### 4.4.5.2 List All Alarms #### {#ServiceDetailsListAlarm}
 ###### GET /alarms
 
