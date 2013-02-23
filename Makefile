@@ -51,6 +51,7 @@ deploy-qa: build
 	./deploy.sh qa1-stackato.cx.hpcloud.net
 
 deploy-pro: build
+	./deploy.sh secondary1-stackato.cx.hpcloud.net hpcloud.com
 	./deploy.sh prod1-stackato.cx.hpcloud.net hpcloud.com
 
 
