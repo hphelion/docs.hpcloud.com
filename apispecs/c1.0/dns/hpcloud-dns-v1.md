@@ -13,10 +13,14 @@ product: HP Cloud DNS
 
 # 1. Overview
 
-*Brief introduction and overview of the service and its intended use.*
+This guide is intended for software developers who wish to create applications using the HP Cloud DNS set of APIs. It assumes the reader has a general understanding of cloud APIs, DNS concepts, RESTful web services, HTTP/1.1 conventions and JSON serialization formats. The HP Cloud DNS set of APIs utilize and take advantage of a variety of Openstack cloud API patterns which are described in detail.
+
+
+
+
 ## 1.1 API Maturity Level
 
-**Maturity Level**: *Exploratory* (HP Cloud Block Storage is currently in Private Beta)
+**Maturity Level**: *Exploratory* (HP Cloud DNS is currently in Private Beta)
 
 **Version API Status**: *BETA*
 
@@ -24,7 +28,95 @@ product: HP Cloud DNS
 
 
 # 2. Architecture View
-### 2.1 Overview*References to architectural details of the service.*### 2.2 Conceptual/Logical Architecture View*Describe the logical components of the system and their responsibilities*### 2.3 Infrastructure Architecture View*Describe how the API fits into the overall HPCS Infrastructure*### 2.4 Entity Relationship Diagram*Describe the relationships between the various entities (resources) involved in the API*## 3. Account-level View*Describe the relationship of the API with respect to the accounts, groups, tenants, regions, availability zones etc.*### 3.1 Accounts*Describe the structure of the user accounts, groups and tenants. Currently this might be described separately in context of Control Services, but in future each service API needs to state their usage. In future CS might support complex group hierarchies, enterprise account structures while there maybe a phased adoption by individual service APIs*### 3.2 Regions and Availability Zones*Describe the availability of the service API in different regions and availability zones. State plans for future expansion as well.***Region(s)**: region-a**Availability Zone(s)**: az-1, az-2, az-3 **Future Expansion**: region-b### 3.3 Service Catalog*Describe if the service API is exposed via the service catalog. Reference the fragment of the service catalog showing the structure.*The service is exposed in the service catalog, as shown in the following fragment:    {
+
+
+### 2.1 Overview
+HP Cloud DNS is a service includes a set of restful APIs for the display, creation, modification and deletion of DNS records. This service offers users the ability to manage their domains and have DNS servers to serve DNS queries worldwide using graphically distributed DNS servers.
+
+### 2.2 Conceptual/Logical Architecture View
+To use the HP Cloud DNS API effectively, you should understand several key concepts.
+
+### 2.2.1 DNS
+DNS, or Domain Name Service, is a service that provides a telephone book-like lookup of the actual internet address (IP address) of a domains. This is called name resolution. For instance, if a user wants to be able to access mytestdomain.com in their browser, DNS provides the mechanism for the browswer to know that the server is 1.2.3.4 (or whatever IP address it may be)
+
+### 2.2.2 Domain Name
+A domain name is an identification string that defines a realm of administrative autonomy, authority, or control on the Internet. An example of this is mytestdomain.com
+
+### 2.3 Infrastructure Architecture View
+HP Cloud DNS fits into the HP Cloud ecosystem of APIs by utilizing the common authentication mechanisms as other HP cloud services. In order to use HP Cloud DNS, a user account must be 'activated' all API calls will require a valid HP Cloud authentication token.
+
+## 3. Account-level View
+Once the account is activated, the HP Cloud DNS service will show up in the service catelog returned during user login. In addition, the HP Cloud DNS endpoint to be used will also be presented.
+
+
+
+### 3.1 Accounts
+Once logged into the HP Cloud, a service catalog will list the availability of HP Cloud DNS, roles and endpoints for the region logged into and for which the user is activated for.
+
+*The following is an example of the HP Cloud DNS information within the service catalog including roles and endpoints*
+
+    "user": {
+        "id": "1234567890",
+        "name": "user@somename.com",
+        "roles": [
+          {
+            "id": "00000000004024",
+            "serviceId": "140",
+            "name": "user",
+            "tenantId": "9876543210"
+          },
+          {
+            "id": "00000000004004",
+            "serviceId": "100",
+            "name": "domainuser"
+          },
+          {
+            "id": "91643347410087",
+            "serviceId": "240",
+            "name": "dns-admin",
+            "tenantId": "9876543210"
+          },
+          {
+            "id": "00000000004003",
+            "serviceId": "100",
+            "name": "domainadmin"
+          }
+        ]
+      },
+      "serviceCatalog": [
+        ...
+        {
+          "name": "DNS",
+          "type": "hpext:dns",
+          "endpoints": [{
+            "tenantId": "74562296981260",
+            "publicURL": "https:\/\/region-a.geo-1.dns.hpcloudsvc.com\/v1\/",
+            "publicURL2": "",
+            "region": "region-a.geo-1",
+            "versionId": "1",
+            "versionInfo": "https:\/\/region-a.geo-1.dns.hpcloudsvc.com\/v1\/",
+            "versionList": "https:\/\/region-a.geo-1.dns.hpcloudsvc.com\/"
+          }]
+        },
+      ]
+    }}
+    
+### 3.2 Regions and Availability Zones
+HP Cloud DNS does not have AZ-specific endpoints but utilizes all AZs internally. It is available in region A
+
+**Region(s)**: region-a
+
+**Availability Zone(s)**: az-1, az-2, az-3 
+
+**Future Expansion**: region-b
+
+
+### 3.3 Service Catalog
+*Describe if the service API is exposed via the service catalog. Reference the fragment of the service catalog showing the structure.*
+
+The service is exposed in the service catalog, as shown in the following fragment:
+
+    {
         "name": "DNS",
         "type": "hpext:dns",
         "endpoints": [
@@ -40,7 +132,10 @@ product: HP Cloud DNS
         ]
     }
 
-## 4. REST API Specifications*Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.*## 3.1 Service API Operations
+## 4. REST API Specifications
+*Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.*
+
+## 3.1 Service API Operations
 
 **Host**: https://region-a.geo-1.dns.hpcloudsvc.com
 
@@ -64,12 +159,15 @@ product: HP Cloud DNS
 
 
 ## 3.2 Common Request Headers
-*List the common response headers i.e. X-Auth-Token, Content-Type, Content-Length, Date etc.*
+The common request headers are
+X-Auth-Token: Keystone/Control services authentication token
+Content-Type: application/json
 
 
 ## 3.3 Common Response Headers
-*List the common response headers i.e. Content-Type, Content-Length, Connection, Date, ETag, Server, etc. *
-
+Content-Type: application/json
+Content-Length: size of response body
+Content-Type: application/json
 
 ## 3.4 Service API Operation Details
 *The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
@@ -101,11 +199,19 @@ None.
 
 **Request Data**
 
+n/a
 
 **URL Parameters**
 
+None
 
 **Data Parameters**
+
+created_at – timestamp
+name – domain name
+ttl – time-to-live numeric value in seconds
+serial – numeric seconds
+email – email address
 
 A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
    
@@ -129,6 +235,10 @@ JSON
 **Status Code**
 
 200 - OK
+401 – Access Denied
+400 – Invalid Object
+409 – Duplicate Domain
+
 
 **Response Data**
 
@@ -192,6 +302,7 @@ Curl Example
 
 **Request Data**
 
+None
 
 **URL Parameters**
 
@@ -283,10 +394,10 @@ Curl Example
 #### PUT /domains
 
 **Request Data**
-
+n/a
 
 **URL Parameters**
-
+none
 
 **Data Parameters**
 
@@ -374,10 +485,10 @@ Curl Example
 #### DELETE /domains
 
 **Request Data**
-
+n/a
 
 **URL Parameters**
-
+none
 
 **Data Parameters**
 
@@ -466,9 +577,11 @@ Curl Example
 
 **Request Data**
 
+none
 
 **URL Parameters**
 
+none
 
 **Data Parameters**
 
@@ -1006,8 +1119,3 @@ Curl Example
 ***Create Domain***
 
     curl -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://region-a.geo-1.dns.hpcloudsvc.com/v1/domains"
-
-
-**Additional Notes**
-
-## 5. Changes from Cloud 1.0 API to Cloud 1.1 API*Put down a list of things that has changed from the 1.0 specs to 1.1 specs. If your service did not have a 1.0 version, please remove this section.*## 6. Glossary*Put down definitions of terms and items that need explanation.*
