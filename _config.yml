@@ -119,3 +119,5 @@ apinavigation:
   url: http://api-docs.hpcloud.com/hpcloud-rdb-mysql/1.0/content/index.html
 - text: Load Balancer
   url: /api/lbaas/
+- text: DNS
+  url: /api/dns/
