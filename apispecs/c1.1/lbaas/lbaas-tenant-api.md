@@ -162,7 +162,7 @@ Tenant identifiers with LBaaS API URIs are not required. The tenant identifier i
 
 
 
-## 5. LBaaS API Resources and Methods 
+## 5. REST API Specifications 
 The following is a summary of all supported LBaaS API resources and methods. Each resource and method is defined in detail in the subsequent sections. 
 
 **Derived resource identifiers:**
