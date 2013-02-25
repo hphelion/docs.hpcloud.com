@@ -48,37 +48,11 @@ clean:
 	@rm -rf _site
 
 deploy-qa: build
-	@echo "Deploying to stackato QA cluster"
-	stackato target https://api.stackato-qa-1-az1.devex.uswest.hpcloud.net
-	stackato login
-	stackato --group Documentation map OffLineApp docs.qa.devex.uswest.hpcloud.net
-	-stackato --group Documentation unmap docs-site docs.qa.devex.uswest.hpcloud.net
-	stackato --group Documentation update -n --nostart docs-site
-	stackato --group Documentation start docs-site
-	stackato --group Documentation map docs-site docs.qa.devex.uswest.hpcloud.net
-	stackato --group Documentation unmap OffLineApp docs.qa.devex.uswest.hpcloud.net
+	./deploy.sh qa1-stackato.cx.hpcloud.net
 
-deploy-prod-az2: build
-	stackato target https://api.stackato-prod-1-az2.devex.uswest.hpcloud.net
-	stackato login
-	stackato --group Documentation map OffLineApp docs.hpcloud.com
-	-stackato --group Documentation unmap docs-site docs.hpcloud.com
-	stackato --group Documentation update -n --nostart docs-site
-	stackato --group Documentation start docs-site
-	stackato --group Documentation map docs-site docs.hpcloud.com
-	stackato --group Documentation unmap OffLineApp docs.hpcloud.com
-
-deploy-prod-az1: build
-	stackato target https://api.stackato-prod-2-az1.devex.uswest.hpcloud.net
-	stackato login
-	stackato --group Documentation map OffLineApp docs.hpcloud.com
-	-stackato --group Documentation unmap docs-site docs.hpcloud.com
-	stackato --group Documentation update -n --nostart docs-site
-	stackato --group Documentation start docs-site
-	stackato --group Documentation map docs-site docs.hpcloud.com
-	stackato --group Documentation unmap OffLineApp docs.hpcloud.com
-
-deploy-prod: deploy-prod-az2 deploy-prod-az1
+deploy-pro: build
+	./deploy.sh secondary1-stackato.cx.hpcloud.net hpcloud.com
+	./deploy.sh prod1-stackato.cx.hpcloud.net hpcloud.com
 
 
-.PHONY: add-tutorials update-tutorials add-docs update-docs server prepare optimize build clean deploy-qa deploy-prod-az1 deploy-prod-az2 deploy-prod add-api update-api
+.PHONY: add-tutorials update-tutorials add-docs update-docs server prepare optimize build clean deploy-qa deploy-pro add-api update-api
