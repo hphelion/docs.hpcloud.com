@@ -5,8 +5,6 @@ title: HP Cloud My Service API
 description: "HP Cloud Load Balancer Service API Specification"
 keywords: "lbaas,loadbalancer"
 product: LoadBalancer
-published: false
-author:Peter Mellquist, pemellquist@gmail.com
 
 ---
 
