@@ -1,8 +1,0 @@
-# Static HTML site for OFFLINE messages.
-name: docs-site
-framework:
-  type: python
-mem: 40M
-ignores: [".git", "_build", "_config.yml", "content", "css", "favicon.ico", "fonts", ".gitignore", "images", "_includes", "js", "_layouts", "Makefile", "_plugins", "_posts", "README.md"]
-processes:
-  web: $STACKATO_UWSGI --static-map /=$HOME/_site --static-index index.html
