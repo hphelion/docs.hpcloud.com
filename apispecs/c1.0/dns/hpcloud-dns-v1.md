@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /api/dns
+permalink: /api/dns/
 title: HP Cloud DNS API
 description: "HP Cloud DNS API Specification"
 version: v1
@@ -112,9 +112,7 @@ HP Cloud DNS does not have AZ-specific endpoints but utilizes all AZs internally
 
 
 ### 3.3 Service Catalog
-*Describe if the service API is exposed via the service catalog. Reference the fragment of the service catalog showing the structure.*
-
-The service is exposed in the service catalog, as shown in the following fragment:
+The HP Cloud DNS service is exposed in the service catalog, as shown in the following fragment:
 
     {
         "name": "DNS",
@@ -199,7 +197,7 @@ None.
 
 **Request Data**
 
-n/a
+N/A
 
 **URL Parameters**
 
@@ -228,11 +226,7 @@ JSON
         "email": "nsadmin@example.org"
     }
 
-**Success Response**
-
-*Specify the status code and any content that is returned.*
-
-**Status Code**
+*Status Code**
 
 200 - OK
 401 – Access Denied
@@ -260,6 +254,10 @@ JSON
     }
 
 **Error Response**
+
+JSON
+
+    {"errors": [{"path": "xxx", "message": "error message", "validator": "required"}]}
 
 **Status Code**
 
@@ -306,6 +304,7 @@ None
 
 **URL Parameters**
 
+None
 
 **Data Parameters**
 
@@ -323,10 +322,6 @@ JSON
         "ttl": 3600,
         "email": "nsadmin@example.org"
     }
-
-**Success Response**
-
-*Specify the status code and any content that is returned.*
 
 **Status Code**
 
@@ -352,6 +347,10 @@ JSON
     }
 
 **Error Response**
+
+JSON
+
+    {"errors": [{"path": "xxx", "message": "error message", "validator": "required"}]}
 
 **Status Code**
 
@@ -394,10 +393,11 @@ Curl Example
 #### PUT /domains
 
 **Request Data**
-n/a
+N/A
 
 **URL Parameters**
-none
+
+None
 
 **Data Parameters**
 
@@ -415,10 +415,6 @@ JSON
         "ttl": 3600,
         "email": "nsadmin@example.org"
     }
-
-**Success Response**
-
-*Specify the status code and any content that is returned.*
 
 **Status Code**
 
@@ -444,6 +440,10 @@ JSON
     }
 
 **Error Response**
+
+JSON
+
+    {"errors": [{"path": "xxx", "message": "error message", "validator": "required"}]}
 
 **Status Code**
 
@@ -485,10 +485,11 @@ Curl Example
 #### DELETE /domains
 
 **Request Data**
-n/a
+N/A
 
 **URL Parameters**
-none
+
+None
 
 **Data Parameters**
 
@@ -506,10 +507,6 @@ JSON
         "ttl": 3600,
         "email": "nsadmin@example.org"
     }
-
-**Success Response**
-
-*Specify the status code and any content that is returned.*
 
 **Status Code**
 
@@ -535,6 +532,10 @@ JSON
     }
 
 **Error Response**
+
+JSON
+
+    {"errors": [{"path": "xxx", "message": "error message", "validator": "required"}]}
 
 **Status Code**
 
@@ -600,10 +601,6 @@ JSON
         "email": "nsadmin@example.org"
     }
 
-**Success Response**
-
-*Specify the status code and any content that is returned.*
-
 **Status Code**
 
 200 - OK
@@ -628,6 +625,11 @@ JSON
     }
 
 **Error Response**
+
+JSON
+
+    {"errors": [{"path": "xxx", "message": "error message", "validator": "required"}]}
+
 
 **Status Code**
 
@@ -694,10 +696,6 @@ JSON
         "email": "nsadmin@example.org"
     }
 
-**Success Response**
-
-*Specify the status code and any content that is returned.*
-
 **Status Code**
 
 200 - OK
@@ -722,6 +720,10 @@ JSON
     }
 
 **Error Response**
+
+JSON
+
+    {"errors": [{"path": "xxx", "message": "error message", "validator": "required"}]}
 
 **Status Code**
 
@@ -785,10 +787,6 @@ JSON
         "email": "nsadmin@example.org"
     }
 
-**Success Response**
-
-*Specify the status code and any content that is returned.*
-
 **Status Code**
 
 200 - OK
@@ -813,6 +811,10 @@ JSON
     }
 
 **Error Response**
+
+JSON
+
+    {"errors": [{"path": "xxx", "message": "error message", "validator": "required"}]}
 
 **Status Code**
 
@@ -855,9 +857,11 @@ Curl Example
 
 **Request Data**
 
+N/A
 
 **URL Parameters**
 
+None
 
 **Data Parameters**
 
@@ -875,10 +879,6 @@ JSON
         "ttl": 3600,
         "email": "nsadmin@example.org"
     }
-
-**Success Response**
-
-*Specify the status code and any content that is returned.*
 
 **Status Code**
 
@@ -904,6 +904,10 @@ JSON
     }
 
 **Error Response**
+
+JSON
+
+    {"errors": [{"path": "xxx", "message": "error message", "validator": "required"}]}
 
 **Status Code**
 
@@ -967,10 +971,6 @@ JSON
         "email": "nsadmin@example.org"
     }
 
-**Success Response**
-
-*Specify the status code and any content that is returned.*
-
 **Status Code**
 
 200 - OK
@@ -995,6 +995,10 @@ JSON
     }
 
 **Error Response**
+
+JSON
+
+    {"errors": [{"path": "xxx", "message": "error message", "validator": "required"}]}
 
 **Status Code**
 
@@ -1058,10 +1062,6 @@ JSON
         "email": "nsadmin@example.org"
     }
 
-**Success Response**
-
-*Specify the status code and any content that is returned.*
-
 **Status Code**
 
 200 - OK
@@ -1086,6 +1086,10 @@ JSON
     }
 
 **Error Response**
+
+JSON
+
+    {"errors": [{"path": "xxx", "message": "error message", "validator": "required"}]}
 
 **Status Code**
 
