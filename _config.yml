@@ -44,7 +44,7 @@ navigation:
   - text: Block Storage Examples
     url: /cli/unix/block-storage/
   - text: Volume Management
-    url: /block-storage/volume
+    url: /block-storage/volume/
   - text: CLI Reference
     url: /cli/unix/reference/
   - text: Release Notes
@@ -114,6 +114,8 @@ apinavigation:
 - text: Block Storage
   url: /api/block-storage/
 - text: CDN
-  url: /api/CDN
+  url: /api/CDN/
 - text: RDB for MySQL
   url: http://api-docs.hpcloud.com/hpcloud-rdb-mysql/1.0/content/index.html
+- text: Load Balancer
+  url: /api/lbaas/
