@@ -45,7 +45,7 @@ DNS, or Domain Name Service, is a service that provides a telephone book-like lo
 A domain name is an identification string that defines a realm of administrative autonomy, authority, or control on the Internet. An example of this is mytestdomain.com
 
 ### 2.3 Infrastructure Architecture View
-HP Cloud DNS fits into the HP Cloud ecosystem of APIs by utilizing the common authentication mechanisms as other HP cloud services. In order to use HP Cloud DNS, a user account must be 'activated' all API calls will require a valid HP Cloud authentication token.
+HP Cloud DNS fits into the HP Cloud ecosystem of APIs by utilizing the common authentication mechanisms as other HP cloud services. In order to use HP Cloud DNS, a user account must have activated DNS service . All API calls require a valid HP Cloud authentication token. 
 
 ## 3. Account-level View
 Once the account is activated, the HP Cloud DNS service will show up in the service catelog returned during user login. In addition, the HP Cloud DNS endpoint to be used will also be presented.
@@ -141,7 +141,7 @@ A user of the service will need to set the nameservers for their domains to the 
 * ns7-67.akam.net
 
 ## 4. REST API Specifications
-This section describes operations and guidelines that are common to all DNSaaS API calls.
+This section describes operations and guidelines that are common to all HP Cloud DNS API calls.
 
 ## 4.1 Service API Operations
 
