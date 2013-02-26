@@ -129,6 +129,17 @@ The HP Cloud DNS service is exposed in the service catalog, as shown in the foll
         ]
     }
 
+### 3.4 DNS Servers
+
+A user of the service will need to set the nameservers for their domains to the following:
+
+* ns2-64.akam.net       
+* ns3-65.akam.net       
+* ns4-65.akam.net       
+* ns5-66.akam.net       
+* ns6-66.akam.net       
+* ns7-67.akam.net
+
 ## 4. REST API Specifications
 This section describes operations and guidelines that are common to all DNSaaS API calls.
 
