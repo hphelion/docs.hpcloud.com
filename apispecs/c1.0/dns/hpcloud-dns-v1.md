@@ -2,7 +2,9 @@
 layout: page
 permalink: /api/dns/
 title: HP Cloud DNS API
-description: "HP Cloud DNS API Specification"
+description: "HP Cloud DNS as a Service (DNSaaS) API Specification"
+Date: February 26, 2013
+Document Version: 0.5
 version: v1
 keywords: "dns"
 product: HP Cloud DNS
@@ -31,7 +33,7 @@ This guide is intended for software developers who wish to create applications u
 
 
 ### 2.1 Overview
-HP Cloud DNS is a service includes a set of restful APIs for the display, creation, modification and deletion of DNS records. This service offers users the ability to manage their domains and have DNS servers to serve DNS queries worldwide using graphically distributed DNS servers.
+HP Cloud DNS is a service that includes a set of restful APIs for the display, creation, modification and deletion of DNS records. This service offers users the ability to manage their domains and have DNS servers to serve DNS queries worldwide using graphically distributed DNS servers.
 
 ### 2.2 Conceptual/Logical Architecture View
 To use the HP Cloud DNS API effectively, you should understand several key concepts.
@@ -108,9 +110,6 @@ HP Cloud DNS does not have AZ-specific endpoints but utilizes all AZs internally
 
 **Availability Zone(s)**: az-1, az-2, az-3 
 
-**Future Expansion**: region-b
-
-
 ### 3.3 Service Catalog
 The HP Cloud DNS service is exposed in the service catalog, as shown in the following fragment:
 
@@ -131,9 +130,9 @@ The HP Cloud DNS service is exposed in the service catalog, as shown in the foll
     }
 
 ## 4. REST API Specifications
-*Describe the API specifications, namely the API operations, and its details, documenting the naming conventions, request and response formats, media type support, status codes, error conditions, rate limits, quota limits, and specific business rules.*
+This section describes operations and guidelines that are common to all DNSaaS API calls.
 
-## 3.1 Service API Operations
+## 4.1 Service API Operations
 
 **Host**: https://region-a.geo-1.dns.hpcloudsvc.com
 
