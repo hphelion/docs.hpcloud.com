@@ -45,7 +45,7 @@ DNS, or Domain Name Service, is a service that provides a telephone book-like lo
 A domain name is an identification string that defines a realm of administrative autonomy, authority, or control on the Internet. An example of this is mytestdomain.com
 
 ### 2.3 Infrastructure Architecture View
-HP Cloud DNS fits into the HP Cloud ecosystem of APIs by utilizing the common authentication mechanisms as other HP cloud services. In order to use HP Cloud DNS, a user account must be 'activated' all API calls will require a valid HP Cloud authentication token.
+HP Cloud DNS fits into the HP Cloud ecosystem of APIs by utilizing the common authentication mechanisms as other HP cloud services. In order to use HP Cloud DNS, a user account must have activated DNS service . All API calls require a valid HP Cloud authentication token. 
 
 ## 3. Account-level View
 Once the account is activated, the HP Cloud DNS service will show up in the service catelog returned during user login. In addition, the HP Cloud DNS endpoint to be used will also be presented.
@@ -129,8 +129,19 @@ The HP Cloud DNS service is exposed in the service catalog, as shown in the foll
         ]
     }
 
+### 3.4 DNS Servers
+
+A user of the service will need to set the nameservers for their domains to the following:
+
+* ns2-64.akam.net       
+* ns3-65.akam.net       
+* ns4-65.akam.net       
+* ns5-66.akam.net       
+* ns6-66.akam.net       
+* ns7-67.akam.net
+
 ## 4. REST API Specifications
-This section describes operations and guidelines that are common to all DNSaaS API calls.
+This section describes operations and guidelines that are common to all HP Cloud DNS API calls.
 
 ## 4.1 Service API Operations
 
@@ -155,22 +166,22 @@ This section describes operations and guidelines that are common to all DNSaaS A
 | | [List Records in a Domain](#list_records_in_domain) | GET | /domains/{domainId}/records | Y/N |
 
 
-## 3.2 Common Request Headers
+## 4.2 Common Request Headers
 The common request headers are
 X-Auth-Token: Keystone/Control services authentication token
 Content-Type: application/json
 
 
-## 3.3 Common Response Headers
+## 4.3 Common Response Headers
 Content-Type: application/json
 Content-Length: size of response body
 Content-Type: application/json
 
-## 3.4 Service API Operation Details
+## 4.4 Service API Operation Details
 *The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
 
 
-### 3.4.1 Domains
+### 4.4.1 Domains
 
 Domain entries are used to generate zones containing RR  
 *Need additional details*
@@ -191,7 +202,7 @@ N/A
 
 None.
 
-#### 3.4.1.1 Create Domain #### {#create_domain}
+#### 4.4.1.1 Create Domain #### {#create_domain}
 #### POST /domains
 
 **Request Data**
@@ -263,7 +274,7 @@ JSON
 
     curl -X POST -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" "https://region-a.geo-1.dns.hpcloudsvc.com/v1/domains" -d '{ "name": "domain1.com.", "ttl": 7200, "email": "nsadmin@example.org" }'
 
-#### 3.4.1.2 Get a Domain #### {#get_domain}
+#### 4.4.1.2 Get a Domain #### {#get_domain}
 #### GET /domains/{domainId}
 
 **Request Data**
@@ -321,7 +332,7 @@ Curl Example
 
 
 
-#### 3.4.1.3 Update Domain #### {#update_domain}
+#### 4.4.1.3 Update Domain #### {#update_domain}
 #### PUT /domains/{domainId}
 
 **Request Data**
@@ -397,7 +408,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 3.4.1.4 Delete Domain #### {#delete_domain}
+#### 4.4.1.4 Delete Domain #### {#delete_domain}
 #### DELETE /domains/{domainId}
 
 **Request Data**
@@ -446,7 +457,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 3.4.1.5 Get Authoritative Nameservers for a Domain #### {#get_servers_hosting_domain}
+#### 4.4.1.5 Get Authoritative Nameservers for a Domain #### {#get_servers_hosting_domain}
 #### GET /domains/{domainId}/servers
 
 **Request Data**
@@ -519,7 +530,7 @@ Curl Example
     curl -X GET -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://region-a.geo-1.dns.hpcloudsvc.com/v1/domains/{domainId}/servers"
 
 
-#### 3.4.1.6 Get a List of Domains for tenant #### {#list_domains}
+#### 4.4.1.6 Get a List of Domains for tenant #### {#list_domains}
 #### GET /domains
 
 **Request Data**
@@ -544,30 +555,30 @@ Json response is returned containing a list of domains.
 
 JSON
 
-HTTP/1.1 200 OK
-Vary: Accept
-Content-Type: application/json
-
-{
-  "domains": [
-    {
-      "name": "domain1.com.",
-      "created_at": "2012-11-01T20:11:08.000000",
-      "email": "nsadmin@example.org",
-      "ttl": 3600,
-      "serial": 1351800668,
-      "id": "09494b72-b65b-4297-9efb-187f65a0553e"
-    },
-    {
-      "name": "domain2.com.",
-      "created_at": "2012-11-01T20:09:48.000000",
-      "email": "nsadmin@example.org",
-      "ttl": 3600,
-      "serial": 1351800588,
-      "id": "89acac79-38e7-497d-807c-a011e1310438"
-    }
-  ]
-}
+     HTTP/1.1 200 OK
+     Vary: Accept
+     Content-Type: application/json
+     
+     {
+       "domains": [
+         {
+           "name": "domain1.com.",
+           "created_at": "2012-11-01T20:11:08.000000",
+           "email": "nsadmin@example.org",
+           "ttl": 3600,
+           "serial": 1351800668,
+           "id": "09494b72-b65b-4297-9efb-187f65a0553e"
+         },
+         {
+           "name": "domain2.com.",
+           "created_at": "2012-11-01T20:09:48.000000",
+           "email": "nsadmin@example.org",
+           "ttl": 3600,
+           "serial": 1351800588,
+           "id": "89acac79-38e7-497d-807c-a011e1310438"
+         }
+       ]
+     }
 
 **Status Code**
 
@@ -588,9 +599,9 @@ Curl Example
     curl -X GET -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://region-a.geo-1.dns.hpcloudsvc.com/v1/domains"
 
 
-### 3.4.2 Records
+### 4.4.2 Records
 
-#### 3.4.2.1 Create Record #### {#create_record}
+#### 4.4.2.1 Create Record #### {#create_record}
 #### POST /domains/{domainId}/records
 
 **Request Data**
@@ -674,7 +685,7 @@ Curl Example
 
 If one is creating an MX record, they must first have an A record to map to. Also, in creating an MX record, one needs to specify the "priority" form attribute.
 
-#### 3.4.2.2 Get Record #### {#get_record}
+#### 4.4.2.2 Get Record #### {#get_record}
 #### GET /domains/{domainId}/records/{recordId}
 
 **Request Data**
@@ -733,7 +744,7 @@ Curl Example
     curl -X GET -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://region-a.geo-1.dns.hpcloudsvc.com/v1/domains/{domainId}/records/{recordId}"
 
 
-#### 3.4.2.3 Update Record #### {#update_record}
+#### 4.4.2.3 Update Record #### {#update_record}
 #### PUT /domains/{domainId}/records/{recordId}
 
 **Request Data**
@@ -814,7 +825,7 @@ Curl Example
 
 **Additional Notes**
 
-#### 3.4.2.4 Delete Record #### {#delete_record}
+#### 4.4.2.4 Delete Record #### {#delete_record}
 #### DELETE /domains/{domainId}/records/{recordId}
 
 **Request Data**
@@ -859,7 +870,7 @@ Curl Example
     curl -X DELETE -k -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" "https://region-a.geo-1.dns.hpcloudsvc.com/v1/domains/89acac79-38e7-497d-807c-a011e1310438/records/2e32e609-3a4f-45ba-bdef-e50eacd345ad"
 
 
-#### 3.4.2.5 List Records in a Domain #### {#list_records_in_domain}
+#### 4.4.2.5 List Records in a Domain #### {#list_records_in_domain}
 #### GET /domains/{domainId}/records
 
 **Request Data**
