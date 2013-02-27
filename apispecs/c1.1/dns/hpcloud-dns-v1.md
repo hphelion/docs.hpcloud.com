@@ -15,14 +15,14 @@ Date: February 27, 2013
 
 Document version 0.5
 
-# 1. Overview
+## 1. Overview
 
 This guide is intended for software developers who wish to create applications using the HP Cloud DNS set of APIs. It assumes the reader has a general understanding of cloud APIs, DNS concepts, RESTful web services, HTTP/1.1 conventions and JSON serialization formats. The HP Cloud DNS set of APIs utilize and take advantage of a variety of Openstack cloud API patterns which are described in detail.
 
 
 
 
-## 1.1 API Maturity Level
+### 1.1 API Maturity Level
 
 **Maturity Level**: *Exploratory* (HP Cloud DNS is currently in Private Beta)
 
@@ -33,7 +33,7 @@ This guide is intended for software developers who wish to create applications u
 ---
 
 
-# 2. Architecture View
+## 2. Architecture View
 
 
 ### 2.1 Overview
