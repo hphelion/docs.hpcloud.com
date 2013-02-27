@@ -54,7 +54,14 @@ The container synchronization feature has the following maturity level:
 
 **Version API Status**: BETA
 
+## 1.2 Changes in this document
 
+The following changes have been made since prior versions of this document:
+
+* [Container and Object Naming](#naming) now restricts the "/./", "/../", "/." and "/.." substrings. This was always true, but not documented.
+
+* The description of the [Range](#range_request) request header has been updated.
+ 
 
 ## 2. Architectural View
 
@@ -1111,6 +1118,7 @@ Storage, but there are some differences to be aware of:
     -   double-quote: "
     -   greater-than: \>
     -   less-than: \<
+    -   the substrings "/./", "/../", "/." and "/.."
 
 * Cross-tenant ACLs are only supported by HP Cloud Object Storage
 
