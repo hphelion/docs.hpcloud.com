@@ -9,7 +9,7 @@ fi
 
 export TERM=xterm-256color
 source "$HOME/.rvm/scripts/rvm"
-rvm use ruby-1.9.2@unix_cli
+rvm use ruby-1.9.2@docs
 
 echo '============================api-site============================'
 rm -rf api-site
