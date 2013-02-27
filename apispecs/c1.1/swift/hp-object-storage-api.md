@@ -132,7 +132,11 @@ The container name length is limited to 256 bytes.
 
 Object names must not contain the double-quote ('"'), less-than ('\<') or
 greater-than ('\>') characters.
-The object name length is limited to 1024 bytes.
+While object names may contain the '/' character, the 
+substrings '/./' and '/../' are not allowed in object names.
+Object names may
+not end with '/.' or '/..'.
+The object name length is limited to 1024 bytes. 
 
 Although you use URL-encoding to specify the URI of a container or object, when the API returns names (as in listing a container), the displayed names are not URL-encoded (i.e., they are the original names).
 
@@ -811,23 +815,61 @@ HP Cloud Object Storage supports the following headers:
 
 ### 2.11 Retrieving a portion of object data ### {#range_request}
 
-It is also possible to fetch a portion of an object's data using the HTTP _Range_
-header. At this time, HP Cloud Object Storage does not support the full
-specification for _Range_ but basic support is provided. 
+It is also possible to fetch a portion of an object's data using the
+HTTP _Range_ header.
+HP Cloud Object Storage supports "bytes" as the range unit.
 
-HP Cloud Object
-Storage only allows a single range that includes OFFSET and/or LENGTH.
-We support a sub-set of _Range_ and do not adhere to the full RFC-2616
-specification. We support specifying OFFSET-LENGTH where either OFFSET
-or LENGTH can be optional (not both at the same time). 
+A range is specified in two basic ways:
 
-The following examples show the supported forms of the header:
+* `first-byte-position - last-byte-position` -- this retrieves the content starting at `first-byte-position` and ending at `last-byte-position`. The byte offsets start at zero (so 0 starts at first byte) and bytes positions are inclusive (so 0-0 is the first byte of content).
 
-* `Range: bytes=-5` - last five bytes of the object
+* `- length` -- this retrieves the final `length` bytes of the content.
 
-* `Range: bytes=10-15` - the five bytes after a 10-byte offset
+You may omit the `last_byte_position`.
+If so, it defaults to be the last byte of the file.
 
-* `Range: bytes=32-` - all data after the first 32 bytes of the object
+The following examples show examples of the Range header in use. In these examples, the data comprises 10 bytes of data containing "0123456789".
+
+* `Range: bytes=0-0` -- The first byte of data; returns "0"
+
+* `Range: bytes=1-1` -- The second byte of data; returns "1"
+
+* `Range: bytes=0-1 -- The first and second byte of data; returns "01"
+
+* `Range: bytes=2-5` -- Bytes 2 to 5 inclusive; returns "2345"
+
+* `Range: bytes=5-` -- All data after and including byte 5; returns "56789" 
+
+* `Range: bytes=-3` -- The last three bytes of the object; returns "789" 
+
+When you specify a range, the GET request returns a `206 Partial Content`
+code (instead of the usual `200 OK`).
+In addition, a _Content-Range_ response header is added. For example, in response to `Range: bytes=-3`, the response header is `Content-Range: bytes 7-9/10`.
+
+You may also specify several ranges in the _Range_ header.  In this example, the first two and final three bytes of the content are being requested:
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/www/0123 -X GET -H 'range: bytes=0-1,-3'
+
+    HTTP/1.1 206 Partial Content
+    Content-Length: 263
+    Accept-Ranges: bytes
+    Etag: 781e5e245d69b566979b86e28d23f2c7
+    Content-Type: multipart/byteranges;boundary=d103b85868e4567035e3148996623809
+
+
+    --d103b85868e4567035e3148996623809
+    Content-Type: application/octet-stream
+    Content-Range: bytes 0-1/10
+
+    01
+    --d103b85868e4567035e3148996623809
+    Content-Type: application/octet-stream
+    Content-Range: bytes 7-9/10
+
+    789
+    --d103b85868e4567035e3148996623809--
+
+As you can see the data is transmitted as a multipart message using the `multipart/byteranges` _Content-Type_.
 
 ### 2.12 Large Object Creation ### {#large_objects}
 
@@ -952,7 +994,7 @@ attachment type that indicates how the file should be downloaded:
 
 
 
-### 2.15 Enabling Browser Bypass with the Content-Disposition Header ###(#content_disposition_header)
+### 2.15 Enabling Browser Bypass with the Content-Disposition Header ### {#content_disposition_header}
 
 When an object is assigned the Content-Disposition header you can
 override a browser's default behavior for a file so that the downloader
@@ -2280,7 +2322,7 @@ See [Conditional GET of objects](#conditional_get) for more information.
 header.
 
 * If the object name is the name of an object manifest, the operation concatenates all the segments into one stream.
-See [Large Object Creation](#large_object_creation) for more information.
+See [Large Object Creation](#large_objects) for more information.
 
 **Request Data**
 
@@ -2495,7 +2537,7 @@ than displaying it using default browser settings by setting the [Content-Dispos
 your object's data in the ETag header. You are not required to include
 the ETag header, but it is recommended to ensure that the storage system
 successfully stored your object's content.
-For [manifest objects](#large_file_creation), the ETag is the MD5 sum of the concatenated string of ETags for
+For [manifest objects](#large_objects), the ETag is the MD5 sum of the concatenated string of ETags for
 each of the segments in the manifest.
 
 * You can set custom metadata on an object using a header name with a prefix of [X-Object-Meta-](#x_object_meta_request). 
