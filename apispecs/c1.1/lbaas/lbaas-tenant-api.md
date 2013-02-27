@@ -4,7 +4,7 @@ permalink: /api/lbaas/
 title: HP Cloud My Service API
 description: "HP Cloud Load Balancer Service API Specification"
 keywords: "lbaas,loadbalancer"
-product: LoadBalancer
+product: lbaas
 
 ---
 
@@ -25,7 +25,9 @@ This guide is intended for software developers who wish to create applications u
 This API definition represents the HP Cloud Load Balancer as a Service in Beta release form. Functionality represented within this specification is supported. The LBaaS API defined within this specification represents version 1.1 of HP Cloud LBaaS.
 
 
-**Maturity Level**: *Experimental*
+**Maturity Level**: *Exploratory* (HP Cloud LBaaS service is currently in Private Beta)
+
+**Service activation required, please refer to the LBaaS service information on hpcloud.com for instructions on how to request activation for your account.**
 
 **Version API Status**: *BETA*
 
