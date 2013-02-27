@@ -3,15 +3,13 @@ layout: page
 permalink: /api/dns/
 title: HP Cloud DNS API
 description: "HP Cloud DNS as a Service (DNSaaS) API Specification"
-Date: February 27, 2013
-Document Version: 0.5
 version: v1
-keywords: "dns"
-product: HP Cloud DNS
+keywords: "dns, domain name service, routing"
+product: dnsaas
 
 ---
 
-# HP Cloud DNS API
+# HP Cloud DNS API Specifications
 
 Date: February 27, 2013
 
@@ -28,7 +26,7 @@ This guide is intended for software developers who wish to create applications u
 
 **Maturity Level**: *Exploratory* (HP Cloud DNS is currently in Private Beta)
 
-Service activation required, please refer to the DNS service information on hpcloud.com for instructions on how to request activation for your account.
+**Service activation required, please refer to the DNS service information on hpcloud.com for instructions on how to request activation for your account.**
 
 **Version API Status**: *BETA*
 
