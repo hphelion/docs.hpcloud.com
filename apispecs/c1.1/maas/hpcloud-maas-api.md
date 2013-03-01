@@ -32,13 +32,10 @@ This document describes the HP Cloud Monitoring API, which allows you to monitor
 |Doc. Version|Date|Description|
 
 |:---------------|:-------|:--------------|
-
 |0.1|01/17/2013|Initial draft|
-
 |0.2|02/22/2013|Compute only release|
-
 |0.3|02/28/2013|Added Volume metrics and cleanup|
-
+|1.0|03/01/2013|Document 1.0 release|
 
 
 ## 2. Architecture View # {#Section2_}
@@ -49,37 +46,26 @@ Monitoring as a Service provides APIs for managing metric consumption endpoints,
 
 The Monitoring API provides a RESTful JSON interface for interacting with Monitoring as a Service and managing monitoring related resources.
 
-
 The API supports a number of operations. These include:
 
-
 + [Version Operations](#ServiceVersionOps) - Provides information about the supported Monitoring API versions.
-
 + [Version Operations Details](#ServiceDetailsVersion)
 + [Endpoint Operations](#ServiceEndpointOps) - The endpoint resource represents an endpoint from which metrics can be consumed.
-
 + [Endpoint Operations Details](#ServiceDetailsEndpoint)
 + [Subscription Operations](#ServiceSubscriptionOps) - The subscription resource represents a subscription to consume metrics.
-
 + [Subscription Operations Details](#ServiceDetailsSubscription)
 + [Notification Operations](#ServiceNotificationOps) - The notification method resource represents a method through which notifications can be sent.
-
 + [Notification Operations Details](#ServiceDetailsNotification)
 + [Alarm Operations](#ServiceAlarmOps) - The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
-
 + [Alarm Operations Details](#ServiceDetailsAlarm)
 
 
 #### 2.1.1 High Level and Usage ### {#HighLevel}
 
-
 There are 4 major operations (besides Version information):
 
-
 + Endpoints specify the connection for consuming metric data to the AMQP message queue. (Only one Endpoint can be created at a time per tenant. At least one Dimension must be specified.)
-
 + Subscriptions specify what monitoring data is to be streamed. (You must create an Endpoint to use with the subscription.)
-
 + Notifications specify the method(s) in which a user is contacted by alarms.
 + Alarms specify user defined exceptional conditions that the user feels the need to be notified about. (You must create a Notification method to use with the Alarm. At least one Dimension must be specified.)
 
@@ -876,11 +862,9 @@ JSON
 	    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
 
 	    "meta": {
-
+	      "amqp_password":"GnbV94wW3MF90",
 	      "amqp_username": "385937540",
-
 	      "amqp_exchange": "metrics",
-
 	      "amqp_queue": "metrics-67892236969703",
 
 	    }
