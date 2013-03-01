@@ -121,5 +121,5 @@ apinavigation:
   url: /api/lbaas/
 - text: DNS
   url: /api/dns/
-- text: MaaS
+- text: Monitoring
   url: /api/monitoring
