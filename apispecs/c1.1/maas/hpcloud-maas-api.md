@@ -6,8 +6,8 @@ keywords: "monitoring, maas"
 product: monitoring---# HP Cloud Monitoring API Specifications
 **Date:**  28th February , 2013
 
-**Document Version:** 0.3## 1. Overview # {#Section1_}This document describes the HP Cloud Monitoring API, which allows you to monitor resources in HP's Cloud.### 1.1 API Maturity Level ## {#Section1_1}**Maturity Level**: Exploratory **Version API Status**: BETA
-**Service activation required, please refer to the Monitoring service information on hpcloud.com for instructions on how to request activation for your account.**
+**Document Version:** 0.3## 1. Overview # {#Section1_}This document describes the HP Cloud Monitoring API, which allows you to monitor resources in HP's Cloud.### 1.1 API Maturity Level ## {#Section1_1}**Maturity Level**: Private Beta 
+**Service activation required, please refer to the Monitoring service information on hpcloud.com for instructions on how to request activation for your account.****Version API Status**: BETA
 ### 1.2 Document Revision History ## {#Section1_2}
 |Doc. Version|Date|Description|
 |:---------------|:-------|:--------------|
