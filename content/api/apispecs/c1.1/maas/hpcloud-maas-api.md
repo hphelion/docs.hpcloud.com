@@ -5,6 +5,7 @@ title: HP Cloud Monitoring API
 description: "HP Cloud Monitoring API Specifications"
 keywords: "monitoring, maas"
 product: monitoring
+
 ---
 
 # HP Cloud Monitoring API Specifications
