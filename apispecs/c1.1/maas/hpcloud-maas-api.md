@@ -14,6 +14,7 @@ product: monitoring---# HP Cloud Monitoring API Specifications
 |0.1|01/17/2013|Initial draft|
 |0.2|02/22/2013|Compute only release|
 |0.3|02/28/2013|Added Volume metrics and cleanup|
+|1.0|03/01/2013|Document 1.0 release|
 ## 2. Architecture View # {#Section2_}Monitoring as a Service provides APIs for managing metric consumption endpoints, metric subscriptions, alarms, and contact methods.### 2.1 Overview ## {#ArchitectureOverview}The Monitoring API provides a RESTful JSON interface for interacting with Monitoring as a Service and managing monitoring related resources.
 The API supports a number of operations. These include:
 + [Version Operations](#ServiceVersionOps) - Provides information about the supported Monitoring API versions.
@@ -337,6 +338,7 @@ Provides information about the supported Monitoring API versions.
 	    ]
 	    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
 	    "meta": {
+	      "amqp_password":"GnbV94wW3MF90",
 	      "amqp_username": "385937540",
 	      "amqp_exchange": "metrics",
 	      "amqp_queue": "metrics-67892236969703",
