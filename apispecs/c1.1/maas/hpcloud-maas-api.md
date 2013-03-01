@@ -22,7 +22,7 @@ product: monitoring---# HP Cloud Monitoring API Specifications
 + [Endpoint Operations Details](#ServiceDetailsEndpoint)+ [Subscription Operations](#ServiceSubscriptionOps) - The subscription resource represents a subscription to consume metrics.
 + [Subscription Operations Details](#ServiceDetailsSubscription)+ [Notification Operations](#ServiceNotificationOps) - The notification method resource represents a method through which notifications can be sent.
 + [Notification Operations Details](#ServiceDetailsNotification)+ [Alarm Operations](#ServiceAlarmOps) - The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
-+ [Alarm Operations Details](#ServiceDetailsAlarm)#### 2.1.1 High Level and Usage ### {#HighLevel}
++ [Alarm Operations Details](#ServiceDetailsAlarm)#### 2.1.1 High Level and Usage ### {#HighLevel}
 There are 4 major operations (besides Version information):
 + Endpoints specify the connection for consuming metric data to the AMQP message queue. (Only one Endpoint can be created at a time per tenant. At least one Dimension must be specified.)
 + Subscriptions specify what monitoring data is to be streamed. (You must create an Endpoint to use with the subscription.)
