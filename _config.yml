@@ -122,4 +122,4 @@ apinavigation:
 - text: DNS
   url: /api/dns/
 - text: Monitoring
-  url: /api/monitoring
+  url: /api/monitoring/
