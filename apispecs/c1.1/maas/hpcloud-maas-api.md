@@ -59,7 +59,6 @@ The API supports a number of operations. These include:
 + [Alarm Operations](#ServiceAlarmOps) - The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.
 + [Alarm Operations Details](#ServiceDetailsAlarm)
 
-
 #### 2.1.1 High Level and Usage ### {#HighLevel}
 
 There are 4 major operations (besides Version information):
