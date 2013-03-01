@@ -62,6 +62,7 @@ The container synchronization feature has the following maturity level:
 |Document Version|Date|Description|
 |1.0             |December 2012|Initial creation|
 |1.1             |March 2013   |+Added [Object Versioning](#object_versioning) |
+|||+ Added [Scheduled Deletion of Objects](#expiring_objects) |
 |||+  [Container and Object Naming](#naming) now restricts the "/./", "/../", "/." and "/.." substrings. This was always true, but not documented. |
 |||+ The description of the [Range](#range_request) request header has been updated. |
  
@@ -1217,9 +1218,86 @@ However, if you are disabling versioning or deleting
 the container or it's contents, it is
 acceptable to delete all objects from the versions-location container. Of
 course, you now have no possability of restoring prior versions of
-an object. 
+an object.
 
-### 2.18 Notable Differences from OpenStack
+### 2.18 Scheduled Deletion of Objects ### {#expiring_objects}
+
+Objects can be scheduled for deletion at a designated time, known as
+the delete-at time.
+Specify the delete-at time with either the X-Delete-At or X-Delete-After request
+headers during an object PUT or POST.
+
+Before the delete-at time, the object behaves normally. However, when
+the delete-at time has passed, the following occurs:
+
+* An attempt to retreive the object (GET or HEAD operation), will return
+404 Not Found error; in effect the object will appear to have been deleted.
+
+* However, if you get a list of the objects in the container (GET container),
+the object may still be listed -- as though it still exists.
+
+* This may persist for a short period. The system makes no guarantees about when
+it will remove the object from the container listing. It may be as short
+as a few minutes but usually does not exceed two hours.
+
+#### 2.18.1 Setting the Delete-At Time #### {#x_delete_at}
+
+The delete-at time is stored in an object's Delete-At metadata. The time is
+expressed as a Unix Epoch timestamp. You can set the Delete-At metedata
+in a PUT or POST operation using one of these request headers:
+
+* X-Delete-At. This specifies the Unix Epoch time at which the object should
+be deleted.
+For example, to request that the object be deleted on 1st March 2013
+at 13:30 GMT, the value should be 1362144600.
+If you specifiy a time in the past, an attempt to retrieve the object
+will immediatly return a 404 Not Found error -- although as explained
+above, the object may continue to appear in container listings.
+
+* X-Delete-After. This specifies the number of seconds
+(from time of request) until the object
+is deleted. Internally, the system adds this value to the current UTC time
+and stores it in the X-Delete-At metadata.
+
+The following example shows an example of using the X-Delete-At request header:
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mycontainer/myobj_1 -X POST -H 'x-delete-at: 1362144600'
+    HTTP/1.1 202 Accepted
+
+The following example shows an example of using the X-Delete-After request
+header. In this example, we demonstrate that an attempt to retreive the
+object after the delete-at time returns 404 Not Found. We also show that
+the object continues to appear in the container for some time
+after the delete-at time.
+
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mycontainer/myobj_2 -X POST -H 'x-delete-after: 30'
+    HTTP/1.1 202 Accepted
+
+    $ sleep 31 
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mycontainer/myobj_2 -X GET
+    HTTP/1.1 404 Not Found
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mycontainer -X GET
+    HTTP/1.1 200 OK
+    X-Container-Object-Count: 2
+    X-Container-Bytes-Used: 2000
+
+    myobj_1
+    myobj_2
+
+    $ sleep 3600
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mycontainer -X GET
+    HTTP/1.1 200 OK
+    X-Container-Object-Count: 1 
+    X-Container-Bytes-Used: 1000
+
+    myobj_1
+
+
+### 2.19 Notable Differences from OpenStack
 
 
 The HP Cloud Object Storage API is an implementation of OpenStack Object
@@ -1228,10 +1306,10 @@ Storage, but there are some differences to be aware of:
 * HP Cloud Services Object Storage naming conventions are slightly
     more restrictive than those described in the OpenStack documentation
     referenced here. Specifically, containers and object names may not
-    contain the following characters:
-    -   double-quote: "
-    -   greater-than: \>
-    -   less-than: \<
+    contain the following:
+    -   the double-quote character (")
+    -   the greater-than chracter (\>)
+    -   the less-than character (\<)
     -   the substrings "/./", "/../", "/." and "/.."
 
 * Cross-tenant ACLs are only supported by HP Cloud Object Storage
@@ -2500,6 +2578,7 @@ The following response headers are returned:
 * [ETag](#etag_response)
 * [Content-Encoding](#content_encoding_header)
 * [Content-Disposition](#content_disposition_header)
+* [X-Delete-At](#x_delete_at)
 * [X-Object-Meta-{name}](#x_object_meta_response)
 
       
@@ -2587,6 +2666,7 @@ is not the length of the response body but is the size in bytes of the object co
 * [ETag](#etag_response)
 * [Content-Encoding](#content_encoding_header)
 * [Content-Disposition](#content_disposition_header)
+* [X-Delete-At](#x_delete_at)
 * [X-Object-Meta-{name}](#x_object_meta_response)
 
       
@@ -2691,6 +2771,10 @@ The following request headers apply to this operation.
 * [Content-Disposition](#content_disposition_header) - Optional - Override default download behaviour of browsers
 * [X-Object-Meta-{name}](#x_object_meta_request) - Optional - Sets custom metadata on the object
 * [X-Object-Manifest](#large_objects) - Optional - Specifies that this object is an object manifest and "points" to the object segments.
+* [X-Delete-At](#x_delete_at) - Optional - Specifies the time at which the
+object is automaticically deleted from the system
+* [X-Delete-After](#x_delete_at) - Optional - Specifies the number of
+seconds until the object is automaticically deleted from the system
 
 **URL Parameters**
 
@@ -3025,6 +3109,10 @@ The following request headers apply to this operation.
 * [Content-Encoding](#content_encoding_header) - Optional - Indicate that the contents are compressed
 * [Content-Disposition](#content_disposition_header) - Optional - Override default download behaviour of browsers
 * [X-Container-Meta-{name}](#x_container_meta_request) - Optional - Sets custom metadata on the container
+* [X-Delete-At](#x_delete_at) - Optional - Specifies the time at which the
+object is automaticically deleted from the system
+* [X-Delete-After](#x_delete_at) - Optional - Specifies the number of
+seconds until the object is automaticically deleted from the system
 
 **URL Parameters**
 
