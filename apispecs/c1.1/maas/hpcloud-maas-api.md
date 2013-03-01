@@ -295,7 +295,7 @@ Provides information about the supported Monitoring API versions.
 	Accept: application/json
 	X-Auth-Token: ${Auth_Token}**Data Parameters**This call does not require a request body.**Success Response****Status Code**200 - OK**Response Data**JSON	{  
 	  "version": {
-	    "id": "v1.0",
+	    "id": "1.0",
 	    "links" : [
 	      {
 	        "rel": "self",
