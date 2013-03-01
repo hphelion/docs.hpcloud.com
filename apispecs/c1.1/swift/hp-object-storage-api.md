@@ -10,9 +10,9 @@ product: object-storage
 
 # HP Cloud Object Storage API Specification
 
-_Date:_ March 2013
+*Date:* March 2013
 
-_Document Version:_ 1.1
+*Document Version:* 1.1
 
 ## 1. Overview
 
@@ -59,12 +59,13 @@ The container synchronization feature has the following maturity level:
 
 ### 1.2 Revision History ###
 
-|Document Version|Date|Description|
+|Document Version|Date            |Description|
+|:--------       | :------------  | :------ |
 |1.0             |December 2012|Initial creation|
-|1.1             |March 2013   |+Added [Object Versioning](#object_versioning) |
-|||+ Added [Scheduled Deletion of Objects](#expiring_objects) |
-|||+  [Container and Object Naming](#naming) now restricts the "/./", "/../", "/." and "/.." substrings. This was always true, but not documented. |
-|||+ The description of the [Range](#range_request) request header has been updated. |
+|1.1             |March 2013   |Added [Object Versioning](#object_versioning) |
+|                |             |Added [Scheduled Deletion of Objects](#expiring_objects) |
+|                |             |[Container and Object Naming](#naming) now restricts the "/./", "/../", "/." and "/.." substrings. This was always true, but not documented. |
+|                |             |The description of the [Range](#range_request) request header has been updated. |
  
 
 ## 2. Architectural View
@@ -841,21 +842,25 @@ If so, it defaults to be the last byte of the file.
 
 The following examples show examples of the Range header in use. In these examples, the data comprises 10 bytes of data containing "0123456789".
 
-* `Range: bytes=0-0` -- The first byte of data; returns "0"
+* Range: bytes=0-0 -- The first byte of data; returns "0"
 
-* `Range: bytes=1-1` -- The second byte of data; returns "1"
+* Range: bytes=1-1 -- The second byte of data; returns "1"
 
-* `Range: bytes=0-1 -- The first and second byte of data; returns "01"
+* Range: bytes=0-1 -- The first and second byte of data; returns "01"
 
-* `Range: bytes=2-5` -- Bytes 2 to 5 inclusive; returns "2345"
+* Range: bytes=2-5 -- Bytes 2 to 5 inclusive; returns "2345"
 
-* `Range: bytes=5-` -- All data after and including byte 5; returns "56789" 
+* Range: bytes=5- -- All data after and including byte 5; returns "56789" 
 
-* `Range: bytes=-3` -- The last three bytes of the object; returns "789" 
+* Range: bytes=-3 -- The last three bytes of the object; returns "789" 
 
-When you specify a range, the GET request returns a `206 Partial Content`
-code (instead of the usual `200 OK`).
-In addition, a _Content-Range_ response header is added. For example, in response to `Range: bytes=-3`, the response header is `Content-Range: bytes 7-9/10`.
+When you specify a range, the GET request returns a 206 Partial Content
+code (instead of the usual 200 OK).
+In addition, a Content-Range response header is added.
+For example, in response to `Range: bytes=-3`,
+the response header is as follows:
+
+    Content-Range: bytes 7-9/10
 
 You may also specify several ranges in the _Range_ header.  In this example, the first two and final three bytes of the content are being requested:
 
@@ -880,7 +885,8 @@ You may also specify several ranges in the _Range_ header.  In this example, the
     789
     --d103b85868e4567035e3148996623809--
 
-As you can see the data is transmitted as a multipart message using the `multipart/byteranges` _Content-Type_.
+As you can see the data is transmitted as a multipart message using the
+_multipart/byteranges_ content type.
 
 ### 2.12 Large Object Creation ### {#large_objects}
 
@@ -1141,7 +1147,7 @@ container. The content and metadata of the object are specified in the
 PUT operation. Specifically, the matadata of the original object is
 not preserved or copied to the new object.
 
-  - A PUT of yet another object of the same name repeats the above process; a
+* A PUT of yet another object of the same name repeats the above process; a
 copy is made in the versions-location container. At this stage, there are now
 three objects in the system -- one in the version-enabled container and two
 in the versions-location container.
@@ -1155,7 +1161,7 @@ you change the _content_ of an exising object.
 * If you delete an object in the version-enabled container, the system
 finds the most recent object in the versions-location container and
 moves it into the version-enabled container. The result is that
-you now have restored the object to the state of it's prior version.
+we have restored the object to the state of its prior version.
 This includes content and metadata. At this stage there are two objects
 in the system -- one in the version-enabled container and one in the
 versions-location container.
@@ -1168,16 +1174,16 @@ container to be deleted.
 
 #### 2.17.2 Enabling Versioning on a Container #### {#x_versions_location)
 
-The enable versioning on a container, set the X-Versions-Location metadata.
+To enable versioning on a container, set the X-Versions-Location metadata.
 The value is the name of a container. The container must already
 exist.
 If the versions-location container does not exist, the PUT/POST
 operation will not fail. However, when you first attempt to replace an
 object in the version-enabled container, the PUT operation will fail
-with a "412 Precondition Failed" error.
+with a 412 Precondition Failed error.
 
-This example shows that the mywork container being enabled using
-priorwork as the versions-location container; it first creates the
+This example shows the _mywork_ container being enabled using
+_priorwork_ conainer as the versions-location container; it first creates the
 versions-location container:
 
     $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/priorwork -X PUT
@@ -1202,7 +1208,7 @@ time you perform a PUT operation to an object that already
 exists, it is simply replaced and no copy of made to the versions-location
 container.
 
-You may re-anable versioning on a container. If you use the original
+You may reenable versioning on a container. If you use the original
 versions-location container, a DELETE operation will restore the
 prior version.
 
@@ -1212,10 +1218,10 @@ The versions-location container is all respects a normal container. It is
 possible to list it's contents, get, put, modify and delete objects.
 This is not
 generally recommended because you may break the versioning semantics
-of the system wih unpredictable results.
+of the system with unpredictable results.
 
 However, if you are disabling versioning or deleting
-the container or it's contents, it is
+a version-enabled container, it is
 acceptable to delete all objects from the versions-location container. Of
 course, you now have no possability of restoring prior versions of
 an object.
@@ -1223,8 +1229,8 @@ an object.
 ### 2.18 Scheduled Deletion of Objects ### {#expiring_objects}
 
 Objects can be scheduled for deletion at a designated time, known as
-the delete-at time.
-Specify the delete-at time with either the X-Delete-At or X-Delete-After request
+the _delete-at_ time.
+You specify the delete-at time with either the X-Delete-At or X-Delete-After request
 headers during an object PUT or POST.
 
 Before the delete-at time, the object behaves normally. However, when
@@ -1242,8 +1248,8 @@ as a few minutes but usually does not exceed two hours.
 
 #### 2.18.1 Setting the Delete-At Time #### {#x_delete_at}
 
-The delete-at time is stored in an object's Delete-At metadata. The time is
-expressed as a Unix Epoch timestamp. You can set the Delete-At metedata
+The delete-at time is stored in an object's X-Delete-At metadata. The time is
+expressed as a Unix Epoch timestamp. You can set the X-Delete-At metedata
 in a PUT or POST operation using one of these request headers:
 
 * X-Delete-At. This specifies the Unix Epoch time at which the object should
@@ -1297,11 +1303,14 @@ after the delete-at time.
     myobj_1
 
 
-### 2.19 Notable Differences from OpenStack
-
+### 2.19 Notable Differences from OpenStack ###
 
 The HP Cloud Object Storage API is an implementation of OpenStack Object
-Storage, but there are some differences to be aware of:
+Storage (Swift).
+OpenStack Object Storage has core and optional features; specifically,
+there are a number of optional middleware components.  
+HP Cloud only supports the features described in this document.
+In addition, there are some differences to be aware of:
 
 * HP Cloud Services Object Storage naming conventions are slightly
     more restrictive than those described in the OpenStack documentation
@@ -1324,7 +1333,6 @@ See [FormPost](#formpost) for more information.
 
 * Signature Based Authentication. This is an alternative to the [X-Auth-Token](#x_auth_token_request) request header. 
 See [Signature Based Authentication](#signature_auth) for more information.
-
 
 ##  3. Account-level View
 
