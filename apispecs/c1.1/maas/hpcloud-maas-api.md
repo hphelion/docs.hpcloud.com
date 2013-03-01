@@ -96,10 +96,10 @@ Each namespace represents a service that has its own metric types. These are des
 
 *Volume Metric Types*
 
-|Metric Type|Type|Unit|Subject|Description|
-|:----------|:---|:---|:------|:----------|
-|total_read_bytes_rate|Rate|Bytes / sec|Disk Name|Bytes per second read from all volumes attached to an instance|
-|total_write_bytes_rate|Rate|Bytes / sec|Disk Name|Bytes per second written to all volumes attached to an instance|
+|Metric Type|Type|Unit|Description|
+|:----------|:---|:---|:----------|
+|total_read_bytes_rate|Rate|Bytes / sec|Bytes per second read from all volumes attached to an instance|
+|total_write_bytes_rate|Rate|Bytes / sec|Bytes per second written to all volumes attached to an instance|
 ### 2.2 Faults ## {#Faults}
 
 When an fault occurs at request time, the system will return an HTTP error response code denoting the type of fault. The system will also return additional information about the fault in the body of the response.
