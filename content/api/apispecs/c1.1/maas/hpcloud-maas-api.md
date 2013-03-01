@@ -350,7 +350,7 @@ Provides information about the supported Monitoring API versions.
 | 403 | Forbidden | Disabled or suspended user making the request or requested operation is forbidden. |
 | 409 | Conflict | An endpoint for this tenant already exists. |
 | 500 | Server Error | The server encountered a problem while processing the request. |**Curl Example**
-*Replace ${Auth_Token} with the token returned from section 3.1 [Accounts](#Accounts).*
+*Replace ${Auth_Token} with the token returned from section 3.1 [Accounts](#Accounts).*
 	$ curl -X POST \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints \
 	  -H "X-Auth-Token: ${Auth_Token}"##### 4.4.2.2 List All Endpoints #### {#ServiceDetailsListEndpoint}###### GET /endpointsLists all endpoints. Password information is not present.**Request Data**	GET /v1.0/endpoints HTTP/1.1
@@ -536,7 +536,7 @@ JSON
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions \
 	  -H "Content-Type:application/json" -H "Accept:application/json" \
 	  -H "X-Auth-Token: ${Auth_Token}" \
-	  -d '{"subscription": 	{"endpoint_id": "4d159ef6-0b6a-439b-a5bf-07459e1005b8", "namespace": "compute", "dimensions": {"instance_id": "392633","az": 2,"instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"}}}'
+	  -d '{"subscription": 	{"endpoint_id": "4d159ef6-0b6a-439b-a5bf-07459e1005b8", "namespace": "compute", "dimensions": {"instance_id": "392633","az": 2,"instance_uuid": "31ff6820-7c86-11e2-b92a-0800200c9a66"}}}'
 ##### 4.4.3.2 List All Subscriptions #### {#ServiceDetailsListSubscription}
 ###### GET /subscriptions
 
