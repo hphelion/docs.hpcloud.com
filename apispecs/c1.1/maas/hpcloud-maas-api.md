@@ -32,7 +32,7 @@ product: monitoring---# HP Cloud Monitoring API Specifications
 
 [Account Creation Details](#Accounts)
 
-Before creating Alarms or Subscriptions, you must first get a valid auth token. Go to the above link and use the Curl Example. Replace both the tenantName and username values with your account username/email. Replace password with your account password.
+Before creating Alarms or Subscriptions, you must first get a valid auth token. Go to the above link and use the Curl Example. Replace both the tenantName and username values with your account tenentName and login username. Replace password with your account password.
 
 Save the returned information. The access:token:id value is required to access the API.
 ##### 2.1.1.2 Setting Up an Alarm Example #### {#AlarmSetup}
