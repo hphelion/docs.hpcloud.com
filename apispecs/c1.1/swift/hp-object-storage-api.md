@@ -65,7 +65,7 @@ The container synchronization feature has the following maturity level:
 |1.1             |March 2013   |Added [Object Versioning](#object_versioning) |
 |                |             |Added [Scheduled Deletion of Objects](#expiring_objects) |
 |                |             |[Container and Object Naming](#naming) now restricts the "/./", "/../", "/." and "/.." substrings. This was always true, but not documented. |
-|                |             |The description of the [Range](#range_request) request header has been updated. |
+|                |             |The description of the [Range](#range_request) request header has been updated.  |
  
 
 ## 2. Architectural View
