@@ -60,7 +60,7 @@ Defines the high level logical partition to monitor.  This restricts what metric
 
 Places restrictions on the namespace to further narrow what is monitored.
 
-*Note: each Dimension type can only be used once per call.  All 3 types are required to be used for compute dimensions.*
+*Note: each Dimension type can only be used once per call.  All 3 types are required to be used. For volume, the dimensions are for the instance the volume is attached to.*
 
 *Required Compute and Volume Namespace Dimensions*
 
