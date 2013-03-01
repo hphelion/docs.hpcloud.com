@@ -187,43 +187,43 @@ A request can then be made against resources at that endpoint by supplying the a
 
 | Resource | Operation                                          | HTTP Method | Path                            | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------------------------------- | :---------- | :------------------------------ | :---------------- | :-------------- |
-| Version | List all versions | GET | {Host}/ | Y/N ||
-| Version | Get a specific version | GET | {Host}/*version_id* | Y/N ||### Endpoint Operations ## {#ServiceEndpointOps}
+| Version | [List all versions](#ServiceDetailsListVersion) | GET | {Host}/ | Y/N ||
+| Version | [Get a specific version](#ServiceDetailsSpecificVersion) | GET | {Host}/*version_id* | Y/N ||### Endpoint Operations ## {#ServiceEndpointOps}
 
 | Resource | Operation                                          | HTTP Method | Path                            | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------------------------------- | :---------- | :------------------------------ | :---------------- | :-------------- |
-| Endpoint | Create a new endpoint | POST | {BaseUri}/endpoints | Y/N ||
-| Endpoint | List all endpoints | GET | {BaseUri}/endpoints | Y/N ||
-| Endpoint | Get a specific endpoint | GET | {BaseUri}/endpoints/*endpoint_id* | Y/N ||
-| Endpoint | Delete a specific endpoint | DELETE | {BaseUri}/endpoints/*endpoint_id* | Y/N ||
-| Endpoint | Reset the password for a specific endpoint | POST | {BaseUri}/endpoints/*endpoint_id*/reset-password | Y/N ||
+| Endpoint | [Create a new endpoint](#ServiceDetailsCreateEndpoint) | POST | {BaseUri}/endpoints | Y/N ||
+| Endpoint | [List all endpoints](#ServiceDetailsListEndpoint) | GET | {BaseUri}/endpoints | Y/N ||
+| Endpoint | [Get a specific endpoint](#ServiceDetailsSpecificEndpoint) | GET | {BaseUri}/endpoints/*endpoint_id* | Y/N ||
+| Endpoint | [Delete a specific endpoint](#ServiceDetailsDeleteEndpoint) | DELETE | {BaseUri}/endpoints/*endpoint_id* | Y/N ||
+| Endpoint | [Reset the password for a specific endpoint](#ServiceDetailsResetPasswordEndpoint) | POST | {BaseUri}/endpoints/*endpoint_id*/reset-password | Y/N ||
 
 ### Subscription Operations ## {#ServiceSubscriptionOps}
 
 | Resource | Operation                                          | HTTP Method | Path                            | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------------------------------- | :---------- | :------------------------------ | :---------------- | :-------------- |
-| Subscription | Create a new subscription | POST | {BaseUri}/subscriptions | Y/N ||
-| Subscription | List all subscriptions | GET | {BaseUri}/subscriptions | Y/N ||
-| Subscription | Get a specific subscription | GET | {BaseUri}/subscriptions/*subscription_id* | Y/N ||
-| Subscription | Delete a specific subscription | DELETE | {BaseUri}/subscriptions/*subscription_id* | Y/N ||
+| Subscription | [Create a new subscription](#ServiceDetailsCreateSubscription) | POST | {BaseUri}/subscriptions | Y/N ||
+| Subscription | [List all subscriptions](#ServiceDetailsListSubscription) | GET | {BaseUri}/subscriptions | Y/N ||
+| Subscription | [Get a specific subscription](#ServiceDetailsSpecificSubscription) | GET | {BaseUri}/subscriptions/*subscription_id* | Y/N ||
+| Subscription | [Delete a specific subscription](#ServiceDetailsDeleteSubscription) | DELETE | {BaseUri}/subscriptions/*subscription_id* | Y/N ||
 
 ### Notification Method Operations ## {#ServiceNotificationOps}
 
 | Resource | Operation                                          | HTTP Method | Path                            | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------------------------------- | :---------- | :------------------------------ | :---------------- | :-------------- |
-| Notification Method | Create a new notification method | POST | {BaseUri}/notification-methods | Y/N ||
-| Notification Method | List all notification methods | GET | {BaseUri}/notification-methods | Y/N ||
-| Notification Method | Get a specific notification method | GET | {BaseUri}/notification-methods/*notification_method_id* | Y/N ||
-| Notification Method | Delete a specific notification method | DELETE | {BaseUri}/notification-methods/*notification_method_id* | Y/N ||
+| Notification Method | [Create a new notification method](#ServiceDetailsCreateNotification) | POST | {BaseUri}/notification-methods | Y/N ||
+| Notification Method | [List all notification methods](#ServiceDetailsListNotification) | GET | {BaseUri}/notification-methods | Y/N ||
+| Notification Method | [Get a specific notification method](#ServiceDetailsSpecificNotification) | GET | {BaseUri}/notification-methods/*notification_method_id* | Y/N ||
+| Notification Method | [Delete a specific notification method](#ServiceDetailsDeleteNotification) | DELETE | {BaseUri}/notification-methods/*notification_method_id* | Y/N ||
 
 ### Alarm Operations ## {#ServiceAlarmOps}
 
 | Resource | Operation                                          | HTTP Method | Path                            | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------------------------------- | :---------- | :------------------------------ | :---------------- | :-------------- |
-| Alarm | Create a new alarm | POST | {BaseUri}/alarms | Y/N ||
-| Alarm | List all alarms | GET | {BaseUri}/alarms | Y/N ||
-| Alarm | Get a specific alarm | GET | {BaseUri}/alarms/*alarm_id* | Y/N ||
-| Alarm | Delete a specific alarm | DELETE | {BaseUri}/alarms/*alarm_id* | Y/N ||  
+| Alarm | [Create a new alarm](#ServiceDetailsCreateAlarm) | POST | {BaseUri}/alarms | Y/N ||
+| Alarm | [List all alarms](#ServiceDetailsListAlarm) | GET | {BaseUri}/alarms | Y/N ||
+| Alarm | [Get a specific alarm](#ServiceDetailsSpecificAlarm) | GET | {BaseUri}/alarms/*alarm_id* | Y/N ||
+| Alarm | [Delete a specific alarm](#ServiceDetailsDeleteAlarm) | DELETE | {BaseUri}/alarms/*alarm_id* | Y/N ||  
 ### 4.2 Common Request Headers ## {#CommonRequestHeaders}*Http standard request headers*
 
 **Accept** - Internet media types that are acceptable in the response. HP Cloud Monitoring supports the media types application/xml and application/json.
@@ -879,7 +879,7 @@ JSON
 	$ curl -X GET \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods \
 	  -H "X-Auth-Token: ${Auth_Token}" 
-	  ##### 4.4.4.3 Get a Specific Notification Methods #### {#ServiceDetailsSpecificNotification}
+	  ##### 4.4.4.3 Get a Specific Notification Method #### {#ServiceDetailsSpecificNotification}
 ###### GET /notification-methods/{notification_method_id}
 
 Gets the details of a specific notification method identified by {notification_method_id}.
