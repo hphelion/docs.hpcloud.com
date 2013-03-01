@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /api/devex/messaging/
+permalink: /api/devex/messaging/publish/
 title: Message Publish API
 description: "Management Console Message Publish API documentation."
 keywords: "Messaging, MessagePub"
