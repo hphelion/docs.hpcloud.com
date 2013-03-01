@@ -62,15 +62,11 @@ Places restrictions on the namespace to further narrow what is monitored.
 
 *Note: each Dimension type can only be used once per call.  All 3 types are required to be used for compute dimensions.*
 
-*Required Compute Namespace Dimensions*
+*Required Compute and Volume Namespace Dimensions*
 
 + instance_id (compute instance id)
 + az (avaliability zone)
 + instance_uuid (nova instance unique id)
-
-*Required Volume Namespace Dimensions*
-
-+ volume_id
 
 ##### 2.1.2.3 Metrics #### {#Metrics}
 
