@@ -98,7 +98,7 @@ N/A
 None.
 
 #### 4.3.1.1 Create a Platform Alert {#create_platform_alert}
-#### POST /public_platform_alert
+#### POST /api/public_platform_alert
 
 The creation of a Platform Alert will post a message containing a title and message content to this Publish API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
 
@@ -189,7 +189,7 @@ N/A
 None.
 
 #### 4.3.2.1 Create a Public Platform status {#create_public_platform_status}
-#### POST /public_platform_status
+#### POST /api/public_platform_status
 
 
 The creation of a Public Platform Status message will post a message containing a title and message content to this API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
@@ -284,7 +284,7 @@ N/A
 None.
 
 #### 4.3.3.1 Create a Private Platform Status {#create_private_platform_status}
-#### POST /private_platform_status
+#### POST /api/private_platform_status
 
 The creation of a Private Platform Status message will post a message containing a title and message content to this API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
 
