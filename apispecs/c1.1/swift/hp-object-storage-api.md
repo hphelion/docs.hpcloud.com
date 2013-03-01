@@ -10,6 +10,9 @@ product: object-storage
 
 # HP Cloud Object Storage API Specification
 
+_Date:_ March 2013
+
+_Document Version:_ 1.1
 
 ## 1. Overview
 
@@ -54,15 +57,13 @@ The container synchronization feature has the following maturity level:
 
 **Version API Status**: BETA
 
-## 1.2 Changes in this document
+### 1.2 Revision History ###
 
-The following changes have been made since prior versions of this document:
-
-* Added [Object Versioning](#object_versioning)
-
-* [Container and Object Naming](#naming) now restricts the "/./", "/../", "/." and "/.." substrings. This was always true, but not documented.
-
-* The description of the [Range](#range_request) request header has been updated.
+|Document Version|Date|Description|
+|1.0             |December 2012|Initial creation|
+|1.1             |March 2013   |+Added [Object Versioning](#object_versioning) |
+|||+  [Container and Object Naming](#naming) now restricts the "/./", "/../", "/." and "/.." substrings. This was always true, but not documented. |
+|||+ The description of the [Range](#range_request) request header has been updated. |
  
 
 ## 2. Architectural View
@@ -1130,16 +1131,16 @@ behaves as normal; the versions-location container is not involved.
 * If you now PUT an object of the same name into the container, two
 actions are performed:
 
-** A copy of
+ * A copy of
 the original object is made and placed in the versions-location container.
 This copy contains the contents and metadata of the original object.
 
-** A new object is created in the version-enabled
+  - A new object is created in the version-enabled
 container. The content and metadata of the object are specified in the
 PUT operation. Specifically, the matadata of the original object is
 not preserved or copied to the new object.
 
-* A PUT of yet another object of the same name repeats the above process; a
+  - A PUT of yet another object of the same name repeats the above process; a
 copy is made in the versions-location container. At this stage, there are now
 three objects in the system -- one in the version-enabled container and two
 in the versions-location container.
@@ -1153,7 +1154,7 @@ you change the _content_ of an exising object.
 * If you delete an object in the version-enabled container, the system
 finds the most recent object in the versions-location container and
 moves it into the version-enabled container. The result is that
-you now have restored the object to the state to it's prior version.
+you now have restored the object to the state of it's prior version.
 This includes content and metadata. At this stage there are two objects
 in the system -- one in the version-enabled container and one in the
 versions-location container.
@@ -1185,14 +1186,14 @@ versions-location container:
     HTTP/1.1 204 No Content
 
 To disable versioning, perform a POST operation to the version-enabled
-container with a blank or empty value for the X-Versions-Enabled request
+container with a blank or empty value for the X-Versions-Location request
 header.
 
 This example shows how to disable versioning on a container. Note: you need
 a recent version of curl that sets headers to an empty string using the ";"
 character.
 
-    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mywork -X POST -H 'x-versions-location:'
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mywork -X POST -H 'x-versions-location;'
 
 When you disable versioning nothing happens to the objects in the
 version-enabled or versions-location container. However, the next
@@ -1212,8 +1213,8 @@ This is not
 generally recommended because you may break the versioning semantics
 of the system wih unpredictable results.
 
-However, if you are disabling versioning on a container (or even deleting
-the container or it's contents) , it is
+However, if you are disabling versioning or deleting
+the container or it's contents, it is
 acceptable to delete all objects from the versions-location container. Of
 course, you now have no possability of restoring prior versions of
 an object. 
