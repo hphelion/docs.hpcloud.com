@@ -61,9 +61,9 @@ Documentation for MessagePub is available on the [MessagePub](https://wiki.hpclo
 
 | Resource | Operation                 | HTTP Method           | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------ | :----------           | :--------------------- | :---------------- | :-------------: |
-| Platform Alert | [Create a new Platform Alert](#create_platform_alert) | POST | {BaseURI}/external_platform_alert | Y/N | L3 Support Role |
-| Public Platform Status | [Create a new Public Platform Status](#create_public_platform_status) | POST | {BaseURI}/public_platform_status | Y/N | L3 Support Role |
-| Private Platform Status | [Create a new Private Platform Status](#create_private_platform_status) | POST | {BaseURI}/private_platform_status | Y/N | L3 Support Role |
+| Public Platform Alert | [Create a new Platform Alert](#create_platform_alert) | POST | {BaseURI}/api/public_platform_alert | Y/N | L3 Support Role |
+| Public Platform Status | [Create a new Public Platform Status](#create_public_platform_status) | POST | {BaseURI}/api/public_platform_status | Y/N | L3 Support Role |
+| Private Platform Status | [Create a new Private Platform Status](#create_private_platform_status) | POST | {BaseURI}/api/private_platform_status | Y/N | L3 Support Role |
 
 
 ## 4.2 Common Request Headers
@@ -75,9 +75,9 @@ X-Auth-Token: <Auth_Token>
 ## 4.3 Service API Operation Details
 
 
-### 4.3.1 Platform Alert
+### 4.3.1 Public Platform Alert
 
-The Platform Alert provides critical platform feedback to both internal and external users of the Management Console.
+The Public Platform Alert provides critical platform feedback to both internal and external users of the Management Console.
 More information is on the wiki - [Messaging Characteristics](https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics)
 
 
@@ -98,7 +98,7 @@ N/A
 None.
 
 #### 4.3.1.1 Create a Platform Alert {#create_platform_alert}
-#### POST /external_platform_alert
+#### POST /api/public_platform_alert
 
 The creation of a Platform Alert will post a message containing a title and message content to this Publish API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
 
@@ -142,10 +142,9 @@ JSON - 400 Exception example
 JSON - 401 Exception example
 
     {"PlatformAlertException": {"message": "Unauthorized Request - invalid CS token.", "code": 401}}
-    {"PlatformAlertException": {"message": "Unauthorized Request - user doesn't have sufficient access to perform this      operation.", "code": 401}}
+    {"PlatformAlertException": {"message": "Unauthorized Request - user doesn't have sufficient access to perform this operation.", "code": 401}}
 
 JSON - 500 Exception example
-
 
     {"PlatformAlertException": {"message": "Server Error of an unknown nature.", "code": 500}}
 
@@ -153,11 +152,12 @@ JSON - 500 Exception example
 
 Here's an example in the RDD environment:
 
-    curl -H "Content-Type: application/json"
-         -H "X-Auth-Token: <HPAuthToken>"
-         -X POST
-         -d '{"title":"test message","message":"test message"}'
-         https://mp.rndd.aw1.hpcloud.net/external_platform_alert
+    curl -v -H "Accept=application/vnd.messagepub-v1+json" \
+         -H "Content-Type: application/json" \
+         -H "X-Auth-Token: <HPAuthToken>" \
+         -X POST \
+         -d '{"title":"public_platform_alert test message","message":"public_platform_alert test message"}' \
+         https://mp.rndd.aw1.hpcloud.net/api/public_platform_alert
 
 **Additional Notes**
 
@@ -189,7 +189,7 @@ N/A
 None.
 
 #### 4.3.2.1 Create a Public Platform status {#create_public_platform_status}
-#### POST /public_platform_status
+#### POST /api/public_platform_status
 
 
 The creation of a Public Platform Status message will post a message containing a title and message content to this API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
@@ -248,10 +248,11 @@ JSON - 500 Exception example
 
 Here's an example in the RDD environment:
 
-    curl -H "Content-Type: application/json"
-         -H "X-Auth-Token: <HPAuthToken>"
-         -X POST
-         -d '{"title":"test message","message":"test message"}'
+    curl -v -H "Accept=application/vnd.messagepub-v1+json" \
+         -H "Content-Type: application/json" \
+         -H "X-Auth-Token: <HPAuthToken>" \
+         -X POST \
+         -d '{"title":"public_platform_status test message","message":"public_platform_status test message"}' \
          https://mp.rndd.aw1.hpcloud.net/public_platform_status
 
 **Additional Notes**
@@ -283,7 +284,7 @@ N/A
 None.
 
 #### 4.3.3.1 Create a Private Platform Status {#create_private_platform_status}
-#### POST /private_platform_status
+#### POST /api/private_platform_status
 
 The creation of a Private Platform Status message will post a message containing a title and message content to this API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
 
@@ -342,10 +343,11 @@ JSON - 500 Exception example
 Here's an example in the RDD environment:
 
 
-    curl -H "Content-Type: application/json"
-         -H "X-Auth-Token: <HPAuthToken>"
-         -X POST
-         -d '{"title":"test message","message":"private test message"}'
+    curl -v -H "Accept=application/vnd.messagepub-v1+json" \
+         -H "Content-Type: application/json" \
+         -H "X-Auth-Token: <HPAuthToken>" \
+         -X POST \
+         -d '{"title":"private_platform_status test message","message":"private_platform_status private test message"}' \
          https://mp.rndd.aw1.hpcloud.net/private_platform_status
 
 **Additional Notes**
