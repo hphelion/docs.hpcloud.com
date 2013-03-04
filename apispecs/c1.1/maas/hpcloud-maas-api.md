@@ -5,14 +5,11 @@ title: HP Cloud Monitoring API
 description: "HP Cloud Monitoring API Specifications"
 keywords: "monitoring, maas"
 product: monitoring
-
 ---
-
 
 # HP Cloud Monitoring API Specifications
 
 **Date:**  4th March , 2013
-
 
 **Document Version:** 1.0
 
@@ -36,7 +33,6 @@ This document describes the HP Cloud Monitoring API, which allows you to monitor
 |0.2|02/22/2013|Compute only release|
 |0.3|02/28/2013|Added Volume metrics and cleanup|
 |1.0|03/04/2013|Document 1.0 release|
-
 
 ## 2. Architecture View # {#Section2_}
 
@@ -195,7 +191,6 @@ The root element of the fault (the fault_element value) may change depending on 
 |not_found|404|
 |conflict|409|
 |unprocessable_entity|422|
-
 
 ## 3. Account-level View # {#Section3_}
 
