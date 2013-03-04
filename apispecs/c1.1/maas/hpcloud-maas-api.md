@@ -716,7 +716,6 @@ JSON
 
 	  -H "X-Auth-Token: ${Auth_Token}"
 
-
 #### 4.4.2 Endpoint ### {#ServiceDetailsEndpoint}
 
 The endpoint resource represents an endpoint from which metrics can be consumed.
@@ -788,7 +787,6 @@ JSON
 	  }
 
 	}
-
 **Error Response**
 
 **Status Code**
@@ -993,7 +991,7 @@ JSON
 	$ curl -X GET \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c \
 	  -H "X-Auth-Token: ${Auth_Token}"
-
+	  
 ##### 4.4.2.4 Delete a Specific Endpoint #### {#ServiceDetailsDeleteEndpoint}
 ###### DELETE /endpoints/{endpoint_id}
 
@@ -1097,7 +1095,7 @@ This call does not require a request body.
 	$ curl -X POST \
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c/reset-password \
 	  -H "X-Auth-Token: ${Auth_Token}"
-
+	  
 #### 4.4.3 Subscription ### {#ServiceDetailsSubscription}
 
 
@@ -1656,7 +1654,6 @@ This call does not provide a response body.
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c \
 
 	  -H "X-Auth-Token: ${Auth_Token}" 
-
 #### 4.4.4 Notification Method ### {#ServiceDetailsNotification}
 The notification method resource represents a method through which notifications can be sent.
 
@@ -1958,7 +1955,6 @@ JSON
 	  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/notification-methods \
 
 	  -H "X-Auth-Token: ${Auth_Token}" 
-
 ##### 4.4.4.3 Get a Specific Notification Method #### {#ServiceDetailsSpecificNotification}
 ###### GET /notification-methods/{notification_method_id}
 
