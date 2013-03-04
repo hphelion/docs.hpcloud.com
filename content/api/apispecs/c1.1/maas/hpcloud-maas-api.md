@@ -328,7 +328,9 @@ The HP Cloud Monitoring API is implemented using a RESTful web service interface
 | Alarm | [Get a specific alarm](#ServiceDetailsSpecificAlarm) | GET | {BaseUri}/alarms/*alarm_id* | Y/N ||
 | Alarm | [Delete a specific alarm](#ServiceDetailsDeleteAlarm) | DELETE | {BaseUri}/alarms/*alarm_id* | Y/N ||  
 
-### 4.2 Common Request Headers ## {#CommonRequestHeaders}
+### 4.2 Common Requests ## {#CommonRequests}
+
+#### 4.2.1 Common Request Headers ### {#CommonRequestHeaders}
 
 *Http standard request headers*
 
@@ -353,7 +355,27 @@ The HP Cloud Monitoring API is implemented using a RESTful web service interface
 	X-Auth-Token: HPAuth_2895c13b1118e23d977f6a21aa176fd2bd8a10e04b74bd8e353216072968832a
 	Content-Length: 85
 
-### 4.3 Common Response Headers ## {#CommonResponseHeaders}
+#### 4.2.2 Common Request Attributes ### {#CommonRequestAttributes}
+
+|Attributes|Type|Description|
+|:---------|:---|:----------|
+|endpoint_id|string|The id of an endpoint to subscribe to or view|
+|namespace|string|The namespace of the metrics to receive. See [Namespaces](#Namespaces)|
+|dimensions|dictionary|The dimensions of metrics to receive (each dimension type can only be used once in this call). Currently all 3 types are required to be used. See [Dimensions](#Dimensions)|
+|instance_id|string|Compute instance id|
+|az|integer|Availability zone|
+|instance_uuid|string|Compute instance UUID|
+|type|string / enumeration|The type of notification method (SMS, EMAIL)|
+|address|string|The address / number to notify|
+|metric_type|string|Type of metric to alarm on. See [Metrics](#Metrics)|
+|metric_subject|string|(Optional) Descriptive subject name of metric to alarm on|
+|operator|string / enumeration|Comparison operator for which threshold and metric values are compared (LT, LTE, GT, GTE) corresponding to less than, less than or equal, greater than, and greater than or equal|
+|threshold|long|Threshold which triggers an alarm when exceeded (see metric descriptions)|
+|alarm_actions|array|Methods through which notifications (notification id) should be sent when transitioning to an ALARM state|
+
+### 4.3 Common Responses ## {#CommonResponses}
+
+#### 4.3.1 Common Response Headers ### {#CommonResponseHeaders}
 
 *Http standard response headers*
 
@@ -369,6 +391,33 @@ The HP Cloud Monitoring API is implemented using a RESTful web service interface
 	Content-Length: 1135
 	Content-Type: application/json; charset=UTF-8
 	Date: Tue, 30 Oct 2012 16:22:35 GMT
+	
+#### 4.3.2 Common Response Attributes ### {#CommonResponseAttributes}
+
+|Attributes|Type|Description|
+|:---------|:---|:----------|
+|rel|string|Relationship type|
+|href|string|Hypermedia reference|
+|status|string|Status of the API, if it is active and/or current|
+|updated|timestamp|Internal timestamp of when the API was released|
+|uri|string|URI of the amqp router|
+|meta|array|Amqp router information|
+|amqp_username|string|Needed to access the amqp router|
+|amqp_exchange|string|Needed to access the amqp router|
+|amqp_queue|string|Needed to access the amqp router|
+|endpoint_id|string|The id of an endpoint to subscribe to or view|
+|namespace|string|The namespace of the metrics to receive. See [Namespaces](#Namespaces)|
+|dimensions|dictionary|The dimensions of metrics to receive (each dimension type can only be used once in this call). Currently all 3 types are required to be used. See [Dimensions](#Dimensions)|
+|instance_id|string|Compute instance id|
+|az|integer|Availability zone|
+|instance_uuid|string|Compute instance UUID|
+|type|string / enumeration|The type of notification method (SMS, EMAIL)|
+|address|string|The address / number to notify|
+|metric_type|string|Type of metric to alarm on. See [Metrics](#Metrics)|
+|metric_subject|string|(Optional) Descriptive subject name of metric to alarm on|
+|operator|string / enumeration|Comparison operator for which threshold and metric values are compared (LT, LTE, GT, GTE) corresponding to less than, less than or equal, greater than, and greater than or equal|
+|threshold|long|Threshold which triggers an alarm when exceeded (see metric descriptions)|
+|alarm_actions|array|Methods through which notifications (notification id) should be sent when transitioning to an ALARM state|
 
 ### 4.4 Service API Operation Details ## {#ServiceDetails}
 *The following section, enumerates each resource and describes each of its API calls as listed in the Service API Operations section, documenting the naming conventions, request and response formats, status codes, error conditions, rate limits, quota limits, and specific business rules.*
@@ -400,6 +449,12 @@ This call does not require a request body.
 200 - OK
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|API version number|
 
 JSON
 
@@ -459,6 +514,12 @@ This call does not require a request body.
 200 - OK
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|API version number|
 
 JSON
 
@@ -533,6 +594,13 @@ This call does not require a request body.
 
 **Response Data**
 
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Endpoint id value|
+|amqp_password|string|Needed to access the amqp router|
+
 JSON
 
 	{
@@ -596,6 +664,12 @@ This call does not require a request body.
 200 - OK
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Endpoint id value|
 
 JSON
 
@@ -666,6 +740,12 @@ This call does not require a request body.
 200 - OK
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Endpoint id value|
 
 JSON
 
@@ -777,6 +857,12 @@ This call does not require a request body.
 
 **Response Data**
 
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|password|string|Newly created amqp_password|
+
 	{
 	  "password": "mEfOy34qJV"
 	}
@@ -821,9 +907,7 @@ Creates a new subscription to consume metrics.
 
 **Data Parameters**
 
-* *endpoint_id* - string - The id of the endpoint to subscribe to
-* *namespace* - string - The namespace of metrics to receive
-* *dimensions* - dictionary - The dimensions of metrics to receive (each dimension type can only be used once in this call). Currently all 3 types are required to be used 
+Common attributes in [Common Request Attributes](#CommonRequestAttributes).
 
 JSON
 
@@ -851,6 +935,12 @@ JSON
 201 - Created
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Subscription id value|
 
 JSON
 
@@ -920,6 +1010,12 @@ This call does not require a request body.
 200 - OK
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Subscription id value|
 
 JSON
 
@@ -1003,6 +1099,12 @@ This call does not require a request body.
 200 - OK
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Subscription id value|
 
 JSON
 
@@ -1112,9 +1214,11 @@ Creates a new notification method through which notifications can be sent when a
 
 **Data Parameters**
 
-* *name* - string - A descriptive name for the notification
-* *type* - string - The type of notification method (SMS, EMAIL)
-* *address* - string - The address/number to notify 
+Common attributes in [Common Request Attributes](#CommonRequestAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|name|string|A descriptive name for the notification|
 
 JSON
 
@@ -1138,6 +1242,13 @@ JSON
 201 - Created
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Notification method id value|
+|name|string|A descriptive name for the notification|
 
 JSON
 
@@ -1200,6 +1311,13 @@ This call does not require a request body.
 200 - OK
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Notification method id value|
+|name|string|A descriptive name for the notification|
 
 JSON
 
@@ -1274,6 +1392,13 @@ This call does not require a request body.
 200 - OK
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Notification method id value|
+|name|string|A descriptive name for the notification|
 
 JSON
 
@@ -1385,14 +1510,11 @@ Creates a new alarm.
 
 **Data Parameters**
 
-* *name* - string - A descriptive name for the alarm
-* *namespace* - string - Namespace of metric to alarm on
-* *metric_type* - string - Type of metric to alarm on
-* *metric_subject* - string - (Optional) Descriptive subject name of metric to alarm on
-* *dimensions* - dictionary - Dimensions of metrics to alarm on (each dimension type can only be used once in this call). Currently all 3 types are required to be used
-* *operator* - string - Comparison operator for which threshold and metric values are compared (LT, LTE, GT, GTE) corresponding to less than, less than or equal, greater than, and greater than or equal
-* *threshold* - long - Threshold which triggers an alarm when exceeded (see metric descriptions)
-* *alarm_actions* - array - Methods through which notifications (notification id) should be sent when transitioning to an ALARM state
+Common attributes in [Common Request Attributes](#CommonRequestAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|name|string|A descriptive name for the alarm|
 
 JSON
 
@@ -1428,6 +1550,13 @@ JSON
 201 - Created
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Notification method id value|
+|name|string|A descriptive name for the alarm|
 
 JSON
 
@@ -1505,6 +1634,13 @@ This call does not require a request body.
 
 **Response Data**
 
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Notification method id value|
+|name|string|A descriptive name for the alarm|
+
 JSON
 
 	{
@@ -1576,6 +1712,13 @@ This call does not require a request body.
 200 - OK
 
 **Response Data**
+
+Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+
+|Call Specific Attributes|Type|Description|
+|:---------|:---|:----------|
+|id|string|Notification method id value|
+|name|string|A descriptive name for the alarm|
 
 JSON
 
