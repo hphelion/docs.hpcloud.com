@@ -15,5 +15,5 @@ An overview of the various APIs for HP Cloud Devex Messaging services.
 
 ## Sub-pages
 
-* [Publish API](/api/block-storage/storage/)
-* [Subscribe API](/api/block-storage/backup/)
+* [Publish API](/api/publish-api/)
+* [Subscribe API](/api/subscribe-api/)
