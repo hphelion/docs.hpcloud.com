@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /api/devex/messaging/
+permalink: /api/devex/messaging/subscribe/
 title: Message Subscribe API
 description: "Management Console Message Subscribe API documentation."
 keywords: "Messaging, MessageHub"
