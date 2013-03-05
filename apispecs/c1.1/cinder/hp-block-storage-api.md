@@ -1,11 +1,11 @@
 ---
 layout: page
-permalink: /api/block-storage/
+permalink: /api/1.1/block-storage/
 title: HP Cloud Block Storage API
 description: "HP Cloud Block Storage API Specification"
 keywords: "block storage, volume, cinder, bootable volume, volume backup"
 product: block-storage
-published: false
+private: true
 
 ---
 
@@ -21,7 +21,7 @@ The HP Cloud Block Storage service is based on
 [OpenStack Cinder](http://docs.openstack.org/developer/cinder/).
 
 HP Cloud Block Storage provides persistent block devices that can be attached
-to [HP Cloud Compute instances](/api/compute). HP 
+to [HP Cloud Compute instances](/api/compute/). HP
 Cloud Block Storage volumes can be created in sizes from 1GB to 2047GB. Volumes
 attached to instances can be used as standard block devices. As volumes are
 exposed as standard block devices, the user is responsible for partitioning
@@ -36,7 +36,7 @@ backups. Snapshots capture the point in time state of a volume and are quick
 and inexpensive to create. They do not require the original volume from which
 they are taken to remain available after creation. To use a snapshot, the user
 must create a new volume from the snapshot. Backups are full copies of volumes
-stored to [HP Object Storage](/api/object-storage). Since they are full copies, 
+stored to [HP Object Storage](/api/object-storage/). Since they are full copies,
 they take longer to create than snapshots. Backups are independent of the original
 volume once created and are intended for archival and disaster recovery purposes.
 
@@ -51,8 +51,8 @@ HP Cloud Block Storage also supports bootable volumes, volumes which are pre-ini
 
 ### 1.2 Document Revision History
 
-| Version | Date       | Description                                 |
-| :----------- | :----------| :------------------------------------------ |
+| Version      | Date        | Description                                 |
+| :----------- | :---------- | :------------------------------------------ |
 | 0.1          | 31-Jan-2013 | Initial draft.                              |
 
 ### 1.3 API Changes from cloud 1.0 to cloud 1.1
@@ -124,7 +124,7 @@ The HP Cloud Block Storage facility consists of a,
 
 * The HP Cloud Block Storage API - a RESTful API which allows users to view,
 create, delete, modify, snapshot, backup and restore volumes.
-* An extension to the [HP Cloud Compute API](/api/compute) which allows users
+* An extension to the [HP Cloud Compute API](/api/compute/) which allows users
  to attach/detach volumes to/from instances.
 * The volume service which handles volume requests.
 * The volume backup service which handles volume backup requests.
@@ -146,7 +146,7 @@ the cloud. All calls to HP Cloud Block Storage APIs include the users
 _tenant_id_ as part of the call.
 
 For additional details on accounts and tenants, please refer to the
-[HP Cloud Identity Service Overview](/identity).
+[HP Cloud Identity Service Overview](/api/identity/).
 
 ### 3.2 Regions and Availability Zones
 
