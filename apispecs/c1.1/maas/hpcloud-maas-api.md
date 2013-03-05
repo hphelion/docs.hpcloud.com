@@ -237,8 +237,8 @@ Requests to the Monitoring API are required to present a valid token which must 
 			"endpoints": [
 			{
 				"tenantId": "12345678901234",
-				"publicURL": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/",
-				"region": "az-1.region-a.geo-1",
+				"publicURL": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/",
+				"region": "region-a.geo-1",
 				"versionId": "1.0",
 			}
 		]
@@ -250,7 +250,7 @@ Requests to the Monitoring API are required to present a valid token which must 
 
 The endpoint for accessing the Monitoring API can be obtained from the service catalog returned in your Keystone authentication request.
 
-	https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/
+	https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/
 
 A request can then be made against resources at that endpoint by supplying the access/token/id from your Keystone authentication request as in your Monitoring API request header as an X-Auth-Token:
 
@@ -280,7 +280,7 @@ The HP Cloud Monitoring API is implemented using a RESTful web service interface
 
 ### 4.1 Service API Operations ## {#Service}
 
-**Host**: https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com
+**Host**: https://region-a.geo-1.monitoring.hpcloudsvc.com
 
 **BaseUri**: {Host}/v1.0
 
@@ -349,7 +349,7 @@ The HP Cloud Monitoring API is implemented using a RESTful web service interface
 *Example*
 
 	POST /v1.0/subscriptions HTTP/1.1
-	Host: az-1.region-a.geo-1.monitoring.hpcloudsvc.com
+	Host: region-a.geo-1.monitoring.hpcloudsvc.com
 	Content-Type: application/json
 	Accept: application/json
 	X-Auth-Token: HPAuth_2895c13b1118e23d977f6a21aa176fd2bd8a10e04b74bd8e353216072968832a
@@ -611,7 +611,7 @@ JSON
 	    "links": [
 	      {
 	        "rel": "self",
-	        "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
+	        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	      }
 	    ]
 	    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
@@ -678,7 +678,7 @@ JSON
 	      "links": [
 	        {
 	          "rel": "self",
-	          "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
+	          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	        }
 	      ],
 	      "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540"
@@ -688,7 +688,7 @@ JSON
 	      "links": [
 	        {
 	          "rel": "self",
-	          "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/abce9e32-6ce0-4a36-9750-df415606babc"
+	          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/abce9e32-6ce0-4a36-9750-df415606babc"
 	        }
 	      ]
 	      "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/473077483"
@@ -749,7 +749,7 @@ JSON
 	    "links": [
 	      {
 	        "rel": "self",
-	        "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
+	        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	      }
 	    ],
 	    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
@@ -1520,7 +1520,7 @@ JSON
 	    "links": [
 	      {
 	        "rel": "self",
-	        "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
+	        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	      }
 	    ],
 	    "name": "Disk Exceeds 1k Operations",
@@ -1599,7 +1599,7 @@ JSON
 	      "links": [
 	        {
 	          "rel": "self",
-	          "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
+	          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	        }
 	      ],
 	      "name": "Disk Exceeds 1k Operations",
@@ -1672,7 +1672,7 @@ JSON
 	    "links": [
 	      {
 	        "rel": "self",
-	        "href": "https://az-1.region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
+	        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.0/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
 	      }
 	    ],
 	    "name": "Disk Exceeds 1k Operations",
