@@ -11,6 +11,10 @@ published: false
 
 # HP Cloud Block Storage API Specification
 
+**Date:** 05-Mar-2013
+
+**Document Version:** 0.1
+
 ## 1. Overview
 
 The HP Cloud Block Storage service is based on 
@@ -45,7 +49,13 @@ HP Cloud Block Storage also supports bootable volumes, volumes which are pre-ini
 
 **Version API Status**: *CURRENT*
 
-### 1.2 API Changes from <cloud 1.0> to <cloud 1.1>
+### 1.2 Document Revision History
+
+| Doc. Version | Date       | Description                                 |
+| :----------- | :----------| :------------------------------------------ |
+| 0.1          | 31-Jan-2013 | Initial draft.                              |
+
+### 1.3 API Changes from <cloud 1.0> to <cloud 1.1>
 
 TODO(smulcahy) Change the title of this and fill in with changes
 
