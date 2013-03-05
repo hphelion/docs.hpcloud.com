@@ -18,7 +18,7 @@ The HP Cloud Block Storage service is based on
 
 HP Cloud Block Storage provides persistent block devices that can be attached
 to [HP Cloud Compute instances](/api/compute). HP 
-Cloud Block Storage volumes can be created in sizes from 1GB to 2TB. Volumes
+Cloud Block Storage volumes can be created in sizes from 1GB to 2047GB. Volumes
 attached to instances can be used as standard block devices. As volumes are
 exposed as standard block devices, the user is responsible for partitioning
  them and creating filesystems on them. There are no limitations on what 
@@ -73,7 +73,7 @@ Storage API. Data on volumes is accessed in the same way that a user accesses
 data on local physical block devices. On creation, volumes are in an unattached 
 state (and the volume status is _available_). Volume size is specified at creation
 time and is fixed for the lifetime of the volume. Volume sizes can be from 
-1GB to 2TB in units of 1GB. Volumes have an optional _display-name_ and
+1GB to 2047GB in units of 1GB. Volumes have an optional _display-name_ and
 _display_description_ associated with them. 
 
 __Bootable volumes__ can be created by specifying an _image-id_ when creating
@@ -837,6 +837,7 @@ XML
 
 
 TODO(smulcahy) Add additional examples and request/response samples for scenarios such as creating from snapshot, bfv and so on
+TODO(smulcahy) Clarify that some options are mutually exclusive options (imageRef/snapshot_id/source_volid)
 
 ##### 4.5.1.5 Delete volume #### {#delete_volume}
 ###### DELETE /volumes/{volume_id}
