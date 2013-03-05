@@ -365,6 +365,7 @@ The HP Cloud Monitoring API is implemented using a RESTful web service interface
 |instance_id|string|Compute instance id|
 |az|integer|Availability zone|
 |instance_uuid|string|Compute instance UUID|
+|name|string|A descriptive name|
 |type|string / enumeration|The type of notification method (SMS, EMAIL)|
 |address|string|The address / number to notify|
 |metric_type|string|Type of metric to alarm on. See [Metrics](#Metrics)|
@@ -400,6 +401,7 @@ The HP Cloud Monitoring API is implemented using a RESTful web service interface
 |href|string|Hypermedia reference|
 |status|string|Status of the API, if it is active and/or current|
 |updated|timestamp|Internal timestamp of when the API was released|
+|id|string|Return value id of the call|
 |uri|string|URI of the amqp router|
 |meta|array|Amqp router information|
 |amqp_username|string|Needed to access the amqp router|
@@ -411,6 +413,7 @@ The HP Cloud Monitoring API is implemented using a RESTful web service interface
 |instance_id|string|Compute instance id|
 |az|integer|Availability zone|
 |instance_uuid|string|Compute instance UUID|
+|name|string|A descriptive name|
 |type|string / enumeration|The type of notification method (SMS, EMAIL)|
 |address|string|The address / number to notify|
 |metric_type|string|Type of metric to alarm on. See [Metrics](#Metrics)|
@@ -450,7 +453,7 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 |Call Specific Attributes|Type|Description|
 |:---------|:---|:----------|
@@ -515,7 +518,7 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 |Call Specific Attributes|Type|Description|
 |:---------|:---|:----------|
@@ -594,11 +597,10 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 |Call Specific Attributes|Type|Description|
 |:---------|:---|:----------|
-|id|string|Endpoint id value|
 |amqp_password|string|Needed to access the amqp router|
 
 JSON
@@ -665,11 +667,7 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|id|string|Endpoint id value|
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 JSON
 
@@ -741,11 +739,7 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|id|string|Endpoint id value|
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 JSON
 
@@ -857,7 +851,7 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 |Call Specific Attributes|Type|Description|
 |:---------|:---|:----------|
@@ -907,7 +901,7 @@ Creates a new subscription to consume metrics.
 
 **Data Parameters**
 
-Common attributes in [Common Request Attributes](#CommonRequestAttributes).
+Common attributes described in [Common Request Attributes](#CommonRequestAttributes).
 
 JSON
 
@@ -936,11 +930,7 @@ JSON
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|id|string|Subscription id value|
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 JSON
 
@@ -1011,11 +1001,7 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|id|string|Subscription id value|
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 JSON
 
@@ -1100,11 +1086,7 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|id|string|Subscription id value|
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 JSON
 
@@ -1214,11 +1196,7 @@ Creates a new notification method through which notifications can be sent when a
 
 **Data Parameters**
 
-Common attributes in [Common Request Attributes](#CommonRequestAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|name|string|A descriptive name for the notification|
+Common attributes described in [Common Request Attributes](#CommonRequestAttributes).
 
 JSON
 
@@ -1243,12 +1221,7 @@ JSON
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|id|string|Notification method id value|
-|name|string|A descriptive name for the notification|
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 JSON
 
@@ -1312,12 +1285,7 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|id|string|Notification method id value|
-|name|string|A descriptive name for the notification|
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 JSON
 
@@ -1393,12 +1361,7 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|id|string|Notification method id value|
-|name|string|A descriptive name for the notification|
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 JSON
 
@@ -1510,11 +1473,7 @@ Creates a new alarm.
 
 **Data Parameters**
 
-Common attributes in [Common Request Attributes](#CommonRequestAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|name|string|A descriptive name for the alarm|
+Common attributes described in [Common Request Attributes](#CommonRequestAttributes).
 
 JSON
 
@@ -1551,12 +1510,7 @@ JSON
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|id|string|Notification method id value|
-|name|string|A descriptive name for the alarm|
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 JSON
 
@@ -1634,12 +1588,7 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|id|string|Notification method id value|
-|name|string|A descriptive name for the alarm|
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 JSON
 
@@ -1713,12 +1662,7 @@ This call does not require a request body.
 
 **Response Data**
 
-Common attributes in [Common Response Attributes](#CommonResponseAttributes).
-
-|Call Specific Attributes|Type|Description|
-|:---------|:---|:----------|
-|id|string|Notification method id value|
-|name|string|A descriptive name for the alarm|
+Common attributes described in [Common Response Attributes](#CommonResponseAttributes).
 
 JSON
 
@@ -1820,5 +1764,4 @@ This call does not provide a response body.
 ## 5. Glossary # {#Section5_}
 
 * Namespace - A required classification for a metric.
-* Dimension - An optional classification for a metric. A metric may be classified by multiple dimensions.
-* Tenant - The cloud name/id of the customer.
+* Dimension - An required classification for a metric narrowing the namespace classification. A metric may be classified by multiple dimensions.
