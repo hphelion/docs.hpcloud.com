@@ -10,6 +10,9 @@ product: object-storage
 
 # HP Cloud Object Storage API Specification
 
+*Date:* March 2013
+
+*Document Version:* 1.1
 
 ## 1. Overview
 
@@ -54,7 +57,16 @@ The container synchronization feature has the following maturity level:
 
 **Version API Status**: BETA
 
+### 1.2 Revision History ###
 
+|Document Version|Date            |Description|
+|:--------       | :------------  | :------ |
+|1.0             |December 2012|Initial creation|
+|1.1             |March 2013   |Added [Object Versioning](#object_versioning) |
+|                |             |Added [Scheduled Deletion of Objects](#expiring_objects) |
+|                |             |[Container and Object Naming](#naming) now restricts the "/./", "/../", "/." and "/.." substrings. This was always true, but not documented. |
+|                |             |The description of the [Range](#range_request) request header has been updated.  |
+ 
 
 ## 2. Architectural View
 
@@ -132,7 +144,11 @@ The container name length is limited to 256 bytes.
 
 Object names must not contain the double-quote ('"'), less-than ('\<') or
 greater-than ('\>') characters.
-The object name length is limited to 1024 bytes.
+While object names may contain the '/' character, the 
+substrings '/./' and '/../' are not allowed in object names.
+Object names may
+not end with '/.' or '/..'.
+The object name length is limited to 1024 bytes. 
 
 Although you use URL-encoding to specify the URI of a container or object, when the API returns names (as in listing a container), the displayed names are not URL-encoded (i.e., they are the original names).
 
@@ -203,7 +219,7 @@ The following HTTP codes are used by HP Cloud Object Storage.
 |Code      | Description    | Notes   |
 |:-------- | :------------  | :------ |
 |200 OK    | Standard response for successful requests. | The actual response will depend on the specific operation. The HTTP code is transferred before the body of a request, so you should check that the body has not been truncated by comparing with the [Content-Length](#content_length_response) and [ETag](#etag_response) response headers. |
-|201 Created| Standard response for successful create of a container. Object creation always returns this code, even if an object of the same name already exists. In terms of how the service works, this is correct since you are creating a new copy of the object.| The actual response will depend on the specific operation. |
+|201 Created| Standard response for successful create of a container. Object creation usualy returns this code, even if an object of the same name already exists. In terms of how the service works, this is correct since you are creating a new copy of the object. However, when creating an object in a version-enabled container, 200 OK is returned if an object of the same name already exists.| The actual response will depend on the specific operation. |
 |202 Accepted | Standard response for successful updates to account, container or object. | The actual response will depend on the specific operation. |
 |204 No Content | Standard response to HEAD operations. It is also the response when listing an account or container and there are no names in the list.| The response is in the response headers, there is no body in the response. The object HEAD response does not use this code. It uses 200 OK instead.|
 |400 Bad Request | The request cannot be fulfilled due to bad syntax. | Check your code. |
@@ -213,7 +229,7 @@ The following HTTP codes are used by HP Cloud Object Storage.
 |405 Method Not Allowed| A request was made of a resource using a request method not supported by that resource| Check your code. |
 |409 Conflict |You are not allowed to perform the requested operation. | For example, you cannot delete a container that contains objects.|
 |411 Length Required | A Content-Length request header was not specified. | Check your code. |
-|412 Precondition Failed | The server does not meet one of the preconditions that the requester put on the request. | See [Conditional Get of Objects](#conditional_get) |
+|412 Precondition Failed | The server does not meet one of the preconditions that the requester put on the request. | See [Conditional Get of Objects](#conditional_get) and [Object Versioning](#object_versioning). |
 |413 Request Entity Too Large|The request is larger than the server is willing or able to process.| For objects, see [Large Object Creation](#large_objects) |
 |414 Request-URI Too Long | The URI provided was too long for the server to process. | See [Arbitrary Limits](#uri_limits) |
 |416 Requested Range Not Satisfiable | The client has asked for a portion of the file, but the server cannot supply that portion.| For example, if the client asked for a part of the file that lies beyond the end of the file.|
@@ -300,7 +316,7 @@ You use your username, password and tenant Id as shown in the following example.
 This example uses curl. 
 The X-Storage-Url response header contains the HP Cloud Object Storage endpoint (including your account) and the X-Auth-Token response header contains your authentication token.
 
-    curl -i https://region-a.geo-1.identity.hpcloudsvc.com:35357/auth/v1.0/ -X GET -H 'x-auth-user: 12345678912345:sally' -H 'x-auth-key: MyPassword'
+    $ curl -i https://region-a.geo-1.identity.hpcloudsvc.com:35357/auth/v1.0/ -X GET -H 'x-auth-user: 12345678912345:sally' -H 'x-auth-key: MyPassword'
 
     HTTP/1.1 200 OK
     X-Storage-Url: https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345
@@ -811,23 +827,66 @@ HP Cloud Object Storage supports the following headers:
 
 ### 2.11 Retrieving a portion of object data ### {#range_request}
 
-It is also possible to fetch a portion of an object's data using the HTTP _Range_
-header. At this time, HP Cloud Object Storage does not support the full
-specification for _Range_ but basic support is provided. 
+It is also possible to fetch a portion of an object's data using the
+HTTP _Range_ header.
+HP Cloud Object Storage supports "bytes" as the range unit.
 
-HP Cloud Object
-Storage only allows a single range that includes OFFSET and/or LENGTH.
-We support a sub-set of _Range_ and do not adhere to the full RFC-2616
-specification. We support specifying OFFSET-LENGTH where either OFFSET
-or LENGTH can be optional (not both at the same time). 
+A range is specified in two basic ways:
 
-The following examples show the supported forms of the header:
+* `first-byte-position - last-byte-position` -- this retrieves the content starting at `first-byte-position` and ending at `last-byte-position`. The byte offsets start at zero (so 0 starts at first byte) and bytes positions are inclusive (so 0-0 is the first byte of content).
 
-* `Range: bytes=-5` - last five bytes of the object
+* `- length` -- this retrieves the final `length` bytes of the content.
 
-* `Range: bytes=10-15` - the five bytes after a 10-byte offset
+You may omit the `last_byte_position`.
+If so, it defaults to be the last byte of the file.
 
-* `Range: bytes=32-` - all data after the first 32 bytes of the object
+The following examples show examples of the Range header in use. In these examples, the data comprises 10 bytes of data containing "0123456789".
+
+* Range: bytes=0-0 -- The first byte of data; returns "0"
+
+* Range: bytes=1-1 -- The second byte of data; returns "1"
+
+* Range: bytes=0-1 -- The first and second byte of data; returns "01"
+
+* Range: bytes=2-5 -- Bytes 2 to 5 inclusive; returns "2345"
+
+* Range: bytes=5- -- All data after and including byte 5; returns "56789" 
+
+* Range: bytes=-3 -- The last three bytes of the object; returns "789" 
+
+When you specify a range, the GET request returns a 206 Partial Content
+code (instead of the usual 200 OK).
+In addition, a Content-Range response header is added.
+For example, in response to `Range: bytes=-3`,
+the response header is as follows:
+
+    Content-Range: bytes 7-9/10
+
+You may also specify several ranges in the _Range_ header.  In this example, the first two and final three bytes of the content are being requested:
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/www/0123 -X GET -H 'range: bytes=0-1,-3'
+
+    HTTP/1.1 206 Partial Content
+    Content-Length: 263
+    Accept-Ranges: bytes
+    Etag: 781e5e245d69b566979b86e28d23f2c7
+    Content-Type: multipart/byteranges;boundary=d103b85868e4567035e3148996623809
+
+
+    --d103b85868e4567035e3148996623809
+    Content-Type: application/octet-stream
+    Content-Range: bytes 0-1/10
+
+    01
+    --d103b85868e4567035e3148996623809
+    Content-Type: application/octet-stream
+    Content-Range: bytes 7-9/10
+
+    789
+    --d103b85868e4567035e3148996623809--
+
+As you can see the data is transmitted as a multipart message using the
+_multipart/byteranges_ content type.
 
 ### 2.12 Large Object Creation ### {#large_objects}
 
@@ -946,13 +1005,13 @@ In the example, the content-encoding header is assigned with an
 attachment type that indicates how the file should be downloaded:
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/vid -X PUT -T vid -H 'Content-Type: video/mp4' -H 'Content-Encoding: gzip'
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/vid -X PUT -T vid -H 'Content-Type: video/mp4' -H 'Content-Encoding: gzip'
     HTTP/1.1 201 Created
     ETag: 4281c348eaf83e70ddce0e07221c3d28
 
 
 
-### 2.15 Enabling Browser Bypass with the Content-Disposition Header ###(#content_disposition_header)
+### 2.15 Enabling Browser Bypass with the Content-Disposition Header ### {#content_disposition_header}
 
 When an object is assigned the Content-Disposition header you can
 override a browser's default behavior for a file so that the downloader
@@ -962,7 +1021,7 @@ In the example, the content-encoding header is assigned with an
 attachment type that indicates how the file should be downloaded.
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/image.tif -X PUT -T image1.tif -H 'Content-Type: image/tiff' -H 'Content-Disposition: attachment; filename=image.tif'
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/image.tif -X PUT -T image1.tif -H 'Content-Type: image/tiff' -H 'Content-Disposition: attachment; filename=image.tif'
     HTTP/1.1 201 Created
     ETag: 4281c348eaf83e70ddce0e07221c3d28
 
@@ -1038,37 +1097,229 @@ Here, the source is set up:
 
 
 
-    curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/src -H 'x-auth-token: HPAUTH_4321' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest' -H 'x-container-sync-key: our-secret'
+    $ curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/src -H 'x-auth-token: HPAUTH_4321' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest' -H 'x-container-sync-key: our-secret'
 
 
 Here, the destination is setup with a secret value:
 
-    curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-key: our-secret'
+    $ curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345987654321/dest -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-key: our-secret'
 
 
 The following example shows setting up two-way synchronization where the account and container names are the same on both systems.
 Notice that the commands are nearly identical except for the "region-a" and "region-b" strings in the paths.
 
 
-    curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-key: my-secret'
+    $ curl https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-key: my-secret'
 
-    curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-key: my-secret'
+    $ curl https://region-b.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos -H 'x-auth-token: HPAUTH_1234' -X PUT -H 'x-container-sync-to: https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/photos' -H 'x-container-sync-key: my-secret'
+
+### 2.17 Object Versioning ### {#object_versioning}
+
+#### 2.17.1 Object Versioning Overview ####
+
+Object versioning is enabled at the container level. To specifiy that objects
+should be versioned, set the [X-Versions-Location](#x_versions_location)
+metadata on the container.
+
+The value of X-Versions-Location is the name of another container -- this
+is a container that will hold old versions of the objects. It is
+recommended that you use a different versions-location container for
+each version-enabled container.
+
+Once you enable versions on a container, the system behaves as follows:
+
+* When you first set the X-Versions-Location metadata, nothing happens
+to the objects already in the container.
+
+* If you PUT a new object (i.e., an object of that name does not already
+exist) into the version-enabled container, the PUT
+behaves as normal; the versions-location container is not involved.
+
+* If you now PUT an object of the same name into the container, two
+actions are performed:
+
+ * A copy of
+the original object is made and placed in the versions-location container.
+This copy contains the contents and metadata of the original object.
+
+  - A new object is created in the version-enabled
+container. The content and metadata of the object are specified in the
+PUT operation. Specifically, the matadata of the original object is
+not preserved or copied to the new object.
+
+* A PUT of yet another object of the same name repeats the above process; a
+copy is made in the versions-location container. At this stage, there are now
+three objects in the system -- one in the version-enabled container and two
+in the versions-location container.
+
+* A POST operation on an object in the version-enabled container updates
+the metadata of the object in the normal way. The metadata of the objects
+in the versions-location container is not changed. No new object is
+created in the versions-location container. This only happens when
+you change the _content_ of an exising object.
+
+* If you delete an object in the version-enabled container, the system
+finds the most recent object in the versions-location container and
+moves it into the version-enabled container. The result is that
+we have restored the object to the state of its prior version.
+This includes content and metadata. At this stage there are two objects
+in the system -- one in the version-enabled container and one in the
+versions-location container.
+
+* Another DELETE operation will operate in the same way. We are now back to
+the first, original, object.
+
+* A DELETE at this stage will cause the object in the version-enabled
+container to be deleted.
+
+#### 2.17.2 Enabling Versioning on a Container #### {#x_versions_location)
+
+To enable versioning on a container, set the X-Versions-Location metadata.
+The value is the name of a container. The container must already
+exist.
+If the versions-location container does not exist, the PUT/POST
+operation will not fail. However, when you first attempt to replace an
+object in the version-enabled container, the PUT operation will fail
+with a 412 Precondition Failed error.
+
+This example shows the _mywork_ container being enabled using
+_priorwork_ conainer as the versions-location container; it first creates the
+versions-location container:
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/priorwork -X PUT
+    HTTP/1.1 201 Created
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mywork -X POST -H 'x-versions-location: priorwork'
+    HTTP/1.1 204 No Content
+
+To disable versioning, perform a POST operation to the version-enabled
+container with a blank or empty value for the X-Versions-Location request
+header.
+
+This example shows how to disable versioning on a container. Note: you need
+a recent version of curl that sets headers to an empty string using the ";"
+character.
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mywork -X POST -H 'x-versions-location;'
+
+When you disable versioning nothing happens to the objects in the
+version-enabled or versions-location container. However, the next
+time you perform a PUT operation to an object that already
+exists, it is simply replaced and no copy of made to the versions-location
+container.
+
+You may reenable versioning on a container. If you use the original
+versions-location container, a DELETE operation will restore the
+prior version.
+
+#### 2.17.3 Accessing the versions-location Container Directly ####
+
+The versions-location container is all respects a normal container. It is
+possible to list it's contents, get, put, modify and delete objects.
+This is not
+generally recommended because you may break the versioning semantics
+of the system with unpredictable results.
+
+However, if you are disabling versioning or deleting
+a version-enabled container, it is
+acceptable to delete all objects from the versions-location container. Of
+course, you now have no possability of restoring prior versions of
+an object.
+
+### 2.18 Scheduled Deletion of Objects ### {#expiring_objects}
+
+Objects can be scheduled for deletion at a designated time, known as
+the _delete-at_ time.
+You specify the delete-at time with either the X-Delete-At or X-Delete-After request
+headers during an object PUT or POST.
+
+Before the delete-at time, the object behaves normally. However, when
+the delete-at time has passed, the following occurs:
+
+* An attempt to retreive the object (GET or HEAD operation), will return
+404 Not Found error; in effect the object will appear to have been deleted.
+
+* However, if you get a list of the objects in the container (GET container),
+the object may still be listed -- as though it still exists.
+
+* This may persist for a short period. The system makes no guarantees about when
+it will remove the object from the container listing. It may be as short
+as a few minutes but usually does not exceed two hours.
+
+#### 2.18.1 Setting the Delete-At Time #### {#x_delete_at}
+
+The delete-at time is stored in an object's X-Delete-At metadata. The time is
+expressed as a Unix Epoch timestamp. You can set the X-Delete-At metedata
+in a PUT or POST operation using one of these request headers:
+
+* X-Delete-At. This specifies the Unix Epoch time at which the object should
+be deleted.
+For example, to request that the object be deleted on 1st March 2013
+at 13:30 GMT, the value should be 1362144600.
+If you specifiy a time in the past, an attempt to retrieve the object
+will immediatly return a 404 Not Found error -- although as explained
+above, the object may continue to appear in container listings.
+
+* X-Delete-After. This specifies the number of seconds
+(from time of request) until the object
+is deleted. Internally, the system adds this value to the current UTC time
+and stores it in the X-Delete-At metadata.
+
+The following example shows an example of using the X-Delete-At request header:
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mycontainer/myobj_1 -X POST -H 'x-delete-at: 1362144600'
+    HTTP/1.1 202 Accepted
+
+The following example shows an example of using the X-Delete-After request
+header. In this example, we demonstrate that an attempt to retreive the
+object after the delete-at time returns 404 Not Found. We also show that
+the object continues to appear in the container for some time
+after the delete-at time.
 
 
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mycontainer/myobj_2 -X POST -H 'x-delete-after: 30'
+    HTTP/1.1 202 Accepted
 
-### 2.17 Notable Differences from OpenStack
+    $ sleep 31 
 
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mycontainer/myobj_2 -X GET
+    HTTP/1.1 404 Not Found
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mycontainer -X GET
+    HTTP/1.1 200 OK
+    X-Container-Object-Count: 2
+    X-Container-Bytes-Used: 2000
+
+    myobj_1
+    myobj_2
+
+    $ sleep 3600
+
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/mycontainer -X GET
+    HTTP/1.1 200 OK
+    X-Container-Object-Count: 1 
+    X-Container-Bytes-Used: 1000
+
+    myobj_1
+
+
+### 2.19 Notable Differences from OpenStack ###
 
 The HP Cloud Object Storage API is an implementation of OpenStack Object
-Storage, but there are some differences to be aware of:
+Storage (Swift).
+OpenStack Object Storage has core and optional features; specifically,
+there are a number of optional middleware components.  
+HP Cloud only supports the features described in this document.
+In addition, there are some differences to be aware of:
 
 * HP Cloud Services Object Storage naming conventions are slightly
     more restrictive than those described in the OpenStack documentation
     referenced here. Specifically, containers and object names may not
-    contain the following characters:
-    -   double-quote: "
-    -   greater-than: \>
-    -   less-than: \<
+    contain the following:
+    -   the double-quote character (")
+    -   the greater-than chracter (\>)
+    -   the less-than character (\<)
+    -   the substrings "/./", "/../", "/." and "/.."
 
 * Cross-tenant ACLs are only supported by HP Cloud Object Storage
 
@@ -1082,7 +1333,6 @@ See [FormPost](#formpost) for more information.
 
 * Signature Based Authentication. This is an alternative to the [X-Auth-Token](#x_auth_token_request) request header. 
 See [Signature Based Authentication](#signature_auth) for more information.
-
 
 ##  3. Account-level View
 
@@ -1486,7 +1736,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -X GET
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -X GET
 
     HTTP/1.1 200 OK
     X-Account-Object-Count: 21280
@@ -1592,7 +1842,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-    curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -H 'x-account-meta-one: 1' -H 'x-remove-account-meta-two: -' -X POST
+    $ curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -H 'x-account-meta-one: 1' -H 'x-remove-account-meta-two: -' -X POST
     HTTP/1.1 204 No Content
 
 
@@ -1673,7 +1923,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -X HEAD
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345 -X HEAD
     HTTP/1.1 200 OK
     X-Account-Object-Count: 21280
     X-Account-Bytes-Used: 3044371826
@@ -1768,6 +2018,7 @@ The following request headers apply to this operation:
 * [X-Container-Write](#x_container_write_request) - Optional - Sets an ACL that grants write access
 * [X-Container-Sync-To](#container_sync) - Optional - See [Container Synchronization](#container_sync)
 * [X-Container-Sync-Key](#container_sync) - Optional - See [Container Synchronization](#container_sync)
+* [X-Versions-Location](#x_versions_location) - Optional - Enables or disables [Object Versioning](#object_versioning)
 
 **URL Parameters**
 
@@ -1800,7 +2051,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -H 'x-container-meta-one: one' -X PUT
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -H 'x-container-meta-one: one' -X PUT
     HTTP/1.1 201 Created
 
 
@@ -1850,6 +2101,7 @@ The following request headers apply to this operation:
 * [X-Container-Write](#x_container_write_request) - Optional - Sets an ACL that grants write access
 * [X-Container-Sync-To](#container_sync) - Optional - See [Container Synchronization](#container_sync)
 * [X-Container-Sync-Key](#container_sync) - Optional - See [Container Synchronization](#container_sync)
+* [X-Versions-Location](#x_versions_location) - Optional - Enables or disables [Object Versioning](#object_versioning)
 
 **URL Parameters**
 
@@ -1882,7 +2134,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -H 'x-container-meta-one: one' -X POST
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -H 'x-container-meta-one: one' -X POST
     HTTP/1.1 204 No Content
 
 
@@ -2034,6 +2286,7 @@ The following response headers are returned:
 * [X-Container-Bytes-Used](#x_container_bytes_used_response)
 * [X-Container-Sync-To](#container_sync)
 * [X-Container-Sync-Key](#container_sync)
+* [X-Versions-Location](#x_versions_location)
 
 **Error Response**
 
@@ -2046,7 +2299,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X GET
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X GET
     HTTP/1.1 200 OK
     X-Container-Object-Count: 2
     X-Container-Meta-One: one
@@ -2115,6 +2368,7 @@ The following response headers are returned:
 * [X-Container-Bytes-Used](#x_container_bytes_used)
 * [X-Container-Sync-To](#container_sync)
 * [X-Container-Sync-Key](#container_sync)
+* [X-Versions-Location](#x_versions_location)
       
 **Error Response**
 
@@ -2127,7 +2381,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X HEAD
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X HEAD
     HTTP/1.1 204 No Content
     X-Container-Object-Count: 2
     X-Container-Meta-One: one
@@ -2201,7 +2455,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X DELETE
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1 -X DELETE
     HTTP/1.1 204 No Content
 
 
@@ -2280,7 +2534,7 @@ See [Conditional GET of objects](#conditional_get) for more information.
 header.
 
 * If the object name is the name of an object manifest, the operation concatenates all the segments into one stream.
-See [Large Object Creation](#large_object_creation) for more information.
+See [Large Object Creation](#large_objects) for more information.
 
 **Request Data**
 
@@ -2332,6 +2586,7 @@ The following response headers are returned:
 * [ETag](#etag_response)
 * [Content-Encoding](#content_encoding_header)
 * [Content-Disposition](#content_disposition_header)
+* [X-Delete-At](#x_delete_at)
 * [X-Object-Meta-{name}](#x_object_meta_response)
 
       
@@ -2346,7 +2601,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X GET
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X GET
     HTTP/1.1 200 OK
     Last-Modified: Fri, 16 Nov 2012 15:34:56 GMT
     ETag: 4281c348eaf83e70ddce0e07221c3d28
@@ -2419,6 +2674,7 @@ is not the length of the response body but is the size in bytes of the object co
 * [ETag](#etag_response)
 * [Content-Encoding](#content_encoding_header)
 * [Content-Disposition](#content_disposition_header)
+* [X-Delete-At](#x_delete_at)
 * [X-Object-Meta-{name}](#x_object_meta_response)
 
       
@@ -2433,7 +2689,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X HEAD
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X HEAD
     HTTP/1.1 200 OK
     Last-Modified: Fri, 16 Nov 2012 15:34:56 GMT
     ETag: 4281c348eaf83e70ddce0e07221c3d28
@@ -2495,13 +2751,17 @@ than displaying it using default browser settings by setting the [Content-Dispos
 your object's data in the ETag header. You are not required to include
 the ETag header, but it is recommended to ensure that the storage system
 successfully stored your object's content.
-For [manifest objects](#large_file_creation), the ETag is the MD5 sum of the concatenated string of ETags for
+For [manifest objects](#large_objects), the ETag is the MD5 sum of the concatenated string of ETags for
 each of the segments in the manifest.
 
 * You can set custom metadata on an object using a header name with a prefix of [X-Object-Meta-](#x_object_meta_request). 
 After this prefix, you can pick any name meaningful to you. For example, X-Object-Meta-Reviewed could be used indicate
 that the contents of an object had been reviewed.
 Any valid UTF-8 http header value is allowed for metadata, however we recommend that you URL-encode any non-ASCII values.
+
+* You can preserve prior versions of an object by enabling object versioning
+on the container.
+See [Object Versioning](#object_versioning) for more information.
 
 **Request Data**
 
@@ -2519,6 +2779,10 @@ The following request headers apply to this operation.
 * [Content-Disposition](#content_disposition_header) - Optional - Override default download behaviour of browsers
 * [X-Object-Meta-{name}](#x_object_meta_request) - Optional - Sets custom metadata on the object
 * [X-Object-Manifest](#large_objects) - Optional - Specifies that this object is an object manifest and "points" to the object segments.
+* [X-Delete-At](#x_delete_at) - Optional - Specifies the time at which the
+object is automaticically deleted from the system
+* [X-Delete-After](#x_delete_at) - Optional - Specifies the number of
+seconds until the object is automaticically deleted from the system
 
 **URL Parameters**
 
@@ -2558,11 +2822,11 @@ See [HTTP Status Codes](#http_codes) for more information.
 
 **Curl Example**
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/ -X PUT -H 'content-type: application/directory' -H 'content-length: 0'
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/ -X PUT -H 'content-type: application/directory' -H 'content-length: 0'
     HTTP/1.1 201 Created
     ETag: d41d8cd98f00b204e9800998ecf8427e
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/test_obj_1.gif -X PUT -T image1.gif
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1/test_obj_1.gif -X PUT -T image1.gif
     HTTP/1.1 201 Created
     ETag: 4281c348eaf83e70ddce0e07221c3d28
 
@@ -2770,7 +3034,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 **Curl Example**
 
 
-    curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X DELETE
+    $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/test_obj_1 -X DELETE
     HTTP/1.1 204 No Content
 
 
@@ -2853,6 +3117,10 @@ The following request headers apply to this operation.
 * [Content-Encoding](#content_encoding_header) - Optional - Indicate that the contents are compressed
 * [Content-Disposition](#content_disposition_header) - Optional - Override default download behaviour of browsers
 * [X-Container-Meta-{name}](#x_container_meta_request) - Optional - Sets custom metadata on the container
+* [X-Delete-At](#x_delete_at) - Optional - Specifies the time at which the
+object is automaticically deleted from the system
+* [X-Delete-After](#x_delete_at) - Optional - Specifies the number of
+seconds until the object is automaticically deleted from the system
 
 **URL Parameters**
 
@@ -2885,7 +3153,7 @@ See [HTTP Status Codes](#http_codes) for more information.
 
 **Curl Example**
 
-    curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1 -X POST -H 'x-object-meta-reviewed: Yes'
+    $ curl -i -H 'X-Auth-Token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/test_container_1/dir1 -X POST -H 'x-object-meta-reviewed: Yes'
     HTTP/1.1 202 Accepted
 
 
