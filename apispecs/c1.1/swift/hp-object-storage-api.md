@@ -10,9 +10,9 @@ product: object-storage
 
 # HP Cloud Object Storage API Specification
 
-*Date:* March 2013
+**Date:** March 2013
 
-*Document Version:* 1.1
+**Document Version:** 1.1
 
 ## 1. Overview
 
@@ -57,7 +57,7 @@ The container synchronization feature has the following maturity level:
 
 **Version API Status**: BETA
 
-### 1.2 Revision History ###
+### 1.2 Document Revision History ###
 
 |Document Version|Date            |Description|
 |:--------       | :------------  | :------ |
@@ -86,13 +86,13 @@ The HP Cloud Storage API allows the management of the following resources:
 
 #### 2.1.1 HP Cloud Storage Accounts #### {#account_resource}
 
-The account is the top level resource in the hierarchy. An account is assigned when you activate HP Cloud Object Storage.
-There is a one-to-one relationship between an account and the _tenant_. In fact, for most users, the HP Cloud Storage account and tenant _Id_ are the same.
+The account is the top level resource in the hierarchy.
+There is a one-to-one relationship between an account and the _tenant_.
 
 If you subscribed to the HP Cloud Beta program, your HP Cloud Storage account name may start with "AUTH_", followed by a long number. This makes
 no difference to how you use the API. In all cases, you should use the endpoint from the service catalog that the HP Cloud Identity Service supplies when authenticating yourself.
 
-You may set custome metadata on an account.
+You may set custom metadata on an account.
 
 There is more about [tenants and accounts](#tenants_account) later in this document. 
 There is more about using the [HP Cloud Identity Service](#getting_tokens) later in this document.
@@ -1044,7 +1044,7 @@ before it becomes visible in the destination container.
 HP Cloud Storage Services will not necessarily copy objects in any particular order. Specifically, they
 may be transferred in a different order to which they were created.
 
-> Note: [Segmented objects](#large_objects) (objects larger than 5GB) will not work seemlessly with Container Synchronization.
+> Note: [Segmented objects](#large_objects) (objects larger than 5GB) will not work seamlessly with Container Synchronization.
 If the manifest object is copied to the destination container before the object segments,
 when you perform a GET operation on the manifest object, the system may fail to find some or
 all of the object segments. If your manifest and object segments are in different containers, don't forget that both containers
@@ -1172,7 +1172,7 @@ the first, original, object.
 * A DELETE at this stage will cause the object in the version-enabled
 container to be deleted.
 
-#### 2.17.2 Enabling Versioning on a Container #### {#x_versions_location)
+#### 2.17.2 Enabling Versioning on a Container #### {#x_versions_location}
 
 To enable versioning on a container, set the X-Versions-Location metadata.
 The value is the name of a container. The container must already
@@ -1183,7 +1183,7 @@ object in the version-enabled container, the PUT operation will fail
 with a 412 Precondition Failed error.
 
 This example shows the _mywork_ container being enabled using
-_priorwork_ conainer as the versions-location container; it first creates the
+_priorwork_ container as the versions-location container; it first creates the
 versions-location container:
 
     $ curl -i -H 'x-auth-token: HPAuth_1234' https://region-a.geo-1.objects.hpcloudsvc.com/v1/12345678912345/priorwork -X PUT
@@ -1205,7 +1205,7 @@ character.
 When you disable versioning nothing happens to the objects in the
 version-enabled or versions-location container. However, the next
 time you perform a PUT operation to an object that already
-exists, it is simply replaced and no copy of made to the versions-location
+exists, it is simply replaced and no copy is made to the versions-location
 container.
 
 You may reenable versioning on a container. If you use the original
@@ -1236,7 +1236,7 @@ headers during an object PUT or POST.
 Before the delete-at time, the object behaves normally. However, when
 the delete-at time has passed, the following occurs:
 
-* An attempt to retreive the object (GET or HEAD operation), will return
+* An attempt to retrieve the object (GET or HEAD operation), will return
 404 Not Found error; in effect the object will appear to have been deleted.
 
 * However, if you get a list of the objects in the container (GET container),
@@ -1257,7 +1257,7 @@ be deleted.
 For example, to request that the object be deleted on 1st March 2013
 at 13:30 GMT, the value should be 1362144600.
 If you specifiy a time in the past, an attempt to retrieve the object
-will immediatly return a 404 Not Found error -- although as explained
+will immediately return a 404 Not Found error -- although as explained
 above, the object may continue to appear in container listings.
 
 * X-Delete-After. This specifies the number of seconds
@@ -1271,7 +1271,7 @@ The following example shows an example of using the X-Delete-At request header:
     HTTP/1.1 202 Accepted
 
 The following example shows an example of using the X-Delete-After request
-header. In this example, we demonstrate that an attempt to retreive the
+header. In this example, we demonstrate that an attempt to retrieve the
 object after the delete-at time returns 404 Not Found. We also show that
 the object continues to appear in the container for some time
 after the delete-at time.
@@ -1349,7 +1349,7 @@ HP Cloud Object Storage has the following service instances in these regions:
 
 * region-a-geo-1 - US West
 
-* region-b.geo-2 - US East
+* region-b.geo-1 - US East
 
 Each instance or region is a distinct storage entity. Each contains its own set of containers and
 objects -- there is no shared data between the regions.
