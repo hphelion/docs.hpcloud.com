@@ -19,7 +19,7 @@ product: object-storage
 HP Cloud Object Storage is an affordable, redundant, scalable, and
 dynamic storage service. The core storage system is designed to
 provide a safe, secure, network accessible
-way to store data. You can store an unlimited quantity of files and each
+way to store data. You can store an unlimited number of files and each
 file can be as large as 5GB.  With segmented objects,
 you can upload and store objects of virtually any size.
 
@@ -108,7 +108,7 @@ You may also set custom metadata on a container.
 
 #### 2.1.3 HP Cloud Storage Objects #### {#object_resource}
 
-An object provides a way for you to store an arbitrary blob of data. 
+An object provides a way for you to store any arbitrary data. 
 This may be a document, image, video, backup file or anything else required by your application.
 You can pick any name that is meaningful to you. However, see [Container and Object Naming](#naming) for restrictions on object names.
 
