@@ -59,7 +59,7 @@ Its value should be the name of the image. Note that the name of an image is not
 
 Each image has an identifier, which is guaranteed to be unique to an Availability Zone in HP Cloud 1.0. For Availability Zone please refer to [section 3.2](#32-regions-and-availability-zones).
 
-#### 2.2.2.3 Status
+#### 2.2.2.3 Status [Openstack message][Openstack attrib]
 
 Images in HP Cloud Image Service can be in one the following statuses:
 
@@ -87,7 +87,7 @@ The HP Cloud Image Service has retained the information about the image, but it 
 
 This is similiar to deleted, however, the image data has not yet been removed. An image in this state is recoverable.
 
-#### 2.2.2.4 Disk and Container Format
+#### 2.2.2.4 Disk and Container Format [Openstack message][Openstack attrib]
 
 When adding an image to HP Cloud Image Service, specifying the image's disk format and container format is **not** required in HP Cloud 1.0.
 
@@ -1377,3 +1377,5 @@ No response body
     < Content-Type: text/html; charset=UTF-8
     < Content-Length: 0
     < Date: Mon, 04 Mar 2013 03:11:09 GMT
+
+[Openstack attrib] http://docs.openstack.org/developer/glance/glanceapi.html
