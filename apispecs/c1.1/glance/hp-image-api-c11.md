@@ -1386,5 +1386,6 @@ No response body
 |Add new image API | "X-Image-Meta-Name", "X-Image-Meta-Disk_format", "X-Image-Meta-Container_format" are required | "X-Image-Meta-Name" is required |
 
 [Openstack attrib_st] http://docs.openstack.org/developer/glance/statuses.html
+
 [Openstack attrib_fm] http://docs.openstack.org/developer/glance/formats.html
 
