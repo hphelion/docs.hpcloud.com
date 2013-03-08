@@ -39,7 +39,7 @@ The maturity levels are defined as follows:
 
 ## 2.1 Overview
 
-The HP Cloud Image Service provides services for discovering, registering, and retrieving virtual machine images. The HP Cloud Image Service has a RESTful API that allows querying of VM image metadata as well as retrieval of the actual image.
+The HP Cloud Image Service is a web service for managing virtual machine images. It provides a set of RESTful APIs that enables querying/updating of image metadata as well as retrieval of the actual image data.
 
 ## 2.2 Images
 
@@ -165,7 +165,7 @@ The minimum disk space required in gigabytes to run this image on a server.
 
 #### 2.2.2.9 Owner
 
-HP Cloud Image Service normally sets the owner of an image to be the tenant or user (depending on the "owner_is_tenant" configuration option) of the authenticated user adding the image.
+HP Cloud Image Service normally sets the owner of an image to be the tenant ID of the authenticated user adding the image.
 
 #### 2.2.2.10 Custom Image Properties
 
@@ -218,15 +218,15 @@ The hp_image_license property is custom to HP and has the following semantics:
 
 ## 2.3 Image Ownership and Sharing
 
-The ownership of an image is defined by the value of its 'owner' attribute. The value of this attribute will be a tenant identifier extracted from the request context at image creation time or NULL. Ownership of an image is shared across all users that belong to the tenant identified in the 'owner' attribute of an image. Therefore, a A NULL owner indicates that the image is not owned by any specific tenant.
+The ownership of an image is defined by the value of its 'owner' attribute, as mentioned in section 2.2.2.9. The value of this attribute can be NULL, which indicates that the image is not owned by any specific tenant. Ownership of an image is shared across all users that belong to the tenant identified in the 'owner' attribute of an image.
 
-A user may share an image he owns with another tenant. When sharing with another tenant, the original owner can also indicate whether the recipient can share the image further.  Modification of shared images is still restricted to the user that owns it.
+An image can be shared with another tenant by its owner, in which case the original owner can also indicate whether the recipient can share the image further. Modification of shared images is still restricted to the user that owns it.
 
 ## 2.4 Authentication and Access Controls
 
 ### 2.4.1 Authentication
 
-HP Cloud Image Service depends on Control Service (CS) API to handle authentication of clients. You must obtain an authentication token from CS and send it along with all API requests to Image Service through the `X-Auth-Token` header. HP Cloud Image Service will communicate back to CS to verify the token validity and obtain your identity credentials. Anonymous users cannot access HP Cloud Image Service APIs.
+HP Cloud Image Service depends on Control Service (CS) API to handle authentication of clients. A HP Cloud Image Service consumer must obtain an authentication token from CS and send it along with all API requests to Image Service through the `X-Auth-Token` header. HP Cloud Image Service will communicate back to CS to verify the token validity and obtain the consumer's identity credentials. Anonymous users cannot access HP Cloud Image Service APIs.
 
 ### 2.4.2 Access Control
 
@@ -600,29 +600,27 @@ Both the `GET /v1/images` and `GET /v1/images/detail` requests take certain quer
 
 + name=NAME
 
-Filters images having a name attribute matching NAME.
+Showing images having a name attribute matching NAME.
 
 + container_format=FORMAT
 
-Filters images having a container_format attribute matching FORMAT
+Showing images having a container_format attribute matching FORMAT
 
 + disk_format=FORMAT
 
-Filters images having a disk_format attribute matching FORMAT
+Showing images having a disk_format attribute matching FORMAT
 
 + status=STATUS
 
-Filters images having a status attribute matching STATUS
+Showing images having a status attribute matching STATUS
 
 + size_min=BYTES
 
-Filters images having a size attribute greater than or equal to BYTES
+Showing images having a size attribute greater than or equal to BYTES
 
 + size_max=BYTES
 
-Filters images having a size attribute less than or equal to BYTES
-
-These two resources also accept sort parameters:
+Showing images having a size attribute less than or equal to BYTES
 
 + sort_key=KEY
 
@@ -922,9 +920,9 @@ For example:
 
 **request**
 
-HP Cloud Image Service will view as image metadata any HTTP header that it receives in a PUT request where the header key is prefixed with the strings `x-image-meta-` and `x-image-meta-property-`.
+All the request headers prefixed with `x-image-meta-` and `x-image-meta-property-` are recognized as image metadata.
 
-If an image was previously reserved, and thus is in the `queued` state, then image raw data can be added by including it as the request body. If the image already has data associated with it (e.g. not in the `queued` state), then including a request body will result in a 409 Conflict exception.
+If an image was previously reserved, and thus is in the `queued` state, then image raw data can be added by including it as the request body. If the image already has data associated with it (e.g. not in the `queued` state), then including a request body will result in a 409 Conflict.
 
 **response**
 
@@ -1008,23 +1006,23 @@ The metadata is returned as a set of HTTP headers that begin with the prefix `x-
 
 **request**
 
-The metadata about the image is sent to HP Cloud Image Service in HTTP headers. The body of the HTTP request to the API will be the MIME-encoded disk image data.
+The metadata of the image is sent to HP Cloud Image Service in HTTP headers. The body of the HTTP request to the API will be the MIME-encoded image data.
 
 Image Metadata in HTTP Headers:
 
-HP Cloud Image Service will view as image metadata any HTTP header that it receives in a POST request where the header key is prefixed with the strings `x-image-meta-` and `x-image-meta-property-`.
+All HTTP headers prefixed with `x-image-meta-` and `x-image-meta-property-` are recognized as image metadata.
 
 The list of metadata headers are listed below.
 
 + x-image-meta-name (required)
 
-Its value should be the name of the image.
+The name of the image.
 
 + x-image-meta-id (optional)
 
-When present, HP Cloud Image Service will use the supplied identifier for the image. If the identifier already exists in that HP Cloud Image Service node, then a 409 Conflict will be returned by HP Cloud Image Service.
+HP Cloud Image Service will use the supplied identifier for the image if specified. A 409 Conflict will be returned if an identifier already exists in that HP Cloud Image Service region.
 
-When this header is not present, HP Cloud Image Service will generate an identifier for the image and return this identifier in the response (see below)
+HP Cloud Image Service will generate an identifier for the image and return this identifier in the response if not specified.
 
 + x-image-meta-disk_format (required)
 
@@ -1036,40 +1034,42 @@ Valid values are one of aki, ari, ami, bare, or ovf.
 
 + x-image-meta-size (optional)
 
-When present, HP Cloud Image Service assumes that the expected size of the request body will be the value of this header. If the length in bytes of the request body does not match the value of this header, HP Cloud Image Service will return a 400 Bad Request.
+HP Cloud Image Service assumes the supplied value is the expected size if specified. A 400 Bad Request will be returned if the length in bytes of the request body does not match the value of this header.
 
-When not present, HP Cloud Image Service will calculate the image's size based on the size of the request body.
+HP Cloud Image Service will set the image's size based on the size of the request body if not specified.
 
 + x-image-meta-checksum (optional)
 
-When present, HP Cloud Image Service will verify the checksum generated from the backend store when storing your image against this value and return a 400 Bad Request if the values do not match.
+HP Cloud Image Service will verify the checksum generated from the backend store against the supplied checksum value if specified, a 400 Bad Request will be returned if not match.
+
+HP Cloud Image Service will calculate the MD5 checksum based on the image data in the request body if not specified.
 
 + x-image-meta-min-ram (optional)
 
-When present it shall be the expected minimum ram required in megabytes to run this image on a server.
+HP Cloud Image Service views the supplied value as the minimum ram required in megabytes to run this image on a server if specified.
 
-When not present, the image is assumed to have a minimum ram requirement of 0.
+HP Cloud Image Service considers the minimum ram requirement is 0 for this image if not specified.
 
 + x-image-meta-min-disk (optional)
 
-When present it shall be the expected minimum disk space required in gigabytes to run this image on a server.
+HP Cloud Image Service views the supplied value as the minimum disk space required in gigabytes to run this image on a server if specified.
 
-When not present, the image is assumed to have a minimum disk space requirement of 0.
+HP Cloud Image Service considers the minimum disk space requirement is 0 for this image if not specified.
 
 + x-image-meta-owner (optional)
 
 This header is only meaningful for admins.
 
-HP Cloud Image Service normally sets the owner of an image to be the tenant or user (depending on the "owner_is_tenant" configuration option) of the authenticated user issuing the request. However, if the authenticated user has the Admin role, this default may be overridden by setting this header to null or to a string identifying the owner of the image.
+HP Cloud Image Service normally sets the owner of an image to be the tenant ID of the authenticated user issuing the request. However, if the authenticated user has the Admin role, this default may be overridden by setting this header to null or to a string identifying the owner of the image.
 
 + x-image-meta-property-*
 
-When HP Cloud Image Service receives any HTTP header whose key begins with the string prefix `x-image-meta-property-`, HP Cloud Image Service adds the key and value to a set of custom, free-form image properties stored with the image. The key is the lower-cased string following the prefix x-image-meta-property- with dashes and punctuation replaced with underscores.
+When HP Cloud Image Service receives any HTTP header whose key begins with the prefix `x-image-meta-property-`, HP Cloud Image Service adds the key and value to a set of custom, free-form image properties stored with the image. The key is the lower-cased string following the prefix x-image-meta-property- with dashes and punctuation replaced with underscores.
 
 For example, if the following HTTP header were sent:
 
-`x-image-meta-property-distro  Ubuntu 10.10`
-Then a key/value pair of "distro"/"Ubuntu 10.10" will be stored as image metadata with the image in HP Cloud Image Service.
+`x-image-meta-property-architecture  amd64`
+Then a key/value pair of "architecture"/"amd64" will be stored as image metadata with the image in HP Cloud Image Service.
 
 There is no limit on the number of free-form key/value attributes that can be attached to the image. However, keep in mind that the 8K limit on the size of all HTTP headers sent in a request will effectively limit the number of image properties.
 
@@ -1181,7 +1181,7 @@ Business Rules: None
 
 #### 4.4.3.1 List Image Memberships
 
-Retrieve a list of the other tenants (or users, if "owner_is_tenant" is False) that may access a given image.
+Retrieve a list of the other tenants that may access a given image.
 
     GET /v1/images/<IMAGE_ID>/members
 
@@ -1271,13 +1271,13 @@ To authorize a tenant to access a private image.
 
 **request**
 
-With no body, this will add the membership to the image, leaving existing memberships unmodified and defaulting new memberships to have `can_share` set to false. We may also optionally attach a body of the following form:
+With no body, this will add the membership to the image, leaving existing memberships unchanged and defaulting new memberships to have `can_share` set to false.
+
+If the following body is specified, both existing and new memberships will have `can_share` set to the supplied value.
 
     {'member':
      {'can_share': true}
     }
-
-If such a body is provided, both existing and new memberships will have `can_share` set to the provided value (either true or false). This query will return a 204 ("No Content") status code.
 
 **response**
 
@@ -1342,14 +1342,18 @@ The full membership list for a given image may be replaced.
 
 **request**
 
-with a body of the following form:
+A body in the following form:
 
     {'memberships': [
      {'member_id': 'tenant1',
       'can_share': false}
      ...]}
 
-All existing memberships which are not named in the replacement body are removed, and those which are named have their `can_share` settings changed as specified. (The `can_share` setting may be omitted, which will cause that setting to remain unchanged in the existing memberships.) All new memberships will be created, with `can_share` defaulting to false if it is not specified.
+All the supplied memberships will be created, having `can_share` set to false by default if not specified.
+
+The existing memberships named in the body will have their `can_share` set to the specified value, or keep the existing values unchanged if the corresponding `can_share` is not specified in the body.
+
+All existing memberships which are not named in the body are removed.
 
 **response**
 
