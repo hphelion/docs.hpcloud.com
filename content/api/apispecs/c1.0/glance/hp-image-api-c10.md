@@ -1378,5 +1378,6 @@ No response body
     < Content-Length: 0
     < Date: Mon, 04 Mar 2013 03:11:09 GMT
 
-[Openstack attrib_st] http://docs.openstack.org/developer/glance/statuses.html
-[Openstack attrib_fm] http://docs.openstack.org/developer/glance/formats.html
+[Openstack attrib_st]: http://docs.openstack.org/developer/glance/statuses.html
+
+[Openstack attrib_fm]: http://docs.openstack.org/developer/glance/formats.html
