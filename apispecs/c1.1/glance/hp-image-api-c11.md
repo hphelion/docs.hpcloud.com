@@ -59,7 +59,7 @@ Its value should be the name of the image. Note that the name of an image is not
 
 Each image has an identifier, which is guaranteed to be unique to a Region in HP Cloud 1.1. For Regions please refer to [section 3.2](#32-regions-and-availability-zones). Images identifiers are UUIDs in HP Cloud 1.1, commonly represented in hexadecimal string notation.
 
-#### 2.2.2.3 Status
+#### 2.2.2.3 Status [Openstack message][Openstack Attrib]
 
 Images in HP Cloud Image Service can be in one the following statuses:
 
@@ -87,7 +87,7 @@ The HP Cloud Image Service has retained the information about the image, but it 
 
 This is similiar to deleted, however, the image data has not yet been removed. An image in this state is recoverable.
 
-#### 2.2.2.4 Disk and Container Format
+#### 2.2.2.4 Disk and Container Format [Openstack message][Openstack Attrib]
 
 When adding an image to HP Cloud Image Service, specifying the image's disk format and container format is required in HP Cloud 1.1.
 
@@ -1384,3 +1384,6 @@ No response body
 |Image Identifier| UUID (for example: 6eab43da-eb20-4e43-8984-48fa057989c5) | Integer |
 |Get Metadata API | new response header "X-Openstack-Request-Id" | N/A |
 |Add new image API | "X-Image-Meta-Name", "X-Image-Meta-Disk_format", "X-Image-Meta-Container_format" are required | "X-Image-Meta-Name" is required |
+
+
+[Openstack Attrib]: http://docs.openstack.org/developer/glance/glanceapi.html
