@@ -1,24 +1,22 @@
 ---
 layout: page
-permalink: /api/devex/messaging/subscribe/
-title: Message Subscribe API
-description: "Management Console Message Subscribe API documentation."
-keywords: "Messaging, MessageHub"
-product: devex_messaging
+permalink: /api/devex/messaging/
+title: HP Cloud Management Console Messaging API
+description: "Management Console Messaging API documentation."
+keywords: "Messaging, MessagePub, MessageHub"
+product: devex-messaging
 private: true
 ---
 
 
-# 1. Overview
+# Management Console Messaging API Overview
+
+
+The Management Console Messaging API is a lightweight messaging platform for the exchange of messages between the  
+
+ that allows for messaging targeted at both the Network Operations Center (NOC) and the Support group to initiate messages to HPCS clients and HP Cloud Admin users. These messages will target Management Console users via the web UI.
 
 The HP Cloud Message Hub is a lightweight message subscription platform that allows the Network Operations Center (NOC) and the Support group to retrieve archived messaging data.
-
-The first iteration is essentially a prototype that supports archive retrieval for the following message types:
-
-- Private Platform Alerts
-- Public Platform Alerts
-- Private Platform Status
-- Public Platform Status
 
 
 ## 1.1 API Maturity Level
@@ -27,11 +25,12 @@ The first iteration is essentially a prototype that supports archive retrieval f
 
 **Version API Status**: *ALPHA*
 
-
 ---
 
 
 # 2. Architecture View
+
+Documentation for MessagePub is available on the [MessagePub](https://wiki.hpcloud.net/display/iaas/MessagePub+-+Message+Publishing) Wiki page.
 
 Documentation for MessageHub is available on the [MessageHub](https://wiki.hpcloud.net/display/iaas/MessageHub+-+Message+Subscriptions) Wiki page.
 
@@ -57,18 +56,22 @@ Documentation for MessageHub is available on the [MessageHub](https://wiki.hpclo
 
 ## 4.1 Service API Operations
 
-**Host**: https://sp.uswest.hpcloud.net
+**Host**: https://mp.uswest.hpcloud.net
 
 **BaseUri**: /
 
 | Resource | Operation                 | HTTP Method           | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------ | :----------           | :--------------------- | :---------------- | :-------------: |
+| Public Platform Alert | [Create a new Platform Alert](#create_platform_alert) | POST | {BaseURI}/api/public/platform/alert | Y/N | L3 Support Role |
+| Public Platform Status | [Create a new Public Platform Status](#create_public_platform_status) | POST | {BaseURI}/api/public/platform/status | Y/N | L3 Support Role |
+| Private Platform Status | [Create a new Private Platform Status](#create_private_platform_status) | POST | {BaseURI}/api/private/platform/status | Y/N | L3 Support Role |
 | Private Platform | [Retrieve all Private Platform messages](#get_private_platform) | GET | {BaseURI}/api/private/platform | Y/N | HP Cloud Domain |
 | Private Platform Alert | [Retrieve all Private Platform Alert messages](#get_private_platform_alert) | GET | {BaseURI}/api/private/platform/alert | Y/N | HP Cloud Domain |
 | Private Platform Status | [Retrieve all Private Platform Status messages](#get_private_platform_status) | GET | {BaseURI}/api/private/platform/status | Y/N | HP Cloud Domain |
 | Public Platform | [Retrieve all Public Platform messages](#get_public_platform) | GET | {BaseURI}/api/public/platform | Y/N | None |
 | Public Platform Alert | [Retrieve all Public Platform Alert messages](#get_public_platform_alert) | GET | {BaseURI}/api/public/platform/alert | Y/N | None |
 | Public Platform Status | [Retrieve all Public Platform Status messages](#get_public_platform_status) | GET | {BaseURI}/api/public/platform/status | Y/N | None |
+
 
 
 ## 4.2 Common Request Headers
@@ -89,7 +92,298 @@ Documentation for MessageHub is available on the [MessageHub](https://wiki.hpclo
 ## 4.4 Service API Operation Details
 
 
-### 4.4.1 Public Platform
+
+
+### 4.4.1 Public Platform Alert
+
+The Public Platform Alert provides critical platform feedback to both internal and external users of the Management Console.
+More information is on the wiki - [Messaging Characteristics](https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics)
+
+
+**Status Lifecycle**
+
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
+
+#### 4.4.1.1 Create a Platform Alert {#create_platform_alert}
+#### POST /api/public/platform/alert
+
+The creation of a Platform Alert will post a message containing a title and message content to this Publish API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
+
+**Data Parameters**
+
+* title - string - brief title of the message to convey significance
+* message - string - message to be sent
+
+JSON
+
+```
+{ :title => 'Test Message',
+  :message => 'This is a <strong>test</strong> message'
+}
+```
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+A successful response does not require a response body.
+
+**Error Response**
+
+**Status Code**
+
+400 - Malformed request, normally because of missing required data.  
+401 - Unauthorized access has been attempted.  
+500 - Internal Server Error of an unspecified nature.  
+
+**Response Data**
+
+JSON - 400 Exception example
+
+    {"PlatformAlertException": {"message": "Malformed Request - missing message title.", "code": 400}}
+
+JSON - 401 Exception example
+
+    {"PlatformAlertException": {"message": "Unauthorized Request - invalid CS token.", "code": 401}}
+    {"PlatformAlertException": {"message": "Unauthorized Request - user doesn't have sufficient access to perform this operation.", "code": 401}}
+
+JSON - 500 Exception example
+
+    {"PlatformAlertException": {"message": "Server Error of an unknown nature.", "code": 500}}
+
+**Curl Example**
+
+Here's an example in the RDD environment:
+
+    curl -v -H "Accept=application/vnd.messagepub-v1+json" \
+         -H "Content-Type: application/json" \
+         -H "X-Auth-Token: <HPAuthToken>" \
+         -X POST \
+         -d '{"title":"public platform alert test message","message":"public platform alert test message"}' \
+         https://mp.rndd.aw1.hpcloud.net/api/public/platform/alert
+
+**Additional Notes**
+
+The 'message' attribute can include a number of HTML markup tags. A whitelist of allowed tags are noted on the [HPCS Wiki](https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist).
+
+A 400 exception will be thrown if the content length of the request exceeds 4096 characters.
+
+
+
+
+### 4.4.2 Public Platform Status
+
+The Public Platform Status provides platform status information to all users of the Management Console.
+More information is on the wiki - [Messaging Characteristics](https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics)
+
+
+**Status Lifecycle**
+
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
+
+#### 4.4.2.1 Create a Public Platform status {#create_public_platform_status}
+#### POST /api/public/platform/status
+
+
+The creation of a Public Platform Status message will post a message containing a title and message content to this API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
+
+**Request Data**
+
+**URL Parameters**
+
+None.
+
+**Data Parameters**
+
+* title - string - brief title of the message to convey significance
+* message - string - message to be sent
+
+JSON
+
+    { :title => 'Test Message',
+      :message => 'This is a <strong>test</strong> message'
+    }
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+A successful response does not require a response body.
+
+**Error Response**
+
+**Status Code**
+
+400 - Malformed request, normally because of missing required data.  
+401 - Unauthorized access has been attempted.  
+500 - Internal Server Error of an unspecified nature.
+
+**Response Data**
+
+JSON - 400 Exception example
+
+    {"PlatformStatusException": {"message": "Malformed Request - missing message title.", "code": 400}}
+
+JSON - 401 Exception example
+
+    {"PlatformStatusException": {"message": "Unauthorized Request - invalid CS token.", "code": 401}}
+    {"PlatformStatusException": {"message": "Unauthorized Request - user doesn't have sufficient access to perform this operation.", "code": 401}}
+
+JSON - 500 Exception example
+
+    {"PlatformStatusException": {"message": "Server Error of an unknown nature.", "code": 500}}
+
+**Curl Example**
+
+Here's an example in the RDD environment:
+
+    curl -v -H "Accept=application/vnd.messagepub-v1+json" \
+         -H "Content-Type: application/json" \
+         -H "X-Auth-Token: <HPAuthToken>" \
+         -X POST \
+         -d '{"title":"public platform status test message","message":"public platform status test message"}' \
+         https://mp.rndd.aw1.hpcloud.net/public/platform/status
+
+**Additional Notes**
+
+The 'message' attribute can include a number of HTML markup tags. A whitelist of allowed tags are noted on the [HPCS Wiki](https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist).
+
+A 400 exception will be thrown if the content length of the request exceeds 4096 characters.
+
+
+
+
+### 4.4.3 Private Platform Status
+
+The Private Platform Status provides platform status information to all HPCS users of the Management Console.
+More information is on the wiki - [Messaging Characteristics](https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics)
+
+
+**Status Lifecycle**
+
+N/A
+
+**Rate Limits**
+
+N/A
+
+**Quota Limits**
+
+N/A
+
+**Business Rules**
+
+None.
+
+#### 4.4.3.1 Create a Private Platform Status {#create_private_platform_status}
+#### POST /api/private/platform/status
+
+The creation of a Private Platform Status message will post a message containing a title and message content to this API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
+
+**Request Data**
+
+**URL Parameters**
+
+None.
+
+**Data Parameters**
+
+* title - string - brief title of the message to convey significance
+* message - string - message to be sent
+
+JSON
+
+    { :title => 'Test Message',
+      :message => 'This is a <strong>test</strong> message'
+    }
+
+**Success Response**
+
+**Status Code**
+
+200 - OK
+
+**Response Data**
+
+A successful response does not require a response body.
+
+**Error Response**
+
+**Status Code**
+
+400 - Malformed request, normally because of missing required data.  
+401 - Unauthorized access has been attempted.  
+500 - Internal Server Error of an unspecified nature.
+
+**Response Data**
+
+JSON - 400 Exception example
+
+    {"PlatformStatusException": {"message": "Malformed Request - missing message title.", "code": 400}}
+
+JSON - 401 Exception example
+
+    {"PlatformStatusException": {"message": "Unauthorized Request - invalid CS token.", "code": 401}}
+    {"PlatformStatusException": {"message": "Unauthorized Request - user doesn't have sufficient access to perform this operation.", "code": 401}}
+
+JSON - 500 Exception example
+
+    {"PlatformStatusException": {"message": "Server Error of an unknown nature.", "code": 500}}
+
+**Curl Example**
+
+Here's an example in the RDD environment:
+
+
+    curl -v -H "Accept=application/vnd.messagepub-v1+json" \
+         -H "Content-Type: application/json" \
+         -H "X-Auth-Token: <HPAuthToken>" \
+         -X POST \
+         -d '{"title":"private platform status test message","message":"private platform status private test message"}' \
+         https://mp.rndd.aw1.hpcloud.net/private/platform/status
+
+**Additional Notes**
+
+The 'message' attribute can include a number of HTML markup tags. A whitelist of allowed tags are noted on the [HPCS Wiki](https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist).
+
+A 400 exception will be thrown if the content length of the request exceeds 4096 characters.
+
+
+
+
+### 4.4.4 Public Platform
 
 Public Platform messages represents raw message data for messages targeted towards public/external users of the Management Console.
 
@@ -110,7 +404,7 @@ N/A
 
 None.
 
-#### 4.4.1.1 Get Public Platform {#get_public_platform}
+#### 4.4.4.1 Get Public Platform {#get_public_platform}
 #### GET /api/public/platform
 
 Returns all the public platform alert and status messages.
@@ -188,7 +482,7 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json" 
             -H X-Auth-Token:<HPAuthToken> 
-            https://sp.rndd.aw1.hpcloud.net/api/public/platform
+            https://mp.rndd.aw1.hpcloud.net/api/public/platform
 
 
 **Additional Notes**
@@ -199,7 +493,7 @@ Here's an example in the RDD environment:
 None.
 
 
-#### 4.4.1.2 Get Public Platform Alert
+#### 4.4.4.2 Get Public Platform Alert
 #### GET /api/public/platform/alert {#get_public_platform_alert}
 
 Returns all the public platform alert messages.
@@ -269,7 +563,7 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json"
             -H X-Auth-Token:<HPAuthToken>
-            https://sp.rndd.aw1.hpcloud.net/api/public/platform/alert
+            https://mp.rndd.aw1.hpcloud.net/api/public/platform/alert
 
 
 **Additional Notes**
@@ -277,7 +571,7 @@ Here's an example in the RDD environment:
 None.
 
 
-#### 4.4.1.3 Get Public Platform Status {#get_public_platform_status}
+#### 4.4.4.3 Get Public Platform Status {#get_public_platform_status}
 #### GET /api/public/platform/status
 
 Returns all the public platform status messages.
@@ -345,14 +639,14 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json"
             -H "X-Auth-Token:<HPAuthToken>"
-            https://sp.rndd.aw1.hpcloud.net/api/public/platform/status
+            https://mp.rndd.aw1.hpcloud.net/api/public/platform/status
 
 **Additional Notes**
 
 None.
 
 
-### 4.4.2 Private Platform
+### 4.4.5 Private Platform
 
 Public Platform messages represents raw message data for messages targeted towards public/internal users of the Cloud Admin Console.
 
@@ -372,7 +666,7 @@ N/A
 
 None.
 
-#### 4.4.1.1 Get Private Platform {#get_private_platform}
+#### 4.4.5.1 Get Private Platform {#get_private_platform}
 #### GET /api/private/platform
 
 Returns all the private platform alert and status messages.
@@ -453,14 +747,14 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json"
             -H "X-Auth-Token:<HPAuthToken>"
-            https://sp.rndd.aw1.hpcloud.net/api/private/platform
+            https://mp.rndd.aw1.hpcloud.net/api/private/platform
 
 **Additional Notes**
 
 None.
 
 
-#### 4.4.1.2 Get Private Platform Alert {#get_private_platform_alert}
+#### 4.4.5.2 Get Private Platform Alert {#get_private_platform_alert}
 #### GET /api/private/platform/alert
 
 Returns all the private platform alert messages.
@@ -531,14 +825,14 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json"
             -H "X-Auth-Token:<HPAuthToken>"
-            https://sp.rndd.aw1.hpcloud.net/api/private/platform/alert
+            https://mp.rndd.aw1.hpcloud.net/api/private/platform/alert
 
 **Additional Notes**
 
 None.
 
 
-#### 4.4.2.3 Get Private Platform Status {#get_private_platform_status}
+#### 4.4.5.3 Get Private Platform Status {#get_private_platform_status}
 #### GET /api/private/platform/status
 
 Returns all the private platform status messages.
@@ -609,7 +903,7 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json"
             -H "X-Auth-Token:<HPAuthToken>"
-            https://sp.rndd.aw1.hpcloud.net/api/private/platform/status
+            https://mp.rndd.aw1.hpcloud.net/api/private/platform/status
 
 **Additional Notes**
 
@@ -617,19 +911,22 @@ None.
 
 ---
 
+
 # 5. Additional References
 
 ## 5.1 Resources
 
 **Wiki Page**:
 
-https://wiki.hpcloud.net/display/iaas/MessageHub+-+Message+Subscriptions
+https://wiki.hpcloud.net/display/iaas/MessagePub+-+Message+Publishing
 https://wiki.hpcloud.net/display/iaas/Implementation+Phases+and+Scope
 https://wiki.hpcloud.net/display/iaas/Messaging+Characteristics
+https://wiki.hpcloud.net/display/iaas/Messaging+-+Markup+Tags+Whitelist
+https://wiki.hpcloud.net/display/iaas/MessageHub+-+Message+Subscriptions
 
 **Code Repo**:
 
-https://git.hpcloud.net/ManagementConsole/message_hub.git
+https://git.hpcloud.net/ManagementConsole/message_pub.git
 
 **API Lead Contacts**:
 
