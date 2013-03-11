@@ -62,15 +62,15 @@ Documentation for MessageHub is available on the [MessageHub](https://wiki.hpclo
 
 | Resource | Operation                 | HTTP Method           | Path                   | JSON/XML Support? | Privilege Level |
 | :------- | :------------------------ | :----------           | :--------------------- | :---------------- | :-------------: |
-| Public Platform Alert | [Create a new Platform Alert](#create_platform_alert) | POST | {BaseURI}/api/public/platform/alert | Y/N | L3 Support Role |
-| Public Platform Status | [Create a new Public Platform Status](#create_public_platform_status) | POST | {BaseURI}/api/public/platform/status | Y/N | L3 Support Role |
-| Private Platform Status | [Create a new Private Platform Status](#create_private_platform_status) | POST | {BaseURI}/api/private/platform/status | Y/N | L3 Support Role |
-| Private Platform | [Retrieve all Private Platform messages](#get_private_platform) | GET | {BaseURI}/api/private/platform | Y/N | HP Cloud Domain |
-| Private Platform Alert | [Retrieve all Private Platform Alert messages](#get_private_platform_alert) | GET | {BaseURI}/api/private/platform/alert | Y/N | HP Cloud Domain |
-| Private Platform Status | [Retrieve all Private Platform Status messages](#get_private_platform_status) | GET | {BaseURI}/api/private/platform/status | Y/N | HP Cloud Domain |
-| Public Platform | [Retrieve all Public Platform messages](#get_public_platform) | GET | {BaseURI}/api/public/platform | Y/N | None |
-| Public Platform Alert | [Retrieve all Public Platform Alert messages](#get_public_platform_alert) | GET | {BaseURI}/api/public/platform/alert | Y/N | None |
-| Public Platform Status | [Retrieve all Public Platform Status messages](#get_public_platform_status) | GET | {BaseURI}/api/public/platform/status | Y/N | None |
+| Public Platform Alert | [Create a new Platform Alert](#create_platform_alert) | POST | {BaseURI}/api/pm/public/platform/alert | Y/N | L3 Support Role |
+| Public Platform Status | [Create a new Public Platform Status](#create_public_platform_status) | POST | {BaseURI}/api/pm/public/platform/status | Y/N | L3 Support Role |
+| Private Platform Status | [Create a new Private Platform Status](#create_private_platform_status) | POST | {BaseURI}/api/pm/private/platform/status | Y/N | L3 Support Role |
+| Private Platform | [Retrieve all Private Platform messages](#get_private_platform) | GET | {BaseURI}/api/pm/private/platform | Y/N | HP Cloud Domain |
+| Private Platform Alert | [Retrieve all Private Platform Alert messages](#get_private_platform_alert) | GET | {BaseURI}/api/pm/private/platform/alert | Y/N | HP Cloud Domain |
+| Private Platform Status | [Retrieve all Private Platform Status messages](#get_private_platform_status) | GET | {BaseURI}/api/pm/private/platform/status | Y/N | HP Cloud Domain |
+| Public Platform | [Retrieve all Public Platform messages](#get_public_platform) | GET | {BaseURI}/api/pm/public/platform | Y/N | None |
+| Public Platform Alert | [Retrieve all Public Platform Alert messages](#get_public_platform_alert) | GET | {BaseURI}/api/pm/public/platform/alert | Y/N | None |
+| Public Platform Status | [Retrieve all Public Platform Status messages](#get_public_platform_status) | GET | {BaseURI}/api/pm/public/platform/status | Y/N | None |
 
 
 
@@ -176,7 +176,7 @@ Here's an example in the RDD environment:
          -H "X-Auth-Token: <HPAuthToken>" \
          -X POST \
          -d '{"title":"public platform alert test message","message":"public platform alert test message"}' \
-         https://mp.rndd.aw1.hpcloud.net/api/public/platform/alert
+         https://mp.rndd.aw1.hpcloud.net/api/pm/public/platform/alert
 
 **Additional Notes**
 
@@ -210,7 +210,7 @@ N/A
 None.
 
 #### 4.4.2.1 Create a Public Platform status {#create_public_platform_status}
-#### POST /api/public/platform/status
+#### POST /api/pm/public/platform/status
 
 
 The creation of a Public Platform Status message will post a message containing a title and message content to this API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
@@ -308,7 +308,7 @@ N/A
 None.
 
 #### 4.4.3.1 Create a Private Platform Status {#create_private_platform_status}
-#### POST /api/private/platform/status
+#### POST /api/pm/private/platform/status
 
 The creation of a Private Platform Status message will post a message containing a title and message content to this API. The API will drop the message onto the RabbitMQ messaging cluster where it will be consumed by connected Management Console clients and saved to a database for archival purposes.
 
@@ -405,13 +405,13 @@ N/A
 None.
 
 #### 4.4.4.1 Get Public Platform {#get_public_platform}
-#### GET /api/public/platform
+#### GET /api/pm/public/platform
 
 Returns all the public platform alert and status messages.
 
 **Request Data**
 
-    GET /api/public/platform HTTP/1.1
+    GET /api/pm/public/platform HTTP/1.1
     Accept: application/json
     Content-Type: application/json
     X-Auth-Token:HPAuth_XXXXX
@@ -482,7 +482,7 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json" 
             -H X-Auth-Token:<HPAuthToken> 
-            https://mp.rndd.aw1.hpcloud.net/api/public/platform
+            https://mp.rndd.aw1.hpcloud.net/api/pm/public/platform
 
 
 **Additional Notes**
@@ -494,13 +494,13 @@ None.
 
 
 #### 4.4.4.2 Get Public Platform Alert
-#### GET /api/public/platform/alert {#get_public_platform_alert}
+#### GET /api/pm/public/platform/alert {#get_public_platform_alert}
 
 Returns all the public platform alert messages.
 
 **Request Data**
 
-    GET /api/public/platform HTTP/1.1
+    GET /api/pm/public/platform HTTP/1.1
     Accept: application/json
     Content-Type: application/json
     X-Auth-Token:HPAuth_XXXXX
@@ -525,7 +525,7 @@ This call does not require a request body.
 
 Header
 
-    GET /api/public/platform HTTP/1.1
+    GET /api/pm/public/platform HTTP/1.1
     Accept: application/json
     Content-Type: application/json
     X-Auth-Token:HPAuth_XXXXX
@@ -563,7 +563,7 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json"
             -H X-Auth-Token:<HPAuthToken>
-            https://mp.rndd.aw1.hpcloud.net/api/public/platform/alert
+            https://mp.rndd.aw1.hpcloud.net/api/pm/public/platform/alert
 
 
 **Additional Notes**
@@ -572,13 +572,13 @@ None.
 
 
 #### 4.4.4.3 Get Public Platform Status {#get_public_platform_status}
-#### GET /api/public/platform/status
+#### GET /api/pm/public/platform/status
 
 Returns all the public platform status messages.
 
 **Request Data**
 
-    GET /api/public/platform HTTP/1.1
+    GET /api/pm/public/platform HTTP/1.1
     Accept: application/json
     Content-Type: application/json
     X-Auth-Token:HPAuth_XXXXX
@@ -603,7 +603,7 @@ This call does not require a request body.
 
 Header
 
-    GET /api/public/platform HTTP/1.1
+    GET /api/pm/public/platform HTTP/1.1
     Accept: application/json
     Content-Type: application/json
     X-Auth-Token:HPAuth_XXXXX
@@ -639,7 +639,7 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json"
             -H "X-Auth-Token:<HPAuthToken>"
-            https://mp.rndd.aw1.hpcloud.net/api/public/platform/status
+            https://mp.rndd.aw1.hpcloud.net/api/pm/public/platform/status
 
 **Additional Notes**
 
@@ -667,13 +667,13 @@ N/A
 None.
 
 #### 4.4.5.1 Get Private Platform {#get_private_platform}
-#### GET /api/private/platform
+#### GET /api/pm/private/platform
 
 Returns all the private platform alert and status messages.
 
 **Request Data**
 
-    GET /api/public/platform HTTP/1.1
+    GET /api/pm/public/platform HTTP/1.1
     Accept: application/json
     Content-Type: application/json
     X-Auth-Token:HPAuth_XXXXX
@@ -698,7 +698,7 @@ This call does not require a request body.
 
 Header
 
-    GET /api/public/platform HTTP/1.1
+    GET /api/pm/public/platform HTTP/1.1
     Accept: application/json
     Content-Type: application/json
     X-Auth-Token:HPAuth_XXXXX
@@ -747,7 +747,7 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json"
             -H "X-Auth-Token:<HPAuthToken>"
-            https://mp.rndd.aw1.hpcloud.net/api/private/platform
+            https://mp.rndd.aw1.hpcloud.net/api/pm/private/platform
 
 **Additional Notes**
 
@@ -755,13 +755,13 @@ None.
 
 
 #### 4.4.5.2 Get Private Platform Alert {#get_private_platform_alert}
-#### GET /api/private/platform/alert
+#### GET /api/pm/private/platform/alert
 
 Returns all the private platform alert messages.
 
 **Request Data**
 
-    GET /api/public/platform HTTP/1.1
+    GET /api/pm/public/platform HTTP/1.1
     Accept: application/json
     Content-Type: application/json
     X-Auth-Token:HPAuth_XXXXX
@@ -784,7 +784,7 @@ This call does not require a request body.
 
 Header
 
-    GET /api/public/platform HTTP/1.1
+    GET /api/pm/public/platform HTTP/1.1
     Accept: application/json
     Content-Type: application/json
     X-Auth-Token:HPAuth_XXXXX
@@ -825,7 +825,7 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json"
             -H "X-Auth-Token:<HPAuthToken>"
-            https://mp.rndd.aw1.hpcloud.net/api/private/platform/alert
+            https://mp.rndd.aw1.hpcloud.net/api/pm/private/platform/alert
 
 **Additional Notes**
 
@@ -833,13 +833,13 @@ None.
 
 
 #### 4.4.5.3 Get Private Platform Status {#get_private_platform_status}
-#### GET /api/private/platform/status
+#### GET /api/pm/private/platform/status
 
 Returns all the private platform status messages.
 
 **Request Data**
 
-    GET /api/public/platform HTTP/1.1
+    GET /api/pm/public/platform HTTP/1.1
     Accept: application/json
     Content-Type: application/json
     X-Auth-Token:HPAuth_XXXXX
@@ -862,7 +862,7 @@ This call does not require a request body.
 
 Header
 
-    GET /api/public/platform HTTP/1.1
+    GET /api/pm/public/platform HTTP/1.1
     Accept: application/json
     Content-Type: application/json
     X-Auth-Token:HPAuth_XXXXX
@@ -903,7 +903,7 @@ Here's an example in the RDD environment:
 
     curl -v -H "Accept=application/vnd.messagehub-v1+json"
             -H "X-Auth-Token:<HPAuthToken>"
-            https://mp.rndd.aw1.hpcloud.net/api/private/platform/status
+            https://mp.rndd.aw1.hpcloud.net/api/pm/private/platform/status
 
 **Additional Notes**
 
