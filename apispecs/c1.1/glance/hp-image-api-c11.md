@@ -1,9 +1,10 @@
 ---
 layout: page
 title: HP Cloud Image Service API Reference
-permalink: /api/image/
-description: This document describes the HP Cloud Image Service. HP Cloud Image is based on OpenStack Glance.
-keywords: Image, Glance, OpenStack
+permalink: /api/nextgen/image/
+description: "This document describes the HP Cloud Image Service. HP Cloud Image is based on OpenStack Glance."
+keywords: "Image, Glance, OpenStack"
+private: true
 
 ---
 
