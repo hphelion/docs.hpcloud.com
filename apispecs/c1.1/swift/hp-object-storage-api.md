@@ -309,7 +309,7 @@ Access Keys are more suitable for use in APIs because you can create them for us
 have been compromised, you can delete the Access Key. This is more convenient than changing your password credentials. However, not all API bindings support Access Keys.
 
 In addition, to credentials, you also specify a tenant -- either the Id or tenant Name. With your credentials and tenant, the HP Cloud Identity Service checks to see
-whether you have activated the HP Cloud Object Storage service. If so, it returns an authentication token and the endpoints to all instances of the HP Cloud Object Storage service that you are activated for. See [Service Catalog](#service_catalog) for an example of how the authentication token and endpoints are returned.
+whether you have activated the HP Cloud Object Storage service. If so, it returns an authentication token and the endpoints to all regions of the HP Cloud Object Storage service that you are activated for. See [Service Catalog](#service_catalog) for an example of how the authentication token and endpoints are returned.
 
 There are legacy OpenStack Object Store APIs that used TempAuth or Swauth as their identity server. The HP Cloud Identity Service offers a compatible interface.
 You use your username, password and tenant Id as shown in the following example. 
@@ -1031,7 +1031,7 @@ attachment type that indicates how the file should be downloaded.
 #### 2.16.1 Overview of Container Synchronization
 
 Container Synchronization allows you to automatically synchronize the objects between containers in different HP Cloud Object Storage
-instances/regions. The containers must be in different instances or regions. The containers do not need to be
+regions. The containers must be in different regions. The containers do not need to be
 in the same swift account i.e., users associated with two different tenants can share objects.
 
 Container Synchronization works by making a copy of objects in a "source" container and sending the objects to a "destination" container.
@@ -1351,13 +1351,13 @@ HP Cloud Object Storage has the following service instances in these regions:
 
 * region-b.geo-1 - US East
 
-Each instance or region is a distinct storage entity. Each contains its own set of containers and
+Each region is a distinct storage entity. Each contains its own set of containers and
 objects -- there is no shared data between the regions.
 
-In each instance/region, HP Cloud Object Storage has servers physically located in multiple availability zones.
+In each region, HP Cloud Object Storage has servers physically located in multiple availability zones.
 It also automatically keeps multiple copies of data in multiple availability zones.
 The system transparently manages this for you -- you have a single endpoint through which
-you access HP Cloud Object Storage services for an instance/region.
+you access HP Cloud Object Storage services for a region.
 
 ### 3.3 Service Catalog ### {#service_catalog}
 
@@ -1368,7 +1368,7 @@ For additional details on the Identity Service, please refer to
 [https://docs.hpcloud.com/identity](https://docs.hpcloud.com/identity).
 
 The service is exposed in the service catalog, as shown in the following fragment. Note the
-user has the Admin role and is activated for two instances of the HP Cloud
+user has the Admin role and is activated for two regions of the HP Cloud
 Object Storage service.
 
 
