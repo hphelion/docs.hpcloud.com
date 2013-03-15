@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /api/identity/
+permalink: /api/nextgen/identity/ 
 title: Identity Services API
 description: "HP Cloud Identity Services API documenation."
 keywords: "Keystone, Identity Services"
