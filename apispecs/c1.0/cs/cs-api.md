@@ -311,7 +311,7 @@ Curl Example
 
 ### 3.4.2 Tokens
 
-A yummy cookie one uses to bribe the authorization monster.
+An unique identifier which is used to identify the privilege of the user.
 
 **Status Lifecycle**
 
@@ -1123,7 +1123,7 @@ See schema file for more details on the request and response data structure.
 
 * *algorithm* (Optional) - String - the algorithm the key will be used with. One of 
 * *domainId* - String - domain identifier of the owner of the key.
-* *keyLength* (Optional) - Integer - Length of the key in bits.
+* *keyLength* (Optional) - Integer - Length of the key in bits.Minimum length is 64, and maximum length is 512. Default lenght is 240
 * *status* (Optional) String - the key status. One the values (active, inactive). Defaults to active if not specified.
 * *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
 * *validFrom* (Optional) - DateTime - The date the key becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
@@ -1690,6 +1690,7 @@ See schema file for more details on the request and response data structure.
 * *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
 * *validFrom* (Optional) - DateTime - The date the key becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
 * *validTo* (Optional) - DateTime - The date the key becomes invalid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+* *secretKey, accessKeyId*  - Length cannot be more than 999
 
 A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
