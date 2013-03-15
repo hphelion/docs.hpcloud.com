@@ -58,7 +58,7 @@ private: true
 | Action | [Delete Error Jobs By Category](#delete_error_jobs_by_category) | GET | /HP-IDM/v1.0/job/error/{category} | Y/Y | SA |
 | Action | [Get Jobs By Status](#get_jobs_by_status) | GET | /HP-IDM/v1.0/job/status/{status} | Y/Y | SA |
 | Action | [Get Job Count By Status](#get_job_count_by_status) | GET | /HP-IDM/v1.0/job/status/{status}/count | Y/Y | SA |
-| Domains | [Check For Existence Of Domain Name](#check_for_existence_of_domain_name) | GET | /HP-IDM/v1.0/job/status/{status}/count | Y/Y | Anonymous |
+| Domains | [Check For Existence Of Domain Name](#check_for_existence_of_domain_name) | HEAD | /HP-IDM/v1.0/domains | Y/Y | Anonymous |
 | Domains | [Create A Domain](#create_a_domain) | GET | /HP-IDM/v1.0/domains  | Y/Y | System Adminstrator (SA) |
 | Domains | [Delete A Domain](#delete_a_domain) | DELETE | /HP-IDM/v1.0/domains/{domainId}  | Y/Y | System Adminstrator (SA) |
 | Domains | [Get A Domain](#get_a_domain) | GET | /HP-IDM/v1.0/domains/{domainId}  | Y/Y | System Adminstrator (SA), Domain Admin (DA), Domain User (DU) |
@@ -89,7 +89,7 @@ private: true
 | Management Console | [User Preferences](#user_preferences) | PUT | /HP-IDM/v1.0/preferences/{userId} | Y/Y | MC-CS Certificate |
 | Role Assignment | [List Role Assignments Made On A Tenant](#list_role_assignments_made_on_a_tenant) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
 | Role Assignment | [List Tenant Role Assignments For A User](#list_tenant_role_assignments_for_a_user) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
-| Role Assignment | [Check Tenant Role Assignment For A User](#check_tenant_role_assignment_for_a_user) | GET | /tenants/{tenantId}/roles | Y/Y | SA, DA, DU |
+| Role Assignment | [Check Tenant Role Assignment For A User](#check_tenant_role_assignment_for_a_user) | HEAD | /tenants/{tenantId}/users/{userId}/roles/{roleId} | Y/Y | SA, DA, DU |
 | Role Assignment | [Create Tenant Role Assignments For A User](#create_tenant_role_assignments_for_a_user) | PUT | /tenants/{tenantId}/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
 | Role Assignment | [Delete Tenant Role Assignment For A User](#delete_tenant_role_assignment_for_a_user) | DELETE | /tenants/{tenantId}/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
 | Role Assignment | [List Tenant Role Assignments For A Group](#list_tenant_role_assignments_for_a_group) | GET | /tenants/{tenantId}/groups/{groupId}/roles | Y/Y | SA, DA, DU |
@@ -99,7 +99,7 @@ private: true
 | Role Defs | [Delete Role Definition](#delete_role_definition) | DELETE | /HP-IDM/v1.0/roleDefs/{roleId} | Y/Y | SA, SVC, DA |
 | Role Defs | [Update Role Definition](#update_role_definition) | PUT | /HP-IDM/v1.0/roleDefs/{roleId} | Y/Y | SA, SVC, DA |
 | Role Defs | [Update Role Scope](#update_role_scope) | PUT | /HP-IDM/v1.0/roleDefs/{roleId}/scope | Y/Y | SA, SVC |
-| Role Defs | [Get A Role Definition](#get_a_role_definition) | GET | /HP-IDM/v1.0/roleDefs/{roleId} | Y/Y | SA, SVC, DA, DU |
+| Role Defs | [Get A Role Definition](#get_a_role_definition) | GET | /HP-IDM/v1.0/roleDefs/{roleId} | Y/Y | SA, SVC |
 | Role Defs | [List Role Definitions](#list_role_definitions) | GET | /HP-IDM/v1.0/roleDefs | Y/Y | SA, SVC |
 | Services | [Get Service By Id](#get_service_by_id) | GET | /HP-IDM/v1.0/services/{serviceId}    | Y/Y | SA, SVC |
 | Services | [List Registered Services](#list_registered_services) | GET | /HP-IDM/v1.0/services | Y/Y | SA, SVC, DA, DU |
@@ -110,7 +110,7 @@ private: true
 | Tenants | [List Tenants](#list_tenants) | GET | /tenants | Y/Y | SS |
 | Tenants | [Get All Tenants](#get_all_tenants) | GET | /HP-IDM/v1.0/tenants | Y/Y | SA |
 | Tenants | [Get A Tenant](#get_a_tenant) | GET | /HP-IDM/v1.0/tenants/{tenantId}  | Y/Y | SA, DA, DU |
-| Tenants | [Check For Existence Of Tenant Name](#check_for_existence_of_tenant_name) | GET | /HP-IDM/v1.0/tenants/{tenantId}  | Y/Y | Anon |
+| Tenants | [Check For Existence Of Tenant Name](#check_for_existence_of_tenant_name) | HEAD | /HP-IDM/v1.0/tenants | Y/Y | Anon |
 | Tenants | [Get A List Of Users For A Tenant (includes Role Assignments)](#get_a_list_of_users_for_a_tenant_(includes_role_assignments)) | GET | /HP-IDM/v1.0/tenants/{tenantId}/users | Y/Y | SA, DA |
 | Tenants | [Create A Tenant](#create_a_tenant) | POST | /HP-IDM/v1.0/tenants  | Y/Y | SA, DA |
 | Tenants | [Update A Tenant](#update_a_tenant) | PUT | /HP-IDM/v1.0/tenants/{tenantID}  | Y/Y | SA, DA |
@@ -126,19 +126,19 @@ private: true
 | Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.0 | Y/Y | Anon |
 | Tokens | [Swift Legacy Authentication](#swift_legacy_authentication) | GET | /auth/v1.1 | Y/Y | Anon |
 | Tokens | [Validate Token](#validate_token) | GET | /tokens/{tokenId} | Y/Y | Anon |
-| Tokens | [Quick Token Validation](#quick_token_validation) | GET | /tokens/{tokenId} | Y/Y | Anon |
-| Tokens | [Refresh Token](#refresh_token) | GET | /tokens/{tokenId} | Y/Y | SS |
+| Tokens | [Quick Token Validation](#quick_token_validation) | HEAD | /tokens/{tokenId} | Y/Y | Anon |
+| Tokens | [Refresh Token](#refresh_token) | HEAD | /tokens/{tokenId} | Y/Y | SS |
 | Users | [List Users](#list_users) | GET | /HP-IDM/v1.0/users | Y/Y | SA, SS |
 | Users | [Get A User](#get_a_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | SA, DA, SS |
-| Users | [Check For Existence Of User](#check_for_existence_of_user) | GET | /HP-IDM/v1.0/users/{userId}  | Y/Y | Anon |
+| Users | [Check For Existence Of User](#check_for_existence_of_user) | HEAD | /HP-IDM/v1.0/users | Y/Y | Anon |
 | Users | [Create A New User](#create_a_new_user) | POST | /HP-IDM/v1.0/users | Y/Y | SA, DA, SR |
 | Users | [Delete A User](#delete_a_user) | DELETE | /HP-IDM/v1.0/users/{userId} | Y/Y | SA, DA |
 | Users | [Get All Groups For A User](#get_all_groups_for_a_user) | GET | /HP-IDM/v1.0/users/{userId}/groups | Y/Y | SA, DA, SS |
 | Users | [Update Password For A User](#update_password_for_a_user) | PUT | /HP-IDM/v1.0/users/{userId}/password | Y/Y | SA, DA, SS |
 | Users | [Initial Password Reset](#initial_password_reset) | POST | /HP-IDM/v1.0/users/password/reset | Y/Y | SA, DA, Anon |
 | Users | [Validate Password ResetId And Update Password](#validate_password_resetid_and_update_password) | PUT | /HP-IDM/v1.0/users/password/reset/{resetId} | Y/Y | Anon |
-| Users | [List A User's Non Tenant Role Assignments](#list_a_users_non_tenant_role_assignments) | GET | /HP-IDM/v1.0/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
-| Users | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | GET | /HP-IDM/v1.0/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
+| Users | [List A User's Role Assignments](#list_a_users_role_assignments) | GET | /HP-IDM/v1.0/users/{userId}/username}/roles | Y/Y | SA, DA, DU |
+| Users | [Check User's Non Tenant Role Assignment](#check_users_non_tenant_role_assignment) | HEAD | /HP-IDM/v1.0/users/{userId}/roles/{roleId}  | Y/Y | SA, DA, DU |
 | Users | [Create A User's Non Tenant Role Assignment](#create_a_users_non_tenant_role_assignment) | PUT | /HP-IDM/v1.0/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
 | Users | [Delete A User's Non Tenant Role Assignment](#delete_a_users_non_tenant_role_assignment) | DELETE | /HP-IDM/v1.0/users/{userId}/roles/{roleId} | Y/Y | SA, DA |
 | User Access Keys | [Create User Access Key](#create_user_access_key) | POST | /HP-IDM/v1.0/accesskeys | Y/Y | SA, DA, SS |
@@ -1922,7 +1922,7 @@ None.
 
 
 #### 3.4.2.1 Check For Existence Of Domain Name#### {#check_for_existence_of_domain_name}
-#### HEAD [HPKeystoneExtensionBaseURI]/domains?name=domainName 
+#### HEAD /HP-IDM/v1.0/domains
 *Privilege Level: Anonymous*
 
 This API does case insensitive domainName lookup in system. It returns http status code 200 (Ok) when provided domainName exists and returns 404 (not found) when provided domainName is not found in the system. If provided domainName is blank or missing, then it returns 204 (No content). The domain name with extra spaces is converted to single space in-between words and then look up is done for its existence. So domain name " Abc Corp" and "ABC    Corp" are treated as same and will be found if entry is there in system. In system, the corresponding name is going to be stored as "abc corp" in a separate field.    
@@ -2927,14 +2927,16 @@ A valid token must be presented in the *X-Auth-Token* HTTP header. Otherwise, a 
 Following filters can be used to filter the response data.
 
 *Inclusion Filters*
+
 * *groupId (Optional)* - string - include results for given groupId. Filters groupId and groupName are mutually exclusive. You can filter either using groupId or using groupName.
 * *groupName (Optional)* - string - include results for given groupName. Filters groupId and groupName are mutually exclusive. You can filter either using groupId or using groupName  
 * *tenantId (Optional)* - string - include results for given tenantId. Filters tenantId and tenantName are mutually exclusive. You can filter either using tenantId or using tenantName
 * *tenantName (Optional)* - string - include results for given tenantName. Filters tenantId and tenantName are mutually exclusive. You can filter either using tenantId or using tenantName    
 
 *Exclusion Filters*
-* *excludeRoles (Optional)* - string - comma separated roleId to exclude 
 
+* *excludeRoles (Optional)* - string - comma separated roleId to exclude 
+* *excludeUsers (Optional)* - string - comma separated userId to exclude
 
 **Data Parameters**
 
@@ -2970,7 +2972,15 @@ XML
 
 Request with filters groupId and excludeRoles
 
-    GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/groupId=1234&excludeRoles=roleId1,roleId22 HTTP/1.1
+    GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/groupId=1234&excludeRoles=roleId1,roleId2 HTTP/1.1
+    Connection: close
+    Accept: application/xml
+    User-Agent: Jakarta Commons-HttpClient/3.1
+    Host: haneef-desktop.americas.hpqcorp.net:8080
+
+Request with filters excludeUsers
+
+    GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups?excludeUsers=userId1,userId2 HTTP/1.1
     Connection: close
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
@@ -2978,7 +2988,7 @@ Request with filters groupId and excludeRoles
 
 Request with filters tenantId and excludeRoles
 
-    GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/tenantId=1234&excludeRoles=roleId1,roleId22 HTTP/1.1
+    GET http://haneef-desktop.americas.hpqcorp.net:8080/v2.0/HP_IDM/v1.0/domains/641564254582/groups/tenantId=1234&excludeRoles=roleId1,roleId2 HTTP/1.1
     Connection: close
     Accept: application/xml
     User-Agent: Jakarta Commons-HttpClient/3.1
@@ -9259,7 +9269,7 @@ Curl Example
 
 #### 3.4.7.5 Get A Role Definition#### {#get_a_role_definition}
 #### GET /HP-IDM/v1.0/roleDefs/{roleId}
-*Privilege Level: SA, SVC, DA, DU*
+*Privilege Level: SA, SVC*
 
 This API is used to get a role definition specified by a roleId.
 
@@ -9637,7 +9647,7 @@ Curl Example
 #### GET /HP-IDM/v1.0/services
 *Privilege Level: SA, SVC, DA, DU*
 
-This API is used to get paginated list of registered services available in the system. The marker value is serviceId of last item in previous list. Results are sorted by serviceId. To get list of services for a specific type of service, serviceType request parameter can be added. 
+This API is used to get paginated list of registered services available in the system. The marker value is serviceId of last item in previous list. Results are sorted by serviceId. To get list of services for a specific type of service, serviceType request parameter can be added.  This API will return services in all release states (public, beta, decommissioned, etc.).
 
 **Request Data**
 
@@ -11040,6 +11050,9 @@ Allows reading a list of all tenants across domains. This API supports paginatio
 * *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100.
 * *marker* (Optional) - string - the resource Id of the last item in the previous list.
 * *name* (Optional) - string - name of the tenant to be returned.
+* *swiftAccountHash* (Optional) - string - swiftAccountHash of the tenant to be returned.
+
+name and swiftAccountHash filters as mutually exclusive. So both filter values cannot be present within one API request.
 
 **Data Parameters**
 
@@ -11087,6 +11100,28 @@ JSON
 XML
 
     GET /v2.0/HP-IDM/v1.0/tenants?name=tenantName HTTP/1.1
+    Accept: application/json
+    Content-Type: application/xml
+    User-Agent: Wink Client v1.1.2
+    X-Auth-Token: HPAuth_4ed5120a2cdc1f6ab057b22d
+    Host: localhost:9999
+    Connection: keep-alive
+
+Request With swiftAccountHash Filter:
+
+JSON
+
+    GET /v2.0/HP-IDM/v1.0/tenants?swiftAccountHash=accountHash HTTP/1.1
+    Accept: application/json
+    Content-Type: application/json
+    User-Agent: Wink Client v1.1.2
+    X-Auth-Token: HPAuth_4ed5120a2cdc1f6ab057b22d
+    Host: localhost:9999
+    Connection: keep-alive
+
+XML
+
+    GET /v2.0/HP-IDM/v1.0/tenants?swiftAccountHash=accountHash HTTP/1.1
     Accept: application/json
     Content-Type: application/xml
     User-Agent: Wink Client v1.1.2
@@ -11312,7 +11347,7 @@ Curl Example
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants/48164969660120" 
 
 #### 3.4.10.4 Check For Existence Of Tenant Name#### {#check_for_existence_of_tenant_name}
-#### HEAD [HPKeystoneExtensionBaseURI]/tenants?name=tenantName
+#### HEAD /HP-IDM/v1.0/tenants
 *Privilege Level: Anon*
 
 Returns http status code indicating the result of tenantName existence check.
@@ -11764,6 +11799,11 @@ XML
 Curl Example
 
     curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -X POST -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Content-Type: application/json" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/tenants" -d '{"tenant":{"description":"Payroll Tenant Services for TimeWarner","domainId":"47826457774667","name":"Payroll Tenant Services","status":"enabled"}}'
+
+**Additional Notes**
+
+The default maximum tenants allowed in a domain is 20.
+
 
 #### 3.4.10.7 Update A Tenant#### {#update_a_tenant}
 #### PUT /HP-IDM/v1.0/tenants/{tenantID} 
@@ -12454,7 +12494,7 @@ Curl Example
 
 ### 3.4.11 Tokens
 
-A yummy cookie one uses to bribe the authorization monster.
+An unique identifier which is used to identify the privilege of the user.
 
 **Status Lifecycle**
 
@@ -13454,7 +13494,7 @@ Curl Example
 
 
 #### 3.4.11.6 Quick Token Validation#### {#quick_token_validation}
-#### HEAD /tokens/\<tokenId\>?belongsTo=tenantId
+#### HEAD /tokens/{tokenId}
 *Privilege Level: Anon*
 
 This API is used to do a quick token validation. Validation includes checking that the token belongs to a particular user and it has not expired.   If the query parameter, belongTo, is provided the call will check the corresponding tenantId to ensure membership in that tenant. If there is no tenantId then it is globally scoped. In the event a token is not valid, a 404 (item not found) will be returned.  This call won't return any roles associated with the token.
@@ -14123,7 +14163,7 @@ Curl Example
 
 
 #### 3.4.12.3 Check For Existence Of User#### {#check_for_existence_of_user}
-#### HEAD [HPKeystoneExtensionBaseURI]/users?name=username
+#### HEAD /HP-IDM/v1.0/users
 *Privilege Level: Anon*
 
 This API does case-insensitive username lookup in system. It returns http status code 200 (Ok) when provided username exists and returns 404 (not found) when provided username is not found in the system. If provided username is blank or missing, then it returns 204 (No content).
@@ -14277,6 +14317,7 @@ JSON
         "emailAddress": "larryking@timewarner.com",
         "firstName": "Larry",
         "lastName": "King",
+        "displayName": "User Forum Dislay Name",
         "password": "changeme",
         "phone": "1-800-555-1212",
         "state": "CA",
@@ -14297,7 +14338,7 @@ XML
     Content-Length: 399
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-    <user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" emailAddress="XmlUser9@timewarner.com" website="http://www.timewarner.com" phone="1-800-555-1212" zip="90210" country="USA" state="CA" city="Los Angeles" addressLine1="128, Hollywood Blvd" password="changeme" username="XmlUser9@timewarner.com" lastName="Last" firstName="First"/>
+    <user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" emailAddress="XmlUser9@timewarner.com" website="http://www.timewarner.com" phone="1-800-555-1212" zip="90210" country="USA" state="CA" city="Los Angeles" addressLine1="128, Hollywood Blvd" password="changeme" username="XmlUser9@timewarner.com" displayName="userForumDisplayName" lastName="Last" firstName="First"/>
 
 **Success Response**
 
@@ -14458,6 +14499,7 @@ JSON
     {
       "user": {
         "emailAddress": "larrykinglive@timewarner.com"
+        "displayName": "newDisplayName"
       }
     }
 
@@ -14472,7 +14514,7 @@ XML
     Content-Length: 177
      
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-    <user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" emailAddress="janedoe2@timewarner.com" status="enabled"/>
+    <user xmlns="http://docs.openstack.org/identity/api/ext/hp/v1.0" emailAddress="janedoe2@timewarner.com" displayName="NewDisplayName" status="enabled"/>
 
 **Success Response**
 
@@ -15286,11 +15328,12 @@ Assuming there exist a file "mypasword.json" with the following content:
 {Specify any inconsistencies, ambiguities, issues, commentary or discussion relevant to the call.}
 
 
-#### 3.4.12.11 List A User's Non Tenant Role Assignments#### {#list_a_users_non_tenant_role_assignments}
+#### 3.4.12.11 List A User's Role Assignments#### {#list_a_users_role_assignments}
 #### GET /HP-IDM/v1.0/users/{userId}/username}/roles
 *Privilege Level: SA, DA, DU*
 
-This API would return all the non tenant role assignments for a user in his domain filtered by serviceId.
+This API would return all the non-tenant role assignments for a user in his domain filtered by serviceId.
+It would return all the role assignments(tenant and non-tenant) for a user if includeTenantService is true.
 
 **Request Data**
 
@@ -15299,6 +15342,7 @@ This API would return all the non tenant role assignments for a user in his doma
 * *limit* (Optional) - integer - represents the maximum number of elements which will be returned in the request. Default is 100. 
 * *marker* (Optional)} - string - the resource Id of the last item in the previous list
 * *serviceId* (Optional) - string - filter by serviceId
+* *includeTenantRoles* (Optional) - returns all roles if includeTenantRoles is true
 
 **Data Parameters**
 
@@ -15339,6 +15383,15 @@ Filtered by service ID:
     Host: localhost:9999
     Connection: keep-alive
 
+Filtered by includeTenantRoles:
+
+    GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?includeTenantRoles=true HTTP/1.1
+    Accept: application/json
+    User-Agent: Wink Client v1.1.2
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+    Host: localhost:9999
+    Connection: keep-alive
+
 Return maximum of 10 roles at a time, starting with role ID `123456`:
 
     GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?limit=10&marker=123456 HTTP/1.1
@@ -15353,6 +15406,15 @@ XML
 Filtered by service ID:
 
     GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?serviceId=100 HTTP/1.1
+    Accept: application/xml
+    User-Agent: Wink Client v1.1.2
+    X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
+    Host: localhost:9999
+    Connection: keep-alive
+
+Filtered by includeTenantRoles:
+
+    GET /v2.0/HP-IDM/v1.0/users/345678902345/roles?includeTenantRoles=true HTTP/1.1
     Accept: application/xml
     User-Agent: Wink Client v1.1.2
     X-Auth-Token: HPAuth_4e56db8d2cdce58d662fb351
@@ -15485,12 +15547,12 @@ XML
 
 Curl Example
 
-    curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/345678902345/roles?serviceId=100"
+    curl -k --cacert ca.pem --cert hpmiddleware.pem --key hpmiddleware.pem -H "X-Auth-Token: HPAuth_fd6f4f19c0bbf7bb0d500aac3bfe21b621073f22b8a92959cabfdc5c4b3f234c" -H "Accept: application/json" "https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2.0/HP-IDM/v1.0/users/345678902345/roles?includeTenantRoles=true&serviceId=100"
 
 **Additional Notes**
 
 #### 3.4.12.12 Check User's Non Tenant Role Assignment#### {#check_users_non_tenant_role_assignment}
-#### HEAD [HPKeystoneExtensionBaseURI]/users/\<userId\>/roles/\<roleId\> 
+#### HEAD /HP-IDM/v1.0/users/{userId}/roles/{roleId} 
 *Privilege Level: SA, DA, DU*
 
 This API check to see if the give user has the given role assignment.
@@ -15855,7 +15917,7 @@ See schema file for more details on the request and response data structure.
 
 * *algorithm* (Optional) - String - the algorithm the key will be used with. One of 
 * *domainId* - String - domain identifier of the owner of the key.
-* *keyLength* (Optional) - Integer - Length of the key in bits.
+* *keyLength* (Optional) - Integer - Length of the key in bits.Minimum length is 64, and maximum length is 512. Default lenght is 240
 * *status* (Optional) String - the key status. One the values (active, inactive). Defaults to active if not specified.
 * *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
 * *validFrom* (Optional) - DateTime - The date the key becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
@@ -16426,6 +16488,7 @@ See schema file for more details on the request and response data structure.
 * *userId* (Optional) - String - User identifier of the owner of the key. If not specified the user identifier defaults to the user identifier of the requester.
 * *validFrom* (Optional) - DateTime - The date the key becomes valid specified in the following form "YYYY-MM-DDThh:mm:ss". 
 * *validTo* (Optional) - DateTime - The date the key becomes invalid specified in the following form "YYYY-MM-DDThh:mm:ss". 
+* *secretKey, accessKeyId*  - Length cannot be more than 999
 
 A valid token must be present in the *X-Auth-Token* HTTP header. Otherwise, a 401 will be returned.
 
@@ -19105,6 +19168,7 @@ Curl Example
 | [CreateDomain - SEVERELY DEPRECATED - TO BE REMOVED IN CONSER-4098](#createdomain_-_severely_deprecated_-_to_be_removed_in_conser-4098) |
 | [Create Tenant](#create_tenant) |
 | [CreateUser](#createuser) |
+| [CreditCardDetailsUpdated](#creditcarddetailsupdated) |
 | [DeactivateBlockStorage](#deactivateblockstorage) |
 | [DeactivateCdn](#deactivatecdn) |
 | [DeactivateCompute](#deactivatecompute) |
@@ -20013,12 +20077,9 @@ TBD
 #### POST [HPKeystoneExtensionBaseURI]/action/createtenant
 *Privilege Level: System Admin, Domain Admin*  
  
-*Constraints:*  
-
-1.  Tenant Name must be unique.
-2.  If Zuora cannot be accessed than this Action Step will be retried at a future time.
-
 This Action is used to create a new Tenant for an existing Domain in Control Services. Once successfully created in CS, a new Account is created in Zuora which is linked to the Tenant. Later, when the tenant activates services, the corresponding Zuora Account will subscribe to products in order to support customer billing.
+
+This action can also be used to set the soldTo address of tenant (CS and Zuora) account.
 
 **Request Data**  
 
@@ -20034,6 +20095,19 @@ None
 |domainId|xs:string|true|
 |description|xs:string|false|
 |homeRegion|xs:string|false|
+|addressLine1|xs:string|false|
+|addressLine2|xs:string|false|
+|city|xs:string|false|
+|state|xs:string|false|
+|country|xs:string|false|
+|zip|xs:string|false|
+
+#### Constraints ####
+1. Tenant Name must be unique.
+1. If Zuora cannot be accessed than this Action Step will be retried at a future time.
+1. Address fields are not a mandatory parameter but if provided it should have all the required components (e.g. state and country).As per requirement addressLine1, addressLine2, city and zip are optional address fields.
+1. If no address is provided in parameter this action will use the domain's soldTo address to map to tenant's soldTo address,if soldTo address in CS domains is not present we use the soldTo contact's address from Zuora domain account.
+1. BillTo address of tenant (CS and Zuora) account should always mapped to the billTo address of domain account.
 
 JSON
 
@@ -20149,6 +20223,7 @@ Note that the **EnterpriseUserEmailVerification** action must handle validations
 | highRiskEmail	| xs:boolean 	| false 	| 	|
 | sendWelcomeEmail 	| xs:boolean 	| false	| false	|
 | emailValidationType 	| xs:string 	| false 	| None	|
+| displayName 	| xs:string 	| false 	| 	|
 | homeRegion	| xs:string 	| false 	| 	|
 
 **emailValidationType Values**
@@ -20168,6 +20243,7 @@ Note that the **EnterpriseUserEmailVerification** action must handle validations
 | CreateKmsUserKeys 	| Create a set of KMS Keys for the specified UMS User. 	| false 	|
 | CreateSalesforceContact 	| Create a new or locate an existing Salesforce Contact. 	| **true** 	|
 | CreateZuoraContact 	| Create a new Contact in Zuora only if there is not one already. 	| **true** 	|
+| SuspendOnViolation 	| If a violation has occurred during processing, suspend the domain. *Note:* Rollback is not supported.	| false	|
 
 #### Constraints ####
 
@@ -20214,6 +20290,79 @@ Email messages are stored in the database. The email template is stored under th
 | %website% 	| user.website 	|
 | %emailAddress% 	| user.emailAddress 	|
 | %ResetToken%	| user.nonce	|
+
+### CreditCardDetailsUpdated {#creditcarddetailsupdated}
+#### POST [HPKeystoneExtensionBaseURI]/action/creditcarddetailsupdated
+*Privilege Level: System Admin*
+
+This action is invoked when the user has modified (or created) their credit card details, it's primary purpose is to log the fact that the user has changed some aspect of the credit card payment data in Salesforce.
+It also updates the Zuora domain account and maps credit card's address to the address of billTo contact of the domain account, to get billTo address this action requires Zuora payment method Id associated with the credit card modification. 
+
+Currently this action assumes that it is invoked only when the user has entered their credit card details for the first time. Other behaviors may be added in the future.
+
+A new Salesforce Contact.CtrlSvcsContactActivity object will be created with a type of **CreditCardDetailsEntered**.
+
+#### PrivilegeLevel ####
+
+**System Administration, Domain Administration, Self-Service**
+
+#### Examples ####
+
+    http://host:port/v2.0/HP-IDM/v1.0/action/creditcarddetailsupdated
+
+#### Action Parameters ####
+
+| Parameter Name 	| Parameter Type 	| Is Required 	| Default 	|
+| :------------- 	| :------------- 	| :---------- 	| :------ 	|
+| sendWelcomeEmail	| xs:boolean 	| false	| false	|
+| sendCreditCardDetailsEnteredEmail	| xs:boolean 	| false	| false	|
+| paymentMethodId	| xs:String 	| true	| false	|
+| ipCountry	| xs:String 	| false	| 	|
+
+#### Action Steps ####
+
+| Step Name 	| Step Description 	| Is Retryable 	|
+| -----------	| ------------------	| -------------	|
+| LogActivityInSalesforce 	| Log the activity against the salesforce contact. 	| false 	|
+| UpdateZuoraAccountBillToAddress 	| Update Zuora account's contact billTo and soldTo address 	| false 	|
+| SendCreditCardDetailsEnteredEmail 	| Create a new KMS User Account corresponding to a UMS User. 	| false 	|
+| SuspendOnViolation 	| If a violation has occurred during processing, suspend the domain. *Note:* Rollback is not supported.	| false	|
+
+#### Constraints ####
+* paymentMethodId is a required filed which actually reflect a Zuora payment method. The paymentMethodId will be provided by Zuora after successful credit card modification.  
+* ipCountry (if present) must match the bill to address retrieved from Zuora or fraud will be indicated.
+
+#### JobTicket Results ####
+
+N/A
+
+#### Email Integration ####
+
+After submission of an email a **CtrlSvcsContactActivity** Salesforce object is created with **ActvityType** set to a value from the table below.
+
+| Templates Used	| CtrlSvcsContactActivity Type 	|
+| -------------- 	| ----------------------------- 	|
+| WELCOME_TO_CLOUD_EMAIL_ID 	| WelcomeEmailSent	|
+| CREDIT_CARD_DETAILS_ENTERED_EMAIL_ID 	| CreditCardDetailsEnteredEmail	|
+
+Email messages are stored in the database. The email template is stored under the template name. Before being sent each email is processed by replacing text of the for %keyword% with a specific value. Replacement values available in the welcome email are listed in the following table.
+
+| Email Text 	| Replaced With 	|
+| ---------- 	| -------------- 	|
+| %accountId% 	| user.accountId 	|
+| %username% 	| user.username 	|
+| %firstName% 	| user.firstName 	|
+| %lastName% 	| user.lastName 	|
+| %addressLine1% 	| user.addressLine1 	|
+| %addressLine2% 	| user.addressLine2 	|
+| %city% 	| user.city 	|
+| %state% 	| user.state 	|
+| %zip% 	| user.zip 	|
+| %country% 	| user.country 	|
+| %phone% 	| user.phone 	|
+| %company% 	| user.company 	|
+| %website% 	| user.website 	|
+| %emailAddress% 	| user.emailAddress 	|
 
 ### DeactivateBlockStorage {#deactivateblockstorage}
 #### POST [HPKeystoneExtensionBaseURI]/action/deactivateblockstorage
@@ -21289,9 +21438,9 @@ Completely remove the specified Domain from the system. Cascade removal to all s
 | Step Name 	| Step Description 	| Is Retryable 	|
 | ---------- 	| ----------------- 	| ------------ 	|
 | DeactivateZuoraAccount 	| When a domain is deleted we mark the corresponding Zuora Account as inactive by setting its state to 'Canceled' - with one Ell. 	| false 	|
-| PurgeServicesForDomain 	| Find all domain tenants and attempt to purge (physically remove) all the services for every tenant by deprovisioning the tenant's services first. *Note:* Rollback is not supported. 	| false 	|
-| DeleteKmsDomain 	| 	| false 	|
-| DeleteUmsDomain 	| 	| false 	|
+| PurgeServicesForDomain 	| Find all domain tenants and attempt to purge (physically remove) all the services for every tenant by deprovisioning the tenant's services first.	| false 	|
+| DeleteKmsDomain 	| *Note:* Rollback is not supported. 	| false 	|
+| DeleteUmsDomain 	| *Note:* Rollback is not supported. 	| false 	|
 
 #### Constraints ####
 
@@ -21380,6 +21529,8 @@ N/A
 
 This action sets up a new Domain and User using minimal parameters. Keys are created for the user, and Accounts are created in both Salesforce and Zuora. In order to support MC IP address validation there are two additional parameters. ipCheckSucceeded store a boolean value indicating whether or not the IP address of the client is not blocked. ipAddress contains the actual address.
 
+An address can be provided with this action which will maps to new domain's billTo and soldTo address, the same address will also be  used to create Zuora domain account's billTo and SoldTo contact.
+
 #### Validation Modes ####
 
 **No Validation**: In this mode all the required entities (user, domain, etc....) are created in the mongodb and the Sales Force and they are set to \*enabled\* state. Welcome email will be sent to customer immediately after successful registration process.
@@ -21457,6 +21608,7 @@ Note that the **EmailVerification** action must handle validations from this act
 | emailValidationType 	| xs:string 	| false 	| None	|
 | customerType 	| xs:string 	| false 	| Self Service 	|
 | homeRegion	| xs:string 	| false 	| 	|
+| displayName	| xs:string 	| false 	| 	|
 | optIntoCloudServicesEmails	| xs:boolean   	| false 	| 	|
 
 
@@ -21472,10 +21624,16 @@ Note that the **EmailVerification** action must handle validations from this act
 
 | Value	| Effect 	|
 | :---------------	| :---------------	|
-| Gratis Account	| 	|
-| Self Service	| 	|
-| HP Internal	| 	|
-| Corporate	| Causes the Zuora defaultPaymentMethod to be set to "Other" and tax exemption to "No" on the Zuora account.	|
+| Gratis Account | The permissions of the caller are must be able to register the new account. |
+| Self Service	| Allows an anonomous user to register themselves. |
+| HP Internal | The permissions of the caller are must be able to register the new account. |
+| Corporate	| Causes the Zuora defaultPaymentMethod to be set to "Other" and tax exemption to "No" on the Zuora account.  Also, the permissions of the caller are must be able to register the new account. |
+
+A customerType of **Corporate** has the following effects:
+
+1. It changes the verification email templates from EMAIL_… form to the EMAIL_SR_ENTERPRISE_… form.
+1. It sets the Zuora account DefaultPaymetMethod to "Other".
+1. It sets the Zuora account TaxExemptStatus to "No".
 
 #### Action Steps ####
 
@@ -21488,6 +21646,7 @@ Note that the **EmailVerification** action must handle validations from this act
 | CreateSalesforceAccount 	| Create a new Salesforce Account. No Salesforce Contact is created with the new Account. 	| false 	|
 | CreateSalesforceContact 	| Create a new or a locate existing Salesforce Contact. A query is performed based on the User's email address. If an existing contact is found, then it is assumed to correspond to the UMS User. 	| false 	|
 | CreateZuoraDomainAndContact 	| Create a new Account and Contact in Zuora that correspond with the given Domain and User. 	| false 	|
+| SuspendOnViolation 	| If a violation has occurred during processing, suspend the domain. *Note:* Rollback is not supported.	| false	|
 
 #### Constraints ####
 
@@ -21675,7 +21834,7 @@ N/A
 
 #### Description ####
 
-Change the name and/or description for an existing Tenant in both UMS and Zuora.
+Change the name and/or description for an existing Tenant in both UMS and Zuora. This action can also be used to update the soldTo address of tenant account (CS and Zuora).
 
 #### PrivilegeLevel ####
 
@@ -21693,6 +21852,12 @@ Change the name and/or description for an existing Tenant in both UMS and Zuora.
 | tenantName 	| xs:string 	| false 	|
 | description 	| xs:string 	| false 	|
 | status 	| xs:string 	| false	|
+| addressLine1	| xs:string	|false	|
+| addressLine2	| xs:string	|false	|
+| city		| xs:string	|false	|
+| state		| xs:string	|false	|
+| country	| xs:string	|false	|
+| zip		| xs:string	|false	|
 
 #### Action Steps ####
 | Step Name 	| Step Description 	| Is Retryable 	|
@@ -21707,6 +21872,8 @@ Change the name and/or description for an existing Tenant in both UMS and Zuora.
 1. tenantId must be valid.
 1. tenantName must be unique.
 1. If Zuora cannot be accessed than this Action Step will be retried at a future time.
+1. Address fields are not mandatory parameters but if provided in update tenant call, it should not make the address incomplete. (e.g. updated DB address should be complete)
+1. BillTo address of tenant (CS and Zuora) account should always mapped to the billTo address of domain account.
 
 #### JobTicket Results ####
 
@@ -21815,6 +21982,7 @@ If the user modified their email address then a notification email to the old an
 | UpdateSalesforceContact 	| Update the appropriate Salesforce "Contact" object to match the UMS properties. 	| true 	|
 | UpdateZuoraContact 	| If the given UMS User is also a Zuora Contact, then update the corresponding Zuora Contact with all the current User properties. By default, only the Domain Admin has a corresponding Zuora Contact. 	| true 	|
 | SendEmailUpdateEmails 	| If the UMS user has modified their email address then send a notification email to the old and new email address. \\ 	| true 	|
+| SuspendOnViolation 	| If a violation has occurred during processing, suspend the domain. *Note:* Rollback is not supported.	| false	|
 
 #### Constraints ####
 
