@@ -31,26 +31,7 @@ The branch structure for this project is:
 
 ## Usage
 
-This setup has a number of commands using Make to operate.
-
-* `make server` - Use this to launch a local version of the site at http://0.0.0.0:4000
-* `make build` - Places the output site in the _site folder and optimizes the files (e.g., minifies html)
-* `make clear` - Cleans up a build.
-* `make update-docs` - Updates the docs to the latest.
-* `make update-tutorials` - Updates the tutorials to the latest.
-* `make update-api` - Updates the API documentation to the latest.
-* `make deploy-qa` - Deploy to [QA](http://docs.qa.devex.uswest.hpcloud.net/). Note, you need credentials that will be asked for when deploying.
-* `make deploy-prod` -  Deploy to [production](http://docs.hpcloud.com/). Note, you need credentials that will be asked for when deploying.
-
-Additionally there are some commands that should rarely be used if at all:
-
-* `make prepare` - Sets up the site in the `_site` folder. This is used by the `build` step.
-* `make optimize` - Optimizes the contents of `_site`. This is used by the `build` step.
-* `make add-docs` - Adds the docs project to the site (via subtree).
-* `make add-tutorials` - Adds the tutorials project to the site (via subtree).
-* `make add-api` - Adds the tutorials project to the site (via subtree).
-* `make deploy-prod-az2` - Deploys an update to the cluster in AZ2 (the primary cluster).
-* `make deploy-prod-az1` - Deploy to the backup cluster in AZ1.
+The make file has been removed in favor of shell scripts in the jenkins directory.  Use the build.sh script to build the _site directory and use the server.sh script to fire up a stand alone server.  See the scripts for other capabilities.
 
 ## Dependencies
 
