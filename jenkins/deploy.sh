@@ -1,4 +1,7 @@
 #!/bin/bash -e
+#
+#
+#
 if [ -z "${1}" ]
 then
   echo "Usage: ${0} domain"

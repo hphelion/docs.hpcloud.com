@@ -1,3 +1,8 @@
+#!/bin/bash -e
+#
+#
+#
+mkdir -p content
 cd content
 rm -rf api
 git clone git@git.hpcloud.net:DevExDocs/apihome.git

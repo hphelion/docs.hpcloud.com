@@ -1,1 +1,5 @@
-@ejekyll --no-future
+#!/bin/bash -e
+#
+#
+#
+ejekyll --no-future

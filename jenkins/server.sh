@@ -1,1 +1,5 @@
-@ejekyll --server --auto
+#!/bin/bash -e
+#
+#
+#
+ejekyll --server --auto
