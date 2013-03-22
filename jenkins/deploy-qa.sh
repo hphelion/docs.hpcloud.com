@@ -7,6 +7,10 @@ echo '=git================================================================='
 git checkout develop
 git pull origin develop
 
+echo '=content============================================================='
+./jenkins/api.sh develop
+./jenkins/documentation.sh develop
+
 echo '=build==============================================================='
 ./jenkins/clean.sh
 ./jenkins/build.sh

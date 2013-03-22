@@ -7,6 +7,10 @@ echo '=git================================================================='
 git checkout master
 git pull origin master
 
+echo '=content============================================================='
+./jenkins/api.sh master
+./jenkins/documentation.sh master
+
 echo '=build==============================================================='
 ./jenkins/clean.sh
 ./jenkins/build.sh
