@@ -1,6 +1,6 @@
 #!/bin/bash -e
 #
-#
+# Generic deploy script
 #
 if [ -z "${1}" ]
 then

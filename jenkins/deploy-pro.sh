@@ -1,6 +1,6 @@
 #!/bin/bash -e
 #
-#
+# Run a deploy
 #
 export TERM=xterm-256color
 source "$HOME/.rvm/scripts/rvm"
