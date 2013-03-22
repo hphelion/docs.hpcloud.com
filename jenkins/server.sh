@@ -1,0 +1,1 @@
+@ejekyll --server --auto
