@@ -7,7 +7,7 @@ source "$HOME/.rvm/scripts/rvm"
 rvm use ruby-1.9.2@docs
 
 echo '=git================================================================='
-git checkout master
+git checkout -f master
 git pull origin master
 
 echo '=content============================================================='
