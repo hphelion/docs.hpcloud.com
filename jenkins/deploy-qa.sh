@@ -7,8 +7,8 @@ source "$HOME/.rvm/scripts/rvm"
 rvm use ruby-1.9.2@docs
 
 echo '=git================================================================='
-git checkout develop
-git pull origin develop
+git checkout master
+git pull origin master
 
 echo '=content============================================================='
 ./jenkins/api.sh develop
