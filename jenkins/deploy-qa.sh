@@ -12,7 +12,7 @@ git pull origin develop
 
 echo '=content============================================================='
 ./jenkins/api.sh develop
-./jenkins/documentation.sh develop
+./jenkins/documentation.sh master
 
 echo '=build==============================================================='
 ./jenkins/clean.sh
