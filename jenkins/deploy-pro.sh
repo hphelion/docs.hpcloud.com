@@ -19,11 +19,19 @@ echo '=build==============================================================='
 ./jenkins/build.sh
 
 echo '=deploy================================================================'
-./jenkins/deploy.sh secondary1-stackato.cx.hpcloud.net hpcloud.com <<!
+./jenkins/deploy.sh one secondary1-stackato.cx.hpcloud.net hpcloud.com <<!
 ${LOGIN}
 ${PASSWORD}
 !
-./jenkins/deploy.sh prod1-stackato.cx.hpcloud.net hpcloud.com <<!
+./jenkins/deploy.sh one prod1-stackato.cx.hpcloud.net hpcloud.com <<!
+${LOGIN}
+${PASSWORD}
+!
+./jenkins/deploy.sh two secondary1-stackato.cx.hpcloud.net hpcloud.com <<!
+${LOGIN}
+${PASSWORD}
+!
+./jenkins/deploy.sh two prod1-stackato.cx.hpcloud.net hpcloud.com <<!
 ${LOGIN}
 ${PASSWORD}
 !

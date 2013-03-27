@@ -2,15 +2,16 @@
 #
 # Generic deploy script
 #
-if [ -z "${1}" ]
+if [ -z "${1}" -o -z "${2}" ]
 then
-  echo "Usage: ${0} domain"
+  echo "Usage: ${0} application domain <url>"
   exit 1
 fi
-DOMAIN="${1}"
-if [ -n "${2}" ]
+APP="${1}"
+DOMAIN="${2}"
+if [ -n "${3}" ]
 then
-  URL=${2}
+  URL=${3}
 else
   URL=${DOMAIN}
 fi
@@ -19,23 +20,14 @@ set -x
 stackato target https://api.${DOMAIN}
 stackato login
 stackato group Documentation
-stackato map docs-two docs.${URL} || true
-stackato unmap docs-one docs.${URL} || true
-cp stackato-one.yml stackato.yml
-stackato stop docs-one
-stackato update -n --nostart docs-one ||
-stackato update -n --nostart docs-one
-echo "Deploying http://docs-one.${DOMAIN}"
-stackato start docs-one
-stackato map docs-one docs.${URL}
-stackato unmap docs-two docs.${URL} || true
-cp stackato-two.yml stackato.yml
-stackato stop docs-two
-stackato update -n --nostart docs-two ||
-stackato update -n --nostart docs-two
-echo "Deploying http://docs-two.${DOMAIN}"
-stackato start docs-two
-stackato map docs-two docs.${URL}
+stackato unmap docs-${APP} docs.${URL} || true
+cp stackato-${APP} stackato.yml
+stackato stop docs-${APP}
+stackato update -n --nostart docs-${APP} ||
+stackato update -n --nostart docs-${APP}
+echo "Deploying http://docs-${APP}${DOMAIN}"
+stackato start docs-${APP}
+stackato map docs-${APP} docs.${URL}
 rm -f stackato.yml
 echo "Done."
 exit 0
