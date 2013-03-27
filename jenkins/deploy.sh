@@ -21,7 +21,7 @@ stackato target https://api.${DOMAIN}
 stackato login
 stackato group Documentation
 stackato unmap docs-${APP} docs.${URL} || true
-cp stackato-${APP} stackato.yml
+cp stackato-${APP}.yml stackato.yml
 stackato stop docs-${APP}
 stackato update -n --nostart docs-${APP} ||
 stackato update -n --nostart docs-${APP}
