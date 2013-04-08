@@ -53,7 +53,7 @@ navigation:
     url: /cli/unix/release-notes/
   win-cli:
   - text: Site home page
-    url: /  
+    url: /
   - text: Overview
     url: /cli/windows/
   - text: Installation
@@ -74,7 +74,7 @@ navigation:
     url: /cli/windows/release-notes/
   nova-cli:
   - text: Site home page
-    url: /  
+    url: /
   - text: Overview
     url: /cli/nova
   - text: Installation
@@ -83,7 +83,7 @@ navigation:
     url: /cli/nova/reference
   fog:
   - text: Site home page
-    url: /  
+    url: /
   - text: Overview
     url: /bindings/fog/
   - text: Installation
@@ -102,7 +102,7 @@ navigation:
     url: /bindings/fog/release-notes/
   jclouds:
   - text: Site home page
-    url: /  
+    url: /
   - text: Overview
     url: /bindings/jclouds/
   - text: Compute Examples
