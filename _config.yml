@@ -114,7 +114,7 @@ navigation:
     
 apinavigation:
 - text: Site home page
-    url: /  
+  url: /
 - text: API Overview
   url: /api/
 - text: Identity Service
