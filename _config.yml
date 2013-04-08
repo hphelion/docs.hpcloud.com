@@ -27,6 +27,8 @@ navigation:
   - text: Site Overview
     url: /site-overview/
   unix-cli:
+  - text: Site home page
+    url: /
   - text: Overview
     url: /cli/unix/
   - text: Installation
@@ -50,6 +52,8 @@ navigation:
   - text: Release Notes
     url: /cli/unix/release-notes/
   win-cli:
+  - text: Site home page
+    url: /  
   - text: Overview
     url: /cli/windows/
   - text: Installation
@@ -69,6 +73,8 @@ navigation:
   - text: Release Notes
     url: /cli/windows/release-notes/
   nova-cli:
+  - text: Site home page
+    url: /  
   - text: Overview
     url: /cli/nova
   - text: Installation
@@ -76,6 +82,8 @@ navigation:
   - text: CLI Reference
     url: /cli/nova/reference
   fog:
+  - text: Site home page
+    url: /  
   - text: Overview
     url: /bindings/fog/
   - text: Installation
@@ -93,6 +101,8 @@ navigation:
   - text: Release Notes
     url: /bindings/fog/release-notes/
   jclouds:
+  - text: Site home page
+    url: /  
   - text: Overview
     url: /bindings/jclouds/
   - text: Compute Examples
@@ -103,6 +113,8 @@ navigation:
     url: /bindings/jclouds/object-storage/
     
 apinavigation:
+- text: Site home page
+    url: /  
 - text: API Overview
   url: /api/
 - text: Identity Service
