@@ -136,6 +136,6 @@ apinavigation:
 - text: Monitoring
   url: /api/monitoring/
 - text: Application Platform
-  url: /api/apaas/
+  url: https://apaas-docs.hpcloud.com
 - text: Messaging
   url: /api/msgaas/
