@@ -135,3 +135,7 @@ apinavigation:
   url: /api/dns/
 - text: Monitoring
   url: /api/monitoring/
+- text: Application Platform
+  url: /api/apaas/
+- text: Messaging
+  url: /api/msgaas/
