@@ -57,6 +57,8 @@ navigation:
     url: /mc/
   - text: Object Storage Dashboard
     url: /mc/object-storage/
+  - text: Use Cases
+    url: /mc/object-storage/use-cases/
   unix-cli:
   - text: Site home page
     url: /
