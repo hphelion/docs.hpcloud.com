@@ -6,6 +6,8 @@ navigation:
   main:
   - text: Getting Started
     url: /
+  - text: Management Console
+    url: /mc/
   - text: Identity Services
     url: /identity/
   - text: Object Storage
