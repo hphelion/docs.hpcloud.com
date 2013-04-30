@@ -24,7 +24,7 @@ navigation:
   - text: Overview
     url: /mc/
   - text: Main Dashboard
-    url: /mc/main/
+    url: /mc/dashboard/
   - text: Available Services
     url: /mc/services/
   - text: Console Pages Sitemap
