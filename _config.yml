@@ -50,6 +50,8 @@ navigation:
     url: /mc/compute/floating-ips/
   - text: Key Pairs
     url: /mc/compute/keypairs/
+  - text: Use Cases
+    url: /mc/compute/use-cases/
   mc-object-storage:
   - text: Console Overview
     url: /mc/
