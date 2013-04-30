@@ -8,16 +8,8 @@ navigation:
     url: /
   - text: Management Console
     url: /mc/
-  - text: Identity Services
-    url: /identity/
-  - text: Object Storage
-    url: /object-storage/
-  - text: Compute
-    url: /compute/
-  - text: Block Storage
-    url: /block-storage/
-  - text: Relational Database
-    url: /dbaas/
+  - text: Available Services
+    url: /services/
   - text: Language Bindings
     url: /bindings/
   - text: APIs
@@ -28,6 +20,41 @@ navigation:
     url: /faq/
   - text: Site Overview
     url: /site-overview/
+  mc:
+  - text: Overview
+    url: /mc/
+  - text: Main Dashboard
+    url: /mc/main/
+  - text: Available Services
+    url: /mc/services/
+  - text: Console Pages Sitemap
+    url: /mc/sitemap/
+  - text: Console Reference
+    url: /mc/reference/
+  mc-compute:
+  - text: Console Overview
+    url: /mc/
+  - text: Compute Dashboard
+    url: /mc/compute/
+  - text: Server
+    url: /mc/compute/server/
+  - text: Images
+    url: /mc/compute/images/
+  - text: Volumes
+    url: /mc/compute/volumes/
+  - text: Network
+    url: /mc/compute/network/
+  - text: Security Groups
+    url: /mc/compute/security-groups/
+  - text: Floating IPs
+    url: /mc/compute/floating-ips/
+  - text: Key Pairs
+    url: /mc/compute/keypairs/
+  mc-object-storage:
+  - text: Console Overview
+    url: /mc/
+  - text: Object Storage Dashboard
+    url: /mc/object-storage/
   unix-cli:
   - text: Site home page
     url: /
