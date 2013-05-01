@@ -114,7 +114,7 @@ navigation:
     
 apinavigation:
 - text: Site home page
-    url: /
+  url: /
 - text: API Overview
   url: /api/
 - text: Identity Service
@@ -135,3 +135,7 @@ apinavigation:
   url: /api/dns/
 - text: Monitoring
   url: /api/monitoring/
+- text: Application Platform
+  url: https://apaas-docs.hpcloud.com
+- text: Messaging
+  url: /api/msgaas/

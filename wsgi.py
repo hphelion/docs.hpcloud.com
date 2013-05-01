@@ -24,15 +24,11 @@ lookup['/file/python-novaclient.tar'] = 'https://a248.e.akamai.net/cdn.hpcloudsv
 lookup['/file/python-novaclient_2.6.8.deb'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp15_all.deb'
 lookup['/file/python-novaclient_2.6.8.tar.gz'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp15.tar.gz'
 lookup['/file/Python-novaclient2.6.8.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp15.zip'
-lookup['/file/WinCLI-1.3.0.1.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.0.1.zip'
-lookup['/file/WinCLI-1.3.0.4.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.0.4.zip'
-lookup['/file/WinCLI-1.3.0.6.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.0.6.zip'
-lookup['/file/WinCLI-1.3.1.8.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.1.8.zip'
-lookup['/file/WinCLI-1.3.1.9.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.1.9.zip'
-lookup['/file/WinCLI-1.3.2.2.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.2.2.zip'
-lookup['/file/WinCLI-1.3.2.7.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.2.7.zip'
-lookup['/file/WinCLI-1.3.3.7.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.3.7.zip'
-lookup['/file/WinCLI.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-3.zip'
+lookup['/file/python-novaclient_2.6.8-17.tar.gz'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp17.tar.gz'
+lookup['/file/Python-novaclient2.6.8-17.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp17.zip'
+lookup['/file/python-novaclient_2.6.8-17.deb'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp17_all.deb'
+lookup['/file/WinCLI-1.3.3.8.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.3.8.zip'
+lookup['/file/WinCLI-1.3.3.9.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.3.9.zip'
 
 
 def handle_no_file(env, start_response):

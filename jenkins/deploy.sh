@@ -25,7 +25,7 @@ cp stackato-${APP}.yml stackato.yml
 stackato stop docs-${APP}
 stackato update -n --nostart docs-${APP} ||
 stackato update -n --nostart docs-${APP}
-echo "Deploying http://docs-${APP}${DOMAIN}"
+echo "Deploying http://docs-${APP}.${DOMAIN}"
 stackato start docs-${APP}
 stackato map docs-${APP} docs.${URL}
 rm -f stackato.yml
