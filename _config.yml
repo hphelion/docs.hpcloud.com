@@ -80,6 +80,8 @@ navigation:
     url: /cli/unix/block-storage/
   - text: Volume Management
     url: /block-storage/volume/
+  - text: DNS Examples
+    url: /cli/unix/dns/
   - text: CLI Reference
     url: /cli/unix/reference/
   - text: Release Notes
