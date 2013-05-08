@@ -6,8 +6,6 @@ navigation:
   main:
   - text: Getting Started
     url: /
-  - text: Management Console
-    url: /mc/
   - text: Available Services
     url: /services/
   - text: Language Bindings
