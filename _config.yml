@@ -161,7 +161,7 @@ apinavigation:
 - text: CDN
   url: /api/CDN/
 - text: RDB for MySQL
-  url: http://api-docs.hpcloud.com/hpcloud-rdb-mysql/1.0/content/index.html
+  url: /api/dbaas/
 - text: Load Balancer
   url: /api/lbaas/
 - text: DNS
