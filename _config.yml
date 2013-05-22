@@ -23,33 +23,29 @@ navigation:
     url: /mc/
   - text: Main Dashboard
     url: /mc/dashboard/
-  - text: Available Services
-    url: /mc/services/
-  - text: Console Pages Sitemap
+  - text: Console Pages Site Map
     url: /mc/sitemap/
-  - text: Console Reference
-    url: /mc/reference/
   mc-compute:
   - text: Console Overview
     url: /mc/
-  - text: Compute Dashboard
-    url: /mc/compute/
-  - text: Server
+  - text: Server Screen
     url: /mc/compute/server/
-  - text: Images
+  - text: Images Screen
     url: /mc/compute/images/
-  - text: Volumes
+  - text: Volumes Screen
     url: /mc/compute/volumes/
-  - text: Network
+  - text: Network Screen
     url: /mc/compute/network/
-  - text: Security Groups
+  - text: Security Groups Screen
     url: /mc/compute/security-groups/
-  - text: Floating IPs
+  - text: Floating IPs Screen
     url: /mc/compute/floating-ips/
-  - text: Key Pairs
+  - text: Key Pairs Screen
     url: /mc/compute/keypairs/
   - text: Use Cases
     url: /mc/compute/use-cases/
+  - text: Console Pages Site Map
+    url: /mc/sitemap/
   mc-object-storage:
   - text: Console Overview
     url: /mc/
