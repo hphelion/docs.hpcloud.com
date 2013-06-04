@@ -35,15 +35,13 @@ navigation:
   - text: Volumes Screen
     url: /mc/compute/volumes/
   - text: Network Screen
-    url: /mc/compute/network/
+    url: /mc/compute/networks/
   - text: Security Groups Screen
     url: /mc/compute/security-groups/
   - text: Floating IPs Screen
     url: /mc/compute/floating-ips/
   - text: Key Pairs Screen
-    url: /mc/compute/keypairs/
-  - text: Use Cases
-    url: /mc/compute/use-cases/
+    url: /mc/compute/key-pairs/
   - text: Console Pages Site Map
     url: /mc/sitemap/
   mc-object-storage:
