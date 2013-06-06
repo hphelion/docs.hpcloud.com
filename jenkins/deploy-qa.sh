@@ -21,7 +21,6 @@ echo '=build==============================================================='
 ${LOGIN}
 ${PASSWORD}
 !
-sleep 30
 ./jenkins/deploy.sh two qa1-stackato.cx.hpcloud.net <<!
 ${LOGIN}
 ${PASSWORD}
