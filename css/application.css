@@ -502,7 +502,7 @@ textarea {
 
 /* line 74, ../sass/_normalize.sass */
 ::selection {
-  background: #fe57a1;
+  background: #151515;
   color: white;
   text-shadow: none;
 }

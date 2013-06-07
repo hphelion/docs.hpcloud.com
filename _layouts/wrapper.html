@@ -19,6 +19,8 @@
 	<link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
 	<link rel="stylesheet" href="/js/google-code-prettify/prettify.css">
 	<link rel="stylesheet" href="/css/application.css">
+    <link rel="stylesheet" href="/css/rest_api.css">
+    <link rel="stylesheet" href="/css/jquery.tocify.css">
 
 	<script src="/js/modernizr-2.5.3.min.js"></script>
 	<script src="/js/metrics.js"></script>
@@ -189,6 +191,7 @@
 	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
   <script>window.jQuery || document.write('<script src="/js/jquery-1.8.2f.min.js"><\/script>')</script>
 
   <script src="/js/header-nav.js"></script>
@@ -200,6 +203,7 @@
   <script src="/js/google-code-prettify/lang-sql.js"></script>
   <script src="/js/google-code-prettify/lang-yaml.js"></script>
   <script src="/js/highlight.js"></script>
+  <script src="/js/jquery.tocify.min.js"></script>
   <script>
       __HP_CHAT_CONF = {};
       __HP_CHAT_CONF.sales = true;
@@ -215,6 +219,37 @@
           s0.parentNode.insertBefore(sNew, s0);
         });
       })(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+        function removeGhostSpaceFromCodeBlock() {
+            $("span.pln:contains('  ')").remove();
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+
+            removeGhostSpaceFromCodeBlock();
+        });
     </script>
 <!--[if lte IE 7 ]>
 	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
