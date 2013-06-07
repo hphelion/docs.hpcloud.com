@@ -232,9 +232,9 @@
             $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
             $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
         }
-        function removeGhostSpaceFromCodeBlock() {
-            $("span.pln:contains('  ')").remove();
-        }
+//        function removeGhostSpaceFromCodeBlock() {
+//            $("span.pln:contains('  ')").remove();
+//        }
 
         $(function() {
             //Calls the tocify method on your HTML div.
@@ -248,7 +248,7 @@
             // Style the REST commands
             styleRestCmds();
 
-            removeGhostSpaceFromCodeBlock();
+//            removeGhostSpaceFromCodeBlock();
         });
     </script>
 <!--[if lte IE 7 ]>
