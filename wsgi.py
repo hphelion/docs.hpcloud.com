@@ -42,7 +42,7 @@ def handle_no_file(env, start_response):
         start_response(status, headers)
         return env['PATH_INFO']
     else:
-        f = open('_site/404.html')
+        f = open('_site/404error.html')
         status = '404 Not Found'  # HTTP Status
         headers = [('Content-type', 'text/html')]  # HTTP Headers
         start_response(status, headers)
