@@ -2,4 +2,4 @@
 #
 # This script builds the _site directory
 #
-ejekyll --no-future
+ejekyll build
