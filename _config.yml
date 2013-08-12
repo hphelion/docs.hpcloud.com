@@ -5,7 +5,7 @@ relative_permalinks: false
 
 navigation:
   main:
-  - text: Getting Started
+  - text: Services Overview
     url: /
   - text: Available Services
     url: /services/
