@@ -29,8 +29,8 @@ navigation:
   mc-compute:
   - text: Console Overview
     url: /mc/
-  - text: Server Screen
-    url: /mc/compute/server/
+  - text: Servers Screen
+    url: /mc/compute/servers/
   - text: Images Screen
     url: /mc/compute/images/
   - text: Volumes Screen
