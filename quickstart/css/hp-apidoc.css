@@ -1,0 +1,15 @@
+/* custom styles for HP API documentation */
+
+pre.payload {
+    border: 1px dashed gray; 
+    padding: 4px 4px 4px 4px;
+    background: #f8f8f8;
+}
+
+th.apidoc { 
+    padding: 12px 12px 12px 12px;
+}
+
+td.apidoc { 
+    padding: 12px 12px 12px 12px;
+}
