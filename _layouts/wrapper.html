@@ -17,193 +17,84 @@
 	{% endif %}
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
-	<link rel="stylesheet" href="/js/google-code-prettify/prettify.css">
-	<link rel="stylesheet" href="/css/application.css">
-    <link rel="stylesheet" href="/css/rest_api.css">
-    <link rel="stylesheet" href="/css/jquery.tocify.css">
+  <link rel="stylesheet" href="/css/combined.css">
 
 	<script src="/js/modernizr-2.5.3.min.js"></script>
 	<script src="/js/metrics.js"></script>
 </head>
 <body>
-	<div id="wrapper">
-		<!--[if lte IE 8]>
-		<div id='ie-upgrade'>
-		Your version of Internet Explorer is out of date. Please
-		<a href="http://www.microsoft.com/windows/internet-explorer" target="_blank">upgrade</a>
-		or install
-		<a href="http://www.google.com/chromeframe" target="_blank">Chrome Frame</a>.
-		</div>
-		<![endif]-->
-		<div id="header-container">
-      <header class="wrapper clearfix" role="banner">
-      	<div id="nav-primary-container">
-	        <div id="nav-primary" class="container_16">
-						<div id="logo" class="grid_2">
-							<h1 id="site-name"><a href="https://www.hpcloud.com"><span class="element-invisible">HP </span>Cloud</a></h1>
-						</div>
-						<nav id="site-navigation" class="grid_11">
-							<ul>
-								<li class="has-subnav has-subnav-big"><a href="#"><span>Solutions &amp; Products</span></a>
-									<div class="sub-navigation">
-										<ul>
-											<li class="first"><a href="https://www.hpcloud.com/learn"><span>Learn About The Cloud</span></a></li>
-											<li><a href="https://www.hpcloud.com/products/cloud-compute"><span>Compute</span></a></li>
-											<li><a href="https://www.hpcloud.com/products/storage"><span>Storage &amp; CDN</span></a></li>
-											<li><a href="https://www.hpcloud.com/products/services"><span>Platform Services</span></a></li>
-											<li><a href="https://www.hpcloud.com/products"><span>All Products</span></a></li>
-											<li><a href="https://www.hpcloud.com/solutions"><span>Solutions</span></a></li>
-											<li><a href="https://www.hpcloud.com/partners/solution/list"><span>Marketplace &amp; Partner Solutions</span></a></li>
-											<li><a href="https://www.hpcloud.com/pricing"><span>Pricing</span></a></li>
-											<li class="last"><a href="https://www.hpcloud.com/learn/getting-started-guide"><span>Getting Started</span></a></li>
-										</ul>
-									</div>
-								</li>
-								<li class="has-subnav"><a href="#"><span>Develop</span></a>
-									<div class="sub-navigation">
-										<ul>
-											<li class="first"><a href="https://docs.hpcloud.com/"><span>Documentation</span></a></li>
-											<li><a href="https://docs.hpcloud.com/bindings"><span>Language Bindings</span></a></li>
-											<li><a href="https://docs.hpcloud.com/cli"><span>CLIs</span></a></li>
-											<li><a href="https://docs.hpcloud.com/downloads"><span>Downloads</span></a></li>
-											<li><a href="https://community.hpcloud.com/knowledge-base"><span>Knowledge Base</span></a></li>
-											<li class="last"><a href="https://community.hpcloud.com/forum"><span>Forums</span></a></li>
-										</ul>
-									</div>
-								</li>
-								<li class="has-subnav"><a href="#"><span>Support</span></a>
-									<div class="sub-navigation">
-										<ul>
-											<li class="first"><a href="https://www.hpcloud.com/support"><span>Overview</span></a></li>
-											<li><a href="https://community.hpcloud.com/knowledge-base"><span>Knowledge Base</span></a></li>
-											<li><a href="https://community.hpcloud.com/forum"><span>Forums</span></a></li>
-											<li><a href="https://docs.hpcloud.com/"><span>Documentation</span></a></li>
-											<li><a href="https://console.hpcloud.com/cases"><span>Support Cases</span></a></li>
-											<li><a href="https://community.hpcloud.com/status"><span>System Status</span></a></li>
-											<li class="last"><a href="https://www.hpcloud.com/learn/getting-started-guide"><span>Getting Started</span></a></li>
-										</ul>
-									</div>
-								</li>
-								<li class="has-subnav"><a href="#"><span>Partner</span></a>
-									<div class="sub-navigation">
-										<ul>
-											<li class="first"><a href="https://www.hpcloud.com/partners"><span>Overview</span></a></li>
-											<li><a href="https://www.hpcloud.com/partners/solution"><span>Solution Partner Program</span></a></li>
-											<li><a href="https://www.hpcloud.com/partners/consulting"><span>Cloud Consulting Partner Program</span></a></li>
-											<li class="last"><a href="https://www.hpcloud.com/partners/globalpremier"><span>Global Premier Program</span></a></li>
-										</ul>
-									</div>
-								</li>
-								<li class="has-subnav"><a href="#"><span>About</span></a>
-									<div class="sub-navigation">
-										<ul>
-											<li class="first"><a href="https://www.hpcloud.com/about-us"><span>About HP Cloud</span></a></li>
-											<li><a href="https://www.hpcloud.com/news"><span>News</span></a></li>
-											<li><a href="https://www.hpcloud.com/events"><span>Events</span></a></li>
-											<li><a href="https://blog.hpcloud.com"><span>Blog</span></a></li>
-											<li class="last"><a href="https://www.hpcloud.com/jobs"><span>Careers</span></a></li>
-										</ul>
-									</div>
-								</li>								
-								<li><a href="https://console.hpcloud.com"><span>Console</span></a></li>
-							</ul>
-						</nav>
-						<div  class="grid_3 make-relative">
-						</div>
-					</div>
-				</div>
-			</header>
-		</div>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar">
+      		<div class="search-wrapper wrapper container_16">
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+        			<ul>
+        				<li><a href="http://hpcloud.com/support">Support</a></li>
+        				<li><a href="http://hpcloud.com/partners">Partners</a></li>
+        				<li><a href="http://marketplace.hpcloud.com">Marketplace</a></li>
+        				<li><a href="http://hpcloud.com/about">About</a></li>
+        				<li><a href="http://hp.com">hp.com</a></li>
+        				<li><a href="http://hpcloud.com/about/contact">Contact</a></li>
+        				<li><a href="https://account.hpcloud.com">Account</a></li>
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="/" class="logo"><img src="/images/hp-public-cloud-logo.png" alt="HP Public Cloud" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+      </header>
+    </div>
 		<div id="main-container">
 			<div id="main" class="wrapper clearfix container_16">
 				{{ content }}
 			</div> <!-- #main -->
 		</div> <!-- #main-container -->
 	</div> <!-- #wrapper -->
-	<div id="footer-container">
-		<footer class="wrapper container_16">
-			<nav>
-				<dl>
-					<dt><a href="https://www.hpcloud.com/">Products</a></dt>
-					<dd><a href="https://www.hpcloud.com/sign_up">Sign Up</a></dd>
-					<dd><a href="https://www.hpcloud.com/need_to_know">Things to know</a></dd>
-					<dd><a href="https://www.hpcloud.com/products">All Products</a></dd>
-					<dd><a href="https://www.hpcloud.com/partners">Partners</a></dd>
-				</dl>
-				<dl>
-					<dt><a href="https://docs.hpcloud.com">Documentation</a></dt>
-					<dd><a href="https://docs.hpcloud.com/compute">Compute</a></dd>
-					<dd><a href="https://docs.hpcloud.com/object-storage">Object Storage</a></dd>
-					<dd><a href="https://docs.hpcloud.com/cli">CLI</a></dd>
-					<dd><a href="https://docs.hpcloud.com/bindings">Bindings</a></dd>
-				</dl>
-				<dl>
-					<dt><a href="https://community.hpcloud.com/">Community</a></dt>
-					<dd><a href="https://blog.hpcloud.com">Blog</a></dd>
-					<dd><a href="https://community.hpcloud.com/forum">Forum</a></dd>
-					<dd><a href="https://community.hpcloud.com/knowledge-base">Knowledge Base</a></dd>
-					<dd><a href="https://community.hpcloud.com/status">System Status</a></dd>
-				</dl>
-				<dl>
-					<dt><a href="https://console.hpcloud.com/">Console</a></dt>
-					<dd><a href="https://console.hpcloud.com/dashboard">Dashboard</a></dd>
-					<dd><a href="https://console.hpcloud.com/compute">Compute</a></dd>
-					<dd><a href="https://console.hpcloud.com/object_store">Object Storage</a></dd>
-					<dd><a href="https://console.hpcloud.com/account">Account</a></dd>
-				</dl>
-				<dl>
-					<dt>About Us</dt>
-					<dd><a href="https://www.hpcloud.com/about-us">About HP Cloud</a></dd>
-					<dd><a href="http://hp.com/cloud">HP Converged Cloud</a></dd>
-					<dd><a href="http://hp.com/">hp.com</a></dd>
-					<dd><a href="https://www.hpcloud.com/jobs">Careers</a></dd>					
-				</dl>
-				<dl>
-	        <dt>Contact</dt>
-			    <dd>
-						1-855-61CLOUD<br>
-						(855-612-5683)<br>
-						Intl: +1678-745-9010
-					</dd>
-					<dd><a href="https://www.hpcloud.com/contact_us">Contact Us</a></dd>
-					<dd><a href="http://twitter.com/hpcloud" class="twitter-icon" title="Follow us on Twitter">Follow @hpcloud on Twitter</a></dd></dl>
-				</dl>
-			</nav>
-			<div id="content-info" role="contentinfo">
-				<div class="container_16">
-					<div class="grid_10">
-						<ul>
-							<li><a href="http://welcome.hp.com/country/us/en/privacy.html" target="_blank">Privacy Statement</a></li>
-							<li><a href="http://www8.hp.com/us/en/privacy/terms-of-use.html" target="_blank">Terms of Use</a></li>
-							<li><a href="https://www.hpcloud.com/legal_docs">HP Cloud Services Legal Documents</a></li>
-							<li><a href="https://www.hpcloud.com/jobs" title="Jobs at HP Cloud">Jobs</a></li>
-							<li><a href="https://www.hpcloud.com/contact_us">Contact Us</a></li>
-						</ul>
-					</div>
-					<div class="grid_6 align-right">
-						©
-						2013
-						Hewlett-Packard Development Company, L.P.
-					</div>
-				</div>
-			</div>
-		</footer>
-	</div>
+
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="https://twitter.com/hpcloud"></a></li>
+    			<li class="youtube"><a href="http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="http://hpcloud.com/blog/feed.xml"></a></li>
+    			<li class="facebook"><a href="https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="http://www.linkedin.com/company/2591355"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span></li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of OpenStack, LLC, in the United States and other countries and are used with OpenStack LLC's permission. We are not affiliated with, endorsed or sponsored by OpenStack LLC, the OpenStack Advisory Board, or the OpenStack community.</p><br />
+    			<p>&copy; 2013 Hewlett-Packard Development Company, L.P.<br /><a href="http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
   <script>window.jQuery || document.write('<script src="/js/jquery-1.8.2f.min.js"><\/script>')</script>
 
-  <script src="/js/header-nav.js"></script>
-  <script src="/js/jumplinks.js"></script>
-  <script src="/js/google-code-prettify/prettify.js"></script>
-  <script src="/js/google-code-prettify/lang-css.js"></script>
-  <script src="/js/google-code-prettify/lang-go.js"></script>
-  <script src="/js/google-code-prettify/lang-scala.js"></script>
-  <script src="/js/google-code-prettify/lang-sql.js"></script>
-  <script src="/js/google-code-prettify/lang-yaml.js"></script>
-  <script src="/js/highlight.js"></script>
-  <script src="/js/jquery.tocify.min.js"></script>
+  <script src="/js/combined.js"></script>
   <script>
       __HP_CHAT_CONF = {};
       __HP_CHAT_CONF.sales = true;
@@ -232,9 +123,6 @@
             $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
             $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
         }
-//        function removeGhostSpaceFromCodeBlock() {
-//            $("span.pln:contains('  ')").remove();
-//        }
 
         $(function() {
             //Calls the tocify method on your HTML div.
@@ -247,14 +135,7 @@
             );
             // Style the REST commands
             styleRestCmds();
-
-//            removeGhostSpaceFromCodeBlock();
         });
     </script>
-<!--[if lte IE 7 ]>
-	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
-	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
-<![endif]-->
-
 </body>
 </html>
