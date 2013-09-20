@@ -6011,14 +6011,14 @@ header {
 }
 
 /* line 531, ../sass/styles.sass */
-.nav ul li {
+.header .nav-wrapper .nav ul li {
   background: #3f3f3f;
   line-height: 3em;
   vertical-align: middle;
   border-top: 2px solid white;
 }
 /* line 536, ../sass/styles.sass */
-.nav ul li a {
+.header .nav-wrapper .nav ul li a {
   font-family: "HP Simplified";
   color: white;
   font-size: 1.5em;
@@ -6030,14 +6030,14 @@ header {
 }
 @media screen and (min-width: 768px) {
   /* line 536, ../sass/styles.sass */
-  .nav ul li a {
+  .header .nav-wrapper .nav ul li a {
     padding-left: 42px;
     padding-right: 42px;
   }
 }
 @media screen and (min-width: 980px) {
   /* line 536, ../sass/styles.sass */
-  .nav ul li a {
+  .header .nav-wrapper .nav ul li a {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -6242,13 +6242,13 @@ header .top-bar .search-form .search-field {
 }
 
 /* line 640, ../sass/styles.sass */
-.nav {
+.header .nav-wrapper .nav {
   display: block !important;
   clear: both;
   padding-top: 1.5em;
 }
 /* line 644, ../sass/styles.sass */
-.nav ul {
+.header .nav-wrapper .nav ul {
   font-family: "HP Simplified";
   margin: 0;
   padding: 0;
@@ -6263,7 +6263,7 @@ header .top-bar .search-form .search-field {
   padding-right: 0 !important;
 }
 /* line 60, ../../../../../../../../../../Users/rpeters/.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
-.nav ul li {
+.header .nav-wrapper .nav ul li {
   list-style-image: none;
   list-style-type: none;
   margin-left: 0;
@@ -6274,33 +6274,33 @@ header .top-bar .search-form .search-field {
   padding-right: 32px;
 }
 /* line 48, ../../../../../../../../../../Users/rpeters/.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
-.nav ul li:first-child, .nav ul li.first {
+.header .nav-wrapper .nav ul li:first-child, .nav ul li.first {
   padding-left: 0;
 }
 /* line 49, ../../../../../../../../../../Users/rpeters/.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
-.nav ul li:last-child {
+.header .nav-wrapper .nav ul li:last-child {
   padding-right: 0;
 }
 /* line 50, ../../../../../../../../../../Users/rpeters/.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
-.nav ul li.last {
+.header .nav-wrapper .nav ul li.last {
   padding-right: 0;
 }
 @media screen and (min-width: 768px) {
   /* line 644, ../sass/styles.sass */
-  .nav ul {
+  .header .nav-wrapper .nav ul {
     padding-left: 42px;
     padding-right: 42px;
   }
 }
 @media screen and (min-width: 980px) {
   /* line 644, ../sass/styles.sass */
-  .nav ul {
+  .header .nav-wrapper .nav ul {
     padding-left: 20px;
     padding-right: 20px;
   }
 }
 /* line 651, ../sass/styles.sass */
-.nav ul li {
+.header .nav-wrapper .nav ul li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -6309,15 +6309,15 @@ header .top-bar .search-form .search-field {
   border-top: 0;
 }
 /* line 656, ../sass/styles.sass */
-.nav ul li:not(:first-child) {
+.header .nav-wrapper .nav ul li:not(:first-child) {
   border-left: 1px solid #d6d6d6;
 }
 /* line 658, ../sass/styles.sass */
-.nav ul li span {
+.header .nav-wrapper .nav ul li span {
   display: block;
 }
 /* line 660, ../sass/styles.sass */
-.nav ul li a {
+.header .nav-wrapper .nav ul li a {
   color: black;
   font-size: 1em;
   line-height: 1.5em;
