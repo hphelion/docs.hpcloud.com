@@ -32,7 +32,7 @@ lookup['/file/python-novaclient_2.6.8-17.tar.gz'] = 'https://a248.e.akamai.net/c
 lookup['/file/Python-novaclient2.6.8-17.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp17.zip'
 lookup['/file/python-novaclient_2.6.8-17.deb'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp17_all.deb'
 lookup['/file/WinCLI-1.3.3.8.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.3.8.zip'
-lookup['/file/WinCLI-1.3.3.9.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.3.9.zip'
+lookup['/file/WinCLI-1.3.3.9.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/WinCLI-1.3.3.9.zip'
 
 
 def handle_no_file(env, start_response):
