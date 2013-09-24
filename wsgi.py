@@ -3,24 +3,6 @@ from wsgiref.simple_server import make_server
 
 # Lookup is a lookup for redirects to files in object storage.
 lookup = {}
-lookup['/file/hpcloud-1.3.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/v1.3.0/hpcloud-1.3.0.gem'
-lookup['/file/hpcloud-1.4.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/v1.4.0/hpcloud-1.4.0.gem'
-lookup['/file/hpcloud-1.5.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/v1.5.0/hpcloud-1.5.0.gem'
-lookup['/file/hpcloud-1.6.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/v1.6.0/hpcloud-1.6.0.gem'
-lookup['/file/hpcloud-1.7.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/v1.7.0/hpcloud-1.7.0.gem'
-lookup['/file/hpcloud-1.8.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/v1.8.0/hpcloud-1.8.0.gem'
-lookup['/file/hpcloud-1.9.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/v1.9.0/hpcloud-1.9.0.gem'
-lookup['/file/hpcloud-1.9.1.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/hpcloud-1.9.1.gem'
-lookup['/file/hpcloud-2.0.0.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/hpcloud-2.0.0.gem'
-lookup['/file/hpcloud-test.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/unixcli/hpcloud-test.gem'
-lookup['/file/hpcloud.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/hpcloud-1.9.1.gem'
-lookup['/file/hpfog-0.0.16.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog-0.0.16.gem'
-lookup['/file/hpfog-0.0.17.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog-0.0.17.gem'
-lookup['/file/hpfog-0.0.18.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog-0.0.18.gem'
-lookup['/file/hpfog-0.0.19.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog-0.0.19.gem'
-lookup['/file/hpfog-0.0.20.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/hpfog-0.0.20.gem'
-lookup['/file/hpfog-0.0.21.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/hpfog-0.0.21.gem'
-lookup['/file/hpfog.gem'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/hpfog.gem'
 lookup['/file/hpNET-1.3.0.6.nupkg'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/HPCloud-API.1.3.0.6.nupkg'
 lookup['/file/hpPHP-1.1.0.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/HPCloud-PHP-1.1.0.zip'
 lookup['/file/nova-stuff.tar'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/prettytable-0.5.tar.gz'
@@ -32,9 +14,6 @@ lookup['/file/Python-novaclient2.6.8.zip'] = 'https://a248.e.akamai.net/cdn.hpcl
 lookup['/file/python-novaclient_2.6.8-17.tar.gz'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/python-novaclient_2.6.8-1hp17.tar.gz'
 lookup['/file/Python-novaclient2.6.8-17.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp17.zip'
 lookup['/file/python-novaclient_2.6.8-17.deb'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/python-novaclient_2.6.8-1hp17_all.deb'
-lookup['/file/WinCLI-1.3.3.8.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/WinCLI-1.3.3.8.zip'
-lookup['/file/WinCLI-1.3.3.9.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/WinCLI-1.3.3.9.zip'
-lookup['/file/WinCLI-1.3.4.5.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/WinCLI-1.3.4.5.zip'
 
 
 def handle_no_file(env, start_response):
