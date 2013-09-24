@@ -6,14 +6,6 @@ lookup = {}
 lookup['/file/hpNET-1.3.0.6.nupkg'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/HPCloud-API.1.3.0.6.nupkg'
 lookup['/file/hpPHP-1.1.0.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/HPCloud-PHP-1.1.0.zip'
 lookup['/file/nova-stuff.tar'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/prettytable-0.5.tar.gz'
-lookup['/file/python-novaclient-debian.deb'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2-5.6.8-1hp10_all.deb'
-lookup['/file/python-novaclient.tar'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2-3.6.8-1hp10.tar.gz'
-lookup['/file/python-novaclient_2.6.8.deb'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp15_all.deb'
-lookup['/file/python-novaclient_2.6.8.tar.gz'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp15.tar.gz'
-lookup['/file/Python-novaclient2.6.8.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp15.zip'
-lookup['/file/python-novaclient_2.6.8-17.tar.gz'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/python-novaclient_2.6.8-1hp17.tar.gz'
-lookup['/file/Python-novaclient2.6.8-17.zip'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw2/python-novaclient_2.6.8-1hp17.zip'
-lookup['/file/python-novaclient_2.6.8-17.deb'] = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/h3d77dedbb2fa5f545ce40fac227b06c6/prodaw2/python-novaclient_2.6.8-1hp17_all.deb'
 
 
 def handle_no_file(env, start_response):
