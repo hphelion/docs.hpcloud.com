@@ -15,3 +15,4 @@ git clone git@git.hpcloud.net:DevExDocs/documentation.git
 cd documentation
 git checkout "${BRANCH}"
 git pull origin "${BRANCH}"
+cp _config.yml ../..
