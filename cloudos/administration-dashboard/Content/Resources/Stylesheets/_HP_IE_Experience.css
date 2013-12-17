@@ -1,0 +1,402 @@
+/*<meta />*/
+/* This header may be removed before distributing to customers. 
+
+FILE:         _HP_IE_Experience.css
+DESCRIPTION:  Cascading Style Sheet for HP software products
+MODIFIED:     February 28, 2013
+LEVEL         CSS Level 2 (plus support for Madcap Flare Webhelp)
+VERSION:      1.0 (released with fileset 1.80)
+
+*/
+
+@import url('_HP_IE.css');
+
+/* Paragraphs */
+
+body
+{
+	color: #222222;
+}
+
+/* Links */
+
+a
+{
+	color: #007dba;
+}
+
+a:link
+{
+	color: #007dba;
+}
+
+a:visited
+{
+	color: #822980;
+}
+
+a.MiniTOC1:link,
+a.MiniTOC2:link,
+a.MiniTOC3:link,
+a.MiniTOC4:link,
+a.MiniTOC5:link,
+a.MiniTOC6:link,
+a.MiniTOC7:link,
+a.MiniTOC8:link
+{
+	color: #007dba;
+}
+
+a.MiniTOC1:visited,
+a.MiniTOC2:visited,
+a.MiniTOC3:visited,
+a.MiniTOC4:visited,
+a.MiniTOC5:visited,
+a.MiniTOC6:visited,
+a.MiniTOC7:visited,
+a.MiniTOC8:visited
+{
+	color: #822980;
+}
+
+/* popup and dropdown icon  */
+
+a.pop
+{
+	color: #007dba;
+	text-decoration: none;
+}
+
+a.pop:visited
+{
+	color: #822980;
+}
+
+a.Popup 
+{
+	background-image: url('./_HP_Experience_expand.png');
+}
+
+/* Headings */
+
+h1
+{
+	color: #333333;
+}
+
+h2
+{
+	color: #333333;
+}
+
+/* Rules */
+
+hr
+{
+	color: #cccccc;
+}
+
+/* Admonitons */
+
+/* indicates deprecation of methods in APIs and command line tools */
+
+div.Admonition_Deprecated
+{
+	background-color: #E5E8E8;
+	border-color: #E5E8E8;
+}
+
+div.Admonition_Note, div.Admonition_Caution, div.Admonition_Tip
+{
+                background-color: #E5E8E8;
+		border-color: #E5E8E8;
+}
+
+/* tables */
+
+table
+{
+	color: 	#222222;
+}
+
+td
+{
+	color: 	#222222;
+}
+
+th
+{
+	color: 	#333333;
+	background-color: #E5E8E8;
+	font-size: 110%;
+	border-bottom: solid 1px #cccccc;
+	border-right-color: #cccccc;
+	border-top: .1em solid #cccccc;
+	vertical-align: top;
+}
+
+table.no_lines, table.no_lines td
+{      
+            color: #222222;         
+}
+
+table.no_lines th
+{      
+            color: #333333;         
+}
+
+caption
+{
+	color: #222222;
+}
+
+/* backgrounds for examples */
+
+div.example
+{
+	background-color: #E5E8E8;
+	border-color: #E5E8E8;
+}
+
+/* MadCap Flare Styles */
+
+MadCap|breadcrumbsProxy
+{
+	color: #007dba;
+	border-bottom: 1px solid #cccccc;
+}
+
+MadCap|breadcrumbsProxy:visited
+{
+	color: #822980;
+}
+
+span.MCBreadcrumbsDivider, span.MCBreadcrumbs
+{		
+	color: #222222;
+}
+
+MadCap|conceptLink
+{
+	color: #007dba;
+	mc-image: url('./_HP_Experience_RelatedTopics.png');
+}
+
+MadCap|conceptLink:link
+{
+	color: #007dba;
+}
+
+MadCap|conceptLink:visited
+{
+	color: #822980;
+}
+	
+MadCap|conceptLink.ListFormatHeader
+{
+	color: #333333;
+}
+
+MadCap|dropDown
+{
+	mc-closed-image: url('./_HP_Experience_expand.png');
+	mc-open-image: url('./_HP_Experience_collapse.png');
+	mc-image-position: left;
+}
+
+MadCap|dropDownHead
+{
+       vertical-align: text-top;
+}
+
+MadCap|expanding
+{
+	mc-image: url('./_HP_Experience_expand.png'); 
+	padding-right: 18px;
+}
+
+MadCap|glossaryTerm
+{
+	border: none;
+	color: #007dba;
+	font-weight: normal;
+	mc-image: url('./_HP_Experience_Glossary.png'); 
+}
+
+MadCap|glossaryTerm.Expanding
+{
+	color: #007dba;
+}
+
+MadCap|glossaryTerm.Hyperlink
+{
+	color: #007dba;
+}
+
+MadCap|glossaryTerm.Popup
+{
+	color: #007dba;
+}
+
+MadCap|helpControlMenu
+{
+	background-color: #ffffff;
+	border: solid 1pt #cccccc;
+	border-color: #cccccc;
+	border-collapse: collapse;
+	color: #007dba;
+}
+
+MadCap|helpControlMenuItem
+{
+	border: none;
+	color: #007dba;
+}
+
+MadCap|helpControlMenuItem.Highlighted
+{
+	background-color: #ffffff;
+	color: #007dba;
+}
+
+MadCap|keywordLink
+{
+	color: #007dba;
+	mc-image: url('./_HP_Experience_RelatedTopics.png'); 
+}
+
+MadCap|keywordLink:link
+{
+	color: #007dba;
+}
+
+MadCap|keywordLink:visited
+{
+	color: #822980;
+}
+
+MadCap|keywordLink.ListFormatHeader
+{
+	color: #333333;
+	mc-help-control-display: list;
+	mc-image: none;
+	font-weight: bold;
+}
+
+MadCap|miniTocProxy
+{
+	border-top: solid 0px #ffffff;
+}
+
+MadCap|popup
+{
+
+	background-color: #ffffff;
+	border: none;	
+	color: #007dba;
+}
+
+MadCap|popup:link
+{
+	color: #007dba;
+}
+
+MadCap|popup:visited
+{
+	color: #822980;
+}
+
+MadCap|popupBody
+{
+	background-color: #ffffff;	
+	margin: 2pt;
+	border: solid 1pt #cccccc;
+	border-color: #cccccc;
+}
+
+MadCap|popupHead
+{
+	background-color: #ffffff;
+	background-image: url('./_HP_Experience_expand.png');
+}
+
+MadCap|relatedTopics
+{
+ 	color: #007dba;
+ 	margin: 0em;
+	mc-image: url('./_HP_Experience_RelatedTopics.png');
+}
+
+MadCap|relatedTopics.ListFormatHeader
+{
+        color: #333333;
+}
+
+/* controls list bullet colors */
+MadCap|relatedTopicsControlList
+{
+        color: #333333;
+}
+
+MadCap|toggler
+{
+	mc-image: url('./_HP_Experience_expand.png'); 
+}
+
+MadCap|toggler:link
+{
+	color: #007dba;
+}
+
+MadCap|toggler:visited
+{
+	color: #822980;
+}
+
+MadCap|toggler:hover
+{
+	text-decoration: underline;
+}
+
+MadCap|xref
+{
+	color: #007dba;
+}
+
+MadCap|xref:link
+{
+	border: none;
+	color: #007dba;
+}
+
+MadCap|xref:visited
+{
+	border: none;
+	color: #822980;
+}
+
+MadCap|xref.noNum
+{
+	border: none;
+	color: #007dba;
+}
+
+MadCap|xref.noNum:visited
+{
+	border: none;
+	color: #822980;
+}
+
+span.MCPopup > a:link
+{
+	color: #007dba;
+	background-image: url('./_HP_Experience_expand.png');
+	padding-right: 14px;
+}
+
+span.MCPopupBody
+{
+	background-color: #ffffff;
+}
+
+/* copyright 2013 Hewlett-Packard Development Company, L.P. */

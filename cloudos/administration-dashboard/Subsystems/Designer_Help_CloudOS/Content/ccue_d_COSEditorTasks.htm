@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Topology Designs|Editor" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Designer_Help_CloudOS.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Designing a Topology Layout</title>
+        <!-- WEBHELP-ONLY: The following statement fixes cropping errors when customers use IE7 at 120 dpi (for example, list numbering problems) -->
+        <!--[if lt IE 8]>
+            <style type="text/css"> 
+                body
+                {
+                        padding-left: 16px;
+                }
+            </style>
+         <![endif]-->
+        <link href="SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/_HP_IE_Experience.css" rel="stylesheet" />
+        <script src="SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../Designer_Help_CloudOS_CSH.htm#ccue_d_COSEditorTasks.htm" style="">Open topic with navigation</a>
+        </p>
+        <h1 MadCap:conditions="">Designing a Topology Layout</h1>
+        <p MadCap:conditions="">For information on how to create a new design, see <a href="ccue_d_COSCreateNew.htm" class="MCXref_0" xrefformat="{para}">Create a New Design</a>.</p>
+        <p MadCap:conditions="">After creating the design, you then select and arrange the free-form component  nodes and connectors in the <b>Editor</b>.</p>
+        <h2 MadCap:conditions="">To create the design layout</h2>
+        <p MadCap:conditions=""><b>Nodes</b>
+        </p>
+        <p MadCap:conditions=""> As you move your cursor around the canvas in the <b>Editor</b>, gray tiles display. Clicking a tile presents you with a list of available node types determined by the <b>Cloud Profile</b>.</p>
+        <p MadCap:conditions="">A new blank design displays at least one validation error indicating the design layout is unsaved. As you add nodes, more validation issues will display until you set required properties for the nodes and save the design.</p>
+        <p MadCap:conditions="">By default, the system proposes a <b>Name</b> for the node consisting of the node type and a sequential number, e.g., Network Segment 1. This name can be changed by editing the node properties.</p>
+        <p MadCap:conditions="" style="font-weight: bold;">Connectors</p>
+        <p MadCap:conditions="">Connectors are used to establish relationships between nodes, for example between a Server Group and a Volume Group. <span style="color: #ff0000; font-style: italic;"><span style="color: #000000;font-style: normal;">Line connectors represent one or more purposes for the connection between two nodes, even though there is a single line displayed. This design helps prevent excess visual display and allows the connector to represent multiple networking relationships. </span></span></p>
+        <p MadCap:conditions="">You can add a connector and a node in a single operation by dragging a connector from a node to an empty tile. There you will be presented with a list of valid nodes for connection. You can also select a node and drag the blue circle from either side and drop it on the canvas in position. Only valid nodes display for selection</p>
+        <p MadCap:conditions=""> If connector properties are required, the connector displays a validation error. </p>
+        <p MadCap:conditions=""><b>Rules for node and connector layout</b>
+        </p>
+        <p MadCap:conditions="">The system validates the following rules as you create a design: </p>
+        <ul>
+            <li MadCap:conditions="" value="1">You can only set node properties in the <b>Editor</b> if you selected a Resource Pool during design creation.</li>
+            <li value="2">Only a Router node, a Load Balancer Service node, or a Server Group node can be connected to an External Network node.</li>
+            <li value="3">Only a Server Group node and a Load Balancer Service node can be connected to a Network Segment node.</li>
+            <li value="4">Only a Network Segment node and an External Network node can be connected to a Router node.</li>
+            <li value="5">A Server Group node can be connected to all other nodes. A Server Group node must be connected to a Network Segment node to make it accessible to an end user after it is created in a service. </li>
+            <li value="6">	A Volume Group node must be connected to a Server Group node to create a valid topology.</li>
+        </ul>
+        <p><b><a name="StepsAdd"></a>Design steps</b>
+        </p>
+        <ol>
+            <li MadCap:conditions="" value="1">After you <a href="ccue_d_COSCreateNew.htm" class="MCXref_0" xrefformat="{para}">Create a New Design</a>, the <b>Editor</b> opens with a blank canvas.</li>
+            <li MadCap:conditions="" value="2">Left-click a tile to add the first node. </li>
+            <li value="3">
+                <p MadCap:conditions="">Select a topology node type from the list, which is populated according to the <b>Cloud Profile</b> selected during design creation. As you hover over a node, a tool tip displays. Possible node options are:</p>
+                <table style="width: 100%;margin-left: auto;margin-right: auto;">
+                    <col />
+                    <col style="width: 28px;" />
+                    <col />
+                    <thead>
+                        <tr>
+                            <th>Icon</th>
+                            <th>Node Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center;">
+                                <img src="Resources/Images/icon_external_network.png" />
+                            </td>
+                            <td>
+                                <p MadCap:conditions="">External Network </p>
+                            </td>
+                            <td>
+                                <p MadCap:conditions="">A logical representation of a public network.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <img src="Resources/Images/icon_loadbalancer.png" />
+                            </td>
+                            <td>Load Balancer </td>
+                            <td>
+                                <p>A logical representation of a network load balancer
+that is configured on a virtual machine.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <img src="Resources/Images/icon_networksegment.png" />
+                            </td>
+                            <td>Network Segment</td>
+                            <td>
+                                <p>A logical representation of a network or security group
+definition. </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <img src="Resources/Images/icon_router.png" />
+                            </td>
+                            <td>
+                                <p MadCap:conditions="">Router</p>
+                                <p MadCap:conditions=""><span style="font-size: 8pt; font-style: italic;">(available only with <span class="CCUE_variablesHP Cloud OS">HP Cloud OS</span> Grizzly Cloud Profile)</span>
+                                </p>
+                            </td>
+                            <td>
+                                <p>A logical representation of a network router. </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <img src="Resources/Images/icon_servergroup.png" />
+                            </td>
+                            <td>Server Group</td>
+                            <td>
+                                <p>A  logical representation of a single server or multiple servers
+with the same configuration. </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <img src="Resources/Images/icon_volumegroup.png" />
+                            </td>
+                            <td>Volume Group</td>
+                            <td>
+                                <p>A  logical representation of a storage device. </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+        </ol>
+        <ol>
+            <li value="4" MadCap:conditions="">  The node icon and name display on the canvas in the selected tile and node Properties display in the right panel. <b>NOTE</b>: The red "x" on the node and the red text in the Properties panel indicate that properties need to be updated before saving. These missing properties are flagged as invalid and are tracked in the <b>Validation</b> tab.</li>
+            <li MadCap:conditions="" value="5">With the node selected (blue highlighting), drag one of the blue circles on either side of the node and drop. You are presented with a list of valid nodes.</li>
+            <li MadCap:conditions="" value="6">Make your selection from the list of available nodes. </li>
+            <li MadCap:conditions="" value="7">Repeat steps 5 and 6 to design your template. </li>
+        </ol>
+        <h2 MadCap:conditions="">To set properties</h2>
+        <p MadCap:conditions="">Properties set here become the default configuration for the design. </p>
+        <ol>
+            <li MadCap:conditions="" value="1">Select a node. The Properties panel opens on the right with red asterisks indicating required fields. </li>
+            <li value="2"><a name="NodeProperties"></a>Node properties are defined below. </li>
+        </ol>
+        <p><b>NOTE</b>:</p>
+        <ul>
+            <li value="1">An asterisk (*) indicates the field is required. </li>
+            <li value="2">Check the <b>Modifiable</b> box to indicate the property can be modified by a user of other HP Cloud provisioning software that is using Topology Designs from <span class="CCUE_variablesHP Cloud OS">HP Cloud OS</span>.</li>
+        </ul>
+        <table style="width: 100%;margin-left: auto;margin-right: auto;">
+            <col />
+            <col style="width: 28px;" />
+            <col />
+            <thead>
+                <tr>
+                    <th>Node Name</th>
+                    <th>Node Properties</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td>External Network</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Name*</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">By default, the system proposes a name with a sequential number for each external network segment added to the design, e.g., External Network Segment 1, External Network Segment 2. Replace this name, if needed, to meet your business needs.</td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">External Network* </td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Select the name of the external (public) network.</td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>Load Balancer</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Name*</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Name of the load balancer.</td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Service*</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">
+                        <p MadCap:conditions="">Options are:<span style="color: #ff0000; font-style: italic;"> <![CDATA[ ]]></span></p>
+                        <ul>
+                            <li MadCap:conditions="" value="1"><b>Use existing service</b> - Use the existing resource pool's Load Balancer service. </li>
+                            <li MadCap:conditions="" value="2"><b>Create new service</b> by entering the following information:</li>
+                        </ul>
+                        <table style="margin-left: 0; margin-right: auto;">
+                            <col style="width: 199px;" />
+                            <col />
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: bold;"><b>Name</b>*</td>
+                                    <td>By default, the system proposes a name with a sequential number for each load balancer added to the design. Replace this name, if needed, to meet your business needs.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">Service</td>
+                                    <td>&#160;</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">Resource Pool service*</td>
+                                    <td>A pool of resources associated with the resource provider when the Resource Pool was created through Graffiti.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">Instance Name Prefix*</td>
+                                    <td>A unique prefix to the name of the host you are creating that provides useful identification and avoids duplication.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">Key Name</td>
+                                    <td>Select the keypair to be used for this instance. Keypairs are SSH security keys that  provide authentication and allow you to exchange traffic securely within a VM. </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td style="color: #000000;font-style: normal;">Network Segment</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4" style="color: #000000;font-style: normal;">Name*</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4" style="color: #000000;font-style: normal;">By default, the system proposes a name with a sequential number for each network segment added to the design, e.g., Network Segment 1, Network Segment 2. Replace this name, if needed, to meet your business needs.</td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td style="color: #000000;font-style: normal;">&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4" style="color: #000000;font-style: normal;">Type* </td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4" style="color: #000000;font-style: normal;">Currently the only type of network is <b>Subnet</b>, which indicates a network that may be connected to zero or more subnets.</td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td style="color: #000000;font-style: normal;">&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4" style="color: #000000;font-style: normal;">Network* </td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4" style="color: #000000;font-style: normal;">Available private networks defined in <span class="CCUE_variablesHP Cloud OS">HP Cloud OS</span>.</td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td style="color: #000000;font-style: normal;">&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4" style="color: #000000;font-style: normal;">Select a Subnet*</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4" style="color: #000000;font-style: normal;">
+                        <p MadCap:conditions="">Select:</p>
+                        <ul>
+                            <li MadCap:conditions="" value="1"><b>Existing subnet </b>- subnets defined in <span class="CCUE_variablesHP Cloud OS">HP Cloud OS</span></li>
+                            <li MadCap:conditions="" value="2"><b>Create a subnet</b> -<span> i</span>f selected, you are prompted to enter:</li>
+                        </ul>
+                        <table style="margin-left: 0; margin-right: auto;">
+                            <col style="width: 199px;" />
+                            <col />
+                            <tbody>
+                                <tr>
+                                    <td><b>Subnet Name</b>
+                                    </td>
+                                    <td>&#160;</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Subnet Description</b>
+                                    </td>
+                                    <td>&#160;</td>
+                                </tr>
+                                <tr>
+                                    <td><b>IP Version</b>
+                                    </td>
+                                    <td>Version of IP protocol to be used.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Mask Size</b>
+                                    </td>
+                                    <td>&#160;</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Enable DHCP</b>
+                                    </td>
+                                    <td>Yes or No.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">DNS Servers</td>
+                                    <td>Hostname or IP of DNA Server.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">Disable Gateway</td>
+                                    <td>&#160;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>Router</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Name*</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">By default, the system proposes a name with a sequential number for each router  added to the design, e.g., Router 1, Router 2. Replace this name, if needed, to meet your business needs.</td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Router* </td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">
+                        <p>Select:</p>
+                        <ul>
+                            <li MadCap:conditions="" value="1"><b>Existing Router</b> - routers that are defined in <span class="CCUE_variablesHP Cloud OS">HP Cloud OS</span>. </li>
+                            <li MadCap:conditions="" value="2"><b>Create new router</b> -  Enter the <b>Router Name</b>.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>Server Group</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Name*</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">By default, the system proposes a name with a sequential number for each server group added to the design, e.g., Server Group 1, Server Group 2. Replace this name, if needed, to meet your business needs.</td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Instance Name Prefix* </td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">
+                        <p MadCap:conditions="">A prefix to the name of the host you are creating.</p>
+                    </td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Number of Instances</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">
+                        <p>Controls the minimum and maximum number of servers that can be used in the server group.</p>
+                        <p>To create a single server Server Group, specify 1 for both values. For a Server Group where the maximum number of servers is greater than the minimum, the user is allowed to add additional servers in the future up to the maximum.</p>
+                    </td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Image </td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4"><b>Image</b> is only available if a Resource Pool was selected during design creation. To add a Resource Pool to the design, click the <b>Edit Design Properties</b> button.</td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Machine Flavor* </td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">
+                        <p>A flavor describes the machine configuration size (amount of memory, number of CPUs, and ephemeral disk space available) used to create new VMs. </p>
+                        <p><b>Machine Flavor</b> is only available if a Resource Pool was selected during design creation. To add a Resource Pool to the design, click <b>Edit</b>. </p>
+                    </td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Key Name </td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">
+                        <p>Select the keypair to be used for this instance.  Keypairs are the SSH credentials required to login to a server. To be able to use a keypair for accessing an instance, the user must have the private key. </p>
+                        <p><b>Key Name</b> is only available if a <b>Resource Pool</b> was selected during design creation. </p>
+                    </td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>Volume Group</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Name*</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">By default, the system proposes a name with a sequential number for each volume group added to the design, e.g., Volume Group 1, Volume Group 2. Replace this name, if needed, to meet your business needs.</td>
+                </tr>
+                <tr MadCap:conditions="">
+                    <td>&#160;</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">Volume*</td>
+                    <td MadCap:conditions="Designer_Conditions.CSA_4">
+                        <p MadCap:conditions="">Identifies the disc storage volume allocated to the group. </p>
+                        <p MadCap:conditions="">Options:</p>
+                        <ul>
+                            <li MadCap:conditions="" value="1"><b>Use Existing Volume</b> - enter the <b>Volume Reference</b>  and indicate if it is <b>Modifiable</b>.</li>
+                            <li MadCap:conditions="" value="2"><b>Create a volume </b> - you are prompted to enter:</li>
+                        </ul>
+                        <table style="margin-left: 0; margin-right: auto;">
+                            <col style="width: 199px;" />
+                            <col />
+                            <tbody>
+                                <tr>
+                                    <td><b>Name</b>*</td>
+                                    <td>By default, the system proposes a name with a sequential number for each volume group added to the design, e.g., Volume Group 1, Volume Group 2. Replace this name, if needed, to meet your business needs.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Volume</b>*</td>
+                                    <td><i style="color: #000000; font-style: normal;">Keep the default option <b>Create a Volume</b>.</i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><b>Instance Name Prefix</b>*</p>
+                                        <p>(Modifiable)</p>
+                                    </td>
+                                    <td>A prefix to the name of the volume group you are creating.</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><b>Volume Size</b> (GB)</p>
+                                        <p>(Modifiable)</p>
+                                    </td>
+                                    <td>Enter a number representing the size of the volume in GB. </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p><b>Volume Type</b>
+                                        </p>
+                                        <p>(Modifiable)</p>
+                                    </td>
+                                    <td>Available values from <span class="CCUE_variablesHP Cloud OS">HP Cloud OS</span> that identify the storage backend driver capabilities such as SATA or SSD retrieved from the Eve API. Eve is an infrastructure topology design provisioner for OpenStack-based IaaS.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ol>
+            <li MadCap:conditions="" value="3">Click <b>Save.</b></li>
+        </ol>
+        <h2 MadCap:conditions=""><a name="ConnectorProps"></a>To set connector properties</h2>
+        <p MadCap:conditions="">Connector properties are required if the connector is red. If required, properties open in the right panel:</p>
+        <table style="width: 100%;margin-left: auto;margin-right: auto;">
+            <col />
+            <col />
+            <thead>
+                <tr>
+                    <th>Nodes</th>
+                    <th>Field(s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Between a Volume Group and a Server Group</td>
+                    <td><b>Device (Modifiable)</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Between a Server Group and a Network Segment</td>
+                    <td>
+                        <p><b>Security Group (Modifiable) </b>- Select a <b>Security Group</b> or <b>Create a Security Group</b>.</p>
+                        <p>If you select <b>Create a Security Group</b>, select <b>Yes</b> if you want an unassigned Floating IP address allocated to each server in the Server Group.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p MadCap:conditions=""><a name="ToEditNodeProps"></a>To edit the layout, see <a href="ccue_d_COSEditDesign.htm" class="MCXref_0" xrefformat="{para}">Edit a Topology Design</a>.</p>
+        <p MadCap:conditions=""> <![CDATA[ ]]></p>
+        <hr width="100%" size="0" align="center" padding-bottom="0" style="clear:both" />
+        <table style="border: none; border-collapse: collapse; width: 100%; margin-left: 0; margin-right: auto; margin-top: 0; padding-top: 0">
+            <tr>
+                <td style="border: none; border-collapse: collapse;">
+                    <p style="font-size: 85%; text-align: left;direction: ltr;"><a href="Resources/MasterPages/_HP_Legal_Notices.htm#1">© <span class="_HPc_Basic_Variables_HP_Copyright_Date_Range">2013-2014</span> Hewlett-Packard Development Company, L.P.</a>
+                    </p>
+                </td>
+                <td style="border: none;">
+                    <div id="hp-feedbackLink" style="font-size: 85%;margin: 0px 0px 4px 0px;line-height: 1.25em;text-align: right;"><a href="javascript:sendFeedback();" class="avoidPrint">Send documentation feedback to HP</a>
+                    </div>
+                    <!-- Localizable -->
+                    <div id="hp-feedbackDiv" class="MCTextPopupBody" style="display:none; word-wrap:break-word;">
+                        <div style="position: absolute;top: 2px;right: 2px;text-align: right;"><a href="javascript:closeFeedback();" id="hp-feedbackClose">Close</a>
+                        </div>
+                        <!-- Localizable -->
+                        <p style="font-weight: bold; margin-top: 1.5em;">We welcome your comments!</p>
+                        <!-- Localizable -->
+                        <p>To open the configured email client on this computer, <a name="hp-feedbackOpen" id="hp-feedbackOpen" style="color: #0066CC;">open an email window</a>.</p>
+                        <!-- Localizable -->
+                        <p>Otherwise, copy the information below to a web mail client, and send this email to <span class="_HPc_Basic_Variables_HP_Product_IE_Team_PDL">COSie@hp.com</span>.</p>
+                        <!-- Localizable -->
+                        <hr />
+                        <div id="hp-feedbackBody">
+                            <br />Help Topic ID: <span id="hp-feedbackURL"></span><br /><br />Product: <span id="hp-feedbackProduct"></span><span id="hp-feedbackAcronym"></span>&#160;<span id="hp-feedbackVersion"></span><br /><br />Topic Title: <span id="hp-feedbackTopic"></span><br /><br />Feedback:<br /><br /><br /></div>
+                        <!-- Localizable -->
+                        <hr />
+                    </div>
+                    <div style="display:none;" id="hp-feedback-variables" productName="Cloud OS" productVersion="1.20" commentsEmailAddress="COSie@hp.com" productAcronym="" topicTitle="Designing a Topology Layout" skinLine1="Cloud OS" skinLine2="">&#160;</div>
+                    <p>
+                        <script src="Resources/MasterPages/_HP_Feedback.js">
+                        </script>
+                    </p> <![CDATA[ ]]></td>
+                <td style="border: none;">
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

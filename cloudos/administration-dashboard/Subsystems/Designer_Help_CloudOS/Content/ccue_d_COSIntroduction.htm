@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Designer_Help_CloudOS.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Topology Designs</title>
+        <!-- WEBHELP-ONLY: The following statement fixes cropping errors when customers use IE7 at 120 dpi (for example, list numbering problems) -->
+        <!--[if lt IE 8]>
+            <style type="text/css"> 
+                body
+                {
+                        padding-left: 16px;
+                }
+            </style>
+         <![endif]-->
+        <link href="SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/_HP_IE_Experience.css" rel="stylesheet" />
+        <script src="SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../Designer_Help_CloudOS_CSH.htm#ccue_d_COSIntroduction.htm" style="">Open topic with navigation</a>
+        </p>
+        <h1><span class="CCUE_variablesTopology Designer">Topology Designs</span>
+        </h1>
+        <p>Use the <span class="CCUE_variablesTopology Designer">Topology Designs</span> area of the <span class="CCUE_variablesCloud OS Administration Dashboard">HP Cloud OS Administration Dashboard</span> to manage service designs, which are the recipes for automating the cloud. A topology design is used for straightforward IaaS deployments, and allows you to design in a free-form layout where connection relationships implicitly define the service fulfillment lifecycle.  </p>
+        <p>The provider for <span class="CCUE_variablesTopology Designer">Topology Designs</span> is <span class="CCUE_variablesHP Cloud OS">HP Cloud OS</span>. Available components are determined by the version of OpenStack you select within <span class="CCUE_variablesHP Cloud OS">HP Cloud OS</span>, e.g., Diablo, Grizzly. As part of creating a design, you add nodes and connectors  and set properties in the <b>Editor</b> tab. Use the <b>Validation</b> tab at any time to view details about design errors.</p>
+        <p>After creating the design, you can optionally create one or more <b>Profiles</b> based on that design which allows you to override some of the original configuration <span style="color: #000000; font-style: normal;">properties</span>. Profiles create an association to a design document and allow you to set different values such as flavors, machine images, or keypairs.</p>
+        <p><span class="CCUE_variablesTopology Designer">Topology Designs</span> is accessed within the <span class="CCUE_variablesCloud OS Administration Dashboard">HP Cloud OS Administration Dashboard</span> by selecting <b>Project &gt; Provisioning &gt; Topology Designs</b>. A list of existing designs and their status display in the <b>Browse Designs</b> window.</p>
+        <p>Tasks in <span class="CCUE_variablesTopology Designer">Topology Designs</span> are organized within the following tabs:</p>
+        <table style="width: 100%;margin-left: auto;margin-right: auto;">
+            <col />
+            <col />
+            <col />
+            <thead>
+                <tr>
+                    <th>Window</th>
+                    <th>Description</th>
+                    <th>Available Tasks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="ccue_d_COSBrowseDesigns.htm" class="MCXref_0" xrefformat="{para}">Browse Designs</a>
+                    </td>
+                    <td>A list of existing topology designs and their status.</td>
+                    <td>
+                        <ul>
+                            <li value="1"><b>View design details</b> - click a design to open it in the <b>Overview</b> tab</li>
+                            <li value="2"><b>Create</b>  - create a new topology design </li>
+                            <li value="3"><b>Import</b>  - Import an external design </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a href="ccue_d_COSOverview.htm" class="MCXref_0" xrefformat="{para}">Overview</a>
+                    </td>
+                    <td>
+                        <p>Displays the details of the selected design:</p>
+                        <ul>
+                            <li value="1">Name</li>
+                            <li value="2">Last Modified</li>
+                            <li value="3">Cloud Profile</li>
+                            <li value="4">Resource Pool</li>
+                            <li value="5">Validation Status</li>
+                            <li value="6">Structure Overview</li>
+                            <li value="7">Topology diagram </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li value="1"><b>Save</b> <![CDATA[ ]]></li>
+                            <li value="2"><b>Edit</b> - the design properties.</li>
+                            <li value="3"><b>Save as</b> - make a copy of a design.</li>
+                            <li value="4"><b>Publish/Unpublish </b>- published designs can be used to provision.</li>
+                            <li value="5"><b>Export</b> - export the design to another <span class="CCUE_variablesHP Cloud OS">HP Cloud OS</span> instance.</li>
+                            <li value="6"><b>Delete</b>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a href="ccue_d_COSEditor.htm" class="MCXref_0" xrefformat="{para}">Editor </a>
+                    </td>
+                    <td>A canvas area used to select and arrange nodes, connectors, and properties. Use the <b>Validation</b> tab if you need more details about errors within the <b>Editor</b>.</td>
+                    <td>
+                        <ul>
+                            <li value="1"><b>Edit</b> - the design properties.</li>
+                            <li value="2">Add/change nodes.</li>
+                            <li value="3">Add/change connectors. </li>
+                            <li value="4">Add/change node and connector properties.</li>
+                            <li value="5"><b>Publish/Unpublish</b>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a href="ccue_d_COSProfiles.htm" class="MCXref_0" xrefformat="{para}">Profiles</a>
+                    </td>
+                    <td>Provides a way to override the default configuration of a design by creating as many Profiles as needed.</td>
+                    <td>
+                        <ul>
+                            <li value="1">View existing profiles.</li>
+                            <li value="2"><b>Create</b> - a new profile.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a href="ccue_d_COSRevisions.htm" class="MCXref_0" xrefformat="{para}">Revisions</a>
+                    </td>
+                    <td>The system tracks design revisions sequentially in the <b>Revisions</b> tab, allowing you to revert to an earlier version  if needed.</td>
+                    <td><b>Revert to selected</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a href="ccue_d_COSValidation.htm" class="MCXref_0" xrefformat="{para}">Validation</a>
+                    </td>
+                    <td>
+                        <p>Provides details about  design errors  in the <b>Editor</b> and <b>Profiles</b> areas.</p>
+                        <p>The following artifacts are validated:</p>
+                        <ul>
+                            <li value="1">Document properties</li>
+                            <li value="2">Node properties</li>
+                            <li value="3">Connector properties</li>
+                            <li value="4">Profiles</li>
+                        </ul>
+                    </td>
+                    <td>View validation error details and link back to the source to correct.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&#160;</p>
+        <hr width="100%" size="0" align="center" padding-bottom="0" style="clear:both" />
+        <table style="border: none; border-collapse: collapse; width: 100%; margin-left: 0; margin-right: auto; margin-top: 0; padding-top: 0">
+            <tr>
+                <td style="border: none; border-collapse: collapse;">
+                    <p style="font-size: 85%; text-align: left;direction: ltr;"><a href="Resources/MasterPages/_HP_Legal_Notices.htm#1">© <span class="_HPc_Basic_Variables_HP_Copyright_Date_Range">2013-2014</span> Hewlett-Packard Development Company, L.P.</a>
+                    </p>
+                </td>
+                <td style="border: none;">
+                    <div id="hp-feedbackLink" style="font-size: 85%;margin: 0px 0px 4px 0px;line-height: 1.25em;text-align: right;"><a href="javascript:sendFeedback();" class="avoidPrint">Send documentation feedback to HP</a>
+                    </div>
+                    <!-- Localizable -->
+                    <div id="hp-feedbackDiv" class="MCTextPopupBody" style="display:none; word-wrap:break-word;">
+                        <div style="position: absolute;top: 2px;right: 2px;text-align: right;"><a href="javascript:closeFeedback();" id="hp-feedbackClose">Close</a>
+                        </div>
+                        <!-- Localizable -->
+                        <p style="font-weight: bold; margin-top: 1.5em;">We welcome your comments!</p>
+                        <!-- Localizable -->
+                        <p>To open the configured email client on this computer, <a name="hp-feedbackOpen" id="hp-feedbackOpen" style="color: #0066CC;">open an email window</a>.</p>
+                        <!-- Localizable -->
+                        <p>Otherwise, copy the information below to a web mail client, and send this email to <span class="_HPc_Basic_Variables_HP_Product_IE_Team_PDL">COSie@hp.com</span>.</p>
+                        <!-- Localizable -->
+                        <hr />
+                        <div id="hp-feedbackBody">
+                            <br />Help Topic ID: <span id="hp-feedbackURL"></span><br /><br />Product: <span id="hp-feedbackProduct"></span><span id="hp-feedbackAcronym"></span>&#160;<span id="hp-feedbackVersion"></span><br /><br />Topic Title: <span id="hp-feedbackTopic"></span><br /><br />Feedback:<br /><br /><br /></div>
+                        <!-- Localizable -->
+                        <hr />
+                    </div>
+                    <div style="display:none;" id="hp-feedback-variables" productName="Cloud OS" productVersion="1.20" commentsEmailAddress="COSie@hp.com" productAcronym="" topicTitle="Topology Designs" skinLine1="Cloud OS" skinLine2="">&#160;</div>
+                    <p>
+                        <script src="Resources/MasterPages/_HP_Feedback.js">
+                        </script>
+                    </p> <![CDATA[ ]]></td>
+                <td style="border: none;">
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>
