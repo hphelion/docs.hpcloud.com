@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Topology Designs" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Designer_Help_CloudOS.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Profiles</title>
+        <!-- WEBHELP-ONLY: The following statement fixes cropping errors when customers use IE7 at 120 dpi (for example, list numbering problems) -->
+        <!--[if lt IE 8]>
+            <style type="text/css"> 
+                body
+                {
+                        padding-left: 16px;
+                }
+            </style>
+         <![endif]-->
+        <link href="SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/_HP_IE_Experience.css" rel="stylesheet" />
+        <script src="SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../Designer_Help_CloudOS_CSH.htm#ccue_d_COSProfiles.htm" style="">Open topic with navigation</a>
+        </p>
+        <h1>Profiles</h1>
+        <p>When you create  a topology design, the properties you set for the nodes become the default configuration for the design. Within <span class="CCUE_variablesHP Cloud OS">HP Cloud OS</span>, this original configuration displays as the <b>Default Profile</b> in the <b>Provisioning &gt; Deployment Profiles</b> area. Profiles provide a way to override the default configuration by allowing you to set different values for node properties such as flavors, machine images, or keypairs. Profiles create an association to a binding document. Profiles are optional and are not required in order to publish a design. For more information, see <a href="ccue_d_COSPublishUnpublish.htm" class="MCXref_0" xrefformat="{para}">Publish/Unpublish a Design</a>.</p>
+        <p>Profiles are validated by the topology designer and tracked in the <b>Validation</b> tab. The validation process checks that a profile contains valid values for the configuration properties that are being overwritten.</p>
+        <p>You can create as many profiles as needed. You can create a new profile based on an existing profile.This can save you time and effort if the profiles have similar configurations. This process copies all the nodes, connectors, and properties of the original profile into the new profile where you can then change the properties.</p>
+        <h2>To view profiles and details</h2>
+        <ol>
+            <li value="1">On the Project tab, select a <b>Current Project</b>.</li>
+            <li value="2">Click <b>Provisioning &gt; Topology Designs</b> to open the <b>Browse Designs</b> window.</li>
+            <li value="3">From <b>Browse Designs</b>, select the design for which you want to view profiles.</li>
+            <li value="4">Click the <b>Profiles</b> tab. A list of existing profiles displays.</li>
+            <li value="5">Select a profile. The profile opens in the <b>Overview</b> tab, showing the Name, Description, Changed Properties and a visual representation of the topology design. <b>NOTE</b>: The linked path at the top of this window allows you to move back as needed.</li>
+        </ol>
+        <p>See related topics:</p>
+        <p><a href="ccue_d_COSCreateProfile.htm" class="MCXref_0" xrefformat="{para}">Create a Profile</a>
+        </p>
+        <p><a href="ccue_d_COSEditProfile.htm" class="MCXref_0" xrefformat="{para}">Edit a Profile</a>
+        </p>
+        <p><a href="ccue_d_COSDeleteProfile.htm" class="MCXref_0" xrefformat="{para}">Delete a Profile</a>
+        </p>
+        <hr width="100%" size="0" align="center" padding-bottom="0" style="clear:both" />
+        <table style="border: none; border-collapse: collapse; width: 100%; margin-left: 0; margin-right: auto; margin-top: 0; padding-top: 0">
+            <tr>
+                <td style="border: none; border-collapse: collapse;">
+                    <p style="font-size: 85%; text-align: left;direction: ltr;"><a href="Resources/MasterPages/_HP_Legal_Notices.htm#1">© <span class="_HPc_Basic_Variables_HP_Copyright_Date_Range">2013-2014</span> Hewlett-Packard Development Company, L.P.</a>
+                    </p>
+                </td>
+                <td style="border: none;">
+                    <div id="hp-feedbackLink" style="font-size: 85%;margin: 0px 0px 4px 0px;line-height: 1.25em;text-align: right;"><a href="javascript:sendFeedback();" class="avoidPrint">Send documentation feedback to HP</a>
+                    </div>
+                    <!-- Localizable -->
+                    <div id="hp-feedbackDiv" class="MCTextPopupBody" style="display:none; word-wrap:break-word;">
+                        <div style="position: absolute;top: 2px;right: 2px;text-align: right;"><a href="javascript:closeFeedback();" id="hp-feedbackClose">Close</a>
+                        </div>
+                        <!-- Localizable -->
+                        <p style="font-weight: bold; margin-top: 1.5em;">We welcome your comments!</p>
+                        <!-- Localizable -->
+                        <p>To open the configured email client on this computer, <a name="hp-feedbackOpen" id="hp-feedbackOpen" style="color: #0066CC;">open an email window</a>.</p>
+                        <!-- Localizable -->
+                        <p>Otherwise, copy the information below to a web mail client, and send this email to <span class="_HPc_Basic_Variables_HP_Product_IE_Team_PDL">COSie@hp.com</span>.</p>
+                        <!-- Localizable -->
+                        <hr />
+                        <div id="hp-feedbackBody">
+                            <br />Help Topic ID: <span id="hp-feedbackURL"></span><br /><br />Product: <span id="hp-feedbackProduct"></span><span id="hp-feedbackAcronym"></span>&#160;<span id="hp-feedbackVersion"></span><br /><br />Topic Title: <span id="hp-feedbackTopic"></span><br /><br />Feedback:<br /><br /><br /></div>
+                        <!-- Localizable -->
+                        <hr />
+                    </div>
+                    <div style="display:none;" id="hp-feedback-variables" productName="Cloud OS" productVersion="1.20" commentsEmailAddress="COSie@hp.com" productAcronym="" topicTitle="Profiles" skinLine1="Cloud OS" skinLine2="">&#160;</div>
+                    <p>
+                        <script src="Resources/MasterPages/_HP_Feedback.js">
+                        </script>
+                    </p> <![CDATA[ ]]></td>
+                <td style="border: none;">
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="index.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Domain Services </title>
+        <!-- WEBHELP-ONLY: The following statement fixes cropping errors when customers use IE7 at 120 dpi (for example, list numbering problems) -->
+        <!--[if lt IE 8]>
+            <style type="text/css"> 
+                body
+                {
+                        padding-left: 16px;
+                }
+            </style>
+         <![endif]-->
+        <link href="SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/_HP_IE_Experience.css" rel="stylesheet" />
+        <script src="SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../index_CSH.htm#cosAdDash_Domain_Services.htm" style="">Open topic with navigation</a>
+        </p>
+        <h1>Domain Services </h1>
+        <p>Keystone is the security context and  the defining service for a cloud. All services connected to a single Keystone service belong in one cloud.  Glance, in the recommend configuration, is also a cloud service because the images it provides are available to VMs in all regions. </p>
+        <p><span class="Quasar_VariablesOpenStack">OpenStack</span> cloud services are Cinder, Glance, Keystone, and Quantum. A cloud service is a service that can be used by or for any region, so all of the <span class="Quasar_VariablesCloud OS long">HP Cloud OS</span> services are considered cloud services because they can be used for one or more regions.</p>
+        <p>&#160;</p>
+        <p>To view domain services:</p>
+        <ul>
+            <li value="1">
+                <p>On the Domain view, click  <b>Services</b>. The following domain services display:</p>
+            </li>
+        </ul>
+        <table>
+            <col style="width: 93px;" />
+            <col style="width: 93px;" />
+            <col style="width: 287px;" />
+            <thead>
+                <tr>
+                    <th>Service Name</th>
+                    <th>Service Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Eve</td>
+                    <td>provisioning</td>
+                    <td>A composite provisioning service that uses a topology template and profile to create VMs, volumes,and network segments. Eve uses the <span style="background-color: #ffff00;">Peer </span><span style="color: #b22222; font-size: 12pt;">What should this be? </span>service for determining resource pool existence, traits, and user identity mapping.</td>
+                </tr>
+                <tr>
+                    <td>Focus</td>
+                    <td>template storage</td>
+                    <td>Repository for  topology templates and profiles that are used for provisioning.</td>
+                </tr>
+                <tr>
+                    <td>Glance</td>
+                    <td>image storage</td>
+                    <td>Repository for images used to create new VMs.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #ffff00;">
+                        <p>Graffiti</p>
+                        <p>NEW</p>
+                    </td>
+                    <td style="background-color: #ffff00;">registry</td>
+                    <td style="background-color: #ffff00;">A searchable directory to find cloud resources based on their capabilities.</td>
+                </tr>
+                <tr>
+                    <td>Keystone</td>
+                    <td>identity and security</td>
+                    <td>Provides user authentication and tracks various projects within the
+regions in the domain. If Keystone is disabled, you cannot log into the
+Cloud Administration Dashboard</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Quantum</p>
+                        <p>(new name - Neutron)</p>
+                    </td>
+                    <td>networking</td>
+                    <td>Provides network management for VMs.</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="background-color: #ffff00;">The following services do not display on my test system.</td>
+                </tr>
+                <tr>
+                    <td>Peer</td>
+                    <td>resource pool registry</td>
+                    <td>Provides a registry of resource pool definitions you can use to
+provision to various cloud providers.</td>
+                </tr>
+                <tr>
+                    <td>Eden</td>
+                    <td>Framework and Utility Service</td>
+                    <td>This service provides core functionality such as authorization and job
+access. The framework allows scaling of services so they can be
+distributed across multiple machines if needed. All Cloud Connector
+services are built and supported on the Eden framework.</td>
+                </tr>
+                <tr>
+                    <td>Cinder </td>
+                    <td>storage</td>
+                    <td>
+                        <p>Provides block-storage based volume management for VMs.
+</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Swift</p>
+                    </td>
+                    <td>object storage service</td>
+                    <td>Provides highly available, distributed object/blob store and can be used to store large amounts of data efficiently.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><b>Service URL</b> column shows the IP address where the service is running. </p>
+        <p><b>Status</b> - Enabled</p>
+        <p><b>Actions</b> - If a service supports Rest APIs, you see <b>Rest API</b> under the Actions column. </p>
+        <p>&#160;</p>
+        <h2 class="noTOC">How to Use the REST API Application</h2>
+        <p>The HP Cloud OS API Documentation application is a tool for describing, producing, and visualizing RESTful web services. Its purpose is to enable client and documentation systems to update at the same pace as the server. The documentation of methods, parameters, and models are tightly integrated into the server code, allowing APIs to stay in sync.</p>
+        <p>If a service supports the HP Cloud OS API Documentation application, it displays a REST API button.</p>
+        <p>Click <b>REST&#160;API</b> to start the documentation application for a service.</p>
+        <p> For information about how to use the documentation application, see <span style="color: #a52a2a;">http://docs.hpcloud.com/cloudos/120/en/quickstart/.</span> <![CDATA[ ]]><span style="color: #a52a2a;">(IE will update the link when we have the real location.)</span></p>
+        <hr width="100%" size="0" align="center" padding-bottom="0" style="clear:both" />
+        <table style="border: none; border-collapse: collapse; width: 100%; margin-left: 0; margin-right: auto; margin-top: 0; padding-top: 0">
+            <tr>
+                <td style="border: none; border-collapse: collapse;">
+                    <p style="font-size: 85%; text-align: left;direction: ltr;"><a href="Resources/MasterPages/_HP_Legal_Notices.htm#1">© <span class="_HPc_Basic_Variables_HP_Copyright_Date_Range">2012-2013</span> Hewlett-Packard Development Company, L.P.</a>
+                    </p>
+                </td>
+                <td style="border: none;">
+                    <div id="hp-feedbackLink" style="font-size: 85%;margin: 0px 0px 4px 0px;line-height: 1.25em;text-align: right;"><a href="javascript:sendFeedback();" class="avoidPrint">Send documentation feedback to HP</a>
+                    </div>
+                    <!-- Localizable -->
+                    <div id="hp-feedbackDiv" class="MCTextPopupBody" style="display:none; word-wrap:break-word;">
+                        <div style="position: absolute;top: 2px;right: 2px;text-align: right;"><a href="javascript:closeFeedback();" id="hp-feedbackClose">Close</a>
+                        </div>
+                        <!-- Localizable -->
+                        <p style="font-weight: bold; margin-top: 1.5em;">We welcome your comments!</p>
+                        <!-- Localizable -->
+                        <p>To open the configured email client on this computer, <a name="hp-feedbackOpen" id="hp-feedbackOpen" style="color: #0066CC;">open an email window</a>.</p>
+                        <!-- Localizable -->
+                        <p>Otherwise, copy the information below to a web mail client, and send this email to <span class="_HPc_Basic_Variables_HP_Product_IE_Team_PDL">cosIE@hp.com</span>.</p>
+                        <!-- Localizable -->
+                        <hr />
+                        <div id="hp-feedbackBody">
+                            <br />Help Topic ID: <span id="hp-feedbackURL"></span><br /><br />Product: <span id="hp-feedbackProduct"></span><span id="hp-feedbackAcronym"></span>&#160;<span id="hp-feedbackVersion"></span><br /><br />Topic Title: <span id="hp-feedbackTopic"></span><br /><br />Feedback:<br /><br /><br /></div>
+                        <!-- Localizable -->
+                        <hr />
+                    </div>
+                    <div style="display:none;" id="hp-feedback-variables" productName="Cloud OS" productVersion="1.20" commentsEmailAddress="cosIE@hp.com" productAcronym="" topicTitle="Domain Services " skinLine1="Cloud OS" skinLine2="">&#160;</div>
+                    <p>
+                        <script src="Resources/MasterPages/_HP_Feedback.js">
+                        </script>
+                    </p>
+                </td>
+                <td style="border: none;">
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

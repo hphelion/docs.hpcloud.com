@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Administration Dashboard Tasks by Tab|Project Tab Tasks|Security Groups and Rules" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="index.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>How to Add or Delete a Security Group Rule</title>
+        <!-- WEBHELP-ONLY: The following statement fixes cropping errors when customers use IE7 at 120 dpi (for example, list numbering problems) -->
+        <!--[if lt IE 8]>
+            <style type="text/css"> 
+                body
+                {
+                        padding-left: 16px;
+                }
+            </style>
+         <![endif]-->
+        <link href="SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/_HP_IE_Experience.css" rel="stylesheet" />
+        <script src="SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../index_CSH.htm#cosAdDash_Project_SecurityGroup_Rules.htm" style="">Open topic with navigation</a>
+        </p>
+        <h1>How to Add or Delete a Security Group Rule</h1>
+        <p>Within a security group, you can add, edit, and delete rules to specify communications to other ports.</p>
+        <p>&#160;</p>
+        <p>To create a security group rules:</p>
+        <ol>
+            <li value="1">
+                <p style="font-weight: normal;">On the Project tab, select a <b>Current Project</b>.</p>
+            </li>
+            <li style="font-weight: normal;" value="2">
+                <p>Click <b>Access and Security</b> &gt; <b>Access and Security</b> &gt; <b>Security Groups</b> tab.</p>
+            </li>
+            <li value="3">
+                <p>Select the group to edit, and click <b>Edit Rules</b>.</p>
+            </li>
+            <li value="4">
+                <p>In the Security Group Rules view, click <b>Add Rule</b>.</p>
+            </li>
+            <li value="5">
+                <p>In the Add Rule window, enter the following information:</p>
+                <ol>
+                    <li value="1">
+                        <p><b>IP Protocol</b> — Select from the drop-down list.</p>
+                    </li>
+                    <li value="2">
+                        <p><b>Open</b> — Select from the drop-down list.</p>
+                    </li>
+                    <li value="3">
+                        <p><b>Port Range</b>:</p>
+                        <ol>
+                            <li value="1"><b>From Port</b> — The source port, such as 80.</li>
+                            <li value="2"><b>To Port</b> — The port where VMs inside the security group would receive, such as 80.</li>
+                        </ol>
+                    </li>
+                    <li value="4">
+                        <p><b>Source</b>: The IP addresses from which the group can receive networking traffic</p>
+                        <ol>
+                            <li value="1"><b>CIDR</b> — The format for specifying a range (a block) of IP addresses that includes how many to create.</li>
+                            <li value="2"><b>Security Group</b> — The source group will allow any other instance in this security group access to any other instance.</li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
+            <li value="6">Click <b>Add</b>.</li>
+            <li value="7">Wait for the success message.</li>
+            <li value="8">Verify that the new rule is included in the Security Group Rules list.</li>
+        </ol>
+        <p>&#160;</p>
+        <p>To delete security group rules:</p>
+        <ol>
+            <li value="1">
+                <p>In the Security Group Rules list, select the rule you want to delete.</p>
+            </li>
+            <li value="2">
+                <p>Click <b>Delete Rule</b>.</p>
+            </li>
+            <li value="3">
+                <p>In the Confirm Delete Rule dialog, verify the name of the rule and then click <b>Delete Rule</b>.</p>
+            </li>
+            <li value="4">
+                <p>Wait for the success message.</p>
+            </li>
+            <li value="5">
+                <p>Verify that the new rule is excluded from in the Security Group Rules list.</p>
+            </li>
+        </ol>
+        <hr width="100%" size="0" align="center" padding-bottom="0" style="clear:both" />
+        <table style="border: none; border-collapse: collapse; width: 100%; margin-left: 0; margin-right: auto; margin-top: 0; padding-top: 0">
+            <tr>
+                <td style="border: none; border-collapse: collapse;">
+                    <p style="font-size: 85%; text-align: left;direction: ltr;"><a href="Resources/MasterPages/_HP_Legal_Notices.htm#1">© <span class="_HPc_Basic_Variables_HP_Copyright_Date_Range">2012-2013</span> Hewlett-Packard Development Company, L.P.</a>
+                    </p>
+                </td>
+                <td style="border: none;">
+                    <div id="hp-feedbackLink" style="font-size: 85%;margin: 0px 0px 4px 0px;line-height: 1.25em;text-align: right;"><a href="javascript:sendFeedback();" class="avoidPrint">Send documentation feedback to HP</a>
+                    </div>
+                    <!-- Localizable -->
+                    <div id="hp-feedbackDiv" class="MCTextPopupBody" style="display:none; word-wrap:break-word;">
+                        <div style="position: absolute;top: 2px;right: 2px;text-align: right;"><a href="javascript:closeFeedback();" id="hp-feedbackClose">Close</a>
+                        </div>
+                        <!-- Localizable -->
+                        <p style="font-weight: bold; margin-top: 1.5em;">We welcome your comments!</p>
+                        <!-- Localizable -->
+                        <p>To open the configured email client on this computer, <a name="hp-feedbackOpen" id="hp-feedbackOpen" style="color: #0066CC;">open an email window</a>.</p>
+                        <!-- Localizable -->
+                        <p>Otherwise, copy the information below to a web mail client, and send this email to <span class="_HPc_Basic_Variables_HP_Product_IE_Team_PDL">cosIE@hp.com</span>.</p>
+                        <!-- Localizable -->
+                        <hr />
+                        <div id="hp-feedbackBody">
+                            <br />Help Topic ID: <span id="hp-feedbackURL"></span><br /><br />Product: <span id="hp-feedbackProduct"></span><span id="hp-feedbackAcronym"></span>&#160;<span id="hp-feedbackVersion"></span><br /><br />Topic Title: <span id="hp-feedbackTopic"></span><br /><br />Feedback:<br /><br /><br /></div>
+                        <!-- Localizable -->
+                        <hr />
+                    </div>
+                    <div style="display:none;" id="hp-feedback-variables" productName="Cloud OS" productVersion="1.20" commentsEmailAddress="cosIE@hp.com" productAcronym="" topicTitle="How to Add or Delete a Security Group Rule" skinLine1="Cloud OS" skinLine2="">&#160;</div>
+                    <p>
+                        <script src="Resources/MasterPages/_HP_Feedback.js">
+                        </script>
+                    </p>
+                </td>
+                <td style="border: none;">
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>
