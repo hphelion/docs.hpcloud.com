@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Cloud Tab|Manage Clouds" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="index.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Create Compute Region Dialog</title>
+        <!-- WEBHELP-ONLY: The following statement fixes cropping errors when customers use IE7 at 120 dpi (for example, list numbering problems) -->
+        <!--[if lt IE 8]>
+            <style type="text/css"> 
+                body
+                {
+                        padding-left: 16px;
+                }
+            </style>
+         <![endif]-->
+        <link href="SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/_HP_IE_Experience.css" rel="stylesheet" />
+        <script src="SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../index_CSH.htm#cosCloudTabManageCloudsComputeRegionDialog.htm" style="">Open topic with navigation</a>
+        </p>
+        <h1>Create Compute Region Dialog</h1>
+        <p><b>To access:</b> Select the <b>Cloud</b> tab <b>&gt; Manage Clouds</b> and click <b>Create Compute Region</b> for the corresponding cloud. </p>
+        <p>When the Create Cloud step is complete, the cloud's state displays <b>Active</b> on the <a href="cosCloudTabManageCloudsPage.htm">Manage Clouds page</a>. You can now create one or more compute regions. This is the last step in the installation process of creating a cloud. When the compute region is created, you have created an active cloud.  </p>
+        <p>After successfully creating a cloud and compute region, you can manage your cloud environment by launching the <span class="Cosmos_VariablesSkyline short">Administration Dashboard</span> - see the <a href="cosCloudTabManageCloudsPage.htm" class="MCXref_noNum_0">Manage Clouds Page</a>.</p>
+        <div class="Admonition_Note">
+            <p MadCap:autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span>Successfully creating a compute region automatically creates a default resource pool for that region, which is configured and visible in the <span class="Cosmos_VariablesSkyline short">Administration Dashboard</span>. See the <span style="font-style: italic;" class="Cosmos_VariablesSkyline Help">HP Cloud OS Administration Dashboard Help</span> for details.</p>
+        </div>
+        <p>The following table describes the Compute Region dialog UI elements:</p>
+        <table style="width: 100%;">
+            <col style="width: 193px;" />
+            <col style="width: 338px;" />
+            <thead>
+                <tr>
+                    <th>UI Elements</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Region Name</b>
+                    </td>
+                    <td>
+                        <p>This will be the region name that is used to initialize Keystone and to be displayed in the <span class="Cosmos_VariablesSkyline short">Administration Dashboard</span>.</p>
+                        <div class="Admonition_Note">
+                            <p MadCap:autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span> A region name must contain only letters and
+numbers. It cannot contain spaces or special characters.</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Compute Controller</b>
+                    </td>
+                    <td>
+                        <p>Select the node that will have the Compute Controller services. The Compute Controller service can reside on the same node as the Cloud Controller, but HP&#160;recommends that it be on a separate node.</p>
+                        <div class="Admonition_Note">
+                            <p MadCap:autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span> You can have a single node act as both the Compute Controller and Cloud Controller, however, HP&#160;recommends that they be on separate nodes. If you choose to have them both on the same node, make sure the underlying node has enough CPU, Memory and Storage capacity to be able to run all the controller services as well as act as the virtualization host.</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Compute Nodes</b> service</td>
+                    <td>
+                        <p>Specify which nodes will have the <b>Compute Nodes</b> service. Select the Compute Node(s)  in one of the following ways:</p>
+                        <ul>
+                            <li value="1">Choose a number from the drop-down list to auto-select check boxes of the node(s) for you.</li>
+                            <li value="2">Individually select the check boxes of the node(s) you want.</li>
+                        </ul>
+                        <div class="Admonition_Note">
+                            <p MadCap:autonum="&lt;b&gt;Note: &lt;/b&gt;"><span class="autonumber"><span><b>Note: </b></span></span> HP&#160;recommends that the Compute Nodes be separate nodes.</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Attributes</b> tab</td>
+                    <td>
+                        <p>Use to specify property values required to create a Compute Region. For the <b>Hypervisor</b> attribute:</p>
+                        <ul>
+                            <li value="1">Use <b>kvm</b> (the default) if the compute nodes are bare-metal servers.</li>
+                            <li value="2"> Use <b>qemu</b>  if the compute nodes are VMs. </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Create Compute Region</b>
+                    </td>
+                    <td>
+                        <p>Click to begin creating the Compute Region. </p>
+                        <p>On the Manage Clouds page, the compute region will go through a series of steps to create an active compute region, showing the % completed until the Cloud's Status is <b>Active</b>. This indicates that the cloud and compute region have been successfully created.</p>
+                        <p>You can now add additional compute regions. The added compute regions appear on the <a href="cosCloudTabManageCloudsPage.htm">Manage Clouds page</a> as a comma-separated list. </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&#160;</p>
+        <p><b>Next Step:</b>  Launch the <span class="Cosmos_VariablesSkyline short">Administration Dashboard</span> on the <a href="cosCloudTabManageCloudsPage.htm" class="MCXref_noNum_0">Manage Clouds Page</a></p>
+        <p>&#160;</p>
+        <hr width="100%" size="0" align="center" padding-bottom="0" style="clear:both" />
+        <table style="border: none; border-collapse: collapse; width: 100%; margin-left: 0; margin-right: auto; margin-top: 0; padding-top: 0">
+            <tr>
+                <td style="border: none; border-collapse: collapse;">
+                    <p style="font-size: 85%; text-align: left;direction: ltr;"><a href="Resources/MasterPages/_HP_Legal_Notices.htm#1">© <span class="_HPc_Basic_Variables_HP_Copyright_Date_Range">2012-2013</span> Hewlett-Packard Development Company, L.P.</a>
+                    </p>
+                </td>
+                <td style="border: none;">
+                    <div id="hp-feedbackLink" style="font-size: 85%;margin: 0px 0px 4px 0px;line-height: 1.25em;text-align: right;"><a href="javascript:sendFeedback();" class="avoidPrint">Send documentation feedback to HP</a>
+                    </div>
+                    <!-- Localizable -->
+                    <div id="hp-feedbackDiv" class="MCTextPopupBody" style="display:none; word-wrap:break-word;">
+                        <div style="position: absolute;top: 2px;right: 2px;text-align: right;"><a href="javascript:closeFeedback();" id="hp-feedbackClose">Close</a>
+                        </div>
+                        <!-- Localizable -->
+                        <p style="font-weight: bold; margin-top: 1.5em;">We welcome your comments!</p>
+                        <!-- Localizable -->
+                        <p>To open the configured email client on this computer, <a name="hp-feedbackOpen" id="hp-feedbackOpen" style="color: #0066CC;">open an email window</a>.</p>
+                        <!-- Localizable -->
+                        <p>Otherwise, copy the information below to a web mail client, and send this email to <span class="_HPc_Basic_Variables_HP_Product_IE_Team_PDL">COSie@hp.com</span>.</p>
+                        <!-- Localizable -->
+                        <hr />
+                        <div id="hp-feedbackBody">
+                            <br />Help Topic ID: <span id="hp-feedbackURL"></span><br /><br />Product: <span id="hp-feedbackProduct"></span><span id="hp-feedbackAcronym"></span>&#160;<span id="hp-feedbackVersion"></span><br /><br />Topic Title: <span id="hp-feedbackTopic"></span><br /><br />Feedback:<br /><br /><br /></div>
+                        <!-- Localizable -->
+                        <hr />
+                    </div>
+                    <div style="display:none;" id="hp-feedback-variables" productName="Cloud OS" productVersion="1.20" commentsEmailAddress="COSie@hp.com" productAcronym="" topicTitle="Create Compute Region Dialog" skinLine1="Cloud OS" skinLine2="">&#160;</div>
+                    <p>
+                        <script src="Resources/MasterPages/_HP_Feedback.js">
+                        </script>
+                    </p>
+                </td>
+                <td style="border: none;">
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>
