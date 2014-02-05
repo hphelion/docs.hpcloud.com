@@ -6,24 +6,15 @@ layout: wrapper
     <aside>
       <div id="toc_header">
           {% if page.permalink contains 'v13' %}
-          <!-- Special case for releasing CS 1.1 docs -->
-             {% if page.product contains 'identity' %}
-               {% if page.product %}
-                 <p class="title"><strong><a href="/api/copyright#{{page.product}}">Copyright</a></strong></p>
-               {% endif %}
-               <p class="title"><strong><a href="/api/">API Overview</a></strong></p>
-             {% else %}
-               {% if page.product %}
-                 <p class="title"><strong><a href="/api/v13/copyright#{{page.product}}">Copyright</a></strong></p>
-               {% endif %}
-               <p class="title"><strong><a href="/api/v13/">API Overview</a></strong></p>
-             {% endif %}
+              {% if page.product %}
+                <p class="title"><strong><a href="/api/v13/copyright#{{page.product}}">Copyright</a></strong></p>
+              {% endif %}
           {% else %}
              {% if page.product %}
               <p class="title"><strong><a href="/api/copyright#{{page.product}}">Copyright</a></strong></p>
              {% endif %}
-             <p class="title"><strong><a href="/api/">API Overview</a></strong></p>
           {% endif %}
+          <p class="title"><strong><a href="/api/">API Overview</a></strong></p>
           <p class="title"><strong>Table of Contents</strong></p>
       </div>
       <div id="toc">
