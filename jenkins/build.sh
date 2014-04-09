@@ -10,4 +10,9 @@ find _site/cloudos -name "index.html" -print | xargs sed -i -e 's#<a href="http:
 #
 # Next, replace Sign Up Now text (which is irrelevant for Cloud OS private clouds) and link target with For More Info and better Cloud OS target URL:
 #
-find _site/cloudos -name "index.html" -print | xargs sed -i -e 's#<a href="https://console.hpcloud.com/signup" class="signup-button-orange gutter-top-half">Sign Up Now</a>#<a href="https://cloudos.hpwsportal.com" class="signup-button-orange gutter-top-half">For More Info</a>#g'
+find _site/cloudos -name "index.html" -print | xargs sed -i -e 's#<a href="https://console.hpcloud.com/signup" class="signup-button-orange gutter-top-half">Sign Up Now</a>#<a href="https://cloudos.hpwsportal.com" target="_blank" class="signup-button-orange gutter-top-half">For More Info</a>#g'
+#
+# Now replace For More Info target link on Cloud OS for Moonshot pages:
+#
+find _site/cloudos/moonshot -name "index.html" -print | xargs sed -i -e 's#<a href="https://cloudos.hpwsportal.com"#<a href="http://www.hp.com/go/moonshot"#g'
+
