@@ -14,5 +14,4 @@ find _site/cloudos -name "index.html" -print | xargs sed -i -e 's#<a href="https
 #
 # Now replace For More Info target link on Cloud OS for Moonshot pages:
 #
-find _site/cloudos/moonshot -name "index.html" -print | xargs sed -i -e 's#<a href="https://cloudos.hpwsportal.com"#<a href="http://www.hp.com/go/moonshot"#g'
-
+find _site/cloudos/moonshot -name "index.html" -print | xargs sed -i -e 's#<a href="https://cloudos.hpwsportal.com" target="_blank" class="signup-button-orange gutter-top-half">For More Info</a>#<a href="http://www.hp.com/go/moonshot" target="_blank" class="signup-button-orange gutter-top-half">For More Info</a>#g'
