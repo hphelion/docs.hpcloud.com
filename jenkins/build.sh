@@ -6,7 +6,7 @@ ejekyll build
 #
 # Special post-build logo handling for Cloud OS docs:
 #
-find _site/cloudos -name "index.html" -print | xargs sed -i -e 's#<a href="http://www.hpcloud.com/" class="logo"><img src="/images/hp-public-cloud-logo.png" alt="HP Public Cloud" />#<a href="/cloudos" class="logo"><img src="/images/hp-cloud-logo.png" alt="HP Cloud" />#g'
+# find _site/cloudos -name "index.html" -print | xargs sed -i -e 's#<a href="http://www.hpcloud.com/" class="logo"><img src="/images/hp-public-cloud-logo.png" alt="HP Public Cloud" />#<a href="/cloudos" class="logo"><img src="/images/hp-cloud-logo.png" alt="HP Cloud" />#g'
 #
 # Next, replace Sign Up Now text (which is irrelevant for Cloud OS private clouds) and link target with For More Info and better Cloud OS target URL:
 #
