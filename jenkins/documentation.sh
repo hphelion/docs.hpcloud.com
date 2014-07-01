@@ -15,4 +15,5 @@ git clone git@git.hpcloud.net:DevExDocs/documentation.git
 cd documentation
 git checkout "${BRANCH}"
 git pull origin "${BRANCH}"
+git rev-parse HEAD
 cp _config.yml ../..
