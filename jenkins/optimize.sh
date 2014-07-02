@@ -3,7 +3,7 @@
 # Optimize _size
 #
 
-echo "running docs.hpcloud.com/jenkins/optimize.sh"
+echo 'running docs.hpcloud.com/jenkins/optimize.sh'
 
 echo "Minifying the CSS..."
 java -jar _build/yuicompressor.jar --verbose --type css -o _site/css/application.css _site/css/application.css

@@ -3,7 +3,7 @@
 # This script pulls in the documentation repo into the content directory
 #
 
-echo "running docs.hpcloud.com/jenkins/documentation.sh"
+echo 'running docs.hpcloud.com/jenkins/documentation.sh'
 if [ -z "${1}" ]
 then
   echo "Usage: ${0} <branch>"

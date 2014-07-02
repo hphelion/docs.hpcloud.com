@@ -3,7 +3,7 @@
 # Run a deploy
 #
 
-echo "running docs.hpcloud.com/jenkins/deploy-pro.sh"
+echo 'running docs.hpcloud.com/jenkins/deploy-pro.sh'
 export TERM=xterm-256color
 source "$HOME/.rvm/scripts/rvm"
 rvm use ruby-1.9.2@docs
