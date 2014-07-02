@@ -1,3 +1,5 @@
+echo "running docs.hpcloud.com/jenkins/sync.sh"
+
 SRCDIR=spec/fixtures/files/
 TAINER=":tainer"
 TMPDSTFILES=/tmp/sinkdst$$

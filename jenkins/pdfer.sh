@@ -1,3 +1,5 @@
+echo "running docs.hpcloud.com/jenkins/pdfer.sh"
+
 cd _site
 find cloudos -name index.html | 
 while read FILE

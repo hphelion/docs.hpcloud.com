@@ -2,6 +2,8 @@
 #
 # This script pulls in the apihome repo into the content directory
 #
+
+echo "running docs.hpcloud.com/jenkins/api.sh"
 if [ -z "${1}" ]
 then
   echo "Usage: ${0} <branch>"

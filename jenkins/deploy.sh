@@ -2,6 +2,8 @@
 #
 # Generic deploy script
 #
+
+echo "running docs.hpcloud.com/jenkins/deploy.sh"
 if [ -z "${1}" -o -z "${2}" ]
 then
   echo "Usage: ${0} application domain <url>"
