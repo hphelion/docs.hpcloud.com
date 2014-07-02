@@ -3,7 +3,7 @@
 # This script builds the _site directory
 #
 echo 'running docs.hpcloud.com/jenkins/build.sh'
-ejekyll build
+ejekyll build --trace
 #
 # Special post-build logo handling for Cloud OS docs:
 #
