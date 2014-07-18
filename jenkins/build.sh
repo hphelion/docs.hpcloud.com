@@ -3,6 +3,13 @@
 # This script builds the _site directory
 #
 echo 'running docs.hpcloud.com/jenkins/build.sh'
+#variables needed to prevent the liquid gem from throwing an 
+#"incompatible character encodings: UTF-8 and ISO-8895-1" error
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+
 ejekyll build --trace
 #
 # Special post-build logo handling for Cloud OS docs:
