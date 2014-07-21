@@ -27,7 +27,6 @@ echo '=build==============================================================='
 #${LOGIN}
 #${PASSWORD}
 #!
-./
 
 ./jenkins/deploy.sh one qa1-stackato.cx.hpcloud.net
 
