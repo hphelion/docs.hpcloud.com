@@ -6,7 +6,7 @@
 echo 'running docs.hpcloud.com/jenkins/deploy-qa.sh'
 export TERM=xterm-256color
 source "$HOME/.rvm/scripts/rvm"
-rvm use ruby-1.9.2@docs
+rvm use ruby-1.9.2-p320@docs
 
 echo '=git================================================================='
 git checkout -f master
