@@ -20,7 +20,7 @@ fi
 echo "Deploying http://docs.${URL}"
 set -x
 stackato target https://api.${DOMAIN}
-stackato login
+stackato login --password ${PASSWORD} ${LOGIN}
 stackato group Documentation
 stackato unmap docs-${APP} docs.${URL} || true
 cp stackato-${APP}.yml stackato.yml
