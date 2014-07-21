@@ -8,6 +8,11 @@ export TERM=xterm-256color
 source "$HOME/.rvm/scripts/rvm"
 rvm use ruby-1.9.2-p320@docs
 
+echo '=debug==============================================================='
+echo "LOGIN IS: ${LOGIN}"
+echo "PASSWORD IS: ${PASSWORD}"
+
+
 echo '=git================================================================='
 git checkout -f master
 git pull origin master
