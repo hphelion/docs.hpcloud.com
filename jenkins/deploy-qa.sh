@@ -19,18 +19,16 @@ echo '=content============================================================='
 echo '=build==============================================================='
 ./jenkins/clean.sh
 ./jenkins/build.sh
-#./jenkins/deploy.sh one qa1-stackato.cx.hpcloud.net <<!
-#${LOGIN}
-#${PASSWORD}
-#!
-#./jenkins/deploy.sh two qa1-stackato.cx.hpcloud.net <<!
-#${LOGIN}
-#${PASSWORD}
-#!
+./jenkins/deploy.sh one qa1-stackato.cx.hpcloud.net <<!
+${LOGIN}
+${PASSWORD}
+!
+./jenkins/deploy.sh two qa1-stackato.cx.hpcloud.net <<!
+${LOGIN}
+${PASSWORD}
+!
 
-./jenkins/deploy.sh one qa1-stackato.cx.hpcloud.net
 
-./jenkins/deploy.sh two qa1-stackato.cx.hpcloud.net
 
 
 
