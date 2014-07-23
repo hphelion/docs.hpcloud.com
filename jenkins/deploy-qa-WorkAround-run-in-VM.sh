@@ -8,7 +8,7 @@ export TERM=xterm-256color
 source "$HOME/.rvm/scripts/rvm"
 rvm use ruby-1.9.2-p320@docs
 
- 
+
 
 echo '=build==============================================================='
 ./jenkins/clean.sh
