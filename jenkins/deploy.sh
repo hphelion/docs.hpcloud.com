@@ -25,9 +25,9 @@ stackato group Documentation
 stackato unmap docs-${APP} docs.${URL} || true
 cp stackato-${APP}.yml stackato.yml
 stackato stop docs-${APP}
-#Following commnds deprecated in stackato client 3.2.1
-#stackato update -n --nostart docs-${APP} ||
-#stackato update -n --nostart docs-${APP}
+# Following two commnds deprecated in stackato client 3.2.1
+stackato update -n --nostart docs-${APP} ||
+stackato update -n --nostart docs-${APP}
 echo "Deploying http://docs-${APP}.${DOMAIN}"
 stackato start docs-${APP}
 stackato map docs-${APP} docs.${URL}
