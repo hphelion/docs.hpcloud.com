@@ -24,6 +24,7 @@ echo '=content============================================================='
 echo '=build==============================================================='
 ./jenkins/clean.sh
 ./jenkins/build.sh
+chmod 755 ./jenkins/deploy-devex-WorkAround.sh
 ./jenkins/deploy-devex-WorkAround.sh one qa1-stackato.cx.hpcloud.net  
 ./jenkins/deploy-devex-WorkAround.sh two qa1-stackato.cx.hpcloud.net 
 
