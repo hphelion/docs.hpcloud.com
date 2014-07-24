@@ -25,8 +25,8 @@ set -x
 /usr/bin/stackato unmap docs-${APP} docs.${URL} || true
 cp stackato-${APP}.yml stackato.yml
 /usr/bin/stackato stop docs-${APP}
-#stackato update -n --nostart docs-${APP} ||
-#stackato update -n --nostart docs-${APP}
+stackato update -n --nostart docs-${APP} ||
+stackato update -n --nostart docs-${APP}
 /usr/bin/stackato push docs-${APP} ||
 /usr/bin/stackato push docs-${APP}
 echo "Deploying http://docs-${APP}.${DOMAIN}"
