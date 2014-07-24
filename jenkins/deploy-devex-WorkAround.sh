@@ -27,8 +27,8 @@ cp stackato-${APP}.yml stackato.yml
 /usr/bin/stackato stop docs-${APP}
 stackato update -n --nostart docs-${APP} ||
 stackato update -n --nostart docs-${APP}
-/usr/bin/stackato push docs-${APP} ||
-/usr/bin/stackato push docs-${APP}
+#/usr/bin/stackato push docs-${APP} ||
+#/usr/bin/stackato push docs-${APP}
 echo "Deploying http://docs-${APP}.${DOMAIN}"
 /usr/bin/stackato start docs-${APP}
 /usr/bin/stackato map docs-${APP} docs.${URL}
