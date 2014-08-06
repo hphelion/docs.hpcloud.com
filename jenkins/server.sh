@@ -4,4 +4,5 @@
 #
 
 echo 'running docs.hpcloud.com/jenkins/server.sh'
-ejekyll --server --auto
+#ejekyll --server --auto
+ejekyll serve --watch
