@@ -26,5 +26,5 @@ echo '=build==============================================================='
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-ejekyll serve --detach 
+ejekyll --server --auto
  
