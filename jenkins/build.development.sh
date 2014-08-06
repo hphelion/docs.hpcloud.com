@@ -23,8 +23,5 @@ echo '=content============================================================='
 
 echo '=build==============================================================='
 ./jenkins/clean.sh
-./jenkins/build.sh
-
-
-./jenkins/server.sh
+ejekyll serve --detach 
  
