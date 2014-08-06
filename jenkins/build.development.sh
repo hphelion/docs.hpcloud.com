@@ -29,5 +29,5 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 ejekyll build
 
-ls
+cp ./_site/* /var/www/html/
  
