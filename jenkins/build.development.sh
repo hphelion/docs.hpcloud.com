@@ -24,6 +24,7 @@ echo '=content============================================================='
 echo '=build==============================================================='
 ./jenkins/clean.sh
 
+sudo kill -9 `ps -A | grep ruby | awk '{print $1}'`
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 ejekyll server --watch
