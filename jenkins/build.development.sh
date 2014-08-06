@@ -26,5 +26,5 @@ echo '=build==============================================================='
 ./jenkins/build.sh
 
 
-./jenkins/server
+./jenkins/server.sh
  
