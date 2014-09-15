@@ -16,8 +16,6 @@ echo "PASSWORD IS: ${PASSWORD}"
 echo '=git================================================================='
 git checkout -f master
 git pull origin master
-git checkout -f development
-git pull origin development
 
 echo '=content============================================================='
 ./jenkins/api.sh develop
