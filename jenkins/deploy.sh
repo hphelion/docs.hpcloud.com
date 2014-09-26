@@ -24,12 +24,12 @@ stackato login --password ${PASSWORD} ${LOGIN}
 stackato group Documentation
 stackato unmap docs-${APP} docs.${URL} || true
 cp stackato-${APP}.yml stackato.yml
-#stackato stop docs-${APP}
+stackato stop docs-${APP}
 # Following two commnds deprecated in stackato client 3.2.1
 stackato update -n --nostart docs-${APP} ||
 stackato update -n --nostart docs-${APP}
 echo "Deploying http://docs-${APP}.${DOMAIN}"
-#stackato start docs-${APP}
+stackato start docs-${APP}
 stackato map docs-${APP} docs.${URL}
 rm -f stackato.yml
 echo "Done."
