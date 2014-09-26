@@ -29,7 +29,7 @@ stackato stop docs-${APP}
 stackato update -n --nostart docs-${APP} ||
 stackato update -n --nostart docs-${APP}
 echo "Deploying http://docs-${APP}.${DOMAIN}"
-stackato start docs-${APP}
+stackato start -timeout 4m docs-${APP}
 stackato map docs-${APP} docs.${URL}
 rm -f stackato.yml
 echo "Done."
