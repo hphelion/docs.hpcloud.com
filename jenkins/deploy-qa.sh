@@ -19,7 +19,7 @@ git pull origin master
 
 echo '=content============================================================='
 ./jenkins/api.sh master
-./jenkins/documentation.sh master
+./jenkins/documentation.sh timestamp-2014-09-26
 
 echo '=build==============================================================='
 ./jenkins/clean.sh
