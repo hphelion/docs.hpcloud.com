@@ -27,11 +27,11 @@ echo '=build==============================================================='
 
 echo '=deploy================================================================'
 
-./jenkins/deploy.sh one qa1-stackato.cx.hpcloud.net <<!
+./jenkins/deploy.sh one qa1-stackato.cx.hpcloud.net hpcloud.net <<!
 ${LOGIN}
 ${PASSWORD}
 !
-./jenkins/deploy.sh two qa1-stackato.cx.hpcloud.net <<!
+./jenkins/deploy.sh two qa1-stackato.cx.hpcloud.net hpcloud.net <<!
 ${LOGIN}
 ${PASSWORD}
 !
