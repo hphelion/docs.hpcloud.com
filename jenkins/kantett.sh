@@ -8,7 +8,7 @@ folder=$1
 
 
 pwd
-ftp -in <<EOF
+ftp -in <<END_SCRIPT
 open $ftp_site
 user $username $passwd
 #mkdir $remote/$folder
