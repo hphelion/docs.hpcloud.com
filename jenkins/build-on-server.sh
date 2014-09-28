@@ -32,9 +32,9 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 
-ejekyll serve --detach
+ejekyll build --trace
 
- 
+ cp _site/* /var/www/
 
 #
 # Special post-build logo handling for Cloud OS docs:
