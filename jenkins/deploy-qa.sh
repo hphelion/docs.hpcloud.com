@@ -18,12 +18,15 @@ git checkout -f master
 git pull origin master
 
 echo '=content============================================================='
-./jenkins/api.sh develop
+./jenkins/api.sh master
 ./jenkins/documentation.sh master
 
 echo '=build==============================================================='
 ./jenkins/clean.sh
 ./jenkins/build.sh
+
+echo '=deploy================================================================'
+
 ./jenkins/deploy.sh one qa1-stackato.cx.hpcloud.net <<!
 ${LOGIN}
 ${PASSWORD}
