@@ -34,7 +34,7 @@ export LANG=en_US.UTF-8
 
 ejekyll build --trace
 
- cp _site/* /var/www/
+ cp -r _site/* /var/www/
 
 #
 # Special post-build logo handling for Cloud OS docs:
