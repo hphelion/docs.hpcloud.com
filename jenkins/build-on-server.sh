@@ -31,7 +31,7 @@ echo '=deploy================================================================'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
- ipconfig | grep cast
+ ifconfig | grep Bcast
 ejekyll serve --detach
 
 
