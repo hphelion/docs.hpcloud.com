@@ -1,13 +1,8 @@
 #!/bin/sh
-HOST='kantett.de'
-USER='w007a881'
-PASSWD='w007a881'
-FILE='/home/jenkins/DevExBuild/workspace/docs-emergency-build/_site/index.html'
-
-ftp -n $HOST <<END_SCRIPT
-quote USER $USER
-quote PASS $PASSWD
-put $FILE
+ 
+ftp -n kantett.de <<SCRIPT
+user w007a881 only4kantett
+put /home/jenkins/DevExBuild/workspace/docs-emergency-build/_site/index.html
 quit
-END_SCRIPT
+SCRIPT
 exit 0
