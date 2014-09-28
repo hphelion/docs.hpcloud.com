@@ -6,14 +6,14 @@ remote=/path/to/remote/folder
 folder=$1
 #cd /home/jenkins/DevExBuild/workspace/docs-emergency-build/_site/$folder
 
-/home/jenkins/DevExBuild/workspace/docs-emergency-build/_site/
+
 pwd
 ftp -in <<EOF
 open $ftp_site
 user $username $passwd
-mkdir $remote/$folder
-cd $remote/$folder
+#mkdir $remote/$folder
+#cd $remote/$folder
 #mput *
-put index.html
+/home/jenkins/DevExBuild/workspace/docs-emergency-build/_site/index.html
 close
 bye
