@@ -1,19 +1,13 @@
-#!/bin/bash
-ftp_site=kantatt.de
-username=w007a881
-passwd=only4kantett
-remote=/path/to/remote/folder
-folder=$1
-#cd /home/jenkins/DevExBuild/workspace/docs-emergency-build/_site/$folder
+#!/bin/sh
+HOST='kantatt.de'
+USER='w007a881'
+PASSWD='w007a881'
+FILE='index.html'
 
-
-pwd
-ftp -in <<END_SCRIPT
-open $ftp_site
-user $username $passwd
-#mkdir $remote/$folder
-#cd $remote/$folder
-#mput *
-/home/jenkins/DevExBuild/workspace/docs-emergency-build/_site/index.html
-close
-bye
+ftp -n $HOST <<END_SCRIPT
+quote USER $USER
+quote PASS $PASSWD
+put $FILE
+quit
+END_SCRIPT
+exit 0
