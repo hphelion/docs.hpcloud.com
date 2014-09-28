@@ -31,6 +31,11 @@ echo '=deploy================================================================'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+server=`ps -A | grep ruby | awk '{print $1}'`
+
+kill -9 $server
+
+
  ifconfig | grep Bcast
 ejekyll serve --detach
 
