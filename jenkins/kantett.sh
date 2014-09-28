@@ -1,5 +1,5 @@
 #!/bin/sh
-HOST='kantatt.de'
+HOST='kantett.de'
 USER='w007a881'
 PASSWD='w007a881'
 FILE='index.html'
