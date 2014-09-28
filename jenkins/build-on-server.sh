@@ -31,10 +31,10 @@ echo '=deploy================================================================'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-
+ ipconfig | grep cast
 ejekyll serve --detach
 
- ipconfig | grep cast
+
 
 #
 # Special post-build logo handling for Cloud OS docs:
