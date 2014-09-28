@@ -32,9 +32,9 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 
-ejekyll build --trace
+ejekyll serve --detach
 
- cp -r _site/* /var/www/
+ ipconfig | grep cast
 
 #
 # Special post-build logo handling for Cloud OS docs:
