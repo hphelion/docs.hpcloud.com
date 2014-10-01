@@ -19,16 +19,39 @@ else
 fi
 echo "Deploying http://docs.${URL}"
 set -x
+echo "stackato target"
+date
 stackato target https://api.${DOMAIN}
+
+echo "stackato login"
+date
 stackato login --password ${PASSWORD} ${LOGIN}
+
+echo "stackato group"
+date
 stackato group Documentation
+
+echo "stackato unmap"
+date
 stackato unmap docs-${APP} docs.${URL} || true
+
+echo "cp stackato-${APP}.yml stackato.yml"
+date
 cp stackato-${APP}.yml stackato.yml
+
+echo "stackato stop"
+date
 stackato stop docs-${APP}
+
+echo "stackato update"
+date
 # Following two commnds deprecated in stackato client 3.2.1
 stackato update -n --nostart docs-${APP} ||
 stackato update -n --nostart docs-${APP}
 echo "Deploying http://docs-${APP}.${DOMAIN}"
+
+echo "stackato start"
+date
 stackato start docs-${APP}
 stackato map docs-${APP} docs.${URL}
 rm -f stackato.yml
