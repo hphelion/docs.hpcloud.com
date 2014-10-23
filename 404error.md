@@ -7,5 +7,5 @@ permalink: /404error.html
 # This Page Has Been Removed
 
 
-This page has been removed.  Please vistit [HP Helion Documentation](/)
+This page has been removed.  Please visit [HP Helion Documentation](/).
 
