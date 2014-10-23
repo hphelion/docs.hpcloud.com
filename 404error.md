@@ -4,6 +4,8 @@ title: "Page Not Found"
 permalink: /404error.html
 
 ---
-# Page Not Found
+# This Page Has Been Removed
 
-The page you are looking for could not be found.
+
+This page has been removed.  Please vistit [HP Helion Documentation](docs.hpcoud.com)
+
