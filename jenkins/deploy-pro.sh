@@ -13,8 +13,9 @@ git checkout master
 git pull origin master
 
 echo '=content============================================================='
-./jenkins/api.sh master
+
 ./jenkins/documentation.sh master
+./jenkins/api.sh 
 
 echo '=build==============================================================='
 ./jenkins/clean.sh
