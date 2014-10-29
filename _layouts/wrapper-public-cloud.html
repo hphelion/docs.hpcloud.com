@@ -221,7 +221,32 @@
     })();
     </script>
 <script src="http://www.hpcloud.com/sites/default/files/js/js_lNHbXKW-sJN9oM4eoaw-q0yTco3mOORibOeNn9yzM00.js"></script>
-   
+   <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
 
 </body>
 </html>
