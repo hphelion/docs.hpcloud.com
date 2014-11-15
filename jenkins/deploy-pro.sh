@@ -26,10 +26,10 @@ echo '=deploy================================================================'
 ${LOGIN}
 ${PASSWORD}
 !
-./jenkins/deploy.sh one prod1-stackato.cx.hpcloud.net hpcloud.com <<!
-${LOGIN}
-${PASSWORD}
-!
+#./jenkins/deploy.sh one prod1-stackato.cx.hpcloud.net hpcloud.com <<!
+#${LOGIN}
+#${PASSWORD}
+#!
 ./jenkins/deploy.sh two secondary1-stackato.cx.hpcloud.net hpcloud.com <<!
 ${LOGIN}
 ${PASSWORD}
