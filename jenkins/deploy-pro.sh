@@ -40,10 +40,10 @@ ${PASSWORD}
 !
 
 
-#./jenkins/deploy.sh one secondary1-stackato.cx.hpcloud.net hpcloud.com
-#./jenkins/deploy.sh one prod1-stackato.cx.hpcloud.net hpcloud.com 
-#./jenkins/deploy.sh two secondary1-stackato.cx.hpcloud.net hpcloud.com
-#./jenkins/deploy.sh two prod1-stackato.cx.hpcloud.net hpcloud.com
+./jenkins/deploy.sh one secondary1-stackato.cx.hpcloud.net hpcloud.com
+./jenkins/deploy.sh one prod1-stackato.cx.hpcloud.net hpcloud.com 
+./jenkins/deploy.sh two secondary1-stackato.cx.hpcloud.net hpcloud.com
+./jenkins/deploy.sh two prod1-stackato.cx.hpcloud.net hpcloud.com
 
 echo '====================================================================='
 echo 'http://docs.hpcloud.com/'
