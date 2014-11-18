@@ -28,19 +28,6 @@ do
 	fi
 done
 
-cat master-toc.tmp | sort -t \/ -k 2 >> master-toc.md
-
-for i in `cat filepermalink1.txt  `
-do 
-	if [[ -z $(grep $i permalinklist2.txt ) ]];
-	then
-		echo  ""
-		echo "==== Orphaned file ==="
-		echo "Customers have no way to access this file."
-		echo $i
-		EXIT="1"																																														
-	fi
-done
 
 rm checktmp > /dev/null 2>&1  
 rm permalinklist1.txt  > /dev/null 2>&1  
