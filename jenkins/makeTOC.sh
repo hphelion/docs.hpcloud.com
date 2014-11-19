@@ -2,7 +2,8 @@
  
 
 #Delete any tempfiles left over from the last run and write introduction
-rm master-toc.md > /dev/null 2>&1 
+rm master-toc.md > /dev/null 2>&1
+rm master-toc.tmp > /dev/null 2>&1
  
 echo "---" > master-toc.md
 echo "layout: defaul"t >> master-toc.md
@@ -24,8 +25,10 @@ do
 	then		
 
 
-echo "* ["`head -10 $i | grep title | sed 's/title: //'| sed 's/"//g'`"]("`head $i | grep permalink | sed 's/permalink: //'`")" >> master-toc.md
+echo "* ["`head -10 $i | grep title | sed 's/title: //'| sed 's/"//g'`"]("`head $i | grep permalink | sed 's/permalink: //'`")" >> master-toc.tmp
 	fi
+
+
 done
 
-
+sort -t "(" -k 2 master-toc.tmp >> master-toc.md
