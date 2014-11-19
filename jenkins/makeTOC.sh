@@ -23,9 +23,10 @@ do
 
 	if [[ -z $(head $i | grep "published: false") ]];
 	then		
-
-
+if [[ -z $(grep  redirect $i) ]]
+then
 echo "* ["`head -10 $i | grep title | sed 's/title: //'| sed 's/"//g'`"]("`head $i | grep permalink | sed 's/permalink: //'`")" >> master-toc.tmp
+fi
 	fi
 
 
