@@ -16,7 +16,7 @@ echo "This file is rebuilt each time docs-emergency-build is run."  >> master-to
 echo "The file is not copied to the master branch and not pushed to production" >> master-toc.md
 echo " " >> master-toc.md
   
-for i in `find . -path ./redirects -prune -o -name "*.md" -print`
+for i in `find . -path ./content/documentation/redirects -prune -o -name "*.md" -print`
  
 do
 
