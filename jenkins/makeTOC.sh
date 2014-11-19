@@ -32,4 +32,4 @@ fi
 
 done
 
-sort -t "(" -k 2 master-toc.tmp | grep -v "[]()" >> master-toc.md
+sort -t "(" -k 2 master-toc.tmp | grep -v "\[\]\(\)" >> master-toc.md
