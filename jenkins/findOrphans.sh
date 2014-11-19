@@ -1,5 +1,7 @@
 #!/bin/bash 
  
+echo "start"
+
 #Delete any tempfiles left over from the last run and write introduction
 rm checktmp > /dev/null 2>&1  
 rm permalinklist1.txt  > /dev/null 2>&1  
@@ -15,9 +17,12 @@ echo "---" >> master-toc.md
 echo "<!--UNDER REVISION-->" >> master-toc.md
 echo "#Master Index#" >> master-toc.md
   
-
-for i in `find . -path ./redirects -prune -o -name "*.md" `
+echo "start 1" 
+for i in `find . -path ./redirects -prune -o -name "*.md" -print`
+ 
 do
+echo $i
+
 	if [[ -z $(head $i | grep "published: false") ]];
 	then				 
 		sed ':a;N;$!ba;s/\n/ /g' $i |  sed 's|-->|-->\n|g' | sed 's|<!--.*-->||g' | sed 's|](|\n](|g'  | grep "](/.*)" | sed 's/.*](//' | sed 's/).*//' | sed 's|#.*||' | grep -v "/api/" | grep -v "^/file/" | sed 's|\/$||' >> permalinklist1.txt
