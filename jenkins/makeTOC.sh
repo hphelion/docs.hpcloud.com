@@ -13,7 +13,7 @@ echo "---" >> master-toc.md
 echo "<!--UNDER REVISION-->" >> master-toc.md
 echo "#Master TOC#" >> master-toc.md
 echo "This file is rebuilt each time docs-emergency-build is run."  >> master-toc.md
-echo "The file is not copied to the master branch and not pushed to production" >> master-toc.md
+echo "The file is not copied to the master branch and not pushed to production." >> master-toc.md
 echo " " >> master-toc.md
   
 for i in `find . -path ./content/documentation/redirects -prune -o -name "*.md" -print`
