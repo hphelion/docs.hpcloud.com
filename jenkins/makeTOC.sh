@@ -7,8 +7,8 @@ rm master-toc.md > /dev/null 2>&1
  
 echo "---" > master-toc.md
 echo "layout: defaul"t >> master-toc.md
-echo "title: \"Master Index\"" >> master-toc.md
-echo "permalink: /masterindex/" >> master-toc.md
+echo "title: \"Master TOC\"" >> master-toc.md
+echo "permalink: /mastertoc/" >> master-toc.md
 echo "---" >> master-toc.md
 echo "<!--UNDER REVISION-->" >> master-toc.md
 echo "#Master TOC#" >> master-toc.md
