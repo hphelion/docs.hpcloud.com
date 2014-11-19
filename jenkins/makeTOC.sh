@@ -20,7 +20,6 @@ for i in `find . -path ./redirects -prune -o -name "*.md" -print`
  
 do
 
-echo $i
 
 	if [[ -z $(head $i | grep "published: false") ]];
 	then				 
