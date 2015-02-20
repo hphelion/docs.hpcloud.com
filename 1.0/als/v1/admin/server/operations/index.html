@@ -1,0 +1,418 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/admin/server/operations/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:27 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Common Server Operations</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../../css/combined.css">
+
+	<script src="../../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../../index.html" class="logo"  ><img src="../../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="common-server-operations">HP Helion Development Platform: Common Server Operations</h1>
+
+<ul><li><a href="#server-status">Server Status</a></li>
+<li><a href="#starting-and-stopping-roles">Starting and Stopping Roles</a></li>
+<li><a href="#system-shutdown">System Shutdown</a></li>
+<li><a href="#setting-the-time-zone">Setting the Time Zone</a></li>
+<li><a href="#resetting-the-vm">Resetting the VM</a></li>
+<li><a href="#monitoring-the-helion-server">Monitoring The Application Lifecycle Service Server</a>        -   <a href="#management-console">Management Console</a></li>
+<li><a href="#new-relic">New Relic</a></li>
+<li><a href="#creating-an-admin-user">Creating an Admin User</a></li>
+<li><a href="#system-monitoring-with-nagios">System Monitoring with Nagios</a></li>
+<li><a href="#server-backup-import-and-export">Server Backup, Import, and Export</a></li>
+</ul><h2 id="server-status">Server Status<a href="#server-status" title="Permalink to this headline"></a></h2>
+
+<p>To check the status of Application Lifecycle Service:</p>
+
+<pre>
+  <code>kato status
+</code>
+</pre>
+
+<p>This will list all the roles configured to run on the VM, and whether
+they are running, stopped, or starting.</p>
+
+<p>Roles are logical groups of processes (see <a href="../../reference/kato-ref/index.html#kato-command-ref-role-info">kato role info</a>) which can be inspected individually with <a href="../../reference/kato-ref/index.html#kato-command-ref-process-list">kato process
+...</a> commands.</p>
+
+<p>In particular, the <a href="../../reference/kato-ref/index.html#kato-command-ref-process-ready">kato process ready</a> command is useful for determining if the system is in a state to receive <a href="../configuration/index.html#server-configuration">configuration commands</a>. For example, to check that all processes for the configured roles are ready:</p>
+
+<pre>
+  <code>kato process ready all
+</code>
+</pre>
+
+<h3 id="starting-and-stopping-roles">Starting and Stopping Roles<a href="#starting-and-stopping-roles" title="Permalink to this headline"></a></h3>
+
+<p>To control the Application Lifecycle Service roles, use the <em>kato</em> start,
+stop and restart commands:</p>
+
+<pre>
+  <code>kato stop
+</code>
+</pre>
+
+<p>Without any further options the operation applies to all Application Lifecycle Service roles.
+To start, stop or restart individual roles, specify them after the
+desired command:</p>
+
+<pre>
+  <code>kato stop mysql
+</code>
+</pre>
+
+<h3 id="system-shutdown">System Shutdown<a href="#system-shutdown" title="Permalink to this headline"></a></h3>
+
+<p>To safely shut down the VM, run the <em>shutdown</em> command as root:</p>
+
+<pre>
+  <code>sudo shutdown -h now
+</code>
+</pre>
+
+<h2 id="setting-the-time-zone">Setting the Time Zone<a href="#setting-the-time-zone" title="Permalink to this headline"></a></h2>
+
+<p>At first boot, the time zone of the Application Lifecycle Service VM is set to UTC. To set this to your local time zone, use the <code>kato op set_timezone</code> command. When run without arguments, the command will prompt
+for time zone selection, but the time zone can be set non-interactively
+with the <code>--timezone</code> option. For example:</p>
+
+<pre>
+  <code>kato op set_timezone --timezone America/Chicago
+</code>
+</pre>
+
+<p>You can also use the <code>tzselect</code> command to find the
+appropriate time zone string for your location.</p>
+
+<h2 id="resetting-the-vm">Resetting the VM<a href="#resetting-the-vm" title="Permalink to this headline"></a></h2>
+
+<p>If you would like to return an Application Lifecycle Service VM to its original
+"out-of-the-box" configuration, use the <a href="../../reference/kato-ref/index.html#kato-command-ref-node-attach"><em>kato node reset</em></a> command. This command has two options:</p>
+
+<ul><li><p><code>kato node reset factory</code>: Resets everything.
+The host will behave as it did on first boot (creating a new
+randomized hostname and starting as a micro cloud with no configured
+users). Shutdown the VM after running this command. The primary use
+for this command is to prepare a running VM to be cloned by removing
+stale data/configuration.</p></li>
+<li><p><code>kato node reset soft</code>: Resets only
+configuration and data, but leaves first boot (naming) or other
+state info. You would normally run this together with the <a href="../../reference/kato-ref/index.html#kato-command-ref-node-attach"><em>kato
+node
+setup</em></a>
+command. For example:</p>
+
+<pre><code>kato node reset soft
+kato node setup micro
+</code></pre></li>
+</ul><h2 id="monitoring-the-application-lifecycle-service-server">Monitoring The Application Lifecycle Service Server<a href="#monitoring-the-helion-server" title="Permalink to this headline"></a></h2>
+
+<h3 id="management-console">Management Console<a href="#management-console" title="Permalink to this headline"></a></h3>
+
+<p>The <a href="../../../user/console/index.html#management-console"><em>Management Console</em></a> has a Settings page that allows an administrator to monitor the server component and services, and restart or stop services as necessary.</p>
+
+<h3 id="new-relic">New Relic<a href="#new-relic" title="Permalink to this headline"></a></h3>
+
+<p>Please see <a href="../../best-practices/index.html#bestpractices-nrsysmond"><em>New Relic Server Monitoring</em></a>. New Relic can also be used to <a href="../../../user/deploy/newrelic/index.html#newrelic">monitor apps</a>.</p>
+
+<h3 id="creating-an-admin-user">Creating an Admin User<a href="#creating-an-admin-user" title="Permalink to this headline"></a></h3>
+
+<p>The easiest way to add admin users to Application Lifecycle Service is via the Management
+Console under <a href="../../console/customize/index.html#console-users">Users</a>. The Management Console will prompt to create the initial admin user the first time you use it.</p>
+
+<p>If you do not have access to the Management Console, create a user by logging in to the micro cloud or Core node controller via SSH or through the VM <a href="../../../user/reference/glossary/index.html#term-tty-console">tty console</a> as the <em>helion</em> user and run <em>helion register</em>:</p>
+
+<pre>
+  <code>helion target api.helion-xxxx.local
+helion register superuser@example.net
+</code>
+</pre>
+
+<p>Grant administrative privileges using <em>kato config</em>:</p>
+
+<pre>
+  <code>kato config push cloud_controller_ng admins superuser@example.net
+</code>
+</pre>
+
+<p>Subsequent new users can be added remotely with the Helion client by an admin user.</p>
+
+<h3 id="system-monitoring-with-nagios">System Monitoring with Nagios<a href="#system-monitoring-with-nagios" title="Permalink to this headline"></a></h3>
+
+<p>If Nagios is installed on your server nodes, you can use it to monitor
+and report resource utilization. See the <a href="../../best-practices/index.html#bestpractices-nagios">Best Practices</a> documentation for details.</p>
+
+<h2 id="server-backup-import-and-export">Server Backup, Import, and Export<a href="#server-backup-import-and-export" title="Permalink to this headline"></a></h2>
+
+<p>The import and export functionality can be used to do regular backups,
+or to move the Application Lifecycle Service configuration from one server to another. It is also a means of upgrading the Application Lifecycle Service VM without having to install everything from the ground up.</p>
+
+<p>Please see the <a href="../../best-practices/index.html#bestpractices-controller-migration">Best Practices</a> documentation for details on how to <a href="../../best-practices/index.html#bestpractices-migration-export">export</a> and <a href="../../best-practices/index.html#bestpractices-migration-import">import</a> your data.</p>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Download the<br>Development Platform<br>
+			<a href="../../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show">DOWNLOAD NOW</a>
+		</p>
+	</aside>
+	
+ 
+	<aside class="signup-box">
+		<p class="align-center">
+			Take the Helion Development Platform for a Free Spin<br>
+			<a href="../../../../../helion/devplatform/ALS-developer-trial-quick-start/index.html">Quick Start Developer Trial</a>
+		</p>
+	</aside>
+<!--	
+	<aside class="signup-box">
+		<p class="align-center">Make sure to check out our Developer Portal
+			<a href="https://dev.hpcloud.com">dev.hpcloud.com
+</a><br>
+ 
+		</p>
+	</aside>
+-->	
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/index.html"><span>HP Helion Development Platform Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/install/index.html"><span>Development Platform Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/install/community/index.html"><span>Development Platform Community Edition Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/openstack/update/devplat/101/index.html"><span>Development Platform Commercial 1.0.1 Update</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/appdev/index.html"><span>Application Developer Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/sysadmin/index.html"><span>IT Ops Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/appdev/index.html#sample"><span>Sample Code</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/related-topics/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/deploy/index.html"><span>Application Lifecycle Service Configuration and Deployment</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../index.html"><span>ALS Admin Guide</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/admin/server/operations/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:27 GMT -->
+</html>

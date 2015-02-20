@@ -1,0 +1,656 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/hpcloudconsole by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:53:49 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion Public Cloud Console: Getting Started</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../css/combined.css">
+
+	<script src="../js/modernizr-2.5.3.min.js"></script>
+	<script src="../js/metrics.js"></script> 
+	
+	
+	
+	
+	<!--[if IEMobile 7]><html class="iem7"  lang="en" dir="ltr"><![endif]-->
+<!--[if lte IE 6]><html class="lt-ie9 lt-ie8 lt-ie7"  lang="en" dir="ltr"><![endif]-->
+<!--[if (IE 7)&(!IEMobile)]><html class="lt-ie9 lt-ie8"  lang="en" dir="ltr"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9"  lang="en" dir="ltr"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html  lang="en" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"><!--<![endif]-->
+
+<head profile="../../external.html?link=http://www.w3.org/1999/xhtml/vocab">
+  
+  
+  <meta charset="utf-8" />
+<meta name="web_section_id" content="R11646" />
+<meta name="bu" content="corp" />
+<meta name="hp_design_version" content="hpweb.2.0" />
+<meta name="segment" content="Commercial.B2B" />
+<meta name="page_content" content="HP Public Cloud - Enterprise Public Cloud Products &amp;amp; Services" />
+<meta name="content_country_applicability" content="w1" />
+<meta name="target_country" content="US" />
+<meta name="lifecycle" content="presales.awareness" />
+<link rel="shortcut icon" href="../../external.html?link=http://www.hpcloud.com/sites/all/themes/hpcloud/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<meta name="description" content="HP Public Cloud provides on-demand, pay-as-you-go cloud services for computing, storage infrastructure as well as platform services. Explore the cloud." />
+<meta about="/hp-helion-public-cloud" property="sioc:num_replies" content="0" datatype="xsd:integer" />
+<meta content="HP Helion Public Cloud" about="/hp-helion-public-cloud" property="dc:title" />
+<link rel="canonical" href="../../external.html?link=http://www.hpcloud.com/" />
+<link rel="shortlink" href="../../external.html?link=http://www.hpcloud.com/" />
+<meta property="og:url" content="http://www.hpcloud.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="HP Public Cloud" />
+<meta property="og:site_name" content="HP Public Cloud" />
+   
+
+      <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="cleartype" content="on">
+<!--
+  <link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_791YXBaKKm1ORM_7huSKEsIV9tSWq6wmRkERhuXpN6w.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_mGbqk88-VTBvzao9MxjjAm60xrWNV9JbuxL-XsOdBKY.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_UOCsF9jLPA1lMMj-BVVBzE0l5EIeCw_3PDG18zycRw4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_MfNt8ndX5CcdNjNUw-v__mhCPodpzDeR8KuzaXo-yzQ.css" media="all" />
+-->
+  <script src="../../www.hpcloud.com/sites/default/files/js/js__kIQ7mxn9cgBO3AAnwhKUMQqNbqZZQWibQB6EZRy6u0.html"></script>
+<script src="../../www.hpcloud.com/sites/default/files/js/js_CC-zfeuQHcDhFtVRuKW53h30TL7j_105J32Nz8b8R38.js"></script>
+<script>var WRInitTime=(new Date()).getTime(); // ClickTale top part</script>
+<script src="../../www.hpcloud.com/sites/default/files/js/js_mZQzCl35imgkCIIjGS2RPLYDNuLk9ncwZ5c7lh6STTw.js"></script>
+<script>		<!-- Start Visual Website Optimizer Asynchronous Code -->
+		var _vwo_code=(function(){
+		var account_id=37831,
+		settings_tolerance=2000,
+		library_tolerance=2500,
+		use_existing_jquery=false,
+		// DO NOT EDIT BELOW THIS LINE
+		f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('../../external.html?link=http://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+		<!-- End Visual Website Optimizer Asynchronous Code --></script>
+<script src="../../www.hpcloud.com/sites/default/files/js/js_kv2zkR2iCsl2ctlEzg-TiOxz1jEVBjx7VzAR0mTzlew.js"></script>
+<script src="../../www.hpcloud.com/sites/default/files/js/js_qz7rta8c7yTiJLYNkf4WKFMgEeuRUE1AgWXd6NCAQZU.js"></script>
+<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"hpcloud","theme_token":"NwfPTBjz4hDLctcBflIoKqD4J2r3kIAtWobc48FZKTo","js":{"https:\/\/clicktale.pantherssl.com\/WRd.js":1,"0":1,"sites\/all\/modules\/custom\/hpcs_referrer_url\/js\/referrer.min.js":1,"sites\/all\/modules\/custom\/kenshoo\/js\/kenshoo.min.js":1,"1":1,"sites\/all\/themes\/hpcloud\/js\/fastclick.min.js":1,"sites\/all\/themes\/hpcloud\/js\/main.min.js":1,"sites\/all\/modules\/custom\/lp_chat\/js\/le-mtagconfig.js":1,"sites\/all\/modules\/custom\/hpcloud_jquery\/js\/jquery-1.9.0.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"misc\/jquery.cookie.js":1,"2":1,"sites\/all\/modules\/custom\/omniture\/js\/hpcs_metrics.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/tinycon.min.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/color.js":1,"3":1,"sites\/all\/modules\/custom\/lp_chat\/js\/lp-initialize.js":1,"sites\/all\/themes\/hpcloud\/js\/vendor\/modernizr-2.6.2.min.js":1,"sites\/all\/themes\/hpcloud\/js\/respond.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/uif\/uif.css":1,"sites\/all\/modules\/contrib\/field_collection\/field_collection.theme.css":1,"sites\/all\/themes\/zen\/system.menus.css":1,"sites\/all\/themes\/hpcloud\/css\/screen.css":1,"sites\/all\/themes\/hpcloud\/css\/styles.css":1}}});</script>
+      <!--[if lt IE 9]>
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+      <!--[if (lt IE 9) & (!IEMobile)]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie8.css">
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+    
+    <!--[if IE]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie.css">
+    <![endif]-->
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" ><!--
+				<a href="http://docs.hpcloud.com/" class="logo"  ><img src="/images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>-->
+        			<ul class="menu"><li class="first leaf menu-mlid-1845"><a href="../../external.html?link=http://www.hpcloud.com/support">Support</a></li>
+<li class="leaf has-children menu-mlid-1222"><a href="../../external.html?link=http://www.hpcloud.com/partners">Partners</a></li>
+<li class="leaf menu-mlid-1817"><a href="../../external.html?link=http://marketplace.hpcloud.com/" title="">Marketplace</a></li>
+<li class="leaf has-children menu-mlid-1223"><a href="../../external.html?link=http://www.hpcloud.com/about" title="">About</a></li>
+<li class="leaf menu-mlid-1224"><a href="../../external.html?link=http://www.hp.com/" title="">hp.com</a></li>
+<li class="leaf menu-mlid-1225"><a href="../../external.html?link=http://www.hpcloud.com/about/contact">Contact</a></li>
+<li class="last leaf menu-mlid-1226"><a href="../../external.html?link=http://www.hpcloud.com/console">Log In</a></li>
+</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="getting-started-with-hp-helion-public-cloud-console">Getting Started with HP Helion Public Cloud Console</h1>
+
+<p>Welcome to HP Helion Public Cloud Horizon Console! We want you up and running quickly, so this Getting Started guide walks you through network setup and connection (if not going with the default configuration setup when you activate compute services), instance and volume creation, security options, identity parameters, and management tools that facilitate your organization's use of HP Helion Public Cloud. <strong>This page takes you through the interface in the chronological order needed to get up and running, rather than the order displayed in the console</strong>.</p>
+
+<p>After initial setup, revisit the interface to monitor usage, modify, add, and delete networks, instances, volumes, roles, groups, and more. For the latest updates to the current HP Helion Public Cloud Console release, see <a href="whats_new_with_HP_Cloud_Console/index.html">What's new with HP Helion Public Cloud Console</a>.</p>
+
+<p>
+  <img src="../content/documentation/media/landingpage.png" width="580" alt="" />
+</p>
+
+<p>This page contains the following sections:</p>
+
+<ul><li><a href="#Createandconnect">Creating and connecting a network</a></li>
+<li><a href="#ManageHPPublicCloud">Managing HP Helion Public Cloud</a></li>
+<li><a href="#Forfurtherinformation">For further information</a></li>
+</ul><h2 id="Createandconnect">Creating and connecting a network</h2>
+
+<p>This section includes how to:</p>
+
+<ul><li><a href="#Createanetwork">Create a network</a> </li>
+<li><a href="#Createasubnet">Create a subnet</a> </li>
+<li><a href="#Createarouter">Create a router</a></li>
+<li><a href="#Connectyournetwork">Connect your network</a></li>
+</ul><p><strong>Note</strong>: A default configuration comes with HP Helion Public Cloud compute activation and includes:</p>
+
+<ul><li>A network </li>
+<li>A subnet</li>
+<li>A router connecting the subnets to the Internet</li>
+<li>A security group with basic server options, both SSH and Ping rules</li>
+</ul><p>You can use the default network to deploy HP Helion Public Cloud compute instances (virtual servers), or create a network configuration through the HP Helion Public Cloud Console with the following instructions.</p>
+
+<h3 id="Createanetwork">Create a network</h3>
+
+<ol><li><p>Login to HP Helion Public Cloud with your username and password.</p></li>
+<li><p>On the HP Helion Public Cloud console interface, click "Project," on the left-side bar then "Networks" under "Manage Networks."</p>
+
+<p><img src="../content/documentation/media/CreateaNetworkImage1.png" width="580" alt="" /></p></li>
+<li><p>Click "+Create Network" in the right-hand navigation.</p>
+
+<p><img src="../content/documentation/media/CreateaNetworkImage2.png" width="580" alt="" /></p></li>
+<li><p>Enter a "Network Name" in the "Create Network" pop-up screen, leave the "Admin" State box checked, and continue to the directions in "Create a subnet" below.</p>
+
+<p><img src="../content/documentation/media/CreateaNetworkImage3.png" width="580" alt="" /></p></li>
+</ol><h3 id="Createasubnet">Create a subnet</h3>
+
+<ol><li>Click the "Subnet" tab in the "Create Network" pop-up screen. <strong>Note</strong>: If you click the "Create" button on the "Network" pop-up before setting up a "Subnet,"  you are prompted to specify a network address or turn off the option to create a subnet through an error message.</li>
+<li>Enter the subnet name.</li>
+<li>Click in the "Network Address" box. The pop-up message states the network address is in Classless Inter-Domain Routing (CIDR) format; i.e.,  000.000.0.0/00. Enter the network address displayed: 192.168.0.0/24.</li>
+<li>Keep the IPv4 default in the "IP Version" box unless you know you have moved to IPv6.</li>
+<li>Leave the "Gateway IP" box blank to use the default value of the network address; e.g., 192.168.0.1 for 192.168.0.0/24.</li>
+<li><p>Leave the "Disable Gateway" box unchecked to use the default and click "Create."</p>
+
+<p><img src="../content/documentation/media/CreateaSubnetImage1.png" width="580" alt="" /></p></li>
+<li><p>The "Networks" screen displays your network name and associated subnets.</p>
+
+<p><img src="../content/documentation/media/CreateaSubnetImage2.png" width="580" alt="" /></p></li>
+<li><p>To see a graphic display of your network setup, click "Network Topology" under "Manage Network" in the left-hand navigation.</p>
+
+<p><img src="../content/documentation/media/CreateaSubnetImage3.png" width="580" alt="" /></p></li>
+</ol><h3 id="Createarouter">Create a router</h3>
+
+<ol><li><p>If on the "Network Topology" screen, click "Create Router" in the top right-hand navigation. If not, click "Routers" under the "Manage Network" heading in the left-hand navigation.</p>
+
+<p><img src="../content/documentation/media/CreateaRouterImage1.png" width="580" alt="" /></p></li>
+<li><p>If you clicked "+Create Router" on the "Network Topology" screen, enter your router name and click "Create Router." If you clicked "Routers" under "Manage Network", click "+Create Router" in the upper right-hand navigation and enter the router name in the pop-up.</p></li>
+<li><p>Click "Router" in the left-hand navigation to see the router name and status. <strong>Note</strong>:  Click the router "Name" to display its ID number and status. If you do this, click "Routers" in the left-hand navigation to make the "Set Gateway" action available for the following step or click the "Back" button in your browser.</p>
+
+<p><img src="../content/documentation/media/CreateaRouteImage2.png" width="580" alt="" /></p></li>
+<li><p>On the "Routers" page, click "Set Gateway" under "Actions" to connect your router to the Internet.</p>
+
+<p><img src="../content/documentation/media/CreateaRouterImage3.png" width="580" alt="" /></p></li>
+<li><p>Click the drop-down menu in the "External Network" box in the "Set Gateway" pop-up, select "Ext-Net," and click "Set Gateway."</p>
+
+<p><strong>Note</strong>: The external network is the router's default route, with the router acting as a gateway for external connectivity. While you can configure a subnet that is internal-only, you must connect it to another subnet with external connectivity.</p>
+
+<p><img src="../content/documentation/media/CreateaRouterImage4.png" width="580" alt="" /></p></li>
+</ol><h3 id="Connectyournetwork">Connect your network</h3>
+
+<ol><li><p>Click the router name on the "Routers" page.</p></li>
+<li><p>Click "+Add Interface" on the far-right of the "Router Details" page.</p>
+
+<p><img src="../content/documentation/media/Connectyournetworkimage1.png" width="580" alt="" /></p></li>
+<li><p>Click the drop-down menu in the "Select Subnet" box in the "Add Interface" pop-up and click on the network you configured. <strong>Note</strong>: You can optionally specify an IP address in the box provided, but the default interface IP address is the selected subnet's external gateway and the best choice unless you are setting up a more complicated connection. Any IP address you specify must belong to the subnet in the drop-down menu.</p></li>
+<li><p>Click "Add Interface."</p>
+
+<p><img src="../content/documentation/media/Connectyournetworkimage2.png" width="580" alt="" /></p></li>
+</ol><p><strong>Important: To delete a network, you must delete any instances running on that network (instance creation covered below) and the router interface before deleting the network. If you don't have instances on the network, you still have to delete the router interface before deleting the network</strong>:</p>
+
+<ol><li><p>If you have created an instance, click "Instances" on the left-hand bar under "Manage Compute."</p></li>
+<li><p>Select the check box for any instance running on the network you want to delete and click "Terminate Instances" in the upper right-hand navigation.</p></li>
+<li><p>Click "Routers" under "Manage Network in the left-hand bar.</p></li>
+<li><p>Click on the router "Name."</p></li>
+<li><p>On the "Router Details" page, select the check box next to the "Interface" name, and click "Delete Interface."</p></li>
+<li><p>Click "Networks" in the left-hand bar, select the check box next to the network you want to delete, and click "Delete Networks" in the upper right-hand navigation.</p></li>
+</ol><h2 id="ManageHPPublicCloud">Managing HP Helion Public Cloud</h2>
+
+<p>You are now ready to use the options under "Manage Compute" under "Project" in the left-hand navigation. This section includes:</p>
+
+<ul><li><a href="#Overview">Overview</a></li>
+<li><a href="#Instance">Create an instance</a></li>
+<li><a href="#Volumes">Create and attach a volume</a></li>
+<li><a href="#Imagesandsnapshots">Images and Snapshots</a></li>
+<li><a href="#Monitoring">Monitoring</a></li>
+<li><a href="#Accessandsecurity">Access and Security</a></li>
+</ul><h3 id="Overview">Overview</h3>
+
+<p>Select "Overview" under "Manage Compute," to display your usage summary and quotas for:</p>
+
+<ul><li>Instances</li>
+<li>VPCUs</li>
+<li>RAM</li>
+<li>Floating IPs</li>
+<li>Security Groups</li>
+</ul><p>As you use HP Helion Public Cloud, click on the "Overview" options any time to query current usage as well as usage during specific time frames.</p>
+
+<h4 id="Instance">Create an instance</h4>
+
+<p>An instance is a virtual server.</p>
+
+<p><strong>Note</strong>: HP Helion Public Cloud provides a list of images from which you can boot an instance.  While you can also boot from an HP Helion Public Cloud instance you have launched using "Images and Snapshots," it is unnecessary to get up and running and beyond the scope of this document.</p>
+
+<ol><li><p>Click "Instances" under "Manage Compute" in the left-hand navigation.</p></li>
+<li><p>Click "+Launch Instance" in the upper right-hand navigation of the screen.</p>
+
+<p><img src="../content/documentation/media/CreateaninstanceImage1.png" width="580" alt="" /></p></li>
+<li><p>You can leave the default choice of the "Any Availability Zone" (AZ) box, which arbitrarily assigns an AZ for an instance or click the drop box to specify  where to locate an instance. <strong>Note</strong>: The default choice locating an instance in any AZ offers high availability, ensuring a high level of operational performance. You can also specify an AZ for an instance if you want to segregate AZs per function for your own organizational purposes; e.g., you could select AZ1 for your data center, and set the remaining two up later for other discrete functions. Such a setup is completely optional as the AZs share all information and work in tandem.</p></li>
+<li><p>Enter a name in the "Instance Name" box.</p></li>
+<li><p>Click the drop-down menu under "Flavor" to select the hardware configuration you want to emulate, i.e., how much disk space and RAM you need. When you select a flavor, the "Flavor Details" box displays the following:</p>
+
+<ul><li>Name</li>
+<li># of VCPUs</li>
+<li>Root disk size</li>
+<li>Ephemeral disk size</li>
+<li>Total disk size</li>
+<li>RAM usage</li>
+</ul><p><strong>Note</strong> The "Project Limits" box under "Flavor Details" graphically displays quotas allowed and usage of Instances, VCPUs, and Total RAM after you select a flavor.</p>
+
+<p><img src="../content/documentation/media/CreateanInstanceImage2.png" width="580" alt="" /></p></li>
+<li><p>Enter the number of instances you want to create under "Instance Count."</p></li>
+<li><p>Select the "Instance Boot Source" source from the drop-down menu. To select an HP Helion Public Cloud default image, select "Boot from Image" from the drop-down.</p>
+
+<p><img src="../content/documentation/media/CreateanInstanceImage3.png" width="580" alt="" /></p></li>
+<li><p>Click the "Select Image" drop down under "Image Name." Select one of the images HP Helion Public Cloud provides.</p>
+
+<p><img src="../content/documentation/media/CreateanInstanceImage4.png" width="580" alt="" /></p></li>
+<li><p>Click the "Networking" tab in the upper navigation of  "Launch Instance" and click the "+" next to the network you want to launch an instance from.  You can also drag and drop the network from which you want to launch the instance from the "Available Networks" box to the "Selected Networks" box.</p>
+
+<p><strong>Note</strong> If you click "Launch" before clicking the "Networking" tab, an error message displays; however, you can still select the network desired from the "Available Network" box to the "Selected Networks" box.</p></li>
+<li><p>Click "Launch."</p>
+
+<p><img src="../content/documentation/media/CreateanInstanceImage5.png" width="580" alt="" /></p></li>
+</ol><h3 id="Volumes">Create and Attach a Volume</h3>
+
+<p>A volume is a block storage device you attach to an instance.</p>
+
+<p><strong>Note</strong>: HP Helion Public Cloud provides a list of images from which you can boot an instance or volume.  While you can also boot from an HP Helion Public Cloud instance you have launched using "Images and Snapshots," it is unnecessary to get up and running in HP Helion Public Cloud and beyond the scope of this document.</p>
+
+<ol><li><p>In the left-hand navigation, click "Volumes" under "Manage Compute."</p></li>
+<li><p>Click "+Create Volume" in the upper right-hand navigation.</p>
+
+<p><img src="../content/documentation/media/VolumeImage1.png" width="580" alt="" /></p></li>
+<li><p>Enter a name under "Volume Name" and, optionally, a description in the box below and a "Type" from the following drop-down menu.</p></li>
+<li><p>Staying within the "Volume Limits" shown in the "Create Volume" box, enter a number of GBs under "Size."</p>
+
+<p><img src="../content/documentation/media/VolumeImage2.png" width="580" alt="" /></p></li>
+<li><p>Select a volume source from the drop-down menu.</p></li>
+<li><p>If you select "Image" as your volume source, click the drop-down menu for "Choose an image" under the "Use image as a source" box that appears. Click on the image you want to use.</p>
+
+<p><img src="../content/documentation/media/VolumeImage3.png" width="580" alt="" /></p></li>
+<li><p>Select an AZ. HP Helion Public Cloud recommends the pre-filled "Any Availability Zone."</p></li>
+<li><p>Click "Create Volume."</p>
+
+<p><img src="../content/documentation/media/VolumeImage4.png" width="580" alt="" /></p></li>
+<li><p>To attach the volume to an instance, click "Edit Volume" under "Action" on the "Volumes" page.</p>
+
+<p><img src="../content/documentation/media/VolumeImage5.png" width="580" alt="" /></p></li>
+<li><p>Select an instance to attach the volume to from the drop-down menu on the "Manage Volume Attachments" page.</p></li>
+<li><p>Under "Device Name," you can specify a location in the system if desired or enter the displayed default. <strong>Note</strong>: If choosing the default, you must still enter it manually even though it is displayed (greyed out). Otherwise, you receive an error message that you must specify a location.</p></li>
+<li><p>Click "Attach Volume."</p>
+
+<p><img src="../content/documentation/media/VolumeImage6.png" width="580" alt="" /></p></li>
+</ol><h3 id="Imagesandsnapshots">Images and Snapshots</h3>
+
+<p>
+  <strong>Functionality Overview</strong>
+</p>
+
+<p><strong>Important</strong>: HP Helion Public Cloud provides a list of images from which you can boot an instance.  While you can also boot from an HP Helion Public Cloud instance you have launched and customized using "Images and Snapshots," it is unnecessary to get up and running in the Cloud and beyond the scope of this document.</p>
+
+<p>While this document does not cover creating snapshots, click "Images and Snapshots" in the left-hand bar to view available server and volume images and their details. For more details, click the image name on the "Images" page. Images listed under "Public" are available to anyone. "Project" images are for your specific project only.</p>
+
+<h3 id="Accessandsecurity">Access and Security</h3>
+
+<p>Security groups and security group rules allow you to specify the type of traffic and direction (inbound/outbound) that are allowed to pass through a project's network port(s). When you create a project in HP Helion Public Cloud, you must also create security group rules to define access types through its ports, designating security group members depending on their job functions and access needs.</p>
+
+<p>When a port is created in HP Helion Public Cloud Networking it is associated, unless you specify otherwise, with a default security group that allows inbound traffic from the same subnet and all outbound traffic. You can add security group rules to the default security group to modify access or create a new security group to contain the rules you need.</p>
+
+<p>Security group rules have three parts:</p>
+
+<ol><li><p>Rule - A rule template or rules you create. For example, if setting up a VM as a mail server, you might select Custom TCP Rule, Custom UDP Rule, or Custom ICMP Rule.</p></li>
+<li><p>Open Port/Port Range: Open a single port or a range of ports.</p></li>
+<li><p>Remote: For this rule, you must specify the source of allowed traffic in either the form of an IP address block (CIDR) or through a security group.</p></li>
+</ol><h4 id="default-security-group">Default security group</h4>
+
+<ol><li><p>Click "Access &amp; Security" in the left-hand bar under "Manage Compute" and "Project" to begin.</p>
+
+<p><img src="../content/documentation/media/Accesssecurity1.png" width="580" alt="" /></p></li>
+<li><p>A default security group is already set up. To display the default rules, click the "Edit Rules" button next to "default" on the "Security Groups" page. As shown below, the default security group rules have "Ether Types" IPv4 and IPv6 set up for "Ingress" (Incoming) and "Egress" (Outbound) directions. <strong>Note</strong>: It may be easiest to add any new security group rules to the default group so you do not have to recreate ingress and egress directions.</p>
+
+<p><img src="../content/documentation/media/Accesssecuritydefaultsecuritygrouprulesimage2.png" width="580" alt="" /></p></li>
+<li><p>Click the "+Add Rule" button in the top-right navigation if you want to create a new rule in the default security group.</p>
+
+<p><img src="../content/documentation/media/Accesssecurityaddruletodefault.png" width="580" alt="" /></p></li>
+<li><p>In the "Add Rule" box, make selections for the rule as outlined below. Additional selections may pop up depending on your setup choices.</p>
+
+<p><img src="../content/documentation/media/Accesssecurityaddrulebox.png" width="580" alt="" /></p></li>
+<li><p>Click the "Rule" drop-down box and make a selection based on the function of your VM.</p></li>
+<li><p>Select "Port" to open a single port, or "Port Range" to specify a range from the drop-down under "Open Port."  Enter the port number or start and end port numbers based on your selection.</p></li>
+<li><p>Select "CIDR" or "Security Group" from the drop-down under "Remote" to specify the source of the allowed traffic for the rule. If CIDR, enter an IP address block under "CIDR." If "Security Group," select the name from the drop-down box, then designate IPv4 or IPv6 under "Ether Type." If you do not already know you are using IPv6, select IPv4.</p></li>
+<li><p>Click "Add."</p></li>
+<li><p>To delete a rule from the default group, click "Access &amp; Security" in the left-hand bar, then click "Edit Rules" to the right of the default security group, which is what you did to add a rule.</p></li>
+<li><p>Click "Delete Rule" next to the rule you want to get rid of.</p>
+
+<p><img src="../content/documentation/media/Accesssecuritydeletedefaultgrouprule.png" width="580" alt="" /></p></li>
+</ol><h4 id="new-security-group">New security group</h4>
+
+<ol><li><p>Click "Access &amp; Security" in the left-hand bar under "Manage Compute" and "Project" to begin.</p>
+
+<p><img src="../content/documentation/media/Accesssecurity1.png" width="580" alt="" /></p></li>
+<li><p>Click "+Create Security Group" in the upper right-hand navigation.</p>
+
+<p><img src="../content/documentation/media/ASCreatenewsecuritygroup.png" width="580" alt="" /></p></li>
+<li><p>Enter a name in ASCII-only characters and numbers, a description, then click "Create Security Group."</p></li>
+<li><p>Click "Edit Rules" next to the new security group under "Actions" in the right-hand navigation to add security group rules.</p>
+
+<p><img src="../content/documentation/media/ASClickeditrules.png" width="580" alt="" /></p></li>
+<li><p>Click the "+Add Rule" button in the top-right navigation.</p>
+
+<p><img src="../content/documentation/media/Accesssecurityaddruletonewgroup.png" width="580" alt="" /></p></li>
+<li><p>Click the "Rule" drop-down in the "Add Rule" box and make a selection based on the function of your VM.</p></li>
+<li><p>Click the "Direction" drop-down box and select "Egress" to designate outbound traffic or "Ingress" to designate inbound traffic.</p></li>
+<li><p>Select "Port" to open a single port, or "Port Range" to specify a range from the drop-down under "Open Port."  Enter the port number or start and end port numbers based on your selection.</p></li>
+<li><p>Select "CIDR" or "Security Group" from the drop-down under "Remote" to specify the source of the allowed traffic for the rule. If CIDR, enter an IP address block under "CIDR." If "Security Group," select the name from the drop-down box, then designate IPv4 or IPv6 under "Ether Type." If you do not already know you are using IPv6, select IPv4.</p></li>
+<li><p>Click "Add" and your new rule displays in the security group.</p>
+
+<p><img src="../content/documentation/media/ASNewruledisplay.png" width="580" alt="" /></p></li>
+<li><p>Click "Delete Rule" next to a rule you want to get rid of.</p></li>
+<li><p>Click "Access &amp; Security" in the left-hand bar to display your security groups.</p>
+
+<p><img src="../content/documentation/media/ASSecurityGroupsdisplay.png" width="580" alt="" /></p></li>
+</ol><h3 id="Monitoring">Monitoring</h3>
+
+<p>Use HP Helion Public Cloud Monitoring to ascertain system health and track resource metrics. Create the following in the HP Helion Public Cloud Console to define the metrics you want to gather, where you want them sent, and configure an alarm that sends them:</p>
+
+<ul><li>An endpoint that specifies the metrics to gather</li>
+<li>Subscriptions that specify which metrics to stream to an endpoint</li>
+<li>Notification addresses to receive email and/or SMS alarm messages</li>
+<li>Alarms to define conditions that trigger end-user notification  </li>
+</ul><p>After completing these tasks, you receive the metrics in JSON format at the locations you specified when an alarm is triggered. The metrics are streamed over an <a href="../../external.html?link=http://www.amqp.org/about/what">AMQP</a> socket. Select the tool of your choice to create graphical representations of the metrics.</p>
+
+<h4 id="begin">Begin:</h4>
+
+<ol><li>Click "Manage Services" in the left-hand bar on the <a href="../../external.html?link=https://horizon.hpcloud.com/landing">HP Helion Public Cloud Console landing page</a>, then "Activate" in the "Monitoring" row under the region you are setting up.</li>
+</ol><p>
+  <img src="../content/documentation/media/Monitoring1.png" width="580" alt="" />
+</p>
+
+<ol><li><p>Once activated, click "Monitoring" under the "Actions" heading on the <a href="../../external.html?link=https://horizon.hpcloud.com/landing">landing page</a> to begin.</p>
+
+<p><img src="../content/documentation/media/Monitoring2.png" width="580" alt="" /></p></li>
+</ol><h4 id="create-endpoints">Create endpoints</h4>
+
+<ol><li><p>Click "+Create Endpoint." You can create only one, total. <strong>Note</strong>: Record the password for the generated endpoint in the pop-up display. It cannot be retrieved later. If you lose the password, click the "Reset Password" button under "Actions" on the "Endpoints" page.</p>
+
+<p><img src="../content/documentation/media/Monitoring3CreateEndpoint.png" width="580" alt="" /></p></li>
+<li><p>Click the endpoint ID in the "Endpoints" screen to display the endpoint ID, the URI, the queue, and the user name.</p>
+
+<p><img src="../content/documentation/media/Monitoring5EndpointDisplaybox.png" width="580" alt="" /></p></li>
+</ol><h4 id="create-subscriptions-to-endpoints">Create subscriptions to endpoints</h4>
+
+<ol><li><p>Click "Subscriptions" under "Manage Monitoring" in the left-hand bar.</p></li>
+<li><p>Click "+Create Subscription" in the upper-right corner of the "Subscriptions" page.</p></li>
+<li><p>Select an endpoint ID to subscribe to from the drop-down menu in the "Create Subscription" box.</p></li>
+<li><p>Select the namespace of the metrics to receive from the drop-down menu.</p></li>
+<li><p>Select an instance from the drop-down menu.</p></li>
+<li><p>Click "Create Subscription" in the lower-right of the "Create Subscription" box.</p>
+
+<p><img src="../content/documentation/media/SubscriptionSelect.png" width="580" alt="" /></p></li>
+</ol><h4 id="create-notification-addresses-for-subscriptions">Create notification addresses for subscriptions</h4>
+
+<ol><li><p>Click "Notifications" under "Monitoring" in the left-hand bar.</p></li>
+<li><p>Click "+Create Notification Address" in the upper-right of the "Notifications" page.</p>
+
+<p><img src="../content/documentation/media/Notification1.png" width="580" alt="" /></p></li>
+<li><p>Enter a notification address name in the "Create Notification Address" box.</p></li>
+<li><p>Select "Email" or "SMS" from the "Type" drop-down menu.</p></li>
+<li><p>Enter an address in the "Address" box. For SMS, use the E.164 for international telephone numbers, which requires a "+" followed by the country code, then the regional number. <strong>Note</strong>: Currently, only US phone numbers are supported.</p></li>
+<li><p>Click "Create Notification Address."</p>
+
+<p><img src="../content/documentation/media/Notification2.png" width="580" alt="" /></p></li>
+<li><p>Click "Verify Address" under "Actions" in the row for the address you just created.</p>
+
+<p><img src="../content/documentation/media/Notification3.png" width="580" alt="" /></p></li>
+<li><p>Enter the Verification Code you received at your specified notification address from the monitoring service in the "Verify Notification Address."</p></li>
+<li><p>Click "Verify Address."</p>
+
+<p><img src="../content/documentation/media/Notification4.png" width="580" alt="" /></p></li>
+<li><p>Click "Create Notification Method" under "Actions" on the "Notifications" page.</p>
+
+<p><img src="../content/documentation/media/Notification5.png" width="580" alt="" /></p></li>
+<li><p>Enter a notification method name in the "Name" box, a type, and an email address, and click "Create Notification Method."</p></li>
+</ol><h4 id="create-alarm-name">Create alarm name</h4>
+
+<ol><li><p>Click "Alarms" under "Manage Monitoring" in the left-hand bar.</p></li>
+<li><p>Click "+Create Alarm" in the upper-right hand of the "Alarms" page.</p>
+
+<p><img src="../content/documentation/media/Alarms1.png" width="580" alt="" /></p></li>
+<li><p>Enter alarm name in "Create Alarm" box.</p></li>
+<li><p>Enter an alarm expression as indicated under "Description" in the "Create Alarm" box.  <a href="api/monitoring/index.html#AlarmExpressions">Click</a> to see the "Alarm Expressions" section for setup information or use the link in the interface. When the expression you set is true, it triggers a notification.</p></li>
+<li><p>Select an alarm action name and click "Create Alarm."</p>
+
+<p><img src="../content/documentation/media/Alarms2.png" width="580" alt="" /></p></li>
+</ol><h3 id="Identity">Organize and manage HP Helion Public Cloud access</h3>
+
+<p>Click  "Identity" in the left-hand interface to display links:</p>
+
+<ul><li><p>Domain - The domain is your primary work space in HP Helion Public Cloud.  An individual or company can be the domain owner and enables a project with the necessary services and permissions. The first user created in a domain is considered the domain owner and placed in both the "Users" and "Domain Administrators" groups.</p>
+
+<p>A domain has one owner and may have multiple users, groups and roles. A domain owner can allow users of another domain access to its projects.</p></li>
+<li><p>Projects - A project is a collection of HP Helion Public Cloud services, e.g., compute, storage, etc. within a domain  A project is defined by selecting services to be activated and a set of users to interact with the services. A project may contain multiple services, such as compute or object storage. Services can exist multiple times within the same project as long as they have different service endpoints, distinguished by their geography and region.</p></li>
+<li><p>Users - Users are defined individually and can be assigned to groups and granted roles either directly or through inclusion in groups.  A user may have multiple roles.</p></li>
+<li><p>Groups - When you create a domain, two default groups are created: Users and Domain Administrators. Domain Administrators can add individuals to a group and create new groups, which may contain multiple users.</p></li>
+<li><p>Roles - A role is a user or group  capability within a  service that determines access rights. Roles include  Compute Admin, Network Admin, Object Storage Admin, and others.  Domain owners can  assign roles to individuals or groups. A role may be associated with multiple users and multiple groups.</p></li>
+</ul><h2 id="Forfurtherinformation">For further information</h2>
+
+<p>*For the latest updates to the current HP Helion Public Cloud Console release, see <a href="whats_new_with_HP_Cloud_Console/index.html">What's new with HP Helion Public Cloud Console</a>..
+* For basic information about our HP Helion Public Cloud compute services, take a look at the <a href="compute/index.html">HP Helion Public Cloud compute overview</a> page
+* If you'd rather use the HP Helion Public Cloud Command Line Interface (CLI) features, choose your topic of interest from our <a href="cli.html">HP Helion Public Cloud CLI</a> pages.</p>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using<br>HP Helion Public Cloud<br>
+			<a href="../../external.html?link=http://www.hpcloud.com/cloud-credit" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="overview/index.html"><span>HP Helion Public Cloud Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="services/index.html"><span>Available Services</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="bindings/index.html"><span>Language Bindings</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="api/index.html"><span>APIs</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="cli/index.html"><span>CLIs</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="site-overview/index.html"><span>Site Overview</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+		<ul class="footer-social">
+			<li class="twitter"><a href="../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+			<li class="youtube"><a href="../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+			<li class="rss"><a href="../../external.html?link=http://h30499.www3.hp.com/t5/Grounded-in-the-Cloud/bg-p/sws-661#.U7qe27Hn-M8"></a></li>
+			<li class="facebook"><a href="../../external.html?link=https://www.facebook.com/HPHelion"></a></li>
+			<li class="linkedin stretch"><a href="../../external.html?link=http://www.linkedin.com/company/3510998"></a></li>
+		</ul>
+		<ul class="contact-info hide-320 show-768">
+			<li>In the U.S.<br />1-855-61CLOUD</li>
+			<li>Worldwide<br />+1678-745-9010</li>
+			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span></li>
+		</ul>
+		<div class="copyright">	
+			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+			</p><br />
+			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../external.html?link=http://www8.hp.com/us/en/privacy/privacy.html" target="_blank">Privacy</a> | <a href="../../external.html?link=http://www8.hp.com/us/en/privacy/terms-of-use.html" target="_blank">Terms of use</a> | <a href="../../external.html?link=http://www.hpcloud.com/legal-documents" target="_blank">Legal Documents</a></p>
+		</div>
+	</div>
+	</div>
+</footer>
+
+<!-- Load JS -->
+<!--[if lt IE 9]>
+<script src="http://www.hpcloud.com/sites/all/themes/hpcloud/js/svgeezy.js"></script>
+-->
+	<script src="../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../js/combined.js"></script>
+
+<div id="ClickTaleDiv" style="display: none;"></div>    <div class="region region-page-bottom">
+    <div id="lpButtonDiv"></div>  </div><!-- /.region -->
+<script src="../../www.hpcloud.com/sites/default/files/js/js_zUhl2jDXgUKVBRVBUeMbuSby0YSCiXHWIAYNbn9ecwc.js"></script>
+<script>ClickTaleSSL=1; // This is intentinally global. 
+			if(typeof ClickTale=='function') 
+				ClickTale(24406,0.05,"www02");</script>
+<script src="../../www.hpcloud.com/sites/default/files/js/js_gPMh2zNJqEE6EkEOKNeOTAet3kwTiahCt35rBAtwqq4.js"></script>
+<script>
+    var _elqQ = _elqQ || [];
+    _elqQ.push(['elqSetSiteId', '521454204']);
+    _elqQ.push(['elqTrackPageView']);
+    
+    (function () {
+        function async_load() {
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+            s.src = '../sites/all/modules/custom/custom_eloqua/elqNow/elqCfg.min.html';
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        }
+        if (window.addEventListener) window.addEventListener('DOMContentLoaded', async_load, false);
+        else if (window.attachEvent) window.attachEvent('onload', async_load); 
+    })();
+    </script>
+<script src="../../www.hpcloud.com/sites/default/files/js/js_lNHbXKW-sJN9oM4eoaw-q0yTco3mOORibOeNn9yzM00.html"></script>
+   <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/hpcloudconsole by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:53:49 GMT -->
+</html>

@@ -1,0 +1,497 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/services/swift/diagnosis-disk-health/hpssacli/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:20 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion OpenStack&#174; Object Operations Service Overview</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../../../css/combined.css">
+
+	<script src="../../../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../../../index.html" class="logo"  ><img src="../../../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<script>
+<![CDATA[
+
+function PageRefresh {
+onLoad="window.refresh"
+}
+
+PageRefresh();
+
+]]>
+</script><!--
+<p style="font-size: small;"> <a href=" /helion/openstack/services/object/overview/scale-out-swift/">&#9664; PREV</a> | <a href="/helion/openstack/services/overview/">&#9650; UP</a> | <a href="/helion/openstack/services/overview/"> NEXT &#9654</a> </p>--><h1 id="hp-helion-openstack-10-diagnosis-of-disk-health-using-hpssacli-utility-for-hp-servers">HP Helion OpenStack® 1.0: Diagnosis of disk health using hpssacli utility for HP servers</h1>
+
+<p>The health of the disk  of the HP servers can be diagnosed using the <strong><em>hpsacli</em></strong> utility.</p>
+
+<h2 id="hp-smart-storage-administrator-cli-20220-hpssacli">HP Smart Storage Administrator CLI 2.0.22.0 (HPSSACLI)</h2>
+
+<p>The HP Smart Storage Administrator CLI (HPSSACLI) is a command line disk configuration program for Smart Array Controllers.</p>
+
+<h2 id="deployment">Deployment</h2>
+
+<p>The <strong><em>hpssacli</em></strong> utility is deployed onto the servers wherever the disks are to be monitored, usually all Swift, VSA, and Compute nodes. This page explains the collection of diagnostic reports from disks in the servers where the utility has been loaded.</p>
+
+<h3 id="download-the-hpssacli-debian-package-into-the-kvm-host">Download the hpssacli debian package into the KVM host</h3>
+
+<p>
+  <a href="../../../../../../../external.html?link=http://downloads.linux.hp.com/SDR/repo/mcp/pool/non-free/hpssacli-2.0-16.0_amd64.deb">http://downloads.linux.hp.com/SDR/repo/mcp/pool/non-free/hpssacli-2.0-16.0_amd64.deb</a>
+</p>
+
+<h3 id="copy-the-debian-to-seed-and-to-the-servers-where-the-disks-has-to-be-monitored">Copy the debian to seed and to the servers where the disks has to be monitored</h3>
+
+<p>Use <code>scp</code> to copy the utility package on to the servers and install it.</p>
+
+<ol><li><p>Copy the package from KVM host to SEED.</p>
+
+<pre><code># scp scp "hpssacli-2.0-16.0_amd64.deb" root@&lt;IP address of Seed&gt;
+</code></pre></li>
+<li><p>Copy the package from SEED to machine where the disks to be monitored.</p>
+
+<pre><code># scp scp "hpssacli-2.0-16.0_amd64.deb" heat-admin@&lt;IP address of machine&gt;
+</code></pre></li>
+<li><p>Log in to the server where the debian is copied and install the package.</p>
+
+<pre><code># ssh heat-admin@&lt;IP address of machine&gt;
+</code></pre></li>
+<li><p>Change the directory.</p>
+
+<pre><code># cd /home/heat-admin/
+</code></pre></li>
+<li><p>List the files.</p>
+
+<pre><code># ls
+</code></pre>
+
+<p>All the files present in that directory will be displayed.</p></li>
+<li><p>Install the following package.</p>
+
+<pre><code># dpkg -i hpssacli-2.0-16.0_amd64.deb
+</code></pre>
+
+<p><strong>Note</strong>: The diagnostics can be done in the server or from SEED through ssh.</p></li>
+<li><p>You can collect the diagnostic report of the controller either in server or through Seed using ssh.</p></li>
+</ol><h3 id="collect-the-diagnostic-report">Collect the diagnostic report</h3>
+
+<p><strong>Using the server controller:</strong>
+<!---
+1. Log in to the server
+
+        # ssh heat-admin@<IP address of machine>
+2. Change the directory
+
+        /home/heat-admin/hp/hpssacli/bld
+---></p>
+
+<ol><li><p>Enter the following command to determine the controller slot.</p>
+
+<pre><code># hpssacli ctrl all show status
+</code></pre>
+
+<p>The following sample displays slot details:</p>
+
+<pre><code>Smart Array P420i in Slot 0 (Embedded)
+
+   Controller Status: OK
+
+   Cache Status: OK
+
+   Battery/Capacitor Status: OK
+</code></pre></li>
+<li><p>Generate the diagnostic report for a particular slot.</p>
+
+<pre><code># hpssacli ctrl slot=(slot number) diag file=&lt;filename.zip&gt;
+</code></pre>
+
+<p>Or <br />
+    Generate the report for all the slots</p>
+
+<pre><code># hpssacli ctrl all diag file=&lt;filename.zip&gt;
+</code></pre>
+
+<p>The file will be stored in the selected location.</p></li>
+<li><p>Copy the generated file to the desired location.</p></li>
+<li><p>Extract the file.</p></li>
+</ol><p>
+  <strong>Using ssh from Seed:</strong>
+</p>
+
+<!---
+1. Log in to the server
+
+        ssh heat-admin@<Machine IP address>
+
+2. Change the directory
+
+        /home/heat-admin/hp/hpssacli/bld
+--->
+
+<ol><li><p>Generate the diagnostic report of the particular slot.</p>
+
+<pre><code> ssh heat-admin@&lt;Machine IP address&gt; "sudo hpssacli ctrl slot=&lt;slot number&gt; diag file=details_slot_&lt;slot number&gt;.zip"
+</code></pre></li>
+<li><p>Copy the report from the server to Seed VM.</p>
+
+<pre><code># scp heat-admin@&lt;Machine IP address&gt;:/home/heat-admin/&lt;filename.zip&gt; 
+</code></pre></li>
+<li><p>Copy the report &lt;filename.zip&gt; to the KVM_host</p>
+
+<pre><code># scp details_slot_&lt;slot number&gt;.zip ubuntu@&lt;KVM_Host IP address&gt;:
+</code></pre>
+
+<!--Enter login credentails ???--></li>
+<li><p>Extract the file.</p></li>
+<li><p>Open the <code>ADUReport.htm</code> file in the browser. The html page displays complete details of the controller and the health status of the physical disks available in the machine.</p>
+
+<!-- <image = utility_ADUR-report> --></li>
+<li><p>Generate SmartSSD Wear Gauge Report from either the local server or from the seed:</p>
+
+<ul><li><p>From the local server</p>
+
+<p><code># hpssacli ctrl slot=&lt;slot number&gt; diag file=&lt;filename.zip&gt; ssdrpt=on</code></p></li>
+<li><p>From the seed</p>
+
+<p><code># ssh heat-admin@&lt;machine IP address&gt; "sudo hpssacli ctrl slot=&lt;slot number&gt; diag file=&lt;filename.zip&gt;</code></p></li>
+</ul></li>
+</ol><!-- **Now retrieve the ssd_report.zip to kvm host using scp from server to analyse.??? is this applicable for seed only??** --><p>The following SmartSSDWearGaugeReport.txt sample file displays the details of the  SSD drives.</p>
+
+<pre>
+  <code>ADU Version                             2.0.22.0
+
+Diagnostic Module Version               8.0.22.0
+
+Time Generated                          Tuesday September 16, 2014 12:26:57PM
+
+Device Summary:
+
+   Smart Array P420i in Embedded Slot
+
+Report for Smart Array P420i in Embedded Slot
+
+---------------------------------------------
+
+Smart Array P420i in Embedded Slot : Internal Drive Cage at Port 2I : Box 2 : Physical Drive (400 GB SAS SSD) 2I:2:6 : SmartSSD Wear Gauge
+
+   Status                               OK
+
+   Supported                            TRUE
+
+   Log Full                             FALSE
+
+   Utilization                          0.000000
+
+   Power On Hours                       1798
+
+   Has Smart Trip SSD Wearout           FALSE
+
+Smart Array P420i in Embedded Slot : Internal Drive Cage at Port 2I : Box 2 : Physical Drive (400 GB SAS SSD) 2I:2:7 : SmartSSD Wear Gauge
+
+   Status                               OK
+
+   Supported                            TRUE
+
+   Log Full                             FALSE
+
+   Utilization                          0.000000
+
+   Power On Hours                       1797
+
+   Has Smart Trip SSD Wearout           FALSE
+
+Smart Array P420i in Embedded Slot : Internal Drive Cage at Port 2I : Box 2 : Physical Drive (400 GB SAS SSD) 2I:2:8 : SmartSSD Wear Gauge
+
+   Status                               OK
+
+   Supported                            TRUE
+
+   Log Full                             FALSE
+
+   Utilization                          0.000000
+
+   Power On Hours                       1798
+
+   Has Smart Trip SSD Wearout           FALSE
+</code>
+</pre>
+
+<h2 id="other-useful-commands">Other useful commands</h2>
+
+<ul><li><p>To get the details of the physical disks and also the logical group status on the server</p>
+
+<pre><code>ssh heat-admin@&lt;machine IP address&gt; "sudo hpssacli ctrl slot=&lt;slot number&gt; show config detail"
+</code></pre></li>
+<li><p>To execute other operations on physical drives</p>
+
+<pre><code>ssh heat-admin@&lt;machine IP address&gt; "sudo hpssacli help physicaldrive"
+</code></pre></li>
+<li><p>Open the help to explore other options with the utility</p>
+
+<pre><code>ssh heat-admin@&lt;machine IP address&gt; "sudo hpssacli help"
+</code></pre></li>
+</ul><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<hr />
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../index.html"><span>HP Helion OpenStack Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../release-notes/101/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../faq/index.html"><span>FAQ</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../technical-overview/index.html"><span>Technical Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../overview/index.html"><span>Services Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../support-matrix/index.html"><span>Support Matrix</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../install/overview/index.html"><span>Installation Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../install/security/index.html"><span>Network Security</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../backup.restore/index.html"><span>Back Up and Restore</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../troubleshooting/index.html"><span>Troubleshooting</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../related-links/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../glossary/index.html"><span>Glossary</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/services/swift/diagnosis-disk-health/hpssacli/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:20 GMT -->
+</html>

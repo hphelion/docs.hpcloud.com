@@ -1,0 +1,2363 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/cli/windows/reference by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:02:39 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion Public Cloud CLI Software for Windows PowerShell Command Line Reference</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../css/combined.css">
+
+	<script src="../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../js/metrics.js"></script> 
+	
+	
+	
+	
+	<!--[if IEMobile 7]><html class="iem7"  lang="en" dir="ltr"><![endif]-->
+<!--[if lte IE 6]><html class="lt-ie9 lt-ie8 lt-ie7"  lang="en" dir="ltr"><![endif]-->
+<!--[if (IE 7)&(!IEMobile)]><html class="lt-ie9 lt-ie8"  lang="en" dir="ltr"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9"  lang="en" dir="ltr"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html  lang="en" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"><!--<![endif]-->
+
+<head profile="../../../../external.html?link=http://www.w3.org/1999/xhtml/vocab">
+  
+  
+  <meta charset="utf-8" />
+<meta name="web_section_id" content="R11646" />
+<meta name="bu" content="corp" />
+<meta name="hp_design_version" content="hpweb.2.0" />
+<meta name="segment" content="Commercial.B2B" />
+<meta name="page_content" content="HP Public Cloud - Enterprise Public Cloud Products &amp;amp; Services" />
+<meta name="content_country_applicability" content="w1" />
+<meta name="target_country" content="US" />
+<meta name="lifecycle" content="presales.awareness" />
+<link rel="shortcut icon" href="../../../../external.html?link=http://www.hpcloud.com/sites/all/themes/hpcloud/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<meta name="description" content="HP Public Cloud provides on-demand, pay-as-you-go cloud services for computing, storage infrastructure as well as platform services. Explore the cloud." />
+<meta about="/hp-helion-public-cloud" property="sioc:num_replies" content="0" datatype="xsd:integer" />
+<meta content="HP Helion Public Cloud" about="/hp-helion-public-cloud" property="dc:title" />
+<link rel="canonical" href="../../../../external.html?link=http://www.hpcloud.com/" />
+<link rel="shortlink" href="../../../../external.html?link=http://www.hpcloud.com/" />
+<meta property="og:url" content="http://www.hpcloud.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="HP Public Cloud" />
+<meta property="og:site_name" content="HP Public Cloud" />
+   
+
+      <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="cleartype" content="on">
+<!--
+  <link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_791YXBaKKm1ORM_7huSKEsIV9tSWq6wmRkERhuXpN6w.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_mGbqk88-VTBvzao9MxjjAm60xrWNV9JbuxL-XsOdBKY.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_UOCsF9jLPA1lMMj-BVVBzE0l5EIeCw_3PDG18zycRw4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_MfNt8ndX5CcdNjNUw-v__mhCPodpzDeR8KuzaXo-yzQ.css" media="all" />
+-->
+  <script src="../../../../www.hpcloud.com/sites/default/files/js/js__kIQ7mxn9cgBO3AAnwhKUMQqNbqZZQWibQB6EZRy6u0.html"></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_CC-zfeuQHcDhFtVRuKW53h30TL7j_105J32Nz8b8R38.js"></script>
+<script>var WRInitTime=(new Date()).getTime(); // ClickTale top part</script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_mZQzCl35imgkCIIjGS2RPLYDNuLk9ncwZ5c7lh6STTw.js"></script>
+<script>		<!-- Start Visual Website Optimizer Asynchronous Code -->
+		var _vwo_code=(function(){
+		var account_id=37831,
+		settings_tolerance=2000,
+		library_tolerance=2500,
+		use_existing_jquery=false,
+		// DO NOT EDIT BELOW THIS LINE
+		f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('../../../../external.html?link=http://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+		<!-- End Visual Website Optimizer Asynchronous Code --></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_kv2zkR2iCsl2ctlEzg-TiOxz1jEVBjx7VzAR0mTzlew.js"></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_qz7rta8c7yTiJLYNkf4WKFMgEeuRUE1AgWXd6NCAQZU.js"></script>
+<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"hpcloud","theme_token":"NwfPTBjz4hDLctcBflIoKqD4J2r3kIAtWobc48FZKTo","js":{"https:\/\/clicktale.pantherssl.com\/WRd.js":1,"0":1,"sites\/all\/modules\/custom\/hpcs_referrer_url\/js\/referrer.min.js":1,"sites\/all\/modules\/custom\/kenshoo\/js\/kenshoo.min.js":1,"1":1,"sites\/all\/themes\/hpcloud\/js\/fastclick.min.js":1,"sites\/all\/themes\/hpcloud\/js\/main.min.js":1,"sites\/all\/modules\/custom\/lp_chat\/js\/le-mtagconfig.js":1,"sites\/all\/modules\/custom\/hpcloud_jquery\/js\/jquery-1.9.0.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"misc\/jquery.cookie.js":1,"2":1,"sites\/all\/modules\/custom\/omniture\/js\/hpcs_metrics.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/tinycon.min.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/color.js":1,"3":1,"sites\/all\/modules\/custom\/lp_chat\/js\/lp-initialize.js":1,"sites\/all\/themes\/hpcloud\/js\/vendor\/modernizr-2.6.2.min.js":1,"sites\/all\/themes\/hpcloud\/js\/respond.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/uif\/uif.css":1,"sites\/all\/modules\/contrib\/field_collection\/field_collection.theme.css":1,"sites\/all\/themes\/zen\/system.menus.css":1,"sites\/all\/themes\/hpcloud\/css\/screen.css":1,"sites\/all\/themes\/hpcloud\/css\/styles.css":1}}});</script>
+      <!--[if lt IE 9]>
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+      <!--[if (lt IE 9) & (!IEMobile)]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie8.css">
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+    
+    <!--[if IE]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie.css">
+    <![endif]-->
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" ><!--
+				<a href="http://docs.hpcloud.com/" class="logo"  ><img src="/images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>-->
+        			<ul class="menu"><li class="first leaf menu-mlid-1845"><a href="../../../../external.html?link=http://www.hpcloud.com/support">Support</a></li>
+<li class="leaf has-children menu-mlid-1222"><a href="../../../../external.html?link=http://www.hpcloud.com/partners">Partners</a></li>
+<li class="leaf menu-mlid-1817"><a href="../../../../external.html?link=http://marketplace.hpcloud.com/" title="">Marketplace</a></li>
+<li class="leaf has-children menu-mlid-1223"><a href="../../../../external.html?link=http://www.hpcloud.com/about" title="">About</a></li>
+<li class="leaf menu-mlid-1224"><a href="../../../../external.html?link=http://www.hp.com/" title="">hp.com</a></li>
+<li class="leaf menu-mlid-1225"><a href="../../../../external.html?link=http://www.hpcloud.com/about/contact">Contact</a></li>
+<li class="last leaf menu-mlid-1226"><a href="../../../../external.html?link=http://www.hpcloud.com/console">Log In</a></li>
+</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<p><!--PUBLISHED-->
+<!-- Removed all html tags --></p>
+
+<h1 id="hp-helion-public-cloud-cli-software-for-windows-powershell-command-line-reference">HP Helion Public Cloud CLI Software for Windows PowerShell Command Line Reference</h1>
+
+<p>Below you can find a full reference of supported HP Helion Public Cloud CLI software for Windows PowerShell commands (sometimes called "cmdlets").  The commands are broken up into separate sections by functional area:</p>
+
+<ul><li><a href="#Nonservicespecific">Non-service-specific</a></li>
+<li><a href="#Compute">Compute</a></li>
+<li><a href="#ObjectStorage">Object Storage</a></li>
+<li><a href="#BlockStorage">Block Storage</a>
+<!-- * [CDN](#CDN) --></li>
+</ul><p><strong>Note</strong>: The HP Helion Public Cloud CLI software for Windows PowerShell cmdlets are not case specific; in other words, <code>Get-Catalog</code> and <code>get-catalog</code> function identically. When referencing an argument, like a container name, that has a space, use quotes to access that resource. For example:</p>
+
+<pre>
+  <code> PS: HPCS:\&gt; cd "my container:"
+ PS: HPCS:\&gt; new-container -name "my new container"
+</code>
+</pre>
+
+<p><!--DOUG: Modify the fonts in the syntax sections--perhaps create a Jira case for them?-->
+<!--DOUG: Create a CDN examples page?-->
+<!--DOUG: include a section on environment variables, such as ENABLE-CREDENTIAL-TRACKING? Full list from Travis.--></p>
+
+<h1 id="Nonservicespecific">Non-service-specific</h1>
+
+<p>Following is the complete list of HP Helion Public Cloud Windows CLI commands that are not applicable to a specific service (compute, object storage, etc.).   To issue these commands, you need to navigate to a container or the HP Helion Public Cloud Services (HPCS) provider, issuing the following command:</p>
+
+<pre>
+  <code>cd HPCS:
+</code>
+</pre>
+
+<h2 id="getcatalog">Get-Catalog</h2>
+
+<p>Displays the current user's service catalog that was retrieved at login time.  This catalog stores each service the user has authorization to use.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>get-catalog {-v}</p>
+
+<dl><dt><strong>v</strong></dt>
+<dd>Verbose mode; displays detailed information about each service that's available</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>PS yourcontainer:\&gt; get-catalog
+</code>
+</pre>
+
+<p>Lists the available services.</p>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>PS yourcontainer:\&gt; get-catalog -v
+</code>
+</pre>
+
+<p>Lists the available services with extended information about each available service.</p>
+
+<h2 id="getconfig">Get-Config</h2>
+
+<p>Lists the config file entries for the current session.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>get-config</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>PS HPCS:\&gt; get-config
+
+ ==============================================================================================
+ Current Session Settings are as follows.
+ ==============================================================================================
+
+ Configuration File located at C:\Users\morando\Documents\HP\CLI.config
+
+
+ Name                           Value
+ ----                           -----
+ LogReadAttemptsMax             20
+ ReleaseNotesURI                https://a248.e.akamai.net/cdn.hpcloudsvc.com/hdb0a98359ca04396dd429335015a1b4b/prodaw...
+ AccessKey                      ***********
+ AuthenticationServiceURI       https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens
+ HttpTimeoutInterval            9200000
+ RDPClientPath                  40000
+ EnableCredentialTracking       true
+ LogReadAttemptIntervalInMil... 40000
+ delimiter                      /
+ DefaultTenantId
+ PasteGetURIResultsToClipboard  true
+ max-keys                       10000
+ SecretKey                      ***********
+
+PS HPCS:\&gt;
+</code>
+</pre>
+
+<p>Displays the settings for the session.  The above example shows all currently-configurable environment variables.</p>
+
+<h2 id="getmetadata">Get-Metadata</h2>
+
+<p>Lists the Metadata entries assigned to the supplied resource.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>
+  <code>get-metadata  [*SourcePath*  | -sp *SourcePath* | -s *server-ID* | -cn "*container-name*"]</code>
+</p>
+
+<h3 id="description">Description</h3>
+
+<p>You can list metadata assigned to Servers, Storage Objects, and Containers.  Many resources can have zero to many custom meta-data entries assigned to them. <em>Get-Metadata</em> generates a list of key value pairs attached to the resource; you may use these for whatever purpose you like. (For details on how to add meta-data elements, see the <a href="#setmetadata">Set-Metadata</a> cmdlet.)</p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>sp</strong></dt>
+<dd>Path to the remote storage object. You can express paths as fully qualified (absolute) or relative to the current location in the store.</dd>
+
+<dt><strong>s</strong></dt>
+<dd>Server ID.</dd>
+
+<dt><strong>cn</strong></dt>
+<dd>Container name.</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>PS yourcontainer:\&gt; get-metadata test.txt
+</code>
+</pre>
+
+<p>Generates a list of name value pairs assigned to the object via the copy operation's use of the -md argument.</p>
+
+<p>EXAMPLE 2</p>
+
+<pre>
+  <code>PS yourcontainer:\&gt; get-metadata -sid 23465
+</code>
+</pre>
+
+<p>Lists all metadata entries for the server with the ID=23465.</p>
+
+<p>EXAMPLE 3</p>
+
+<pre>
+  <code>PS yourcontainer:\&gt; get-metadata -cn "Marketing"
+</code>
+</pre>
+
+<p>Lists all metadata entries for the container "Marketing".</p>
+
+<h2 id="getnotes">get-notes</h2>
+
+<p>Displays the release notes for the current version. You can filter the release notes to a specific version or show all previous release notes.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>Get-Notes {-all <em>switch</em>} {-v <em>switch</em>}</p>
+
+<dl><dt><strong>all</strong></dt>
+<dd>Prints all release notes</dd>
+
+<dt><strong>v</strong></dt>
+<dd>Prints the release notes for the specific WinCLI version in the for of xx.xx.xx.xx.</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>get-notes
+</code>
+</pre>
+
+<p>Lists the current release notes.</p>
+
+<h2 id="getversion">Get-Version</h2>
+
+<p>Displays the current version number.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>Get-Version</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>get-version
+</code>
+</pre>
+
+<p>Displays the product's current version.</p>
+
+<h2 id="getzone">Get-Zone</h2>
+
+<p>Lists the currently-used availability zone.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>Get-Zone</p>
+
+<h3 id="examples">Examples</h3>
+
+<pre>
+  <code>get-zone
+</code>
+</pre>
+
+<p>Displays which availability zone is currently being used.</p>
+
+<h2 id="getzones">Get-Zones</h2>
+
+<p>Lists all currently-availability zones.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>get-zones</p>
+
+<h3 id="examples">Examples</h3>
+
+<pre>
+  <code>PS HPCS:\\&gt; get-zones
+
+Current Availability Zones include
+
+
+Zone Id  Name                 Shell Foreground Color  Is Default
+-------  ----                 ----------------------  ----------
+1        az-1.region-a.geo-1  Green                   True
+2        az-2.region-a.geo-1  Red                     False
+3        az-3.region-a.geo-1  Blue                    False
+4        az-1.region-b.geo-1  Magenta                 False
+
+PS HPCS:\\&gt;    
+</code>
+</pre>
+
+<p>Displays all the availability zones with their color information.</p>
+
+<h2 id="setconfig">Set-Config</h2>
+
+<p>Changes specific settings on a per session basis. All settings may be changed simultaneously by supplying the path to a different config file.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>set-config -k *Key -v *Value</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; set-config -k "HttpTimeOut" -v "100"
+</code>
+</pre>
+
+<p>Changes the HttpTimeout setting to 100 miliseconds</p>
+
+<p>EXAMPLE 2</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; set-config -s "c:\testconfig.config"
+</code>
+</pre>
+
+<p>Replaces all current session settings with those defined within the testconfig.config file.</p>
+
+<p>EXAMPLE 3</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; set-config -resercfg"
+</code>
+</pre>
+
+<p>Resets the current session settings to those defined within the default config file (CLI.config)</p>
+
+<h2 id="setcredentials">Set-Credentials</h2>
+
+<p>Sets the credentials (access key, secret key, and so on) for your session.
+<!--   Set-Credentials [-AccessKey] <String> [-SecretKey] <String> [-TenantId] <String>   --></p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>set-credentials -AccessKey <em>access-key</em> -SecretKey <em>secret-key</em> -TenantId <em>tenant-id</em></p>
+
+<p><strong>Note</strong>: If you execute <code>set-credentials</code> with no arguments or options, you are prompted for the input values.</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>set-credentials -AccessKey 12345678901234:12345678901234 -SecretKey abcd1EFGH2ijklmnop3QRSTUV4wxyz5678 -TenantId 31415926535898
+</code>
+</pre>
+
+<p>Sets the session credentials for the access key to <code>12345678901234:12345678901234</code>, secret key to <code>abcd1EFGH2ijklmnop3QRSTUV4wxyz5678</code>, and tenant ID to <code>31415926535898</code>.</p>
+
+<h2 id="setmetadata">Set-Metadata</h2>
+
+<p>Allows you to add meta-data elements to an existing resource. Storage objects can have zero to many custom meta-data entries assigned to them.  This is essentially a list of key value pairs attached to the object that you may use for whatever you would like. Delimit the name value pairs (NVPs) with the pipe symbol | and enclose them in quotes. You can delimit multiple NVPs with commas.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>set-metadata  [<em>SourcePath</em> | -sp <em>SourcePath</em> | -s <em>server-ID</em> ] -md ["<em>name</em>" {"<em>name2</em>" . . .}]</p>
+
+<dl><dt><strong>sp</strong></dt>
+<dd>Path to the remote storage object. You can express paths as fully qualified (absolute) or relative to the current location in the store.</dd>
+
+<dt><strong>s</strong></dt>
+<dd>Server ID.</dd>
+
+<dt><strong>md</strong></dt>
+<dd>Pipe-delimited set of key value pairs separated by commas.</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>PS yourcontainer:\&gt; set-metadata test.txt -md "Author|Tom", "Editor|Sam"
+</code>
+</pre>
+
+<p>Adds the KVPs "Author|Tom" and "Editor|Sam" to the file test.txt.</p>
+
+<p>EXAMPLE 2</p>
+
+<pre>
+  <code>PS yourcontainer:\&gt; set-metadata -s 1345 -md "Author|Tom", "Editor|Sam"
+</code>
+</pre>
+
+<p>Applies the KVPs "Author|Tom" and "Editor|Sam" to the server with the ID=1345.</p>
+
+<h2 id="setzone">Set-Zone</h2>
+
+<p>Sets the availability zone; all subsequently-issued commands will apply to the assigned availability zone.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>set-zone "<em>zone-ID</em>"</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>set-zone "1"
+</code>
+</pre>
+
+<p>Sets the availability zone to "az-2-region-a.geo-1".</p>
+
+<h1 id="Compute">Compute CLI Commands</h1>
+
+<p>Following is the complete list of HP Helion Public Cloud Windows Compute CLI commands.</p>
+
+<h2 id="Add-Rule">Add-Rule</h2>
+
+<p>Creates a new security group rule and assigns it to an existing security group.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>add-rule [ -fp "<em>FromPort</em>" -tp "<em>ToPort</em>" | -ipr "<em>low</em>/<em>high</em>" ] -ipp "<em>Protocol</em>" -gid "<em>GroupID</em>"</p>
+
+<dl><dt><strong>fp</strong></dt>
+<dd>From Port: designates the low end of the port range to which this rule applies.</dd>
+
+<dt><strong>tp</strong></dt>
+<dd>To Port: designates the high end of the port range to which this rule applies.</dd>
+
+<dt><strong>ipr</strong></dt>
+<dd><code>/</code>-separated range of IP addresses to which the rule applies (highest/lowest).</dd>
+
+<dt><strong>ipp</strong></dt>
+<dd>The protocol affected by this rule. Valid values include tcp, udp, and icmp.</dd>
+
+<dt><strong>gid</strong></dt>
+<dd>The security group ID used to apply this rule. If your current location is within one of these groups the ID is implied and therefore optional.</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>add-rule -fp "80" -tp "84" -ipp "tcp" -ipr "15.185.118.75" -gid "2133"
+</code>
+</pre>
+
+<p>Creates a new security group rule affecting the TCP protocol from port 80 to 84, and assigns it to SecurityGroup 2133.</p>
+
+<h2 id="Allocate">Allocate-IP</h2>
+
+<p>Requests a new Floating IP and adds to your IP pool.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>allocate-ip</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>allocate-ip
+</code>
+</pre>
+
+<h2 id="Assign-IP">Assign-IP</h2>
+
+<p>Assigns an allocated IP address to an existing server.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>assign-ip "<em>address</em>" <em>server-ID</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>assign-ip "192.168.110.45" -s 4ee64397-1253-473c-a81d-bc23dceeef31
+</code>
+</pre>
+
+<p>Assigns the IP address 192.168.45 to the server with the ID -s 4ee64397-1253-473c-a81d-bc23dceeef31.</p>
+
+<h2 id="Connect-Server">Connect-Server</h2>
+
+<p>Creates quick connection to the designated server instance.</p>
+
+<p><strong>Note:</strong> Currently available for Windows instances only.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>connect-server <em>instance-ID</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>connect-server 123456
+</code>
+</pre>
+
+<p>Performs a connection to the server with the ID <code>123456</code>.</p>
+
+<h2 id="Get-Limits">Get-Limits</h2>
+
+<p>Shows your quota amounts for Compute assets</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>get-limits</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>get-limits
+</code>
+</pre>
+
+<h2 id="Get-Password">Get-Password</h2>
+
+<p>Displays the password for a server instance.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>get-password <em>instance-ID</em></p>
+
+<p>If you do not enter the keypair name, <code>Get-Password</code> prompts you for it.  In order to invoke <code>get-password</code>, both of the following must be true:</p>
+
+<ul><li>The server must appear in the server list </li>
+<li>The listing of the EventLog for the server (<code>PS HPCS:\Servers\server_id\EventLog</code>), must display the encrypted key</li>
+</ul><p><strong>Note:</strong> This cmdlet is currently available for Windows instances only. This password is not updated if you re-sync the administrator password with the <code>reset-password</code> command; it displays the original generated password as long as the eventlog is available.</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>PS HPCS:\&gt; get-password 123456
+</code>
+</pre>
+
+<p>Displays the password for the server instance <code>123456</code>.</p>
+
+<h2 id="ls">Ls</h2>
+
+<p>Lists the currently-available servers, flavors, images, networking, and security group and their associated information.  The information listed is dependent on the directory in which you execute the command.  For example, if you are in the directory "\Servers", the server information is listed.</p>
+
+<p><strong>Note</strong>: The HP Helion Public Cloud environment CLI software for Windows PowerShell supports the <a href="../../../../external.html?link=http://msdn.microsoft.com/en-us/library/windows/desktop/aa717088(v=vs.85).aspx">standard Windows wildcard</a> characters asterix (<code>*</code>), question mark (<code>?</code>), and range brackets (<code>[]</code>).</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>ls</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>PS HPCS:\Servers&gt; ls
+</code>
+</pre>
+
+<p>Lists the currently-available servers and their associated details.</p>
+
+<p>EXAMPLE 2</p>
+
+<pre>
+  <code>PS HPCS:\Flavors&gt; ls
+</code>
+</pre>
+
+<p>Lists the currently-available flavors and their associated details.</p>
+
+<h2 id="New-FloatingIP">New-FloatingIP</h2>
+
+<p>Creates a new Floating IP.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-floatingip</p>
+
+<p>new-floatingip -pid <em>portID</em> -nid <em>NetworkID</em></p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>pid</strong></dt>
+<dd>Floating IP port identifier value.</dd>
+
+<dt><strong>nid</strong></dt>
+<dd>Floating IP network identifier value.</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>new-FloatingIP -pid 12857174-99cf-40e9-999e-fb0fa2e84898 -nid bd1c30f7-71f1-455e-b91e-8d03da7f5224 
+</code>
+</pre>
+
+<p>Creates a new Floating IP address for Network 12857174-99cf-40e9-999e-fb0fa2e84898 and Port bd1c30f7-71f1-455e-b91e-8d03da7f5224</p>
+
+<h2 id="New-Image">New-Image</h2>
+
+<p>Creates a new server image based on an existing server.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-image "<em>existing-server-name</em>" "<em>new-server-name</em>"</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>new-image myserver testserver
+</code>
+</pre>
+
+<p>Creates a new server instance <code>testserver</code> based on the existing server instance <code>testserver</code>.</p>
+
+<h2 id="New-Keypair">New-Keypair</h2>
+
+<p>Creates a new keypair. The keypair is stored by default in <code>C:\Users\*username*\Documents\HP</code>.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-keypair <em>Name</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>new-keypair "TestKey"
+</code>
+</pre>
+
+<p>Creates a new keypair with the name "TestKey.pem".</p>
+
+<h2 id="New-Network">New-Network</h2>
+
+<p>Creates a new Network.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-network</p>
+
+<p>new-network -n <em>Name</em> - asu <em>AdminStateUp</em></p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>n</strong></dt>
+<dd>
+<p>Name of new Network.</p>
+</dd>
+
+<dt><strong>asu</strong></dt>
+<dd>
+<p>AdminStateUp. Determines if AdminStateUp flag is true or false.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># new-network "testNet1" -asu 
+</code>
+</pre>
+
+<p>Creates a new Network testNet1 with AdminStateUp set to "true".</p>
+
+<h2 id="New-Port">New-Port</h2>
+
+<p>Creates a new Port.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-port</p>
+
+<p>new-port -n <em>Name</em> - asu <em>AdminStateUp</em> -nid <em>NetworkID</em> -did <em>PortsDeviceID</em></p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>n</strong></dt>
+<dd>
+<p>Port name.</p>
+</dd>
+
+<dt><strong>asu</strong></dt>
+<dd>
+<p>Determines if AdminStateUp flag is true or false.</p>
+</dd>
+
+<dt><strong>nid</strong></dt>
+<dd>
+<p>Identifies Port Network.</p>
+</dd>
+
+<dt><strong>did</strong></dt>
+<dd>Identifies Port Device.</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># new-port "testPort1" -nid bd1c30f7-71f1-455e-b91e-8d03da7f5224 -asu -did "sdf\etc" 
+</code>
+</pre>
+
+<p>Creates a new Port called testNet1 on Network bd1c30f7-71f1-455e-b91e-8d03da7f5224 with its AdminStateUp set to true and a Device = sdf\etc.</p>
+
+<h2 id="New-Router">New-Router</h2>
+
+<p>Creates a new Router.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-router</p>
+
+<p>new-router -n <em>Name</em> -asu <em>AdminStatep</em> - egw <em>ExternalGatewayNeworkID</em></p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>n</strong></dt>
+<dd>
+<p>Router name.</p>
+</dd>
+
+<dt><strong>asu</strong></dt>
+<dd>
+<p>Determines if AdminStateUp flag is true or false.</p>
+</dd>
+
+<dt><strong>egw</strong></dt>
+<dd>
+<p>Identifies External Gateway Network.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># new-router "testRouter1" -asu -egw bd1c30f7-71f1-455e-b91e-8d03da7f5224 
+</code>
+</pre>
+
+<p>Creates a new Router called testRouter1 on External Network bd1c30f7-71f1-455e-b91e-8d03da7f5224 with its AdminStateUp set to true.</p>
+
+<h2 id="New-RouterInterface">New-RouterInterface</h2>
+
+<p>Creates a new RouterInterface.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-routerinterface</p>
+
+<p>new-routerinterface -rid <em>RouterID</em> -sid <em>SubnetID</em> -pid <em>portID</em></p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>rid</strong></dt>
+<dd>
+<p>Identifies Router.</p>
+</dd>
+
+<dt><strong>sid</strong></dt>
+<dd>
+<p>Identifies Subnet.</p>
+</dd>
+
+<dt><strong>pid</strong></dt>
+<dd>
+<p>Identifies Port.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<pre>
+  <code># new-routerinterface -rid bd1c30f7-71f1-455e-b91e-8d03da7f5224 -pid c9e32588-5b69-4100-a1a6-fa49094ec0a8 -sid 7yuu9886-5b69-4100-a1a6-fa49094ec0a8
+</code>
+</pre>
+
+<p>Creates a new relationship between Router (bd1c30f7-71f1-455e-b91e-8d03da7f5224), Port (c9e32588-5b69-4100-a1a6-fa49094ec0a8) and Subnet (7yuu9886-5b69-4100-a1a6-fa49094ec0a8)</p>
+
+<h2 id="New-SecurityGroup">New-SecurityGroup</h2>
+
+<p>Creates a new security group.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-securitygroup -n "<em>name</em>" "<em>description</em>"</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>new-securitygroup -n "TestGroup" -d "SomeDescription"
+</code>
+</pre>
+
+<p>Creates a new security group with the name "TestGroup" and the description "SomeDescription".</p>
+
+<h2 id="New-Server">New-Server</h2>
+
+<p>Creates a new server.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-server -n "<em>name</em>" -i "<em>image-ref-ID</em>" -f "<em>flavor-ref-ID</em>"<br />
+  {-md ["<em>name</em>" {"<em>name2</em>" . . .}] {-s "<em>server-ID</em>"}}<br />
+  -sg "<em>security-group</em>" -k "<em>key-name</em>"</p>
+
+<dl><dt><strong>n</strong></dt>
+<dd>Server name.</dd>
+
+<dt><strong>i</strong></dt>
+<dd>The image identifier (ImageRefId) used to define this server.</dd>
+
+<dt><strong>f</strong></dt>
+<dd>The flavor identifier (FlavorRefId) used to define the server.</dd>
+
+<dt><strong>md</strong> (optional)</dt>
+<dd>Pipe-delimited set of metadata name value pairs separated by commas.</dd>
+
+<dt><strong>s</strong> (optional)</dt>
+<dd>The identifier (ServerId) used to associate the metadata for the server. If your currently viewing a servers details, this parameter may be omitted as it's supplied for you.</dd>
+
+<dt><strong>sg</strong></dt>
+<dd>Set of SecurityGroup names that are to be applied to the newly created server separated by commas.</dd>
+
+<dt><strong>k</strong></dt>
+<dd>Keypair for this server.</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>new-server -n "TestServer" -i "2111" -f "100" -md "Namevalue1 | value1", "NameValue2 | value2", "NameValue3 | value3" -sg "securitygroupname","securitygroupname2" -k "KeyName"
+</code>
+</pre>
+
+<p>Creates a new server with the name <code>TestServer</code>, along with some metadata.</p>
+
+<p>EXAMPLE 2</p>
+
+<pre>
+  <code>PS HPCS:\Flavors&gt; New-Server -n TestServer -s "default" 
+cmdlet New-Server at command pipeline position 1 
+Supply values for the following parameters: 
+(Type !? for Help.) 
+ImageRef: 102 
+FlavorRef: 100 
+KeyName: mySecurityGroup
+</code>
+</pre>
+
+<p>Creates a new server with the name 'TestServer'. In this example, the user is prompted for the <code>Image</code>, <code>Flavor</code>, and <code>KeyName</code> values rather than entering them on the command line directly.</p>
+
+<h2 id="New-Subnet">New-Subnet</h2>
+
+<p>Creates a new Subnet.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-subnet</p>
+
+<p>new-subnet -nid <em>NetworkID</em> -ipv <em>IPVersion</em> -c <em>CIDRValue</em> -a <em>AllocationPools</em></p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>nid</strong></dt>
+<dd>
+<p>Subnet name.</p>
+</dd>
+
+<dt><strong>ipv</strong></dt>
+<dd>
+<p>Sets the IP Version</p>
+</dd>
+
+<dt><strong>c</strong></dt>
+<dd>
+<p>CIDR value.</p>
+</dd>
+
+<dt><strong>a</strong></dt>
+<dd>
+<p>Lists Allocation Pools, separating them by commas.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># new-subnet -n testSubnet -nid bd1c30f7-71f1-455e-b91e-8d03da7f5224 -ipv 4 -c "10.0.6.0/24" -a "10.0.6.20", "10.0.6.22", "10.0.6.26", "10.0.6.29" 
+</code>
+</pre>
+
+<p>Creates a new Subnet called testSubnet.</p>
+
+<h2 id="Ping-Server">Ping-Server</h2>
+
+<p>Sends echo request packets to the named server.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>ping-server <em>instance_ID</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>PS HPCS:\Servers&gt; ping-server 123456
+
+2 assigned IP addresses found.  Ping results are as follows.
+
+Pinging Server : 10.5.180.96
+Time to live   : 64
+Don't fragment : True
+ping status    : TimedOut
+
+Pinging Server : 15.185.107.139
+Time to live   : 64
+Don't fragment : True
+ping status    : Success
+Address        : 15.185.107.139
+RoundTrip time : 62
+Time to live   : 59
+Don't fragment : False
+Buffer size    : 32
+</code>
+</pre>
+
+<p>Sends echo request packets to the server with the ID 123456 and returns the results.</p>
+
+<h2 id="Reboot-Server">Reboot-Server</h2>
+
+<p>Allows you to perform either a soft or hard reboot of a server. With a soft reboot, the operating system is signaled to restart, which allows for a graceful shutdown of all processes. A hard reboot is the equivalent of cycling power on the server.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>reboot-server "<em>server-ID</em>" [ "SOFT" | "HARD" ]</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>reboot-server "4516" "SOFT"
+</code>
+</pre>
+
+<p>Performs a soft reboot of server 4516.</p>
+
+<h2 id="Refresh-Cache">Refresh-Cache</h2>
+
+<p>Refreshes current shell cache.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>refresh-cache</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>refresh-cache
+</code>
+</pre>
+
+<p>Refreshes the cache for your current shell.</p>
+
+<h2 id="Remove-FloatingIP">Remove-FloatingIP</h2>
+
+<p>Removes an existing Floating IP address.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-floatingip</p>
+
+<p>remove-floatingip -id -all</p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>
+<p>Identifies the Floating IP address to remove.</p>
+</dd>
+
+<dt><strong>all</strong></dt>
+<dd>
+<p>Removes all Floating IP addresses.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># remove-floatingIP 4ee64397-1253-473c-a81d-bc23dceeef31 
+</code>
+</pre>
+
+<p>Deletes the Floating IP with id of 4ee64397-1253-473c-a81d-bc23dceeef31.</p>
+
+<h2 id="Remove-Keypair">Remove-Keypair</h2>
+
+<p>Removes a previously created keypair.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-keypair <em>Name</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>remove-keypair "TestKey"
+</code>
+</pre>
+
+<p>Removes the keypair with the name <code>TestKey</code>.</p>
+
+<h2 id="Remove-Network">Remove-Network</h2>
+
+<p>Removes an existing Network.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-network</p>
+
+<p>remove-network -id -all</p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>
+<p>Identifies Floating IP address to remove.</p>
+</dd>
+
+<dt><strong>all</strong></dt>
+<dd>Removes all Floating IP addresses.</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># remove-network -id 12857174-99cf-40e9-999e-fb0fa2e84898  
+</code>
+</pre>
+
+<p>Deletes the Network with the id of 12857174-99cf-40e9-999e-fb0fa2e84898</p>
+
+<h2 id="Remove-Port">Remove-Port</h2>
+
+<p>Removes an existing port.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-port</p>
+
+<p>remove-port -id -all</p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>
+<p>Identifies port to remove.</p>
+</dd>
+
+<dt><strong>all</strong></dt>
+<dd>
+<p>Removes all ports.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># remove-port -id 12857174-99cf-40e9-999e-fb0fa2e84898 
+</code>
+</pre>
+
+<p>Deletes the Port with the id of 12857174-99cf-40e9-999e-fb0fa2e84898</p>
+
+<h2 id="Remove-Router">Remove-Router</h2>
+
+<p>Removes an existing router.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-router</p>
+
+<p>remove-router -id -all</p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>
+<p>Identifies router to remove.</p>
+</dd>
+
+<dt><strong>all</strong></dt>
+<dd>
+<p>Removes all routers.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># remove-router 12857174-99cf-40e9-999e-fb0fa2e84898 
+</code>
+</pre>
+
+<p>Removes the Router with the id of 12857174-99cf-40e9-999e-fb0fa2e84898</p>
+
+<h2 id="Remove-RouterInteface">Remove-RouterInterface</h2>
+
+<p>Removes an existing relationship between a Router and a Subnet.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-routerinterface</p>
+
+<p>remove-routerinterface -id -all</p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>
+<p>Identifies Router/Subnet relationship to remove.</p>
+</dd>
+
+<dt><strong>all</strong></dt>
+<dd>
+<p>Removes all Router/Subnet relationships.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># remove-routerinterface -id 12857174-99cf-40e9-999e-fb0fa2e84898 -sid Removes the association between Router 12857174-99cf-40e9-999e-fb0fa2e84898 and Subnet bd1c30f7-71f1-455e-b91e-8d03da7f5224 
+</code>
+</pre>
+
+<h2 id="Remove-Rule">Remove-Rule</h2>
+
+<p>Removes an existing security group rule.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-rule "<em>rule-ID</em>"</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>remove-rule -id "3244"
+</code>
+</pre>
+
+<p>Removes the rule with the ID of 3244.</p>
+
+<h2 id="Remove-SecurityGroup">Remove-SecurityGroup</h2>
+
+<p>Deletes an existing security group.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-securitygroup -id "<em>group-ID</em>"</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>remove-securitygroup -id "3244"
+</code>
+</pre>
+
+<p>Removes the security group with the ID of 3244.</p>
+
+<h2 id="Remove-Server">Remove-Server</h2>
+
+<p>Deletes an existing Server.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-server [ "<em>server-ID</em>" | -all ]  "<em>server-ID</em>"</p>
+
+<dl><dt><strong>-all</strong></dt>
+<dd>Deletes all servers</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>remove-server "4516"
+</code>
+</pre>
+
+<p>Deletes server 4516.</p>
+
+<h2 id="Remove-Subnet">Remove-Subnet</h2>
+
+<p>Removes an existing subnet.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-subnet</p>
+
+<p>remove-subnet -id -all</p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>
+<p>Identifies the Subnet to remove.</p>
+</dd>
+
+<dt><strong>all</strong></dt>
+<dd>
+<p>Removes all Subnets.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># remove-Subnet 12857174-99cf-40e9-999e-fb0fa2e84898 &lt;/dev:code&gt;-
+</code>
+</pre>
+
+<p>Removes the Subnet with the id of 12857174-99cf-40e9-999e-fb0fa2e84898</p>
+
+<h2 id="reset-password">Reset-Password</h2>
+
+<p>Re-syncs your Windows administrator password for the given server, after manual modification, in order to use the <code>connect-server</code> cmdlet.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>reset-password -id "<em>serverID</em>" -p "<em>password</em>"</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>reset-password -id "3245" -p "testpassword08"
+</code>
+</pre>
+
+<p>Re-syncs the Windows session administrator password with that of the server with the ID of "3245" to "testpassword08".</p>
+
+<h2 id="Set-ZoneColor">Set-ZoneColor</h2>
+
+<p>Sets the availability zone; all subsequently-issued commands are applied to the assigned availability zone.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>set-zonecolor <em>zone_ID</em> <em>color</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; set-zonecolor 1 Cyan
+
+az-1.region-a.geo-1 now assigned to Cyan.
+
+PS HPCS:\\&gt;
+</code>
+</pre>
+
+<p>Sets the color identifier for zone 1 to cyan.  The color names must be capitalized (as in the example).</p>
+
+<h2 id="Unassign-IP">Unassign-IP</h2>
+
+<p>Unassigns an IP address for an existing Server.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>unassign-ip 
+unassign-ip <em>address</em> -sid  <em>server-ID</em></p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>ip</strong></dt>
+<dd>
+<p>The IP address to disassociate.</p>
+</dd>
+
+<dt><strong>sid</strong></dt>
+<dd>
+<p>The Server ID that is disassociated from the IP address.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># unassign-IP "192.168.110.45" -s 4ee64397-1253-473c-a81d-bc23dceeef31
+</code>
+</pre>
+
+<p>Removes the supplied IP address from server 4ee64397-1253-473c-a81d-bc23dceeef31</p>
+
+<h2 id="update-floatingip--update-floatingip-">Update-FloatingIP ## {#Update-FloatingIP }</h2>
+
+<p>Updates an existing Floating IP.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>update-floatingip</p>
+
+<p>update-floatingip -id <em>ID</em> -pid <em>portID</em></p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>
+<p>Identifies Floating IP.</p>
+</dd>
+
+<dt><strong>pid</strong></dt>
+<dd>
+<p>Identifies Port.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># update-FLoatingIP -id 12857174-99cf-40e9-999e-fb0fa2e84898 -pid c9e32588-5b69-4100-a1a6-fa49094ec0a8 
+</code>
+</pre>
+
+<p>Updates the Floating IP (12857174-99cf-40e9-999e-fb0fa2e84898) to the new Port (c9e32588-5b69-4100-a1a6-fa49094ec0a8)</p>
+
+<h2 id="Update-Network">Update-Network</h2>
+
+<p>Updates an existing Network.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>update-network</p>
+
+<p>update-network -id <em>networkIP Identity</em> -n <em>Name</em></p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>
+<p>Identifies Network IP.</p>
+</dd>
+
+<dt><strong>n</strong></dt>
+<dd>
+<p>Network Name.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># update-Network -id 12857174-99cf-40e9-999e-fb0fa2e84898 -n "NewNameTest" 
+</code>
+</pre>
+
+<p>Changes the Network(12857174-99cf-40e9-999e-fb0fa2e84898) name to NewNameTest.</p>
+
+<h2 id="Update-Network">Update-Port</h2>
+
+<p>Updates an existing port.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>update-port</p>
+
+<p>update-port -id -did</p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>
+<p>Port IP ID.</p>
+</dd>
+
+<dt><strong>did</strong></dt>
+<dd>
+<p>Device ID.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># update-Port -id 12857174-99cf-40e9-999e-fb0fa2e84898 -did "sdf\test" 
+</code>
+</pre>
+
+<p>Changes the Port(12857174-99cf-40e9-999e-fb0fa2e84898) device to "sdf\test".</p>
+
+<h2 id="Update-Router">Update-Router</h2>
+
+<p>Updates an existing Router.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>update-router</p>
+
+<p>update-router- id <em>RouterIdentifier</em> -nid <em>NetworkID</em></p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>
+<p>Identifies the Router</p>
+</dd>
+
+<dt><strong>nid</strong></dt>
+<dd>
+<p>Identifies the Network.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># update-Router -id 12857174-99cf-40e9-999e-fb0fa2e84898 -nid c9e32588-5b69-4100-a1a6-fa49094ec0a8 
+</code>
+</pre>
+
+<p>Reassigns Router 12857174-99cf-40e9-999e-fb0fa2e84898 to Network c9e32588-5b69-4100-a1a6-fa49094ec0a8.</p>
+
+<h2 id="Update-Server">Update-Server</h2>
+
+<p>Allows you to change the server name property.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>update-server -id "<em>server-ID</em>" -n "<em>name</em>"</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>update-server -id "2133" -n "NewName"
+</code>
+</pre>
+
+<p>Changes the name of server 2133 to "NewName".</p>
+
+<h2 id="Update-Subnet">Update-Subnet</h2>
+
+<p>Updates an existing Subnet.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>update-subnet</p>
+
+<p>update-subnet -id <em>SubnetIdentifier</em> -egw <em>ExternalGatewayNetworkIPAddress</em> - n <em>Name</em></p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>
+<p>Identifies the Subnet.</p>
+</dd>
+
+<dt><strong>egw</strong></dt>
+<dd>
+<p>External Gateway Network ID.</p>
+</dd>
+
+<dt><strong>n</strong></dt>
+<dd>
+<p>New Subnet name.</p>
+</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<p><!-- Example section -->
+    # update-Subnet -id 12857174-99cf-40e9-999e-fb0fa2e84898 -egw 129.15.124.12 -n "NewSubnetName" 
+Reassigns the Subnet(12857174-99cf-40e9-999e-fb0fa2e84898) to the designated External Network with the new name of "NewSubnetName".</p>
+
+<h1 id="ObjectStorage">Object Storage CLI Commands</h1>
+
+<p>Following is the complete list of HP Helion Public Cloud Windows Object Storage CLI commands.</p>
+
+<h2 id="Cd">Cd</h2>
+
+<p>Allows you to traverse through a directory structure (along both ascendant and descendant axis).</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>cd *target</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; cd foo\bar
+</code>
+</pre>
+
+<p>Sets the current folder to "bar" location 2 levels deep.</p>
+
+<p>EXAMPLE 2</p>
+
+<pre>
+  <code>PS yourContainer:\foo\bar&gt; cd .. 
+</code>
+</pre>
+
+<p>Moves the current folder to "foo" from its current position (bar)</p>
+
+<h2 id="Copy">Copy</h2>
+
+<p>Allows you to move files in the following ways:</p>
+
+<ul><li>Local Client to Object Storage</li>
+<li>Within Object Storage</li>
+<li>From Object Storage to the Local Client</li>
+</ul><p><strong>Note</strong>: <strong>copy</strong> supports the <a href="../../../../external.html?link=http://msdn.microsoft.com/en-us/library/windows/desktop/aa717088(v=vs.85).aspx">standard Windows wildcard</a> characters asterix (<code>*</code>), question mark (<code>?</code>), and range brackets (<code>[]</code>).</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>copy *[source] target  [-recurse]</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; copy c:\test\
+</code>
+</pre>
+
+<p>Copies the entire folder named "test" to the current location within Object Storage. This is a non-recursive operation.</p>
+
+<p>EXAMPLE 2</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; copy c:\test\ -recurse
+</code>
+</pre>
+
+<p>Copies the entire folder named "test" (along with all descendant folders) to the current location within Object Storage. This is a recursive operation.</p>
+
+<p>EXAMPLE 3</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; copy test\ incoming\
+</code>
+</pre>
+
+<p>This copies the folder within Object Storage called "test" to the folder named "incoming". Both folders are adjacent to the current directory.</p>
+
+<p>EXAMPLE 4</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; copy foo\bar\anothertest.txt c:\incoming\
+</code>
+</pre>
+
+<p>This example copies the file "anothertest.txt" location two levels deep from the current location within Object Storage, to the local Incoming folder.</p>
+
+<p>EXAMPLE 5</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; copy sourceContainerName\folder1\ targetContainerName\FolderX\ -r
+</code>
+</pre>
+
+<p>This examples copies the folder <code>folder1</code> from container <code>sourceContainerName</code> to container <code>targerContainerName</code>.</p>
+
+<h2 id="Copy-Item">Copy-Item</h2>
+
+<p>Copies an item from one location to another.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>copy-item "<em>source-object</em>" "<em>target-object</em>"</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>copy-item my-file backup-file
+</code>
+</pre>
+
+<p>Copy's the object <code>my-file</code> to the object <code>backup-file</code>.</p>
+
+<h2 id="del">Del</h2>
+
+<p>Removes an object from storage.</p>
+
+<p><strong>Note</strong>: <strong>del</strong> supports the <a href="../../../../external.html?link=http://msdn.microsoft.com/en-us/library/windows/desktop/aa717088(v=vs.85).aspx">standard Windows wildcard</a> characters asterix (<code>*</code>), question mark (<code>?</code>), and range brackets (<code>[]</code>).</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>del -t "<em>object</em>"</p>
+
+<dl><dt><strong>-t</strong></dt>
+<dd>Path to the storage object to be removed</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>PS yourContainer:\&gt;# del test.xml
+</code>
+</pre>
+
+<p>Removes the storage object <code>test.xml</code> from the current directory.</p>
+
+<h1 id="Get-Uri">Get-Uri</h1>
+
+<p>Lists the fully qualified URI of the resource that you supply.  The optional parameters allow you to define a timespan for the URI.  When you issue this command, the URI is also pasted to the Windows clipboard for your convenience. If you want to disable this behavior, set the <code>CLI.config</code> option <code>PasteGetURIResultsToClipboard</code> to <code>false</code>.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>get-uri <em>filename</em> {-dv <em>days-valid</em>} {-sv <em>seconds-valid</em>}</p>
+
+<dl><dt><em>filename</em></dt>
+<dd>Source path to the storage object</dd>
+
+<dt><strong>dv</strong></dt>
+<dd>Number of days the URI is valid</dd>
+
+<dt><strong>sv</strong></dt>
+<dd>Number of seconds the URI is valid</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; get-uri anothertest.txt.
+
+Object located at : https://region-a.geo-1.objects.hpcloudsvc.com/v1/AUTH_e9e11fd3-ec18-4415-8b4f-e7b7ec9eed8e/Kaushik/test11.html
+</code>
+</pre>
+
+<p>Displays the fully qualified URI for the file <code>anothertest.txt</code>.</p>
+
+<p>EXAMPLE 2</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; get-uri anothertest.txt -dv 27
+
+Object located at   : https://region-a.geo-1.objects.hpcloudsvc.com/v1/AUTH_e9e11fd3-ec18-4415-8b4f-e7b7ec9eed8e/Kaushik/test11.html?temp_url_sig=95110298407447%3a95110298407447%3a75713970004400%3a84d2be6d472d06b7e83ca4af42b5ea14cc01596c
+&amp;temp_url_expires=1361904513
+Url Expiration Date : 2/26/2013. [120 day(s) \ 1361904513 seconds.]
+</code>
+</pre>
+
+<p>Displays the URI for the file <code>anothertest.txt</code>, where the URI is valid for 27 days.</p>
+
+<h2 id="Ls">Ls</h2>
+
+<p>Allows you to list available resources within the current Container.</p>
+
+<p><strong>Note</strong>: <strong>ls</strong> supports the <a href="../../../../external.html?link=http://msdn.microsoft.com/en-us/library/windows/desktop/aa717088(v=vs.85).aspx">standard Windows wildcard</a> characters asterix (<code>*</code>), question mark (<code>?</code>), and range brackets (<code>[]</code>).</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>ls {<em>target</em>}</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; ls
+</code>
+</pre>
+
+<p>Lists the contents of the current folder (in this case root)</p>
+
+<p>EXAMPLE 2</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; ls foo\bar
+</code>
+</pre>
+
+<p>Lists the contents of the "bar" folder located two levels from the current directory (root).</p>
+
+<!-- ##Map-Drive## {#Map-Drive}
+Maps a container owned by a different user to your list of available drives.
+
+###Syntax###
+ map-drive <drive_URL>
+ 
+###Examples###
+EXAMPLE 1
+
+    map-drive https://objects.werr.net:443/v1/9153476658759/rgtest2
+
+Maps the `rgtest2` container to your list of available drives. -->
+
+<h2 id="Md">Md</h2>
+
+<p>Allows you organize your resources within Object Storage in a hierarchical fashion through the use of folders.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>md <em>target</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>PS yourContainer:\&gt; md foo
+</code>
+</pre>
+
+<p>This creates a sub-folder under the current folder (in this example root).</p>
+
+<p>EXAMPLE 2</p>
+
+<pre>
+  <code> PS yourContainer:\&gt; md foo\bar
+</code>
+</pre>
+
+<p>This examples creates another sub-folder but this time the target location is two levels deep from the current location (root).</p>
+
+<h2 id="Migrate-Drive">Migrate-Drive</h2>
+
+<p>Migrates existing stores of data from external sources like S3, Dropbox and Skydrive to a target Container within HP Object Storage.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>migrate-drive -p "<em>bucket</em>" -sk "<em>secret-key</em>" -ak "<em>access-key</em>"</p>
+
+<dl><dt><strong>p</strong></dt>
+<dd>Bucket type, e.g. <code>S3</code></dd>
+
+<dt><strong>sk</strong></dt>
+<dd>Secret key ID.</dd>
+
+<dt><strong>ak</strong></dt>
+<dd>Access key ID.</dd>
+
+<dt><strong>b</strong></dt>
+<dd>Comma-deliniated bucket names to be copied to the HP Helion Public Cloud system.</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code>migrate-drive -p "S3" -sk "aa78676dhhh100" -ak "jhjhgu64332" -b "testb1", "testb2"
+</code>
+</pre>
+
+<p>Copies the <code>testb1</code> and <code>testb2</code> S3 buckets to the HP object storage containers of the same name, using a secret-key value of "<code>aa78676dhhh100</code>" and an access-key value of "<code>jhjhgu64332</code>".</p>
+
+<h2 id="New-Container">New-Container</h2>
+
+<p>Creates a new storage container.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-container -name  <em>Name</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>PS yourcontainer:\&gt; New-container -name marketing
+</code>
+</pre>
+
+<p>Creates a new container named marketing.</p>
+
+<h2 id="Remove-Container">Remove-Container</h2>
+
+<p>After confirmation, deletes a container entirely. If any files exist within the container, they are deleted as well.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-container  <em>Name</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>PS yourcontainer:\&gt; remove-container marketing
+</code>
+</pre>
+
+<p>Deletes the container named marketing and all of its contents.</p>
+
+<!-- ##Remove-Drive## {#Remove-Drive}
+Removes an existing mapped drive.
+
+###Syntax###
+ remove-drive <drive_URL>
+
+###Examples###
+EXAMPLE 1
+
+    remove-drive rgtest
+    
+Removes the container `rgtest` from your list of available drives. -->
+
+<h2 id="Remove-FloatingIP">Remove-FloatingIP</h2>
+
+<p>Removes an existing Floating IP address.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-floatingip 
+remove-floatingip -id -all</p>
+
+<h3 id="options">Options</h3>
+
+<dl><dt><strong>id</strong></dt>
+<dd>Identifies the Floating IP address</dd>
+
+<dt><strong>all</strong></dt>
+<dd>Removes all Floating IP addresses.</dd>
+</dl><h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># remove-floatingIP 4ee64397-1253-473c-a81d-bc23dceeef31 
+</code>
+</pre>
+
+<p>Deletes the Floating IP with id of 4ee64397-1253-473c-a81d-bc23dceeef31.</p>
+
+<h2 id="Remove-Item">Remove-Item</h2>
+
+<p>Removes an object from your object storage container.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-item "<em>object</em>"</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>remove-item my-object
+</code>
+</pre>
+
+<p>Removes the object <code>'my-object</code> from the container.</p>
+
+<h2 id="Remove-Metadata">Remove-Metadata</h2>
+
+<p>Removes the metadata from an object in storage.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-metadata "<em>object</em>"</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>remove-metadata my-object
+</code>
+</pre>
+
+<p>Removes the metadata from the object <code>my-object</code>.</p>
+
+<h2 id="Set-Scope">Set-Scope</h2>
+
+<p>Sets the scope of a Private Container to Public.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>set-scope  <em>Name</em> PUBLIC</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code>marketing:\&gt; set-scope yourcontainer -s PUBLIC
+</code>
+</pre>
+
+<p>Allows you to access resources hosted within the Marketing Container over the public Internet.</p>
+
+<!-- Removed per DXCLI-83
+#CDN CLI  Commands# {#CDN}
+
+##Get-CDN## {#Get-CDN}
+Lists all CDN-enabled containers and their associated CDN entries.
+
+### Syntax###
+get-cdn
+
+###Examples###
+EXAMPLE
+
+    get-cdn
+
+Lists all CDN-enabled containers and their associated CDN entries.
+
+##New-CDN## {#New-CDN}
+Creates a new CDN entry for the specified container.
+
+###Syntax###
+new-cdn -n "*container-name*"
+
+###Examples###
+EXAMPLE
+
+    new-cdn -n "TestContainer"
+
+Creates a new CDN entry for the container "TestContainer".
+
+##Remove-CDN## {#Remove-CDN}
+Removes a CDN entry from the specified container.
+
+### Syntax###
+remove-cdn -n "*container-name*"
+
+###Examples###
+EXAMPLE
+
+    remove-cdn -n "TestContainer"
+
+Removes a CDN entry from container "TestContainer".
+-->
+
+<h1 id="BlockStorage">Block Storage CLI Commands</h1>
+
+<h2 id="Attach-Volume">Attach-Volume</h2>
+
+<p>Associates a volume with an existing server.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>attach-volume <em>server_id</em> <em>volume_id</em> "<em>device_name</em>"</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># attach-volume 21 2345 "/dev/vdp"
+</code>
+</pre>
+
+<p>Associates the volume with the volume ID <code>2345</code> to the server with the ID of <code>21</code>, with the assigned device name of <code>/dev/vdX</code>.</p>
+
+<h2 id="Detach-Volume">Detach-Volume</h2>
+
+<p>Disassociates a volume from an existing server.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>detach-volume <em>server_id</em> <em>volume_id</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># detach-volume 21 2345
+</code>
+</pre>
+
+<p>Disassociates the volume with the ID of 2345 from the server with the ID of 21.</p>
+
+<h2 id="New-Snapshot">New-Snapshot</h2>
+
+<p>Creates a new snapshot of your block storage volumes.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-snapshot "<em>snapshot_name</em>" ["<em>snapshot_description</em>"] <em>volume_id</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># new-snapshot "TestSnapshot" "This is a simple Snapshot test" 2344
+</code>
+</pre>
+
+<p>Creates a snapshot with the name <code>TestSnapshot</code> and the description <code>This is a simple Snapshot test</code> of the block storage volume with the ID of 2344.</p>
+
+<h2 id="New-Volume">New-Volume</h2>
+
+<p>Creates a new block storage volume.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>new-volume "<em>volume_name</em>" ["<em>volume_description</em>"] <em>volume_size</em> ["<em>metadata</em>"]</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE 1</p>
+
+<pre>
+  <code># new-volume "TestVolume" "This is a simple Volume test" 20
+</code>
+</pre>
+
+<p>Creates the new volume <code>TestVolume</code> with a size of 20 gigabytes and the description "This is a simple Volume test".</p>
+
+<p>EXAMPLE 2</p>
+
+<pre>
+  <code># new-volume "TestVolume" "This is a simple Volume test" 20 "test|data", "another|test"
+</code>
+</pre>
+
+<p>Creates the new volume <code>TestVolume</code> with a size of 20 gigabytes, the metadata <code>test|data</code> and <code>another|test</code>, and the description "This is a simple Volume test".</p>
+
+<h2 id="Remove-Snapshot">Remove-Snapshot</h2>
+
+<p>Deletes an existing block storage snapshot.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-snapshot <em>snapshot_id</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code> # remove-snapshot 2457
+</code>
+</pre>
+
+<p>Deletes the snapshot with the snapshot ID of 2457.</p>
+
+<h2 id="Remove-Volume">Remove-Volume</h2>
+
+<p>Deletes an existing block storage volume.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>remove-volume <em>volume_ID</em></p>
+
+<h3 id="examples">Examples</h3>
+
+<p>EXAMPLE</p>
+
+<pre>
+  <code># remove-volume 2457
+</code>
+</pre>
+
+<p>Removes the block storage volume with the ID of <code>2457</code>.</p>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using<br>HP Helion Public Cloud<br>
+			<a href="../../../../external.html?link=http://www.hpcloud.com/cloud-credit" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../cli/windows/2/index.html"><span>Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../cli/windows/2/installation/index.html"><span>Installation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../cli/windows/2/commands/index.html"><span>Non-Service Specific Commands</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../cli/windows/2/compute/index.html"><span>Compute Examples</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../cli/windows/2/containers-and-folders/index.html"><span>Object Storage Examples</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../cli/windows/2/block-storage/index.html"><span>Block Storage Examples</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../cli/windows/2/reference/index.html"><span>CLI Reference</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../cli/windows/2/help/index.html"><span>Getting Help</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../cli/windows/2/release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+		<ul class="footer-social">
+			<li class="twitter"><a href="../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+			<li class="youtube"><a href="../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+			<li class="rss"><a href="../../../../external.html?link=http://h30499.www3.hp.com/t5/Grounded-in-the-Cloud/bg-p/sws-661#.U7qe27Hn-M8"></a></li>
+			<li class="facebook"><a href="../../../../external.html?link=https://www.facebook.com/HPHelion"></a></li>
+			<li class="linkedin stretch"><a href="../../../../external.html?link=http://www.linkedin.com/company/3510998"></a></li>
+		</ul>
+		<ul class="contact-info hide-320 show-768">
+			<li>In the U.S.<br />1-855-61CLOUD</li>
+			<li>Worldwide<br />+1678-745-9010</li>
+			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span></li>
+		</ul>
+		<div class="copyright">	
+			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+			</p><br />
+			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../external.html?link=http://www8.hp.com/us/en/privacy/privacy.html" target="_blank">Privacy</a> | <a href="../../../../external.html?link=http://www8.hp.com/us/en/privacy/terms-of-use.html" target="_blank">Terms of use</a> | <a href="../../../../external.html?link=http://www.hpcloud.com/legal-documents" target="_blank">Legal Documents</a></p>
+		</div>
+	</div>
+	</div>
+</footer>
+
+<!-- Load JS -->
+<!--[if lt IE 9]>
+<script src="http://www.hpcloud.com/sites/all/themes/hpcloud/js/svgeezy.js"></script>
+-->
+	<script src="../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../js/combined.js"></script>
+
+<div id="ClickTaleDiv" style="display: none;"></div>    <div class="region region-page-bottom">
+    <div id="lpButtonDiv"></div>  </div><!-- /.region -->
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_zUhl2jDXgUKVBRVBUeMbuSby0YSCiXHWIAYNbn9ecwc.js"></script>
+<script>ClickTaleSSL=1; // This is intentinally global. 
+			if(typeof ClickTale=='function') 
+				ClickTale(24406,0.05,"www02");</script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_gPMh2zNJqEE6EkEOKNeOTAet3kwTiahCt35rBAtwqq4.js"></script>
+<script>
+    var _elqQ = _elqQ || [];
+    _elqQ.push(['elqSetSiteId', '521454204']);
+    _elqQ.push(['elqTrackPageView']);
+    
+    (function () {
+        function async_load() {
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+            s.src = '../../../sites/all/modules/custom/custom_eloqua/elqNow/elqCfg.min.html';
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        }
+        if (window.addEventListener) window.addEventListener('DOMContentLoaded', async_load, false);
+        else if (window.attachEvent) window.attachEvent('onload', async_load); 
+    })();
+    </script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_lNHbXKW-sJN9oM4eoaw-q0yTco3mOORibOeNn9yzM00.html"></script>
+   <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/cli/windows/reference by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:02:39 GMT -->
+</html>

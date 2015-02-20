@@ -1,0 +1,523 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/update/undercloud/101/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:58:34 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion OpenStack&#174; Updating the Undercloud</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../../css/combined.css">
+
+	<script src="../../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../../index.html" class="logo"  ><img src="../../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<script>
+<![CDATA[
+
+function PageRefresh {
+onLoad="window.refresh"
+}
+
+PageRefresh();
+
+]]>
+</script><!--
+<p style="font-size: small;"> <a href="/helion/openstack/">&#9664; PREV | <a href="/helion/openstack/">&#9650; UP</a> | <a href="/helion/openstack/faq/">NEXT &#9654; </a></p>
+--><h1 id="hp-helion-openstack-10-updating-the-undercloud">HP Helion OpenStack® 1.0 Updating the Undercloud</h1>
+
+<!-- No readme in 1.01 per Jon Lowe
+The *Readme.txt* that comes with a patch update will tell you what nodes need to be updated as a result of this patch. It will be located in the directory described in the [Extract the required scripts and libraries](/helion/openstack/update/prereqs/101/#extract).  
+
+If the Readme.txt does not list undercloud nodes, skip this document and proceed to [Updating the Undercloud](/helion/openstack/update/overcloud/101/). -->
+
+<p>Use the this document when updating the undercloud nodes.</p>
+
+<ul><li><a href="#prereqs">Prerequisites</a></li>
+<li><a href="#update">Update the undercloud</a></li>
+<li><a href="#validate">Validate the update</a></li>
+<li><a href="#backup">Backup the updated undercloud</a></li>
+<li><a href="#next-steps">Next Steps</a></li>
+</ul><p>You can monitor the update process, see <a href="../../monitor/101/index.html">Monitoring the Update</a>.</p>
+
+<h2 id="prereqs">Prerequisites</h2>
+
+<p>Before you begin the update:</p>
+
+<ul><li><p>If the seed VM needed updating, perform this update before updating the undercloud, as described in <a href="../../seed/101/index.html">Updating the Seed Cloud Host</a>.</p></li>
+<li><p>Copy the TAR file to the seed cloud host and extract contents. From an SSH session to the seed cloud host do the following:</p>
+
+<pre><code>ssh root@&lt;seed_cloud_host_IP&gt;
+scp heat-admin@&lt;undercloud_IP&gt;:/tmp/heat_templates/* /tmp
+
+tar xvf tripleo-ansible&lt;version&gt;.tar 
+mv /opt/stack/tripleo-ansible /opt/stack/tripleo-ansible-orig
+mv /tmp/tripleo-ansible /opt/stack/
+</code></pre>
+
+<p>Where:</p>
+
+<ul><li><insert undercloudip=""> is the IP of the undercloud node</insert></li>
+<li>/tmp/heat_templates/ is the default location of the TAR files; enter the appropriate location, if you <a href="#default">changed the location</a>.</li>
+</ul></li>
+</ul><p>The files extracted in the seed tmp node.  If desired, you can delete the files in the <code>/tmp/heat_templates</code> directory.</p>
+
+<h4 id="default">Change the default</h4>
+
+<p>It is possible to change the location of the undercloud patch update TAR files, during or after deployment. The default location is the <code>/tmp/heat_templates</code> folder.</p>
+
+<p>If you have done so you can recall where you have changed the directory to by viewing the Sherpa configuration file.</p>
+
+<p>The Sherpa configuration file for the undercloud can be found at <code>/etc/sherpa/sherpa.conf</code>.</p>
+
+<p>The directory where the files where stored can be found by looking in the <code>RepositoryMgr</code> portion of <code>/etc/sherpa/sherpa.conf</code>. Search for the directory attribute as seen below:</p>
+
+<pre>
+  <code>'file': {
+'classname': 'sherpa.handlers.repository.file.FileSystemHandler',
+'destinations': [
+{
+'directory': '/tmp/heat_templates',
+</code>
+</pre>
+
+<p>When locating the update files, use the directory set in <code>/etc/sherpa/sherpa.conf</code>.</p>
+
+<ul><li><p>Review the <a href="../../prereqs/101/index.html">update prerequisites</a> and make sure all necessary tasks have been performed. <!--- including [extracting the update scripts](/helion/openstack/update/prereqs/101/#extract)---->.</p></li>
+<li><p>Backup a copy of the undercloud to restore in case of catastrophic failures.  For information, see <a href="../../../backup.restore/index.html">Back Up and Restore</a>.</p></li>
+<li><p>Make sure that you have a least 7GB of space available on the seed node. Converting to the raw mode will take space on the seed. 
+<!-- 
+    If you are low on space and you updated the seed previously please refer to the [Cleanup section](/helion/openstack/update/seed/101/) in *Updating the Seed Cloud Host* for information on removing post-update files. The backup/restore process should remove these files. You can check to make sure the files have been removed. --></p></li>
+<li><p>Point the install script to the undercloud. The patch update script is based on the Ansible platform. For the undercloud, because the script is launched from the seed cloud host, you need to point the script to the seed cloud host.</p>
+
+<p>To point the script to update the undercloud, use the following steps:</p>
+
+<p>a. Login to seed</p>
+
+<pre><code>ssh root@&lt;seed_cloud_host_IP&gt;
+</code></pre>
+
+<p>b. Run the following command</p>
+
+<pre><code>TE_DATAFILE=/root/tripleo/ce_env.json . /root/tripleo/tripleo-incubator/seedrc
+</code></pre>
+
+<!---Removed as per JIRA
+
+a. Copy the `stackrc` file it from the undercloud and rename the file for the undercloud:
+
+    ssh heat-admin@<Undercloud IP>
+    sudo -i
+    cp stackrc /home/heat-admin/uc_stackrc
+
+b. On the seed cloud host, copy the `undercloud stackrc` file:
+
+    scp heat-admin@<Undercloud ip>:uc_stackrc ~/
+
+c. Edit the `uc_stackrc` file to replace the localhost in the `OS_AUTH_URL` variable with the IP address of the undercloud.  
+
+    export OS_AUTH_URL=http://<Undercloud>:5000/v2.0
+
+d. Source the file:
+
+    source ~/uc_stackrc
+    --->
+
+<p>c. Execute the following commands:</p>
+
+<pre><code>source /opt/stack/venvs/ansible/bin/activate
+cd /opt/stack/tripleo-ansible
+bash scripts/inject_nova_meta.bash
+export ANSIBLE_LOG_PATH=/var/log/ansible/ansible.log
+mkdir -p /var/log/ansible
+</code></pre>
+
+<p>The command prompt should change to <code>(ansible)</code>. You must use  <code>(ansible)</code> session for executing all the update operations manually.</p>
+
+<p>d. To test that the ansible environment is correctly setup, use the following command to ping all the nodes that ansible can find via its inventory:</p>
+
+<pre><code>ansible all -u heat-admin -i plugins/inventory/heat.py -m ping  
+</code></pre>
+
+<p>If successful, the ping command will show a ping of every node in a particular cloud.  It will look similar to this with one for each node.</p>
+
+<pre><code>192.0.2.28 | success &gt;&gt; {
+    "changed": false,
+    "ping": "pong"
+}   
+</code></pre></li>
+</ul><h2 id="update">Update the undercloud</h2>
+
+<p>There are two methods to update the undercloud:</p>
+
+<ul><li><a href="#upgradescript">Upgrade using the helper script</a></li>
+<li><a href="#upgrademanual">Manual upgrade</a></li>
+</ul><p>You can monitor the update process, see <a href="../../monitor/101/index.html">Monitoring the Update</a>.</p>
+
+<h3 id="upgradescript">Update the undercloud using the script</h3>
+
+<p>To upgrade the undercloud using the <code>HelionUpdate.sh</code> script included in the patch update download, use the following steps:</p>
+
+<ol><li><p>Log in the seed VM host.</p>
+
+<pre><code>sudo su -
+</code></pre></li>
+<li><p>SSH to the seed VM.</p>
+
+<pre><code>ssh root@192.0.2.1 
+</code></pre></li>
+<li><p>Run the following command to start the update:</p>
+
+<pre><code>cd /opt/stack/tripleo-ansible/
+./update-helpers/HelionUpdate.sh -undercloud
+</code></pre>
+
+<p>This script will setup the environment, allow you to do test <code>ping</code> and perform pre-update checking, and also update the node.</p></li>
+<li><p>When the update is done, <a href="#validate">validate the update</a>.</p></li>
+</ol><h3 id="upgrademanual">Update the undercloud manually</h3>
+
+<p>The manual method generally gives you more control of the update.</p>
+
+<p>There are three images that you need to place into the seed glance for the Undercloud. These images will be delivered in a file called <code>undercloud.tar</code> and are located in the undercloud local filesystem after you <a href="../../download/101/index.html">obtain and extract the update package</a>.</p>
+
+<p>Please refer to <a href="../../prereqs/101/index.html#extract">Extract the required scripts and libraries</a> in <em>Update Prerequisites</em> for instructions on locating the directory the undercloud.tar.</p>
+
+<p>To update a node, the patch image needs to be loaded into the seed VM Image Operations service (Glance).  A <code>qcow2</code> image used for image update has dependencies on <code>vmlinuz</code> and <code>initrd</code> images.</p>
+
+<p>Use the following steps to load upload an image and its dependencies:</p>
+
+<ol><li><p>Copy the new undercloud images into the seed glance repo.</p>
+
+<ul><li><code>undercloud.qcow2</code> </li>
+<li><code>undercloud.initrd</code> </li>
+<li><code>undercloud.vmlinuz</code></li>
+</ul></li>
+<li><p>SSH to the seed VM as <code>root</code>:</p>
+
+<pre><code>ssh &lt;IP Address&gt;
+</code></pre></li>
+<li><p>Run the update do the following:</p>
+
+<pre><code>scp heat-admin@&lt;Insert undercloudIP&gt;:/tmp/heat_templates/undercloud.tar /tmp.  
+tar xvf undercloud.tar 
+</code></pre></li>
+<li><p>Rename the old undercloud image using the following commands</p>
+
+<pre><code>export IMAGE_ID='glance image-list | grep undercloud | grep qcow2 | awk '{print $2}''
+export RAMDISK_ID='glance image-list | grep undercloud-initrd | awk '{print $2}''
+export KERNEL_ID='glance image-list | grep undercloud-vmlinuz | awk '{print $2}''
+
+glance image-update --name undercloud-old $IMAGE_ID
+glance image-update --name undercloud-initrd-old $RAMDISK_ID
+glance image-update --name undercloud-vmlinuz-old $KERNEL_ID
+</code></pre></li>
+<li><p>Upload new undercloud images to glance</p>
+
+<pre><code>glance image-create --is-public True --is-protected False --name undercloud.vmlinuz --file undercloud.vmlinuz --disk-format aki --container-format aki
+
+glance image-create --is-public True --is-protected False --name undercloud.initrd --file undercloud.initrd --disk-format ari --container-format ari
+
+glance image-create --name &lt;image name&gt; --disk-format qcow2 --container-format bare --is-public True --file patch1.qcow2 --property ramdisk_id=&lt;GlanceId of initrd image&gt;  --property kernel_id=&lt;GlanceId of vmlinuz image
+</code></pre></li>
+<li><p>Make sure you are in the <code>/opt/stack/tripleo-ansible</code> directory and that you have the <code>(ansbile)</code> as part of your command prompt.</p></li>
+<li><p>Run the following command:</p>
+
+<pre><code>ansible-playbook -vvvv -u heat-admin -i plugins/inventory/heat.py -e force_rebuild=True -l &lt;IP of undercloud&gt; -e undercloud_rebuild_image_id=&lt;glance Image_ID of undercloud&gt; playbooks/update_cloud.yml
+</code></pre>
+
+<p>Ansible will show progress and alert you to failures.  The <code>-vvvv</code> option makes information available in case of failure.</p></li>
+<li><p>When the update is done, <a href="#validate">validate the update</a>.</p></li>
+</ol><h2 id="validate">Validate the update</h2>
+
+<p>Verify that services and communication between nodes is functional.</p>
+
+<ol><li><p>SSH to undercloud:</p>
+
+<pre><code>ssh heat-admin@&lt;undercloud IP address&gt;
+</code></pre></li>
+<li><p>Log in:</p>
+
+<pre><code>sudo -i
+</code></pre></li>
+<li><p>Run the following commands to make sure all systems appear as expected:</p>
+
+<pre><code>#. stackrc - to source the credentials or setup credentials
+nova list
+heat stack-list
+glance image-list
+</code></pre></li>
+<li><p><a href="../../../dashboard/login/index.html">Launch the Horizon UI</a> and make sure you can authenticate successfully.</p></li>
+</ol><h3 id="backup">Backup the updated undercloud</h3>
+
+<p>Once the update of undercloud node is complete, you should backup the node in case of failures.  See <a href="../../../backup.restore/index.html">Back Up and Restore</a>.</p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>Upgrade the overcloud.</p>
+
+<p>For installation instructions, see <a href="../../overcloud/101/index.html">Updating the Overcloud</a>.</p>
+
+<p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<hr />
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../index.html"><span>HP Helion OpenStack Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../release-notes/101/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../faq/index.html"><span>FAQ</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../technical-overview/index.html"><span>Technical Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../services/overview/index.html"><span>Services Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../support-matrix/index.html"><span>Support Matrix</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../install/overview/index.html"><span>Installation Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../install/security/index.html"><span>Network Security</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../backup.restore/index.html"><span>Back Up and Restore</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../services/troubleshooting/index.html"><span>Troubleshooting</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../related-links/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../glossary/index.html"><span>Glossary</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/update/undercloud/101/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:58:34 GMT -->
+</html>

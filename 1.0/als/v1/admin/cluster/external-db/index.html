@@ -1,0 +1,424 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/admin/cluster/external-db/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:56 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>External Data Services</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../../css/combined.css">
+
+	<script src="../../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../../index.html" class="logo"  ><img src="../../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="external-data-services">HP Helion Development Platform: External Data Services</h1>
+
+<ul><li><a href="#general-principles">General Principles</a></li>
+<li><a href="#mysql">MySQL</a></li>
+<li><a href="#postgresql">PostgreSQL</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ul><p>Application Lifecycle Service comes with several data services that can be enabled on an Application Lifecycle Service cluster. However, for implementations where high
+availability or high performance databases are required, it's advisable
+to configure Application Lifecycle Service to connect to an externally maintained database or
+data service.</p>
+
+<p>External data services can be configured at the discretion of the
+administrator or service provider, but in many cases they can be set up
+so that Application Lifecycle Service can allocate databases in the same way it does for the
+built-in databases.</p>
+
+<h2 id="general-principles">General Principles<a href="#general-principles" title="Permalink to this headline"></a></h2>
+
+<p>Any application running on Application Lifecycle Service can connect to an external database
+directly as long as the instance can route to the IP address and port of
+the database server. Database connections can be hard coded in the
+application without needing to make any changes to Application Lifecycle Service
+configuration.</p>
+
+<p>To automatically provision databases for applications on these external
+servers, Application Lifecycle Service must have access to an administrator account on the
+database server with permissions to create users and databases. The
+credentials for this account, along with the hostname and port of the
+database server, are set in the Application Lifecycle Service configuration (via <a href="../../reference/kato-ref/index.html#kato-command-ref-config"><em>kato
+config</em></a>).</p>
+
+<h2 id="mysql">MySQL<a href="#mysql" title="Permalink to this headline"></a></h2>
+
+<p>The MySQL server must be set up to allow connections over the network
+(rather than just on 'localhost'). Make sure the 'bind-address' is set
+to the host's IP address (or '0.0.0.0').</p>
+
+<p>Enter the <code>mysql</code> shell and grant the root user
+privileges on all tables. For example:</p>
+
+<pre>
+  <code>$ GRANT ALL PRIVILEGES ON *.* TO 'root'@'10.5.120.%' IDENTIFIED BY
+'&lt;PASSWORD&gt;'
+WITH GRANT OPTION;
+$ FLUSH PRIVILEGES;
+</code>
+</pre>
+
+<p>The <code>10.5.120.%</code> portion above should be in relation
+to the Application Lifecycle Service <code>mysql_node</code> IP address. For
+increased security you can create a special 'helion' user with the
+same privileges as the 'root' user as an alternative option.</p>
+
+<p>Once the user is configured to accept connections from Application Lifecycle Service and to
+create users and databases, change the configuration for 'mysql_node'
+in Application Lifecycle Service. For example:</p>
+
+<pre>
+  <code>$ kato config set mysql_node mysql/host 10.5.120.101
+$ kato config set mysql_node mysql/pass yourpassword
+$ kato config set mysql_node mysql/port 3306
+$ kato config set mysql_node mysql/user root
+</code>
+</pre>
+
+<p>Once these have been set, restart mysql:</p>
+
+<pre>
+  <code>$ kato restart mysql
+</code>
+</pre>
+
+<h2 id="postgresql">PostgreSQL<a href="#postgresql" title="Permalink to this headline"></a></h2>
+
+<p>Make sure the PostgreSQL database server (version 9.1 or later) will
+accept connections over the network. Edit <em>postgresql.conf</em> make sure
+the 'listen_addresses' is uncommented and set to the networked
+interface IP. For example:</p>
+
+<pre>
+  <code>listen_addresses = 'localhost, 10.5.120.102'
+</code>
+</pre>
+
+<p>Edit <em>pg_hba.conf</em> and make sure a line exists that allows all Application Lifecycle Service
+instances to connect to it. For example:</p>
+
+<pre>
+  <code>host    all   all       10.5.120.0/23   md5
+</code>
+</pre>
+
+<p>Restart PostgreSQL.</p>
+
+<p>Using the default 'postgres' user (or another account with the same
+superuser privileges), change the configuration for 'postgresql_node'
+in Application Lifecycle Service. For example:</p>
+
+<pre>
+  <code>$ kato config set postgresql_node postgresql/host 10.5.120.102
+$ kato config set postgresql_node postgresql/pass yourpassword
+$ kato config set postgresql_node postgresql/port 5432
+$ kato config set postgresql_node postgresql/user postgres
+</code>
+</pre>
+
+<p>Once these have been set, restart the postgresql_node process:</p>
+
+<pre>
+  <code>$ kato restart postgresql_node
+</code>
+</pre>
+
+<h2 id="troubleshooting">Troubleshooting<a href="#troubleshooting" title="Permalink to this headline"></a></h2>
+
+<p>The <code>psql</code> and <code>mysql</code> clients
+are available at the command line on the Application Lifecycle Service VM. Log in to the Core
+node (i.e. the one running the Cloud Controller) and test the database
+connection directly with the appropriate client. For example:</p>
+
+<pre>
+  <code>$ mysql -u helion -p mypassword -h 10.5.120.101
+mysql&gt; show databases;
+...
+</code>
+</pre>
+
+<p>If the basic client connection works, test database creation using the
+<code>helion create-service ...</code> command:</p>
+
+<pre>
+  <code>$ helion create-service mysql
+Creating Service [mysql-24901]: OK
+</code>
+</pre>
+
+<p>If there are problems, check the corresponding logs on the database
+server. These are generally found in <em>/var/log/postgresql</em> and
+<em>/var/log/mysql</em>.</p>
+
+<p>Logs from Application Lifecycle Service can be viewed with <code>kato log tail</code>:</p>
+
+<pre>
+  <code>$ kato log tail postgresql_node
+</code>
+</pre>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Download the<br>Development Platform<br>
+			<a href="../../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show">DOWNLOAD NOW</a>
+		</p>
+	</aside>
+	
+ 
+	<aside class="signup-box">
+		<p class="align-center">
+			Take the Helion Development Platform for a Free Spin<br>
+			<a href="../../../../../helion/devplatform/ALS-developer-trial-quick-start/index.html">Quick Start Developer Trial</a>
+		</p>
+	</aside>
+<!--	
+	<aside class="signup-box">
+		<p class="align-center">Make sure to check out our Developer Portal
+			<a href="https://dev.hpcloud.com">dev.hpcloud.com
+</a><br>
+ 
+		</p>
+	</aside>
+-->	
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/index.html"><span>HP Helion Development Platform Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/install/index.html"><span>Development Platform Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/install/community/index.html"><span>Development Platform Community Edition Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/openstack/update/devplat/101/index.html"><span>Development Platform Commercial 1.0.1 Update</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/appdev/index.html"><span>Application Developer Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/sysadmin/index.html"><span>IT Ops Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/appdev/index.html#sample"><span>Sample Code</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/related-topics/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/deploy/index.html"><span>Application Lifecycle Service Configuration and Deployment</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../index.html"><span>ALS Admin Guide</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/admin/cluster/external-db/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:56 GMT -->
+</html>

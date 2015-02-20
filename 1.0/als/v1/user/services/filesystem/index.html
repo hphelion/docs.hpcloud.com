@@ -1,0 +1,464 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/user/services/filesystem/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:26 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Persistent File System</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../../css/combined.css">
+
+	<script src="../../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../../index.html" class="logo"  ><img src="../../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="persistent-file-system">HP Helion Development Platform: Persistent File System</h1>
+
+<p>The file system of application containers are ephemeral. Any application
+data or files stored locally within these containers is lost when the
+instance is stopped or restarted. To solve this, Application Lifecycle Service provides a filesystem type of service that can be shared between application instances,
+and even between applications deployed to the same space.</p>
+
+<p>A persistent file system service allows apps to do the following:</p>
+
+<ol><li>Share files across multiple instances of an app</li>
+<li>Store files that persist if an app is removed (providing the service
+is not deleted) or if the server is restarted.</li>
+<li>Conserve space on filesystems allocated within the VM instance by referencing the persistent filesystem instead.</li>
+</ol><h2 id="creating-a-persistent-file-system">Creating A Persistent File System<a href="#creating-a-persistent-file-system" title="Permalink to this headline"></a></h2>
+
+<p>A filesystem service can be configured in your <em>manifest.yml</em> file:</p>
+
+<pre>
+  <code>services:
+    mydata: filesystem
+</code>
+</pre>
+
+<p>You can also use the <code>helion create-service</code>
+command:</p>
+
+<pre>
+  <code>$ helion create-service filesystem mydata
+    Creating Service: OK
+
+    $ helion services
+
+    =========== Provisioned Services ============
+
+    +----------------+------------+
+    | Name           | Service    |
+    +----------------+------------+
+    | mydata         | filesystem |
+    +----------------+------------+
+</code>
+</pre>
+
+<h2 id="using-a-persistent-file-system">Using A Persistent File System<a href="#using-a-persistent-file-system" title="Permalink to this headline"></a></h2>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>File system service is available during pre-staging and shouldn't need
+to be reconfigured when the application starts.</p>
+
+<p>The filesystem service creates a path which your app can use to store
+and read files.</p>
+
+<p>If there is only one filesystem service, the
+<code>HELION_FILESYSTEM</code> environment variable can be
+used to get the path.</p>
+
+<p>If there is more than one filesystem service,
+<code>HELION_FILESYSTEM</code> is not available. Instead, a
+custom environment variable <code>HELION_FILESYSTEM_*</code>
+will be created based on the name of each filesystem service (with
+hyphens replaced by underscores).</p>
+
+<p>For example, if your <em>manifest.yml</em> file configures the following
+services:</p>
+
+<pre>
+  <code>services:
+    my-data: filesystem
+    plugins: filesystem
+</code>
+</pre>
+
+<p>Two environment variables would be created:
+<code>HELION_FILESYSTEM_MY_DATA</code> and
+<code>HELION_FILESYSTEM_PLUGINS</code>.</p>
+
+<p>This naming scheme can be used in conjunction with the
+<code>HELION_APP_NAME_UPCASE</code> environment variable. For
+example, in an app with the following filesystem service defined:</p>
+
+<pre>
+  <code>services:
+  ${name}-foo: filesystem
+  ${name}-bar: filesystem
+</code>
+</pre>
+
+<p>The filesystem mount point for the "foo" filesystem service can be
+accessed within the container using constructs such as:</p>
+
+<pre>
+  <code>FOO=HELION_FILESYSTEM_${HELION_APP_NAME_UPCASE}_FOO
+mkdir ${!FOO}/myapp
+</code>
+</pre>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>To use declarations like these in
+<a href="../../deploy/manifestyml/index.html#hooks"><em>hooks</em></a>, put them in a
+separate bash script. Brace expansion and grouping cannot be used
+directly in YAML files.</p>
+
+<p><!-- Does this also apply for VCAP services? if so should be rewritten perhaps. 
+Alternatively, `STACKAT0_SERVICES` contains
+information for all services:
+
+    {
+        "plugins": {
+            "dir": "/home/helion/fs/plugins"
+                },
+                "my-data": {
+                        "dir": "/home/helion/fs/my-data"
+                },
+                "mydb": {
+                        "name": "db76e25bc8fc142858653a6cb8c643204",
+                        "hostname": "192.168.0.112",
+                        "host": "192.168.0.112",
+                        "port": 3306,
+                        "user": "u7Fjl8hdb4iNu",
+                        "username": "u7Fjl8hdb4iNu",
+                        "password": "p4XQAhZr8xfHg"
+                }
+        }
+-->
+Since the <a href="../../reference/environment/index.html#environment-variables"><em>environment
+variables</em></a> are
+available during the staging process, it is possible to make use of them
+in the <a href="../../deploy/manifestyml/index.html"><em>manifest.yml</em></a> file to
+configure a filesystem service and create a symlink to it for use by the
+app. (see example below)</p>
+
+<h2 id="example-of-using-a-persistent-file-system">Example of Using A Persistent File System<a href="#example-of-using-a-persistent-file-system" title="Permalink to this headline"></a></h2>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>When linking the file system service to the application, using symlinks
+is strongly recommended.</p>
+
+<p>We will go through how we customized our WordPress installation to use
+the persistent file system. Before you begin, find out where all the
+user generated contents are saved. You may have to make modifications to
+this general approach if your application stores user generated content
+in more than one location. In WordPress, they are stored in wp-content
+folder.</p>
+
+<p>We need to add the following to our manifest.yml:</p>
+
+<pre>
+  <code>services:
+    fs-wp: filesystem
+hooks:
+    post-staging:
+    # create wp-content in the shared filesystem
+    - mkdir -p "$HELION_FILESYSTEM"/wp-content
+
+    # migrate existing wp-content data into the shared filesystem
+    - mv wp-content/* "$HELION_FILESYSTEM"/wp-content
+
+    # remove unused wp-content directories
+    - rm -rf wp-content
+
+    # link to wp-content folder in the shared filesystem
+    - ln -s "$HELION_FILESYSTEM"/wp-content wp-content
+</code>
+</pre>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>When moving files onto the mounted filesystem with a <code>mv</code> hook, you may see an error message similar to:</p>
+
+<pre>
+  <code>mv: failed to preserve ownership for... Permission denied
+</code>
+</pre>
+
+<p>This is a misleading warning, as the files <strong>will</strong> actually be moved with
+the correct permissions and ownership.</p>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Download the<br>Development Platform<br>
+			<a href="../../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show">DOWNLOAD NOW</a>
+		</p>
+	</aside>
+	
+ 
+	<aside class="signup-box">
+		<p class="align-center">
+			Take the Helion Development Platform for a Free Spin<br>
+			<a href="../../../../../helion/devplatform/ALS-developer-trial-quick-start/index.html">Quick Start Developer Trial</a>
+		</p>
+	</aside>
+<!--	
+	<aside class="signup-box">
+		<p class="align-center">Make sure to check out our Developer Portal
+			<a href="https://dev.hpcloud.com">dev.hpcloud.com
+</a><br>
+ 
+		</p>
+	</aside>
+-->	
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/index.html"><span>HP Helion Development Platform Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/install/index.html"><span>Development Platform Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/install/community/index.html"><span>Development Platform Community Edition Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/openstack/update/devplat/101/index.html"><span>Development Platform Commercial 1.0.1 Update</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/appdev/index.html"><span>Application Developer Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/sysadmin/index.html"><span>IT Ops Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/appdev/index.html#sample"><span>Sample Code</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/related-topics/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/deploy/index.html"><span>Application Lifecycle Service Configuration and Deployment</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../admin/index.html"><span>ALS Admin Guide</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/user/services/filesystem/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:26 GMT -->
+</html>

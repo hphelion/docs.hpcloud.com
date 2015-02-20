@@ -1,0 +1,411 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/helion/devplatform/marketplace/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:53:32 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Working with the Marketplace</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../css/combined.css">
+
+	<script src="../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../index.html" class="logo"  ><img src="../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="hp-helion-10-development-platform-the-marketplace-beta">HP Helion 1.0 Development Platform: The Marketplace (Beta)</h1>
+
+<p>The Marketplace, currently in beta, is a repository where teams can download the latest services they need to accelerate development of their applications. In its beta incarnation, the Marketplace has a single application: the Vertica 7 Community Edition.</p>
+
+<p>The following topics explain how to install and deploy an instance of Vertica 7 Community Edition:</p>
+
+<ul><li><a href="#concepts">Marketplace concepts</a></li>
+<li><a href="#prereq">Prerequisites</a></li>
+<li><a href="#install">Installing a package</a></li>
+<li><a href="#create">Deploying an environment</a></li>
+<li><a href="#deploy">Creating a Deployed Instance of an Application</a></li>
+<li><a href="#notes">Deployment Notes</a></li>
+</ul><h2 id="marketplace-concepts"><a name="concepts" id="concepts"></a>Marketplace Concepts</h2>
+
+<p>The Marketplace deploys packages of services and applications to specified environments.</p>
+
+<ul><li>The term <strong>Application</strong> covers both applications and services that can reside in the Marketplace. For the purposes of this documentation, we will use the term Application even though we are deploying a database, which is a service. </li>
+<li><strong>Packages</strong> are zip files that contain instructions for Application deployment.</li>
+<li><strong>Environments</strong> are groups of Applications managed by a single tenant. Applications within a single Environment <em>may</em> be logically related to one another, but do not have to be.  Applications in different Environments are always independent from one another. </li>
+</ul><h2 id="prerequisites"><a name="prereq" id="prereq"></a>Prerequisites</h2>
+
+<p>Install the Marketplace component of the <a href="../install/index.html">HP Helion Development Platform</a> during the Development Platform install process.</p>
+
+<h2 id="installing-a-package"><a name="install" id="install"></a>Installing a Package</h2>
+
+<p>In this example, the package being installed is the Vertica 7 Community Edition package.</p>
+
+<p>Note that you must log out of the Horizon dashboard and then log back in at least once after Marketplace installation before installing any Marketplace packages. This will ensure that Horizon has properly loaded all Marketplace services prior to package installation.</p>
+
+<h3 id="create-a-target-environment"><a name="create" id="create"></a>Create a Target Environment</h3>
+
+<ol><li><p>Log into Horizon and open the <strong>Marketplace</strong> panel under your Project. Click on <strong>Application Catalog</strong>, and then click on the Environments tab.</p>
+
+<p><img src="../../../content/documentation/media/marketplace1.png" /></p></li>
+<li><p>Click the <strong>Create Environment</strong> button.</p>
+
+<p><img src="../../../content/documentation/media/marketplace2.png" /></p></li>
+<li><p>After the environment has been created, your view should look like this:</p>
+
+<p><img src="../../../content/documentation/media/marketplace3.png" /></p></li>
+</ol><h3 id="create-a-deployed-instance-of-an-application"><a name="deploy" id="deploy"></a>Create a Deployed Instance of an Application</h3>
+
+<p>The following section will show how to create an instance of Vertica 7 Community Edition in the environment created above.</p>
+
+<ol><li><p>Log in to the Horizon console and open the <strong>Marketplace</strong> panel under your Project. Click on <strong>Application Catalog</strong> and then click on the <strong>Applications</strong> tab. You will see the Vertica 7 Community Edition package.</p>
+
+<p><img src="../../../content/documentation/media/marketplace4.png" /></p></li>
+<li><p>Click the Add to Env button from within the Vertica 7 Community Edition section. You will see an <strong>Add Application to &lt;selected environment name&gt;</strong> dialog. Agree to the Terms and Conditions, then scroll down to the bottom of the dialog and click on the Next button.</p>
+
+<p><img src="../../../content/documentation/media/marketplace5.png" /></p></li>
+<li><p>The <strong>Add Application to &lt;selected environment&gt;</strong> dialog will come up. Fill out</p>
+
+<ul><li><p><strong>Application name</strong> - can be anything</p></li>
+<li><p><strong>Flavor</strong> for instances, can be:</p>
+
+<ul><li>m1.medium</li>
+<li>m1.large</li>
+<li>m1.xlarge</li>
+</ul></li>
+</ul><ol><li>Select the <strong>image</strong> to use. In this case there is only one image, the Vertica 7 Community Edition (Debian) image. </li>
+<li>Add a keypair if you don't have one already, by selecting the <strong>+</strong> link. If you are adding a keypair, you will be prompted to supply a name and a public key. You can generate a public key in *nix using <a href="../../../../external.html?link=http://linux.die.net/man/1/ssh-keygen">ssh-keygen</a> or Windows® using <a href="../../../../external.html?link=http://the.earth.li/~sgtatham/putty/0.63/htmldoc/Chapter8.html#pubkey-puttygen">puTTYgen</a>. Insert public key text and click the <strong>Import Key Pair</strong> button.</li>
+</ol><p><img src="../../../content/documentation/media/marketplace6.png" /></p></li>
+<li><p>Supply a database name and a password, complying with the on-page instructions and then click the <strong>Next</strong> button.</p>
+
+<p><img src="../../../content/documentation/media/marketplace7.png" /></p></li>
+<li><p>You will be prompted to add the Application you have created to the environment you selected. Click <strong>Create</strong> to continue.</p>
+
+<p><img src="../../../content/documentation/media/marketplace8.png" /></p></li>
+<li><p>You will see that Vertica 7 Community Edition has been installed in the test1 environment. Note that the Environment has <strong>not</strong> been deployed yet. That is the next step.</p>
+
+<p><img src="../../../content/documentation/media/marketplace9.png" /></p></li>
+<li><p>To deploy the environment, click on the  <strong>Deploy This Environment</strong> button. Expect deployment to take between 5 and 10 minutes.</p>
+
+<p><img src="../../../content/documentation/media/marketplace10.png" /></p></li>
+<li><p>When this process has completed, you will see that the Vertica 7 Community Edition is available for consumption. Connection information is given in the <strong>last operation</strong> column.</p>
+
+<p><img src="../../../content/documentation/media/marketplace11.png" /></p></li>
+<li><p>Take the following steps to ensure that your newly deployed instance of Vertica is secure by modifying its default key pair:</p>
+
+<ol><li><p>Log into the instance using the private key you used during database creation.</p>
+
+<pre><code>ssh dbadmin@&lt;ip&gt; -i &lt;path to private key&gt;
+</code></pre></li>
+<li><p>Remove the existing default key from the keys file.</p>
+
+<pre><code>cd ~/.ssh
+grep -v "`cat id_rsa.pub`" authorized_keys &gt; authorized_keys.tmp
+mv authorized_keys.tmp authorized_keys
+chmod 0600 authorized_keys
+rm authorized_keys.tmp
+</code></pre></li>
+<li><p>Remove the existing default key:</p>
+
+<pre><code>rm ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
+</code></pre></li>
+<li><p>Generate a new, unique default key pair:</p>
+
+<pre><code>ssh-keygen -b 2048 -t rsa -f /home/dbadmin/.ssh/id_rsa -q -N ""
+</code></pre></li>
+</ol></li>
+<li><p>You can also implement additional security by modifying the access rules for the security group associated with the environment that the Vertica instance was deployed into. In the example above, the environment name is <strong>Test1</strong>. The associated security group can be accessed from the Horizon panel as follows:</p>
+
+<ol><li>In the Horizon console under <strong>Compute</strong> -&gt; <strong>Access &amp; Security</strong>, go to the <strong>Security Groups</strong> tab.</li>
+<li>Search for a group with the <strong>Test1</strong> string in the group name. Group names are auto-generated to ensure that they are unique.</li>
+<li>Click <strong>Manage Rules</strong>.
+
+<ul><li>To change the access rules for SSH, add a new security group allowing access on port 22 from the IP range you wish to grant access to.</li>
+<li>To allow access to Vertica, add a new rule on port 5433 that specifies the IP range you wish to grant access to. You can then remove the corresponding default rule.</li>
+</ul></li>
+</ol></li>
+</ol><h3 id="deployment-notes"><a name="notes" id="notes"></a>Deployment Notes</h3>
+
+<p>This section discusses some of the details of deployment that you may encounter.</p>
+
+<ol><li>Environments cannot be deployed unless there is at least one Application in the Environment. </li>
+<li>Deploying an Application to an Environment that has already been deployed follows the same flow as above.
+
+<ul><li>In order to instantiate a newly-configured application, re-deploy its Environment.</li>
+<li>When an Environment is re-deployed, all applications it contains will be re-deployed. </li>
+</ul></li>
+<li><p>If a Vertica instance is restarted or power cycled, the Vertica database must be restarted manually once the instance is reachable. This is by design to avoid potential database corruption in the event of a power event. Note that <strong>all</strong> VMs are shut down and then restarted during the Helion upgrade process.</p>
+
+<ol><li>SSH into your instance</li>
+<li><p>Become the dbadmin user:</p>
+
+<pre><code>sudo su - dbadmin
+</code></pre></li>
+<li><p>Run the following command:</p>
+
+<pre><code>admintools -t stop_db --database=DB_NAME --password=DB_PASSWORD
+</code></pre></li>
+</ol></li>
+</ol><hr />
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Download the<br>Development Platform<br>
+			<a href="../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show">DOWNLOAD NOW</a>
+		</p>
+	</aside>
+	
+ 
+	<aside class="signup-box">
+		<p class="align-center">
+			Take the Helion Development Platform for a Free Spin<br>
+			<a href="../ALS-developer-trial-quick-start/index.html">Quick Start Developer Trial</a>
+		</p>
+	</aside>
+<!--	
+	<aside class="signup-box">
+		<p class="align-center">Make sure to check out our Developer Portal
+			<a href="https://dev.hpcloud.com">dev.hpcloud.com
+</a><br>
+ 
+		</p>
+	</aside>
+-->	
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../index.html"><span>HP Helion Development Platform Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../install/index.html"><span>Development Platform Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../install/community/index.html"><span>Development Platform Community Edition Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../openstack/update/devplat/101/index.html"><span>Development Platform Commercial 1.0.1 Update</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../appdev/index.html"><span>Application Developer Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../sysadmin/index.html"><span>IT Ops Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../appdev/index.html#sample"><span>Sample Code</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../related-topics/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../deploy/index.html"><span>Application Lifecycle Service Configuration and Deployment</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../als/v1/admin/index.html"><span>ALS Admin Guide</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/helion/devplatform/marketplace/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:53:33 GMT -->
+</html>

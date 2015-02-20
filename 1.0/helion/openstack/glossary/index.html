@@ -1,0 +1,759 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/glossary/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:52:10 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion OpenStack&#174; Glossary</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../css/combined.css">
+
+	<script src="../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../index.html" class="logo"  ><img src="../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<script>
+<![CDATA[
+
+function PageRefresh {
+onLoad="window.refresh"
+}
+
+PageRefresh();
+
+]]>
+</script><!--
+<p style="font-size: small;"> <a href="/helion/openstack/related-links/">&#9664; PREV | <a href="/helion/openstack/">&#9650; UP</a> | <a href="/helion/openstack/eula/"> NEXT &#9654; </a></p>
+--><h1 id="hp-helion-openstack-glossary">HP Helion OpenStack® Glossary</h1>
+
+<p>Use this glossary to get definitions of terms used throughout the HP Helion OpenStack-documentation.</p>
+
+<p>For more terms, see the <a href="../../../../external.html?link=http://docs.openstack.org/glossary/content/glossary.html">OpenStack glossary</a> also.</p>
+
+<p><a href="#a">A</a> | <a href="#b">B</a> | <a href="#c">C</a> | <a href="#d">D</a> | <a href="#e">E</a> | <a href="#f">F</a> | <a href="#g">G</a> | <a href="#h">H</a> | <a href="#i">I</a> | <a href="#j">J</a> | <a href="#k">K</a> | <a href="#l">L</a> | <a href="#m">M</a> | 
+<a href="#n">N</a> | <a href="#o">O</a> | <a href="#p">P</a> | <a href="#q">Q</a> | <a href="#r">R</a> | <a href="#s">S</a> | <a href="#t">T</a> | <a href="#u">U</a> | <a href="#v">V</a> | <a href="#w">W</a> | <a href="#x">X</a> | <a href="#y">Y</a> | <a href="#z">Z</a></p>
+
+<h2 id="a">A</h2>
+
+<h3 id="abstraction-layer">Abstraction layer<a name="AbstractionLayer" id="AbstractionLayer"></a></h3>
+
+<p>A coding layer that provides an intermediary between a programmer and a more complex underlying base code set.  The abstraction layer simplifies the complexities of the underlying <a href="#REST">REST</a> API and JSON/XML formatting of the <a href="#RequestAbstraction">request abstraction</a> layer code.</p>
+
+<h3 id="access-control-list-acl">Access control list (ACL)</h3>
+
+<p>A list of permissions attached to an object.</p>
+
+<h3 id="admin-network">Admin Network</h3>
+
+<p>Used for administrative functions such as TFTP booting, DHCP assignments, KVM, system logs, backups, and other monitoring.</p>
+
+<!-- JS: Not in Core and probably not in Enterprise edition:
+###Administration Dashboard###
+The HP Helion OpenStack Administration Dashboard enables administrators to manage their cloud infrastructure. Tasks include launching instances, 
+uploading images, creating resource pools, and using designer tools to create topologies. Hosted (preferably) on the Controller node. See also [Operational Dashboard](#Operational-Dashboard), which is 
+used for the initial cloud installation, setup, configuration, and creation, before starting the Administration Dashboard. 
+-->
+
+<h3 id="allocation">Allocation</h3>
+
+<p>The provisioning of cloud resources such as VM placement in data centers, network virtualization, and network routing.</p>
+
+<h3 id="api">API<a name="API" id="API"></a></h3>
+
+<p>An Application Programming Interface (API) is a set of routines, protocols, and tools for building software applications. An API makes it easier to develop a program by providing all the building blocks. A programmer then puts the blocks together. HP Helion OpenStack provides several <a href="#REST">REST</a> APIs that enable programmers to write applications consistent with the operating environment.</p>
+
+<h3 id="api-key">API key</h3>
+
+<p>An API-based key used for <a href="#Auth">authentication</a>, such as a <a href="#Token">token</a>.</p>
+
+<h3 id="authentication">Authentication<a name="Auth" id="Auth"></a></h3>
+
+<p>A service that confirms the identity of a user. The Identity Service confirms that each incoming request is made by the user who claims to be making the call by validating a set of claims that the user is making. These claims are initially in the form of a set of credentials such as username/password pairs or user access keys. After initial confirmation, the Identity Service issues the user a <a href="#Token">token</a> that a user can provide when making subsequent requests.</p>
+
+<h3 id="authentication-token">Authentication Token<a name="AuthToken" id="AuthToken"></a></h3>
+
+<p>A string that an authenticated user must present for subsequent requests to other services.</p>
+
+<h2 id="b">B</h2>
+
+<!-- JS: replaced by TripleO install framework:
+###Barclamp###
+Also known as an install module, defines the capability of a service or role to apply to individual hosts or a set of hosts. To deploy a barclamp, a proposal is created.
+-->
+
+<h3 id="block-storage">Block storage</h3>
+
+<p>Information stored in raw form, with no consideration as to the type of information. See also <a href="#Volume">Volume Operations</a>.</p>
+
+<h3 id="bootable-image">Bootable Image</h3>
+
+<p><em>See</em> <a href="#VolumeBootable">Volume (bootable)</a>.</p>
+
+<h3 id="broad-network-access">Broad network access</h3>
+
+<p>A network architecture where cloud capabilities are available over the network and are accessed through standard mechanisms that promote the use by heterogenous thin-client or thick-client platforms.  Examples: mobile phones, tablets, laptops and workstations.</p>
+
+<h2 id="c">C</h2>
+
+<h3 id="ceilometer">Ceilometer<a name="Ceilometer" id="Ceilometer"></a></h3>
+
+<p>See <a href="#Reporting">Telemetry and Reporting</a></p>
+
+<h3 id="cinder">Cinder<a name="Cinder" id="Cinder"></a></h3>
+
+<p>See <a href="#Volume">Volume Operations</a></p>
+
+<h3 id="cli">CLI</h3>
+
+<p><strong>C</strong>ommand-<strong>L</strong>ine <strong>I</strong>nterface.</p>
+
+<h3 id="cloud-computing">Cloud computing</h3>
+
+<p>A model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources.  These resources include networks, servers, storage, applications and services.</p>
+
+<p>One advantage of cloud computing is that the resources can be provisioned or released rapidly, with minimal management effort or service provider interaction.</p>
+
+<h3 id="compute">Compute<a name="Compute" id="Compute"></a></h3>
+
+<p>The HP OpenStack service that manages the hypervisors and virtual machines in your environment. Compute provides a cloud computing fabric controller, the main part of an Infrastructure as a Service (IaaS) platform. Also known as <a href="#Nova">Nova</a>.</p>
+
+<h3 id="compute-node">Compute Node</h3>
+
+<p>The machine that hosts cloud virtual machine instances using any supported hypervisor with OpenStack. In the current release,  HP Helion OpenStack supports KVM (qemu-kvm) and VMware (ESXi) as hypervisors. The compute node hosts OpenStack services called Nova-compute and Neutron l2 agent. Multiple compute nodes can be created to expand cloud capacity.</p>
+
+<h3 id="credentials">Credentials</h3>
+
+<p>Data that belongs to, is owned by, and generally only known by a user. A user can present this information to verify identity. Associated with the <a href="#Identity">Identity service</a>.</p>
+
+<h2 id="d">D</h2>
+
+<h3 id="deprovisioning">Deprovisioning</h3>
+
+<p>Deallocating a cloud resource. See also <a href="#Provisioning">Provisioning</a>.</p>
+
+<h3 id="domain-name">Domain Name</h3>
+
+<p>An identification string that defines a realm of administrative autonomy, authority, or control on the Internet.</p>
+
+<h3 id="domain-name-systyem-dns">Domain Name Systyem (DNS)<a name="DNS" id="DNS"></a></h3>
+
+<p>A service that provides look up of the actual internet address (IP address) of domains when a domain name is entered.</p>
+
+<h3 id="dns-server">DNS Server</h3>
+
+<p>A server that stores the <a href="#DNS">DNS records</a> for a domain name, such as address (A or AAAA) records, name server (NS) records, and mail exchanger (MX) records.</p>
+
+<h2 id="e">E</h2>
+
+<h3 id="endpoint">Endpoint</h3>
+
+<p>A network-accessible address, usually described by URL, where a service may be accessed. Associated with the <a href="#Identity">Identity service</a>.</p>
+
+<!-- Not in Commercial beta
+###Eve###
+ A HP Helion OpenStack composite provisioning service that uses a topology design and profile to create VMs, volumes, and network segments as described in the topology. Eve uses the Graffiti service to determine the resource pool existence, traits, and user identity mapping. -->
+
+<h2 id="f">F</h2>
+
+<h3 id="flat-networking">Flat networking</h3>
+
+<p>A network that uses Ethernet adapters configured as bridges to allow the network traffic to transit between the various baremetal nodes. All stations can reach one another without going through an intermediary hardware device, such as a router. and does not require a switch that does VLAN tagging.</p>
+
+<p>A flat network can be set up with a single adapter on the baremetal host.</p>
+
+<h3 id="flavor">Flavor<a name="Flavor" id="Flavor"></a></h3>
+
+<p>The combination of the compute, memory, and storage capacity of a baremetal node defines a flavor.</p>
+
+<h3 id="floating-ip-address">Floating IP address</h3>
+
+<p>An on-demand, allocatable public IP address on a network. You can allocate a number of floating IP addresses up to the quota limit, and then assign them to <a href="#Instance">instances</a>.</p>
+
+<!-- Not in Commercial beta
+###Focus###
+ The  HP Helion OpenStack Topology Document Repository Service, which is used to discover, register, version, and retrieve the document types needed to describe TOSCA-based infrastructure topologies while provisioning a cloud. See [TOSCA](#TOSCA). -->
+
+<h3 id="fully-qualified-domain-name-fqdn">Fully Qualified Domain Name (FQDN)</h3>
+
+<p>The complete domain name for a specific computer, or host, on the Internet. The FQDN consists of two parts: the hostname and the domain name.</p>
+
+<h2 id="g">G</h2>
+
+<h3 id="glance">Glance<a name="Glance" id="Glance"></a></h3>
+
+<p>Glance is the Helion OpenStack imaging service and includes discovery, registering, and the retrieval of virtual machine images.</p>
+
+<!-- Not in Commercial beta
+###Graffiti###
+The HP Helion OpenStack Resource Pool Registry and Capability Tagging Service, providing a dictionary of the "capabilities" of all the resources in a cloud environment; a searchable directory to find cloud resources based on their capabilities; the mechanism for dynamic binding, allowing you to describe requirements rather than concrete bindings; and the base concepts of requirements and capabilities within TOSCA. -->
+
+<h2 id="h">H</h2>
+
+<h3 id="helion-distribution-network-hdn">Helion Distribution Network (HDN)</h3>
+
+<p>A catalog-based HP Helion OpenStack service that allows off-the-shelf content (like workloads, images, and patches) to be imported into your deployed cloud. To access HDN, see the Updates &amp; Extensions panel in the  HP Helion OpenStack user interface. You can import content from the HDN portal or from a local folder.</p>
+
+<h3 id="heat">Heat</h3>
+
+<p>See <a href="#Orchestration">Orchestration</a>.</p>
+
+<h3 id="horizon">Horizon</h3>
+
+<p>The Horizon service is the basis of the HP Helion OpenStack dashboards.</p>
+
+<h3 id="hybrid-cloud">Hybrid cloud</h3>
+
+<p>A cloud infrastructure that is a composition of two or more distinct cloud infrastructures (private or public) which remain unique entities but are bound together by standardized or proprietary technology that enables data and application portability such as cloud bursting for load balancing between clouds.</p>
+
+<h3 id="hypervisor">Hypervisor<a name="Hyper" id="Hyper"></a></h3>
+
+<p>A piece of computer software, firmware, or hardware that creates and runs virtual machines. Each virtual machine appears to have the host's processor, memory, and other resources all to itself.</p>
+
+<h2 id="i">I</h2>
+
+<h3 id="identity-service">Identity Service<a name="Identity" id="Identity"></a></h3>
+
+<p>The HP OpenStack service that performs identity management (domains, projects and users), generates access tokens, and provides service catalog functionality.</p>
+
+<h3 id="image">Image<a name="Image" id="Image"></a></h3>
+
+<p>1) An installable release package of a program, application, or software.</p>
+
+<p>2) A copy of a virtual machine including the operating system information, machine state, and application configurations.
+See also <a href="#ImagePriv">Private image</a> and <a href="#ImagePub">Public image</a>.</p>
+
+<h3 id="image-file">Image file<a name="ImageFile" id="ImageFile"></a></h3>
+
+<p>A virtual disk <a href="#Image">image</a> file that the Compute service can load up to create a virtual machine.</p>
+
+<h3 id="image-management">Image Management<a name="Image" id="Image"></a></h3>
+
+<p>The HP OpenStack service that discovers, registers, and retrieves virtual machine (VM) images. Also known as Glance.</p>
+
+<h3 id="image-metadata">Image metadata<a name="ImageMeta" id="ImageMeta"></a></h3>
+
+<p>Metadata information about <a href="#Image">images</a>. For example: metadata includes the image identifier, name, status, size, disk format, container format, owner, and custom properties. Metadata is data that describes other data.</p>
+
+<h3 id="installer-system">Installer System<a name="Installer" id="Installer"></a></h3>
+
+<p>The machine where HP OpenStack Helion installation is initiated. This is the same machine as the <a href="#KVMhost">KVM host</a> and is called the <a href="#Seed-Cloud">seed VM</a>.</p>
+
+<h3 id="instance">Instance<a name="Instance" id="Instance"></a></h3>
+
+<p>A virtual machine that runs inside the cloud.</p>
+
+<h3 id="intelligent-platform-management-interface-ipmi">Intelligent Platform Management Interface (IPMI)<a name="IPMI" id="IPMI"></a></h3>
+
+<p>A standardized computer interface used by administrators for out-of-band management of computers and monitoring of their operation. IPMI manages a computer that is powered off or otherwise unresponsive by using a network connection to the hardware rather than to an operating system or login shell.</p>
+
+<h3 id="ipmi-network">IPMI Network</h3>
+
+<p>The network that connects the baremetal host to the Intelligent Platform Management Interface (IPMI).</p>
+
+<h3 id="ironic">Ironic</h3>
+
+<p>The HP OpenStack project to provision <a href="#Baremetal">baremetal</a> nodes by leveraging common technologies such as PXE boot and <a href="#IPMI">IPMI</a> to cover a wide range of hardware. This project also supports pluggable drivers to allow adding vendor-specific functionality.</p>
+
+<h2 id="j">J</h2>
+
+<h2 id="k">K</h2>
+
+<h3 id="kernel-based-virtual-machine-kvm">Kernel-based Virtual Machine (KVM)<a name="KVM" id="KVM"></a></h3>
+
+<p>A full virtualization solution for Linux that enables multiple virtual machines. See also <a href="#KVMhyp">KVM Hypervisor</a> and <a href="#KVMhost">KVM Host</a>.</p>
+
+<h3 id="key-pair">Key pair</h3>
+
+<p>A pair of key values used for verification purposes; generally one key value is private, and the other public (i.e. user-owned).</p>
+
+<h3 id="keystone">Keystone</h3>
+
+<p>See <a href="#Identity">Identity Management</a></p>
+
+<h3 id="kvm-hypervisor">KVM Hypervisor<a name="KVMhyp" id="KVMhyp"></a></h3>
+
+<p>The virtualization layer in <a href="#KVM">Kernel-based Virtual Machine or KVM</a>. The KVM hypervisor is a default hypervisor supported by the HP OpenStack <a href="#Compute">Compute service</a>.</p>
+
+<h3 id="kvm-host">KVM Host<a name="KVMhost" id="KVMhost"></a></h3>
+
+<p>The machine which runs the <a href="#KVM">Kernel-based Virtual Machine or KVM</a>.  This is the same machine as the <a href="#Installer">Installer System</a>.</p>
+
+<h2 id="l">L</h2>
+
+<h2 id="m">M</h2>
+
+<h2 id="n">N</h2>
+
+<h3 id="networking">Networking<a name="Networking" id="Networking"></a></h3>
+
+<p>The OpenStack Network Connectivity Service used to create and provision virtual networks. Also known as <a href="#Neutron">Neutron</a></p>
+
+<h3 id="neutron">Neutron<a name="Neutron" id="Neutron"></a></h3>
+
+<p>See <a href="#Networking">Networking</a>.</p>
+
+<h3 id="node">Node</h3>
+
+<p>A computing resource in a network. In other publications, sometimes called a machine.</p>
+
+<h3 id="nova">Nova<a name="Nova" id="Nova"></a></h3>
+
+<p>See <a href="#Compute">Compute</a>.</p>
+
+<h2 id="o">O</h2>
+
+<h3 id="object-operations">Object Operations<a name="Object" id="Object"></a></h3>
+
+<p>The HP OpenStack service used to store and retrieve large amounts of data in virtual containers.</p>
+
+<h3 id="on-demand-self-service">On-demand self service</h3>
+
+<p>A service where a consumer can unilaterally provision computing capabilities, such as server time and network storage, as needed, automatically, without requiring human interaction with each service provider.</p>
+
+<h3 id="openstack">OpenStack®</h3>
+
+<p>An open-source cloud computing operating system.</p>
+
+<!-- JS: Not in Core, I think. 
+###Operational Dashboard<a name="Operational-Dashboard"></a>
+The HP Helion OpenStack Operational Dashboard is used to install, set up, configure, and stand up a cloud environment See also [Administration Dashboard](#Administration-Dashboard), which is 
+used to manage the cloud that you created. 
+-->
+
+<h3 id="overcloud">Overcloud<a name="Overcloud" id="Overcloud"></a></h3>
+
+<p>An image that is deployed onto physical machines by the <a href="#Undercloud">Undercloud</a>. Overcloud images have specialized roles: Management, Object Operations, and Compute. See also <a href="#Seed-Cloud">Seed VM</a> and 
+<a href="#Undercloud">Undercloud</a>.</p>
+
+<h3 id="orchestration">Orchestration<a name="Orchestration" id="Orchestration"></a></h3>
+
+<p>The HP Helion OpenStack service that provides a template-based method for describing a cloud application. A template is a YAML file that describes the infrastructure for a cloud application. Templates contain vendor-independent specifications for launching a particular service or application. Also known as <a href="#Heat">Heat</a>.</p>
+
+<h2 id="p">P</h2>
+
+<h3 id="preboot-execution-environment-pxe-booting">Preboot Execution Environment (PXE) Booting<a name="pxe" id="pxe"></a></h3>
+
+<p>One of the components of <a href="#http://www.intel.com/design/archives/wfm/">Intel's Wired for Management</a> specification. PXE allows a machine to boot from a machine on a network prior to booting the operating system on the local hard drive. For more, start on this <a href="#http://en.wikipedia.org/wiki/Preboot_Execution_Environment">Wikipedia.org page</a>.</p>
+
+<h3 id="private-cloud">Private cloud</h3>
+
+<p>A cloud infrastructure that is provisioned for exclusive use by a single organization comprising multiple consumers, such as business units.  The private cloud may be owned, managed and operated by the organization, a third party. or some combination, and it may exist on or off the owner's premises.</p>
+
+<h3 id="private-image">Private image<a name="ImagePriv" id="ImagePriv"></a></h3>
+
+<p>An <a href="#Image">image</a> that is limited to all users in a <a href="#Project">project</a>.</p>
+
+<h3 id="project">Project<a name="Project" id="Project"></a></h3>
+
+<p>A grouping that allows users within each group to view and use the same set of resources. Associated with the <a href="#Identity">Identity service</a>. Also known as Tenant.</p>
+
+<h3 id="provisioning">Provisioning<a name="Provisioning" id="Provisioning"></a></h3>
+
+<p>The allocation, auditing, and monitoring of cloud resources to users of those resources.</p>
+
+<h3 id="public-cloud">Public cloud</h3>
+
+<p>A cloud infrastructure that is open use by the general public.  A public cloud may be owned, managed and operated by a business, an academic entity, a government organization, or some combination of enterprises.</p>
+
+<h3 id="public-images">Public images<a name="ImagePub" id="ImagePub"></a></h3>
+
+<p>An <a href="#Image">image</a> that is available to all users across all projects in a domain.</p>
+
+<h3 id="public-network">Public network</h3>
+
+<p>Used for connecting devices that are external to the cloud infrastructure.</p>
+
+<h3 id="pxe">PXE</h3>
+
+<p><em>See</em> <a href="#pxe">Preboot Execution Environment</a>.</p>
+
+<h2 id="q">Q</h2>
+
+<h2 id="r">R</h2>
+
+<h3 id="rapid-elasticity">Rapid elasticity<a name="RapidE" id="RapidE"></a></h3>
+
+<p>The ability to scale cloud resources rapidly outward and inward commensurate with demand. To the consumer, these capabilities available for provisioning often appear to be unlimited and can be appropriated in any quantity at any time.</p>
+
+<h3 id="reporting">Reporting</h3>
+
+<p>See <a href="#Reporting">Telemetry and Reporting</a>.</p>
+
+<h3 id="resource-pooling">Resource pooling<a name="Pooling" id="Pooling"></a></h3>
+
+<p>An attribute of cloud computing where computing resources are pooled to serve multiple consumers using a multi-tenant model. Different physical and virtual resources are dynamically assigned and reassigned according to consumer demand.</p>
+
+<h3 id="rest">REST<a name="REST" id="REST"></a></h3>
+
+<p>A model for providing web services of HTTP. Stands for Representational State Transfer.</p>
+
+<h3 id="request-abstraction">Request Abstraction<a name="RequestAbstraction" id="RequestAbstraction"></a></h3>
+
+<p>A coding layer that provides programming-language-specific access to the underlying core code base REST API HTTP calls.</p>
+
+<p>For example, instead of including a call to the REST API by using HTTP <strong>verb</strong> (GET), path (/flavors), format (format=json), 
+and the other HTTP attributes, using the request layer you can simplify the call to <code>list_flavors()</code> (the specific call depends on the 
+details of your specific request layer syntax).  The request layer handles all HTTP request and response parsing and exception handling. Also known as the <strong>request layer</strong>.</p>
+
+<h3 id="role">Role<a name="Role" id="Role"></a></h3>
+
+<p>A personality that a user assumes when performing a specific set of operations. A role includes a set of rights and privileges; a user assuming that role inherits these permissions. Associated with the <a href="#Identity">Identity service</a>.</p>
+
+<h3 id="router-ip">Router IP</h3>
+
+<p>IP Address of the device that passes network traffic between two different IP addresses as well as subnets.</p>
+
+<h2 id="s">S</h2>
+
+<h3 id="seed-vm">Seed VM<a name="Seed-Cloud" id="Seed-Cloud"></a></h3>
+
+<p>A bootable image that is deployed into a virtual machine (VM). The seed VM is a <a href="#KVM">Kernel-based Virtual Machine</a>. See also <a href="#Undercloud">undercloud</a> and <a href="#Overcloud">overcloud</a>.</p>
+
+<h3 id="server">Server<a name="Server" id="Server"></a></h3>
+
+<p>A compute instance that is created from a <a href="#Flavor">flavor</a> combined with an <a href="#Image">image</a>.</p>
+
+<h3 id="swift">Swift<a name="Swift" id="Swift"></a></h3>
+
+<p>See <a href="#Object">Object Operations</a>.</p>
+
+<h2 id="t">T</h2>
+
+<h3 id="telemetry-and-reporting">Telemetry and Reporting<a name="Reporting" id="Reporting"></a></h3>
+
+<p>The HP Helion OpenStack service that enables a single infrastructure to collect measurements within your cloud environment. Also known as <a href="#Ceilometer">Ceilometer</a>.</p>
+
+<h3 id="tenant">Tenant<a name="Tenant" id="Tenant"></a></h3>
+
+<p>See <a href="#Project">Project</a>.</p>
+
+<h3 id="tenant-id">Tenant ID<a name="TenantID" id="TenantID"></a></h3>
+
+<p>An ID linking one or more accounts to one or more subscribed services. APIs and Bindings often require a Tenant ID in addition to authentication information.</p>
+
+<h3 id="token">Token<a name="Token" id="Token"></a></h3>
+
+<p>An arbitrary bit of text that is used to access resources. Each token has a scope that describes the resources are accessible with the token. Associated with the <a href="#Identity">Identity service</a>.</p>
+
+<h3 id="tripleo">TripleO<a name="TripleO" id="TripleO"></a></h3>
+
+<p>A program aimed at installing, upgrading and operating OpenStack clouds using its own cloud facilities as the foundations; it builds on Nova, Neutron and Heat to automate fleet management at data center scale or scaled down to as few as two machines.</p>
+
+<h2 id="u">U</h2>
+
+<h3 id="undercloud">Undercloud<a name="Undercloud" id="Undercloud"></a></h3>
+
+<p>An image that is deployed by the <a href="#Seed-Cloud">seed VM</a> onto a single physical machine. See also <a href="#Overcloud">overcloud</a>.</p>
+
+<h3 id="user">User</h3>
+
+<p>A digital representation of a person who uses the cloud. Users are associated with <a href="#Projects">projects</a> based on <a href="#Role">roles</a> assigned to them with that tenant. Associated with the <a href="#Identity">Identity service</a>.</p>
+
+<h2 id="v">V</h2>
+
+<h3 id="virtual-local-area-network-vlan">Virtual Local Area Network (VLAN)</h3>
+
+<p>An architecture where devices appear to be physically connected.</p>
+
+<h3 id="virtual-cloud-networking-vcn">Virtual Cloud Networking (VCN)</h3>
+
+<p>Virtual Cloud Networking (VCN) is an enhanced OpenStack Networking service (Neutron) that delivers network virtualization enabled by software-defined networking (SDN). SDN orchestrates the entire data canter infrastructure.</p>
+
+<h3 id="virtual-extensible-lan-vxlan">Virtual Extensible LAN (VxLAN)</h3>
+
+<p>A network virtualization technology that addresses the scalability problems associated with large cloud computing deployments. It uses a VLAN-like encapsulation technique to encapsulate MAC-based OSI layer 2 Ethernet frames within layer 3 UDP packets.</p>
+
+<h3 id="virtual-storage-appliance-vsa">Virtual Storage Appliance (VSA)<a name="VSA" id="VSA"></a></h3>
+
+<p>A virtual storage appliance (VSA) is a storage controller that runs on a virtual machine (VM) to create shared storage without the cost of additional hardware. See also <a href="#VSAcluster">VSA cluster</a>.</p>
+
+<h3 id="vmware-esxi-hypervisor">VMWare ESXi hypervisor</h3>
+
+<p>A <a href="#Baremetal">baremetal</a> <a href="#Hyper">hypervisor</a> that installs directly on top of your physical machine and partitions the machine into multiple virtual machines.</p>
+
+<h3 id="volume-bootable">Volume (bootable)<a name="VolumeBootable" id="VolumeBootable"></a></h3>
+
+<p>A bootable machine previously saved by a user.</p>
+
+<h3 id="volume-operations">Volume Operations<a name="Volume" id="Volume"></a></h3>
+
+<p>The HP OpenStack service that provides volume management in cloud environments. Also known as <a href="#Cinder">Cinder</a>.</p>
+
+<h3 id="vsa-cluster">VSA cluster<a name="VSAcluster" id="VSAcluster"></a></h3>
+
+<p>An architecture that includes multiple hosts and provides shared datastores that are connected to all hosts in the datacenter. See also <a href="#VSA">Virtual Storage Appliance</a>.</p>
+
+<h2 id="w">W</h2>
+
+<h2 id="x">X</h2>
+
+<h2 id="y">Y</h2>
+
+<h2 id="z">Z</h2>
+
+<p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<hr />
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../index.html"><span>HP Helion OpenStack Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../release-notes/101/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../faq/index.html"><span>FAQ</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../technical-overview/index.html"><span>Technical Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../services/overview/index.html"><span>Services Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../support-matrix/index.html"><span>Support Matrix</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../install/overview/index.html"><span>Installation Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../install/security/index.html"><span>Network Security</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../backup.restore/index.html"><span>Back Up and Restore</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../services/troubleshooting/index.html"><span>Troubleshooting</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../related-links/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+        
+      
+      <li>
+        <a class="highlighted" href="index.html"><span>Glossary</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/glossary/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:52:10 GMT -->
+</html>

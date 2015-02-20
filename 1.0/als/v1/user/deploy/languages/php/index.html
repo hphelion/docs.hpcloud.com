@@ -1,0 +1,466 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/user/deploy/languages/php/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:47 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Developing in PHP</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../../../css/combined.css">
+
+	<script src="../../../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../../../index.html" class="logo"  ><img src="../../../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="hp-helion-development-platform-developing-in-php">HP Helion Development Platform: Developing In PHP</h1>
+
+<p>Whether you're deploying an application to the HP Helion Development Platform, a
+Cloud Foundry based Platform as a Service (PaaS), or writing applications that take
+advantage of HP Helion OpenStack® to manage infrastructure or software services, tools
+to enable successful development are available in PHP.</p>
+
+<p>For more information on working with object storage, 
+see the <a href="../../../../../../helion/openstack/services/object/overview/index.html">HP Helion OpenStack® Object Storage Service Overview</a>.</p>
+
+<h2 id="application-lifecycle-services">Application Lifecycle Services</h2>
+
+<p>Application Lifecycle Service (ALS) provides a means to execute PHP applications on a managed platform, controlling application lifecycle through a PaaS tier. Deploying
+applications to this platform is as easy as adding details to a YAML configuration file and using
+a console application to push the application to ALS.
+At its simplest form, the configuration file <em>manifest.yml</em>, which is located at the root of a project, 
+would look like:</p>
+
+<div class="highlight-none"><div class="highlight"><pre>name: php-web-app
+framework:
+    type: php
+</pre></div>
+</div>
+
+<p>This will set the ALS framework type for a PHP web application.</p>
+
+<p>To create a worker non-http application set the web process to <strong>null</strong> (~) and specify
+the command to <strong>run</strong>. For example:</p>
+
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">php-app</span>
+<span class="l-Scalar-Plain">framework</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">php</span>
+<span class="l-Scalar-Plain">command</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">php worker.php</span>
+<span class="l-Scalar-Plain">processes</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">web</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+</pre></div>
+</div>
+
+<p>Management of the deployed application and its services happens through a web application or
+a console application. To learn more see the <a href="als/v1/user/deploy/manifestyml/index.html">manifest.yml</a> reference.</p>
+
+<h2 id="deployment">Deployment<a href="#deployment" title="Permalink to this headline"></a></h2>
+
+<p>You will need at least two files to deploy a PHP app on Application Lifecycle Service:
+<em>index.php</em>, and <em>manifest.yml</em>.</p>
+
+<p>The <em>manifest.yml</em> must specify <strong>php</strong> as the framework type:</p>
+
+<pre>
+  <code>framework:
+        type: php
+</code>
+</pre>
+
+<p>For more information, see the <a href="als/v1/user/deploy/manifestyml/index.html">manifest.yml</a> reference.</p>
+
+<h2 id="application-url">Application URL<a href="#application-url" title="Permalink to this headline"></a></h2>
+
+<p>Some applications require the user to specify the APP_URL. Below is an
+example on how to obtain the correct urls:</p>
+
+<pre>
+  <code>$appinfo = getenv("VCAP_APPLICATION");
+$appinfo_json = json_decode($appinfo,true);
+$admin = $appinfo_json['uris'][0];
+</code>
+</pre>
+
+<h2 id="worker-applications">Worker Applications<a href="#worker-applications" title="Permalink to this headline"></a></h2>
+
+<p>Non-HTTP apps that run as an Application Lifecycle Service application under the control of
+the Health Manager.</p>
+
+<p>To deploy worker applications, you need to use the
+<a href="../../manifestyml/index.html#command"><em>command</em></a> key and set the
+<a href="als/v1/user/deploy/manifestyml/index.html#web"><em>processes: web</em></a>
+key to Null ("\~").</p>
+
+<h3 id="example">Example<a href="#example" title="Permalink to this headline"></a></h3>
+
+<pre>
+  <code>name: php-app
+framework: php
+command: php worker.php
+processes:
+  web: ~
+</code>
+</pre>
+
+<h2 id="database-services">Database Services<a href="#database-services" title="Permalink to this headline"></a></h2>
+
+<h3 id="database-url">
+  <a href="../../../services/data-services/index.html#database-url/">DATABASE_URL</a>
+</h3>
+
+<p>Authentication details for your configured database services can be
+found in the <strong>$_SERVER</strong> variable, under 
+<strong>DATABASE_URL</strong>. Here is a sample for retrieving the correct credentials:</p>
+
+<pre>
+  <code>&lt;?php
+    $url_parts = parse_url($_SERVER['DATABASE_URL']);
+    $db_name = substr( $url_parts['path'], 1 );
+    $db_connection_string = $url_parts['host'] . ':' . $url_parts['port'];
+
+    // ** MySQL settings from resource descriptor ** //
+    echo $db_name;
+    echo $url_parts['user'];
+    echo $url_parts['pass'];
+    echo $url_parts['host'];
+    echo $url_parts['port'];
+?&gt;
+</code>
+</pre>
+
+<h3 id="vcap-services">
+  <a href="../../../services/data-services/index.html#vcap-services/">VCAP_SERVICES</a>
+</h3>
+
+<pre>
+  <code>&lt;?php
+    $services = getenv("VCAP_SERVICES");
+    $services_json = json_decode($services,true);
+    $mysql_config = $services_json["mysql"][0]["credentials"];
+
+    // ** MySQL settings from resource descriptor ** //
+    echo $mysql_config["name"];
+    echo $mysql_config["user"];
+    echo $mysql_config["password"];
+    echo $mysql_config["hostname"];
+    echo $mysql_config["port"];
+    );
+?&gt;
+</code>
+</pre>
+
+<h2 id="phpini">PHP.ini<a href="#php-ini" title="Permalink to this headline"></a></h2>
+
+<p>Additional PHP ini files will be loaded from the
+<code>$HELION_APP_ROOT/apache/php/</code> directory. Refer to
+the example below for more information.</p>
+
+<h2 id="document-root-access">Document Root Access<a href="#document-root-access" title="Permalink to this headline"></a></h2>
+
+<p>If your document root (the location of the main <em>index.php</em> file) is the
+main application directory, the information stored in 
+<em>manifest.yml</em> is exposed to the browser.</p>
+
+<p>To prevent exposing this information, you can use an <em>.htaccess</em> file in
+the document root directory with the following rule:</p>
+
+<pre>
+  <code>&lt;filesmatch "^(manifest)\.yml$"&gt;
+  order allow,deny
+  deny from all
+&lt;/filesmatch&gt;
+</code>
+</pre>
+
+<p>Alternatively, move your application into a subdirectory (e.g. move
+<em>index.php</em> to <em>www/index.php</em>) and explicitly set your document-root in
+<em>manifest.yml</em>:</p>
+
+<pre>
+  <code>framework:
+  document-root: www
+</code>
+</pre>
+
+<p>Using the <em>.htaccess</em> file will generate an "HTTP 403 Forbidden" error
+if a user tries to access the denied files. Changing the document-root
+will generate an "HTTP 404 Not Found" error instead.</p>
+
+<p>These techniques can be use to hide other files in your application
+source tree which you do not want exposed to end users.</p>
+
+<h2 id="server-name--server-port">SERVER_NAME &amp; SERVER_PORT<a href="#server-name-server-port" title="Permalink to this headline"></a></h2>
+
+<p>Application Lifecycle Service serves web applications port 80 and/or 443 at the router, but
+within the application container Apache will be running on a different
+port. PHP will report this internal IP address and port in the
+SERVER_ADDR and SERVER_PORT Apache environment variables respectively.</p>
+
+<p>If your application makes use of these variables, you may need to adjust
+them by using an <a href="../../../../../../../external.html?link=http://httpd.apache.org/docs/current/howto/htaccess">.htaccess
+file</a> to set
+one or more
+<a href="../../../../../../../external.html?link=http://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule">RewriteRule</a>
+directives to correct the server name or port in URLs.</p>
+
+<h2 id="persistent-sessions-php">Persistent Sessions (PHP)<a href="#persistent-sessions-php" title="Permalink to this headline"></a></h2>
+
+<p>One of the issues with managing a PHP application running multiple
+instances is dealing with user sessions.</p>
+
+<p>If your application uses a <a href="../../../services/filesystem/index.html#persistent-file-system"><em>shared filesystem
+service</em></a>, you
+can store user sessions there. The following <em>manifest.yml</em> snippet
+creates a persistent filesystem service, creates a directory for
+sessions, and writes a PHP config file to set the path to the session
+directory:</p>
+
+<pre>
+  <code>services:
+  ${name}-fs: filesystem
+hooks:
+  post-staging:
+  - mkdir -p "$HELION_FILESYSTEM"/sessions
+  - echo "session.save_path = $HELION_FILESYSTEM/sessions" &gt; "$HELION_APP_ROOT"/apache/php/sessions.ini
+</code>
+</pre>
+
+<p>For better performance, use a
+<a href="../../../services/memcached/index.html#memcached"><em>Memcached</em></a> service for
+session storage instead:</p>
+
+<pre>
+  <code>services:
+  ${name}-cache: memcached
+hooks:
+  post-staging:
+  - echo "session.save_handler = memcached" &gt; "$HELION_APP_ROOT"/apache/php/sessions.ini
+  - echo "session.save_path = $MEMCACHE_URL" &gt;&gt; "HELIONO_APP_ROOT"/apache/php/sessions.ini
+</code>
+</pre>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Download the<br>Development Platform<br>
+			<a href="../../../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show">DOWNLOAD NOW</a>
+		</p>
+	</aside>
+	
+ 
+	<aside class="signup-box">
+		<p class="align-center">
+			Take the Helion Development Platform for a Free Spin<br>
+			<a href="../../../../../../helion/devplatform/ALS-developer-trial-quick-start/index.html">Quick Start Developer Trial</a>
+		</p>
+	</aside>
+<!--	
+	<aside class="signup-box">
+		<p class="align-center">Make sure to check out our Developer Portal
+			<a href="https://dev.hpcloud.com">dev.hpcloud.com
+</a><br>
+ 
+		</p>
+	</aside>
+-->	
+	<aside class="box section-navigation">
+  
+    
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../../helion/openstack/index.html"><span>HP Helion OpenStack</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../../helion/community/index.html"><span>HP Helion OpenStack Community</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../../helion/devplatform/index.html"><span>HP Helion Development Platform</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../../publiccloud/overview/index.html"><span>HP Helion Public Cloud</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../../automation/index.html"><span>HP Cloud Service Automation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../../cloudsystem/index.html"><span>HP CloudSystem</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../../cloudos/index.html"><span>HP Cloud OS (Deprecated)</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/user/deploy/languages/php/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:47 GMT -->
+</html>

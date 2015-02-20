@@ -1,0 +1,5349 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/api/monitoring/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:00:19 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion Public Cloud Monitoring API</title>
+	
+		<meta name="description" content="HP Helion Public Cloud Monitoring API Specifications">
+	
+	
+		<meta name="keywords" content="monitoring, maas">
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../css/combined.css">
+
+	<script src="../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../js/metrics.js"></script> 
+	
+	
+	
+	
+	<!--[if IEMobile 7]><html class="iem7"  lang="en" dir="ltr"><![endif]-->
+<!--[if lte IE 6]><html class="lt-ie9 lt-ie8 lt-ie7"  lang="en" dir="ltr"><![endif]-->
+<!--[if (IE 7)&(!IEMobile)]><html class="lt-ie9 lt-ie8"  lang="en" dir="ltr"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9"  lang="en" dir="ltr"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html  lang="en" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"><!--<![endif]-->
+
+<head profile="../../../../external.html?link=http://www.w3.org/1999/xhtml/vocab">
+  
+  
+  <meta charset="utf-8" />
+<meta name="web_section_id" content="R11646" />
+<meta name="bu" content="corp" />
+<meta name="hp_design_version" content="hpweb.2.0" />
+<meta name="segment" content="Commercial.B2B" />
+<meta name="page_content" content="HP Public Cloud - Enterprise Public Cloud Products &amp;amp; Services" />
+<meta name="content_country_applicability" content="w1" />
+<meta name="target_country" content="US" />
+<meta name="lifecycle" content="presales.awareness" />
+<link rel="shortcut icon" href="../../../../external.html?link=http://www.hpcloud.com/sites/all/themes/hpcloud/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<meta name="description" content="HP Public Cloud provides on-demand, pay-as-you-go cloud services for computing, storage infrastructure as well as platform services. Explore the cloud." />
+<meta about="/hp-helion-public-cloud" property="sioc:num_replies" content="0" datatype="xsd:integer" />
+<meta content="HP Helion Public Cloud" about="/hp-helion-public-cloud" property="dc:title" />
+<link rel="canonical" href="../../../../external.html?link=http://www.hpcloud.com/" />
+<link rel="shortlink" href="../../../../external.html?link=http://www.hpcloud.com/" />
+<meta property="og:url" content="http://www.hpcloud.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="HP Public Cloud" />
+<meta property="og:site_name" content="HP Public Cloud" />
+   
+
+      <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="cleartype" content="on">
+<!--
+  <link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_791YXBaKKm1ORM_7huSKEsIV9tSWq6wmRkERhuXpN6w.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_mGbqk88-VTBvzao9MxjjAm60xrWNV9JbuxL-XsOdBKY.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_UOCsF9jLPA1lMMj-BVVBzE0l5EIeCw_3PDG18zycRw4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_MfNt8ndX5CcdNjNUw-v__mhCPodpzDeR8KuzaXo-yzQ.css" media="all" />
+-->
+  <script src="../../../../www.hpcloud.com/sites/default/files/js/js__kIQ7mxn9cgBO3AAnwhKUMQqNbqZZQWibQB6EZRy6u0.html"></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_CC-zfeuQHcDhFtVRuKW53h30TL7j_105J32Nz8b8R38.js"></script>
+<script>var WRInitTime=(new Date()).getTime(); // ClickTale top part</script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_mZQzCl35imgkCIIjGS2RPLYDNuLk9ncwZ5c7lh6STTw.js"></script>
+<script>		<!-- Start Visual Website Optimizer Asynchronous Code -->
+		var _vwo_code=(function(){
+		var account_id=37831,
+		settings_tolerance=2000,
+		library_tolerance=2500,
+		use_existing_jquery=false,
+		// DO NOT EDIT BELOW THIS LINE
+		f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('../../../../external.html?link=http://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+		<!-- End Visual Website Optimizer Asynchronous Code --></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_kv2zkR2iCsl2ctlEzg-TiOxz1jEVBjx7VzAR0mTzlew.js"></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_qz7rta8c7yTiJLYNkf4WKFMgEeuRUE1AgWXd6NCAQZU.js"></script>
+<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"hpcloud","theme_token":"NwfPTBjz4hDLctcBflIoKqD4J2r3kIAtWobc48FZKTo","js":{"https:\/\/clicktale.pantherssl.com\/WRd.js":1,"0":1,"sites\/all\/modules\/custom\/hpcs_referrer_url\/js\/referrer.min.js":1,"sites\/all\/modules\/custom\/kenshoo\/js\/kenshoo.min.js":1,"1":1,"sites\/all\/themes\/hpcloud\/js\/fastclick.min.js":1,"sites\/all\/themes\/hpcloud\/js\/main.min.js":1,"sites\/all\/modules\/custom\/lp_chat\/js\/le-mtagconfig.js":1,"sites\/all\/modules\/custom\/hpcloud_jquery\/js\/jquery-1.9.0.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"misc\/jquery.cookie.js":1,"2":1,"sites\/all\/modules\/custom\/omniture\/js\/hpcs_metrics.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/tinycon.min.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/color.js":1,"3":1,"sites\/all\/modules\/custom\/lp_chat\/js\/lp-initialize.js":1,"sites\/all\/themes\/hpcloud\/js\/vendor\/modernizr-2.6.2.min.js":1,"sites\/all\/themes\/hpcloud\/js\/respond.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/uif\/uif.css":1,"sites\/all\/modules\/contrib\/field_collection\/field_collection.theme.css":1,"sites\/all\/themes\/zen\/system.menus.css":1,"sites\/all\/themes\/hpcloud\/css\/screen.css":1,"sites\/all\/themes\/hpcloud\/css\/styles.css":1}}});</script>
+      <!--[if lt IE 9]>
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+      <!--[if (lt IE 9) & (!IEMobile)]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie8.css">
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+    
+    <!--[if IE]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie.css">
+    <![endif]-->
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" ><!--
+				<a href="http://docs.hpcloud.com/" class="logo"  ><img src="/images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>-->
+        			<ul class="menu"><li class="first leaf menu-mlid-1845"><a href="../../../../external.html?link=http://www.hpcloud.com/support">Support</a></li>
+<li class="leaf has-children menu-mlid-1222"><a href="../../../../external.html?link=http://www.hpcloud.com/partners">Partners</a></li>
+<li class="leaf menu-mlid-1817"><a href="../../../../external.html?link=http://marketplace.hpcloud.com/" title="">Marketplace</a></li>
+<li class="leaf has-children menu-mlid-1223"><a href="../../../../external.html?link=http://www.hpcloud.com/about" title="">About</a></li>
+<li class="leaf menu-mlid-1224"><a href="../../../../external.html?link=http://www.hp.com/" title="">hp.com</a></li>
+<li class="leaf menu-mlid-1225"><a href="../../../../external.html?link=http://www.hpcloud.com/about/contact">Contact</a></li>
+<li class="last leaf menu-mlid-1226"><a href="../../../../external.html?link=http://www.hpcloud.com/console">Log In</a></li>
+</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="sidebar" class="grid_4 suffix_1 top-spacer">
+    <aside>
+      <div id="toc_header">
+          
+             
+              <p class="title"><strong><a href="../../../api/copyright.html#monitoring">Copyright</a></strong></p>
+             
+          
+          <p class="title"><strong><a href="../../../api/index.html">API Overview</a></strong></p>
+          <p class="title"><strong>Table of Contents</strong></p>
+      </div>
+      <div id="toc">
+      </div>
+      <!--<aside class="box section-navigation fixed_menu">
+  <ul>
+    
+  </ul>
+</aside>-->
+      <!--<aside class="block block-boxes box block-boxes-simple fixed">-->
+        <!--<p>Having trouble finding the info you need? Try one of the following helpful links:</p>-->
+            <!--<ul>-->
+                <!--<li><a href="/downloads">Downloads</a></li>-->
+                <!--<li><a href="https://community.hpcloud.com/knowledge-base">Knowledge Base</a></li>-->
+                <!--<li><a href="https://community.hpcloud.com/forum">Forums</a></li>-->
+                <!--<li><a href="/sitemap">Site Map</a></li>-->
+            <!--</ul>-->
+      <!--</aside>-->
+    </aside>
+</div>
+<div id="content" class="grid_11">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="hp-helion-public-cloud-monitoring-api-specifications">HP Helion Public Cloud Monitoring API Specifications</h1>
+
+<p><strong>Date:</strong> May 2014</p>
+
+<p><strong>Document Version:</strong> 2.0</p>
+
+<p><strong>Note:</strong> If you are using HP Helion v12.12, see the <a href="../../../api/monitoring/index.html">Monitoring API v1.0</a>.</p>
+
+<h2 id="Section1_">1. Overview</h2>
+
+<p>This document describes the HP Helion Public Cloud Monitoring API v1.1, which allows you to monitor resources in HP Helion Public Cloud.</p>
+
+<p>We will be referring to HP Helion Public Cloud Monitoring in this document as simply Monitoring.</p>
+
+<h3 id="Section1_1">1.1 API Maturity Level</h3>
+
+<p><strong>Maturity Level</strong>: Public Beta</p>
+
+<p><strong>Version API Status</strong>: The Monitoring Service v1.1 status is CURRENT, and the v1.0 status is DEPRECATED.</p>
+
+<h3 id="Section1_2">1.2 Document Revision History</h3>
+
+<table>
+  <thead>
+    <tr><th align="left">Doc. Version</th>
+  <th align="left">Date</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">0.1</td>
+  <td align="left">01/17/2013</td>
+  <td align="left">Initial draft</td>
+</tr>
+    <tr><td align="left">0.2</td>
+  <td align="left">02/22/2013</td>
+  <td align="left">Compute only release</td>
+</tr>
+    <tr><td align="left">0.3</td>
+  <td align="left">02/28/2013</td>
+  <td align="left">Added Volume metrics and cleanup</td>
+</tr>
+    <tr><td align="left">1.0</td>
+  <td align="left">03/04/2013</td>
+  <td align="left">Document 1.0 release</td>
+</tr>
+    <tr><td align="left">1.1</td>
+  <td align="left">03/09/2013</td>
+  <td align="left">API Keys desc and cleanup</td>
+</tr>
+    <tr><td align="left">1.2</td>
+  <td align="left">04/25/2013</td>
+  <td align="left">User defined metrics and cleanup</td>
+</tr>
+    <tr><td align="left">1.3</td>
+  <td align="left">05/01/2013</td>
+  <td align="left">Advanced alarm expressions and cleanup</td>
+</tr>
+    <tr><td align="left">1.3.1</td>
+  <td align="left">05/06/2013</td>
+  <td align="left">Cleanup</td>
+</tr>
+    <tr><td align="left">1.3.2</td>
+  <td align="left">05/09/2013</td>
+  <td align="left">Modified dimensions handling for user defined metrics and cleanup</td>
+</tr>
+    <tr><td align="left">1.3.3</td>
+  <td align="left">05/13/2013</td>
+  <td align="left">Namespace and dimension changes</td>
+</tr>
+    <tr><td align="left">1.3.4</td>
+  <td align="left">05/22/2013</td>
+  <td align="left">Timestamp and Subject optional for user defined metrics</td>
+</tr>
+    <tr><td align="left">1.3.5</td>
+  <td align="left">05/24/2013</td>
+  <td align="left">Zero value metrics change</td>
+</tr>
+    <tr><td align="left">1.4</td>
+  <td align="left">07/11/2013</td>
+  <td align="left">Rate based metrics</td>
+</tr>
+    <tr><td align="left">1.4.1</td>
+  <td align="left">07/15/2013</td>
+  <td align="left">Enhanced volume metrics</td>
+</tr>
+    <tr><td align="left">1.5</td>
+  <td align="left">10/02/2013</td>
+  <td align="left">Monitoring 1.1 API</td>
+</tr>
+    <tr><td align="left">1.6</td>
+  <td align="left">11/06/2013</td>
+  <td align="left">Notification address validation additions</td>
+</tr>
+    <tr><td align="left">1.7</td>
+  <td align="left">12/01/2013</td>
+  <td align="left">Metric querying</td>
+</tr>
+    <tr><td align="left">1.8</td>
+  <td align="left">12/04/2013</td>
+  <td align="left">Add name field to notification addresses, update HTTP headers sent in curl examples</td>
+</tr>
+    <tr><td align="left">1.9</td>
+  <td align="left">12/18/2013</td>
+  <td align="left">Monitoring level selection</td>
+</tr>
+    <tr><td align="left">1.9.1</td>
+  <td align="left">02/04/2014</td>
+  <td align="left">Revised entire document</td>
+</tr>
+    <tr><td align="left">2.0</td>
+  <td align="left">May 2014</td>
+  <td align="left">HP Helion updates</td>
+</tr>
+  </tbody>
+</table><h2 id="Section2_">2. Architecture View</h2>
+
+<p>Monitoring provides APIs for managing metric consumption endpoints, metric subscriptions, alarms, contact methods, and publishing user-defined metrics.</p>
+
+<h3 id="ArchitectureOverview">2.1 Overview</h3>
+
+<p>The Monitoring API provides a RESTful JSON interface for interacting with Monitoring and managing monitoring-related resources.</p>
+
+<p>The API supports a number of operations. These include:</p>
+
+<ul><li><p><a href="#ServiceEndpointOps">Endpoint Operations</a> - The endpoint resource represents an endpoint from which metrics can be consumed.</p></li>
+<li><p><a href="#ServiceDetailsEndpoint">Endpoint Operations Details</a></p></li>
+<li><p><a href="#ServiceSubscriptionOps">Subscription Operations</a> - The subscription resource represents a subscription to consume metrics.</p></li>
+<li><p><a href="#ServiceDetailsSubscription">Subscription Operations Details</a></p></li>
+<li><p><a href="#ServiceNotificationOps">Notification Operations</a> - The notification method resource represents a method through which notifications can be sent.</p></li>
+<li><p><a href="#ServiceDetailsNotification">Notification Operations Details</a></p></li>
+<li><p><a href="#ServiceNotificationAddressOps">Notification Address Operations</a> - The notification address resource represents validated address to which notifications can be sent.</p></li>
+<li><p><a href="#ServiceDetailsNotificationAddress">Notification Address Operations Details</a></p></li>
+<li><p><a href="#ServiceAlarmOps">Alarm Operations</a> - The alarm resource identifies a particular metric scoped by namespace, type and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold.</p></li>
+<li><p><a href="#ServiceDetailsAlarm">Alarm Operations Details</a></p></li>
+<li><p><a href="#ServiceMetricsOps">Metric Operations</a> - The metric resource allows the insertion of user defined metrics and querying of system and user defined metrics.</p></li>
+<li><p><a href="#ServiceDetailsMetrics">Metrics Operations Details</a></p></li>
+</ul><h3 id="Examples">2.2 Examples</h3>
+
+<h4 id="HighLevelExample">2.2.1 High Level</h4>
+
+<p>There are 4 major functions possible with the Monitoring API resources:</p>
+
+<ul><li>Message subscription - This allows AMQP message queue access to the current metric stream.</li>
+<li>Alarming - Sends a notification when a metric passes a threshold.</li>
+<li>Metric Post - Sends a metric to HP Monitoring.</li>
+<li>Metric Query - Queries all of the metrics sent to and/or captured by HP Monitoring.</li>
+</ul><p><strong>Note:</strong> Access to these functions are also available through the <a href="../../../../external.html?link=https://horizon.hpcloud.com/">Console</a> and it is the preferred method. You do NOT need to obtain an auth token when working from the console. However, when accessing the REST interface directly, you are required to include the auth token.</p>
+
+<h4 id="AccountActivation">2.2.2 Activating Your Account Example</h4>
+
+<p>
+  <a href="#Accounts">Account Creation Details</a>
+</p>
+
+<p>Before creating Alarms or Subscriptions, you must first get a valid auth token. Go to the above link and follow the actions listed.</p>
+
+<h4 id="SubscriptionExample">2.2.3 Setting Up a Subscription Example</h4>
+
+<p>Subscriptions provides a continuous feed of monitoring metrics data.</p>
+
+<p>
+  <a href="#ServiceDetailsCreateEndpoint">Endpoint Creation Details</a>
+</p>
+
+<p>Subscriptions need a way to connect you to the RabbitMQ (AMQP) queue, so we need to create an endpoint.</p>
+
+<p>From the above link, use the Curl Example, changing the X-Auth-Token to the auth token value. Save the returned json output. "uri", "amqp_username", "amqp_password", and "amqp_queue" are the required values for accessing the RabbitMQ (AMQP) queue.</p>
+
+<p>How to setup a queue connection is beyond the scope of this document. There are tutorials at <a href="../../../../external.html?link=http://www.rabbitmq.com/">RabbitMQ</a>. There is a simple, limited AMQP client application at: <a href="#SupportSoftwareAndOtherTools">AMQP client</a>.</p>
+
+<p>
+  <a href="#ServiceDetailsCreateSubscription">Subscription Creation Details</a>
+</p>
+
+<p>From the above link, use the Curl Example, changing the X-Auth-Token to the auth token value. Change "endpoint_id" to the id value returned from the Endpoint call and "instance_id" with a valid compute instance ID that you own. The data feed should start soon after.</p>
+
+<p>The metric json format (HP Helion Metrics JSON) received is the same format used for creating user defined metrics in 4.4.6.1 <a href="#ServiceDetailsCreateMetric">Create a New Metric</a>.</p>
+
+<h4 id="AlarmExample">2.2.4 Setting Up an Alarm Example</h4>
+
+<p>Alarms send notifications when a metric value exceeds a user defined threshold.</p>
+
+<p>
+  <a href="#ServiceDetailsCreateNotification">Notification Creation Details</a>
+</p>
+
+<p>Alarms need a way in which to contact you, so we need to create a notification method and a notification method that the system is authorized to send alarm notifications to.</p>
+
+<p>From the above link, use the Curl Example, changing the X-Auth-Token to the auth token value. Change "name" to your descriptive name, "type" with how you are to be accessed (this is a strict enumeration value, use only the values given in the Data Parameters section), and "address" with your email address or phone number. Save the returned json output.</p>
+
+<p>
+  <a href="#ServiceDetailsCreateAlarm">Alarm Creation Details</a>
+</p>
+
+<p>From the above link, use the Curl Example, changing the X-Auth-Token to the auth token value. Change "name" to a description of the alarm. Put into "alarm_actions" the notification method id you received above. For "expression" create something like the below expression, targeted towards a valid compute instance ID that you own (replace the instance_id value):</p>
+
+<pre>
+  <code>max(hpcs.compute{metric_name=cpu_total_time, instance_id=42ff6820-7c86-11e2-b92a-0800200c9a67}) &gt; 0
+</code>
+</pre>
+
+<p>Since the cpu_total_time for an instance should always be over 0 after it's creation, this should evaluate to true. (Evaluations are done every 60 seconds.) A notification should then be sent out and the alarm will remain in the ALARM state.</p>
+
+<p>
+  <a href="#ServiceDetailsCreateAlarmAddress">Alarm Creation Notification Address</a>
+</p>
+
+<p>To avoid misuse of the notification system, alarm notifications will only be delivered to authorized addresses.  You may create alarms pointing at any address, but the system will only deliver notifications to verified addresses.<br />
+To authorize a notification address use the <a href="#ServiceDetailsCreateAddress">Create a new notification address</a> 
+API call to create a new notification address, and then the <a href="#ServiceDetailsValidateAddress">Validate received validation code for a specific notification address</a> API call.  You can verify that the notification address has been verified by using the <a href="#ServiceDetailsListAddress">List all notification addresses</a> API call and noting the state of each notification address.  Addresses can have states in-progress, verified or timed out which indicate which particular part of the verification process they are in at the time of the API call.</p>
+
+<h4 id="MetricPostExample">2.2.5 Posting a Metric Example</h4>
+
+<p>
+  <a href="#ServiceDetailsCreateMetric">Metric Post Details</a>
+</p>
+
+<p>From the above link, create the json for the metric to be sent. The simplest metric example:</p>
+
+<pre>
+  <code>{
+    "namespace": "user_namespace"
+    "value": 1.0
+}
+</code>
+</pre>
+
+<p>Dimensions are optional and a missing timestamp is set to the current time. This metric will be stored for later query.</p>
+
+<p>If you create a subscription with this namespace and no dimensions, you will have AMQP output of the metric when it is sent. If you create an alarm with this namespace, you can receive a notification.</p>
+
+<h4 id="MetricQueryExample">2.2.6 Metric Query Example</h4>
+
+<p>
+  <a href="#ServiceDetailsGetMetrics">Metric Query Details</a>
+</p>
+
+<p>From the above link, create a metric query. For querying the metric submitted in the previous section (replace start_time with a date/time close to current):</p>
+
+<pre>
+  <code>namespace=user_namespace&amp;statistics=avg&amp;start_time=2013-11-01T12:00Z
+</code>
+</pre>
+
+<h3 id="Namespaces">2.3 Namespaces, Dimensions, and Metrics</h3>
+
+<p>The Monitoring API makes use of several metric related pre-defined constants throughout.</p>
+
+<ul><li><p>Namespaces define the high-level logical partition to monitor.  This restricts what metrics will be used.</p>
+
+<p><strong>Note:</strong> All namespaces starting with hpcs. are reserved by HP and cannot be used for user defined namespaces.</p></li>
+<li><p>Dimensions place restrictions on the namespace to further narrow what is monitored.</p></li>
+<li><p>A metric definition is the unique combination of the namespace plus the dimension keys. A metric is the entirety of the namespace, dimension keys, dimension values, timestamp, and value.</p></li>
+</ul><h4 id="NamespaceUserDefined">2.3.1 Namespace: User Defined</h4>
+
+<p><strong>Required dimensions:</strong> None</p>
+
+<p><strong>Supported dimensions:</strong> Any</p>
+
+<p><strong>Note:</strong> Dimensions must currently match exactly for subscriptions using user defined namespaces.</p>
+
+<p>A user-defined namespace is a logical grouping of metrics for a customer that the customer defines. Performing a metric post call with a new namespace automatically creates the new namespace. The HP namespace (hpcs. prefixed namepaces) are restricted and cannot be used. Any other name can be used for a user defined namespace and there are no limits on the number that a customer can create.</p>
+
+<p>See <a href="#ServiceDetailsMetrics">Metrics Operations Details</a>.</p>
+
+<h4 id="NamespaceHpcsCompute">2.3.2 Namespace: hpcs.compute</h4>
+
+<p><strong>Required dimensions:</strong> instance_id, which is the compute node unique instance id value.</p>
+
+<p><strong>Supported dimensions:</strong> instance_id, metric_name, device. The metrics tables below show the supported metric_name values. device is vda, vdb, etc for disk metrics and eth0, etc for network metrics. You should use all 3 supported dimensions for uniquely identifying a hpcs.compute metric definition.</p>
+
+<p>
+  <strong>Gauge and delta metrics</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Metric Name</th>
+  <th align="left">Metric Type</th>
+  <th align="left">Unit</th>
+  <th align="left">Device</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">cpu_total_utilization</td>
+  <td align="left">Gauge</td>
+  <td align="left">Percent</td>
+  <td align="left"></td>
+  <td align="left">Total percentage of CPU used for all cores</td>
+</tr>
+    <tr><td align="left">cpu_time</td>
+  <td align="left">Delta</td>
+  <td align="left">Nanoseconds</td>
+  <td align="left"></td>
+  <td align="left">Delta CPU time used for all cores in nanoseconds</td>
+</tr>
+    <tr><td align="left">disk_read_ops</td>
+  <td align="left">Delta</td>
+  <td align="left">Operations</td>
+  <td align="left">Disk Name</td>
+  <td align="left">Delta of read requests from a disk</td>
+</tr>
+    <tr><td align="left">disk_write_ops</td>
+  <td align="left">Delta</td>
+  <td align="left">Operations</td>
+  <td align="left">Disk Name</td>
+  <td align="left">Delta of write requests from a disk</td>
+</tr>
+    <tr><td align="left">disk_read_bytes</td>
+  <td align="left">Delta</td>
+  <td align="left">Bytes</td>
+  <td align="left">Disk Name</td>
+  <td align="left">Delta of bytes read from a disk</td>
+</tr>
+    <tr><td align="left">disk_write_bytes</td>
+  <td align="left">Delta</td>
+  <td align="left">Bytes</td>
+  <td align="left">Disk Name</td>
+  <td align="left">Delta of bytes written to a disk</td>
+</tr>
+    <tr><td align="left">net_in_bytes</td>
+  <td align="left">Delta</td>
+  <td align="left">Bytes</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Delta of receive bytes on a network interface</td>
+</tr>
+    <tr><td align="left">net_out_bytes</td>
+  <td align="left">Delta</td>
+  <td align="left">Bytes</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Delta of transfer bytes on a network interface</td>
+</tr>
+    <tr><td align="left">net_in_dropped</td>
+  <td align="left">Delta</td>
+  <td align="left">Packets</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Delta of receive packets dropped on a network interface</td>
+</tr>
+    <tr><td align="left">net_out_dropped</td>
+  <td align="left">Delta</td>
+  <td align="left">Packets</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Delta of transfer packets dropped on a network interface</td>
+</tr>
+    <tr><td align="left">net_in_packets</td>
+  <td align="left">Delta</td>
+  <td align="left">Packets</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Delta of receive packets on a network interface</td>
+</tr>
+    <tr><td align="left">net_out_packets</td>
+  <td align="left">Delta</td>
+  <td align="left">Packets</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Delta of transfer packets on a network interface</td>
+</tr>
+    <tr><td align="left">net_in_errors</td>
+  <td align="left">Delta</td>
+  <td align="left">Errors</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Delta of receive packet errors on a network interface</td>
+</tr>
+    <tr><td align="left">net_out_errors</td>
+  <td align="left">Delta</td>
+  <td align="left">Errors</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Delta of transfer packet errors on a network interface</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Counter metrics</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Metric Name</th>
+  <th align="left">Metric Type</th>
+  <th align="left">Unit</th>
+  <th align="left">Device</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">cpu_total_time</td>
+  <td align="left">Counter</td>
+  <td align="left">Nanoseconds</td>
+  <td align="left"></td>
+  <td align="left">Total CPU time used in nanoseconds</td>
+</tr>
+    <tr><td align="left">disk_read_ops_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Operations</td>
+  <td align="left">Disk Name</td>
+  <td align="left">Number of read requests from a disk</td>
+</tr>
+    <tr><td align="left">disk_write_ops_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Operations</td>
+  <td align="left">Disk Name</td>
+  <td align="left">Number of write requests from a disk</td>
+</tr>
+    <tr><td align="left">disk_read_bytes_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Bytes</td>
+  <td align="left">Disk Name</td>
+  <td align="left">Number of bytes read from a disk</td>
+</tr>
+    <tr><td align="left">disk_write_bytes_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Bytes</td>
+  <td align="left">Disk Name</td>
+  <td align="left">Number of bytes written to a disk</td>
+</tr>
+    <tr><td align="left">net_in_bytes_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Bytes</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Number of receive bytes on a network interface</td>
+</tr>
+    <tr><td align="left">net_out_bytes_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Bytes</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Number of transfer bytes on a network interface</td>
+</tr>
+    <tr><td align="left">net_in_dropped_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Packets</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Number of receive packets dropped on a network interface</td>
+</tr>
+    <tr><td align="left">net_out_dropped_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Packets</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Number of transfer packets dropped on a network interface</td>
+</tr>
+    <tr><td align="left">net_in_packets_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Packets</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Number of receive packets on a network interface</td>
+</tr>
+    <tr><td align="left">net_out_packets_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Packets</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Number of transfer packets on a network interface</td>
+</tr>
+    <tr><td align="left">net_in_errors_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Errors</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Number of receive packet errors on a network interface</td>
+</tr>
+    <tr><td align="left">net_out_errors_count</td>
+  <td align="left">Counter</td>
+  <td align="left">Errors</td>
+  <td align="left">Interface Name</td>
+  <td align="left">Number of transfer packet errors on a network interface</td>
+</tr>
+  </tbody>
+</table><h4 id="NamespaceHpcsVolume">2.3.3 Namespace: hpcs.volume</h4>
+
+<p><strong>Required dimensions:</strong> instance_id (compute instance id), disk, where disk has a typical value of 'vda' or 'vdb'</p>
+
+<p><strong>Supported dimensions:</strong> instance_id, metric_name, disk. The table below shows the supported metric_name values. You should use all 3 supported dimensions for uniquely identifying a hpcs.compute metric definition.</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Metric Name</th>
+  <th align="left">Metric Type</th>
+  <th align="left">Unit</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">volume_read_ops</td>
+  <td align="left">Delta</td>
+  <td align="left">Operations</td>
+  <td align="left">Read operations for volume attached to an instance</td>
+</tr>
+    <tr><td align="left">volume_write_ops</td>
+  <td align="left">Delta</td>
+  <td align="left">Operations</td>
+  <td align="left">Write operations for volume attached to an instance</td>
+</tr>
+    <tr><td align="left">volume_read_bytes</td>
+  <td align="left">Delta</td>
+  <td align="left">Bytes</td>
+  <td align="left">Read bytes for volume attached to an instance</td>
+</tr>
+    <tr><td align="left">volume_write_bytes</td>
+  <td align="left">Delta</td>
+  <td align="left">Bytes</td>
+  <td align="left">Write bytes for volume attached to an instance</td>
+</tr>
+    <tr><td align="left">volume_read_time</td>
+  <td align="left">Delta</td>
+  <td align="left">Seconds</td>
+  <td align="left">Read time spent for volume attached to an instance</td>
+</tr>
+    <tr><td align="left">volume_write_time</td>
+  <td align="left">Delta</td>
+  <td align="left">Seconds</td>
+  <td align="left">Write time spent for volume attached to an instance</td>
+</tr>
+    <tr><td align="left">volume_idle_time</td>
+  <td align="left">Delta</td>
+  <td align="left">Seconds</td>
+  <td align="left">Idle time spent for volume attached to an instance</td>
+</tr>
+  </tbody>
+</table><h3 id="MetricFormat">2.4 HP Helion Metrics JSON Format Schema</h3>
+
+<ul><li>namespace : string (64 char max)</li>
+<li>dimensions : (optional) map<string char="" max="" string=""></string></li>
+<li>timestamp : (optional) long (unix time)</li>
+<li>value : (scalar only) double </li>
+<li>time_values : (vector only) [[long, double]]</li>
+</ul><p>Namespace and dimension key names are restricted to these characters: a-z A-Z 0-9 . - _. Dimension values currently have the same restriction but will soon support the full range of UTF-8 characters.</p>
+
+<p>
+  <strong>Scalar format example</strong>
+</p>
+
+<pre>
+  <code>{
+  "namespace": "hpcs.compute",
+  "dimensions": {
+    "instance_id": "42ff6820-7c86-11e2-b92a-0800200c9a67",
+    "metric_name": "disk_read_bytes",
+    "device": "vda"
+  },
+  "timestamp": 123123123,
+  "value": 123.0
+}
+</code>
+</pre>
+
+<p>
+  <strong>Vector format example</strong>
+</p>
+
+<pre>
+  <code>{
+  "namespace": "hpcs.compute",
+  "dimensions": {
+    "instance_id": "42ff6820-7c86-11e2-b92a-0800200c9a67",
+    "metric_name": "disk_read_bytes",
+    "device": "vda"
+  },
+  "timestamp": 123123123,
+  "time_values": [[123123123,123.0],[123123183,127.0]]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Aggregate format example</strong>
+</p>
+
+<pre>
+  <code>[
+    {
+      "namespace": "hpcs.compute",
+      "dimensions": {
+        "instance_id": "42ff6820-7c86-11e2-b92a-0800200c9a67",
+        "metric_name": "disk_read_bytes",
+        "device": "vda"
+      },
+      "timestamp": 123123123,
+      "value": 123.0
+    },
+     {
+       "namespace": "hpcs.compute",
+       "dimensions": {
+         "instance_id": "42ff6820-7c86-11e2-b92a-0800200c9a67",
+         "metric_name": "disk_read_bytes",
+         "device": "vda"
+      },
+      "timestamp": 123123123,
+      "time_values": [[123123123,123.0],[123123183,127.0]]
+    }
+]
+</code>
+</pre>
+
+<h3 id="AlarmExpressions">2.5 Alarm Expressions</h3>
+
+<p>The alarm expression syntax allows the creation of simple to complex alarms to handle a wide variety of needs. Alarm expressions are evaluated every 60 seconds.</p>
+
+<p>An alarm expression is a boolean equation which if it evaluates to true with the incoming metrics, will then trigger a notification to be sent.</p>
+
+<p>Go to <a href="#ServiceDetailsAlarm">Alarm</a> to see the REST interface.</p>
+
+<p>
+  <strong>Syntax</strong>
+</p>
+
+<p>At the highest level, you have an expression, which is made up of one or more subexpressions, joined by boolean logic. Parenthesis can be used for separators in a BNF style format:</p>
+
+<pre>
+  <code>expression
+    : subexpression
+    | '(' expression ')'
+    | expression logical_operator expression
+</code>
+</pre>
+
+<p>The logical_operators are:</p>
+
+<ul><li>'and' (also &amp;&amp;)</li>
+<li>'or' (also ||)</li>
+</ul><p>Each subexpression is made up of several parts with a couple of options:</p>
+
+<pre>
+  <code>subexpression
+    : metric relational_operator threshold_value
+    | function '(' metric ',' period ')' relational_operator threshold_value ('times' periods)?
+</code>
+</pre>
+
+<p>The relational_operators are:</p>
+
+<ul><li>'lt' (also &lt;)</li>
+<li>'gt' (also &gt;)</li>
+<li>'lte' (also &lt;=)</li>
+<li>'gte' (also &gt;=)</li>
+</ul><p>Threshold values are always in the same units as the metric that they are being compared to.</p>
+
+<p>The first subexpression shows a direct comparison of a metric to a threshold_value, done every 60 seconds. For example:</p>
+
+<pre>
+  <code>hpcs.compute{metric_name=cpu_total_utilization, instance_id=42ff6820-7c86-11e2-b92a-0800200c9a67} &gt; 90
+</code>
+</pre>
+
+<p>The second subexpression shows a function operation done on all collected metrics within a specific period and compared to a threshold_value, then triggered if it happens periods number of times. For example:</p>
+
+<pre>
+  <code>avg(hpcs.compute{metric_name=cpu_total_utilization, instance_id=42ff6820-7c86-11e2-b92a-0800200c9a67}, 60) &gt; 90 times 3
+</code>
+</pre>
+
+<p>Note that period is the number of seconds for the measurement to be done on. They can only be in a multiple of 60. Periods is how many times in a row that this expression must be true before triggering the alarm. Both period and periods are optional and default to 60 and 1 respectively.</p>
+
+<p>Functions work on all metric measurements during the period time frame.</p>
+
+<ul><li>min (returns the minimum of all the values)</li>
+<li>max (returns the maximum of all the values)</li>
+<li>sum (returns the sum of all the values)</li>
+<li>count (returns the number of metric observations)</li>
+<li>avg (returns the average of all the values)</li>
+</ul><p>The metric is a complex identifier that consists of a namespace and an optional set of dimensions.</p>
+
+<pre>
+  <code>metric
+    : namespace ('{' dimensions '}')?
+</code>
+</pre>
+
+<p>
+  <em>Metric example</em>
+</p>
+
+<pre>
+  <code>hpcs.compute{metric_name=disk_read_ops, device=vda, instance_id=42ff6820-7c86-11e2-b92a-0800200c9a67}
+
+hpcs.compute{metric_name=cpu_total_utilization, instance_id=42ff6820-7c86-11e2-b92a-0800200c9a67}
+
+userspace{metric_name=usermetric}
+
+userspace
+</code>
+</pre>
+
+<p>The first example shows a namespace of 'hpcs.compute', see <a href="#Namespaces">Namespaces</a>. The dimensions further qualifying the metric are 'metric_name=disk_read_ops', 'device=vda', and 'instance_id=42ff6820-7c86-11e2-b92a-0800200c9a67'. This fully describes where the metric comes from, what namespace it belongs to, and what metric type was measured.</p>
+
+<p>The second example shows leaving out 1 of the dimensions.</p>
+
+<p>The third example is for targeting a user defined namespace and metric name.</p>
+
+<p>The fourth example is for targeting a user defined namespace and leaving the dimensions out entirely.</p>
+
+<p>
+  <em>Example with two subexpressions</em>
+</p>
+
+<pre>
+  <code>( avg(hpcs.compute{metric_name=cpu_total_utilization, instance_id=42ff6820-7c86-11e2-b92a-0800200c9a67}) &gt; 90 ) or ( avg(hpcs.compute{metric_name=disk_read_ops, device=vda, instance_id=42ff6820-7c86-11e2-b92a-0800200c9a67}, 120) &gt; 1000 times 3 )
+</code>
+</pre>
+
+<p>If the cpu_total_utilization is on average greater than 90 for a 60 second period for that instance then the alarm will trigger. If not that, then if the disk_read_ops for that same instance is on average greater than to 1000 for a 120 second period for 3 periods in a row, then the alarm will also trigger.</p>
+
+<p>
+  <em>User-defined metric example</em>
+</p>
+
+<pre>
+  <code>count(userspace{metric_name=usermetric, instance_id=42ff6820-7c86-11e2-b92a-0800200c9a67}, 600) &gt; 7 times 5
+</code>
+</pre>
+
+<p>This example shows 1 subexpression. It does a count of how many times the user publishes a user defined metric in a 600 second period. If more than 7 occur in that period and this happens 5 times in a row, then the alarm will trigger.</p>
+
+<h3 id="Faults">2.6 Faults</h3>
+
+<p>When an fault occurs at request time, the system will return an HTTP error response code denoting the type of fault. The system will also return additional information about the fault in the body of the response.</p>
+
+<p>
+  <strong>Fault Response</strong>
+</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{  
+    "fault_element": {
+        "code": HTTP error code (integer),
+        "message": "Fault information...",
+        "details": "Fault Details...",
+        "internal_code": "Internal error log code"
+    }
+}
+</code>
+</pre>
+
+<p>The error code is returned in the body of the response for convenience. The message section returns a human-readable message that is appropriate for display to the end user. The details section is optional and may contain extra information. The internal_code section is optional monitoring logging information to further identify the cause of the fault.</p>
+
+<p>The root element of the fault (the fault_element value) may change depending on the type of fault. The following is a list of possible elements along with their associated HTTP error codes.</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Fault Element</th>
+  <th align="left">HTTP Error Code</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">bad_request</td>
+  <td align="left">400</td>
+</tr>
+    <tr><td align="left">unauthorized</td>
+  <td align="left">401</td>
+</tr>
+    <tr><td align="left">forbidden</td>
+  <td align="left">403</td>
+</tr>
+    <tr><td align="left">not_found</td>
+  <td align="left">404</td>
+</tr>
+    <tr><td align="left">conflict</td>
+  <td align="left">409</td>
+</tr>
+    <tr><td align="left">unprocessable_entity</td>
+  <td align="left">422</td>
+</tr>
+    <tr><td align="left">rate limited</td>
+  <td align="left">429</td>
+</tr>
+    <tr><td align="left">server_error</td>
+  <td align="left">500</td>
+</tr>
+    <tr><td align="left">service load balancers</td>
+  <td align="left">503</td>
+</tr>
+  </tbody>
+</table><h4 id="faults-errorcode03">2.6.1 HTTP Error Code 503</h4>
+
+<p>HTTP Error Code 503 indicates an internal system error has occurred. The Monitoring service uses load balancing and rate-limiting technologies to protect the core application servers operating the service. The 503 error indicates an internal, temporary failure in the load balancing/rate limiting components. The body of the response is different from the normal fault response of the service.</p>
+
+<p>
+  <strong>Fault Response</strong>
+</p>
+
+<p>JSON</p>
+
+<pre>{ "fault" : {
+   { "faultstring": "&lt;short description of error&gt;",
+      "detail" : {
+         "errorcode": "&lt;text error code&gt;"
+}}}
+</pre>
+
+<p>If you encounter this error, please retry the request. If the error persists or occurs at an unacceptable rate, please contact HP Customer Support and be sure to include in your report the full body of the response and the region and time you received this response.</p>
+
+<h3 id="SupportSoftwareAndOtherTools">2.7 Support Software and Other Tools</h3>
+
+<h4 id="271-amqp-client-application">2.7.1 AMQP Client Application</h4>
+
+<p>
+  <a href="../../../../external.html?link=https://github.com/egustafson/grabbit">https://github.com/egustafson/grabbit</a>
+</p>
+
+<p>There are several different AMQP client applications available. The above link points to a simple command line application that is useful for debugging. It uses python with the pika module.</p>
+
+<p>
+  <strong>Execution</strong>
+</p>
+
+<pre>
+  <code>grabbit.py -u username -p password -q queue -v vhost hostname
+</code>
+</pre>
+
+<p>
+  <strong>Execution example</strong>
+</p>
+
+<pre>
+  <code>grabbit.py -u mon-55287769266623 -p OUMkab5w0GdE -q metrics-55287769266623 -v 55287769266623 region-a.geo-1.amqp-monaas.hpcloudsvc.com
+</code>
+</pre>
+
+<p>The return json from creating an endpoint:</p>
+
+<pre>
+  <code>{
+  "endpoint": {
+    "id": "612340f8-7a65-453e-b95e-9a13aaa51bbc",
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring-internal.hpcloudsvc.com/v1.1/endpoints/612340f8-7a65-453e-b95e-9a13aaa51bbc"
+      }
+    ],
+    "uri": "amqp://region-a.geo-1.amqp-monaas.hpcloudsvc.com:5672/55287769266623",
+    "meta": {
+      "amqp_queue": "metrics-55287769266623",
+      "amqp_username": "mon-55287769266623",
+      "amqp_password": "OUMkab5w0GdE"
+    }
+  }
+}
+</code>
+</pre>
+
+<h2 id="Section3_">3. Account-level View</h2>
+
+<p>Requests to the Monitoring API are required to present a valid token which must be obtained from the Identity service prior to making a Monitoring API request.</p>
+
+<p>More information about the Identity service:</p>
+
+<p>
+  <a href="../../../../external.html?link=https://community.hpcloud.com/article/identity-service-introduction">Introduction to HP Helion Identity Service</a>
+</p>
+
+<p>
+  <a href="../../../../external.html?link=https://community.hpcloud.com/knowledge-base-categories/cloud-identity-service">HP Helion Identity Service Overview</a>
+</p>
+
+<h3 id="Accounts">3.1 Accounts</h3>
+
+<p><strong>Note:</strong> Access to the Monitoring API functions are also available through the <a href="../../../../external.html?link=http://www.hpcloud.com/console">Console</a> and it is the preferred method. You do NOT need to obtain an auth token when working from the <a href="../../../../external.html?link=https://horizon.hpcloud.com/">Console</a>. However when accessing the REST interface directly, you are required to include the auth token.</p>
+
+<p>
+  <strong>Verifying Access</strong>
+</p>
+
+<p>Log into your cloud account from the <a href="../../../../external.html?link=https://horizon.hpcloud.com/">Console</a> page. With the left side menu, go to Identity &gt; Projects. From this page you can retrieve your Project Name. Username and password are the same as you use to log into the <a href="../../../../external.html?link=https://horizon.hpcloud.com/">Console</a>.</p>
+
+<p>
+  <strong>Requesting a Token</strong>
+</p>
+
+<p>
+  <strong>
+    <em>Request URI</em>
+  </strong>
+</p>
+
+<p>
+  <em>For West:</em>
+</p>
+
+<pre>
+  <code>curl -i -X POST \
+https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens \
+-H "Content-Type: application/json" -H "Accept: application/json"
+</code>
+</pre>
+
+<p>
+  <em>For East:</em>
+</p>
+
+<pre>
+  <code>curl -i -X POST \
+https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens \
+-H "Content-Type: application/json" -H "Accept: application/json"
+</code>
+</pre>
+
+<p>
+  <strong>
+    <em>Request Body</em>
+  </strong>
+</p>
+
+<pre>
+  <code>{"auth": {"tenantName": "yourprojectname", "passwordCredentials": {"username": "yourusername", "password": "yourpassword"}}}
+</code>
+</pre>
+
+<p>
+  <strong>
+    <em>Response Body</em>
+  </strong>
+</p>
+
+<pre>
+  <code>{
+    "access": {
+        "token": {
+            "expires": "2012-04-05T04:28:29.405Z",
+            "id": "HPAuth10_65f6a8e01d5437d6d628448c8411b862de878f622bfd8238df3a6433dd601fd1",
+            "tenant": {
+                "id": "123456789",
+                "name": "tenant@domain.com"
+            }
+        },
+        "user": {
+        "id": "987654321",
+        "name": "tenant@hp.com",
+        "roles": [
+        {
+            ...
+        },
+    },
+    "serviceCatalog": [
+        ...
+    {
+         "name": "Monitoring",
+         "type": "hpext:monitoring",
+         "endpoints": [
+             {
+                 "tenantId": "55287769244623",
+                 "publicURL": "https://region-a.geo-1.monaas.hpcloudsvc.com/v1.1",
+                 "publicURL2": "",
+                 "region": "region-a.geo-1",
+                 "versionId": "1.1",
+                 "versionInfo": "https://region-a.geo-1.monaas.hpcloudsvc.com/v1.1",
+                 "versionList": "https://region-a.geo-1.monaas.hpcloudsvc.com"
+             },
+             {
+                 "tenantId": "55287769244623",
+                 "publicURL": "https://region-b.geo-1.monitoring.hpcloudsvc.com/v1.1",
+                 "publicURL2": "",
+                 "region": "region-b.geo-1",
+                 "versionId": "1.1",
+                 "versionInfo": "https://region-b.geo-1.monitoring.hpcloudsvc.com/v1.1",
+                 "versionList": "https://region-b.geo-1.monitoring.hpcloudsvc.com"
+             }
+         ]
+    }
+]
+}}
+</code>
+</pre>
+
+<p>
+  <strong>
+    <em>Accessing Monitoring</em>
+  </strong>
+</p>
+
+<p>The endpoint for accessing the Monitoring API can be obtained from the service catalog returned in your authentication request.</p>
+
+<pre>
+  <code>https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/
+https://region-b.geo-1.monitoring.hpcloudsvc.com/v1.1/
+</code>
+</pre>
+
+<p>A request can then be made against resources at that endpoint by supplying the <code>access:token:id</code> from your authentication request as in your Monitoring API request header as an X-Auth-Token, for example:</p>
+
+<pre>
+  <code>X-Auth-Token: HPAuth10_65f6a8e01d5437d6d628448c8411b862de878f622bfd8238df3a6433dd601fd1)
+</code>
+</pre>
+
+<p>
+  <strong>Sample Request</strong>
+</p>
+
+<pre>
+  <code>&gt; GET /v1.1/ HTTP/1.1
+&gt; Host: 15.185.167.67:8779
+&gt; Accept: application/json
+&gt; Content-Type: application/json
+&gt; X-Auth-Token: HPAuth10_65f6a8e01d5437d6d628448c8411b862de878f622bfd8238df3a6433dd601fd1
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>tenantName</code> with your Project ID value from the API Keys web page. Replace <code>username</code> and <code>password</code> with your credentials for logging in to HP Helion.</p>
+
+<pre>
+  <code>$ curl -i -X POST \
+  https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0/tokens \
+  -H "Content-Type: application/json" -H "Accept: application/json" \
+  -d '{"auth": {"tenantName": "yourprojectname", "passwordCredentials": {"username": "yourusername", "password": "yourpassword"}}}'
+</code>
+</pre>
+
+<h3 id="AccountsRegions">3.2 Regions and Availability Zones</h3>
+
+<p>
+  <strong>Regions</strong>
+</p>
+
+<ul><li>Region A West 13.5 (region-a.geo-1)</li>
+<li>Region B East 13.5 (region-b.geo-1)</li>
+</ul><h2 id="Section4_">4. REST API Specifications</h2>
+
+<p>The Monitoring API is implemented using a RESTful web service interface. All requests to authenticate and operate against the Monitoring API should be performed using SSL over HTTP (HTTPS) on TCP port 443.</p>
+
+<h3 id="Service">4.1 Service API Operations</h3>
+
+<p>
+  <strong>Hosts</strong>
+</p>
+
+<p>
+  <em>US West</em>
+</p>
+
+<ul><li>https://region-a.geo-1.monitoring.hpcloudsvc.com</li>
+</ul><p>
+  <em>US East</em>
+</p>
+
+<ul><li>https://region-b.geo-1.monitoring.hpcloudsvc.com</li>
+</ul><p><strong>BaseUri</strong>: {Host}/v1.1</p>
+
+<h3 id="ServiceVersionOps">Version Operations</h3>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON/XML Support?</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">Version</td>
+  <td align="left"><a href="#ServiceDetailsListVersion">List all versions</a></td>
+  <td align="left">GET</td>
+  <td align="left">{Host}/</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Version</td>
+  <td align="left"><a href="#ServiceDetailsSpecificVersion">Get a specific version</a></td>
+  <td align="left">GET</td>
+  <td align="left">{Host}/<em>version_id</em></td>
+  <td align="left">Y/N</td>
+</tr>
+  </tbody>
+</table><h3 id="ServiceEndpointOps">Endpoint Operations</h3>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON/XML Support?</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">Endpoint</td>
+  <td align="left"><a href="#ServiceDetailsCreateEndpoint">Create a new endpoint</a></td>
+  <td align="left">POST</td>
+  <td align="left">{BaseUri}/endpoints</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Endpoint</td>
+  <td align="left"><a href="#ServiceDetailsListEndpoint">List all endpoints</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/endpoints</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Endpoint</td>
+  <td align="left"><a href="#ServiceDetailsSpecificEndpoint">Get a specific endpoint</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/endpoints/<em>endpoint_id</em></td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Endpoint</td>
+  <td align="left"><a href="#ServiceDetailsDeleteEndpoint">Delete a specific endpoint</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">{BaseUri}/endpoints/<em>endpoint_id</em></td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Endpoint</td>
+  <td align="left"><a href="#ServiceDetailsResetPasswordEndpoint">Reset the password for a specific endpoint</a></td>
+  <td align="left">POST</td>
+  <td align="left">{BaseUri}/endpoints/<em>endpoint_id</em>/reset-password</td>
+  <td align="left">Y/N</td>
+</tr>
+  </tbody>
+</table><h3 id="ServiceSubscriptionOps">Subscription Operations</h3>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON/XML Support?</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">Subscription</td>
+  <td align="left"><a href="#ServiceDetailsCreateSubscription">Create a new subscription</a></td>
+  <td align="left">POST</td>
+  <td align="left">{BaseUri}/subscriptions</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Subscription</td>
+  <td align="left"><a href="#ServiceDetailsListSubscription">List all subscriptions</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/subscriptions</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Subscription</td>
+  <td align="left"><a href="#ServiceDetailsSpecificSubscription">Get a specific subscription</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/subscriptions/<em>subscription_id</em></td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Subscription</td>
+  <td align="left"><a href="#ServiceDetailsDeleteSubscription">Delete a specific subscription</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">{BaseUri}/subscriptions/<em>subscription_id</em></td>
+  <td align="left">Y/N</td>
+</tr>
+  </tbody>
+</table><h3 id="ServiceNotificationOps">Notification Method Operations</h3>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON/XML Support?</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">Notification Method</td>
+  <td align="left"><a href="#ServiceDetailsCreateNotification">Create a new notification method</a></td>
+  <td align="left">POST</td>
+  <td align="left">{BaseUri}/notification-methods</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Notification Method</td>
+  <td align="left"><a href="#ServiceDetailsListNotification">List all notification methods</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/notification-methods</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Notification Method</td>
+  <td align="left"><a href="#ServiceDetailsSpecificNotification">Get a specific notification method</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/notification-methods/<em>notification_method_id</em></td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Notification Method</td>
+  <td align="left"><a href="#ServiceDetailsDeleteNotification">Delete a specific notification method</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">{BaseUri}/notification-methods/<em>notification_method_id</em></td>
+  <td align="left">Y/N</td>
+</tr>
+  </tbody>
+</table><h3 id="ServiceNotificationAddressOps">Notification Address Operations</h3>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON/XML Support?</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">Notification Address</td>
+  <td align="left"><a href="#ServiceDetailsCreateAddress">Create a new notification address</a></td>
+  <td align="left">POST</td>
+  <td align="left">{BaseUri}/notification-addresses</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Notification Address</td>
+  <td align="left"><a href="#ServiceDetailsListAddress">List all notification addresses</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/notification-addresses</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Notification Address</td>
+  <td align="left"><a href="#ServiceDetailsSpecificAddress">Get a specific notification address</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/notification-addresses/<em>notification_address_id</em></td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Notification Address</td>
+  <td align="left"><a href="#ServiceDetailsDeleteAddress">Delete a specific notification address</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">{BaseUri}/notification-addresses/<em>notification_address_id</em></td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Notification Address</td>
+  <td align="left"><a href="#ServiceDetailsValidateAddress">Validate received validation code for a specific notification address</a></td>
+  <td align="left">POST</td>
+  <td align="left">{BaseUri}/notification-addresses/validate</td>
+  <td align="left">Y/N</td>
+</tr>
+  </tbody>
+</table><h3 id="ServiceAlarmOps">Alarm Operations</h3>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON/XML Support?</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">Alarm</td>
+  <td align="left"><a href="#ServiceDetailsCreateAlarm">Create a new alarm</a></td>
+  <td align="left">POST</td>
+  <td align="left">{BaseUri}/alarms</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Alarm</td>
+  <td align="left"><a href="#ServiceDetailsListAlarm">List all alarms</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/alarms</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Alarm</td>
+  <td align="left"><a href="#ServiceDetailsSpecificAlarm">Get a specific alarm</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/alarms/<em>alarm_id</em></td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Alarm</td>
+  <td align="left"><a href="#ServiceDetailsDeleteAlarm">Delete a specific alarm</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">{BaseUri}/alarms/<em>alarm_id</em></td>
+  <td align="left">Y/N</td>
+</tr>
+  </tbody>
+</table><h3 id="ServiceMetricsOps">Metrics Operations</h3>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON/XML Support?</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">Metrics</td>
+  <td align="left"><a href="#ServiceDetailsCreateMetric">Create a new metric</a></td>
+  <td align="left">POST</td>
+  <td align="left">{BaseUri}/metrics</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Metrics</td>
+  <td align="left"><a href="#ServiceDetailsCreateMetrics">Create new aggregated metrics</a></td>
+  <td align="left">POST</td>
+  <td align="left">{BaseUri}/metrics/aggregate</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Metrics</td>
+  <td align="left"><a href="#ServiceDetailsGetMetrics">Get metric datapoints</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/metrics</td>
+  <td align="left">Y/N</td>
+</tr>
+  </tbody>
+</table><h3 id="ServiceMeteringOps">Metering Operations</h3>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON/XML Support?</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">Metering</td>
+  <td align="left"><a href="#ServiceDetailsSetMonitoringLevel">Set the Monitoring Level</a></td>
+  <td align="left">POST</td>
+  <td align="left">{BaseUri}/metering</td>
+  <td align="left">Y/N</td>
+</tr>
+    <tr><td align="left">Metering</td>
+  <td align="left"><a href="#ServiceDetailsGetMonitoringLevel">Get the Monitoring Level</a></td>
+  <td align="left">GET</td>
+  <td align="left">{BaseUri}/metering</td>
+  <td align="left">Y/N</td>
+</tr>
+  </tbody>
+</table><h3 id="CommonRequests">4.2 Common Requests</h3>
+
+<h4 id="CommonRequestHeaders">4.2.1 Common Request Headers</h4>
+
+<p>
+  <strong>Http standard request headers</strong>
+</p>
+
+<ul><li><p><em>Accept</em></p>
+
+<p>Internet media types that are acceptable in the response. Monitoring supports the media types application/xml and application/json.</p></li>
+<li><p><em>Content-Length</em></p>
+
+<p>The length of the request body in octets (8-bit bytes).</p></li>
+<li><p><em>Content-Type</em></p>
+
+<p>The Internet media type of the request body. Used with POST and PUT requests. Must be either application/xml or application/json.</p></li>
+<li><p><em>Host</em></p>
+
+<p>The domain name of the server hosting Monitoring.</p></li>
+</ul><p>
+  <strong>Non-standard request headers</strong>
+</p>
+
+<ul><li><p><em>X-Auth-Token</em></p>
+
+<p>HP Helion authorization token.</p></li>
+</ul><p>
+  <strong>Example</strong>
+</p>
+
+<pre>
+  <code>POST /v1.1/subscriptions HTTP/1.1
+Host: region-a.geo-1.monitoring.hpcloudsvc.com
+Content-Type: application/json
+Accept: application/json
+X-Auth-Token: HPAuth_2895c13b1118e23d977f6a21aa176fd2bd8a10e04b74bd8e353216072968832a
+Content-Length: 85
+</code>
+</pre>
+
+<h3 id="CommonResponses">4.3 Common Responses</h3>
+
+<h4 id="CommonResponseHeaders">4.3.1 Common Response Headers</h4>
+
+<p>
+  <strong>Http standard response headers</strong>
+</p>
+
+<ul><li><p><em>Content-Length</em></p>
+
+<p>The length of the response body in octets (8-bit bytes).</p></li>
+<li><p><em>Content-Type</em></p>
+
+<p>Internet media type of the response body.</p></li>
+<li><p><em>Date</em></p>
+
+<p>The date and time that the response was sent.</p></li>
+</ul><p>
+  <strong>Example</strong>
+</p>
+
+<pre>
+  <code>HTTP/1.1 200 OK
+Content-Length: 1135
+Content-Type: application/json; charset=UTF-8
+Date: Tue, 30 Oct 2012 16:22:35 GMT
+</code>
+</pre>
+
+<h3 id="ServiceDetails">4.4 Service API Operation Details</h3>
+
+<h4 id="ServiceDetailsVersion">4.4.1 Versions</h4>
+
+<p>Provides information about the supported Monitoring API versions.</p>
+
+<h5 id="ServiceDetailsListVersion">4.4.1.1 List All Versions</h5>
+
+<h5 id="get-">GET /</h5>
+
+<p>Lists all versions.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET / HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">id</td>
+  <td align="left">string</td>
+  <td align="left">API version number.</td>
+</tr>
+    <tr><td align="left">rel</td>
+  <td align="left">string</td>
+  <td align="left">Relationship type.</td>
+</tr>
+    <tr><td align="left">href</td>
+  <td align="left">string</td>
+  <td align="left">Hypermedia reference.</td>
+</tr>
+    <tr><td align="left">status</td>
+  <td align="left">string</td>
+  <td align="left">Status of the API, if it is active and/or current.</td>
+</tr>
+    <tr><td align="left">updated</td>
+  <td align="left">timestamp</td>
+  <td align="left">Internal timestamp of when the API was released.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<pre>
+  <code>{  
+  "versions": [
+    {
+      "id": "1.0",
+      "links" : [
+        {
+          "rel": "self",
+          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/1.0"
+        }
+      ],
+      "status": "DEPRECATED",
+      "updated": "1361977272958"
+    },
+    {
+      "id": "1.1",
+      "links" : [
+        {
+          "rel": "self",
+          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/1.1"
+        }
+      ],
+      "status": "CURRENT",
+      "updated": "1361977272958"
+    }
+  ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsSpecificVersion">4.4.1.2 Get a Specific Version</h5>
+
+<h5 id="get-version-id">GET /{version_id}</h5>
+
+<p>Gets the details of a specific version identified by <code>{version_id}</code>.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1 HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsListVersion">4.4.1.1 List All Versions</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{  
+  "version": {
+    "id": "1.1",
+    "links" : [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1"
+      }
+    ],
+    "status": "CURRENT",
+    "updated": "2012-09-25T00:00:00Z"
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1 \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h4 id="ServiceDetailsEndpoint">4.4.2 Endpoint</h4>
+
+<p>The endpoint resource represents an endpoint from which metrics can be consumed.</p>
+
+<p>
+  <strong>Note:</strong>
+</p>
+
+<ul><li>The amqp_password is not retrievable after endpoint creation. If the password is lost, then the password reset operation must be performed.*</li>
+<li>Only one Endpoint can be created at a time per project.</li>
+</ul><h5 id="ServiceDetailsCreateEndpoint">4.4.2.1 Create a New Endpoint</h5>
+
+<h5 id="post-endpoints">POST /endpoints</h5>
+
+<p>Creates a new endpoint for metric consumption. AMQP and URI information needs to be retained for accessing the message queue.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>POST /v1.1/endpoints HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<pre>
+  <code>HTTP/1.1 201 Created
+Content-Type: application/json
+Content-Length: 337
+Location: /v1.1/endpoints/${endpoint_id}
+</code>
+</pre>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>201 - Created</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">id</td>
+  <td align="left">string</td>
+  <td align="left">Return value id of the call.</td>
+</tr>
+    <tr><td align="left">rel</td>
+  <td align="left">string</td>
+  <td align="left">Relationship type.</td>
+</tr>
+    <tr><td align="left">href</td>
+  <td align="left">string</td>
+  <td align="left">Hypermedia reference.</td>
+</tr>
+    <tr><td align="left">uri</td>
+  <td align="left">string</td>
+  <td align="left">URI of the amqp router.</td>
+</tr>
+    <tr><td align="left">meta</td>
+  <td align="left">array</td>
+  <td align="left">Amqp router information.</td>
+</tr>
+    <tr><td align="left">amqp_password</td>
+  <td align="left">string</td>
+  <td align="left">Needed to access the amqp router.</td>
+</tr>
+    <tr><td align="left">amqp_username</td>
+  <td align="left">string</td>
+  <td align="left">Needed to access the amqp router.</td>
+</tr>
+    <tr><td align="left">amqp_queue</td>
+  <td align="left">string</td>
+  <td align="left">Needed to access the amqp router.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<pre>
+  <code>{
+  "endpoint": {
+    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
+      }
+    ],
+    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
+    "meta": {
+      "amqp_password":"GnbV94wW3MF90",
+      "amqp_username": "385937540",
+      "amqp_queue": "metrics-67892236969703",
+    }
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">409</td>
+  <td align="left">Conflict</td>
+  <td align="left">An endpoint for this project already exists.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>.</p>
+
+<pre>
+  <code>$ curl -i -X POST \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/endpoints \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsListEndpoint">4.4.2.2 List All Endpoints</h5>
+
+<h5 id="get-endpoints">GET /endpoints</h5>
+
+<p>Lists all endpoints. Password information is not present.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/endpoints HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsCreateEndpoint">4.4.2.1 Create a New Endpoint</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{
+  "endpoints": [
+    {
+      "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
+        }
+      ],
+      "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540"
+    },
+  ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/endpoints \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsSpecificEndpoint">4.4.2.3 Get a Specific Endpoint</h5>
+
+<h5 id="get-endpointsendpoint-id">GET /endpoints/${endpoint_id}</h5>
+
+<p>Gets the details of a specific endpoint identified by <code>${endpoint_id}</code>. Password information is not present.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/endpoints/${endpoint_id} HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsCreateEndpoint">4.4.2.1 Create a New Endpoint</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{
+  "endpoint": {
+    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/endpoints/eabe9e32-6ce0-4a36-9750-df415606b44c"
+      }
+    ],
+    "uri": "amqp://region-a.geo-1.amqp-monitoring.hpcloudsvc.com:5672/385937540",
+    "meta": {
+      "amqp_username": "385937540",
+      "amqp_queue": "metrics-67892236969703"
+    }
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace <code>${endpoint_id}</code> with the actual endpoint id.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/endpoints/${endpoint_id} \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsDeleteEndpoint">4.4.2.4 Delete a Specific Endpoint</h5>
+
+<h5 id="delete-endpointsendpoint-id">DELETE /endpoints/${endpoint_id}</h5>
+
+<p>Deletes a specific endpoint identified by <code>${endpoint_id}</code>.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>DELETE /v1.1/endpoints/${endpoint_id} HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>This call does not provide a response body.</p>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace <code>${endpoint_id}</code> with the actual endpoint id.</p>
+
+<pre>
+  <code>$ curl -i -X DELETE \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/endpoints/${endpoint_id} \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsResetPasswordEndpoint">4.4.2.4 Reset the Password for a Specific Endpoint</h5>
+
+<h5 id="post-endpointsendpoint-idreset-password">POST /endpoints/${endpoint_id}/reset-password</h5>
+
+<p>Resets the password for a specific endpoint identified by <code>${endpoint_id}</code>.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>POST /v1.1/endpoints/${endpoint_id}/reset-password HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">password</td>
+  <td align="left">string</td>
+  <td align="left">Newly created amqp_password</td>
+</tr>
+  </tbody>
+</table><pre>
+  <code>{
+  "password": "mEfOy34qJV"
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace <code>${endpoint_id}</code> with the actual endpoint id.</p>
+
+<pre>
+  <code>$ curl -i -X POST \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/endpoints/${endpoint_id}/reset-password \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h4 id="ServiceDetailsSubscription">4.4.3 Subscription</h4>
+
+<p>The subscription resource represents a subscription to consume metrics.</p>
+
+<p><strong>Note:</strong> Only AMQP basicConsume functionality is allowed. You cannot create queues or exchanges.</p>
+
+<h5 id="ServiceDetailsCreateSubscription">4.4.3.1 Create a New Subscription</h5>
+
+<h5 id="post-subscriptions">POST /subscriptions</h5>
+
+<p>Creates a new subscription to consume metrics.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>POST /v1.1/subscriptions HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+Content-Type: application/json
+Accept: application/json
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">endpoint_id</td>
+  <td align="left">string</td>
+  <td align="left">The id of an endpoint to subscribe to or view.</td>
+</tr>
+    <tr><td align="left">namespace</td>
+  <td align="left">string</td>
+  <td align="left">The namespace of the metrics to receive. See <a href="#Namespaces">Namespaces</a>.</td>
+</tr>
+    <tr><td align="left">dimensions</td>
+  <td align="left">dictionary</td>
+  <td align="left">The dimensions of metrics to receive. May be empty for user defined namespaces. See <a href="#Namespaces">Dimensions</a>.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<pre>
+  <code>{
+  "subscription": {
+    "endpoint_id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+    "namespace": "hpcs.compute",
+    "dimensions": {
+      "instance_id": "31ff6820-7c86-11e2-b92a-0800200c9a66"
+    }
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<pre>
+  <code>HTTP/1.1 201 Created
+Content-Type: application/json
+Content-Length: 337
+Location: /v1.1/subscriptions/${subscription_id}
+</code>
+</pre>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>201 - Created</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">id</td>
+  <td align="left">string</td>
+  <td align="left">Return value id of the call.</td>
+</tr>
+    <tr><td align="left">rel</td>
+  <td align="left">string</td>
+  <td align="left">Relationship type.</td>
+</tr>
+    <tr><td align="left">href</td>
+  <td align="left">string</td>
+  <td align="left">Hypermedia reference.</td>
+</tr>
+    <tr><td align="left">endpoint_id</td>
+  <td align="left">string</td>
+  <td align="left">The id of an endpoint to subscribe to or view.</td>
+</tr>
+    <tr><td align="left">namespace</td>
+  <td align="left">string</td>
+  <td align="left">The namespace of the metrics to receive. See <a href="#Namespaces">Namespaces</a>.</td>
+</tr>
+    <tr><td align="left">dimensions</td>
+  <td align="left">dictionary</td>
+  <td align="left">The dimensions of metrics to receive. See <a href="#Namespaces">Dimensions</a>.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<pre>
+  <code>{
+  "subscriptions": {
+    "id": "cdace7b4-8bea-404c-848c-860754a76fb7",
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/subscriptions/cdace7b4-8bea-404c-848c-860754a76fb7"
+      }
+    ],
+    "endpoint_id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+    "namespace": "hpcs.compute",
+    "dimensions": {
+      "instance_id": "31ff6820-7c86-11e2-b92a-0800200c9a66"
+    }
+    "meta": {}
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">409</td>
+  <td align="left">Conflict</td>
+  <td align="left">A Subscription for this combination of endpoint_id, namespace, and dimension already exists for this project.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace the values for <code>endpoint_id</code>, <code>namespace</code>, <code>instance_id</code>.</p>
+
+<pre>
+  <code>$ curl -i -X POST \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/subscriptions \
+  -H "X-Auth-Token: ${Auth_Token}" -H "Content-Type: application/json" -H "Accept: application/json" \
+  -d '{"subscription": {"endpoint_id": "4d159ef6-0b6a-439b-a5bf-07459e1005b8", "namespace": "hpcs.compute", "dimensions": {"instance_id": "31ff6820-7c86-11e2-b92a-0800200c9a66"}}}'
+</code>
+</pre>
+
+<h5 id="ServiceDetailsListSubscription">4.4.3.2 List All Subscriptions</h5>
+
+<h5 id="get-subscriptions">GET /subscriptions</h5>
+
+<p>Lists all subscriptions.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/subscriptions HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsCreateSubscription">4.4.3.1 Create a New Subscription</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{
+  "subscriptions": [
+    {
+      "id": "cdace7b4-8bea-404c-848c-860754a76fb7",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/subscriptions/cdace7b4-8bea-404c-848c-860754a76fb7"
+        }
+      ],
+      "endpoint_id": "36351ef0-3ff3-11e2-a25f-0800200c9a66",
+      "namespace": "hpcs.compute",
+      "dimensions": {
+        "instance_id": "31ff6820-7c86-11e2-b92a-0800200c9a66"
+      }
+    },
+    {
+      "id": "abce9e32-6ce0-4a36-9750-df415606babc",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/subscriptions/abce9e32-6ce0-4a36-9750-df415606babc"
+        }
+      ],
+      "endpoint_id": "3d713b90-3ff3-11e2-a25f-0800200c9a66",
+      "namespace": "hpcs.compute",
+      "dimensions": {
+        "instance_id": "42ff6820-7c86-11e2-b92a-0800200c9a67"
+      }
+    }
+  ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/subscriptions \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsSpecificSubscription">4.4.3.3 Get a Specific Subscription</h5>
+
+<h5 id="get-subscriptionssubscription-id">GET /subscriptions/${subscription_id}</h5>
+
+<p>Gets the details of a specific subscription identified by ${subscription_id}.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/subscriptions/${subscription_id} HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsCreateSubscription">4.4.3.1 Create a New Subscription</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{
+  "subscription": {
+    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/subscriptions/eabe9e32-6ce0-4a36-9750-df415606b44c"
+      }
+    ],
+    "endpoint_id": "36351ef0-3ff3-11e2-a25f-0800200c9a66",
+    "namespace": "hpcs.compute",
+    "dimensions": {
+      "instance_id": "31ff6820-7c86-11e2-b92a-0800200c9a66"
+    },
+    "meta": {}
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace <code>${subscription_id}</code> with the actual subscription id.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/subscriptions/${subscription_id} \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsDeleteSubscription">4.4.3.4 Delete a Specific Subscription</h5>
+
+<h5 id="delete-subscriptionssubscription-id">DELETE /subscriptions/${subscription_id}</h5>
+
+<p>Deletes a specific subscription identified by ${subscription_id}.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>DELETE /v1.1/subscriptions/${subscription_id} HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>This call does not provide a response body.</p>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace <code>${subscription_id}</code> with the actual subscriptions id.</p>
+
+<pre>
+  <code>$ curl -i -X DELETE \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/subscriptions/${subscription_id} \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h4 id="ServiceDetailsNotification">4.4.4 Notification Method</h4>
+
+<p>The notification method resource represents a method through which notifications can be sent.</p>
+
+<p><strong>Note:</strong> SMS is currently only supported for US customers.</p>
+
+<h5 id="ServiceDetailsCreateNotification">4.4.4.1 Create a New Notification Method</h5>
+
+<h5 id="post-notification-methods">POST /notification-methods</h5>
+
+<p>Creates a new notification method through which notifications can be sent when an alarm is triggered.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>POST /v1.1/notification-methods HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+Content-Type: application/json
+Accept: application/json
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">name</td>
+  <td align="left">string (250)</td>
+  <td align="left">A descriptive name.</td>
+</tr>
+    <tr><td align="left">type</td>
+  <td align="left">enumeration</td>
+  <td align="left">The type of notification method (SMS, EMAIL).</td>
+</tr>
+    <tr><td align="left">address</td>
+  <td align="left">string (100)</td>
+  <td align="left">The address / number to notify.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<pre>
+  <code>{
+  "notification_method": {
+    "name": "Joe's Email",
+    "type": "EMAIL",
+    "address": "joe@mail.com"
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<pre>
+  <code>HTTP/1.1 201 Created
+Content-Type: application/json
+Content-Length: 337
+Location: /v1.1/notification-methods/${notification_method_id}
+</code>
+</pre>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>201 - Created</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">id</td>
+  <td align="left">string</td>
+  <td align="left">Return value id of the call.</td>
+</tr>
+    <tr><td align="left">rel</td>
+  <td align="left">string</td>
+  <td align="left">Relationship type.</td>
+</tr>
+    <tr><td align="left">href</td>
+  <td align="left">string</td>
+  <td align="left">Hypermedia reference.</td>
+</tr>
+    <tr><td align="left">name</td>
+  <td align="left">string</td>
+  <td align="left">A descriptive name.</td>
+</tr>
+    <tr><td align="left">type</td>
+  <td align="left">string / enumeration</td>
+  <td align="left">The type of notification method (SMS, EMAIL).</td>
+</tr>
+    <tr><td align="left">address</td>
+  <td align="left">string</td>
+  <td align="left">The address / number to notify.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<pre>
+  <code>{
+  "notification_method": {
+    "id": "acb8ad2b-6ce0-4a36-9750-a78bc7da87a2",
+    "links" : [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
+      }
+    ],
+    "name": "Joe's Email",
+    "type": "EMAIL",
+    "address": "joe@mail.com"
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace the values for <code>name</code>, <code>type</code>, and <code>address</code>.</p>
+
+<pre>
+  <code>$ curl -i -X POST \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-methods \
+  -H "Content-Type: application/json" -H "Accept: application/json" \
+  -H "X-Auth-Token: ${Auth_Token}" \
+  -d '{"notification_method": {"name": "Joe'\''s Email", "type": "EMAIL", "address": "joe@mail.com"}}'
+</code>
+</pre>
+
+<h5 id="ServiceDetailsListNotification">4.4.4.2 List All Notification Methods</h5>
+
+<h5 id="get-notification-methods">GET /notification-methods</h5>
+
+<p>Lists all notification methods.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/notification-methods HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsCreateNotification">4.4.4.1 Create a New Notification Method</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{
+  "notification_methods": [
+    {
+      "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+      "links" : [
+        {
+          "rel": "self",
+          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
+        }
+      ],
+      "name": "Joe's Email",
+      "type": "EMAIL",
+      "address": "joe@mail.com"
+    },
+    {
+      "id": "acb8ad2b-6ce0-4a36-9750-a78bc7da87a2",
+      "links" : [
+        {
+          "rel": "self",
+          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-methods/acb8ad2b-6ce0-4a36-9750-a78bc7da87a2"
+        }
+      ],
+      "name": "Joe's Phone",
+      "type": "SMS",
+      "address": "+12063823454"
+    }
+  ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-methods \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsSpecificNotification">4.4.4.3 Get a Specific Notification Method</h5>
+
+<h5 id="get-notification-methodsnotification-method-id">GET /notification-methods/${notification_method_id}</h5>
+
+<p>Gets the details of a specific notification method identified by <code>${notification_method_id}</code>.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/notification-methods/${notification_method_id} HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsCreateNotification">4.4.4.1 Create a New Notification Method</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{
+  "notification_method": {
+    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+    "links" : [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-methods/eabe9e32-6ce0-4a36-9750-df415606b44c"
+      }
+    ],
+    "name": "Joe's Email",
+    "type": "EMAIL",
+    "address": "joe@mail.com"
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace <code>${notification_method_id}</code> with the actual notification-method id.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-methods/${notification_method_id} \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsDeleteNotification">4.4.4.4 Delete a Specific Notification Method</h5>
+
+<h5 id="delete-notification-methodsnotification-method-id">DELETE /notification-methods/${notification_method_id}</h5>
+
+<p>Deletes a specific notification method identified by <code>${notification_method_id}</code>.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>DELETE /v1.1/notification-methods/${notification_method_id} HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>This call does not provide a response body.</p>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace <code>${notification_method_id}</code> with the actual notification-method id.</p>
+
+<pre>
+  <code>$ curl -i -X DELETE \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-methods/${notification_method_id} \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h4 id="ServiceDetailsNotificationAddress">4.4.5 Notification Address</h4>
+
+<p>In order to avoid misuses of the notification system, the Monitoring API requires that email and SMS addresses be validated before notifications are sent. The notification address resource represents validated address to which notifications can be sent. Notifications destined for addresses which have not been validated will not be
+delivered.</p>
+
+<p><strong>Note:</strong> SMS is currently only supported for US customers.</p>
+
+<p>Validation of notification addresses is a two step process:</p>
+
+<ol><li>Create a new notification address by <a href="#ServiceDetailsCreateAddress">sending a POST command to the /notification-addresses resource</a>.</li>
+<li>Taking the validation code delivered to the new address and <a href="#ServiceDetailsValidateAddress">sending a POST command to the /notification-addresses/validate resource</a>.</li>
+</ol><p>The validation code sent by the monitoring notification API is not returned by the POST command in step 1 above. Rather it is used to prove that the sender of the API command has access to the notification address.</p>
+
+<h5 id="ServiceDetailsCreateAddress">4.4.5.1 Create a New Notification Address</h5>
+
+<h5 id="post-notification-addresses">POST /notification-addresses</h5>
+
+<p>Creates a new notification address through which notifications can be sent when an alarm is triggered.</p>
+
+<p><strong>Note:</strong> A status code of 400 will be returned if the notification address could not be validated. Addresses of type EMAIL the address should be deliverable by a standards-confirming SMTP server. For addresses of type SMS the address should be in the E.164 format for international telephone numbers. This requires a leading + (plus sign) followed by the country code, then the regional number.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>POST /v1.1/notification-addresses HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+Content-Type: application/json
+Accept: application/json
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">type</td>
+  <td align="left">enumeration</td>
+  <td align="left">The type of notification address (SMS, EMAIL).</td>
+</tr>
+    <tr><td align="left">address</td>
+  <td align="left">string (100)</td>
+  <td align="left">The address / number to verify.</td>
+</tr>
+    <tr><td align="left">name</td>
+  <td align="left">string (100)</td>
+  <td align="left">A textual description of the address.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<pre>
+  <code>{
+  "notification_address": {
+    "type": "EMAIL",
+    "address": "joe@mail.com",
+    "name": "Joe's email"
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<pre>
+  <code>HTTP/1.1 201 Created
+Content-Type: application/json
+Content-Length: 337
+Location: /v1.1/notification-addresses/${notification_addresses_id}
+</code>
+</pre>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>201 - Created</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">id</td>
+  <td align="left">string</td>
+  <td align="left">Return value id of the call.</td>
+</tr>
+    <tr><td align="left">rel</td>
+  <td align="left">string</td>
+  <td align="left">Relationship type.</td>
+</tr>
+    <tr><td align="left">href</td>
+  <td align="left">string</td>
+  <td align="left">Hypermedia reference.</td>
+</tr>
+    <tr><td align="left">type</td>
+  <td align="left">string / enumeration</td>
+  <td align="left">The type of notification address (SMS, EMAIL).</td>
+</tr>
+    <tr><td align="left">address</td>
+  <td align="left">string</td>
+  <td align="left">The address / number to notify.</td>
+</tr>
+    <tr><td align="left">name</td>
+  <td align="left">string</td>
+  <td align="left">The textual description of the address.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<pre>
+  <code>{
+  "notification_address": {
+    "id": "ada28363-a4dc-4bda-85f4-fd37dea6f543",
+    "links" : [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-address/ada28363-a4dc-4bda-85f4-fd37dea6f543"
+      }
+    ],
+    "type": "EMAIL",
+    "state": "in-progress",
+    "address": "joe@mail.com",
+    "name": "Joe's email"
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace the values for <code>type</code> and <code>address</code>.</p>
+
+<pre>
+  <code>$ curl -i -X POST \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-addresses \
+  -H "Content-Type: application/json" -H "Accept: application/json" \
+  -H "X-Auth-Token: ${Auth_Token}" \
+  -d '{"notification_address": {"type": "EMAIL", "address": "joe@mail.com", "name": "Joe email"}}'
+</code>
+</pre>
+
+<h5 id="ServiceDetailsListAddress">4.4.5.2 List All Notification Addresses</h5>
+
+<h5 id="get-notification-addresses">GET /notification-addresses</h5>
+
+<p>Lists all notification addresses.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/notification-addresses HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsCreateAddress">4.4.5.1 Create a New Notification Address</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{
+  "notification_addresses": [
+    {
+      "id": "ada28363-a4dc-4bda-85f4-fd37dea6f543",
+      "links" : [
+        {
+          "rel": "self",
+          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-addresses/ada28363-a4dc-4bda-85f4-fd37dea6f543"
+        }
+      ],
+      "type": "EMAIL",
+      "state": "in-progress",
+      "address": "joe@mail.com",
+      "name": "Joe's email"
+    },
+    {
+      "id": "d6f1f349-0832-492b-8117-32c81497eba0",
+      "links" : [
+        {
+          "rel": "self",
+          "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-addresses/d6f1f349-0832-492b-8117-32c81497eba0"
+        }
+      ],
+      "type": "SMS",
+      "state": "verified",
+      "address": "+12063823454",
+      "name": "Joe's SMS"
+    }
+  ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-addresses \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsSpecificAddress">4.4.5.3 Get a Specific Notification Address</h5>
+
+<h5 id="get-notification-addressesnotification-addresses-id">GET /notification-addresses/${notification_addresses_id}</h5>
+
+<p>Gets the details of a specific notification address identified by <code>${notification_addresses_id}</code>.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/notification-addresses/ HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsCreateAddress">4.4.5.1 Create a New Notification Address</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{
+  "notification_address": {
+    "id": "ada28363-a4dc-4bda-85f4-fd37dea6f543",
+    "links" : [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-addresses/ada28363-a4dc-4bda-85f4-fd37dea6f543"
+      }
+    ],
+    "type": "EMAIL",
+    "state": "verified",
+    "address": "joe@mail.com",
+    "name": "Joe's email"
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace <code>${notification_addresses_id}</code> with the actual notification-addresses id.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-addresses/${notification_addresses_id} \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsDeleteAddress">4.4.5.4 Delete a Specific Notification Address</h5>
+
+<h5 id="delete-notification-addressesnotification-addresses-id">DELETE /notification-addresses/${notification_addresses_id}</h5>
+
+<p>Deletes a specific notification address identified by <code>${notification_addresses_id}</code>.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>DELETE /v1.1/notification-addresses/${notification_addresses_id} HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>This call does not provide a response body.</p>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace <code>${notification_addresses_id}</code> with the actual notification-addresses id.</p>
+
+<pre>
+  <code>$ curl -i -X DELETE \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-addresses/${notification_addresses_id} \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsValidateAddress">4.4.5.6 Validate a Specific Notification Address</h5>
+
+<h5 id="post-notification-addressesvalidate">POST /notification-addresses/validate</h5>
+
+<p>Validate an address by passing the validation code sent by the monitoring service to the address as the result of a notification address request. Knowledge of the value of the validation code implies that the project has access to the address and is willing to accept notifications from the monitoring service.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>POST /v1.1/notification-addresses/validate HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+Content-Type: application/json
+Accept: application/json
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">validation_code</td>
+  <td align="left">string</td>
+  <td align="left">The validation code delivered to the notification address as a result of a notification address request.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<pre>
+  <code>{
+  "validation_code": "123456789"
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>This call does not provide a response body.</p>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>$ curl -i -X POST \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/notification-addresses/validate \
+  -H "Content-Type: application/json" -H "Accept: application/json" -d '{"validation_code": "1234567890"}'
+</code>
+</pre>
+
+<h4 id="ServiceDetailsAlarm">4.4.6 Alarm</h4>
+
+<p>The alarm resource identifies a particular metric scoped by namespace, metric type, and dimensions, which should trigger a set of actions when the value of the metric exceeds a threshold as determined by an expression. Alarm polling is done once every 60 seconds.</p>
+
+<p><strong>Note:</strong> See <a href="#AlarmExpressions">Alarm Expressions</a> for how to write the expression.</p>
+
+<p>
+  <strong>State Lifecycle</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">State</th>
+  <th align="left">Definition</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">UNDETERMINED</td>
+  <td align="left">The state of the alarm cannot be determined. An alarm starts in this state and can re-enter this state if it doesn't receive metric values for a while</td>
+</tr>
+    <tr><td align="left">OK</td>
+  <td align="left">The threshold is not passed, no notification is sent</td>
+</tr>
+    <tr><td align="left">ALARM</td>
+  <td align="left">The threshold has been passed, a notification has been sent</td>
+</tr>
+  </tbody>
+</table><h5 id="ServiceDetailsCreateAlarm">4.4.6.1 Create a New Alarm</h5>
+
+<h5 id="post-alarms">POST /alarms</h5>
+
+<p>Creates a new alarm.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>POST /v1.1/alarms HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+Content-Type: application/json
+Accept: application/json
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">name</td>
+  <td align="left">string (250)</td>
+  <td align="left">A descriptive name.</td>
+</tr>
+    <tr><td align="left">expression</td>
+  <td align="left">string</td>
+  <td align="left">An expression, which if true, triggers a notification to be sent. See <a href="#AlarmExpressions">Alarm Expressions</a> for how to write an expression.</td>
+</tr>
+    <tr><td align="left">alarm_actions</td>
+  <td align="left">array</td>
+  <td align="left">Methods through which notifications (notification id) should be sent when transitioning to an ALARM state.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<pre>
+  <code>{
+  "alarm": {
+    "name": "Disk exceeds 1k operations per measurement period",
+    "expression": "avg(hpcs.compute{metric_name=disk_read_ops, device=vda, instance_id=31ff6820-7c86-11e2-b92a-0800200c9a66}) &gt;= 1000",
+    "alarm_actions": [
+      "036609b0-3d6b-11e2-a25f-0800200c9a66",
+      "1221dba0-3d6b-11e2-a25f-0800200c9a66"
+    ]
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<pre>
+  <code>HTTP/1.1 201 Created
+Content-Type: application/json
+Content-Length: 337
+Location: /v1.1/alarms/${alarm_id}
+</code>
+</pre>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>201 - Created</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">id</td>
+  <td align="left">string</td>
+  <td align="left">Return value id of the call.</td>
+</tr>
+    <tr><td align="left">rel</td>
+  <td align="left">string</td>
+  <td align="left">Relationship type.</td>
+</tr>
+    <tr><td align="left">href</td>
+  <td align="left">string</td>
+  <td align="left">Hypermedia reference.</td>
+</tr>
+    <tr><td align="left">name</td>
+  <td align="left">string</td>
+  <td align="left">A descriptive name.</td>
+</tr>
+    <tr><td align="left">expression</td>
+  <td align="left">string</td>
+  <td align="left">An expression, which if true, triggers a notification to be sent. See <a href="#AlarmExpressions">Alarm Expressions</a> for how to write an expression.</td>
+</tr>
+    <tr><td align="left">state</td>
+  <td align="left">string</td>
+  <td align="left">The alarm state. See State Lifecycle above.</td>
+</tr>
+    <tr><td align="left">alarm_actions</td>
+  <td align="left">array</td>
+  <td align="left">Methods through which notifications (notification id) should be sent when transitioning to an ALARM state.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<pre>
+  <code>{
+  "alarm": {
+    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
+      }
+    ],
+    "name": "Disk exceeds 1k operations per measurement period",
+    "expression": "avg(hpcs.compute{metric_name=disk_read_ops, device=vda, instance_id=31ff6820-7c86-11e2-b92a-0800200c9a66}) &gt;= 1000",
+    "state": "UNDETERMINED",
+    "alarm_actions": [
+      "036609b0-3d6b-11e2-a25f-0800200c9a66",
+      "1221dba0-3d6b-11e2-a25f-0800200c9a66"
+    ]
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">409</td>
+  <td align="left">Conflict</td>
+  <td align="left">An Alarm for this combination of values already exists for this project.</td>
+</tr>
+    <tr><td align="left">422</td>
+  <td align="left">Unprocessable Entity</td>
+  <td align="left">The metric json contained errors.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace the values for <code>name</code>, <code>expression</code>, <code>alarm_actions</code>.</p>
+
+<pre>
+  <code>$ curl -i -X POST \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/alarms \
+  -H "Content-Type: application/json" -H "Accept: application/json" \
+  -H "X-Auth-Token: ${Auth_Token}" \
+  -d '{"alarm": {"name": "Disk exceeds 1k operations per measurement period", "expression": "avg(hpcs.compute{metric_name=disk_read_ops, device=vda, instance_id=31ff6820-7c86-11e2-b92a-0800200c9a66}) &gt;= 1000", "alarm_actions": ["036609b0-3d6b-11e2-a25f-0800200c9a66", "1221dba0-3d6b-11e2-a25f-0800200c9a66"]}}'
+</code>
+</pre>
+
+<h5 id="ServiceDetailsListAlarm">4.4.6.2 List All Alarms</h5>
+
+<h5 id="get-alarms">GET /alarms</h5>
+
+<p>Lists all alarms.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/alarms HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsCreateAlarm">4.4.6.1 Create a New Alarm</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{
+  "alarms": [
+    {
+    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
+      }
+    ],
+    "name": "Disk exceeds 1k operations per measurement period",
+    "expression": "avg(hpcs.compute{metric_name=disk_read_ops, device=vda, instance_id=31ff6820-7c86-11e2-b92a-0800200c9a66}) &gt;= 1000",
+    "state": "OK",
+    }
+  ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/alarms \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsSpecificAlarm">4.4.6.3 Get a Specific Alarm</h5>
+
+<h5 id="get-alarmsalarm-id">GET /alarms/${alarm_id}</h5>
+
+<p>Gets the details of a specific alarms identified by <code>${alarm_id}</code>.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/alarms/${alarm_id} HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsCreateAlarm">4.4.6.1 Create a New Alarm</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{
+  "alarm": {
+    "id": "eabe9e32-6ce0-4a36-9750-df415606b44c",
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/alarms/eabe9e32-6ce0-4a36-9750-df415606b44c"
+      }
+    ],
+    "name": "Disk exceeds 1k operations per measurement period",
+    "expression": "avg(hpcs.compute{metric_name=disk_read_ops, device=vda, instance_id=31ff6820-7c86-11e2-b92a-0800200c9a66}) &gt;= 1000",
+    "state": "OK",
+    "alarm_actions": [
+      "036609b0-3d6b-11e2-a25f-0800200c9a66",
+      "1221dba0-3d6b-11e2-a25f-0800200c9a66"
+    ]
+  }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace <code>${alarm_id}</code> with the actual alarm id.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/alarms/${alarm_id} \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsDeleteAlarm">4.4.6.4 Delete a Specific Alarm</h5>
+
+<h5 id="delete-alarmsalarm-id">DELETE /alarms/${alarm_id}</h5>
+
+<p>Deletes a specific alarm identified by <code>${alarm_id}</code>.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>DELETE /v1.1/alarms/${alarm_id} HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>This call does not provide a response body.</p>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Requested resource cannot be found.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace <code>${alarm_id}</code> with the actual alarm id.</p>
+
+<pre>
+  <code>$ curl -i -X DELETE \ 
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/alarms/${alarm_id} \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h4 id="ServiceDetailsMetrics">4.4.7 Metrics</h4>
+
+<p>The metrics resource allows the insertion of user defined metrics.</p>
+
+<h5 id="ServiceDetailsCreateMetric">4.4.7.1 Create a New Metric</h5>
+
+<h5 id="post-metrics">POST /metrics</h5>
+
+<p>Creates a new metric.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>POST /v1.1/metrics HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+Content-Type: application/json
+Accept: application/json
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">namespace</td>
+  <td align="left">string (64)</td>
+  <td align="left">User defined namespace (cannot conflict with a reserved namespace). See <a href="#Namespaces">Namespaces</a>.</td>
+</tr>
+    <tr><td align="left">dimensions</td>
+  <td align="left">dictionary</td>
+  <td align="left">(Optional) The dimensions of metrics to receive (each dimension type can only be used once in this call). User defined metrics do not require dimensions. See <a href="#Namespaces">Dimensions</a>.</td>
+</tr>
+    <tr><td align="left">timestamp</td>
+  <td align="left">integer (long)</td>
+  <td align="left">(Optional) Unix format timestamp for the message. This must be within 2 minutes into the future or 2 weeks into the past of the current UTC time. If not included, the current UTC time is inserted.</td>
+</tr>
+    <tr><td align="left">value</td>
+  <td align="left">double</td>
+  <td align="left">Metric value. Must be between 8.515920e-109 and 1.174271e+108 or zero.</td>
+</tr>
+    <tr><td align="left">time_values</td>
+  <td align="left">[ [ long, double ] ]</td>
+  <td align="left">Use instead of the value field to give a list of timestamp / value pairs.</td>
+</tr>
+  </tbody>
+</table><p>JSON</p>
+
+<p>The HP Helion Metrics JSON format is used for publishing new user defined metrics and for receiving all metrics from a subscription.</p>
+
+<p>
+  <strong>
+    <em>Scalar Metric</em>
+  </strong>
+</p>
+
+<pre>
+  <code>{
+    "namespace": "user_namespace"
+    "dimensions": {
+      "metric_name": "user_metric",
+      "instance_id": "31ff6820-7c86-11e2-b92a-0800200c9a66"
+    },
+    "timestamp": 123123123,
+    "value": 123.0
+}
+</code>
+</pre>
+
+<p>
+  <strong>
+    <em>Vector Metric</em>
+  </strong>
+</p>
+
+<pre>
+  <code>{
+    "namespace": "user_namespace"
+    "dimensions": {
+      "metric_name": "user_metric",
+      "instance_id": "31ff6820-7c86-11e2-b92a-0800200c9a66"
+    },
+    "timestamp": 123123123,
+    "time_values": [
+      [1366128488, 123.0], [1366128504, 0.0], [1366128494, 234.0]
+    ]
+}       
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>This call does not provide a response body.</p>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">409</td>
+  <td align="left">Conflict</td>
+  <td align="left">The namespace name conflicts with a reserved namespace.</td>
+</tr>
+    <tr><td align="left">422</td>
+  <td align="left">Unprocessable Entity</td>
+  <td align="left">The metric json contained errors.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace '${Auth_Token}' with the token returned from section <a href="#Accounts">Accounts</a>. Replace the values for 'namespace', 'type', 'dimensions', 'timestamp'.</p>
+
+<pre>
+  <code>$ curl -i -X POST \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/metrics \
+  -H "Content-Type: application/json" -H "Accept: application/json" \
+  -H "X-Auth-Token: ${Auth_Token}" \
+  -d '{"namespace": "user_namespace", "dimensions": {"metric_name": "user_metric", instance_id": "31ff6820-7c86-11e2-b92a-0800200c9a66"}, "timestamp": 123123123, "value": 123}'
+</code>
+</pre>
+
+<h5 id="ServiceDetailsCreateMetrics">4.4.7.2 Create New Aggregated Metrics</h5>
+
+<h5 id="post-metricsaggregate">POST /metrics/aggregate</h5>
+
+<p>Creates several new metrics with one call. Vector aggregate metrics can also be created.</p>
+
+<p><strong>Note:</strong> Aggregate metrics are split into scalar metrics internally.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>POST /v1.1/metrics/aggregate HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+Content-Type: application/json
+Accept: application/json
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsCreateMetric">4.4.7.1 Create a New Metric</a>.</p>
+
+<p>JSON</p>
+
+<p>The HP Helion Metrics JSON format is used for publishing new user defined metrics and for receiving all metrics from a subscription.</p>
+
+<p>
+  <strong>
+    <em>Scalar Aggregate Metric</em>
+  </strong>
+</p>
+
+<pre>
+  <code>[
+    {
+        "namespace": "user_namespace",
+        "dimensions": {
+          "metric_name": "user_metric",
+          "instance_id": "31ff6820-7c86-11e2-b92a-0800200c9a66"
+        },
+        "timestamp": 123123123,
+        "value": 123.0
+    },
+    {
+        "namespace": "user_namespace",
+        "dimensions": {
+          "metric_name": "user_metric2",
+          "instance_id": "423f6820-7c86-11e2-b92a-0800200c9bb7"
+        },
+        "timestamp": 123123123,
+        "value": 127.0
+    }
+]
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>This call does not provide a response body.</p>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">409</td>
+  <td align="left">Conflict</td>
+  <td align="left">The namespace name conflicts with a reserved namespace.</td>
+</tr>
+    <tr><td align="left">422</td>
+  <td align="left">Unprocessable Entity</td>
+  <td align="left">The metric json contained errors.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace the values for <code>namespace</code>, <code>type</code>, <code>dimensions</code>, <code>timestamp</code>.</p>
+
+<pre>
+  <code>$ curl -i -X POST \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/metrics \
+  -H "Content-Type: application/json" -H "Accept: application/json" \
+  -H "X-Auth-Token: ${Auth_Token}" \
+  -d '[{"namespace": "user_namespace", "dimensions": {"metric_name": "user_metric", instance_id": "31ff6820-7c86-11e2-b92a-0800200c9a66"}, "timestamp": 123123123, "value": 123},{"namespace": "user_namespace", "dimensions": {"metric_name": "user_metric2", instance_id": "423f6820-7c86-11e2-b92a-0800200c9bb7"}, "timestamp": 123123123, "value": 127}'
+</code>
+</pre>
+
+<h5 id="ServiceDetailsGetMetrics">4.4.7.3 Get metric datapoints</h5>
+
+<h5 id="get-metrics">GET /metrics</h5>
+
+<p>Gets a set of metric datapoints for a time range. Datapoints are aggregated by statistic for individual time periods over a broader time range.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/metrics?${query_parameters} HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Required</th>
+  <th align="left">Type</th>
+  <th align="left">Default Value</th>
+  <th align="left">Valid Values</th>
+  <th align="left">Example Value</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">namespace</td>
+  <td align="left">Y</td>
+  <td align="left">string</td>
+  <td align="left"></td>
+  <td align="left"></td>
+  <td align="left">user_namespace</td>
+  <td align="left">The namespace to get metric datapoints by.</td>
+</tr>
+    <tr><td align="left">dimensions</td>
+  <td align="left">Y</td>
+  <td align="left">comma separated key/value pairs</td>
+  <td align="left"></td>
+  <td align="left"></td>
+  <td align="left">metric_name:user_metric,instance_id:392633</td>
+  <td align="left">The dimensions to get metric datapoints by.</td>
+</tr>
+    <tr><td align="left">statistics</td>
+  <td align="left">Y</td>
+  <td align="left">comma separated statistics</td>
+  <td align="left"></td>
+  <td align="left">avg, sum, min, max, count</td>
+  <td align="left">avg,sum</td>
+  <td align="left">The statistics to aggregate datapoints by.</td>
+</tr>
+    <tr><td align="left">start_time</td>
+  <td align="left">Y</td>
+  <td align="left">ISO 8601 date/time</td>
+  <td align="left"></td>
+  <td align="left"></td>
+  <td align="left">2013-11-01T12:00Z</td>
+  <td align="left">The start time to query metric datapoint by.</td>
+</tr>
+    <tr><td align="left">end_time</td>
+  <td align="left">N</td>
+  <td align="left">ISO 8601 date/time</td>
+  <td align="left">Current time</td>
+  <td align="left"></td>
+  <td align="left">2013-11-02T12:00Z</td>
+  <td align="left">The end time to query metric datapoints by.</td>
+</tr>
+    <tr><td align="left">period</td>
+  <td align="left">N</td>
+  <td align="left">seconds</td>
+  <td align="left">300</td>
+  <td align="left"></td>
+  <td align="left">600</td>
+  <td align="left">The time period to aggregate datapoints by.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>[
+   {
+     "dimensions": {
+       "metric_name": "user_metric",
+       "instance_id": "31ff6820-7c86-11e2-b92a-0800200c9a66"
+     },
+     "datapoints": {
+       "timestamp": [13543534, 13543594, 13543654],
+       "avg": [12, 13, 14],
+       "min": [2, 3, 4],
+       "max": [20, 21, 22]
+      }
+   }
+]
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">The caller does not have the privilege required to perform the operation.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">Disabled or suspended user making the request or requested operation is forbidden.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Replace the query section with your specific query. Keep in mind that the command line may interpret '&amp;' or '?' as a shell operation, so you'll likely need to use single quotes around that section.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  'https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/metrics?namespace=user_namespace&amp;dimensions=metric_name:user_metric,instance_id:31ff6820-7c86-11e2-b92a-0800200c9a66&amp;statistics=avg&amp;start_time=2013-11-01T12:00Z&amp;end_time=2013-11-02T12:00Z&amp;period=300' \
+  -H "X-Auth-Token: ${Auth_Token}" 
+</code>
+</pre>
+
+<h4 id="ServiceDetailsVersion">4.4.8 Metering</h4>
+
+<p>Changes settings for support and billing. Premium support gives access to a higher resolution data rate.</p>
+
+<h5 id="ServiceDetailsSetMonitoringLevel">4.4.8.1 Set the Monitoring Level</h5>
+
+<h5 id="post-metering">POST /metering</h5>
+
+<p>Set the Monitoring Level to either "basic" or "premium"; basic is assumed if nothing is set.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>POST /v1.1/metering?${setting}=${value} HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Attributes</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">setting</td>
+  <td align="left">string</td>
+  <td align="left">Currently only "monitoring_level"</td>
+</tr>
+    <tr><td align="left">value</td>
+  <td align="left">string</td>
+  <td align="left">Either "basic" or "premium"</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{  
+  "setting": "monitoring_level",
+  "value": "basic"
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>. Keep in mind that the command line may interpret '?' as a shell operation, so you'll likely need to use single quotes around that section.</p>
+
+<pre>
+  <code>$ curl -i -X POST \
+  'https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/metering?monitoring_level=premium' \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+
+<h5 id="ServiceDetailsGetMonitoringLevel">4.4.8.2 Get the Monitoring Level</h5>
+
+<h5 id="get-metering">GET /metering</h5>
+
+<p>Get the Monitoring Level; basic monitoring level is assumed if nothing is explicitly set.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>GET /v1.1/metering HTTP/1.1
+Host: https://region-a.geo-1.monitoring.hpcloudsvc.com
+X-Auth-Token: ${Auth_Token}
+</code>
+</pre>
+
+<p>
+  <strong>Data Parameters</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Common attributes described in <a href="#ServiceDetailsSetMonitoringLevel">4.4.8.1 Create a New Metric</a>.</p>
+
+<p>JSON</p>
+
+<pre>
+  <code>{  
+  "setting": "monitoring_level",
+  "value": "basic"
+}
+</code>
+</pre>
+
+<p>
+  <strong>Error Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Status Code</th>
+  <th align="left">Description</th>
+  <th align="left">Reasons</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">Malformed request in URI or request body.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Server Error</td>
+  <td align="left">The server encountered a problem while processing the request.</td>
+</tr>
+  </tbody>
+</table><p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>Replace <code>${Auth_Token}</code> with the token returned from section <a href="#Accounts">Accounts</a>.</p>
+
+<pre>
+  <code>$ curl -i -X GET \
+  https://region-a.geo-1.monitoring.hpcloudsvc.com/v1.1/metering \
+  -H "X-Auth-Token: ${Auth_Token}"
+</code>
+</pre>
+	</article>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+		<ul class="footer-social">
+			<li class="twitter"><a href="../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+			<li class="youtube"><a href="../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+			<li class="rss"><a href="../../../../external.html?link=http://h30499.www3.hp.com/t5/Grounded-in-the-Cloud/bg-p/sws-661#.U7qe27Hn-M8"></a></li>
+			<li class="facebook"><a href="../../../../external.html?link=https://www.facebook.com/HPHelion"></a></li>
+			<li class="linkedin stretch"><a href="../../../../external.html?link=http://www.linkedin.com/company/3510998"></a></li>
+		</ul>
+		<ul class="contact-info hide-320 show-768">
+			<li>In the U.S.<br />1-855-61CLOUD</li>
+			<li>Worldwide<br />+1678-745-9010</li>
+			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span></li>
+		</ul>
+		<div class="copyright">	
+			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+			</p><br />
+			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../external.html?link=http://www8.hp.com/us/en/privacy/privacy.html" target="_blank">Privacy</a> | <a href="../../../../external.html?link=http://www8.hp.com/us/en/privacy/terms-of-use.html" target="_blank">Terms of use</a> | <a href="../../../../external.html?link=http://www.hpcloud.com/legal-documents" target="_blank">Legal Documents</a></p>
+		</div>
+	</div>
+	</div>
+</footer>
+
+<!-- Load JS -->
+<!--[if lt IE 9]>
+<script src="http://www.hpcloud.com/sites/all/themes/hpcloud/js/svgeezy.js"></script>
+-->
+	<script src="../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../js/combined.js"></script>
+
+<div id="ClickTaleDiv" style="display: none;"></div>    <div class="region region-page-bottom">
+    <div id="lpButtonDiv"></div>  </div><!-- /.region -->
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_zUhl2jDXgUKVBRVBUeMbuSby0YSCiXHWIAYNbn9ecwc.js"></script>
+<script>ClickTaleSSL=1; // This is intentinally global. 
+			if(typeof ClickTale=='function') 
+				ClickTale(24406,0.05,"www02");</script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_gPMh2zNJqEE6EkEOKNeOTAet3kwTiahCt35rBAtwqq4.js"></script>
+<script>
+    var _elqQ = _elqQ || [];
+    _elqQ.push(['elqSetSiteId', '521454204']);
+    _elqQ.push(['elqTrackPageView']);
+    
+    (function () {
+        function async_load() {
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+            s.src = '../../../sites/all/modules/custom/custom_eloqua/elqNow/elqCfg.min.html';
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        }
+        if (window.addEventListener) window.addEventListener('DOMContentLoaded', async_load, false);
+        else if (window.attachEvent) window.attachEvent('onload', async_load); 
+    })();
+    </script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_lNHbXKW-sJN9oM4eoaw-q0yTco3mOORibOeNn9yzM00.html"></script>
+   <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/api/monitoring/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:00:19 GMT -->
+</html>

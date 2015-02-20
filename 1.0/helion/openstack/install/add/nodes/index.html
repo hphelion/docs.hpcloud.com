@@ -1,0 +1,406 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/install/add/nodes/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:58:24 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion OpenStack: Add and Remove Nodes</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../../css/combined.css">
+
+	<script src="../../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../../index.html" class="logo"  ><img src="../../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<script>
+<![CDATA[
+
+function PageRefresh {
+onLoad="window.refresh"
+}
+
+PageRefresh();
+
+]]>
+</script><!--
+<p style="font-size: small;"> <a href="/helion/openstack/install-beta/prereqs/">&#9664; PREV</a> | <a href="/helion/openstack/install-beta-overview/">&#9650; UP</a> | <a href="/helion/openstack/install-beta/vsa/">NEXT &#9654;</a> </p>
+--><h1 id="hp-helion-openstack-add-scale-out-and-remove-scale-in-nodes-on-kvm-hypervisors">HP Helion OpenStack®: Add (Scale-Out) and Remove (Scale-In) Nodes on KVM Hypervisors</h1>
+
+<p><!---This document describes the steps to add and remove nodes (scale in or scale out the VSA and Compute nodes) on an already installed overcloud-->
+By default, HP Helion Openstack cloud deploys a two node (termed as start-up swift nodes) Swift cluster as part of its deployment.</p>
+
+<p>This document describes the steps to add (Scale Out) or remove (Scale In) nodes (KVM Compute Nodes) to an already-installed overcloud on a KVM hypervisor.</p>
+
+<ul><li><a href="#pre">Prerequisites</a></li>
+<li><a href="#add">Add compute nodes</a></li>
+<li><a href="#remove">Remove nodes</a></li>
+</ul><h2 id="pre">Prerequisites</h2>
+
+<p>Before you begin, ensure the following:</p>
+
+<ul><li>The seed VM, undercloud and overcloud are installed using the HP Helion OpenStack installer.</li>
+</ul><h2 id="add">Add compute nodes</h2>
+
+<p>New compute nodes can be added to an already-installed overcloud. You can add nodes in any of the following scenarios:</p>
+
+<ul><li><a href="#pre-allocated">Configure compute nodes to pre-allocated empty baremetal nodes</a></li>
+<li><a href="#non-allocated">Enroll a new baremetal and then add nodes</a></li>
+</ul><h3 id="pre-allocated">Configure compute nodes to pre-allocated empty baremetal nodes</h3>
+
+<p>You can enroll (add) nodes that that are present in baremetal.csv but have not been used, perform the following steps:</p>
+
+<ol><li><p>SSH to the seed VM as <code>root</code>:</p>
+
+<pre><code>ssh root@&lt;IP Address&gt;
+</code></pre></li>
+<li><p>Edit the scale counts in JSON environment variables file (<code>kvm-custom-ips.json</code>) that was used during the initial installation to define the appropriate scale number:</p>
+
+<pre><code>"compute_scale":&lt;number of compute nodes&gt;,
+</code></pre></li>
+<li><p>Source the environment variables file that you updated:</p>
+
+<pre><code>source tripleo/tripleo-incubator/scripts/hp_ced_load_config.sh tripleo/configs/kvm-custom-ips.json
+</code></pre></li>
+<li><p>Run the installer script:</p>
+
+<pre><code>bash -x tripleo/tripleo-incubator/scripts/hp_ced_installer.sh --update-overcloud 2&gt;&amp;1 | tee update.log
+</code></pre></li>
+</ol><h3 id="non-allocated">Enroll a new baremetal node and then configure compute nodes</h3>
+
+<p>To add new compute nodes that were not present during the initial installation process, first enroll the baremetal node and then configure the new node.</p>
+
+<ol><li><p>Log in to the seed VM:</p>
+
+<pre><code>ssh root@&lt;IP Address&gt;
+</code></pre></li>
+<li><p>Make the respective Baremetal entry in <code>/root/baremetal.csv</code>.<br /><!---If the `/root/overcloud-config.json` is not present, copy the overcloud template config file to `/root/overcloud-config.json`: 
+        cp /root/tripleo/tripleo-incubator/scripts/ee-config.json /root/overcloud-config.json--><strong>Add the node to baremetal.csv at the end.</strong></p>
+
+<p>The full syntax is documented above. Make sure it is at the end of the file as it is a new node.</p></li>
+<li><p>Edit the scale counts in JSON environment variables file (<code>kvm-custom-ips.json</code>) that was used during the initial installation to define the appropriate scale number:</p>
+
+<pre><code>"compute_scale":&lt;number of compute nodes&gt;,
+</code></pre></li>
+<li><p>Source the environment variables file that you updated:</p>
+
+<pre><code>source tripleo/tripleo-incubator/scripts/hp_ced_load_config.sh tripleo/configs/kvm-custom-ips.json
+</code></pre></li>
+<li><p>Run the installer script:</p>
+
+<pre><code>bash -x tripleo/tripleo-incubator/scripts/hp_ced_installer.sh --update-overcloud 2&gt;&amp;1 | tee update.log
+</code></pre>
+
+<p>This will register a new ironic node and create a new nova instance and a new heat stack.</p></li>
+</ol><h2 id="remove">Remove nodes</h2>
+
+<p>To remove a node:</p>
+
+<ol><li><p>SSH to the undercloud VM:</p>
+
+<pre><code>ssh root@&lt;IP Address&gt;
+</code></pre></li>
+<li><p>If using trickle (default):
+Identify the MAC address of the node to be deleted</p></li>
+<li><p>identify the ironic 'Node UUID'</p>
+
+<pre><code>ironic port-list --detail
+</code></pre></li>
+<li><p>identify the nova instance 'Instance UUID' associated with the ironic Node UUID and, from that, identify the heat stack associated with the nova instance</p>
+
+<pre><code>ironic node-list
+</code></pre></li>
+<li><p>the instance name will be something like:</p>
+
+<pre><code>overcloud-ce-novacompute0-NovaCompute0-aztnviyoamsc
+</code></pre>
+
+<p>so the stack name will be:</p>
+
+<pre><code>overcloud-ce-novacompute0
+</code></pre></li>
+<li><p>Run</p>
+
+<pre><code>heat stack-delete &lt;stackname&gt;
+</code></pre></li>
+<li><p>Wait for stack to be deleted, running the following command until it is gone:</p>
+
+<pre><code>heat stack-list 
+</code></pre></li>
+<li><p>Delete node</p>
+
+<pre><code>ironic node-delete &lt;ironic_nodeid&gt;
+</code></pre></li>
+<li><p>Mark the node as 'deleted' in baremetal.csv. Change the 'role' from 'OvercloudCompute' to 'OvercloudCompute:deleted'.
+For example:</p>
+
+<pre><code>78:e7:d1:22:52:9e,administrator,password,192.168.11.7,12,32768,2048,OvercloudCompute,IPMI
+</code></pre>
+
+<p>becomes:</p>
+
+<pre><code>78:e7:d1:22:52:9e,administrator,password,192.168.11.7,12,32768,2048,OvercloudCompute:deleted,IPMI
+</code></pre>
+
+<p><strong>Note: DO NOT DELETE THIS LINE</strong></p></li>
+</ol><p>When hp_ced_installer --update-overcloud is run again, the node will be skipped in all operations.</p>
+
+<hr />
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../index.html"><span>HP Helion OpenStack Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../release-notes/101/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../faq/index.html"><span>FAQ</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../technical-overview/index.html"><span>Technical Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../services/overview/index.html"><span>Services Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../support-matrix/index.html"><span>Support Matrix</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../overview/index.html"><span>Installation Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../security/index.html"><span>Network Security</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../backup.restore/index.html"><span>Back Up and Restore</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../services/troubleshooting/index.html"><span>Troubleshooting</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../related-links/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../glossary/index.html"><span>Glossary</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/install/add/nodes/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:58:24 GMT -->
+</html>

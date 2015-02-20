@@ -1,0 +1,449 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/services/swift/provision-nodes/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:25 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion OpenStack&#174; Object Operations Service Overview</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../../css/combined.css">
+
+	<script src="../../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../../index.html" class="logo"  ><img src="../../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<script>
+<![CDATA[
+
+function PageRefresh {
+onLoad="window.refresh"
+}
+
+PageRefresh();
+
+]]>
+</script><!--
+<p style="font-size: small;"> <a href="/helion/openstack/services/object/overview/">&#9664; PREV</a> | <a href="/helion/openstack/services/overview/">&#9650; UP</a> | <a href=" /helion/openstack/services/swift/deployment/"> NEXT &#9654</a> </p>--><h1 id="hp-helion-openstack-provisioning-object-storage-swift-nodes">HP Helion OpenStack®: Provisioning Object Storage (Swift) Node(s)</h1>
+
+<p>This page describes the procedure to provision scale-out Swift nodes. 
+<!---
+**Caution**: Do not provision proxy and scale-out object nodes together as the requirements for each are different. It is recommended that you use HP DL380 or HP SL230 servers for Proxy nodes and SL4540 servers for scale-out object storage nodes. ---></p>
+
+<ul><li><a href="#Preq">Prerequisites</a></li>
+<li><a href="#adding-physical-server-for-scale-out-Swift">Add a new physical server</a> </li>
+<li><a href="#provision-swift-node">Provision the Swift node</a></li>
+<li><a href="#verify-swift-node-deployment">Verify the node deployment</a> </li>
+</ul><h2 id="Preq">Prerequisites</h2>
+
+<p>A HP Helion OpenStack® cloud must be deployed. This ensures that the Starter Swift nodes are installed and functional as they are part of the default HP Helion OpenStack cloud deployment.</p>
+
+<p>You can check the health of the starter nodes using the following command. All nodes should be in <strong>ACTIVE</strong> status and the power state should be <strong>Running</strong>.</p>
+
+<pre>
+  <code># nova list
+</code>
+</pre>
+
+<h2 id="adding-physical-server-for-scale-out-Swift">Adding physical server to scale-out Object Storage (Swift)</h2>
+
+<p>You must add a server to the cloud inventory to handle the increased number of nodes.</p>
+
+<p>Perform the following steps to add a physical server:</p>
+
+<ol><li><p>Get the server details. For HP servers you can use <strong>iLO</strong> to gather the required information.</p>
+
+<ul><li>User name</li>
+<li>Password</li>
+<li>RAM</li>
+<li>CPU</li>
+<li>Disk capacity</li>
+<li>MAC address</li>
+</ul></li>
+<li><p>Log in to the seed cloud.</p>
+
+<pre><code># ssh root@&lt;seed IP address&gt; 
+</code></pre></li>
+<li><p>When prompted for host authentication, type <strong>yes</strong> to allow the ssh connection to proceed.</p></li>
+<li><p>Add server details in the <strong><em>baremetal.csv</em></strong> configuration file in the following format and upload the file to <code>/root</code>.</p>
+
+<pre><code>&lt;mac_address&gt;,&lt;ipmi_user&gt;,&lt;ipmi_password&gt;,&lt;ipmi_address&gt;,&lt;no_of_cpus&gt;,&lt;memory_MB&gt;,&lt;diskspace_GB&gt;
+</code></pre>
+
+<p><strong>Notes</strong>:</p>
+
+<ul><li>There must be one entry in this file for each baremetal system you intend to install.</li>
+<li>The first entry is used for the undercloud.</li>
+<li>The second entry is the node with the weakest  (lowest) specifications (CPU/RAM/Disk size) of nodes in the overcloud.</li>
+</ul><p>The following sample displays the <code>baremetal.csv</code> configuration file after adding server details.</p>
+
+<pre><code>E8:39:35:2B:FB:3E,Administrator,gone2far,10.1.192.33,12,73728,70
+E4:11:5B:B7:AD:CE,Administrator,gone2far,10.1.192.34,12,73728,70
+</code></pre></li>
+<li><p>Log in to the undercloud.</p>
+
+<pre><code># ssh heat-admin@&lt;undercloud IP address&gt; 
+</code></pre></li>
+<li><p>Add the server details to the ironic database using the following <strong><em>ironic</em></strong> command:</p>
+
+<pre><code># ironic node-create -d pxe_ipmitool -p cpus=&lt;value&gt; -p memory_mb=&lt;value&gt; -p local_gb=&lt;value&gt; -p cpu_arch=&lt;value&gt; -i ipmi_address=&lt;IP address&gt; -i ipmi_username=&lt;admin user name&gt; -i ipmi_password=&lt;password&gt; 
+</code></pre>
+
+<p>The following sample displays the ironic database with the new server details:</p>
+
+<pre><code>+--------------+-----------------------------------------------------------------------+
+| Property     | Value                                                                 |
++--------------+-----------------------------------------------------------------------+
+| uuid         | 08623d52-31cc-4d47-bb29-ecf34a59019b                                  |
+| driver_info  | {u'ipmi_address': u'10.1.192.33', u'ipmi_username': u'Administrator', |
+|              | u'ipmi_password': u'gone2far'}                                        |
+| extra        | {}                                                                    |
+| driver       | pxe_ipmitool                                                          |
+| chassis_uuid | None                                                                  |
+| properties   | {u'memory_mb': u'73728', u'cpu_arch': u'amd64', u'local_gb': u'70',   |
+|              | u'cpus': u'12'}                                                       |
++--------------+-----------------------------------------------------------------------+
+</code></pre></li>
+<li><p>Create the port, and enter the MAC address and node ID  using the following ironic command:</p>
+
+<pre><code># ironic port-create -a $MAC -n $NODE_ID
+</code></pre>
+
+<p>The following sample displays the output of the above command:</p>
+
+<pre><code>+-----------+--------------------------------------+
+| Property  | Value                                |
++-----------+--------------------------------------+
+| node_uuid | 08623d52-31cc-4d47-bb29-ecf34a59019b |
+| extra     | {}                                   |
+| uuid      | 1c5c5c54-bb3e-4883-8ebe-ba24e7f3d159 |
+| address   | e8:39:35:2b:fb:3e                    |
++-----------+--------------------------------------+    
+</code></pre></li>
+<li><p>Verify the successful registration of a new physical server.</p>
+
+<pre><code># ironic node-list
+</code></pre>
+
+<p>The newly created server should appear in the list.</p></li>
+</ol><h2 id="provision-swift-node">Provision Object Storage (Swift) node</h2>
+
+<p><strong>Caution</strong>: Do not provision proxy and scale-out object nodes together. The requirements are different for proxy nodes and scale-out object nodes. It is recommended that you use HP DL380 or HP SL230 servers for Proxy nodes and SL4540 servers for scale-out Object storage nodes.</p>
+
+<p>Perform the following steps to provision the Swift node:</p>
+
+<ol><li><p>Log in to the seed cloud.</p>
+
+<pre><code># ssh root@&lt;Seed IP address&gt;
+</code></pre></li>
+<li><p>Set the following variables in the environment variables file to configure the following values:</p>
+
+<pre><code>"so_swift_storage_scale":&lt;number of object servers&gt;,
+"so_swift_proxy_scale":&lt;number of proxy servers&gt;,
+</code></pre>
+
+<!--
+3.Set the following variables **overcloud-config.json*** file to configure the following values
+
+        so_swift_storage_scale: <number of object servers>,
+        so_swift_proxy_scale: <number of proxy servers>, --->
+
+<p><strong>Note</strong>: While deploying a scale-out <strong>proxy</strong> node ensure that the value of <code>so_swift_storage_scale</code> is unchanged. While deploying a scale-out <strong>object</strong> node ensure that the value of <code>so_swift_proxy_scale</code> is unchanged.</p></li>
+</ol><p>3.Source the environment variables file created during initial installation.</p>
+
+<pre>
+  <code># source tripleo/tripleo-incubator/scripts/hp_ced_load_config.sh tripleo/configs/&lt;environment variables file name&gt;
+</code>
+</pre>
+
+<p>For example:</p>
+
+<pre>
+  <code># source tripleo/tripleo-incubator/scripts/hp_ced_load_config.sh tripleo/configs/kvm-custom-ips.json
+</code>
+</pre>
+
+<p>4.Run the installer script to update the cloud.</p>
+
+<pre>
+  <code># bash -x tripleo/tripleo-incubator/scripts/hp_ced_installer.sh --update-overcloud |&amp; tee update_cloud.log
+</code>
+</pre>
+
+<h2 id="verify-swift-node-deployment">Verify Object Storage (Swift) node deployment</h2>
+
+<p>Verify that the new nodes were created and are functioning properly using the following commands:</p>
+
+<ol><li><p>Log in to the undercloud from the seed cloud.</p>
+
+<pre><code># ssh heat-admin@&lt;undercloud IP address&gt; 
+</code></pre></li>
+<li><p>List the available Swift nodes.</p>
+
+<pre><code># nova list
+</code></pre>
+
+<p>It displays available Swift nodes including the newly added node(s).</p></li>
+</ol><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<hr />
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../index.html"><span>HP Helion OpenStack Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../release-notes/101/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../faq/index.html"><span>FAQ</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../technical-overview/index.html"><span>Technical Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../overview/index.html"><span>Services Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../support-matrix/index.html"><span>Support Matrix</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../install/overview/index.html"><span>Installation Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../install/security/index.html"><span>Network Security</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../backup.restore/index.html"><span>Back Up and Restore</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../troubleshooting/index.html"><span>Troubleshooting</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../related-links/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../glossary/index.html"><span>Glossary</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/services/swift/provision-nodes/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:25 GMT -->
+</html>

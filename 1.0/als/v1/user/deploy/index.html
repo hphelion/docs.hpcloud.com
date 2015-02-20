@@ -1,0 +1,770 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/user/deploy/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:26 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>General Deployment</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../css/combined.css">
+
+	<script src="../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../index.html" class="logo"  ><img src="../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="-hp-helion-10-development-platform-general-deployment"># HP Helion 1.0 Development Platform: General Deployment<a href="#general-deployment" title="Permalink to this headline"></a></h1>
+
+<p>Applications are typically deployed to Application Lifecycle Service by pushing source code
+and configuration to the system's API endpoint using the <a href="../client/index.html#client"><em>helion client</em></a> or other clients that use the
+Application Lifecycle Service or Cloud Foundry API.</p>
+
+<p>The steps for deploying applications will be slightly different
+depending on the application and its requirements.</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>In Application Lifecycle Service 1.0 and later (Cloud Foundry v2 API), application deployment
+is done primarily using <a href="buildpack/index.html">Buildpacks</a>. A
+special built-in 'Legacy' buildpack handles Cloud Foundry V1 frameworks for
+existing application configurations.</p>
+
+<h2 id="targeting--authenticating">Targeting &amp; Authenticating<a href="#targeting-authenticating" title="Permalink to this headline"></a></h2>
+
+<p>Before deploying an app, the client must first target Application Lifecycle Service's API
+endpoint URL. This will generally be the same URL that exposes the
+Management Console. For example:</p>
+
+<pre>
+  <code>$ helion target api.example.com
+Successfully targeted to [https://api.example.hphelion.com]
+...
+</code>
+</pre>
+
+<p>Use the <code>helion login</code> command to authenticate
+with your username and password:</p>
+
+<pre>
+  <code>$ helion login &lt;username&gt;
+Attempting login to [https://api.example.hphelion.com]
+Password: ******
+Successfully logged into [https://api.example.hphelion.com]
+</code>
+</pre>
+
+<h2 id="selecting-org--space">Selecting Org &amp; Space<a href="#selecting-org-space" title="Permalink to this headline"></a></h2>
+
+<p>If your account is a member of multiple
+<a href="orgs-spaces/index.html#orgs-spaces"><em>organizations</em></a>, choose which one you
+want to operate under:</p>
+
+<pre>
+  <code>$ helion switch-org exampleco
+</code>
+</pre>
+
+<p>Likewise, if you are a member of more than one space, choose a default
+space:</p>
+
+<pre>
+  <code>$ helion switch-space devel-example
+</code>
+</pre>
+
+<h2 id="pushing-application-code">Pushing Application Code<a href="#pushing-application-code" title="Permalink to this headline"></a></h2>
+
+<p>Change to the root directory of your source code project, and use the
+<code>helion push</code> command to deploy your application.
+If you have a <a href="manifestyml/index.html"><em>manifest.yml</em></a> config file in this
+directory, you can use just:</p>
+
+<pre>
+  <code>$ helion push -n
+</code>
+</pre>
+
+<p>The "-n" option is an alias for "--no-prompt", which takes options from
+the config YAML file instead of prompting for them.</p>
+
+<p>The output of the push command will be something like:</p>
+
+<pre>
+  <code>$ helion push -n
+Using manifest file "manifest.yml"
+Application Url: env.example.hphelion.com
+Creating Application [env] as [https://api.example.hphelion.com -&gt; exampleco -&gt; devel-example -&gt; env] ... OK
+  Map env.stacka.to ... OK
+Uploading Application [env] ...
+  Checking for bad links ... 80 OK
+  Copying to temp space ... 79 OK
+  Checking for available resources ...  OK
+  Processing resources ... OK
+  Packing application ... OK
+  Uploading (223K) ... 100% OK
+Push Status: OK
+...
+helion.dea_ng: [STAGED_APP] Completed staging application
+helion.dea_ng.0: [SPAWNING_APP] Spawning app web process: node server.js
+app.0: Server running at
+app.0:   =&gt; http://0.0.0.0:50932/
+app.0: CTRL + C to shutdown
+OK
+http://env.heli.on/ deployed
+</code>
+</pre>
+
+<p>The Helion client will show staging and running
+logs for the deployment process. To inspect these logs after deployment
+has finished, use the <a href="../reference/client-ref/index.html#command-logs"><em>helion
+logs</em></a> command.</p>
+
+<h2 id="language-specific-deployment">Language Specific Deployment<a href="#language-specific-deployment" title="Permalink to this headline"></a></h2>
+
+<p>See each of these sections for language specific deployment details and
+examples:</p>
+
+<ul><li><a href="languages/java/index.html">Java</a></li>
+<li><a href="languages/node/index.html">Node</a></li>
+<li><a href="languages/php/index.html">PHP</a>
+<!---   [Clojure](/als/v1/user/deploy/languages/clojure/)
+-   [Go](/als/v1/user/deploy/languages/go/)
+-   [Perl](/als/v1/user/deploy/languages/perl/)
+-   [Python](/als/v1/user/deploy/languages/python/)
+-   [Ruby](/als/v1/user/deploy/languages/ruby/)
+--></li>
+</ul><h2 id="configuring-your-application-for-application-lifecycle-service">Configuring Your Application For Application Lifecycle Service<a href="#configuring-your-application-for-helion" title="Permalink to this headline"></a></h2>
+
+<p>Most applications should be able to run under Application Lifecycle Service with only a few
+changes.</p>
+
+<dl><dt><strong>manifest.yml</strong></dt>
+<dd>
+<p>A manifest.yml file should be added to the root of
+your application to hold installation details as well as setup
+configuration instructions for your app.</p>
+
+<p><a href="manifestyml/index.html#manifest-yml"><em>manifest.yml</em></a></p>
+</dd>
+
+<dt><strong>Data Services</strong></dt>
+<dd>
+<p>If you want to use Application Lifecycle Service's data services, your code will need to
+use the connection details provided by special environment variables
+(e.g. DATABASE_URL). The code should generally check for the
+existence of these environment variables, use them if they exist,
+and otherwise fall back to some default setting.</p>
+
+<p>See the <a href="../services/data-services/index.html#data-services"><em>Data
+Services</em></a> section for
+further details.</p>
+</dd>
+
+<dt><strong>Environment Variables</strong></dt>
+<dd>
+<p>A number of special environment variables are available during
+staging and runtime. These can be used in
+<a href="manifestyml/index.html#hooks"><em>hooks</em></a> or application code
+(for setting up databases, filesystem services, web server options,
+and cron jobs) in places where you would normally use hard-coded
+paths, credentials, or host-specific values.</p>
+
+<p>See the <a href="../reference/environment/index.html#environment-variables"><em>Environment
+Variables</em></a>
+section for a complete list.</p>
+</dd>
+</dl><h2 id="application-lifecycle-service-push">Application Lifecycle Service push<a href="#helion-push" title="Permalink to this headline"></a></h2>
+
+<p>The <a href="../reference/client-ref/index.html#command-push"><em>helion push</em></a> command
+creates (or updates) applications on Application Lifecycle Service. It negotiates with the
+API endpoint to reserve application URLs, allocate application
+instances, provision data services, upload application code, and
+optionally stage and start the application.</p>
+
+<p>The command will prompt for options or use those specified in a <a href="manifestyml/index.html#manifest-yml"><em>manifest.yml</em></a> file.</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>The application name must be a valid <a href="../../../../../external.html?link=http://en.wikipedia.org/wiki/Hostname#Restrictions_on_valid_host_names">hostname
+label</a>
+(i.e. containing only alphanumeric characters and hyphens).</p>
+
+<p>The <code>push</code> command implicitly stages and starts the
+application unless the <code>--no-start</code> option is used.
+With this option, applications are pushed in a pre-staged, stopped state
+where variables can be added (e.g. for use in staging hooks). The
+application can then be staged and started with the <a href="../reference/client-ref/index.html#command-start"><em>helion
+start</em></a> command or the Start
+button in the <a href="../../admin/console/customize/index.html#user-console-welcome"><em>Management
+Console</em></a>.</p>
+
+<p>The client will display staging logs while pushing the application but
+will generally exit before any application logs are visible. To view the
+application logs, use the <a href="../reference/client-ref/index.html#command-logs"><em>helion
+logs</em></a> command.</p>
+
+<h2 id="allowed-file-types">Allowed File Types<a href="#allowed-file-types" title="Permalink to this headline"></a></h2>
+
+<p>During the push process, Application Lifecycle Service includes only three file types:</p>
+
+<ol><li>Files</li>
+<li>Folders</li>
+<li>Links</li>
+</ol><p>All other special file types are ignored.</p>
+
+<h2 id="naming-and-urls">Naming and URLs<a href="#naming-and-urls" title="Permalink to this headline"></a></h2>
+
+<p>To prevent confusion or collisions, Application Lifecycle Service enforces uniqueness for
+URLs, application names, and service names:</p>
+
+<ul><li><strong>URLs</strong> (auto-generated or <a href="#deploy-map-url"><em>manually mapped</em></a>)
+must be globally unique, and are allocated on a "first come, first
+serve" basis.</li>
+<li><strong>Application names</strong> must be unique within the scope of the
+<a href="orgs-spaces/index.html#orgs-spaces"><em>space</em></a>. Applications deployed in
+different spaces can have the same name, but the full application
+URL must be globally unique URL.</li>
+<li><strong>Service names</strong> must be unique within the scope of the
+<a href="orgs-spaces/index.html#orgs-spaces"><em>space</em></a>. The name given to a service
+during creation is a pointer to a globally unique string (i.e. the
+<em>actual</em> database name in the system as shown by
+VCAP_SERVICES), so there is no possibility of naming conflicts
+with services created in other orgs and spaces.</li>
+</ul><h2 id="crontab-support">Crontab Support<a href="#crontab-support" title="Permalink to this headline"></a></h2>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>Cron commands are only executed on instance #0 of the app.</p>
+
+<p>Cron commands can be provided either in a regular crontab file in the
+root directory of the app, or via the <code>cron:</code>
+section in <em>manifest.yml</em> (See <a href="manifestyml/index.html"><em>manifest.yml
+Options</em></a>.</p>
+
+<p>The <code>HOME</code> and <code>PATH</code>
+environment variables, as well as all variables that start with
+<code>PERL</code>, <code>PYTHON</code>,
+<code>VCAP</code>,
+<code>BUNDLE</code>, <code>LEIN</code>,
+<code>GEM</code>, <code>RACK</code>, <code>RAILS</code>, <code>RUBY</code> or <code>http</code>
+are exported to the top of the crontab file. When applicable, the
+following database related environment variables are also added:
+<code>DATABASE_URL</code>, <code>MYSQL_URL</code>,
+<code>POSTGRESQL_URL</code>, <code>REDIS_URL</code>,
+<code>MONGODB_URL</code>, and <code>RABBITMQ_URL</code>.</p>
+
+<p>This happens after the <code>pre-running</code> hook has
+executed, so any changes made by those commands will be included in the
+crontab file.</p>
+
+<p>After setting up environment variables, we copy the <em>\$HOME/crontab</em>
+file, and finally the commands from the <code>cron:</code>
+section in <em>manifest.yml</em>. The resulting file is stored at
+<em>\$HELION_APP_ROOT/crontab</em>.</p>
+
+<h3 id="whitespace--newlines-in-environment-variables">Whitespace &amp; Newlines in Environment Variables<a href="#whitespace-newlines-in-environment-variables" title="Permalink to this headline"></a></h3>
+
+<p>To prevent breakage in cron, embedded newlines ("\n") in environment
+variable values will be replaced with "\\n" when generating the
+crontab. Any leading and trailing spaces in environment variable values
+are also stripped.</p>
+
+<h2 id="mapping-app-urls">Mapping App URLs<a href="#mapping-app-urls" title="Permalink to this headline"></a></h2>
+
+<p>Application Lifecycle Service automatically assigns to each application a URL made up of the
+application's name and the base URL for the system. An application named
+"myblog" deployed to an Application Lifecycle Service system at "api.example.com" would be given
+the URL "myblog.example.com".</p>
+
+<p>In addition to this default URL, additional URLs can be set for an
+application using the <a href="../reference/client-ref/index.html#command-map"><em>helion
+map</em></a> command. The application
+will respond to requests on the mapped URL, provided a DNS record has
+been set up resolving to Application Lifecycle Service's external IP or hostname.</p>
+
+<p>For example, to map a URL to an existing application on Application Lifecycle Service:</p>
+
+<pre>
+  <code>$ helion apps
+
++--------------+---+--------+----------------------------------+------------+
+| Application  | # | Health | URLS                             | Services   |
++--------------+---+--------+----------------------------------+------------+
+| myapp        | 1 | 100%   | myapp.example.com                  |            |
++--------------+---+--------+----------------------------------+------------+
+
+$ helion map myapp example.com
+
++--------------+---+--------+----------------------------------+------------+
+| Application  | # | Health | URLS                             | Services   |
++--------------+---+--------+----------------------------------+------------+
+| myapp        | 1 | 100%   | myapp.example.com                  |            |
+|              |   |        | example.com                     |            |
++--------------+---+--------+----------------------------------+------------+
+</code>
+</pre>
+
+<p>If DNS is configured correctly, requests to "example.com" will resolve
+transparently to "myapp.example.com".</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>Application URLs are allocated on a "first come, first serve" basis, and
+are reserved for the user who created the URL.</p>
+
+<p>URLs can be mapped to multiple applications owned by the same user,
+which can be useful for A/B testing. Application Lifecycle Service routes requests to the
+mapped URL randomly between all available app instances.</p>
+
+<p>Using the 'myapp.example.com' example above, you could push 'myapp-v2'
+(e.g. a more recent revision) then map 'example.com' to that app as
+well. You can access the specific versions directly using
+'myapp.example.com' and 'myapp-v2.example.com', and use 'example.com' to
+round robin between available instances of both versions:</p>
+
+<pre>
+  <code>+-------------+---+---------+--------------------+-------------+
+| Application | # | Health  | URLS               | Services    |
++-------------+---+---------+--------------------+-------------+
+| myapp       | 5 | RUNNING | myapp.example.com    |             |
+|             |   |         | example.com       |             |
+| myapp-v2    | 1 | RUNNING | myapp-v2.example.com |             |
+|             |   |         | example.com       |             |
++-------------+---+---------+--------------------+-------------+
+</code>
+</pre>
+
+<p>As you gain confidence with the new revision, you can increase the
+number of instances of 'myapp-v2' (i.e. phasing that version into
+production rather than cutting over) and eventually
+<a href="../reference/client-ref/index.html#command-unmap"><em>unmap</em></a> 'example.com'
+from the original 'myapp'.</p>
+
+<h2 id="best-practices">Best Practices<a href="#best-practices" title="Permalink to this headline"></a></h2>
+
+<h3 id="reducing-downtime-during-app-updates">Reducing downtime during app updates<a href="#reducing-downtime-during-app-updates" title="Permalink to this headline"></a></h3>
+
+<p>Updating an app can create downtime while the new code is being staged.
+URL mapping can be used to reduce this downtime by switching between two
+running versions of an app.</p>
+
+<p>For example, we have an application called "customertracker". The pushed
+application name will include a version or build number, but it is
+mapped to a "production" URL as well:</p>
+
+<pre>
+  <code>$ helion apps
+
++--------------------+---+---------+------------------------------+------------+
+| Application        | # | Health  | URLS                         | Services   |
++--------------------+---+---------+------------------------------+------------+
+| customertracker-v1 | 1 | RUNNING | customertracker-v1.example.com | customerdb |
+|                    |   |         | customertracker.example.com  |            |
++--------------------+---+---------+------------------------------+------------+
+</code>
+</pre>
+
+<p>Push the updated code with a new application name:</p>
+
+<pre>
+  <code>$ helion push --as customertracker-v2
+
+...
+
+$ helion apps
+
++--------------------+---+---------+------------------------------+------------+
+| Application        | # | Health  | URLS                         | Services   |
++--------------------+---+---------+------------------------------+------------+
+| customertracker-v1 | 1 | RUNNING | customertracker-v1.example.com | customerdb |
+|                    |   |         | customertracker.example.com  |            |
+| customertracker-v2 | 1 | RUNNING | customertracker-v2.example.com | customerdb |
++--------------------+---+---------+------------------------------+------------+
+</code>
+</pre>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>In this example, the configured service has the same name, so it is
+bound to both versions of the application. This will only work if there
+are no database schema changes or differences in the filesystem layout
+on a persistent filesystem service. If there are such differences, use
+distinct data services for the new version.</p>
+
+<p>Map the "production" URL to the new app:</p>
+
+<pre>
+  <code>$ helion map customertracker-v2 customertracker.example.com
+
+$ helion apps
+
++--------------------+---+---------+------------------------------+------------+
+| Application        | # | Health  | URLS                         | Services   |
++--------------------+---+---------+------------------------------+------------+
+| customertracker-v1 | 1 | RUNNING | customertracker-v1.stacka.to | customerdb |
+|                    |   |         | customertracker.example.com  |            |
+| customertracker-v2 | 1 | RUNNING | customertracker-v2.stacka.to | customerdb |
+|                    |   |         | customertracker.example.com  |            |
++--------------------+---+---------+------------------------------+------------+
+</code>
+</pre>
+
+<p>While both versions of the application are live and mapped to the same
+production URL, the router will round-robin web requests to this URL
+between both versions.</p>
+
+<p>Next, unmap the production URL from the first app:</p>
+
+<pre>
+  <code>$ helion unmap customertracker-v1 customertracker.example.com
+</code>
+</pre>
+
+<p>The old version is still available in case it's needed for rollback. If
+everything works as expected with the newer code, delete the old app:</p>
+
+<pre>
+  <code>$ helion delete customertracker-v1
+
+$ helion apps
+
++--------------------+---+---------+------------------------------+------------+
+| Application        | # | Health  | URLS                         | Services   |
++--------------------+---+---------+------------------------------+------------+
+| customertracker-v2 | 1 | RUNNING | customertracker-v2.stacka.to | customerdb |
+|                    |   |         | customertracker.example.com  |            |
++--------------------+---+---------+------------------------------+------------+
+</code>
+</pre>
+
+<h3 id="managing-multiple-targets">Managing Multiple Targets<a href="#managing-multiple-targets" title="Permalink to this headline"></a></h3>
+
+<p>The Application Lifecycle Service client targets a single location with the command
+<code>helion target</code>.</p>
+
+<p>If you need to target two or more instances at the same time, use one of
+the following methods:</p>
+
+<ol><li><p>Use the <code>--target &lt;target&gt;</code> option. This sets
+the specified target for the current command only, and does not set
+it as the default:</p>
+
+<pre><code>$ helion apps --target api.helion-xxx1.local
+</code></pre></li>
+<li><p>Use two or more terminals to access multiple targets. Within each
+terminal, set the <code>HELION_TARGET</code> environment
+variable for the API endpoint URL you want to work with in that
+terminal. The client will use this URL, overriding any target set
+with the <code>helion target</code> command:</p>
+
+<pre><code>$ export HELION_TARGET='api.helion-xxx2.local'
+</code></pre>
+
+<p>This target is used until the variable is unset or the terminal is
+closed. To unset it:</p>
+
+<p>$ unset HELION_TARGET</p></li>
+</ol><h2 id="persistent-sessions">Persistent Sessions<a href="#persistent-sessions" title="Permalink to this headline"></a></h2>
+
+<p>With multi-instance applications on Application Lifecycle Service, the Router will distribute
+requests among all instances. Without session management, the end user
+could access different application instances with each HTTP request
+instead of connecting to the same instance that started their session. Application Lifecycle Service's default router does no special handling of
+<code>JSESSIONID</code> or <code>SESSIONID</code>
+cookies.</p>
+
+<p>Cloud-enabled applications should use a shared database (e.g. Redis),
+cache (e.g. Memcached), or filesystem as a back end for session
+management. Some examples of this approach are:</p>
+
+<ul><li>Java:
+
+<ul><li><a href="../../../../../external.html?link=http://tomcat.apache.org/tomcat-6.0-doc/config/manager">Tomcat session
+manager</a></li>
+<li><a href="../../../../../external.html?link=http://code.google.com/p/memcached-session-manager/">memcached-session-manager</a></li>
+<li><a href="../../../../../external.html?link=https://github.com/jcoleman/tomcat-redis-session-manager">tomcat-redis-session-manager</a></li>
+</ul></li>
+<li>Node.js:
+<a href="../../../../../external.html?link=https://github.com/balor/connect-memcached#connect-memcached">connect-memcached</a>,
+a session store that uses Memcached</li>
+<li>PHP:
+
+<ul><li><a href="languages/php/index.html#php-persistent-sessions-filesystem">Persistent Sessions</a></li>
+<li><a href="../../../../../external.html?link=http://php.net/manual/en/memcached.sessions.php">Memcached session support</a></li>
+</ul></li>
+<li>Python: <a href="../../../../../external.html?link=https://docs.djangoproject.com/en/dev/topics/http/sessions/">Django "How to use
+sessions"</a></li>
+</ul>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Download the<br>Development Platform<br>
+			<a href="../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show">DOWNLOAD NOW</a>
+		</p>
+	</aside>
+	
+ 
+	<aside class="signup-box">
+		<p class="align-center">
+			Take the Helion Development Platform for a Free Spin<br>
+			<a href="../../../../helion/devplatform/ALS-developer-trial-quick-start/index.html">Quick Start Developer Trial</a>
+		</p>
+	</aside>
+<!--	
+	<aside class="signup-box">
+		<p class="align-center">Make sure to check out our Developer Portal
+			<a href="https://dev.hpcloud.com">dev.hpcloud.com
+</a><br>
+ 
+		</p>
+	</aside>
+-->	
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/index.html"><span>HP Helion Development Platform Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/install/index.html"><span>Development Platform Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/install/community/index.html"><span>Development Platform Community Edition Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/openstack/update/devplat/101/index.html"><span>Development Platform Commercial 1.0.1 Update</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/appdev/index.html"><span>Application Developer Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/sysadmin/index.html"><span>IT Ops Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/appdev/index.html#sample"><span>Sample Code</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/related-topics/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/deploy/index.html"><span>Application Lifecycle Service Configuration and Deployment</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../admin/index.html"><span>ALS Admin Guide</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/user/deploy/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:26 GMT -->
+</html>

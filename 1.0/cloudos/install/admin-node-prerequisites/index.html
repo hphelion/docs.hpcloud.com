@@ -1,0 +1,351 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/cloudos/install/admin-node-prerequisites/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:03:00 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Set Admin Node Prerequisites (Required)</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../css/combined.css">
+
+	<script src="../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../index.html" class="logo"  ><img src="../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<script>
+<![CDATA[ 
+
+function PageRefresh { 
+onLoad="window.refresh"
+}
+ 
+PageRefresh();
+ 
+]]>
+</script><p style="font-size: small;"> <a href="../before-you-install/index.html">◀ PREV</a> | <a href="../index.html">▲ UP</a> | <a href="../customize-server-types/index.html">NEXT ▶</a> </p>
+
+<h1 id="set-admin-node-prerequisites-required">Set Admin Node Prerequisites (Required)</h1>
+
+<p>Your first step in the HP Cloud OS Operational Dashboard is to configure the Admin Node prerequisites. See the sections in this topic:</p>
+
+<ul><li><p><a href="#enable-admin-node-internet-access">Enable Admin Node Internet Access</a> — Set up Internet access on the Admin Node. You will need Internet access for downloading hot fixes using the Hot Fixes panel of the Cloud tab. For details, see the <a href="../hot-fixes/index.html">Install Hot Fixes</a> topic.</p></li>
+<li><p><a href="#set-the-external-dns-server">Set the External DNS Server</a> —  Add the IP address of the external DNS server that your Cloud OS environment is using to access named websites within your cloud.</p></li>
+<li><p><a href="#set-the-time-for-the-admin-node">Set the Time for the Admin Node</a> — Configure the date/time settings accurately because the Admin Node acts as the NTP Server to all the managed nodes.</p></li>
+<li><p><a href="#set-the-email-notification">Set the Email Notification</a> — Configure your cloud to send email notifications when the Cloud and Compute Region operation completes since this takes some time. By enabling and setting this prerequisite, you can be alerted by e-mail when each operation completes.</p></li>
+</ul><p><strong>Note:</strong> In the current release, after you complete the Admin Node installation, you cannot go back to modify the prerequisite settings. Set the values carefully!</p>
+
+<!--
+...., you may continue to use the Operational Dashboard to modify the following prerequisite values:  
+* Cloud Admin Node Time settings 
+* Email Notification settings
+You cannot change:
+* Admin Node Internet Access settings
+* External DNS Server settings
+-->
+
+<h2 id="enable-admin-node-internet-access">Enable Admin Node Internet Access</h2>
+
+<p>To enable the Admin Node Internet Access:</p>
+
+<ol><li><p>On the Operational Dashboard, select the Environment tab &gt; Prerequisites.</p></li>
+<li><p>For the Cloud Administration Node Internet Access, click <strong>Edit Prerequisite</strong>.</p></li>
+<li><p>Set the Network Interface to the network interface on the Admin Node that has been configured for internet access, for example, eth1.</p></li>
+<li><p>Leave the default Network Configuration checked as DHCP. If you have a static IP address allocated for the node, uncheck DHCP and fill in the appropriate information.</p></li>
+<li><p>Set the HTTP Proxy Information applicable for your environment. If you are on a network that has a proxy, you must fill in this Proxy information.</p></li>
+</ol><p><strong>Caution:</strong> Specifying incorrect proxy host settings might cause some features to not work correctly later, after the installation, when you use the HP Cloud OS Administration Dashboard.</p>
+
+<p>a. Specify the Host's IP address</p>
+
+<blockquote>
+  <p>Get this value from your system administrator or from the settings in your web browser.</p>
+</blockquote>
+
+<p>b. Specify the Port</p>
+
+<blockquote>
+  <p>Get this value from your system administrator or from the settings in your web browser.</p>
+</blockquote>
+
+<p>c. Specify the Non-Proxy Hosts' IP addresses</p>
+
+<blockquote>
+  <p>Specify addresses that <strong>should not</strong> use proxy servers (for the Controller/Compute Nodes' admin and os_sdn networks, IP range). 
+  Each network needs to be separated by a bar "|". For example: <nobr> 10.*|192.*|localhost|127.* </nobr></p>
+</blockquote>
+
+<p>d. If necessary, specify the optional Username and Password.</p>
+
+<blockquote>
+  <p>After completing the steps above, click <strong>Update Prerequisite</strong>.</p>
+  
+  <p>Now click <strong>Complete Prerequisite</strong> to complete this setup for the Cloud Administration Node Internet Access entry.</p>
+</blockquote>
+
+<p>When this prerequisite completes, a timestamp will be displayed in the Last Updated column.</p>
+
+<h2 id="set-the-external-dns-server">Set the External DNS Server</h2>
+
+<p>To set the external DNS server:</p>
+
+<ol><li><p>On the Operational Dashboard, select the Environment tab &gt; Prerequisites.</p></li>
+<li><p>For the External DNS Server, click <strong>Edit Prerequisite</strong>.</p></li>
+<li><p>Type the appropriate IP address for the external DNS server used by your Cloud OS environment to be able to access named websites within your cloud.</p></li>
+<li><p>Click <strong>Update Prerequisite</strong>.</p></li>
+</ol><p>When this prerequisite completes, a timestamp will be displayed in the Last Updated column.</p>
+
+<h2 id="set-the-time-for-the-admin-node">Set the Time for the Admin Node</h2>
+
+<p>To set the time for the Admin Node:</p>
+
+<ol><li><p>On the Operational Dashboard, select the Environment tab &gt; Prerequisites.</p></li>
+<li><p>For the Cloud Administration Node Time Settings, click <strong>Edit Prerequisite</strong>.</p></li>
+<li><p>Set the appropriate Timezone for your area (UTC is the default).</p></li>
+<li><p>Set the Date and Time applicable for your environment if different from the default.</p></li>
+<li><p>Click <strong>Update Prerequisite</strong>.</p></li>
+<li><p>Click <strong>Complete Prerequisite</strong> to complete this setup for the Set the Time for the Admin Node entry.</p></li>
+</ol><p>When this prerequisite completes, a timestamp will be displayed in the Last Updated column.</p>
+
+<h2 id="set-the-email-notification">Set the Email Notification</h2>
+
+<p>To set the email notification:</p>
+
+<ol><li><p>On the Operational Dashboard, select the Environment tab &gt; Prerequisites.</p></li>
+<li><p>For the email notification settings, click <strong>Edit Prerequisites</strong>.</p></li>
+<li><p>Click the Enable Notification checkbox.</p></li>
+<li><p>Set the SMTP Server to an SMTP server that is valid for your network.</p></li>
+<li><p>Set From Address to an applicable email address for your environment. Most likely, you would add your email address as the person responsible for managing the cloud infrastructure.</p></li>
+<li><p>Set To Address to an applicable email address or comma-separated addresses for your environment. This address could be to the person who started the cloud build, or anyone who is interested in following the cloud build process.</p></li>
+<li><p>Click <strong>Update Prerequisite</strong>.</p></li>
+</ol><p>When the Cloud and Compute Region operation completes, the email goes to the listed recipients, showing the start and completion times.</p>
+
+<p>When this prerequisite completes, a timestamp will be displayed in the Last Updated column.</p>
+
+<h2 id="prerequisite-troubleshooting">Prerequisite Troubleshooting</h2>
+
+<p>If any of the prerequisite steps fail to complete, an error message displays.  If this happens, see the "Admin Node Internet Access 
+Prerequisites fail to complete" section of the <a href="../../manage/troubleshooting/index.html">Troubleshooting</a> topic.</p>
+
+<h2 id="next-step">Next Step</h2>
+
+<p>Proceed to the next topic, <a href="../customize-server-types/index.html">Customize Server Types</a>.</p>
+
+<p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../index.html"><span>HP Cloud OS Home  (Deprecated)</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../prepare/index.html"><span>Prepare</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../index.html"><span>Install</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../manage/index.html"><span>Manage</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../develop/index.html"><span>Develop</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../forum/index.html"><span>Community Forum</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../openstack/index.html"><span>OpenStack Links</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/cloudos/install/admin-node-prerequisites/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:03:00 GMT -->
+</html>

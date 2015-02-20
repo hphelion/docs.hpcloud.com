@@ -1,0 +1,435 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/admin/server/upgrade/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:55 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Upgrading Application Lifecycle Service</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../../css/combined.css">
+
+	<script src="../../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../../index.html" class="logo"  ><img src="../../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="-hp-helion-10-development-platform-upgrading-application-lifecycle-service"># HP Helion 1.0 Development Platform: Upgrading Application Lifecycle Service<a href="#upgrading-helion" title="Permalink to this headline"></a></h1>
+
+<p><a href="#before-an-upgrade">Before an upgrade</a>
+        -   <a href="#maintenance-mode">Maintenance Mode</a>
+        -   <a href="#proxy-settings">Proxy settings</a>
+        -   <a href="#rsa-keys">RSA keys</a>
+    -   <a href="#executing-the-upgrade">Executing the upgrade</a>
+        -   <a href="#upgrading-an-individual-node">Upgrading an individual
+            node</a>
+        -   <a href="#upgrading-a-cluster">Upgrading a cluster</a>
+        -   <a href="#node-upgrade-ordering">Node upgrade ordering</a>
+        -   <a href="#node-upgrade-process">Node Upgrade Process</a></p>
+
+<p>Application Lifecycle Service 1.0 provides the ability to upgrade a node or cluster in place
+via <a href="../../reference/kato-ref/index.html#kato-command-ref-node-upgrade"><em>kato node
+upgrade</em></a>
+without the need to rebuild the entire cluster. This section covers how
+the upgrade process works.</p>
+
+<h2 id="before-an-upgrade">Before an upgrade<a href="#before-an-upgrade" title="Permalink to this headline"></a></h2>
+
+<h3 id="maintenance-mode">Maintenance Mode<a href="#maintenance-mode" title="Permalink to this headline"></a></h3>
+
+<p>Before beginning an upgrade, put Application Lifecycle Service in maintenance mode in the
+<a href="../../console/customize/index.html#console-settings-maintenance-mode"><em>Cloud Controller
+Settings</em></a> or
+the following <code>kato</code> command:</p>
+
+<pre>
+  <code>$ kato config set cloud_controller_ng maintenance_mode true
+</code>
+</pre>
+
+<p>This shuts down API requests but continues to serve web requests. The Management Console becomes "read only" with the exception of this toggle so that it can be brought back online. Remember to disable maintenance mode once the upgrade has been completed.</p>
+
+<h3 id="proxy-settings">Proxy settings<a href="#proxy-settings" title="Permalink to this headline"></a></h3>
+
+<p>The systems being upgraded will need to be able to access the following
+public URIs:</p>
+
+<ul><li><a href="../../../../../../external.html?link=https://upgrade.helion.com/">https://upgrade.helion.com</a></li>
+<li><a href="../../../../../../external.html?link=https://pkg.helion.com/">https://pkg.helion.com</a></li>
+</ul><p>This may require setting the HTTPS_PROXY environment variable on each
+node if a proxy is in use on your network.</p>
+
+<h3 id="rsa-keys">RSA keys<a href="#rsa-keys" title="Permalink to this headline"></a></h3>
+
+<p>For cluster upgrades, you should <a href="../../../../../../external.html?link=https://help.ubuntu.com/community/SSH/OpenSSH/Configuring#disable-password-authentication">set up SSH keys for password-less
+authentication</a>
+between the Core node and all other cluster nodes. Without this, you
+will be prompted for the 'helion' system user password multiple times
+for each node.</p>
+
+<h2 id="executing-the-upgrade">Executing the upgrade<a href="#executing-the-upgrade" title="Permalink to this headline"></a></h2>
+
+<h3 id="upgrading-an-individual-node">Upgrading an individual node<a href="#upgrading-an-individual-node" title="Permalink to this headline"></a></h3>
+
+<p>To upgrade an individual node, log into the node and run:</p>
+
+<pre>
+  <code>$ kato node upgrade
+</code>
+</pre>
+
+<p>This will start the <strong>Node Upgrade Process</strong> as described below.</p>
+
+<h3 id="upgrading-a-cluster">Upgrading a cluster<a href="#upgrading-a-cluster" title="Permalink to this headline"></a></h3>
+
+<p>To upgrade a cluster, log into the Core node in the cluster and run:</p>
+
+<pre>
+  <code>$ kato node upgrade --cluster
+</code>
+</pre>
+
+<p>This will automatically arrange the nodes in the cluster into a
+preferred upgrade order (see below) before upgrading the nodes one at a
+time.</p>
+
+<h3 id="node-upgrade-ordering">Node upgrade ordering<a href="#node-upgrade-ordering" title="Permalink to this headline"></a></h3>
+
+<p>When performing a cluster upgrade, the nodes in the cluster are
+automatically arranged into an upgrade order based on the roles they
+have enabled. This order is then followed when upgrading nodes.</p>
+
+<p>The default role order is:</p>
+
+<ul><li>DEA</li>
+<li>controller</li>
+<li>router</li>
+<li>base</li>
+<li>primary</li>
+</ul><p>Nodes are matched to this ordering by the roles they have enabled. Any
+nodes that don't match (e.g. data service nodes) are added to the end to
+be upgraded last.</p>
+
+<p>The order can be overridden with the
+<a href="../../reference/kato-ref/index.html#kato-command-ref-node-upgrade"><em>--role-order</em></a>
+option.</p>
+
+<h3 id="node-upgrade-process">Node Upgrade Process<a href="#node-upgrade-process" title="Permalink to this headline"></a></h3>
+
+<p>Each node goes through the following process during an upgrade.</p>
+
+<ol><li>Self-update</li>
+<li>Application Lifecycle Service version check</li>
+<li>Pre-upgrade validation</li>
+<li>Retire (DEA nodes only)</li>
+<li>Backup state</li>
+<li>Upgrade</li>
+<li>Post-upgrade validation</li>
+<li>Node restart</li>
+</ol><p>Before any upgrade actions are performed, <code>kato node upgrade</code> performs a self-update check to make sure it is running the
+latest code available. After this base check, the version of Application Lifecycle Service
+running on the node is checked against the latest version available. If
+a newer version of Application Lifecycle Service is available (or if the <code>--force</code> option was used) the upgrade process begins.</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>Using the <code>--force</code> option is not recommended unless
+you have been directed to do so by HP Application Lifecycle Service Support.</p>
+
+<p>A pre-upgrade validation check is performed on the node to check that it
+is in working order before any upgrade actions are performed. If this
+validation fails then the upgrade process is stopped. These validation
+steps can be displayed to the user as errors while still continuing the
+upgrade process by using the <code>--ignore-inspect-failures</code> option.</p>
+
+<p>
+  <strong>Warning</strong>
+</p>
+
+<p>Use this option is only if you get failures running
+<code>kato node inspect</code> that are known to be caused by
+systems outside of the control of Application Lifecycle Service, or if directed by
+HP Application Lifecycle Service Support.</p>
+
+<p>Next, the upgrade packages are downloaded and a validation check is
+performed on the files to make sure everything required for an upgrade
+is available. If the node is a DEA it is then
+<a href="../../reference/kato-ref/index.html#kato-command-ref-node-retire"><em>retired</em></a> to
+make sure any applications running on the node are evacuated before the
+upgrade takes place.</p>
+
+<p>After the components have been upgraded, the node is restarted and then
+post-upgrade validation takes place. If any failures occur, the upgrade
+process is stopped and you will be given the option to roll back
+the upgrade. As with the pre-upgrade validation, this can be skipped
+using the <code>--ignore-inspect-failures</code> option (see
+warning above).</p>
+
+<p>When <code>kato node upgrade</code> completes successfully, the
+node is restarted running the latest version of Application Lifecycle Service.</p>
+
+<p>Remember to take the node out of maintenance mode after the upgrade.</p>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Download the<br>Development Platform<br>
+			<a href="../../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show">DOWNLOAD NOW</a>
+		</p>
+	</aside>
+	
+ 
+	<aside class="signup-box">
+		<p class="align-center">
+			Take the Helion Development Platform for a Free Spin<br>
+			<a href="../../../../../helion/devplatform/ALS-developer-trial-quick-start/index.html">Quick Start Developer Trial</a>
+		</p>
+	</aside>
+<!--	
+	<aside class="signup-box">
+		<p class="align-center">Make sure to check out our Developer Portal
+			<a href="https://dev.hpcloud.com">dev.hpcloud.com
+</a><br>
+ 
+		</p>
+	</aside>
+-->	
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/index.html"><span>HP Helion Development Platform Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/install/index.html"><span>Development Platform Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/install/community/index.html"><span>Development Platform Community Edition Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/openstack/update/devplat/101/index.html"><span>Development Platform Commercial 1.0.1 Update</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/appdev/index.html"><span>Application Developer Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/sysadmin/index.html"><span>IT Ops Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/appdev/index.html#sample"><span>Sample Code</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/related-topics/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/deploy/index.html"><span>Application Lifecycle Service Configuration and Deployment</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../index.html"><span>ALS Admin Guide</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/admin/server/upgrade/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:55 GMT -->
+</html>

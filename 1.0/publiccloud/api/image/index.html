@@ -1,0 +1,1709 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/api/image/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:02:10 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion Public Cloud Image Service API Reference</title>
+	
+		<meta name="description" content="This document describes the HP Helion Public Cloud Image Service. HP Helion Public Cloud Image is based on OpenStack Glance.">
+	
+	
+		<meta name="keywords" content="Image, Glance, OpenStack">
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../css/combined.css">
+
+	<script src="../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../js/metrics.js"></script> 
+	
+	
+	
+	
+	<!--[if IEMobile 7]><html class="iem7"  lang="en" dir="ltr"><![endif]-->
+<!--[if lte IE 6]><html class="lt-ie9 lt-ie8 lt-ie7"  lang="en" dir="ltr"><![endif]-->
+<!--[if (IE 7)&(!IEMobile)]><html class="lt-ie9 lt-ie8"  lang="en" dir="ltr"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9"  lang="en" dir="ltr"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html  lang="en" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"><!--<![endif]-->
+
+<head profile="../../../../external.html?link=http://www.w3.org/1999/xhtml/vocab">
+  
+  
+  <meta charset="utf-8" />
+<meta name="web_section_id" content="R11646" />
+<meta name="bu" content="corp" />
+<meta name="hp_design_version" content="hpweb.2.0" />
+<meta name="segment" content="Commercial.B2B" />
+<meta name="page_content" content="HP Public Cloud - Enterprise Public Cloud Products &amp;amp; Services" />
+<meta name="content_country_applicability" content="w1" />
+<meta name="target_country" content="US" />
+<meta name="lifecycle" content="presales.awareness" />
+<link rel="shortcut icon" href="../../../../external.html?link=http://www.hpcloud.com/sites/all/themes/hpcloud/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<meta name="description" content="HP Public Cloud provides on-demand, pay-as-you-go cloud services for computing, storage infrastructure as well as platform services. Explore the cloud." />
+<meta about="/hp-helion-public-cloud" property="sioc:num_replies" content="0" datatype="xsd:integer" />
+<meta content="HP Helion Public Cloud" about="/hp-helion-public-cloud" property="dc:title" />
+<link rel="canonical" href="../../../../external.html?link=http://www.hpcloud.com/" />
+<link rel="shortlink" href="../../../../external.html?link=http://www.hpcloud.com/" />
+<meta property="og:url" content="http://www.hpcloud.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="HP Public Cloud" />
+<meta property="og:site_name" content="HP Public Cloud" />
+   
+
+      <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="cleartype" content="on">
+<!--
+  <link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_791YXBaKKm1ORM_7huSKEsIV9tSWq6wmRkERhuXpN6w.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_mGbqk88-VTBvzao9MxjjAm60xrWNV9JbuxL-XsOdBKY.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_UOCsF9jLPA1lMMj-BVVBzE0l5EIeCw_3PDG18zycRw4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_MfNt8ndX5CcdNjNUw-v__mhCPodpzDeR8KuzaXo-yzQ.css" media="all" />
+-->
+  <script src="../../../../www.hpcloud.com/sites/default/files/js/js__kIQ7mxn9cgBO3AAnwhKUMQqNbqZZQWibQB6EZRy6u0.html"></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_CC-zfeuQHcDhFtVRuKW53h30TL7j_105J32Nz8b8R38.js"></script>
+<script>var WRInitTime=(new Date()).getTime(); // ClickTale top part</script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_mZQzCl35imgkCIIjGS2RPLYDNuLk9ncwZ5c7lh6STTw.js"></script>
+<script>		<!-- Start Visual Website Optimizer Asynchronous Code -->
+		var _vwo_code=(function(){
+		var account_id=37831,
+		settings_tolerance=2000,
+		library_tolerance=2500,
+		use_existing_jquery=false,
+		// DO NOT EDIT BELOW THIS LINE
+		f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('../../../../external.html?link=http://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+		<!-- End Visual Website Optimizer Asynchronous Code --></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_kv2zkR2iCsl2ctlEzg-TiOxz1jEVBjx7VzAR0mTzlew.js"></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_qz7rta8c7yTiJLYNkf4WKFMgEeuRUE1AgWXd6NCAQZU.js"></script>
+<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"hpcloud","theme_token":"NwfPTBjz4hDLctcBflIoKqD4J2r3kIAtWobc48FZKTo","js":{"https:\/\/clicktale.pantherssl.com\/WRd.js":1,"0":1,"sites\/all\/modules\/custom\/hpcs_referrer_url\/js\/referrer.min.js":1,"sites\/all\/modules\/custom\/kenshoo\/js\/kenshoo.min.js":1,"1":1,"sites\/all\/themes\/hpcloud\/js\/fastclick.min.js":1,"sites\/all\/themes\/hpcloud\/js\/main.min.js":1,"sites\/all\/modules\/custom\/lp_chat\/js\/le-mtagconfig.js":1,"sites\/all\/modules\/custom\/hpcloud_jquery\/js\/jquery-1.9.0.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"misc\/jquery.cookie.js":1,"2":1,"sites\/all\/modules\/custom\/omniture\/js\/hpcs_metrics.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/tinycon.min.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/color.js":1,"3":1,"sites\/all\/modules\/custom\/lp_chat\/js\/lp-initialize.js":1,"sites\/all\/themes\/hpcloud\/js\/vendor\/modernizr-2.6.2.min.js":1,"sites\/all\/themes\/hpcloud\/js\/respond.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/uif\/uif.css":1,"sites\/all\/modules\/contrib\/field_collection\/field_collection.theme.css":1,"sites\/all\/themes\/zen\/system.menus.css":1,"sites\/all\/themes\/hpcloud\/css\/screen.css":1,"sites\/all\/themes\/hpcloud\/css\/styles.css":1}}});</script>
+      <!--[if lt IE 9]>
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+      <!--[if (lt IE 9) & (!IEMobile)]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie8.css">
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+    
+    <!--[if IE]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie.css">
+    <![endif]-->
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" ><!--
+				<a href="http://docs.hpcloud.com/" class="logo"  ><img src="/images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>-->
+        			<ul class="menu"><li class="first leaf menu-mlid-1845"><a href="../../../../external.html?link=http://www.hpcloud.com/support">Support</a></li>
+<li class="leaf has-children menu-mlid-1222"><a href="../../../../external.html?link=http://www.hpcloud.com/partners">Partners</a></li>
+<li class="leaf menu-mlid-1817"><a href="../../../../external.html?link=http://marketplace.hpcloud.com/" title="">Marketplace</a></li>
+<li class="leaf has-children menu-mlid-1223"><a href="../../../../external.html?link=http://www.hpcloud.com/about" title="">About</a></li>
+<li class="leaf menu-mlid-1224"><a href="../../../../external.html?link=http://www.hp.com/" title="">hp.com</a></li>
+<li class="leaf menu-mlid-1225"><a href="../../../../external.html?link=http://www.hpcloud.com/about/contact">Contact</a></li>
+<li class="last leaf menu-mlid-1226"><a href="../../../../external.html?link=http://www.hpcloud.com/console">Log In</a></li>
+</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="sidebar" class="grid_4 suffix_1 top-spacer">
+    <aside>
+      <div id="toc_header">
+          
+             
+              <p class="title"><strong><a href="../../../api/copyright.html#image">Copyright</a></strong></p>
+             
+          
+          <p class="title"><strong><a href="../../../api/index.html">API Overview</a></strong></p>
+          <p class="title"><strong>Table of Contents</strong></p>
+      </div>
+      <div id="toc">
+      </div>
+      <!--<aside class="box section-navigation fixed_menu">
+  <ul>
+    
+  </ul>
+</aside>-->
+      <!--<aside class="block block-boxes box block-boxes-simple fixed">-->
+        <!--<p>Having trouble finding the info you need? Try one of the following helpful links:</p>-->
+            <!--<ul>-->
+                <!--<li><a href="/downloads">Downloads</a></li>-->
+                <!--<li><a href="https://community.hpcloud.com/knowledge-base">Knowledge Base</a></li>-->
+                <!--<li><a href="https://community.hpcloud.com/forum">Forums</a></li>-->
+                <!--<li><a href="/sitemap">Site Map</a></li>-->
+            <!--</ul>-->
+      <!--</aside>-->
+    </aside>
+</div>
+<div id="content" class="grid_11">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="hp-helion-public-cloud-image-service-api-specifications">HP Helion Public Cloud Image Service API Specifications</h1>
+
+<p><strong>Date:</strong> May 2014</p>
+
+<p><strong>Document Version:</strong> 1.5</p>
+
+<h2 id="1-overview">1. Overview</h2>
+
+<p>This document describes the HP Helion Public Cloud Image service, which is based on OpenStack Glance.</p>
+
+<p>We will be referring to HP Helion Public Cloud Image Service in this document as simply the Image service.</p>
+
+<h3 id="11-api-maturity-level">1.1 API Maturity Level</h3>
+
+<h4 id="111-maturity-level-definitions">1.1.1 Maturity Level Definitions</h4>
+
+<p>The maturity levels are defined as follows:</p>
+
+<ul><li><p>Beta. The functions and features are available publically. While HP expects the feature to operate as advertised, we do not offer a Service Level Agreement (SLA) for the service or feature.</p></li>
+<li><p>Release to General Availability (GA). At this level of maturity, all features and functions are expected to operate as advertised. In particular, there is a Service Level Agreement (SLA) defined and in place.</p></li>
+</ul><h4 id="112-maturity-level">1.1.2 Maturity Level</h4>
+
+<p><strong>Maturity Level</strong>: GA</p>
+
+<p><strong>Version API Status</strong>: <em>1.1</em></p>
+
+<h3 id="12-document-revision-history">1.2 Document Revision History</h3>
+
+<table>
+  <thead>
+    <tr><th align="left">Document Version</th>
+  <th align="left">Date</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">1.0</td>
+  <td align="left">December 2012</td>
+  <td align="left">Initial creation</td>
+</tr>
+    <tr><td align="left">1.1</td>
+  <td align="left">Janurary 2013</td>
+  <td align="left">Added custom image properties</td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"></td>
+  <td align="left">Added Image Ownership and Sharing</td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"></td>
+  <td align="left">Added Authentication and Access Controls</td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"></td>
+  <td align="left">Added Account Level View</td>
+</tr>
+    <tr><td align="left">1.2</td>
+  <td align="left">March 2013</td>
+  <td align="left">Changes per QA's comment</td>
+</tr>
+    <tr><td align="left">1.3</td>
+  <td align="left">April 2014</td>
+  <td align="left">Updated Sections 1.1.2, 3.2, 3.3</td>
+</tr>
+    <tr><td align="left">1.4</td>
+  <td align="left"></td>
+  <td align="left">Updated curl examples to reflect correct endpoint</td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"></td>
+  <td align="left">Updated references to Project instead of Tenant</td>
+</tr>
+    <tr><td align="left">1.5</td>
+  <td align="left">May 2014</td>
+  <td align="left">HP Helion updates</td>
+</tr>
+  </tbody>
+</table><h2 id="2-architectural-view">2. Architectural View</h2>
+
+<h3 id="21-overview">2.1 Overview</h3>
+
+<p>The Image service is a web service for managing virtual machine images. It provides a set of RESTful APIs that enables querying/updating of image metadata as well as retrieval of the actual image data.</p>
+
+<h3 id="22-images">2.2 Images</h3>
+
+<h4 id="221-image-files">2.2.1 Image Files</h4>
+
+<p>An image file refers to a virtual disk image file that Compute service can load up to create a virtual machine.</p>
+
+<h4 id="222-image-metadata">2.2.2 Image Metadata</h4>
+
+<p>The metadata of an image includes all the information about the image, e.g. image identifier, name, status, size, disk format, container format, owner, and custom properties. Not all metadata are required to be specified with a value when adding a new image to Image service, more details can be found in <a href="#4422-add-a-new-image">section 4.4.2.2</a>.</p>
+
+<h5 id="2221-name">2.2.2.1 Name</h5>
+
+<p>Its value should be the name of the image. Note that the name of an image is not unique as it would be unrealistic to expect users to know all the unique names of all other user's images.</p>
+
+<h5 id="2222-identifier">2.2.2.2 Identifier</h5>
+
+<p>Each image has an identifier, which is guaranteed to be unique to a Region. For Regions please refer to <a href="#32-regions-and-availability-zones">section 3.2</a>. Images identifiers are UUIDs, commonly represented in hexadecimal string notation.</p>
+
+<h5 id="2223-status">2.2.2.3 Status</h5>
+
+<p>Images in the Image service can be in one the following statuses:</p>
+
+<ul><li><p><strong>queued</strong> The image identifier has been reserved for an image in the Image service. No image data has been uploaded to the Image service and the image size was not explicitly set to zero on creation.</p></li>
+<li><p><strong>saving</strong> Denotes that an image's raw data is currently being uploaded to the Image service. When an image is registered with a call to <code>POST /images</code> and there is an <code>x-image-meta-location</code> header present, that image will never be in the saving status (as the image data is already available in some other location).</p></li>
+<li><p><strong>active</strong> Denotes an image that is fully available in the Image service. This occurs when the image data is uploaded, or the image size is explicitly set to zero on creation.</p></li>
+<li><p><strong>killed</strong> Denotes that an error occurred during the uploading of an image's data, and that the image is not readable.</p></li>
+<li><p><strong>deleted</strong> The Image service has retained the information about the image, but it is no longer available to use. An image in this state will be removed automatically at a later date.</p></li>
+<li><p><strong>pending_delete</strong> This is similiar to deleted, however, the image data has not yet been removed. An image in this state is recoverable.</p></li>
+</ul><h5 id="2224-disk-and-container-format">2.2.2.4 Disk and Container Format</h5>
+
+<p>When adding an image to the Image service, specifying the image's disk format and container format is required.</p>
+
+<p>The following lists all the formats that the Image service allows.  The Compute service may only support a subset of them, please refer to Compute document for more details.</p>
+
+<h5 id="disk-format">Disk Format</h5>
+
+<p>The disk format of a virtual machine image is the format of the underlying disk image. Virtual appliance vendors have different formats for laying out the information contained in a virtual machine disk image.</p>
+
+<p>You can set your image's disk format to one of the following:</p>
+
+<ul><li><p><strong>raw</strong> This is an unstructured disk image format</p></li>
+<li><p><strong>vhd</strong> This is the VHD disk format, a common disk format used by virtual machine monitors from VMWare, Xen, Microsoft, VirtualBox, and others</p></li>
+<li><p><strong>vmdk</strong> Another common disk format supported by many common virtual machine monitors</p></li>
+<li><p><strong>vdi</strong> A disk format supported by VirtualBox virtual machine monitor and the QEMU emulator</p></li>
+<li><p><strong>iso</strong> An archive format for the data contents of an optical disc (e.g. CDROM).</p></li>
+<li><p><strong>qcow2</strong> A disk format supported by the QEMU emulator that can expand dynamically and supports Copy on Write</p></li>
+<li><p><strong>aki</strong> This indicates what is stored in the Image service is an Amazon kernel image</p></li>
+<li><p><strong>ari</strong> This indicates what is stored in the Image service is an Amazon ramdisk image</p></li>
+<li><p><strong>ami</strong> This indicates what is stored in the Image service is an Amazon machine image</p></li>
+</ul><h5 id="container-format">Container Format</h5>
+
+<p>The container format refers to whether the virtual machine image is in a file format that also contains metadata about the actual virtual machine.</p>
+
+<p>Note that the container format string is not currently used by the Image service or other OpenStack components, so it is safe to simply specify bare as the container format if you are unsure.</p>
+
+<p>You can set your image's container format to one of the following:</p>
+
+<ul><li><p><strong>bare</strong> This indicates there is no container or metadata envelope for the image</p></li>
+<li><p><strong>ovf</strong> This is the OVF container format</p></li>
+<li><p><strong>aki</strong> This indicates what is stored in the Image service is an Amazon kernel image</p></li>
+<li><p><strong>ari</strong> This indicates what is stored in the Image service is an Amazon ramdisk image</p></li>
+<li><p><strong>ami</strong> This indicates what is stored in the Image service is an Amazon machine image</p></li>
+</ul><h5 id="2225-size">2.2.2.5 Size</h5>
+
+<p>The image size in Bytes.</p>
+
+<h5 id="2226-checksum">2.2.2.6 Checksum</h5>
+
+<p>The MD5 checksum of the image file data.</p>
+
+<h5 id="2227-min-ram">2.2.2.7 Min-ram</h5>
+
+<p>The minimum ram required in megabytes to run this image on a HP Compute server. Please refer to HP Compute document for more details about this property.</p>
+
+<h5 id="2228-min-disk">2.2.2.8 Min-disk</h5>
+
+<p>The minimum disk space required in gigabytes to run this image on a HP Compute server. Please refer to HP Compute document for more details about this property.</p>
+
+<h5 id="2229-owner">2.2.2.9 Owner</h5>
+
+<p>The Image service normally sets the owner of an image to be the Project ID of the authenticated user adding the image.</p>
+
+<h5 id="22210-custom-image-properties">2.2.2.10 Custom Image Properties</h5>
+
+<p>The Image service allows a set of custom, free-form image properties stored with the image metadata. There is no limit on the number of free-form key/value attributes that can be attached to the image. However, keep in mind that the 8K limit on the size of all HTTP headers sent in a request will effectively limit the number of image properties.</p>
+
+<h5 id="properties-added-by-the-compute-service-when-creating-a-snapshot">Properties added by the Compute service when creating a snapshot</h5>
+
+<p>HP Compute adds some or all of the following custom properties to instance snapshots it creates.</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Name</th>
+  <th align="left">Description</th>
+  <th align="left">Example</th>
+  <th align="left">Comment</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">architecture</td>
+  <td align="left">arch type</td>
+  <td align="left">'x86_64' or 'i686'</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left">image_location</td>
+  <td align="left">location</td>
+  <td align="left">'snapshot' or 'local'</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left">image_state</td>
+  <td align="left">state</td>
+  <td align="left">'available' or 'creating'</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left">owner_id</td>
+  <td align="left">Project ID of the owner</td>
+  <td align="left"></td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left">user_id</td>
+  <td align="left">user name of the owner</td>
+  <td align="left"></td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left">instance_uuid</td>
+  <td align="left">uuid of creating instance</td>
+  <td align="left"></td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left">instance_ref</td>
+  <td align="left">reference URL</td>
+  <td align="left"></td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left">ramdisk_id</td>
+  <td align="left">Image ID of associated Ramdisk</td>
+  <td align="left"></td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left">kernel_id</td>
+  <td align="left">Image ID of associated Kernel Image</td>
+  <td align="left"></td>
+  <td align="left">typically None</td>
+</tr>
+    <tr><td align="left">image_type</td>
+  <td align="left">type</td>
+  <td align="left">'snapshot'</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left">backup_type</td>
+  <td align="left"></td>
+  <td align="left"></td>
+  <td align="left">typically None</td>
+</tr>
+  </tbody>
+</table><h5 id="properties-added-to-public-images">Properties added to Public Images</h5>
+
+<p>The Image service adds many properties to public images. They are implemented as custom properties, as follow.</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Name</th>
+  <th align="left">Description</th>
+  <th align="left">Type</th>
+  <th align="left">Example</th>
+  <th align="left">Comment</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">com.hp_1_os_distro</td>
+  <td align="left">OS name</td>
+  <td align="left">string</td>
+  <td align="left">'org.ubuntu', 'org.centos', 'com.microsoft.server'</td>
+  <td align="left">Will track org.openstack_1_os_distro in the future</td>
+</tr>
+    <tr><td align="left">com.hp_1_os_version</td>
+  <td align="left">OS version</td>
+  <td align="left">string</td>
+  <td align="left">'12.04', '5.6', '2008 R2 Enterprise SP1'</td>
+  <td align="left">Will track org.openstack_1_os_version in the future</td>
+</tr>
+    <tr><td align="left">com.hp_1_image_type</td>
+  <td align="left">image type</td>
+  <td align="left">string</td>
+  <td align="left">'kernel', 'ramdisk', 'machine', 'disk'</td>
+  <td align="left">machine == AMI; disk == qcow2 raw image; this property will not be required when the glance API properties disk_format, container_format are visible to the DEVEX UI</td>
+</tr>
+    <tr><td align="left">com.hp_1_image_lifecycle</td>
+  <td align="left">image lifecycle state</td>
+  <td align="left">string</td>
+  <td align="left">'deprecated' or 'active'</td>
+  <td align="left">absense of (a value for) this property should be interpreted as 'active'</td>
+</tr>
+    <tr><td align="left">com.hp_1_provider</td>
+  <td align="left">WHO provides the image</td>
+  <td align="left">string</td>
+  <td align="left">com.hp, com.canonical, com.activestate etc.</td>
+  <td align="left">note a ubuntu image built by HP would have com.hp as the provider</td>
+</tr>
+    <tr><td align="left">com.hp_1_bootable_volume</td>
+  <td align="left">is this image compatible with bootable volumes?</td>
+  <td align="left">boolean</td>
+  <td align="left">true or false</td>
+  <td align="left">in the absense of this flag assume the image is compatible with bootable volumes</td>
+</tr>
+  </tbody>
+</table><h5 id="hp-image-license-property">hp_image_license property</h5>
+
+<p>The hp_image_license property is custom to HP Helion and has the following semantics:</p>
+
+<ul><li><p>Value is private to HP Helion;</p></li>
+<li><p>Not removable once set;</p></li>
+<li><p>Will be copied to all snapshots taken in Nova using the image;</p></li>
+<li><p>Applicable to non-public Windows images (snapshots);</p></li>
+<li><p>Applied to Windows images only by HP Helion</p></li>
+</ul><h3 id="23-image-ownership-and-sharing">2.3 Image Ownership and Sharing</h3>
+
+<p>The ownership of an image is defined by the value of its 'owner' attribute, as mentioned in section 2.2.2.9. The value of this attribute can be NULL, which indicates that the image is not owned by any specific Project. Ownership of an image is shared across all users that belong to the Project identified in the 'owner' attribute of an image.</p>
+
+<p>An image can be shared with another Project by its owner, in which case the original owner can also indicate whether the recipient can share the image further. Modification of shared images is still restricted to the user that owns it.</p>
+
+<h3 id="24-authentication-and-access-controls">2.4 Authentication and Access Controls</h3>
+
+<h4 id="241-authentication">2.4.1 Authentication</h4>
+
+<p>The Image service depends on Control Service (CS) API to handle authentication of clients. An Image service consumer must obtain an authentication token from CS and send it along with all API requests to Image Service through the <code>X-Auth-Token</code> header. The Image service will communicate back to CS to verify the token validity and obtain the consumer's identity credentials. Anonymous users cannot access Image service APIs.</p>
+
+<h4 id="242-access-control">2.4.2 Access Control</h4>
+
+<p>Access to an image is controlled with the ownership of the image and whether the image is public or private.</p>
+
+<p>Public images with an owner can be accessed by any user, but modifications are restricted to a user under the Project that owns it or Admin users.</p>
+
+<p>Public images without an owner may be accessed by anyone, but modifications are restricted solely to Admins.</p>
+
+<p>Adding a public image to the Image service is only allowed for users with a privileged role.</p>
+
+<p>Private images with an owner can only be accessed or modified by the user that owns it or Admin users.</p>
+
+<p>Private images may also have a null owner. These images will only be accessible and modifiable by Admins.</p>
+
+<h2 id="3-account-level-view">3. Account Level View</h2>
+
+<h3 id="31-accounts">3.1 Accounts</h3>
+
+<ul><li>Authenticated Users -- Any user that has authenticated against an authentication service (e.g. Control Services) and does not have the admin role</li>
+<li>Admin Users -- Any user that has authenticated against an authentication service and has the admin role returned by the authentication service in that Project's list of roles. The Admin role is HP restricted.</li>
+</ul><h3 id="32-regions">3.2 Regions</h3>
+
+<p>Region(s): region-a, region-b</p>
+
+<h3 id="33-service-catalog">3.3 Service Catalog</h3>
+
+<p>The listing below shows a fragment of the Service Catalog returned by the Identity service which contains the endpoints for the Image service.</p>
+
+<pre>
+  <code>{
+    endpoints: [2]
+        1:  {
+        links: {
+        self: "https://region-b.geo-1.identity.hpcloudsvc.com/v3/endpoints/14000300_P"
+        }
+        url: "https://region-b.geo-1.images.hpcloudsvc.com:443/v1.0"
+        region: "region-b.geo-1"
+        interface: "public"
+        service_Id: "140"
+        id: "14000300_P"
+        }
+        2:  {
+        links: {
+        self: "https://region-b.geo-1.identity.hpcloudsvc.com/v3/endpoints/14001200_P"
+        }
+        url: "https://region-a.geo-1.images.hpcloudsvc.com:443/v1.0"
+        region: "region-a.geo-1"
+        interface: "public"
+        service_Id: "140"
+        id: "14001200_P"
+        }
+        type: "image"
+        id: "140"
+        links: {
+        self: "https://region-b.geo-1.identity.hpcloudsvc.com/v3/services/140"
+        }
+    name: "Image Management"
+}
+</code>
+</pre>
+
+<h2 id="4-rest-api-specifications">4. REST API Specifications</h2>
+
+<h3 id="41-service-api-operations">4.1 Service API Operations</h3>
+
+<p><strong>Hosts</strong>:<br />
+https://region-a.geo-1.images.hpcloudsvc.com:443/v1.0<br />
+https://region-b.geo-1.images.hpcloudsvc.com:443/v1.0</p>
+
+<p><strong>BaseUri</strong>: {Host}</p>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON/XML Support?</th>
+  <th align="center">Privilege Level</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left"><strong>Image Metadata</strong></td>
+  <td align="left"><a href="#4411-list-images">List Images</a></td>
+  <td align="left">GET</td>
+  <td align="left">/images</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Metadata</strong></td>
+  <td align="left"><a href="#4412-list-images-in-more-detail">List Images Details</a></td>
+  <td align="left">GET</td>
+  <td align="left">/images/detail</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Metadata</strong></td>
+  <td align="left"><a href="#4413-filtering-images-lists">Filtering Images Lists</a></td>
+  <td align="left">GET</td>
+  <td align="left">/images?KEY=VALUE</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Metadata</strong></td>
+  <td align="left"><a href="#4414-filtering-on-custom-properties">Filtering on Custom Properties</a></td>
+  <td align="left">GET</td>
+  <td align="left">/images/detail?property-KEY=VALUE</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Metadata</strong></td>
+  <td align="left"><a href="#4415-paginating-a-list-of-images">Paginating a List of Images</a></td>
+  <td align="left">GET</td>
+  <td align="left">/images?limit=LIMIT&amp;marker=ID</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Metadata</strong></td>
+  <td align="left"><a href="#4416-retrieve-image-metadata">Retrieve Image Metadata</a></td>
+  <td align="left">HEAD</td>
+  <td align="left">/images/{image_id}</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Metadata</strong></td>
+  <td align="left"><a href="#4417-update-an-image">Update an Image</a></td>
+  <td align="left">PUT</td>
+  <td align="left">/images/{image_id}</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Data</strong></td>
+  <td align="left"><a href="#4421-retrieve-raw-image-data">Retrieve Raw Image Data</a></td>
+  <td align="left">GET</td>
+  <td align="left">/images/{image_id}</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Data</strong></td>
+  <td align="left"><a href="#4422-add-a-new-image">Add a New Image</a></td>
+  <td align="left">POST</td>
+  <td align="left">/images</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Data</strong></td>
+  <td align="left"><a href="#4423-two-step-adding-new-image">Two-step Adding New Image</a></td>
+  <td align="left">POST /images</td>
+  <td align="left">PUT /images/{image_id}</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Memberships</strong></td>
+  <td align="left"><a href="#4431-list-image-memberships">List Image Memberships</a></td>
+  <td align="left">GET</td>
+  <td align="left">/images/{image_id}/members</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Memberships</strong></td>
+  <td align="left"><a href="#4432-list-shared-images">List Shared Images</a></td>
+  <td align="left">GET</td>
+  <td align="left">/shared-images/{project_id}</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Memberships</strong></td>
+  <td align="left"><a href="#4433-add-a-member-to-an-image">Add a Member to an Image</a></td>
+  <td align="left">PUT</td>
+  <td align="left">/images/{image_id}/members/{project_id}</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Memberships</strong></td>
+  <td align="left"><a href="#4434-remove-a-member-from-an-image">Remove a Member from an Image</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">/images/members/{project_id}</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+    <tr><td align="left"><strong>Image Memberships</strong></td>
+  <td align="left"><a href="#4435-replace-a-membership-list-for-an-image">Replace a Membership List for an Image</a></td>
+  <td align="left">PUT</td>
+  <td align="left">/images/{image_id}/members</td>
+  <td align="left">Y/N</td>
+  <td align="center"></td>
+</tr>
+  </tbody>
+</table><h3 id="42-common-request-headers">4.2 Common Request Headers</h3>
+
+<h4 id="421-accept">4.2.1 Accept</h4>
+
+<p>Where applicable, this determines what Content-Types are acceptable, for example:</p>
+
+<pre>
+  <code>text (text/plain)
+JSON (application/json)
+</code>
+</pre>
+
+<h4 id="422-content-type">4.2.2 Content-Type</h4>
+
+<p>Where applicable, this indicates the MIME type of an object. For example when adding a new image a header of <code>Content-Type: application/octet-stream</code> should be specified.</p>
+
+<h4 id="423-x-auth-token">4.2.3 X-Auth-Token</h4>
+
+<p>When specified, this identifies the user making the request. See section 2.4 for more information about tokens.</p>
+
+<h4 id="424-content-length">4.2.4 Content-Length</h4>
+
+<p>Where applicable, this is the length in bytes of the body of the request.</p>
+
+<h3 id="43-common-response-headers">4.3 Common Response Headers</h3>
+
+<h4 id="431-content-type">4.3.1 Content-Type</h4>
+
+<p>When the response includes a body, this indicates the MIME type of the response.</p>
+
+<h4 id="432-content-length">4.3.2 Content-Length</h4>
+
+<p>When the response includes a body, this indicates the length of the body in bytes.</p>
+
+<h3 id="44-service-api-operation-details">4.4 Service API Operation Details</h3>
+
+<h4 id="441-image-metadata">4.4.1 Image Metadata</h4>
+
+<p>Status Lifecycle: N/A</p>
+
+<p>Rate Limits: N/A</p>
+
+<p>Quota Limits: N/A</p>
+
+<p>Business Rules: None</p>
+
+<h5 id="4411-list-images">4.4.1.1 List Images</h5>
+
+<h5 id="get-images">GET /images</h5>
+
+<p>Retrieve a list of available images that the authenticated user has access to. This includes images owned by the user, images shared with the user and public images.</p>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>URL Parameters</strong>
+</p>
+
+<ul><li>limit=LIMIT</li>
+</ul><p>The <code>LIMIT</code> is a numeric value that you wish to limit the number of images returned per call. If no limit specified, Glance returns <strong>25</strong> images at a time by default.</p>
+
+<ul><li>marker=ID</li>
+</ul><p>The <code>marker</code> query parameter is to specify an image id <strong>after</strong> which the page of images starts. The image with the ID specified will not be shown.</p>
+
+<p>See section 4.4.1.3 for more parameters that can be used for filtering.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request body required.</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>JSON-encoded data. For example:</p>
+
+<pre>
+  <code>{'images':
+  [
+    {
+     'name': 'Ubuntu 12.04 Plain',
+     'disk_format': 'vhd',
+     'container_format': 'ovf',
+     'size': 5368709120,
+     'checksum': '61eabaf2bf278703738b433ff884c91f',
+     'id': "50928dd9-d57b-4b42-8f88-bdc4ccf16695"
+    }
+  ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/images
+</code>
+</pre>
+
+<h5 id="4412-list-images-in-more-detail">4.4.1.2 List Images in More Detail</h5>
+
+<h5 id="get-imagesdetail">GET /images/detail</h5>
+
+<p>Retrieve a more detailed list of available images that the authenticated user has access to. This includes images owned by the user, images shared with the user and public images.</p>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>URL Parameters</strong>
+</p>
+
+<ul><li>limit=LIMIT</li>
+</ul><p>The <code>LIMIT</code> is a numeric value that you wish to limit the number of images returned per call. If no limit specified, Glance returns <strong>25</strong> images at a time by default.</p>
+
+<ul><li>marker=ID</li>
+</ul><p>The <code>marker</code> query parameter is to specify an image id after which the page of images starts.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request body required.</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>JSON-encoded data. For example:</p>
+
+<pre>
+  <code>{'images':
+  [
+    {
+     "status": "active", 
+     "name": "UbuntuServer2-snap1", 
+     "deleted": false, 
+     "container_format": "bare", 
+     "created_at": "2012-11-07T14:36:00", 
+     "disk_format": "qcow2", 
+     "updated_at": "2012-11-07T14:36:34", 
+     "properties": {
+        "instance_uuid": "a249a5a4-66ff-4b9c-a90b-d0ec5419f074", 
+        "image_location": "snapshot", 
+        "image_state": "available", 
+        "user_id": "96028022561439", 
+        "creator": "XXX", 
+        "image_type": "snapshot", 
+        "instance_ref": "http://nv1.example.net/v1.1/355478", 
+        "ramdisk_id": null, 
+        "kernel_id": null, 
+        "backup_type": null, 
+        "version": "1.0.0", 
+        "architecture": "amd64", 
+        "owner_id": "16488133588404"
+     },
+     "min_disk": 0, 
+     "id": "50928dd9-d57b-4b42-8f88-bdc4ccf16695", 
+     "checksum": "c5d96e1cf62c0bcf9c633f14e2f01c3e", 
+     "owner": "16488133588404", 
+     "is_public": false, 
+     "deleted_at": null, 
+     "min_ram": 0, 
+     "size": 686751744
+    }
+  ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/images/detail
+</code>
+</pre>
+
+<h5 id="4413-filtering-images-lists">4.4.1.3 Filtering Images Lists</h5>
+
+<h5 id="get-imageskeyvalue">GET /images?{key=value}</h5>
+
+<p>Both the <code>GET /v1/images</code> and <code>GET /v1/images/detail</code> requests take certain query parameters that serve to filter the returned list of images.</p>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>URL Parameters</strong>
+</p>
+
+<ul><li>name=NAME</li>
+</ul><p>Showing images having a name attribute matching NAME.</p>
+
+<ul><li>container_format=FORMAT</li>
+</ul><p>Showing images having a container_format attribute matching FORMAT</p>
+
+<ul><li>disk_format=FORMAT</li>
+</ul><p>Showing images having a disk_format attribute matching FORMAT</p>
+
+<ul><li>status=STATUS</li>
+</ul><p>Showing images having a status attribute matching STATUS</p>
+
+<ul><li>size_min=BYTES</li>
+</ul><p>Showing images having a size attribute greater than or equal to BYTES</p>
+
+<ul><li>size_max=BYTES</li>
+</ul><p>Showing images having a size attribute less than or equal to BYTES</p>
+
+<ul><li>is_public=PUBLIC</li>
+</ul><p>An admin user may use the <code>is_public</code> parameter to control which results are returned.</p>
+
+<p>When the <code>is_public</code> parameter is absent or set to <code>True</code> the following images will be listed: Images whose <code>is_public</code> field is <code>True</code>, owned images and shared images.</p>
+
+<p>When the <code>is_public</code> parameter is set to <code>False</code> the following images will be listed: Images (owned, shared, or non-owned) whose <code>is_public</code> field is <code>False</code>.</p>
+
+<p>When the <code>is_public</code> parameter is set to <code>None</code> all images will be listed irrespective of owner, shared status or the <code>is_public</code> field.</p>
+
+<p>Note: Use of the <code>is_public</code> parameter is restricted to admin users. For all other users it will be ignored.</p>
+
+<ul><li>sort_key=KEY</li>
+</ul><p>Results will be ordered by the specified image attribute <code>KEY</code>. Accepted values include <code>id</code>, <code>name</code>, <code>status</code>, <code>disk_format</code>, <code>container_format</code>, <code>size</code>, <code>created_at</code> (default) and <code>updated_at</code>.</p>
+
+<ul><li>sort_dir=DIR</li>
+</ul><p>Results will be sorted in the direction <code>DIR</code>. Accepted values are <code>asc</code> for ascending or <code>desc</code> (default) for descending.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request body required</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>JSON-encoded data. See the following for example.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/images?{key=value}
+</code>
+</pre>
+
+<h5 id="4414-filtering-on-custom-properties">4.4.1.4 Filtering on Custom Properties</h5>
+
+<h5 id="get-imagesdetailpropertykeyvalue">GET /images/detail?property={key=value}</h5>
+
+<p>A list of images can be filtered based on custom properties.</p>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>URL Parameters</strong>
+</p>
+
+<p>Any custom property name</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request body required</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>JSON-encoded data. See the following for example.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/images/detail?property={key=value}
+</code>
+</pre>
+
+<h5 id="4415-paginating-a-list-of-images">4.4.1.5 Paginating a list of images</h5>
+
+<h5 id="get-imageslimitlimitmarkerid">GET /images?limit=LIMIT&amp;marker=ID</h5>
+
+<p>A combination of <strong>limit</strong> and <strong>marker</strong> query parameters can be used to paginate a list of images. For example the following request will confine the resulting page length to be LIMIT, and the first image of this page is the one right after ID.</p>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>URL Parameters</strong>
+</p>
+
+<ul><li><p>limit</p></li>
+<li><p>marker</p></li>
+</ul><p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request body required</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>JSON-encoded data. See the following for example.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>First we request a list of images without specifying the <strong>limit</strong> parameter, as a result 25 images were returned.</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/images?limit=LIMIT&amp;marker=ID
+</code>
+</pre>
+
+<p>Then we set the page length to be 3 by <strong>limit</strong>, and try to retrieve the images that are after <strong>d69ede19-2145-4933-806f-e82ef103098f</strong> in the list above. So we got:</p>
+
+<pre>
+  <code>curl -v -k -X GET -H "x-auth-token: ***" "https://localhost:9292/v1/images?limit=3&amp;marker=d69ede19-2145-4933-806f-e82ef103098f"
+
+&gt; GET /v1/images?limit=3&amp;marker=d69ede19-2145-4933-806f-e82ef103098f HTTP/1.1
+&gt; Host: localhost:9292
+&gt; Accept: */*
+&gt; x-auth-token: ***
+&gt;
+&lt; HTTP/1.1 200 OK
+&lt; Content-Type: text/html; charset=UTF-8
+&lt; Content-Type: application/json
+&lt; Content-Length: 456
+&lt; X-Openstack-Request-Id: req-b135294c-7700-48cc-be0e-e00123c508a7
+&lt; Date: Sat, 26 Jan 2013 03:08:16 GMT
+&lt;
+
+{"images": [
+  {"name": "Server1-snap1", "container_format": "bare", "disk_format": "qcow2", "checksum": "2ceadb1ab14775fc809b13301cbe2f10", "id": "d4388c1f-0047-4b46-9ad0-4ffd83b836eb", "size": 686751744},
+  {"name": "Server1-snap1", "container_format": "bare", "disk_format": "qcow2", "checksum": "7402dab7e233cb81d8d9cc8b0b4d10e1", "id": "d313cbdb-152f-4cf9-a2c0-06b23d6afa01", "size": 686751744},
+  {"name": "Server1-snap1", "container_format": "bare", "disk_format": "qcow2", "checksum": "241001b584803f30e3b6b135a66e3b09", "id": "50928dd9-d57b-4b42-8f88-bdc4ccf89000", "size": 686751744}
+]}
+</code>
+</pre>
+
+<h5 id="4416-retrieve-image-metadata">4.4.1.6 Retrieve Image Metadata</h5>
+
+<h5 id="head-imagesimage-id">HEAD /images/{image_id}</h5>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request body required</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>The metadata is returned as a set of HTTP headers that begin with the prefix <code>x-image-meta-</code>.</p>
+
+<p>For example:</p>
+
+<pre>
+  <code>X-Image-Meta-Property-User_id: 96028022561439
+X-Image-Meta-Status: active
+X-Image-Meta-Property-Image_state: available
+X-Image-Meta-Min_disk: 0
+X-Image-Meta-Owner: 16488133588404
+X-Image-Meta-Property-Instance_ref: http://nv1.example.net/v1.1/355478
+X-Image-Meta-Name: Server2-snap1
+X-Image-Meta-Container_format: bare
+X-Image-Meta-Property-Image_type: snapshot
+X-Image-Meta-Created_at: 2012-11-07T14:36:00
+X-Image-Meta-Property-Image_location: snapshot
+X-Image-Meta-Min_ram: 0
+X-Image-Meta-Updated_at: 2012-11-07T14:36:34
+X-Image-Meta-Property-Backup_type:
+X-Image-Meta-Id: 23a4120c-b394-41b1-834d-6ab04fca3358
+X-Image-Meta-Property-Instance_uuid: a249a5a4-66ff-4b9c-a90b-d0ec5419f074
+X-Image-Meta-Deleted_at:
+X-Image-Meta-Property-Ramdisk_id:
+X-Image-Meta-Property-Architecture: amd64
+X-Image-Meta-Property-Kernel_id:
+X-Image-Meta-Deleted: False
+X-Image-Meta-Checksum: c5d96e1cf62c0bcf9c633f14e2f01c3e
+X-Image-Meta-Property-Creator: XXX
+X-Image-Meta-Size: 686751744
+X-Image-Meta-Property-Version: 1.0.0
+X-Image-Meta-Is_public: False
+X-Image-Meta-Property-Owner_id: 16488133588404
+X-Image-Meta-Disk_format: qcow2
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X HEAD -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/images/{image_id}
+</code>
+</pre>
+
+<h5 id="4417-update-an-image">4.4.1.7 Update an Image</h5>
+
+<h5 id="put-imagesimage-id">PUT /images/{image_id}</h5>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>All the request headers prefixed with <code>x-image-meta-</code> and <code>x-image-meta-property-</code> are recognized as image metadata.</p>
+
+<p>If an image was previously reserved, and thus is in the <code>queued</code> state, then image raw data can be added by including it as the request body. If the image already has data associated with it (e.g. not in the <code>queued</code> state), then including a request body will result in a 409 Conflict.</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>On success, the <code>PUT</code> request will return the image metadata encoded as HTTP headers.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<p>This example shows how to update metadata on an image.</p>
+
+<pre>
+  <code>curl -i -k -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' -H "{key:value}" {BaseURI}/images/{image_id}
+</code>
+</pre>
+
+<h3 id="442-image-data">4.4.2 Image data</h3>
+
+<p>Status Lifecycle: N/A</p>
+
+<p>Rate Limits: N/A</p>
+
+<p>Quota Limits: N/A</p>
+
+<p>Business Rules: None</p>
+
+<h5 id="4421-retrieve-raw-image-data">4.4.2.1 Retrieve Raw Image Data</h5>
+
+<h5 id="get-imagesimage-id">GET /images/{image_id}</h5>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request body required</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>The metadata is returned as a set of HTTP headers that begin with the prefix <code>x-image-meta-</code>, and the image itself is encoded into the response body.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/images/{image_id}
+</code>
+</pre>
+
+<h5 id="4422-add-a-new-image">4.4.2.2 Add a New Image</h5>
+
+<h5 id="post-images">POST /images</h5>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>201 - CREATED</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>The metadata of the image is sent to the Image service in HTTP headers. The body of the HTTP request to the API will be the MIME-encoded image data.</p>
+
+<p>Image Metadata in HTTP Headers:</p>
+
+<p>All HTTP headers prefixed with <code>x-image-meta-</code> and <code>x-image-meta-property-</code> are recognized as image metadata.</p>
+
+<p>The list of metadata headers are listed below.</p>
+
+<ul><li>x-image-meta-name (required)</li>
+</ul><p>The name of the image.</p>
+
+<ul><li>x-image-meta-id (optional)</li>
+</ul><p>The Image service will use the supplied identifier for the image if specified. A 409 Conflict will be returned if an identifier already exists in that Image service region.</p>
+
+<p>The Image service will generate an identifier for the image and return this identifier in the response if not specified.</p>
+
+<ul><li>x-image-meta-disk_format (required)</li>
+</ul><p>Valid values are one of aki, ari, ami, raw, iso, vhd, vdi, qcow2, or vmdk.</p>
+
+<ul><li>x-image-meta-container_format (required)</li>
+</ul><p>Valid values are one of aki, ari, ami, bare, or ovf.</p>
+
+<ul><li>x-image-meta-size (optional)</li>
+</ul><p>The Image service assumes the supplied value is the expected size if specified. A 400 Bad Request will be returned if the length in bytes of the request body does not match the value of this header.</p>
+
+<p>The Image service will set the image's size based on the size of the request body if not specified.</p>
+
+<ul><li>x-image-meta-checksum (optional)</li>
+</ul><p>The Image service will verify the checksum generated from the backend store against the supplied checksum value if specified, a 400 Bad Request will be returned if not match.</p>
+
+<p>The Image service will calculate the MD5 checksum based on the image data in the request body if not specified.</p>
+
+<ul><li>x-image-meta-min-ram (optional)</li>
+</ul><p>The Image service views the supplied value as the minimum ram required in megabytes to run this image on a server if specified.</p>
+
+<p>The Image service considers the minimum ram requirement is 0 for this image if not specified.</p>
+
+<ul><li>x-image-meta-min-disk (optional)</li>
+</ul><p>The Image service views the supplied value as the minimum disk space required in gigabytes to run this image on a server if specified.</p>
+
+<p>The Image service considers the minimum disk space requirement is 0 for this image if not specified.</p>
+
+<ul><li>x-image-meta-owner (optional)</li>
+</ul><p>This header is only meaningful for admins.</p>
+
+<p>The Image service normally sets the owner of an image to be the Project ID of the authenticated user issuing the request. However, if the authenticated user has the Admin role, this default may be overridden by setting this header to null or to a string identifying the owner of the image.</p>
+
+<ul><li>x-image-meta-property-*</li>
+</ul><p>When the Image service receives any HTTP header whose key begins with the prefix <code>x-image-meta-property-</code>, the Image service adds the key and value to a set of custom, free-form image properties stored with the image. The key is the lower-cased string following the prefix x-image-meta-property- with dashes and punctuation replaced with underscores.</p>
+
+<p>For example, if the following HTTP header were sent:</p>
+
+<p><code>x-image-meta-property-architecture  amd64</code>
+Then a key/value pair of "architecture"/"amd64" will be stored as image metadata with the image in the Image service.</p>
+
+<p>There is no limit on the number of free-form key/value attributes that can be attached to the image. However, keep in mind that the 8K limit on the size of all HTTP headers sent in a request will effectively limit the number of image properties.</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>JSON-encoded metadata of the new image. See the following for example.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X POST -H 'X-Auth-Token: {Auth_Token}' -H "X-Image-Meta-Name: post_example" -H "X-Image-Meta-disk_format: raw" -H "x-image-meta-container_format: bare" -H "Content-Type: application/octet-stream" --data-binary @/home/lijam/img-800k {BaseURI}/images
+
+&gt; POST /v1/images HTTP/1.1
+&gt; Host: localhost:9292
+&gt; Accept: */*
+&gt; x-auth-token: ***
+&gt; X-Image-Meta-Name: post_example
+&gt; X-Image-Meta-disk_format: raw
+&gt; x-image-meta-container_format: bare
+&gt; Content-Type: application/octet-stream
+&gt; Content-Length: 819200
+&gt; Expect: 100-continue
+&gt;
+&lt; HTTP/1.1 100 Continue
+&lt; HTTP/1.1 201 Created
+&lt; Content-Type: application/json
+&lt; Content-Length: 441
+&lt; Location: https://localhost:9292/v1/images/50928dd9-d57b-4b42-8f88-bdc4ccf16695
+&lt; Etag: 3f8ad80bece5aabec127446bf3bd7a02
+&lt; X-Openstack-Request-Id: req-13d89606-3b04-4d45-b0e4-ea1e6c7d743e
+&lt; Date: Tue, 05 Mar 2013 04:38:11 GMT
+&lt;
+{"image": {"status": "active", "name": "post_example", "deleted": false, "container_format": "bare", "created_at": "2013-03-05T04:38:10", "disk_format": "raw", "updated_at": "2013-03-05T04:38:11", "properties": {}, "min_disk": 0, "protected": false, "id": "50928dd9-d57b-4b42-8f88-bdc4ccf16695", "checksum": "3f8ad80bece5aabec127446bf3bd7a02", "owner": "34096082065107", "is_public": false, "deleted_at": null, "min_ram": 0, "size": 819200}}
+</code>
+</pre>
+
+<h5 id="4423-two-step-adding-new-image">4.4.2.3 Two-step Adding New Image</h5>
+
+<h5 id="post-images">POST /images</h5>
+
+<h5 id="put-imagesimage-id">PUT /images/{image_id}</h5>
+
+<p>Another way to add a new image to the Image service is to first register an image via a POST request and then upload the image data via a PUT.</p>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>POST: 201 - CREATED</p>
+
+<p>PUT: 200 - OK</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>POST: 'x-image-meta-name', 'X-Image-Meta-disk_format' and 'x-image-meta-container_format' are required, no request body required</p>
+
+<p>PUT: 'Content-Type' is required, request body should be the image data</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>POST: JSON-encoded metadata</p>
+
+<p>PUT: JSON-encoded metadata</p>
+
+<p>See the following for example.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X PUT -H 'X-Auth-Token: {Auth_Token}' -H "Content-Type: application/octet-stream" --data-binary @/home/lijam/img-800k {BaseURI}/images/{image_id}
+
+&gt; PUT /v1/images/c639c44f-32df-4734-9baa-7f7452337ffc HTTP/1.1
+&gt; Host: localhost:9292
+&gt; Accept: */*
+&gt; x-auth-token: ***
+&gt; Content-Type: application/octet-stream
+&gt; Content-Length: 819200
+&gt; Expect: 100-continue
+&gt;
+&lt; HTTP/1.1 100 Continue
+&lt; HTTP/1.1 200 OK
+&lt; Content-Length: 441
+&lt; Content-Type: application/json
+&lt; Location: https://localhost:9292/v1/images/c639c44f-32df-4734-9baa-7f7452337ffc
+&lt; Etag: 3f8ad80bece5aabec127446bf3bd7a02
+&lt; X-Openstack-Request-Id: req-dd31ebbf-8bd2-4b8c-9a45-4cf9622fb23d
+&lt; Date: Tue, 05 Mar 2013 04:44:08 GMT
+&lt;
+{"image": {"status": "active", "name": "post_example", "deleted": false, "container_format": "bare", "created_at": "2013-03-05T04:41:17", "disk_format": "raw", "updated_at": "2013-03-05T04:44:08", "properties": {}, "min_disk": 0, "protected": false, "id": "c639c44f-32df-4734-9baa-7f7452337ffc", "checksum": "3f8ad80bece5aabec127446bf3bd7a02", "owner": "34096082065107", "is_public": false, "deleted_at": null, "min_ram": 0, "size": 819200}}
+</code>
+</pre>
+
+<h3 id="443-image-membership">4.4.3 Image Membership</h3>
+
+<p>Status Lifecycle: N/A</p>
+
+<p>Rate Limits: N/A</p>
+
+<p>Quota Limits: N/A</p>
+
+<p>Business Rules: None</p>
+
+<h5 id="4431-list-image-memberships">4.4.3.1 List Image Memberships</h5>
+
+<h5 id="get-imagesimage-idmembers">GET /images/{image_id}/members</h5>
+
+<p>Retrieve a list of the other Projects that may access a given image.</p>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request body required</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>JSON data</p>
+
+<pre>
+  <code>{'members': [
+ {'member_id': '12345',
+  'can_share': false}
+ ]}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/images/{image_id}/members
+</code>
+</pre>
+
+<h5 id="4432-list-shared-images">4.4.3.2 List Shared Images</h5>
+
+<h5 id="get-shared-imagesproject-id">GET /shared-images/{project_id}</h5>
+
+<p>Retrieve a list of images which are shared with a given Project.</p>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request body required</p>
+
+<p>
+  <strong>reponse</strong>
+</p>
+
+<p>JSON data</p>
+
+<pre>
+  <code>{'shared_images': [
+ {'image_id': 'd313cbdb-152f-4cf9-a2c0-06b23d6afa01',
+  'can_share': false}
+ ]}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/shared-images/{project_id}
+</code>
+</pre>
+
+<h5 id="4433-add-a-member-to-an-image">4.4.3.3 Add a Member to an Image</h5>
+
+<h5 id="put-imagesimage-idmembersproject-id">PUT /images/{image_id}/members/{project_id}</h5>
+
+<p>To authorize a Project to access a private image.</p>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>With no body, this will add the membership to the image, leaving existing memberships unchanged and defaulting new memberships to have <code>can_share</code> set to false.</p>
+
+<p>If the following body is specified, both existing and new memberships will have <code>can_share</code> set to the supplied value.</p>
+
+<pre>
+  <code>{'member':
+ {'can_share': true}
+}
+</code>
+</pre>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>No response body</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' -d '{"memberships": [{"member_id": "{member_id}", "can_share": false}]}' {BaseURI}/images/{image_id}/members/{project_id}
+</code>
+</pre>
+
+<h5 id="4434-remove-a-member-from-an-image">4.4.3.4 Remove a Member from an Image</h5>
+
+<h5 id="delete-imagesimage-idmembersproject-id">DELETE /images/{image_id}/members/{project_id}</h5>
+
+<p>To revoke a Project's right to access a private image.</p>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>This query will return a 204 ("No Content") status code.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request body</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>No response body</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/images/{image_id}/members/{project_id}
+</code>
+</pre>
+
+<h5 id="4435-replace-a-membership-list-for-an-image">4.4.3.5 Replace a Membership List for an Image</h5>
+
+<h5 id="put-imagesimage-idmembers">PUT /images/{image_id}/members</h5>
+
+<p>The full membership list for a given image may be replaced.</p>
+
+<p>
+  <strong>Status Codes</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>A body in the following form:</p>
+
+<pre>
+  <code>{'memberships': [
+ {'member_id': 'tenant1',
+  'can_share': false}
+ ...]}
+</code>
+</pre>
+
+<p>All the supplied memberships will be created, having <code>can_share</code> set to false by default if not specified.</p>
+
+<p>The existing memberships named in the body will have their <code>can_share</code> set to the specified value, or keep the existing values unchanged if the corresponding <code>can_share</code> is not specified in the body.</p>
+
+<p>All existing memberships which are not named in the body are removed.</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>No response body</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' -d '{"memberships": [{"member_id": "{member_id}", "can_share": false}]}' {BaseURI}/images/{image_id}/members
+</code>
+</pre>
+
+<h2 id="5-additional-notes">5. Additional Notes</h2>
+
+<h3 id="51-apiv1-differences-between-hp-helion-public-cloud-135-and-1212">5.1 APIv1 Differences between HP Helion Public Cloud 13.5 and 12.12</h3>
+
+<table>
+  <thead>
+    <tr><th align="left"></th>
+  <th align="left">1.1 (2013.1)</th>
+  <th align="left">1.0 (2011.3)</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">Image Identifier</td>
+  <td align="left">UUID (for example: 6eab43da-eb20-4e43-8984-48fa057989c5)</td>
+  <td align="left">Integer</td>
+</tr>
+    <tr><td align="left">Get Metadata API</td>
+  <td align="left">new response header "X-Openstack-Request-Id"</td>
+  <td align="left">N/A</td>
+</tr>
+    <tr><td align="left">Add new image API</td>
+  <td align="left">"X-Image-Meta-Name", "X-Image-Meta-Disk_format", "X-Image-Meta-Container_format" are required</td>
+  <td align="left">"X-Image-Meta-Name" is required</td>
+</tr>
+  </tbody>
+</table>
+	</article>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+		<ul class="footer-social">
+			<li class="twitter"><a href="../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+			<li class="youtube"><a href="../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+			<li class="rss"><a href="../../../../external.html?link=http://h30499.www3.hp.com/t5/Grounded-in-the-Cloud/bg-p/sws-661#.U7qe27Hn-M8"></a></li>
+			<li class="facebook"><a href="../../../../external.html?link=https://www.facebook.com/HPHelion"></a></li>
+			<li class="linkedin stretch"><a href="../../../../external.html?link=http://www.linkedin.com/company/3510998"></a></li>
+		</ul>
+		<ul class="contact-info hide-320 show-768">
+			<li>In the U.S.<br />1-855-61CLOUD</li>
+			<li>Worldwide<br />+1678-745-9010</li>
+			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span></li>
+		</ul>
+		<div class="copyright">	
+			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+			</p><br />
+			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../external.html?link=http://www8.hp.com/us/en/privacy/privacy.html" target="_blank">Privacy</a> | <a href="../../../../external.html?link=http://www8.hp.com/us/en/privacy/terms-of-use.html" target="_blank">Terms of use</a> | <a href="../../../../external.html?link=http://www.hpcloud.com/legal-documents" target="_blank">Legal Documents</a></p>
+		</div>
+	</div>
+	</div>
+</footer>
+
+<!-- Load JS -->
+<!--[if lt IE 9]>
+<script src="http://www.hpcloud.com/sites/all/themes/hpcloud/js/svgeezy.js"></script>
+-->
+	<script src="../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../js/combined.js"></script>
+
+<div id="ClickTaleDiv" style="display: none;"></div>    <div class="region region-page-bottom">
+    <div id="lpButtonDiv"></div>  </div><!-- /.region -->
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_zUhl2jDXgUKVBRVBUeMbuSby0YSCiXHWIAYNbn9ecwc.js"></script>
+<script>ClickTaleSSL=1; // This is intentinally global. 
+			if(typeof ClickTale=='function') 
+				ClickTale(24406,0.05,"www02");</script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_gPMh2zNJqEE6EkEOKNeOTAet3kwTiahCt35rBAtwqq4.js"></script>
+<script>
+    var _elqQ = _elqQ || [];
+    _elqQ.push(['elqSetSiteId', '521454204']);
+    _elqQ.push(['elqTrackPageView']);
+    
+    (function () {
+        function async_load() {
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+            s.src = '../../../sites/all/modules/custom/custom_eloqua/elqNow/elqCfg.min.html';
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        }
+        if (window.addEventListener) window.addEventListener('DOMContentLoaded', async_load, false);
+        else if (window.attachEvent) window.attachEvent('onload', async_load); 
+    })();
+    </script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_lNHbXKW-sJN9oM4eoaw-q0yTco3mOORibOeNn9yzM00.html"></script>
+   <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/api/image/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:02:10 GMT -->
+</html>

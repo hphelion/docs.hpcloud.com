@@ -1,0 +1,374 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/update/devplat/101/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:53:38 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion OpenStack&#174;: Installation and Configuration</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../../css/combined.css">
+
+	<script src="../../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../../index.html" class="logo"  ><img src="../../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<script>
+<![CDATA[
+
+function PageRefresh {
+onLoad="window.refresh"
+}
+
+PageRefresh();
+
+]]>
+</script><!--
+<p style="font-size: small;"> <a href="/helion/openstack/install/esx/">&#9664; PREV</a> | <a href="/helion/openstack/install-overview/">&#  9650; UP</a> | <a href="/helion/openstack/install/dnsaas/">NEXT &#9654;</a> </p>
+--><h1 id="hp-helion-openstack-10-development-platform-commercial-101-update">HP Helion OpenStack® 1.0: Development Platform Commercial 1.01 Update</h1>
+
+<p>The HP Helion Development Platform currently contains four products: <a href="../../../../devplatform/index.html">Application Lifecycle Service (ALS), Marketplace Service, Messaging Service and Database Service</a>.</p>
+
+<p>The following sections explain how to update the HP Helion Development Platform.</p>
+
+<ul><li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#update-messaging">Update the Messaging Service</a></li>
+<li><a href="#update-als">Update the Application Lifecycle Service</a></li>
+<li><a href="#update-database">Update the Database Service</a></li>
+<li><a href="#update-marketplace">Update the Marketplace Service</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ul><h2 id="prerequisites">Prerequisites</h2>
+
+<p>The following guide outlines the steps to update Helion Development Platform from version 1.0 to 1.01. Before executing these steps, ensure you have upgraded HP Helion OpenStack to 1.01 as described in the <a href="../../overview/101/index.html">HP Helion OpenStack Update Overview</a>.</p>
+
+<p><strong>Note:</strong> If you created a new installation of 1.01, bypassing 1.0, you need to install HP Helion OpenStack Development Platform Services, and not update. See <a href="../../../../devplatform/install/index.html">Development Platform Install Guide</a>.</p>
+
+<h2 id="update-messaging">Update the Messaging Service</h2>
+
+<p>This section provides details on updating the Messaging Service for Helion OpenStack Development Platform. This assumes that the Messaging Service is installed in your cloud.</p>
+
+<p><strong>Note:</strong> If the Message Service is not installed, see the <a href="../../../../devplatform/install/index.html#install-messaging">Helion OpenStack Development Platform Install Guide</a>.</p>
+
+<h3 id="download">Download the Messaging Service</h3>
+
+<ol><li><p>Log into the Horizon Dashboard.</p></li>
+<li><p>Click on the <strong>Admin</strong> panel and select <strong>Development Platform</strong>. Then, click <strong>Configure Services</strong>.</p></li>
+<li><p>Locate the <strong>Messaging Service</strong> item in the Configure Services table and select <strong>Download Service</strong> and wait for the download to complete.</p></li>
+<li><p>Once the download is complete, the new image for Messaging clusters will be available. All clusters created from this point forward will be using the Messaging Service 1.01 version.</p></li>
+</ol><h2 id="update-als">Update the Application Lifecycle Service (ALS)</h2>
+
+<p>This section provides details on updating the Application Lifestyle service (ALS) for Helion OpenStack Development Platform. This assumes that (ALS) is installed in your cloud.</p>
+
+<p><strong>Note:</strong> If the Message Service is not installed, see the <a href="../../../../devplatform/install/index.html#install-als">Helion OpenStack Development Platform Install Guide</a>.</p>
+
+<p>The process for updating ALS requires you to remove then have asked that you remove the current version then installing ALS 1.01.</p>
+
+<h3 id="remove-als">Remove Application Lifecycle Service 1.0</h3>
+
+<p>To remove ALS:</p>
+
+<ol><li><p>Log into the Horizon Dashboard.</p></li>
+<li><p>In the <strong>Projects</strong> Images panel locate the Application Lifecycle Service images.</p></li>
+<li><p>Select the two (2) ALS images.</p></li>
+<li><p>Click <strong>Delete Images</strong> and confirm.</p></li>
+</ol><p>The ALS images are deleted and the service has been removed.</p>
+
+<h3 id="dowload-als">Download the Application Lifecycle Service 1.01</h3>
+
+<p>To download the latest version of ALS:</p>
+
+<ol><li><p>In the <strong>Configure Services</strong> panel locate the Application Lifecycle Service item in the Configure Services table and select <strong>Download Service</strong> and wait for the download to complete.</p></li>
+<li><p>Once the download is complete, the new image for Application Lifecycle Service clusters will be available. All clusters created from this point forward will be using the Application Lifecycle Service 1.01 version.</p></li>
+</ol><h2 id="update-database">Update the Database Service</h2>
+
+<p>This section provides details on updating the Database Service for Helion OpenStack Development Platform. This assumes that the Database service is installed in your cloud.</p>
+
+<p><strong>Note:</strong> If the Database service is not installed, see the <a href="../../../../devplatform/install/index.html#install-database">Helion OpenStack Development Platform Install Guide</a>.</p>
+
+<h3 id="download-db">Download the Database Service</h3>
+
+<p>To download the latest version of the Database service:</p>
+
+<ol><li><p>In the <strong>Configure Services</strong> panel locate the <strong>Database Service</strong> item in the Configure Services table and select <strong>Download Service</strong> and wait for the download to complete.</p></li>
+<li><p>Once the download is complete, the new images for Database Service will be available. If at any point, you choose to rebuild the Database Service control plane, it will use the latest images.</p></li>
+</ol><h2 id="update-marketplace">Update the Marketplace Service</h2>
+
+<p>This section provides details on updating the Marketplace service for the Helion OpenStack Development Platform. This assumes that the Marketplace service is installed in your cloud.</p>
+
+<p><strong>Note:</strong> If the Marketplace service is not installed, see the <a href="../../../../devplatform/install/index.html#install-marketplace">Helion OpenStack Development Platform Install Guide</a>.</p>
+
+<h3 id="update-marketplace">Download the Marketplace Service</h3>
+
+<ol><li><p>In the <strong>Configure Services</strong> panel locate the <strong>Marketplace Service</strong> item in the Configure Services table and select <strong>Download Service</strong> and wait for the download to complete.</p></li>
+<li><p>Once the download is complete, the new images for Marketplace Service will be available. If at any point, you choose to rebuild the Marketplace Service control plane, it will use the latest images.</p></li>
+</ol><h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="service-is-stuck-in-download">Service is stuck in download</h3>
+
+<p>There are several situations in which a download will not complete.  One cause which is documented, is because the <code>tmp</code> directory ran out of space. There is a prerequisite to mount the <code>tmp</code> directory to a larger partition.  If you have completed this and it is still failing to download then we will need to reset the download. In the current release, this requires a manual process.</p>
+
+<p>As the "admin" user, in the "admin" tenant, click on <strong>Project</strong>, then <strong>Object Store</strong>. Open the "sherpa-cache" folder and delete the <code>wscatalog.&lt;id&gt;</code> folder which contains the cached download. The service should now be available to download again.</p>
+
+<p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<hr />
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../index.html"><span>HP Helion OpenStack Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../release-notes/101/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../faq/index.html"><span>FAQ</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../technical-overview/index.html"><span>Technical Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../services/overview/index.html"><span>Services Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../support-matrix/index.html"><span>Support Matrix</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../install/overview/index.html"><span>Installation Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../install/security/index.html"><span>Network Security</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../backup.restore/index.html"><span>Back Up and Restore</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../services/troubleshooting/index.html"><span>Troubleshooting</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../related-links/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../glossary/index.html"><span>Glossary</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/update/devplat/101/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:53:38 GMT -->
+</html>

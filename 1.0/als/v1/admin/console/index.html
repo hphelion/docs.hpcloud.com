@@ -1,0 +1,583 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/admin/console/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:27 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Management Console (Admin View)</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../css/combined.css">
+
+	<script src="../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../index.html" class="logo"  ><img src="../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="management-console-admin-view">HP Helion 1.0 Development Platform: Management Console (Admin View)</h1>
+
+<p>Application Lifecycle Service's web interface is called the Management Console.</p>
+
+<p>Note that users with Admin-level privileges have access to more options and settings than regular end-users. Some features documented here are available only from the Admin view.</p>
+
+<ul><li><a href="#about">About the Admin Console</a></li>
+<li><a href="#welcome">Welcome</a></li>
+<li><a href="#system-information">System Information</a></li>
+<li><a href="#cluster-nodes">Cluster Nodes</a></li>
+<li><a href="#organizations">Organizations</a></li>
+<li><a href="#users">Users</a></li>
+<li><a href="#applications">Applications</a></li>
+<li><a href="#cloud-events">Cloud Events</a></li>
+<li><a href="#dashboard">Dashboard</a>
+
+<ul><li><a href="#router">Router</a></li>
+<li><a href="#primary-node-status-graphs">Primary Node Status Graphs</a></li>
+</ul></li>
+<li><a href="#settings">Settings</a>
+
+<ul><li><a href="#console">Console</a></li>
+<li><a href="#quota-definitions">Quota Definitions</a></li>
+<li><a href="#cloud-controller">Cloud Controller</a></li>
+<li><a href="#console-settings-applications">Applications</a></li>
+<li><a href="#dea">DEA</a></li>
+<li><a href="#logyard">Logyard</a></li>
+<li><a href="#harbor">Harbor</a></li>
+<li><a href="#data-services">Data Services</a></li>
+<li><a href="#file-system">File System</a></li>
+</ul></li>
+</ul><h2 id="about-the-admin-console">About the Admin Console<a href="#about" title="Permalink to this headline"></a></h2>
+
+<p>The Application Lifecycle Service Management Console is a web interface that allows the
+administration and management of the Application Lifecycle Service Server.</p>
+
+<p>Your hypervisor provides <a href="../../user/reference/glossary/index.html#term-tty-console"><em>tty
+console</em></a> access to
+each of its virtual machines. After startup, an Application Lifecycle Service VM displays:</p>
+
+<pre>
+  <code>Application Lifecycle Service Management Console at
+
+https://helion-xxxx.local
+</code>
+</pre>
+
+<p>On a <a href="../../user/reference/glossary/index.html#term-micro-cloud"><em>micro
+cloud</em></a> VM where
+the local network supports <a href="../../user/reference/glossary/index.html#term-multicast-dns"><em>multicast
+DNS</em></a>, the
+hostname will be <code>helion-xxxx.local</code>. If you have
+configured the
+<a href="../server/configuration/index.html#server-config-hostname"><em>hostname</em></a> and
+<a href="../server/configuration/index.html#server-config-dns"><em>DNS</em></a> of the Application Lifecycle Service
+server manually, or are connecting to a server administered by someone
+else, supply the assigned hostname instead (e.g.
+<code>api.helion-test.example.com</code>).</p>
+
+<p>Enter the URL into your web browser, and the Management Console will
+load. The Console is supported on the following browsers:</p>
+
+<ul><li>Chrome 30+ (WebKit)</li>
+<li>Firefox 20+</li>
+<li>IE 10+</li>
+</ul><p>Using a browser which fully support WebSockets is recommended.</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>The SSL certificate for the Application Lifecycle Service Management Console is self-signed.
+You will need to manually accept this certificate in your browser. See
+the <a href="../server/configuration/index.html#server-config-https"><em>HTTPS section</em></a>
+for information on using your own certificate.</p>
+
+<p>When you first access the Management Console, you will be prompted to
+create a primary administrative user for Application Lifecycle Service. Enter an email
+address as the username, set a secure password, then review and accept
+the license agreement.</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p><strong>The password you choose here becomes the login password for the</strong>
+<code>helion</code> <strong>user on the VM</strong> (e.g. for
+<code>ssh</code> access).</p>
+
+<p>Once you've logged in, you can begin to add other users and admins,
+enable and disable services, and generally set up the system to your
+requirements.</p>
+
+<p>Basic Application Lifecycle Service administration can be done through the Management
+Console, but some maintenance and configuration tasks may need to be
+done at the command line using the <code>kato</code> command.
+See <a href="../reference/kato-ref/index.html#kato-command-ref"><em>Kato Command
+Reference</em></a> for a full list
+of options.</p>
+
+<p>The Application Lifecycle Service Management Console will periodically send non-identifying pingbacks (Application Lifecycle Service version number and UUID) to HP servers to help improve the web console experience. You can disable this option by setting <code>theme_settings['pingback_allowed'] = false;</code> in the <em>settings.js</em> file described in the <a href="customize/index.html#customize"><em>Theming and
+Customization</em></a> section.</p>
+
+<h2 id="welcome">Welcome<a href="#welcome" title="Permalink to this headline"></a></h2>
+
+<p>The top-level page of the Management Console displays quick links to the
+most used resources and views. The blue buttons are for features also
+available for regular end users (see <a href="../../user/console/index.html#user-console-welcome"><em>Management Console (User
+View)</em></a>).</p>
+
+<p>Green buttons expose Admin-only functionality:</p>
+
+<ul><li><strong>Configure Available Services</strong>: Opens the <a href="#console-cluster-nodes"><em>Cluster
+Nodes</em></a> view showing which roles are running
+on which nodes. From this view you can add or remove Service roles
+on the various nodes in the cluster (or on 127.0.0.1 for micro
+clouds).</li>
+<li><strong>Manage Organizations</strong>: Opens the
+<a href="#console-organizations"><em>Organizations</em></a> view.</li>
+<li><strong>Manage Users</strong>: Opens the <a href="#console-users"><em>Users</em></a> view.</li>
+<li><strong>View All Deployed Applications</strong>: Opens the :ref: Applications
+\&lt;console-applications&gt; view.</li>
+<li><strong>View Cloud Events</strong>: Opens the Cloud Events
+\&lt;console-cloud-events&gt; view.</li>
+<li><strong>View Dashboard</strong>: Opens the Dashboard \&lt;console-dashboard&gt;.</li>
+</ul><h3 id="system-information">System Information<a href="#system-information" title="Permalink to this headline"></a></h3>
+
+<ul><li><strong>Version</strong>: Version (release) number of the system.</li>
+<li><strong>MBUS IP</strong>: The IP address that hosts the primary node. Cluster
+nodes (if any) will connect via this IP address. In a micro cloud
+setting, it will be 127.0.0.1.</li>
+<li><strong>API Endpoint</strong>: The URL for helion clients to target. Normally
+also the URL for the Management Console.</li>
+</ul><h2 id="cluster-nodes">Cluster Nodes<a href="#cluster-nodes" title="Permalink to this headline"></a></h2>
+
+<p>Displays a list of nodes in the current cluster, and what services are
+running on each node. In a micro cloud configuration, only the current
+local node ('127.0.0.1') is shown.</p>
+
+<p>To enable or disable services on a node, click the <strong>Configure Roles</strong>
+button (cog icon) to see the <strong>Node Settings</strong>, showing a list of all
+available roles and checkboxes to enable or disable each one. Click
+<strong>Save</strong> to apply changes.</p>
+
+<p>See also the <a href="../reference/kato-ref/index.html#kato-command-ref-role-add"><em>kato
+role</em></a> and <a href="../reference/kato-ref/index.html#kato-command-ref-info"><em>kato
+info</em></a> command
+documentation for the CLI equivalents, and the <a href="../cluster/index.html#cluster-setup"><em>Cluster
+Setup</em></a> section for information on
+adding nodes to the cluster.</p>
+
+<h2 id="organizations">Organizations<a href="#organizations" title="Permalink to this headline"></a></h2>
+
+<p>The top level Organizations page allows Admins to add and delete
+<a href="../../user/deploy/orgs-spaces/index.html#orgs-spaces"><em>Organizations</em></a>.
+Clicking on an organization name opens its details. This view is the
+same as a regular <a href="../../user/console/index.html#user-console-organizations"><em>user's Organizations
+view</em></a>, but
+admin users can edit quotas, and add/remove domains, spaces, and users.</p>
+
+<h2 id="users">Users<a href="#users" title="Permalink to this headline"></a></h2>
+
+<p>The Users section displays a list of users and admins.</p>
+
+<ul><li>Click <strong>+ Add User</strong> to add users.</li>
+<li>Click on the user name or email address to view account details or
+change the password.</li>
+</ul><h2 id="applications">Applications<a href="#applications" title="Permalink to this headline"></a></h2>
+
+<p>The Applications section displays a list of all apps on the server.
+Click anywhere on the line for an app to view its details. Admins have
+the same permissions in the <a href="../../user/console/index.html#user-console-app"><em>Application
+View</em></a> as a Developer of
+the space it was deployed to.</p>
+
+<h2 id="cloud-events">Cloud Events<a href="#cloud-events" title="Permalink to this headline"></a></h2>
+
+<p>The Cloud Events section displays a list of events (including errors and
+warnings) on the Application Lifecycle Service server. The events can be filtered by Severity
+or Type, or by using a substring match in the Search field.</p>
+
+<h2 id="dashboard">Dashboard<a href="#dashboard" title="Permalink to this headline"></a></h2>
+
+<h3 id="router">Router<a href="#router" title="Permalink to this headline"></a></h3>
+
+<p>Shows realtime results for incoming requests (connections per second),
+routing errors (errors per second), and an overview of the cumulative
+requests to the system.</p>
+
+<h3 id="primary-node-status-graphs">Primary Node Status Graphs<a href="#primary-node-status-graphs" title="Permalink to this headline"></a></h3>
+
+<p>Displays graphs for server statistics: CPU, Load, Memory, Disk
+Operations, Disk Space, Processes, and Swap (primary node or micro cloud
+only).</p>
+
+<h2 id="settings">Settings<a href="#settings" title="Permalink to this headline"></a></h2>
+
+<p>The Settings menu gives access to the following Console and system
+settings:</p>
+
+<h3 id="console">Console<a href="#console" title="Permalink to this headline"></a></h3>
+
+<p>Various settings and templates to customize the look and feel of the
+Management Console. The settings are divided into the following
+categories:</p>
+
+<ul><li><strong>Product</strong>: Options to rename and reversion Application Lifecycle Service for OEM
+deployments, change the default locale (currently only 'en' and 'de'
+available), choose a different URL for documentation, or disable
+console pingbacks.</li>
+<li><strong>Look and Feel</strong>: Change the favicon, header, footer, or background
+color.</li>
+<li><strong>Welcome Page</strong>: EJS templated HTML to display on the Welcome page
+(see above).</li>
+<li><strong>Support Page</strong>: EJS templated HTML to display on the Support page.
+Change this if you are supporting your end users directly.</li>
+<li><strong>Eula Content</strong>: End User License Agreement. Change this if you are
+exposing Application Lifecycle Service to end users under specific terms.</li>
+<li><strong>Custom Stylesheet</strong>: A single CSS file used to override any
+existing styling in the Management Console. Inspect the Console with
+browser tools such as Firebug or Chrome Developer Tools to see the
+class names and IDs.</li>
+</ul><h3 id="quota-definitions">Quota Definitions<a href="#quota-definitions" title="Permalink to this headline"></a></h3>
+
+<p>Lists the Quota Definitions available to apply to Organizations on the
+system.</p>
+
+<ul><li>To edit a definition, click the edit button on the right.</li>
+<li>To create a new definition use the <a href="../../user/reference/client-ref/index.html#command-quota-create"><em>helion quota
+create</em></a>
+command.</li>
+</ul><h3 id="cloud-controller">Cloud Controller<a href="#cloud-controller" title="Permalink to this headline"></a></h3>
+
+<ul><li><strong>Maintenance Mode</strong>: Shuts down API requests but continues to serve
+web requests, useful when performing system operations such as
+importing and exporting data for upgrades. When the primary node
+enters maintenance mode, the Management Console becomes "read only"
+with the exception of this toggle (to bring it back online).</li>
+<li><strong>Logging Level</strong>: Changes the verbosity of Application Lifecycle Service logs from
+'debug2' (most verbose) through 'off' (silent).</li>
+<li><strong>Support Email</strong>: The email address displayed to end users when
+errors are encountered. Use an address which is monitored by
+Application Lifecycle Service administrators.</li>
+<li><strong>Sample Applications URLs</strong>: URIs for JSON files which populate the <a href="app-store-2.html#app-store"><em>App
+Store</em></a>. The URIs need not be public, but
+must be accessible from the controller node.</li>
+<li><strong>Allowed Repos</strong>: Debian package repositories allowed in
+application containers. End users can install additional packages
+(e.g. with <code>apt-get</code> or <code>aptitude</code>) only from these repositories.</li>
+</ul><h3 id="applications">Applications<a href="#console-settings-applications" title="Permalink to this headline"></a></h3>
+
+<ul><li><strong>Reserved URIs</strong>: URIs which cannot be used for end user
+applications.</li>
+</ul><h3 id="dea">DEA<a href="#dea" title="Permalink to this headline"></a></h3>
+
+<ul><li><strong>Max Memory Percentage</strong>: The percentage of physical memory each
+DEA node can use for hosted applications. The 80% default setting
+leaves enough memory for the OS and DEA processes on a node with 4GB
+of RAM. This can be increased on nodes with more memory available
+(e.g. to 90% on a node with 8GB of RAM). Do not exceed 100% unless
+the system correctly supports swap space and has it enabled. Restart
+all DEA roles/nodes to apply the change.</li>
+<li><strong>Max Staging Duration</strong>: The maximum time allowed for application
+staging.</li>
+</ul><h3 id="logyard">Logyard<a href="#logyard" title="Permalink to this headline"></a></h3>
+
+<p>Lists current log
+<a href="../server/logging/index.html#logging-drains-system"><em>Drains</em></a> and the log
+drain retry limits. Drains and limits cannot be changed in this
+interface; use the <a href="../reference/kato-ref/index.html#kato-command-ref-log-drain-add"><em>kato log drain
+...</em></a>
+commands and <a href="../reference/kato-ref/index.html#kato-command-ref-config"><em>kato config
+...</em></a> commands.</p>
+
+<h3 id="harbor">Harbor<a href="#harbor" title="Permalink to this headline"></a></h3>
+
+<p>Settings for the <a href="../cluster/harbor/index.html#harbor"><em>Harbor</em></a> TCP/UDP port
+service.</p>
+
+<ul><li><strong>External Host</strong>: The public IP (if configured) for the Harbor
+node.</li>
+<li><strong>External Hostname</strong>: The public hostname for the Harbor node.</li>
+<li><strong>Port Range Minimum</strong>: Sets the minimum for the exposed port range
+(default: 35000).</li>
+<li><strong>Port Range Maximum</strong>: Sets the maximum for the exposed port range
+(default: 40000).</li>
+</ul><p>See <a href="../cluster/harbor/index.html#harbor-setup"><em>Harbor: Requirements &amp;
+Setup</em></a> for more information.</p>
+
+<h3 id="data-services">Data Services<a href="#data-services" title="Permalink to this headline"></a></h3>
+
+<ul><li><strong>Allow Over-provisioning</strong>: Ignore the Capacity setting.</li>
+<li><strong>Capacity</strong>: Maximum number of service slots to allocate.</li>
+<li><strong>Max DB size</strong>: Maximum size on disk for database services.</li>
+<li><strong>Max Memory</strong>: Maximum amount of physical memory to allocate the
+service.</li>
+<li><strong>Memcached Memory</strong>: Maximum amount of physical memory to allocate
+for memcached instances.</li>
+<li><strong>Max FS Size</strong>: Maximum size on disk for filesystem services.</li>
+</ul><h3 id="file-system">File System<a href="#file-system" title="Permalink to this headline"></a></h3>
+
+<ul><li><strong>Capacity</strong>: Maximum number of service slots to allocate.</li>
+<li><strong>Max FS Size</strong>: Maximum size on disk for filesystem services in MB.</li>
+<li><strong>Allow Over-provisioning</strong>: Ignore the Capacity setting.</li>
+</ul>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Download the<br>Development Platform<br>
+			<a href="../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show">DOWNLOAD NOW</a>
+		</p>
+	</aside>
+	
+ 
+	<aside class="signup-box">
+		<p class="align-center">
+			Take the Helion Development Platform for a Free Spin<br>
+			<a href="../../../../helion/devplatform/ALS-developer-trial-quick-start/index.html">Quick Start Developer Trial</a>
+		</p>
+	</aside>
+<!--	
+	<aside class="signup-box">
+		<p class="align-center">Make sure to check out our Developer Portal
+			<a href="https://dev.hpcloud.com">dev.hpcloud.com
+</a><br>
+ 
+		</p>
+	</aside>
+-->	
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/index.html"><span>HP Helion Development Platform Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/install/index.html"><span>Development Platform Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/install/community/index.html"><span>Development Platform Community Edition Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/openstack/update/devplat/101/index.html"><span>Development Platform Commercial 1.0.1 Update</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/appdev/index.html"><span>Application Developer Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/sysadmin/index.html"><span>IT Ops Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/appdev/index.html#sample"><span>Sample Code</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/related-topics/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/deploy/index.html"><span>Application Lifecycle Service Configuration and Deployment</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../index.html"><span>ALS Admin Guide</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/admin/console/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:27 GMT -->
+</html>

@@ -1,0 +1,608 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/admin/best-practices/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:59 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Best Practices</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../css/combined.css">
+
+	<script src="../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../index.html" class="logo"  ><img src="../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="index-0">HP Helion 1.0 Development Platform: Best Practices</h1>
+
+<h2 id="applying-updates">Applying Updates</h2>
+
+<p><a href="#applying-updates">Applying Updates</a>
+    -   <a href="#backup-migration">Backup &amp; Migration</a>
+        -   <a href="#limitations">Limitations</a>
+            -   <a href="#custom-services">Custom Services</a>
+            -   <a href="#hard-coded-database-connection-info">Hard-coded Database Connection
+                Info</a>
+            -   <a href="#deas">DEAs</a>
+        -   <a href="#exporting-the-server-data">Exporting the server data</a>
+        -   <a href="#scheduled-backups">Scheduled backups</a>
+        -   <a href="#importing-the-server-data">Importing the server data</a>
+    -   <a href="#upgrade">Upgrading (v1.0 and later)</a>
+    -   <a href="#server-monitoring-with-new-relic">Server Monitoring with New
+        Relic</a>
+    -   <a href="#system-monitoring-with-nagios">System Monitoring with Nagios</a>
+    -   <a href="#storage">Persistent Storage</a>
+        -   <a href="#relocating-services-droplets-and-containers">Relocating Services, Droplets, and
+            Containers</a>
+        -   <a href="#enabling-filesystem-quotas">Enabling Filesystem Quotas</a></p>
+
+<p>Major version upgrades of Application Lifecycle Service can be done using <a href="../server/upgrade/index.html#upgrade"><em>kato node
+upgrade</em></a> or a <a href="#bestpractices-migration"><em>migration to a new VM
+or cluster</em></a>, but patch releases (normally
+minor fixes to particular components) can be applied in place using the
+<a href="../reference/kato-ref/index.html#kato-command-ref-patch"><em>kato patch</em></a>
+command.</p>
+
+<p>To see a list of patches available from HP, run the following
+command on any Application Lifecycle Service VM:</p>
+
+<pre>
+  <code>$ kato patch status
+</code>
+</pre>
+
+<p>The command will list the updates available. For example:</p>
+
+<pre>
+  <code>2 updates available to be installed.
+
+Known updates:
+  dea-memory-usage-reporting: Fix the reporting of helion stats usage on the DEA end.
+    severity: required
+    roles affected: dea
+
+  vsphere-autoscaling-fix: Fix VSphere autoscaling behavior.
+    severity: required
+    roles affected: controller, primary
+</code>
+</pre>
+
+<p>To apply all patches to all relevant cluster nodes:</p>
+
+<pre>
+  <code>$ kato patch install
+</code>
+</pre>
+
+<p>To apply a particular patch, specify it by name:</p>
+
+<pre>
+  <code>$ kato patch install dea-memory-usage-reporting
+</code>
+</pre>
+
+<p>Applying patches will automatically restart all patched roles. To
+prevent this, use the <code>--no-restart</code> option.</p>
+
+<p>To apply a patch only to the local Application Lifecycle Service VM (not the whole cluster),
+use the <code>--only-this-node</code> option.</p>
+
+<h2 id="backup-migration">Backup &amp; Migration</h2>
+
+<p>This section describes backing up Application Lifecycle Service data and importing it into a
+new Application Lifecycle Service system. The export/import cycle is required for:</p>
+
+<ul><li>backups of system data</li>
+<li>moving an Application Lifecycle Service cluster to a new location</li>
+</ul><h3 id="limitations">Limitations<a href="#limitations" title="Permalink to this headline"></a></h3>
+
+<p>Before deciding on a backup, upgrade or migration strategy, it's
+important to understand what data the Application Lifecycle Service system can save, and what
+may have to be reset, redeployed, or reconfigured. This is especially
+important when migrating to a new cluster.</p>
+
+<h4 id="custom-services">Custom Services<a href="#custom-services" title="Permalink to this headline"></a></h4>
+
+<p>Application Lifecycle Service can export and import data from built-in data services running
+on Application Lifecycle Service nodes, but it has no mechanism to handle data in <a href="../cluster/external-db/index.html#external-db"><em>external
+databases</em></a> (unless
+<code>kato export|import</code> has also been modified to
+recognize the custom service).</p>
+
+<p>Backing up or moving such databases should be handled separately, and
+user applications should be reconfigured and/or redeployed to connect
+properly to the new database host if the database is not implemented as
+an Application Lifecycle Service data service.</p>
+
+<h4 id="hard-coded-database-connection-info">Hard-coded Database Connection Info<a href="#hard-coded-database-connection-info" title="Permalink to this headline"></a></h4>
+
+<p>Applications which write database connection details during staging
+rather than taking them from environment variables at run time, must be
+re-staged (e.g. redeployed or updated) to pick up the new service
+location and credentials. Restarting the application will not
+automatically force restaging.</p>
+
+<h4 id="deas">DEAs<a href="#deas" title="Permalink to this headline"></a></h4>
+
+<p>Droplet Execution Agent (DEA) nodes are not migrated directly from old
+nodes to new nodes. Instead, the application droplets (zip files
+containing staged applications) are re-deployed to new DEA nodes from
+the Controller.</p>
+
+<h3 id="exporting-the-server-data">Exporting the server data<a href="#exporting-the-server-data" title="Permalink to this headline"></a></h3>
+
+<p>Data export is done with the <a href="../reference/kato-ref/index.html#kato-command-ref-data-export"><em>kato data
+export</em></a>
+command. The command can export:</p>
+
+<ul><li>internal Application Lifecycle Service data (users, groups, quotas, settings, etc.)</li>
+<li>application droplets</li>
+<li>data services</li>
+</ul><p>Start by logging into the VM via <code>ssh</code>:</p>
+
+<pre>
+  <code>$ ssh helion@helion-xxxx.local
+</code>
+</pre>
+
+<p>A single-node micro cloud VM can be backed up with a single command:</p>
+
+<pre>
+  <code>$ kato data export --only-this-node
+</code>
+</pre>
+
+<p>A clustered setup can be backed up with a single command:</p>
+
+<pre>
+  <code>$ kato data export --cluster
+</code>
+</pre>
+
+<p>Once the export completes, you can use
+<a href="../../../../../external.html?link=http://manpages.ubuntu.com/manpages/lucid/man1/scp.1">scp</a> or
+another utility (e.g. sftp, rsync) to move the .tgz file to another
+system, or save the file directly to a mounted external filesystem by
+specifying the full path and filename during export (see backup example
+below).</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>Exporting data can take several minutes. For clusters with constant
+usage or large numbers of users, apps, and databases, put the exporting
+system in <a href="../console/customize/index.html#console-settings"><em>Maintenance Mode</em></a>
+(e.g. during a scheduled maintenance window) before exporting.</p>
+
+<h3 id="scheduled-backups">Scheduled backups<a href="#scheduled-backups" title="Permalink to this headline"></a></h3>
+
+<p>Regular backup of controller data, apps, droplets, and service data is
+recommended for any production system. Implementation of a regular
+backup routine is left to the discretion of the Application Lifecycle Service administrator,
+but using
+<a href="../../../../../external.html?link=http://manpages.ubuntu.com/manpages/oneiric/man1/crontab.1">cron/crontab</a>
+is one simple way is to automate this. For example, you could create an
+entry like the following in the root user's crontab on the filesystem
+node:</p>
+
+<pre>
+  <code>0 3 * * * su - helion /bin/bash -c '/home/helion/bin/kato data export --cluster /mnt/nas/helion-backup.tgz'
+</code>
+</pre>
+
+<p>This runs <code>kato data export --cluster</code> every morning
+at 3AM as <code>root</code> using the <code>helion</code> user's login environment (required) and saves a .tgz file to a
+mounted external filesystem.</p>
+
+<p>Scheduled (non-interactive) backups using the <code>kato export</code> command will need to be run by <code>root</code> as
+some shell operations performed in the export require <code>sudo</code> when run interactively. For clusters, passwordless <a href="../../../../../external.html?link=https://help.ubuntu.com/community/SSH/OpenSSH/Configuring#disable-password-authentication">SSH key
+authentication</a>
+between the Core node and all other nodes will also need to be set up.
+The command should be run on the node hosting the 'filesystem' role, as
+some shell commands need to be run locally for that service.</p>
+
+<h3 id="importing-the-server-data">Importing the server data<a href="#importing-the-server-data" title="Permalink to this headline"></a></h3>
+
+<p>To import Application Lifecycle Service data, transfer the exported .tgz file to the target
+VM or note the hostname of the old VM / Core node.</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>Before importing data to a new microcloud or cluster, make sure you have
+completed first-user (admin) setup in the Application Lifecycle Service Web UI and accepted
+the terms and conditions.</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>All roles in the new cluster should be started prior to proceeding with
+import. If you would like all services to be imported, their
+corresponding roles must be enabled (see also <a href="../reference/known-issues/index.html#known-issues-rabbit-import"><em>Importing Apps using
+RabbitMQ
+2.4</em></a>).</p>
+
+<p>Login to the Application Lifecycle Service VM (or Core node) and run
+<code>kato data import</code> with the relevant options. For
+example, to import all data into a new cluster from a .tgz file:</p>
+
+<pre>
+  <code>$ kato data import --cluster helion-export-xxxxxxxxxx.tgz
+</code>
+</pre>
+
+<p>To import data from a running Application Lifecycle Service system instead, specify the
+hostname of the old Core node:</p>
+
+<pre>
+  <code>$ kato data import --cluster helion-host.example.com
+</code>
+</pre>
+
+<h2 id="upgrade">Upgrading (v1.0 and later)</h2>
+
+<p>The <code>kato node upgrade</code> command was added in
+Application Lifecycle Service 1.0 to allow upgrading Application Lifecycle Service systems in place. See
+<a href="../server/upgrade/index.html#upgrade"><em>Upgrading Application Lifecycle Service</em></a> for full
+instructions.</p>
+
+<h2 id="server-monitoring-with-new-relic">Server Monitoring with New Relic<a href="#server-monitoring-with-new-relic" title="Permalink to this headline"></a></h2>
+
+<p>To use New Relic for server monitoring, you'll need a <a href="../../../../../external.html?link=http://newrelic.com/">New Relic
+account</a> and a License Key. Install the
+<code>newrelic-sysmond</code> package and start the monitoring
+daemon on each Application Lifecycle Service VM as per the <a href="../../../../../external.html?link=http://docs.newrelic.com/docs/server/server-monitor-installation-ubuntu-and-debian">New Relic Server Monitor
+installation
+(Ubuntu)</a>
+instructions.</p>
+
+<h2 id="system-monitoring-with-nagios">System Monitoring with Nagios<a href="#system-monitoring-with-nagios" title="Permalink to this headline"></a></h2>
+
+<p>Though Application Lifecycle Service has an internal mechanism for supervising processes on a
+server or cluster (<a href="../../../../../external.html?link=http://supervisord.org/">Supervisor</a>), it is
+advisable to add some external monitoring for production systems.
+<a href="../../../../../external.html?link=http://www.nagios.org/">Nagios</a> is a free, open source system
+monitoring tool that can provide this external monitoring.</p>
+
+<p>Detailed instructions on installing and configuring Nagios can be found
+in the <a href="../../../../../external.html?link=http://nagios.sourceforge.net/docs/3_0/toc">Nagios Core
+Documentation</a></p>
+
+<h2 id="storage">Persistent Storage</h2>
+
+<p>Cloud hosting providers have different default partition sizes and
+configurations. The default root volumes on some cloud hosted VM
+instances are often fairly small and are usually ephemeral. Data service
+and filesystem nodes should always be backed by some kind of persistent
+storage, with enough free filesystem space to accommodate the projected
+use of the services.</p>
+
+<h3 id="relocating-services-droplets-and-containers">Relocating Services, Droplets, and Containers<a href="#relocating-services-droplets-and-containers" title="Permalink to this headline"></a></h3>
+
+<p>To move database services, application droplets, and application
+containers to larger partitions:</p>
+
+<ul><li>mount the filesystem and/or block storage service on the instance
+(with <a href="#bestpractices-filesystem-quotas"><em>quotas enabled</em></a>),</li>
+<li>create directories for the items you wish to move,</li>
+<li>run the <a href="../reference/kato-ref/index.html#kato-command-ref-relocate"><em>kato
+relocate</em></a>
+command(s).</li>
+</ul><p>For example:</p>
+
+<pre>
+  <code>$ kato stop
+...
+$ kato relocate services /mnt/ebs/services
+...
+$ kato relocate droplets /mnt/ebs/droplets
+...
+$ kato relocate containers /mnt/containers
+...
+</code>
+</pre>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>For performance reasons, Application Lifecycle Service containers should not be relocated to
+block volumes.</p>
+
+<h3 id="enabling-filesystem-quotas">Enabling Filesystem Quotas<a href="#enabling-filesystem-quotas" title="Permalink to this headline"></a></h3>
+
+<p>The Application Lifecycle Service filesystem quotas cannot be enforced by the system unless
+they are mounted on partitions which support Linux quotas. This may need
+to be specified explicitly when running the <code>mount</code>
+command. The <a href="../reference/kato-ref/index.html#kato-command-ref-relocate"><em>kato
+relocate</em></a> command
+will warn if this is necessary.</p>
+
+<p>For the example above, the <code>mount</code> step might look
+like this:</p>
+
+<pre>
+  <code>$ sudo mount -o remount,usrjquota=aquota.user,grpjquota=aquota.group,jqfmt=vfsv0 /mnt/containers
+$ sudo quotacheck -vgumb /mnt/containers
+$ sudo quotaon -v /mnt/containers
+</code>
+</pre>
+
+<p>To ensure the quotas are preserved after reboot, edit
+<em>/etc/init.d/setup_helion_lxc</em> to include mount commands for each
+partition. The example above would require a block such as this:</p>
+
+<pre>
+  <code># enable quotas for Application Lifecycle Service containers
+if [[ -f "/mnt/containers/aquota.user" ]]; then
+  mount -o remount,usrjquota=aquota.user,grpjquota=aquota.group,jqfmt=vfsv0 /mnt/containers
+  quotaon -v /mnt/containers
+fi
+</code>
+</pre>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Download the<br>Development Platform<br>
+			<a href="../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show">DOWNLOAD NOW</a>
+		</p>
+	</aside>
+	
+ 
+	<aside class="signup-box">
+		<p class="align-center">
+			Take the Helion Development Platform for a Free Spin<br>
+			<a href="../../../../helion/devplatform/ALS-developer-trial-quick-start/index.html">Quick Start Developer Trial</a>
+		</p>
+	</aside>
+<!--	
+	<aside class="signup-box">
+		<p class="align-center">Make sure to check out our Developer Portal
+			<a href="https://dev.hpcloud.com">dev.hpcloud.com
+</a><br>
+ 
+		</p>
+	</aside>
+-->	
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/index.html"><span>HP Helion Development Platform Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/install/index.html"><span>Development Platform Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/install/community/index.html"><span>Development Platform Community Edition Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/openstack/update/devplat/101/index.html"><span>Development Platform Commercial 1.0.1 Update</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/appdev/index.html"><span>Application Developer Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/sysadmin/index.html"><span>IT Ops Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/appdev/index.html#sample"><span>Sample Code</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/related-topics/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/deploy/index.html"><span>Application Lifecycle Service Configuration and Deployment</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../index.html"><span>ALS Admin Guide</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../helion/devplatform/3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/admin/best-practices/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:59 GMT -->
+</html>

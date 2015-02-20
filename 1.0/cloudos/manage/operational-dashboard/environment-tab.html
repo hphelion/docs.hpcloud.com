@@ -1,0 +1,1538 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/cloudos/manage/operational-dashboard/environment-tab by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:03:28 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Operational Dashboard: Environment Tab</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../css/combined.css">
+
+	<script src="../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../index.html" class="logo"  ><img src="../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<p>
+  <a name="_top" id="_top"> </a>
+</p>
+
+<script>
+<![CDATA[ 
+
+function PageRefresh { 
+onLoad="window.refresh"
+}
+
+PageRefresh();
+
+]]>
+</script><p style="font-size: small;"> <a href="how-opdash-works/index.html">◀ PREV</a> | <a href="index.html">▲ UP</a> | <a href="cloud-tab/index.html">NEXT ▶</a> </p>
+
+<h1 id="operational-dashboard-environment-tab">Operational Dashboard: Environment Tab</h1>
+
+<p>The Environment tab contains the following panels on which you begin the installation process on the Operational Dashboard. 
+On these panels, you set up your cloud environment and complete the HP Cloud OS Administration node installation. 
+For the installation process, you must complete each panel in the order they are displayed.</p>
+
+<ul><li><p><a href="#prerequisites">Prerequisites</a></p></li>
+<li><p><a href="#server-types">Server Types</a></p></li>
+<li><p><a href="#connections">Connections</a></p></li>
+<li><p><a href="#networks">Networks</a></p></li>
+<li><p><a href="#complete-install">Complete Install</a></p></li>
+</ul><p>For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Clouds</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>The following information provides details about the Prerequisites panel:</p>
+
+<p>
+  <strong>Concepts:</strong>
+</p>
+
+<p>
+  <a href="#prerequisites-overview">Prerequisites Overview</a>
+</p>
+
+<p>
+  <strong>UI Description:</strong>
+</p>
+
+<ul><li><p><a href="#prerequisites-page">Prerequisites Page</a></p></li>
+<li><p><a href="#cloud-administration-node-internet-access-prerequisite-dialog">Cloud Administration Node Internet Access Prerequisite Dialog</a></p></li>
+<li><p><a href="#external-dns-server-prerequisite-dialog">External DNS Server Prerequisite Dialog</a></p></li>
+<li><p><a href="#cloud-administration-node-time-settings-prerequisite-dialog">Cloud Administration Node Time Settings Prerequisite Dialog</a></p></li>
+<li><p><a href="#email-notification-settings-prerequisite-dialog">Email Notification Settings Prerequisite Dialog</a></p></li>
+</ul><h3 id="prerequisites-overview">Prerequisites Overview</h3>
+
+<p>The first step on the Operational Dashboard is to configure the HP Cloud OS Administration node prerequisites.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> 
+Any prerequisites you want to configure, must be done before you complete the steps on the Complete Install panel. 
+For details, see <a href="environment-tab/index.html#complete-install">Complete Install</a>. 
+After that, the Edit Prerequisite dialogs are read-only. Once the install process is triggered, no changes can be made. 
+If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<ul><li><p><strong>Cloud Administration Node Internet Access</strong> — Configure to set up Internet access on the HP Cloud OS Administration node. You will need Internet access for downloading hot fixes and updates using the <a href="cloud-tab/index.html#hot-fixes">Hot Fixes</a> panel, 
+or the <a href="cloud-tab/index.html#updates-and-extensions">Updates and Extensions</a> panel.</p></li>
+<li><p><strong>(Optional) External DNS Server</strong> — Configure to add the IP address of the external DNS server your Cloud OS environment is using to access named websites within your cloud.</p></li>
+<li><p><strong>Cloud Administration Node Time Settings</strong> — Configure to reflect the current time to ensure that the Cloud is created successfully.</p></li>
+<li><p><strong>(Optional) Email Notification Settings</strong> — Configure to send email notifications when the Cloud and Compute Region operations complete because this takes some time. By enabling and setting this prerequisite, you can be alerted by e-mail when each operation completes.</p></li>
+</ul><h3 id="prerequisites-page">Prerequisites Page</h3>
+
+<p>To access: Select the Environment tab &gt; Prerequisites.</p>
+
+<p>The following table describes the Prerequisites page UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th>UI Elements</th>
+<th>Description</th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Prerequisite Description column </nobr></td>
+<td> HP Cloud OS Administration node prerequisite settings:
+<ul><li>Cloud Administration Node Internet Access</li>
+<li>External DNS Server</li>
+<li>Cloud Administration Node Time Settings</li>
+<li>Email Notification Settings </li>
+</ul></td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Last Updated column </td>
+<td> Timestamp when the prerequisite was completed. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Edit Prerequisite button </td>
+<td> Opens the Edit Prerequisite dialog for the corresponding Prerequisite. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Complete Prerequisite button </td>
+<td> Completes the setup of the setting. </td>
+</tr>
+</table><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h3 id="cloud-administration-node-internet-access-prerequisite-dialog">Cloud Administration Node Internet Access Prerequisite Dialog</h3>
+
+<p>To access: Select the Environment tab &gt; Prerequisites&gt; click <b>Edit Prerequisite</b> for the Cloud Administration Node Internet Access Prerequisite.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> 
+If you want to set the Administration Node Internet Access Prerequisite, you must configure it before you complete the steps on the 
+Complete Install panel. For details, see the <a href="environment-tab/index.html#complete-install">Complete Install</a> topic.
+After that, the Administration Node Internet Access Prerequisite dialogs are read-only. Once the install process is triggered, 
+no changes can be made. If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>The following table describes the Cloud Administration Node Internet Access Prerequisite dialog UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th>UI Elements</th>
+<th>Description</th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Network Interface </td>
+<td> Select the network interface on the HP Cloud OS Administration node that has been configured for Internet access. <b>Note:</b> Interface <code>eth0</code> is not used for Internet access.
+</td>
+</tr>
+  <tr style="background-color: #f8f8f8; color: black;"><td colspan="2"> Network Configuration - Set the network configuration for your environment. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> DHCP checkbox </td>
+<td>Enable (default) or disable DHCP.
+<p>If the node will receive its IP configuration via DHCP, leave the DHCP checkbox checked. When DHCP is checked, the four Network Configuration fields are disabled, and can be left blank.</p>
+<p>If you have a static IP address allocated for the node, uncheck the DHCP checkbox and enter the appropriate information into the IP Address, Network Mask, Gateway, and DNS Address fields.</p> 
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> IP Address </td>
+<td> Leave blank unless you have a static IP address, which you enter here. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Network Mask </td>
+<td> Leave blank unless you have a static IP address. Type the network mask. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Gateway </td>
+<td> Leave blank unless you have a static IP address. Type the gateway. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> DNS Address </td>
+<td> Leave blank unless you have a static IP address. Type the DNS address. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> HTTP Proxy Information </td>
+<td>Set proxy information applicable for your environment. If you are on a network that has a proxy, you must fill in this proxy information.
+<br /><br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Caution:</b>  
+Specifying incorrect proxy host settings might cause some features to not work correctly in the Administration Dashboard.</p>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Host </td>
+<td> Get this from your system administrator or from the settings in your web browser. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Port </td>
+<td> Get this from your system administrator or from the settings in your web browser. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Non-Proxy Hosts </td>
+<td> Specify addresses that should not use proxy servers (for Controller/Compute Nodes' admin and os_sdn networks, IP range). 
+Each network needs to be separated by a bar "|". For example: <br /><br /><nobr> 10.*|192.*|localhost|127.* </nobr></td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Username (Optional) </nobr></td>
+<td> Specify the username if necessary for the proxy setting. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Password (Optional) </nobr></td>
+<td> Specify the password if necessary for the proxy setting. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Update Prerequisite </nobr></td>
+<td> Click to save these settings, then click <b>Complete Prerequisite</b> to complete this setup. </td>
+</tr>
+</table><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Note:</b> If this prerequisite fails to 
+complete successfully, an error message displays on the Prerequisites page. For a potential solution, see <a href="../troubleshooting/index.html#problem-admin-node-internet-access-prerequisites-fail-to-complete">Problem: Admin Node Internet Access Prerequisites fail to complete</a> in the Troubleshooting topic. 
+</p>
+
+<p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h3 id="external-dns-server-prerequisite-dialog">External DNS Server Prerequisite Dialog</h3>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> 
+If you want to set the External DNS Server Prerequisite, you must configure it before you complete the steps on the 
+Complete Install panel. For details, see the <a href="environment-tab/index.html#complete-install">Complete Install</a> topic.
+After that, the External DNS Server Prerequisite dialogs are read-only. Once the install process is triggered, 
+no changes can be made. If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>To access: Select the Environment tab &gt; Prerequisites&gt; click <b>Edit Prerequisite</b> for the External DNS Server Prerequisite.</p>
+
+<p>The following table describes the External DNS Server Prerequisite dialog UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th>UI Elements</th>
+<th>Description</th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> External DNS Server IP Address </td>
+<td> Type the IP address of the external DNS server used by your Cloud OS environment to be able to access named websites within your cloud. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Update Prerequisite </td>
+<td> Click to save the IP address. </td>
+</tr>
+</table><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h3 id="cloud-administration-node-time-settings-prerequisite-dialog">Cloud Administration Node Time Settings Prerequisite Dialog</h3>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> 
+If you want to set the Administration Node Time Settings Prerequisite, you must configure it before you complete the steps on the 
+Complete Install panel. For details, see the <a href="environment-tab/index.html#complete-install">Complete Install</a> topic.
+After that, the Administration Node Time Settings Prerequisite dialogs are read-only. Once the install process is triggered, 
+no changes can be made. If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>To access: Select the Environment tab &gt; Prerequisites&gt; click <strong>Edit Prerequisite</strong> for the Cloud Administration Node Time Settings Prerequisite.</p>
+
+<p>The following table describes the Cloud Administration Node Time Settings Prerequisite dialog UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th>UI Elements</th>
+<th>Description</th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Timezone </td>
+<td> Set the appropriate time zone for your area (UTC is the default). </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Date </td>
+<td> Set the date applicable for your environment if different from the default. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Time </td>
+<td> Set the time applicable for your environment if different from the default. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Update Prerequisite </td>
+<td> Click to save these settings, then click <b>Complete Prerequisite</b> to complete this setup. </td>
+</tr>
+</table><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h3 id="email-notification-settings-prerequisite-dialog">Email Notification Settings Prerequisite Dialog</h3>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> 
+If you want to set the Email Notification Settings Prerequisite, you must configure it before you complete the steps on the 
+Complete Install panel. For details, see the <a href="environment-tab/index.html#complete-install">Complete Install</a> topic.
+After that, the Email Notification Settings Prerequisite dialogs are read-only. Once the install process is triggered, 
+no changes can be made. If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>To access: Select the Environment tab &gt; Prerequisites&gt; click <strong>Edit Prerequisite</strong> for the Email Notification Settings Prerequisite.</p>
+
+<p>The following table describes the Email Notification Settings Prerequisite dialog UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th>UI Elements</th>
+<th>Description</th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Timezone </td>
+<td> Set the appropriate time zone for your area (UTC is the default). </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Date </td>
+<td> Set the date applicable for your environment if different from the default. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Time </td>
+<td> Set the time applicable for your environment if different from the default. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Update Prerequisite </td>
+<td> Click to save these settings, then click <b>Complete Prerequisite</b> to complete this setup. </td>
+</tr>
+</table><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h2 id="server-types">Server Types</h2>
+
+<p>The following information provides details about the Server Types panel:</p>
+
+<p>
+  <strong>Concepts:</strong>
+</p>
+
+<p>
+  <a href="#server-types-overview">Server Types Overview</a>
+</p>
+
+<p>
+  <strong>UI Descriptions:</strong>
+</p>
+
+<ul><li><a href="#server-types-page">Server Types Page</a></li>
+<li><a href="#edit-server-definition-dialog">Edit Server Definition Dialog</a></li>
+<li><a href="#create-server-definition-dialog">Create Server Definition Dialog</a></li>
+</ul><h3 id="server-types-overview">Server Types Overview</h3>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> If you plan to customize the servers, 
+you must do that before you complete the steps on the Complete Install panel. For details, see 
+the <a href="environment-tab/index.html#complete-install">Complete Install</a> topic.
+After that, the Server Types dialogs are read-only. Once the install process is triggered, 
+no changes can be made. If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>The Server Types panel allows you to capture new or use existing server definitions about the networking ports for various servers in 
+your baremetal cloud environment. If all servers in your cloud are the same server type (homogeneous nodes), you are not required to 
+configure anything in this view. HP recommends that you keep and accept the default settings.</p>
+
+<p>However, if the servers in your cloud are different types of servers, you may be required to use a Linux utility such as dmidecode to 
+get the pattern and CLI commands to determine the bus addresses of your server's network ports.</p>
+
+<p>Here is one way to get the values for Server Name Pattern and Bus Order:</p>
+
+<p>Server Name Pattern:</p>
+
+<pre>
+dmidecode | grep "Product Name"
+</pre>
+
+<p>Bus Order (for UbuntuOS):</p>
+
+<pre>
+ls -l /sys/class/net | egrep pci | sed -e 's/^.*pci//' -e 's%/net.*$%%'
+</pre>
+
+<p>This is necessary to define the correct order of those ports for the various server types so that all the servers have the 
+same enumeration of network ports (0, 1, 2, 3 and so on) across the cloud. If you do not configure the server types for a cloud with 
+heterogeneous nodes in this way, you will experience networking failures because the servers will not have the same network port enumeration order.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Tip:</b> Based on your network and hardware infrastructure, 
+you can accept defaults or customize Server Types.
+</p>
+
+<h3 id="server-types-page">Server Types Page</h3>
+
+<p>To access: Select the Environment tab &gt; Server Types.</p>
+
+<p>The following table describes the Server Types page UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th>UI Elements</th>
+<th>Description</th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Server Name Pattern column </td>
+<td> List of the Cloud OS supported server types. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Bus Order column </td>
+<td> List of the bus orders related to the corresponding server types. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Edit Server Definition button </td>
+<td> Click to open the <a href="environment-tab/index.html#edit-server-definition-dialog">Edit Server Definition dialog</a> to customize the server type. 
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td>Create Server Definition button </td>
+<td> Click to add a new server type on the Create Server Definition dialog. <br /><br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Note:</b> The Create Server Definition button only displays 
+while the servers can be added or edited. Once you do the <a href="environment-tab/index.html#complete-install">Complete Install</a>, this button disappears and you cannot 
+add new servers or edit or delete existing servers.</p>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Drop-down arrow &gt; </nobr> Delete Server Definition </td>
+<td> Select to delete the server type from the HP Cloud OS Administration node. You are prompted to confirm the deletion. <br /><br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Note:</b> The Delete Server Definition menu item only displays while 
+the servers can be added or edited.  Once you do the <a href="environment-tab/index.html#complete-install">Complete Install</a>, 
+this menu item disappears and you cannot add new servers or edit or delete existing servers.
+</p></td>
+</tr>
+</table><h3 id="edit-server-definition-dialog">Edit Server Definition Dialog</h3>
+
+<p>To access: Select the Environment tab &gt; Server Types &gt; click <b>Edit Server Definition</b> for the server you want to customize.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> If you plan to customize the servers, 
+you must do that before you complete the steps on the Complete Install panel. For details, see 
+the <a href="environment-tab/index.html#complete-install">Complete Install</a> topic.
+After that, the Edit Server Definition dialogs are read-only. Once the install process is triggered, 
+no changes can be made. If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th>UI Elements</th>
+<th>Description</th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Server Name Pattern </td>
+<td> Name of the server type you are editing.</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Bus Order </td>
+<td> One or more bus addresses of your server's network ports.  </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Add Bus Order </td>
+<td> Click to add a blank bus order textbox, in which you then type the new bus order related to the server type. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Delete Bus Order </td>
+<td> Click to delete the selected bus order(s) that are not relevant to the server type. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Update Server Definition </nobr></td>
+<td> Click to save the updated server definition. <br /><br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Note:</b> The <b>Update Server Definition</b> button only 
+displays while the servers are editable. Once you do the 
+<a href="environment-tab/index.html#complete-install">Complete Install</a>, 
+the dialog become read-only and this button disappears.
+</p>
+</td>
+</tr>
+</table><h3 id="create-server-definition-dialog">Create Server Definition Dialog</h3>
+
+<p>To access: Select the Environment tab &gt; Server Types &gt; click <b>Create Server Definition</b>.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> The <b>Create Server Definition</b> button only displays while the servers are editable. 
+Once the install process is triggered by the 
+<a href="environment-tab/index.html#complete-install">Complete Install</a>, this button disappears and no 
+changes can be made. If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th>UI Elements</th>
+<th>Description</th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Server Name Pattern </td>
+<td> Name of the server type you are creating.</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Bus Order </td>
+<td> One or more bus addresses of your server's network ports.  </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Add Bus Order </td>
+<td> Click to add a blank bus order textbox, in which you then type the new bus order related to the server type. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Delete Bus Order </td>
+<td> Click to delete the selected bus order(s) that are not relevant to the server type. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Create Server Definition </nobr></td>
+<td> Click to create the updated server definition. <br /><br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Note:</b> The <b>Create Server Definition</b> button only 
+displays while the servers are editable. Once you do the 
+<a href="environment-tab/index.html#complete-install">Complete Install</a>, 
+the dialog become read-only and this button disappears.
+</p>
+</td>
+</tr>
+</table><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h2 id="connections">Connections</h2>
+
+<p>The following information provides details about the Connections panel:</p>
+
+<p>
+  <strong>Concepts:</strong>
+</p>
+
+<p>
+  <a href="#connections-overview">Connections Overview</a>
+</p>
+
+<p>
+  <strong>UI Descriptions:</strong>
+</p>
+
+<ul><li><a href="#connections-page">Connections Page</a></li>
+<li><a href="#edit-connection-dialog">Edit Connection Dialog</a></li>
+<li><a href="#create-connection-dialog">Create Connection Dialog</a></li>
+</ul><h3 id="connections-overview">Connections Overview</h3>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> 
+If you plan to customize the connections, you must do that before you complete the steps on the Complete Install panel.  
+For details, see <a href="environment-tab/index.html#complete-install">Complete Install</a>. 
+After that, the Connections dialogs are read-only. Once the install process is triggered, no changes can be made. 
+If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>Based on your network infrastructure, you must customize the Connections settings in the Connections panel. 
+After the enumeration of ports is consistent across all servers in the cloud, the Connections panel defines those 
+ports into a set of logical connections (interfaces) that will be used to eventually define the networks.</p>
+
+<p>The connections are defined based on the Network Modes along with a list of logical interfaces and the corresponding 
+physical interfaces' ports and bandwidth. For each logical connection (intf0, intf1, intf2) the network type is 
+identified (admin, os_sdn, public). The os_sdn value stands for OpenStack Software-Defined-Network.</p>
+
+<p>Examples of Network Modes:</p>
+
+<ul><li>Single Mode: All connections are shared on the same physical interface through VLAN.</li>
+<li>Dual Mode: All connections have their own interfaces where VLAN and bridge are off.</li>
+<li>Team Mode: All connections are shared on the same two physical interfaces through VLAN. Teaming means treating the wires like a single bundle.</li>
+</ul><p>Examples of Logical Interface values:</p>
+
+<pre>
+intf0 (admin, bmc_vlan)
+intf1 (os_sdn)
+intf2 (public)
+</pre>
+
+<p>Examples of Physical Interface values:</p>
+
+<pre>
+1Gb (preferred) on 1st port
+1Gb (preferred) on 2nd port
+1Gb (preferred) on 3rd port
+</pre>
+
+<p>In this Dual mode example, "1Gb (preferred) on 2nd port" means a one gigabit network for port 2, as enumerated by default from the 
+server's BIOS or as overridden in the Server Types panel. The "preferred" tag suggests that if the NIC/port does not support 1Gb, HP Cloud 
+OS falls back to the next maximum speed supported by the NIC or port. However, if there is no preferred tag, it means the port has to 
+support 1Gb; otherwise the deployment might not succeed.</p>
+
+<p>Following are some of the criteria to be considered when making changes to the default settings.</p>
+
+<p>In Dual mode, the default settings assume that all the nodes have their interfaces wired as:</p>
+
+<pre>
+eth0 - admin network
+eth1 - os_sdn network
+eth2 - public/external network
+</pre>
+
+<p><strong>IMPORTANT:</strong> In such a scenario, keep the default values intact.</p>
+
+<p>In Dual mode, if the wiring of networks between the nodes are non-contiguous and/or not in sequence, you need to change the default mapping:</p>
+
+<p><strong>Example 1:</strong> For all the nodes, eth0 - admin; eth1 - public, eth2 - private; the Connections table must be customized to look like the following:</p>
+
+<pre>
+intf0 - 1Gb (preferred) on 1st port
+intf1 - 1Gb (preferred) on 3rd port
+intf2 - 1Gb (preferred) on 2nd port
+</pre>
+
+<p><strong>Example 2:</strong> For all the nodes, eth0 - admin, eth2 - os_sdn, eth4 - public/external the Connections table must be customized to look like the following:</p>
+
+<pre>
+intf0 - 1Gb (preferred) on 1st port
+intf1 - 1Gb (preferred) on 3rd port
+intf2 - 1Gb (preferred) on 5th port
+</pre>
+
+<p>In Single mode, keep the defaults. It is assumed that eth0 port is configured on the switch to support tagged VLANs (discussed in the next section).</p>
+
+<p><strong>Note:</strong> Interface mapping must be identical on all the nodes.</p>
+
+<p>In Team mode, configure virtual connections to use both trunks. For example:</p>
+
+<ul><li>Map eth0, eth2, and eth4 to trunk 1.</li>
+<li>Map eth1, eth3, and eth5 to trunk 2.</li>
+</ul><p>Note that in this example, the eth0 and eth1 interfaces belongs to same VLAN; the same is true for the eth2 and eth3 pair, and the eth4 and eth5 pair. 
+When the HP Cloud OS Administration node allocates the baremetal server, Cloud OS should create a teaming NIC using the NIC pairs.</p>
+
+<p>Here's a partial example of how the Team mode configuration could look on this Connections dialog:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th>Logical Interface</th>
+<th>Physical Interface</th>
+<th>Interface Mode</th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> intf0 (admin, bmc_vlan) </td>
+<td> 1Gb on 1st port, 1Gb on 2nd port </td>
+<td> 6 </td> 
+</tr>
+  <tr style="background-color: white; color: black;"><td> intf1 (os_sdn) </td>
+<td> 1Gb on 1st port, 1Gb on 2nd port </td>
+<td> 6 </td> 
+</tr>
+  <tr style="background-color: white; color: black;"><td> intf2 (public) </td>
+<td> 1Gb on 1st port, 1Gb on 2nd port </td>
+<td> 6 </td> 
+</tr>
+</table><h3 id="connections-page">Connections Page</h3>
+
+<p>To access: Select the Environment tab &gt; Connections.</p>
+
+<p>The following table describes the Connections page UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Network Mode column </td>
+<td> Lists the available network modes for the connection set:
+<ul><li>Single Mode: All connections are shared on the same physical interface through VLAN.
+</li><li>Dual Mode: All connections have their own interfaces where VLAN and bridge are off.
+</li><li>Team Mode: All connections are shared on the same two physical interfaces through VLAN. Teaming means treating the wires like a single bundle.
+</li></ul></td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Role column </td>
+<td> Lists the roles for the connection set. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Logical Interface column </td>
+<td> Lists the network modes' logical interfaces for the connection set. For each logical connection (intf0, intf1, intf2) 
+the network type is identified (admin, os_sdn, public):
+<ul><li>intf0 (admin, bmc_vlan)
+</li><li>intf1 (os_sdn)
+</li><li>intf2 (public)
+</li></ul></td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Physical Interface column </td>
+<td> Lists the network modes' physical interface values for the corresponding connection set. For details, see the 
+<a href="environment-tab/index.html#edit-connection-dialog">Edit Connection Dialog</a> section.
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Interface Mode column </td>
+<td> Lists the interface mode for the network mode. 
+The interface mode is the default teaming algorithm to use for the bonding driver in Linux. 
+It is applicable only for team mode.
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Edit Connection button </td>
+<td> Click to open the Edit Connection dialog. For details, see the 
+<a href="environment-tab/index.html#edit-connection-dialog">Edit Connection Dialog</a> section.
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Create Connection button </td>
+<td> Click to add a new connection on the Create Connection dialog. <br /><br /><b>Note:</b> The Create Connection button only displays while the connections can be added or edited. 
+Once you do the <a href="environment-tab/index.html#complete-install">Complete Install</a>, 
+this button disappears and you cannot add new or edit connections.
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Drop-down arrow &gt; Delete Connection </nobr></td>
+<td> Select to delete the connection. You are prompted to confirm the deletion. <br /><br /><b>Note:</b> This option is unavailable after the <a href="environment-tab/index.html#complete-install">Complete Install</a>.
+</td>
+</tr>
+</table><h3 id="edit-connection-dialog">Edit Connection Dialog</h3>
+
+<p>To access: Select the Environment tab &gt; Connections &gt; click <strong>Edit Connection</strong> for the connection you want to customize.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> 
+If you plan to customize the connections, you must do that before you complete the steps on the Complete Install panel.  
+For details, see the <a href="environment-tab/index.html#complete-install">Complete Install</a>. 
+After that, the Edit Connections dialogs are read-only. Once the install process is triggered, no changes can be made. 
+If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>The following table describes the Edit Connection dialog UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Connection Type </td>
+<td> Connection type name (network mode) of the connection set you want to customize.
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Role </td>
+<td> Indicates the networking configuration needed for a specific managed node or nodes. By default, it is set to blank, 
+which means for any role a managed node takes, the networking configuration must be the same across all managed nodes. <br /><br /><b>Note:</b> Do not change from the default value (blank) for this release.
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Add Details </td>
+<td> Click to add a new blank row on which you add the logical interface and physical interface. Interface mode is applicable for Team mode only. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Delete Details </td>
+<td> Click to delete the selected row(s). </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Logical Interface </td>
+<td> Default logical interface for the corresponding connection set. <br /><br /> 
+
+For each logical connection (intf0, intf1, intf2) the network type is identified (admin, os_sdn, public):
+
+<pre>
+intf0 (admin, bmc_vlan)
+intf1 (os_sdn)
+intf2 (public)
+</pre>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Physical Interface </td>
+<td> Default physical interface values for the corresponding connection set. The value contains (up to) four characters, and follows these conventions:
+<ul><li>1st character: the allowable value is a question mark (?) or blank. The question mark indicates a preferred connection, meaning the available bandwidth supported by the Network Interface card (NIC). If not specified (blank), Cloud OS configures the physical interface to the value specified by the next character.
+</li><li>2nd character: the allowable value may be 1, 10, or 100. It is a numerical value to indicate the network bandwidth.
+</li><li>3rd character: the value may be g, m, or k. It is the bandwidth unit. g represents gigabits; m represents megabits; k represents kilobits.
+</li><li>4th character: the value may be a number between 1 and 16. It is a numerical value to specify the port or NIC number.
+</li></ul></td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Interface Mode </td>
+<td> The default teaming algorithm to use for the bonding driver in Linux. The default value is 6 which indicates teaming uses 
+the "adaptive load balancing" algorithm. The other values used with teaming are not supported in this release. This parameter is 
+applicable only if you are using a Team mode. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Update Connection </nobr></td>
+<td> Click to save the connection settings. <br /><br /><b>Note:</b> The Update Connection button only displays the connections that are editable.  
+Once you do the <a href="environment-tab/index.html#complete-install">Complete Install</a>, 
+this dialog become read-only and this button disappears. </td>
+</tr>
+</table><h3 id="create-connection-dialog">Create Connection Dialog</h3>
+
+<p>To access: Select the Environment tab &gt; Connections &gt; click <strong>Create Connection</strong> for the connection you want to customize.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> The Create Connection button only displays 
+while the connections are editable. Once the install process is triggered by the 
+<a href="environment-tab/index.html#complete-install">Complete Install</a>, this button disappears and no changes can be made. 
+If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>The following table describes the Create Connection dialog UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Connection Type </td>
+<td> Type the network mode for the connection set. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Role </td>
+<td> Indicates the networking configuration needed for a specific managed node or nodes. By default, it is set to blank, which means for any role a 
+managed node takes, the networking configuration must be the same across all managed nodes. <br /><br /><b>Note:</b> Do not change from the default value (blank) for this release. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Add Details </td>
+<td> Click to add a new blank row on which you add the logical interface and physical interface. 
+Interface mode is applicable for Team mode only. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Delete Details </td>
+<td> Click to delete the selected row(s). </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Logical Interface </td>
+<td> Type the logical interface appropriate for the network mode. <br /><br /> 
+For each logical connection (intf0, intf1, intf2) the network type is identified (admin, os_sdn, public). For details, see 
+<a href="environment-tab/index.html#edit-connection-dialog">Edit Connection Dialog</a>. 
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Physical Interface </nobr></td>
+<td> Type the physical interface values for the corresponding network mode. The value contains (up to) four characters, 
+and follows specific conventions. For details see 
+<a href="environment-tab/index.html#edit-connection-dialog">Edit Connection Dialog</a>.
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> Interface Mode </td>
+<td> The default teaming algorithm to use for the bonding driver in Linux. The default value is 6 which indicates teaming uses 
+the "adaptive load balancing" algorithm. The other values used with teaming are not supported in this release. This parameter is 
+applicable only if you are using a Team mode. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Create Connection </nobr></td>
+<td> Click to create the connection. <br /><br /><b>Note:</b> The Create Connection button only displays the connections that are editable.  
+Once you do the <a href="environment-tab/index.html#complete-install">Complete Install</a>, 
+this dialog become read-only and this button disappears. </td>
+</tr>
+</table><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h2 id="networks">Networks</h2>
+
+<p>The following information provides details about the Networks panel:</p>
+
+<p>
+  <strong>Concepts:</strong>
+</p>
+
+<p>
+  <a href="#networks-panel-overview">Networks Panel Overview</a>
+</p>
+
+<p>
+  <strong>UI Descriptions:</strong>
+</p>
+
+<ul><li><p><a href="#networks-page">Networks Page</a></p></li>
+<li><p><a href="#edit-network-dialog">Edit Network Dialog</a></p></li>
+<li><p><a href="#edit-address-ranges-dialog">Edit Address Ranges Dialog</a></p></li>
+<li><p><a href="#create-network-dialog">Create Network Dialog</a></p></li>
+</ul><h3 id="networks-panel-overview">Networks Panel Overview</h3>
+
+<p>On the Networks panel, you define the networks that are used in your IT environment. For each logical connection (intf0, intf1, intf2) a network 
+is defined (admin, os_sdn, and public). These definitions are used for various purposes in the cloud such as networking between the nodes and 
+the Cloud OS Administration node (using the admin network), the public or corporate network (such as public network) attached to your cloud, 
+or networking between the Virtual Machine instances and the traffic from the instances to the Cloud Controller Node (using the os_sdn network).</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Important:</b> Customizing the public network settings is 
+critical. Any missing or incorrect values will result in you having to re-install the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>Following are some of the criteria to be considered while making changes to the default settings:</p>
+
+<ul><li><p>The default settings "Dual" assume you have a separate physical network for each interface; the admin, os_sdn, and public network across the Cloud OS Administration node and all managed nodes.</p></li>
+<li><p>For a production type of deployment and to reduce the complexities of configuring the switches, it is strongly recommended that you provide separate wired networks for public, os_sdn and admin. This requires you to specify your own range of IP addresses and other settings.</p></li>
+<li><p>Some networks and address ranges for those networks are provided by default. You can modify or delete the IP address ranges as well as add new ones. You must use valid ranges that fall within the subnet as defined by the subnet address and mask specified in the network details.</p></li>
+<li><p>If you edit the network IP address ranges and enter invalid ranges, you will get a validation error when you click Update Address Ranges in the Edit Address Ranges dialog. The validation error shows the invalid address (start or end) and the corresponding network type. You must fix all errors in the Edit Address Ranges dialog and click <b>Update Address Ranges</b> to validate the addresses are correct. Clicking Cancel will not trigger the validation step.</p></li>
+</ul><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> The address ranges validation only occurs when you 
+open the Edit Address Ranges dialog for each network and click <b>Update Address Ranges</b>. Otherwise,you will not know if you have any errors. 
+However, the Complete Install step will run a validation check and cannot be completed until the errors are fixed. If there is an address 
+range error, the validation check will show the network type and possibly the address value. If not, open the Edit Address Ranges dialog 
+for the specified network and click <b>Update Address Ranges</b> to identify the incorrect address. For details, see 
+<a href="environment-tab/index.html#complete-install">Complete Install</a>.
+</p>
+
+<p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h3 id="networks-page">Networks Page</h3>
+
+<p>To access: Select the Environment tab &gt; Networks.</p>
+
+<p>The following table describes the Networks page UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Network Type</b> column</td>
+<td> Lists the available network types: 
+
+<ul><li><b>admin</b> — Used for administrative functions, such as managed node installation, TFTP booting, DHCP assignments, system logs, backups, 
+and other monitoring tasks. This also carries cinder-volume traffic. Must be an isolated private network.</li>
+<li><b>bmc</b> — Baseboard Management Controller LAN network for Intelligent Platform Management Interface (IPMI) traffic. For test purposes only.</li>
+<li><b>bmc_vlan</b> — Baseboard Management Controller VLAN (IPMI traffic VLAN). For test purposes only.</li>
+<li><b>os_sdn</b> — OpenStack Software-Defined-Network. This network is for data traffic between the Virtual Machine instances, 
+and the traffic from the instances to the Cloud Controller Node. Must be an isolated private network.</li>
+<li><b>public</b> — Public or corporate network that is attached to your cloud infrastructure.  Must provide a pool of IP addresses 
+for the Cloud Controller node for floating IP assignments. Size of the pool depends on the number of Virtual Machine instances. 
+This network handles traffic to the outside world for the instances.</li>
+</ul></td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Logical Interface</b> column</td>
+<td>Logical interface connection associated with the network type.</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Subnet</b> column</td>
+<td>IP address associated with the network type.</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>VLAN</b> column</td>
+<td>Virtual Local Area Network ID number associated with the network type. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>VLAN Enabled</b> column</td>
+<td> Indicates whether the associated network coexists on the same physical interface as other networks. <br /><p>If the networks (particularly os_sdn and public) co-exist on the same physical network, VLAN Enabled must be set to <b>True</b>. 
+This means that the Network Mode will be set to <b>single</b> by default on the 
+<a href="environment-tab/index.html#confirm-complete-install-dialog">Confirm Complete Install Dialog</a>.</p>
+
+<p>If the networks (particularly os_sdn and public) exist on separate physical interfaces,VLAN Enabled must be set to <b>False</b>. 
+This means that the Network Mode will be set to <b>dual</b> by default on the 
+<a href="environment-tab/index.html#confirm-complete-install-dialog">Confirm Complete Install Dialog</a>. </p>
+
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Bridge Enabled</b> column </td>
+<td>Indicates whether a bridge interface should be added on top of the interface for the corresponding network: <b>False</b> (default) or <b>True</b>. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Create Network</b> button</td>
+<td> Click to add a new network type on the <a href="environment-tab/index.html#create-network-dialog">Create Network Dialog</a>. 
+<br /><p><b>Note:</b> The <b>Create Network</b> button only displays while the networks can be added or edited. 
+Once you do the <a href="environment-tab/index.html#complete-install">Complete Install</a>, this button disappears and you cannot 
+add or edit networks.</p>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Edit Network</b> button</td>
+<td>Click to open the <a href="environment-tab/index.html#edit-network-dialog">Edit Network Dialog</a>. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr> Down arrow &gt; <b>Edit Address Ranges</b> </nobr></td>
+<td>Click to open the <a href="environment-tab/index.html#edit-address-ranges-dialog">Edit Address Ranges Dialog</a>. </td>
+</tr>
+</table><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h3 id="edit-network-dialog">Edit Network Dialog</h3>
+
+<p>To access: Select the Environment tab &gt; Networks &gt; click <strong>Edit Network</strong> for the network you want to customize.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> If you plan to customize the networks, 
+you must do that before you complete the steps on the Complete Install panel. For details, see 
+the <a href="environment-tab/index.html#complete-install">Complete Install</a> topic.
+After that, the Edit Network dialogs are read-only. Once the install process is triggered, no changes can be made. If you want to make changes, 
+you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>The following table describes the Edit Network dialog UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td colspan="2"><b>Network Tab</b></td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Type</b> </td>
+<td> Default network type. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Logical Interface</b> </td>
+<td>Logical interface connection associated with the network type.</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Subnet</b> </td>
+<td>
+   <p>IP address associated with the network type.</p>
+   <p>For the public network, specify explicitly for your public IP address range.</p>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Netmask</b> </td>
+<td>
+CIDR notation value used to distinguish the network and host portions of an IP address.
+
+<p>For the public network, specify explicitly for your public IP address range.</p>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Bridge Enabled</b> </td>
+<td> Indicates whether a bridge interface should be added on top of the interface for the corresponding network: True or False.
+
+<p>For the public network, set to <b>False</b>. The default is <b>False</b> for all provided networks.</p>
+
+</td>
+</tr>
+  <tr style="background-color: #f8f8f8;"><td colspan="2"><b>VLAN Tab</b> </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>VLAN ID</b> </td>
+<td>Virtual Local Area Network ID number associated with the network type. Do not change the default for the admin, os_sdn or public networks.</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>VLAN Enabled</b> </td>
+<td> Indicates whether the associated network coexists on the same physical interface as other networks.
+<br /><p>(<i>Recommended</i>) Leave set to <b>False</b> (the default value) if the networks  (particularly os_sdn and public) exist on 
+separate physical interfaces. This means that the Network Mode will be set to <b>dual</b> by default on the 
+<a href="environment-tab/index.html#confirm-complete-install-dialog">Confirm Complete Install Dialog</a>. </p>
+
+<p>Set to <b>True</b> if the networks (particularly os_sdn and public) co-exist on the same physical network. 
+This means that the Network Mode will be set to <b>single</b> by default on the 
+<a href="environment-tab/index.html#confirm-complete-install-dialog">Confirm Complete Install Dialog</a>. </p>
+
+</td>
+</tr>
+  <tr style="background-color: #f8f8f8;"><td colspan="2"><b>Router Tab</b>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Router</b> </td>
+<td> Device's IP Address that passes network traffic between different IP networks.
+<br /><p>Note: For the admin network, it is recommended to provide a non-routable private network for the admin network.</p>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr><b>Router Preference</b> </nobr></td>
+<td>Any value used by a routing protocol to determine whether one particular route should be chosen over another.</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Update Network</b> button</td>
+<td>Saves the edited settings for all three tabs. </td>
+</tr>
+</table><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h3 id="edit-address-ranges-dialog">Edit Address Ranges Dialog</h3>
+
+<p>To access: Select the Environment tab &gt; Networks &gt; click the down arrow and select Edit Address Ranges for the admin, os_sdn or public network type you want to view or edit the IP address ranges.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> If you plan to customize the address ranges, 
+you must do that before you complete the steps on the Complete Install panel. For details, see 
+the <a href="environment-tab/index.html#complete-install">Complete Install</a> topic.
+After that, the Edit Address Ranges dialogs are read-only. Once the install process is triggered, no changes can be made. If you want to make changes, 
+you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>The following table describes the Edit Network dialog UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Network Type</b> </td>
+<td> Network type being viewed or edited. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Subnet</b> </td>
+<td> Subnet for the network type. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Add Address Range</b> </td>
+<td> Click to add a blank address range. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr><b>Delete Address Range</b> </nobr></td>
+<td> Click to delete the selected address range. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> &lt;address range&gt; </td>
+<td> Default address range(s) of the network type (see each network type below for details). </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr><b>Update Address Ranges</b> button </nobr></td>
+<td> Click to save the edited settings, and to validate that the IP address ranges are correct.
+<br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Note:</b> If you enter invalid ranges, 
+you will get a validation error when you click <b>Update Address Ranges</b>. The validation error identifies the incorrect address 
+(start or end) for the corresponding network type. You must fix all errors in this Edit Address Ranges dialog for the install to be 
+successful. Clicking <b>Cancel</b> will not trigger the validation step. Identify the incorrect address.</p>
+</td>
+</tr>
+</table><p>See each network's Edit Address Ranges dialog for the defaults, as described in these sections:</p>
+
+<ul><li><p><a href="#admin-network-edit-address-ranges-dialog">Admin Network Edit Address Ranges Dialog</a></p></li>
+<li><p><a href="#os-sdn-network-edit-address-ranges-dialog">OS_SDN Network Edit Address Ranges Dialog</a></p></li>
+<li><p><a href="#public-network-edit-address-ranges-dialog">Public Network Edit Address Ranges Dialog</a></p></li>
+</ul><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h4 id="admin-network-edit-address-ranges-dialog">Admin Network Edit Address Ranges Dialog</h4>
+
+<p><strong>Note:</strong> HP recommends that you keep the default values because this network type is considered to be an isolated, private network.</p>
+
+<p>To access: Select the Environment tab &gt; Networks &gt; click the down arrow and select Edit Address Ranges for the admin network type.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> If you plan to customize the address ranges, 
+you must do that before you complete the steps on the Complete Install panel. For details, see 
+the <a href="environment-tab/index.html#complete-install">Complete Install</a> topic.
+After that, the Edit Address Ranges dialogs are read-only. Once the install process is triggered, no changes can be made. If you want to make changes, 
+you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>The following table describes the admin network type address range default UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Network Type</b> </td>
+<td> admin </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Subnet</b> </td>
+<td> Pre-populated with the correct setting: 192.168.124.0 </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Node Types</b> and address ranges </td>
+<td> 
+<b>admin:</b> IP range for the HP Cloud OS Administration node — 192.168.124.10 to 192.168.124.11 <br /><br /><b>dhcp:</b> Temporary IP address assignment for the PXE booted nodes — 192.168.124.21 to 192.168.124.80  <br /><br /><b>host:</b> Permanent admin network IP address assignment for the participating nodes — 192.168.124.81 to 192.168.124.160  <br /><br /><b>switch:</b> This is for test purposes only — 192.168.124.241 to 192.168.124.250 
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr><b>Update Address Ranges</b> </nobr></td>
+<td> Click to save the edited settings, and to validate that the IP address ranges are correct.
+<br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Note:</b> If you enter invalid ranges, 
+you will get a validation error when you click <b>Update Address Ranges</b>. The validation error identifies the incorrect address 
+(start or end) for the corresponding network type. You must fix all errors in this Edit Address Ranges dialog for the install to be 
+successful. Clicking <b>Cancel</b> will not trigger the validation step. Identify the incorrect address.</p>
+</td>
+</tr>
+</table><h4 id="os-sdn-network-edit-address-ranges-dialog">OS_SDN Network Edit Address Ranges Dialog</h4>
+
+<p>To access: Select the Environment tab &gt; Networks &gt; click the down arrow and select Edit Address Ranges for the os_sdn network type.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> If you plan to customize the address ranges, 
+you must do that before you complete the steps on the Complete Install panel. For details, see 
+the <a href="environment-tab/index.html#complete-install">Complete Install</a> topic.
+After that, the Edit Address Ranges dialogs are read-only. Once the install process is triggered, no changes can be made. If you want to make changes, 
+you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>The following table describes the os_sdn network type address range default UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Network Type</b> </td>
+<td> os_sdn </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Subnet</b> </td>
+<td> Pre-populated with the correct setting: 192.168.130.0 </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Node Types</b> </td>
+<td> 
+host
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>IPV4 Start Addr / <br /> IPV4 End Addr</b> </td>
+<td> Permanent os_sdn network IP address assignment for the participating nodes -- 192.168.130.81 to 192.168.130.160
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr><b>Update Address Ranges</b> button </nobr></td>
+<td> Click to save the edited settings, and to validate that the IP address ranges are correct.
+<br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Note:</b> If you enter invalid ranges, 
+you will get a validation error when you click <b>Update Address Ranges</b>. The validation error identifies the incorrect address 
+(start or end) for the corresponding network type. You must fix all errors in this Edit Address Ranges dialog for the install to be 
+successful. Clicking <b>Cancel</b> will not trigger the validation step. Identify the incorrect address.</p>
+</td>
+</tr>
+</table><h4 id="public-network-edit-address-ranges-dialog">Public Network Edit Address Ranges Dialog</h4>
+
+<p>To access: Select the Environment tab &gt; Networks &gt; click the down arrow and select Edit Address Ranges for the public network type.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> If you plan to customize the address ranges, 
+you must do that before you complete the steps on the Complete Install panel. For details, see 
+the <a href="environment-tab/index.html#complete-install">Complete Install</a> topic.
+After that, the Edit Address Ranges dialogs are read-only. Once the install process is triggered, no changes can be made. If you want to make changes, 
+you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>The following table describes the public  network type address range default UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Network Type</b> </td>
+<td> public </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Subnet</b> </td>
+<td>    Pre-populated with the subnet that was configured for the public network. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Node Types</b> </td>
+<td> 
+host
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>IPV4 Start Addr / <br /> IPV4 End Addr</b> </td>
+<td> Provide the IP address range corresponding to the public network's configuration. 
+This IP range is used for the PXE booted managed nodes. Get the range from your IT administrator, or define the IP range if you are the IT administrator. 
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr><b>Update Address Ranges</b> button </nobr></td>
+<td> Click to save the edited settings, and to validate that the IP address ranges are correct.
+<br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Note:</b> If you enter invalid ranges, 
+you will get a validation error when you click <b>Update Address Ranges</b>. The validation error identifies the incorrect address 
+(start or end) for the corresponding network type. You must fix all errors in this Edit Address Ranges dialog for the install to be 
+successful. Clicking <b>Cancel</b> will not trigger the validation step. Identify the incorrect address.</p>
+</td>
+</tr>
+</table><h3 id="create-network-dialog">Create Network Dialog</h3>
+
+<p>To access: Select the Environment tab &gt; Networks &gt; click <b>Create Network</b>.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> The <b>Create Network</b> button only displays 
+while the networks are editable. Once the install process is triggered by the 
+<a href="environment-tab/index.html#complete-install">Complete Install</a>, this button disappears and no 
+changes can be made. If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<p>The following table describes the Create Network dialog UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td colspan="2"><b>Network Tab</b></td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Type</b> </td>
+<td> Enter the network type. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Logical Interface</b> </td>
+<td> Select one of these values associated with the network type:
+<ul><li>bmc
+</li><li>intf0
+</li><li>intf1
+</li><li>intf2
+</li></ul></td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Subnet</b> </td>
+<td>
+   <p>IP address associated with the network type.</p>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Netmask</b> </td>
+<td> Enter the 32-bit number used to distinguish the network and host portions of an IP address. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Bridge Enabled</b> </td>
+<td> Select True or False.
+<ul><li> <b>False</b> (Recommended) — Do not add a bridge interface on top of the interface for the corresponding network.
+</li><li> <b>True</b> — Add a bridge interface on top of the interface for the corresponding network.
+</li></ul></td>
+</tr>
+  <tr style="background-color: #f8f8f8;"><td colspan="2"><b>VLAN Tab</b> </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>VLAN ID</b> </td>
+<td> Enter the Virtual Local Area Network ID number associated with the network type. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>VLAN Enabled</b> </td>
+<td> Select True or False. 
+<ul><li> <b>False</b> (Recommended) — Keep this default value if the networks  (particularly os_sdn and public) co-exist on 
+<b>separate</b> physical interfaces; if so, VLAN Enabled must be set to False. This means that the Network Mode will be set to <b>dual</b> by default on the 
+<a href="environment-tab/index.html#confirm-complete-install-dialog">Confirm Complete Install Dialog</a>. </li>
+<li> <b>True</b> — Set to True if the networks (particularly os_sdn and public) co-exist on the same physical network; 
+if so, VLAN Enabled must be set to True. This means that the Network Mode will be set to <b>single</b> by default on the 
+<a href="environment-tab/index.html#confirm-complete-install-dialog">Confirm Complete Install Dialog</a>. </li>
+</ul></td>
+</tr>
+  <tr style="background-color: #f8f8f8;"><td colspan="2"><b>Router Tab</b>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Router</b> </td>
+<td> Enter the device's IP Address that passes network traffic between different IP networks. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr><b>Router Preference</b> </nobr></td>
+<td> Enter a numerical router preference. For example, assume there is more than one network defined in the deployment (admin, public, and os_sdn). 
+Each network requires a set of IP address configurations, including a router. When a node gets more than three networks and three routers defined, 
+the packets going out of the node outside of these networks need to know which router IP address has to route the traffic. 
+The Router Preference determines the router order. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Create Network</b> button </td>
+<td> Click to save the settings. </td>
+</tr>
+</table><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h2 id="complete-install">Complete Install</h2>
+
+<p>The following information provides details about the Complete Install panel.</p>
+
+<p>
+  <strong>Concepts:</strong>
+</p>
+
+<ul><li><a href="#complete-install-overview">Complete Install Overview</a></li>
+</ul><p>
+  <strong>UI Descriptions:</strong>
+</p>
+
+<ul><li><p><a href="#complete-install-page">Complete Install Page</a></p></li>
+<li><p><a href="#confirm-complete-install-dialog">Confirm Complete Install Dialog</a></p></li>
+</ul><h3 id="complete-install-overview">Complete Install Overview</h3>
+
+<p>On the Complete Install panel, you complete the HP Cloud OS Administration node installation, which installs underlying components on the Administration node.</p>
+
+<p>You specify the install settings on the Confirm Complete Install Dialog and then finish the install process on the Complete Install Page.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Note:</b> The Complete Install step runs a validation check 
+of the network IP address ranges. If there is an error, this step cannot be completed until the error is fixed. 
+The validation check shows the network type and possibly the address value. You must open the Edit Address Ranges dialog for the specified 
+network and click <b>Update Address Ranges</b> to identify the incorrect address, and fix it. 
+See <a href="environment-tab/index.html#edit-address-ranges-dialog">Edit Address Ranges Dialog</a>.
+</p>
+
+<p>When the install is complete, the Operational Dashboard displays the Cloud tab (see the <a href="cloud-tab/index.html">Cloud Tab</a> section of this topic), after the user clicks the Continue... button.</p>
+
+<p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000; min-width:700px;"> <b>Caution:</b> Be sure the values for the 
+Prerequisites, Server Types, Connections and Networks are what you need, before you start the install process. Once the install process is triggered, 
+no changes can be made. If you want to make changes, you need to start over by re-installing the HP Cloud OS Administration node. 
+For procedural instructions, see <a href="../../install/index.html">Install and Configure Your Cloud</a>.
+</p>
+
+<h3 id="complete-install-page">Complete Install Page</h3>
+
+<p>To access: Select the Environment tab &gt; Complete Install.</p>
+
+<p>The following table describes the Complete Install page UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr><b>Complete Install</b> button </nobr></td> 
+<td> Click to open the Confirm Complete Install dialog, where you will then specify configuration information to complete the 
+HP Cloud OS Administration node installation. After the HP Cloud OS Administration node is installed, this button is replaced by the Continue... button. <br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Note:</b> The Complete Install step runs a validation check 
+of the network IP address ranges. If there is an error, this step cannot be completed until the error is fixed. 
+The validation check shows the network type and possibly the address value. You must open the Edit Address Ranges dialog for the specified 
+network and click <b>Update Address Ranges</b> to identify the incorrect address, and fix it. 
+See <a href="environment-tab/index.html#edit-address-ranges-dialog">Edit Address Ranges Dialog</a>.
+</p>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Install Launched</b> column </td>
+<td> The timestamp that the HP Cloud OS Administration node install is started. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td><b>Install Complete</b> column </td>
+<td> The timestamp that the HP Cloud OS Administration node install is completed. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Network Mode</b> column </td>
+<td> The mode specified in the Confirm Complete Install dialog. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>IPMI/BMC Network Status</b> column </td>
+<td> The IPMI/BMC Network status specified in the Confirm Complete Install dialog. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>IPMI Username</b> column </td>
+<td> IPMI username, if one was specified in the Confirm Complete Install dialog. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>IPMI Password</b> column </td>
+<td> IPMI password, if one was specified in the Confirm Complete Install dialog. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Show Install Log</b> column </td>
+<td> Click to view the install activity in the /var/log/install.log, which appears on the bottom of the window. 
+This button then becomes a Refresh button. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Refresh</b> button </td>
+<td> Replaces the Show Install Log button to monitor the install progress. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Continue...</b> button </td>
+<td> Replaces the Complete Install button after the HP Cloud OS Administration node install is complete. 
+Click to add the Cloud tab. The HP Cloud OS Administration node is now ready to be configured to set up a cloud. 
+See the <a href="cloud-tab.html">Cloud Tab</a> topic for descriptions of the panels that set up a cloud.</td>
+</tr>
+</table><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<h3 id="confirm-complete-install-dialog">Confirm Complete Install Dialog</h3>
+
+<p>To access: Select the Environment tab &gt; Complete Install and click <strong>Complete Install</strong>.</p>
+
+<p>The following table describes the Confirm Complete Install UI elements:</p>
+
+<table style="text-align: left; vertical-align: top; min-width:700px;">
+  <tr style="background-color: #C8C8C8;"><th> UI Elements </th>
+<th> Description </th>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Domain Name</b> </td>
+<td> Enter the top-level domain name for your infrastructure. The name must be lowercase characters with no numbers or 
+special characters. In the current release, it must end in .com, .org, .net, .edu, .mil, .gov, or .local. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>Network Mode</b>  </td>
+<td> Select <b>single</b> or <b>team</b> if the admin, os_sdn, and public networks co-exist on the same physical interface. <br /><br /><p><b>Note:</b> If the admin, os_sdn, and public networks are on separate physical interfaces, the only choice given is <b>dual</b>.</p>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>IPMI/BMC Network Status</b> </td>
+<td> Select Disabled. <br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Tip:</b> The enable IPMI/BMC feature is for test purposes only. </p>
+</td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>IPMI Username</b> column </td>
+<td> Ignore unless the IPMI/BMC Network Status is enabled. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <b>IPMI Password</b> column </td>
+<td> Ignore unless the IPMI/BMC Network Status is enabled. </td>
+</tr>
+  <tr style="background-color: white; color: black;"><td> <nobr><b>Complete Install</b> </nobr></td>
+<td> Click to install the required software on the HP Cloud OS Administration node. This may take several minutes. <br /><p style="background-color:#f8f8f8; padding:4px 4px 4px 4px; border: 1px dotted #000000;"> <b>Note:</b> The Complete Install step runs a validation check 
+of the network IP address ranges. If there is an error, this step cannot be completed until the error is fixed. 
+The validation check shows the network type and possibly the address value. You must open the Edit Address Ranges dialog for the specified 
+network and click <b>Update Address Ranges</b> to identify the incorrect address, and fix it. 
+See <a href="environment-tab/index.html#edit-address-ranges-dialog">Edit Address Ranges Dialog</a>.
+</p>
+
+</td>
+</tr>
+</table><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../index.html"><span>HP Cloud OS Home  (Deprecated)</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../prepare/index.html"><span>Prepare</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../install/index.html"><span>Install</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../index.html"><span>Manage</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../develop/index.html"><span>Develop</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../forum/index.html"><span>Community Forum</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../openstack/index.html"><span>OpenStack Links</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/cloudos/manage/operational-dashboard/environment-tab by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:03:28 GMT -->
+</html>

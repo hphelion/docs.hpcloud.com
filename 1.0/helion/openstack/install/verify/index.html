@@ -1,0 +1,369 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/install/verify/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:11 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion OpenStack&reg; Verifying your installation</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../css/combined.css">
+
+	<script src="../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../index.html" class="logo"  ><img src="../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<script>
+<![CDATA[
+
+function PageRefresh {
+onLoad="window.refresh"
+}
+
+PageRefresh();
+
+]]>
+</script><h1 id="hp-helion-openstack-verifying-your-installation">HP Helion OpenStack® Verifying your installation</h1>
+
+<p>Once your installation is complete, you should make sure you can connect to your HP Helion OpenStack cloud. You can accomplish this in any of the following ways:</p>
+
+<ul><li><a href="#connectunder">Connecting to the undercloud Horizon console</a></li>
+<li><a href="#connectover">Connecting to the overcloud Horizon console</a></li>
+<li><a href="#connectvm">Connecting to demo VM</a></li>
+<li><a href="#connectmonitor">Connecting to the monitoring and logging interfaces</a></li>
+</ul><h3 id="connectunder">Connecting to the undercloud Horizon console</h3>
+
+<p>From the seed cloud host, connect to the undercloud Horizon console.</p>
+
+<ol><li><p>Obtain the passwords for the <code>demo</code> and <code>admin</code> users</p>
+
+<p><code>cat /root/tripleo/tripleo-overcloud-passwords</code></p></li>
+<li><p>Point your web browser on the seed cloud host to the undercloud Horizon console using the <code>UNDERCLOUD_IP_ADDRESS</code> obtained after the install.</p>
+
+<p>If you did not retrieve the undercloud IP from the end of the install, enter the following command:</p>
+
+<pre><code>. /root/tripleo/tripleo-undercloud-passwords
+TE_DATAFILE=/root/tripleo/ce_env.json . /root/tripleo/tripleo-incubator/undercloudrc
+OVERCLOUD_IP=$(heat output-show overcloud KeystoneURL | cut -d: -f2 | sed s,/,,g )
+echo $UNDERCLOUD_IP
+</code></pre></li>
+<li><p>Log in as <code>demo</code> or <code>admin</code> using the corresponding passwords obtained in step 1.</p></li>
+<li><p>In the Horizon console, you can obtain the IP address of the demo VM:</p>
+
+<p>a. Click Project &gt; Compute &gt; Instance.
+b. Note the public IP address of the <strong>demo</strong> instance, starting with <code>192</code>.</p></li>
+</ol><h3 id="connectover">Connecting to the overcloud Horizon console</h3>
+
+<p>From the seed cloud host, connect to the overcloud Horizon console.</p>
+
+<ol><li><p>Obtain the passwords for the <code>demo</code> and <code>admin</code> users</p>
+
+<p><code>cat /root/tripleo/tripleo-overcloud-passwords</code></p></li>
+<li><p>Point your web browser on the seed cloud host to the overcloud Horizon console using the <code>OVERCLOUD_IP_ADDRESS</code> obtained after the install.</p>
+
+<p>If you did not retrieve the overcloud IP from the end of the install, enter the following command:</p>
+
+<pre><code>. /root/tripleo/tripleo-undercloud-passwords
+TE_DATAFILE=/root/tripleo/ce_env.json . /root/tripleo/tripleo-incubator/undercloudrc
+OVERCLOUD_IP=$(heat output-show overcloud KeystoneURL | cut -d: -f2 | sed s,/,,g )
+echo $OVERCLOUD_IP
+</code></pre></li>
+<li><p>Log in as <code>demo</code> or <code>admin</code> using the corresponding passwords obtained in step 1.</p></li>
+<li><p>In the Horizon console, you can obtain the IP address of the demo VM:</p>
+
+<p>a. Click Project &gt; Compute &gt; Instance.
+b. Note the public IP address of the <strong>demo</strong> instance, starting with <code>192</code>.</p></li>
+</ol><h3 id="connectvm">Connecting to the demo VM</h3>
+
+<p>From the seed cloud host, you can connect to the demo VM using the following steps:</p>
+
+<!-- Maybe not needed per Chris Cannon
+1. Export the overcloud passwords:
+
+    `. /root/tripleo/tripleo-overcloud-passwords`
+
+2. Export the overcloud users:
+
+    `TE_DATAFILE=/root/tripleo/ce_env.json . /root/tripleo/tripleo-incubator/overcloudrc-user`
+
+3. Verify you can view the nova instances:
+
+    `nova list`
+
+4. Assign the demo VM IP address to a variable:
+
+    `DEMO_IP=$(nova list | grep " demo " | awk ' { print $13 } ')`
+-->
+
+<ol><li><p>Connect to the demo VM using the IP address you obtained from the Horizon console:</p>
+
+<p><code>ssh debian@${DEMO_IP}</code></p>
+
+<p><strong>Note:</strong> It might take a few minutes for the demo vm to become available using ssh after finishing the installation.</p>
+
+<p>If the prompt changes to <code>debian@demo</code>, you have successfully connected to the demo VM.</p></li>
+<li><p>Before proceeding, enter <code>exit</code> to disconnect from the demo VM.</p></li>
+</ol><h3 id="connectmonitor">Connecting to the monitoring and logging interfaces</h3>
+
+<p>HP Helion OpenStack includes monitoring logging. The monitoring service uses <a href="../../../community/services/icinga/index.html">Icinga</a> interface and the logging service uses the Kibana interface.</p>
+
+<p>You can access these services with the following steps:</p>
+
+<ol><li><p>To access the Icinga monitoring console, launch a web browser on the seed cloud host to the following IP address, using the undercloud IP address from the end of the install:</p>
+
+<pre><code>http://&lt;undercloud IP&gt;/icinga/
+</code></pre>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>http://192.0.2.2/icinga
+</code></pre></li>
+<li><p>Log in with the user name <code>icingaadmin</code> and password <code>icingaadmin</code>.</p></li>
+<li><p>To access the Kibana logging console, launch a web browser on the seed cloud host to the following IP address, using the undercloud IP address from the end of the install:</p>
+
+<pre><code>http://&lt;undercloud IP&gt;:81 
+</code></pre>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>http://192.0.2.2:81
+</code></pre></li>
+<li><p>Log in with the user name <code>kibana</code> and the password you obtained from the end of the install.</p>
+
+<p>If you did not retrieve the password:</p>
+
+<p>a. From the seed cloud host log in to the undercloud as super user:</p>
+
+<pre><code>ssh heat-admin@&lt;undercloud IP&gt; 
+sudo su - 
+</code></pre>
+
+<p>b. Enter the following command to display the password:</p>
+
+<pre><code>cat  /root/work/tripleo/tripleo-undercloud-passwords
+</code></pre>
+
+<p>Make note of the password.</p></li>
+</ol><h2 id="next-step">Next Step</h2>
+
+<ul><li>Review <a href="../../../community/related-links/index.html">OpenStack documentation</a> </li>
+<li><p>See how to <a href="../../../community/dashboard/how-works/index.html">use the Horizon dashboard</a>.</p>
+
+<p><a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a></p></li>
+</ul><hr />
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../community/index.html"><span>HP Helion OpenStack Community Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../community/release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../community/faq/index.html"><span>FAQ</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../community/install-overview/index.html"><span>Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../community/related-links/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../community/3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../community/eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../community/siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/install/verify/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:11 GMT -->
+</html>

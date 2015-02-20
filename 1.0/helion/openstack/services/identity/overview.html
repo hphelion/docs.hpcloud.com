@@ -1,0 +1,483 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/services/identity/overview by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:54:05 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion OpenStack&#174; Identity Service Overview</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../css/combined.css">
+
+	<script src="../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../index.html" class="logo"  ><img src="../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<script>
+<![CDATA[
+
+function PageRefresh {
+onLoad="window.refresh"
+}
+
+PageRefresh();
+
+]]>
+</script><!--
+<p style="font-size: small;"> <a href="/helion/openstack/services/compute/overview/">&#9664; PREV</a> | <a href="/helion/openstack/services/overview/">&#9650; UP</a> | <a href="/helion/openstack/services/imaging/overview/"> NEXT &#9654</a> </p>
+--><h1 id="hp-helion-openstack-10-identity-service-overview">HP Helion OpenStack® 1.0 Identity Service Overview</h1>
+
+<!-- modeled after HP Cloud Networking Getting Started (network.getting.started.md) -->
+
+<p>Based on OpenStack Keystone, the HP Helion OpenStack Identity service provides one-stop authentication. It performs the following functions:</p>
+
+<ul><li><p><strong>User Management</strong>- It tracks users and their permissions.The main components are:</p>
+
+<ul><li>Users</li>
+<li>Projects</li>
+<li>Roles</li>
+</ul></li>
+<li><p><strong>Service catalog</strong>- It provides a catalog of available services with their API endpoints. The main components are:</p>
+
+<ul><li><p>Services</p></li>
+<li><p>Endpoints</p></li>
+</ul></li>
+</ul><p>The Identity service primarily works on the following key concepts:</p>
+
+<h3 id="user">User</h3>
+
+<p>It is a digital representation of a person, system, or service who uses the cloud. The Identity authentication services validates incoming requests made by users. Users have a login and assigned tokens to access resources. Users are associated with projects based on roles assigned to them within that project.</p>
+
+<h3 id="credentials">Credentials</h3>
+
+<p>Credentials are data that belongs to, is owned by and is generally only known to a user. This data is used by the user to prove his/her identity. For example:</p>
+
+<ul><li>Username and password</li>
+<li>An authentication token provided by the Identity Service</li>
+</ul><h3 id="authentication">Authentication</h3>
+
+<p>It is the act of confirming the identity of a user. The Identity service confirms that the incoming request is being made by the user  by validating a set of claims that the user is making.</p>
+
+<h3 id="token">Token</h3>
+
+<p>A random string that is used to access resources. Each token has a scope that describes which resources are accessible with it.</p>
+
+<h3 id="project">Project</h3>
+
+<p>A collection of HP service subscriptions and/or resources (Compute, Object Storage, etc).</p>
+
+<h3 id="service">Service</h3>
+
+<p>An OpenStack service, such as Compute (Nova), Object Storage (Swift), or Image Service (Glance). Provides one or more endpoints through which users can access resources and perform operations.</p>
+
+<h3 id="endpoint">Endpoint</h3>
+
+<p>A network-accessible address, usually described by a URL, where a service may be accessed.</p>
+
+<h3 id="role">Role</h3>
+
+<p>A role defines set of rights and privileges that can be assigned to a user. A role is also called a <em>personality</em>.</p>
+
+<h2 id="keystone-with-ldap">Keystone with LDAP</h2>
+
+<p>Keystone can also use Lightweight Directory Access Protocol (LDAP) as source of authority authentication. <!---LDAP simplifies integration of Identity authentication into an organization's existing directory service and user account management processes.--></p>
+
+<p>The requests to Identity service are delegated to the LDAP service which authorizes or rejects requests based on the policies that have been defined locally. A token is generated on successful authentication.</p>
+
+<!---The Identity service enables you to create and configure users, specify user roles and credentials, and issue security tokens. The `/etc/keystone/keystone.conf` file maps LDAP attributes to Identity attributes-->
+
+<!---
+
+- **Token** -- An arbitrary bit of text that is used to access resources. Each token has a scope that describes which resources are accessible with it. 
+
+- **Project** -- A collection of HP service subscriptions and/or resources (Compute, Object Storage, etc). Also known as *tenant*.
+
+- **Endpoint** -- A network-accessible address, usually described by URL, where a service may be accessed.
+
+- **Role** -- A set of rights and privileges that can be assigned to a user.  A user assuming that role inherits those rights and privileges. A role is also called a *personality*.
+
+The Identity service validates that incoming requests are being made by the user who claims to be making the call. 
+
+The Identity service enables you to create and configure users, specify user roles and credentials, and issue security tokens. 
+
+Users have a login and may be assigned tokens to access resources. Users can scope their authentication to a project (or, tenant) which then limits where and how their tokens can be used to interact with services. Users are assigned roles that can be used to control access to projects.
+
+The Identity service will confirm that incoming request are being made by the user who claims to be making the call by validating a set of claims that the user is making. These claims are initially in the form of a set of credentials (username & password, or user access keys). After initial confirmation, the Identity service will issue the user a token which the user can then provide to demonstrate that their identity has been authenticated when making subsequent requests.
+
+Users can belong to specific role(s), which is a set of rights and privileges.
+
+## Key Terms ##
+
+- **User** -- A digital representation of a person, system, or service who uses the cloud. Users are associated with tenants based on roles assigned to them with that tenant.
+
+- **Credentials** -- Data that belongs to, is owned by, and generally only known by a user that the user can present to prove they are who they are.
+
+
+
+- **Authentication** -- The act of confirming the identity of a user. The Identity service confirms that incoming request are being made by the user who claims to be making the call by validating a set of claims that the user is making. 
+
+- **Token** -- An arbitrary bit of text that is used to access resources. Each token has a scope that describes which resources are accessible with it. 
+
+- **Project** -- A collection of HP service subscriptions and/or resources (Compute, Object Storage, etc). Also known as *tenant*.
+
+- **Endpoint** -- A network-accessible address, usually described by URL, where a service may be accessed.
+
+- **Role** -- A set of rights and privileges that can be assigned to a user.  A user assuming that role inherits those rights and privileges. A role is also called a *personality*. -->
+
+<h2 id="working-with-the-identity-service">Working with the Identity Service</h2>
+
+<p>To <a href="#howto">perform tasks using the Identity service</a>, you can use the dashboard, API or CLI.</p>
+
+<h3 id="using-the-dashboards">Using the dashboards<a name="UI" id="UI"></a></h3>
+
+<p>You can use the <a href="../../dashboard/how-works/index.html">HP Helion OpenStack Dashboard</a> to work with the Identity service.</p>
+
+<h3 id="using-the-api">Using the API<a name="API" id="API"></a></h3>
+
+<p>You can use a low-level, raw REST API to access  HP Identity. See the <a href="../../../../../external.html?link=http://api.openstack.org/api-ref-identity-v2.html">OpenStack Identity API v2.0 Reference</a>.</p>
+
+<h3 id="using-the-cli">Using the CLI<a name="cli" id="cli"></a></h3>
+
+<p>You can use the command-line interface software to access HP Identity. See the <a href="../../../../../external.html?link=http://docs.openstack.org/cli-reference/content/keystoneclient_commands.html">OpenStack Command Line Interface Reference</a>.</p>
+
+<p>For more information on installing the CLI, see <a href="../../../../../external.html?link=http://docs.openstack.org/user-guide/content/install_clients.html">Install the OpenStack command-line clients</a>.</p>
+
+<!---
+## How To's with the HP Helion OpenStack Identity Service<a name="howto"></a>
+
+The following lists of tasks can be performed by a user or administrator through the [HP Helion OpenStack Dashboard](/helion/openstack/dashboard/how-works/), the [API](http://api.openstack.org/api-ref-identity-v2.html) or [CLI](http://docs.openstack.org/cli-reference/content/keystoneclient_commands.html).
+
+
+Depending upon your user type, [user](#user) or [administrator](#admin), you can perform the following tasks.
+
+### Tasks performed by users<a name="user"></a>
+
+The following Identity service tasks are usually performed by someone with the *user* role.
+
+#### Managing default Project associations ####
+
+Use the Identity service to configure project associations.
+
+#### Listing Projects ####
+
+Use the Identity service to view a list of projects in your cloud environment.
+
+### Tasks performed by an Administrator<a name="admin"></a>
+
+The following Identity service tasks are usually performed by someone with the *administrator* role.
+
+#### Working with domains ###
+
+Use the Identity service to configure user access to your cloud domains.
+
+- Managing users. Configure user access to your cloud domains.
+- Managing projects. Configure user access to your projects. 
+- Managing user groups. Configure user group access to your domain.
+
+### Working with roles ###
+
+Use the Identity service to configure user roles within your cloud environment.
+
+- Managing role definitions. Configure the roles that you can assign.
+- Managing role assignments. Assign users to roles.
+- Managing inherited role assignments. Configure roles inherited from other projects.
+
+### Manage Credentials
+
+Create EC2-compatible credentials for user per tenant. 
+
+### Manage Endpoints
+
+Create and delete endpoints associated with a service. 
+
+### Manage Endpoint Filtering
+
+Find endpoint filtered by a specific attribute or service type. 
+
+### Manage Service Policies 
+
+Manage the policy service, a rule-based authorization engine and the associated rule management interface.
+
+### Issue Token
+
+Issue a new UUID or PKI token for a user.
+
+### Signature Validation 
+
+Manage EC2 and S3 signature validation.
+
+### Manage Federated Access 
+
+Configure federated access for use in HP Helion OpenStack.
+
+### Resetting a user password ###
+
+Use the Identity service to reset a password for a user.
+
+--->
+
+<h2 id="for-more-information">For more information</h2>
+
+<p>For information on how to operate your cloud we suggest you read the <a href="../../../../../external.html?link=http://docs.openstack.org/ops/">OpenStack Operations Guide</a>. <!-- The *Architecture* section contains useful information about how an OpenStack Cloud is put together. However, the HP Helion OpenStack takes care of these details for you. The *Operations* section contains information on how to manage the system.--></p>
+
+<p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../index.html"><span>HP Helion OpenStack Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../release-notes/101/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../faq/index.html"><span>FAQ</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../technical-overview/index.html"><span>Technical Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../overview/index.html"><span>Services Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../support-matrix/index.html"><span>Support Matrix</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../install/overview/index.html"><span>Installation Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../install/security/index.html"><span>Network Security</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../backup.restore/index.html"><span>Back Up and Restore</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../troubleshooting/index.html"><span>Troubleshooting</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../related-links/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../glossary/index.html"><span>Glossary</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/services/identity/overview by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:54:05 GMT -->
+</html>

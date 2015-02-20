@@ -1,0 +1,674 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/install/dnsaas/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:54:22 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion OpenStack&#174;: DNSaaS Installation and Configuration</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../css/combined.css">
+
+	<script src="../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../index.html" class="logo"  ><img src="../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<script>
+<![CDATA[
+
+function PageRefresh {
+onLoad="window.refresh"
+}
+
+PageRefresh();
+
+]]>
+</script><p style="font-size: small;"> ◀ <a href="../post-esx/index.html">Post-Installation for ESX Hypervisor |  ◀ </a><a href="../post-kvm/index.html">Post-Installation for KVM Hypervisor </a></p>
+
+<h1 id="hp-helion-openstack-dnsaas-installation-and-configuration">HP Helion OpenStack®: DNSaaS Installation and Configuration</h1>
+
+<p>Our managed DNS service, based on the OpenStack Designate project, is engineered to help you create, publish, and manage your DNS zones and records securely and efficiently to either a public or private DNS server network.</p>
+
+<p>It is important to read through this page before starting your installation as it explains how to install and configure DNS as a service (DNSaaS) for HP Helion OpenStack.</p>
+
+<p style="border-style: solid;"><b>Caution</b>: Before migrating to DNSaaS 1.01, you <b><i>must</i></b> first <a href="#uninstall">uninstall</a> DNSaaS 1.0. Do <b>not</b> attempt to install version 1.01 over the previous version. </p>
+
+<ul><li><a href="#preq">Prerequisites</a></li>
+<li><a href="#credentials">Creating Prerequisite Credentials</a>
+
+<ul><li><a href="#target-cred">Target Credentials</a></li>
+<li><a href="#service-cred">Service Credentials</a></li>
+</ul></li>
+<li><a href="#publication">Sherpa CSU Publication and Booting the Installer VM</a></li>
+<li><a href="#configure">Installing and Configuring DNSaaS</a></li>
+<li><a href="#configovercloud">Configure the Overcloud Load Balancer for DNSaaS</a></li>
+<li><a href="#keyreg">Registering the Service with Keystone</a></li>
+<li><a href="#uninstall">Uninstalling DNaaS</a></li>
+<li><a href="#moreinfo">More Information</a></li>
+</ul><h2 id="preq">Prerequisites</h2>
+
+<p style="border-style: solid;"><b>Caution</b>: Before migrating to DNSaaS 1.01, you <b><i>must</i></b> first <a href="#uninstall">uninstall</a> DNSaaS 1.0. Do <b>not</b> attempt to install version 1.01 over the previous version. </p>
+
+<ul><li>HP Helion OpenStack is successfully installed</li>
+<li>Download <a href="#publication">DNSaaS Installer Image</a> <br /></li>
+<li><p>Obtain <a href="#target-cred">Target Credentials</a>: credentials of the user+tenant where the service is to be deployed.</p>
+
+<ul><li>This user should have the <strong>admin</strong> and  <strong>_member_</strong> roles.</li>
+<li>Username</li>
+<li>Password</li>
+<li>Tenant/Project Name</li>
+</ul></li>
+<li><p>Obtain <a href="#service-cred">Service Credentials</a>: credentials for the user+tenant used to validate end user tokens.</p>
+
+<ul><li>This user should be in the <strong>service</strong> tenant, have the <strong>admin</strong> and  <strong>_member_</strong> roles, and be called <strong>designate</strong>.</li>
+<li>Username</li>
+<li>Password</li>
+<li>Tenant/Project Name</li>
+</ul></li>
+<li>A generated SSH Key for accessing the Service VMs</li>
+<li><p>A chosen backend driver and its prerequisites:</p>
+
+<ul><li><p>PowerDNS (self hosted)<br />
+A domain name for the nameservers ("Namesever FQDNs"). For example, if your nameservers are to be named <em>ns1.mycompany.com</em>, you will need the <em>mycompany.com</em> domain.</p></li>
+<li><p>Microsoft DNS (self-hosted)</p>
+
+<ul><li>At least one Microsoft DNS server installed and configured</li>
+<li>Knowledge of the FQDNs for all MS DNS servers to be used ("Namesever FQDNs")</li>
+</ul></li>
+<li><p>DynECT (3rd Party)</p>
+
+<ul><li>An active service contract with DynECT</li>
+<li><p>Knowledge of the FQDNs for all DynECT nameservers allocated to your account ("Namsever FQDNs")</p>
+
+<ul><li>ns1.p13.dynect.net.</li>
+<li>ns2.p13.dynect.net.</li>
+<li>ns3.p13.dynect.net.</li>
+<li>ns4.p13.dynect.net.</li>
+</ul></li>
+<li>API credentials for DynECT
+
+<ul><li>Customer Name</li>
+<li>Username</li>
+<li>Password</li>
+</ul></li>
+</ul></li>
+<li><p>Akamai (3rd Party)</p>
+
+<ul><li>An active service contract with Akamai</li>
+<li>Knowledge of the FQDNs for all Akamai nameservers allocated to your account ("Namesever FQDNs")</li>
+<li>API credentials for Akamai
+
+<ul><li>Username</li>
+<li>Password
+<!--
+## Uploading script to Sherpa (do we need to upload the DNaaS script to sherpa) ??
+--></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul><h2 id="credentials">Creating Prerequisite Credentials</h2>
+
+<p>You must create both <strong>target</strong> and <strong>service</strong> credentials.</p>
+
+<h3 id="target-cred">Target Credentials</h3>
+
+<p>Target credentials are the credentials of the user+tenant where the service is to be deployed. Target credentials include a <strong>tenant</strong> and a <strong>username</strong>. Service credentials can only be created after the Target credentials have been successfully created.</p>
+
+<ul><li><p>Create tenant</p>
+
+<pre><code>$ keystone tenant-create --name dnsaas --description "DNSaaS Service" 
+</code></pre></li>
+<li><p>Create username</p>
+
+<pre><code>$ keystone user-create --name dnsaas --tenant dnsaas --email dnsaas@example.com --pass password
+</code></pre></li>
+<li><p>Add role (this role is added for user)</p>
+
+<pre><code>$ keystone user-role-add --user dnsaas --tenant dnsaas --role admin
+</code></pre></li>
+</ul><h3 id="service-cred">Service Credentials</h3>
+
+<p>Service Credentials are credentials for the user+tenant used to validate end user tokens. Service credentials can only be created after the Target credentials have been successfully created. This user should be in the <strong>service</strong> tenant, have the <strong>admin</strong> and  <strong>_member_</strong> roles, and be named <strong>designate</strong>.</p>
+
+<ul><li><p>Create service credentials</p>
+
+<pre><code>$ keystone user-create --name designate --tenant service --email designate@example.com --pass password
+</code></pre></li>
+<li><p>Add admin role to service user command</p>
+
+<pre><code>$ keystone user-role-add --user designate --tenant service --role admin
+</code></pre></li>
+</ul><h2 id="publication">Sherpa CSU Publication and Booting the Installer VM</h2>
+
+<p>Before proceeding with the DNaaS installation, ensure that you have met all the prerequisites, which includes gathering the required information, creating the necessary users/projects and ensuring the users/projects have the appropriate roles. Failure to do so will result in a failed install.</p>
+
+<h3 id="publish-csu-contents">Publish CSU contents</h3>
+
+<ol><li>Log in to the Horizon dashboard using <strong>Target Credentials</strong>. </li>
+<li>Click <strong>Admin</strong> Tab in the left panel.<br />  The tab displays an option in the left panel.</li>
+<li>Click <strong>Updates and Extensions</strong> and then select <strong>Updates and Extensions</strong> to open the Updates and Extensions page.</li>
+<li><p>Click <strong>Configure</strong> in the top-right corner of the page to display the Configure dialog box.</p></li>
+<li><p>Log in with Helion Content Delivery Network credentials. <br /> If you do not yet have login credentials for the Helion Delivery Network, create an account.</p>
+
+<p>a. On the Horizon undercloud dashboard, click  the <strong>Admin</strong> tab in the left panel.</p>
+
+<p>b.  Click <strong>Updates and Extensions</strong> and then select <strong>Updates and Extensions</strong> to open the Updates and Extensions page.</p>
+
+<p>c. Click <strong>Configure</strong> in the top-right corner of the page to display the Configure dialog box.</p>
+
+<p>d. Click <strong>Sign up Now</strong> below the description in the Configure dialog box.<br /> 
+   The page navigates to the HP Helion Product Catalog. Then, do the following:<br /></p>
+
+<p>e. Click <strong>Sign In</strong> in the top of the page to open the HP Web ID dialog box.</p>
+
+<p>f. Click <strong>Sign Up for Web ID</strong> to create log-in credentials. The HP WEB ID dialog box is displayed.</p>
+
+<p>g. Enter the required details.</p>
+
+<p>h. Select the check box next to <strong>I agree to the Terms of Use</strong> to accept the terms and conditions.</p>
+
+<p>i. Click <strong>Submit</strong>.<br /> The credentials are authenticated and the account is created. <br /> Once you register on the HP Helion Product Catalog, you are required to configure your credentials.</p></li>
+<li>Click <strong>Download</strong> against the package that you want to download on your local system from a  list of .csu file. </li>
+<li>Select the appropriate file (for example: <strong>dns.csu</strong>) from the list and click <strong>Publish</strong>. </li>
+<li>Click <strong>Publish</strong> to install the package. </li>
+</ol><h3 id="boot-the-installer-vm">Boot the installer VM</h3>
+
+<ol><li>Log in to the Horizon dashboard using <strong>Target Credentials</strong>.</li>
+<li>Click <strong>Project</strong>. The tab displays an option in the left panel.</li>
+<li>Click <strong>Compute</strong>  and then select <strong>Images</strong> to open the Image page.</li>
+<li><p>Select the image file from the list and click <strong>Launch</strong>. For example: select  <strong>dnsaas-installer_1.0.0.30</strong> to launch this image. <br />
+A Launch Instance dialog box displays with five tabs: Details Tab, Access &amp; Security Tab, Networking Tab, Post-Creation Tab and Advance Options. By default, Details is the active tab.</p></li>
+<li><p>On the Details Tab, do the following:</p>
+
+<p>a. In the <strong>Instance Name</strong>  (Virtual Machine (VM))box enter the name of the instance. For example :<strong>dnsaas-installer</strong>.</p>
+
+<p>b.From the <strong>Flavor</strong> drop-down list and select the flavor. For example: <strong>m1.small</strong></p></li>
+<li><p>On the <strong>Access and Security</strong> Tab, do the following:</p>
+
+<p>a. From the <strong>Keypair</strong> drop-down list, select an appropriate SSH keypair.</p></li>
+<li><p>On the <strong>Networking</strong> Tab, select the <strong>default-net</strong> network, if it is not populated automatically.</p></li>
+<li><p>Click <strong>Launch</strong> to launch the Instance. You are taken to the Instances page with the progress bar displaying the completion progress.</p></li>
+<li><p>Select the launched instance in the Instance table.</p></li>
+<li><p>Click <strong>More</strong> against the instance to display the drop-down list and select <strong>Associate Floating IP</strong>. Manage Floating IP Associations box is displayed.</p></li>
+<li><p>Perform the following steps in the Manage Floating IP Associations:</p>
+
+<p>a. From the <strong>IP Address</strong> drop-down list, select the Floating IP address. Ensure that you remember the selected IP address.</p>
+
+<p>b. From the <strong>Port to be associated</strong> drop-down list, select the  port.</p>
+
+<p>c. Click <strong>Associate</strong>.</p></li>
+<li><p>Click <strong>Access and Security</strong>. Access &amp; Security page is displayed.</p></li>
+<li><p>Select the appropriate security group from the list and click <strong>Manage Rules</strong>. For example: select <strong>default</strong> as a security group. The page navigates to Manage Security Group Rules: <name of="" security=""> page.</name></p></li>
+<li><p>Click <strong>Add Rule</strong>. Add Rule dialog box is displayed.</p></li>
+<li><p>In the <strong>Port</strong> box, enter the port value as <strong>22</strong>.</p></li>
+<li><p>(Optionally) Restrict the CIDR from which SSH connections should be allowed. <!-- (**how do we restrict CIDR? do we need to enter any value or select any value in the CIDR box??**) ?? --></p></li>
+<li><p>Click <strong>Add</strong>.  The rule is added for the instance.<!-- (**What message is displayed after you click add??)** --></p></li>
+</ol><h2 id="configure">Installing and configuring DNSaaS</h2>
+
+<p><strong>IMPORTANT</strong>: During DNSaaS installation, non-deterministic failures within the infrastructure layer may cause the install to fail. If this occurs, DNSaaS installation should be retried up to two times.</p>
+
+<ol><li><p>SSH to install VM.</p>
+
+<pre><code>$ ssh -i samplekey.pem debian@&lt;Floating IP Address associated with the DNS Installer VM&gt;
+</code></pre>
+
+<!--
+$ ssh debian@<Floating IP Address associated with the Installer Instance above> --->
+
+<p><strong>Note</strong>: Before you begin the installation, you must create a configuration file. You can do this by modifying the sample configuration file included with the DNSaaS installer files.</p></li>
+<li><p>Create the SSH Public Key which is used by the Service VMs.</p>
+
+<p>It is recommended to use the same SSH key which was used to boot the installer VM. If you choose to use a different SSH key, please ensure you retain both SSH private keys for future use.</p></li>
+<li><p>Copy the SSH Public Key.</p>
+
+<pre><code>$ cp .ssh/authorized_keys id_rsa.pub
+</code></pre></li>
+<li><p>Copy the sample configuration file to your home directory:</p>
+
+<pre><code>$ cp /etc/dnsaas-installer/dnsaas-installer.conf.sample ~/dnsaas-installer.conf
+</code></pre></li>
+<li><p>Edit your copy of the configuration file with the required changes:</p>
+
+<pre><code>$ nano dnsaas-installer.conf
+</code></pre>
+
+<p>A. DEFAULT section:</p>
+
+<ul><li>auth_url — Keystone auth URL</li>
+<li>target_project_name — Project name where the service is installed</li>
+<li>target_username — Username used to deploy and run the service</li>
+<li>target_region_name — Region name to deploy the service in</li>
+</ul><p>B. Designate section:</p>
+
+<ul><li>ssh_public_key — The SSH public key to be installed on the instances for management access</li>
+<li>ntp_server — An IP or DNS name for an NTP server to sync time with</li>
+<li>database_root_password — Password for the database root user</li>
+<li>database_designate_password — Password for the database designate user</li>
+<li>database_powerdns_password — Password for the database powerdns user</li>
+<li>messaging_root_password — Password for the messaging root user</li>
+<li>messaging_designate_password — Password for the messaging designate user</li>
+<li>keystone_host — Hostname or IP address of Keystone endpoint.
+
+<ul><li>service_project — Project name for a user with permission to validate Keystone tokens</li>
+<li>service_user — Username for a user with permission to validate Keystone tokens</li>
+<li>service_password — Password for a user with permission to validate Keystone tokens</li>
+<li>backend_driver — Backend driver to use (powerdns, dynect, akamai)</li>
+</ul></li>
+</ul><p>C. If you select MSDNS (Microsoft DNS Server) you must set the following options in the designate section:</p>
+
+<ul><li>msdns_servers: A comma separated list of the Microsoft DNS servers short hostnames</li>
+<li>messaging_access_cidr: A CIDR to allow inbound access from the Microsoft DNS servers</li>
+</ul><p>D. If you select DynECT you must set the following options in the designate section:</p>
+
+<ul><li>dynect_customer_name — Customer name provided by Dyn</li>
+<li>dynect_username — Username provided by Dyn</li>
+<li>dynect_password — Password provided by Dyn</li>
+</ul><p>E. If you select Akamai you must set the following options in the designate section:</p>
+
+<ul><li>akamai_username: The username that was set up as part of your Akamai signup
+
+<ul><li>akamai_password: The password that was set up as part of your Akamai signup</li>
+</ul></li>
+</ul></li>
+<li><p>Run the installer validation command to verify the configuration file</p>
+
+<pre><code> $ dnsaas-installer --target-password &lt;Target User Password&gt; validate
+</code></pre></li>
+<li><p>After you validate the configuration file, run the DNSaaS installer:</p>
+
+<pre><code> $ dnsaas-installer --target-password &lt;Target User Password&gt; install
+</code></pre></li>
+</ol><h2 id="configovercloud">Configure the Overcloud Load Balancer for DNSaaS</h2>
+
+<p>You must configure HAProxy before you configure the overcloud Load Balance for DNaaS.</p>
+
+<p>To configure HAProxy use the following command:</p>
+
+<pre>
+  <code>$ dnsaas-installer --target-password &lt;Target User Password&gt; haproxy
+</code>
+</pre>
+
+<p>The HA Proxy configuration file will be displayed as the sample below:</p>
+
+<pre>
+  <code>2014-09-17 23:31:05.670       INFO HAProxy configuration
+### START HAPROXY CONFIG
+listen designate
+  bind 0.0.0.0:9001
+  mode tcp
+  balance source
+  option tcpka
+  option tcplog
+
+  server 10.22.171.32 10.22.171.32 check inter 2000 rise 2 fall 5
+  server 10.22.171.22 10.22.171.22 check inter 2000 rise 2 fall 5
+  server 10.22.171.21 10.22.171.21 check inter 2000 rise 2 fall 5
+### END HAPROXY CONFIG
+</code>
+</pre>
+
+<p>After the configuration of HAProxy, SSH to all three overcloud controllers.</p>
+
+<p>Perform the following steps on each controller node:</p>
+
+<ol><li><p>SSH overcloud as root</p>
+
+<pre><code>ssh heat-admin@&lt;IP address of overcloud&gt;
+</code></pre></li>
+<li><p>nano  <code>paas.cfg</code> to edit the configuration file</p>
+
+<pre><code>/etc/haproxy/manual/paas.cfg
+</code></pre></li>
+<li><p>Paste the HA Proxy configuration file, which is generated in step 1, at the end of the <code>pass.cfg</code> file</p></li>
+<li><p>Save the <code>pass.cfg</code> file.</p>
+
+<pre><code> CTRL+X
+</code></pre></li>
+<li><p>Reload HA Proxy</p>
+
+<pre><code>service haproxy reload 
+</code></pre></li>
+<li><p>Open the Designate API port in the firewall and run the following commands:</p>
+
+<p>a. Run</p>
+
+<pre><code>iptables -I INPUT 1 -p tcp -m tcp --dport 9001 -j ACCEPT
+</code></pre>
+
+<p>b. Run</p>
+
+<pre><code>iptables-save &gt; /etc/iptables/iptables 
+</code></pre></li>
+</ol><h2 id="keyreg">Registering the service with Keystone</h2>
+
+<p>You  can register the DNS service and endpoint as a user or an admin.</p>
+
+<p>You do not have to immediately register the DNS service in Keystone; however, if you choose to register the DNS service and endpoint execute the following command:</p>
+
+<p>User:</p>
+
+<pre>
+  <code>dnsaas-installer --target-passwoinstallrd &lt;Target User Password&gt; keystone-registration
+</code>
+</pre>
+
+<h2 id="initial-service-configuration">Initial Service Configuration</h2>
+
+<p>You must perform an initial configuration step to communicate the names of the servers that serve DNS to Designate. Please ensure you have a valid set of admin credentials in the standard OS_* environment variables before proceeding.</p>
+
+<p>For the "Nameserver FQDNs" gathered during the <a href="#preq">prerequisites</a> step, issue a <code>server-create</code> command for each name to add the server:</p>
+
+<pre>
+  <code>$ designate server-create --name ns1.example.com.
+</code>
+</pre>
+
+<p>For example :</p>
+
+<pre>
+  <code>designate server-create --name ns1.p13.dynect.net.
+</code>
+</pre>
+
+<h2 id="additional-backend-install">Additional backend install</h2>
+
+<p>If you are using Microsoft DNS Server you should perform the following additional steps:</p>
+
+<ol><li>Download Designate Microsoft DNS Agent installer.</li>
+<li>Execute the installer on each of the Microsoft DNS servers.</li>
+<li><p>Edit <code>msdnsagent.conf</code> files</p>
+
+<pre><code>C:\Program Files (x86)\Designate\designate-msdnsagent.conf
+</code></pre></li>
+<li><p>Restart the <code>designate-msdnsagent</code> service using the windows Services GUI.</p></li>
+</ol><h2 id="post-install-cleanup">Post-install cleanup</h2>
+
+<p>The installer VM is no longer required. Archive the configuration file and the SSH public and private keys used and optionally delete the dnsaas-installer instance.</p>
+
+<h2 id="uninstall">Uninstall DNaaS</h2>
+
+<p>To uninstall the DNaaS:</p>
+
+<ol><li><p>Enter the following command to list the DNaaS Stack ID:</p>
+
+<p><code>$ heat stack-list</code></p></li>
+<li><p>Using python-heatclient and the Target Credentials supplied to the installer, verify the DNSaaS Stack ID and delete it.</p>
+
+<pre><code>$ heat stack-delete &lt;stack ID&gt;
+</code></pre></li>
+</ol><p><strong>Note</strong>: Installer VM can also be deleted, if it is not deleted already.</p>
+
+<p>The Keystone service and endpoints will not be deleted, if you want to remove these services, please refer to the <a href="../../../../../external.html?link=http://docs.openstack.org/developer/keystone/">Keystone documentation</a>.</p>
+
+<h2 id="moreinfo">More Information</h2>
+
+<p>For more information, see:</p>
+
+<ul><li><a href="../../../../api/dns/index.html">HP Helion Public Cloud DNS API Specifications</a></li>
+<li><a href="../../../../../external.html?link=https://wiki.openstack.org/wiki/Designate">Designate DNSaaS services for OpenStack</a></li>
+</ul><p><strong>Note</strong>: Public Cloud API and HP Helion Openstack API details are similar.</p>
+
+<p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<hr />
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../index.html"><span>HP Helion OpenStack Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../release-notes/101/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../faq/index.html"><span>FAQ</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../technical-overview/index.html"><span>Technical Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../services/overview/index.html"><span>Services Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../support-matrix/index.html"><span>Support Matrix</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../overview/index.html"><span>Installation Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../security/index.html"><span>Network Security</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../backup.restore/index.html"><span>Back Up and Restore</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../services/troubleshooting/index.html"><span>Troubleshooting</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../related-links/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../glossary/index.html"><span>Glossary</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/install/dnsaas/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:54:22 GMT -->
+</html>

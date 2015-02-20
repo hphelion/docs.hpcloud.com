@@ -1,0 +1,531 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/install/esx/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:57:28 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion OpenStack: Installing and Configuring the ESX Hypervisor</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../css/combined.css">
+
+	<script src="../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../index.html" class="logo"  ><img src="../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<script>
+<![CDATA[
+
+function PageRefresh {
+onLoad="window.refresh"
+}
+
+PageRefresh();
+
+]]>
+</script><h1 id="hp-helion-openstack-10-installation-and-configuration-for-esx-hypervisor">HP Helion OpenStack® 1.0: Installation and Configuration for ESX Hypervisor</h1>
+
+<p>HP Helion OpenStack allows you to manage the ESX hypervisor, manage the VMware vCenter, and provision virtual machines. This document provides installation instructions for HP Helion OpenStack on a suitably specified and prepared system.</p>
+
+<h2 id="installing-hp-helion-openstack">Installing HP Helion OpenStack<a name="install" id="install"></a></h2>
+
+<p>The installation and configuration process for ESX consists of the following general steps:</p>
+
+<ul><li>Preparing for installation
+
+<ul><li>Verify Prerequisites</li>
+<li>Review the ESX deployment architecture</li>
+<li>Edit the JSON environment variables file</li>
+<li>Prepare baremetal.csv file</li>
+<li>Set DNS servers</li>
+<li>Preparing seed cloud host to run seed VM</li>
+</ul></li>
+<li>Download and extracting the installation packages</li>
+<li>Installing HP Helion OpenStack
+
+<ul><li>Configure proxy information</li>
+<li>Install the seed VM and building your cloud</li>
+</ul></li>
+<li>Verifying the installation</li>
+<li>Create projects for LDAP users</li>
+<li>Next steps</li>
+</ul><h2 id="prepare">Preparing for installation</h2>
+
+<p>Before starting the installation, review the following sections.</p>
+
+<h3 id="pre">Verify Prerequisites</h3>
+
+<p>To ensure successful installation, <a href="../prereqs/index.html">perform required pre-installation tasks</a> before you start.</p>
+
+<h3 id="deploy-arch">Review the ESX deployment architecture</h3>
+
+<p>The following diagram depicts the required network topology for a ESX installation.</p>
+
+<p>
+  <a href="javascript:window.open('../../../../content/documentation/media/topology_esx.png','_blank','toolbar=no,menubar=no,resizable=yes,scrollbars=yes')">HP Helion OpenStack architecture diagram for ESX (opens in a new window)</a>
+</p>
+
+<p>For detailed network requirements, see <a href="../prereqs/index.html#network_prepare">Installation: Prerequisites</a>.</p>
+
+<h3 id="envvars">Edit the JSON environment variables file</h3>
+
+<p>Before installing, make sure you have edited the JSON environment variables file that is required for installation.</p>
+
+<p>For more information, see <a href="../envars/index.html">Editing the JSON Environment Variables File for Installation</a>.</p>
+
+<h3 id="csv">Prepare baremetal.csv file</h3>
+
+<p>Before installing, make sure you have created the <code>baremetal.csv</code> file that is required for installation.</p>
+
+<p>For more information, see <a href="../prereqs/index.html#csv/">Creating the baremetal.csv file</a> in <em>HP Helion OpenStack® Installation: Prerequisites</em>.</p>
+
+<h3 id="name-resolution">Set DNS servers</h3>
+
+<p>To set a default DNS name server for your HP Helion OpenStack Commercial cloud, refer to <a href="../../name-resolution/index.html">Enabling Name Resolution from Tenant VMs in the Overcloud</a> before installation.</p>
+
+<h3 id="prepseed">Prepare the seed cloud host to create the seed VM</h3>
+
+<p>On the server identified to run the seed VM, called the seed cloud host (or installation system), make sure that Ubuntu 14.04 LTS Server edition is installed and operating, as listed in <a href="../prereqs/index.html#ubuntu">Installation: Prerequisites</a>.</p>
+
+<h2 id="getinstall">Downloading and extracting the installation packages</h2>
+
+<p>Before you begin, you must have downloaded and extracted the required HP Helion OpenStack installation packages. See <a href="../prereqs/index.html">Installation: Prerequisites</a>.</p>
+
+<h2 id="install">Installing HP Helion OpenStack</h2>
+
+<p>Make sure you have met all the hardware requirements and have completed the required tasks before you begin your installation. The following sections walk you through the steps to be executed on the seed cloud host:</p>
+
+<ul><li><a href="#proxy">Configure proxy information</a></li>
+<li><a href="#startseed">Installing the seed VM and building your cloud</a></li>
+</ul><h3 id="proxy">Configure proxy information</h3>
+
+<p>Before you begin your installation on the seed cloud host, if necessary configure the proxy information for your environment using the following steps:</p>
+
+<ol><li><p>Launch a terminal and log in to your seed cloud host as root:</p>
+
+<pre><code>sudo su -
+</code></pre></li>
+<li><p>Edit the <code>/etc/environment</code> file to add the following lines:</p>
+
+<pre><code>export http_proxy=http://&lt;web_proxy_IP&gt;/
+export https_proxy=http://&lt;web_proxy_IP&gt;/
+export no_proxy=localhost,127.0.0.1,&lt;your 10.x IP address&gt;,&lt;provider_network&gt;
+</code></pre>
+
+<p>Where:</p>
+
+<pre><code>web_proxy_IP is your web proxy IP address.
+provider_Network is your ESX management network
+</code></pre></li>
+<li><p>Log out and re-login to the seed cloud host to activate the proxy configuration.</p></li>
+</ol><h3 id="startseed">Install the seed VM and build your cloud</h3>
+
+<ol><li><p>Make sure you are logged into the seed cloud host as root. If not:</p>
+
+<pre><code>sudo su -
+</code></pre></li>
+<li><p>Execute the <code>esx-custom-ips.json</code> file using the <code>source</code> command. The <code>source</code> command executes the content of the file passed as argument, in the current shell.</p>
+
+<pre><code>source tripleo/tripleo-incubator/scripts/hp_ced_load_config.sh tripleo/configs/esx-custom-ips.json
+</code></pre></li>
+<li><p>Start the seed VM installation by entering the following command:</p>
+
+<pre><code>bash -x /root/tripleo/tripleo-incubator/scripts/hp_ced_host_manager.sh --create-seed
+</code></pre>
+
+<p><strong>Note</strong>:The installation process takes approximately 10 minutes to complete.</p>
+
+<p>When the seed VM startup is complete, you should see a message similar to the following:</p>
+
+<pre><code>"Wed OCt 23 11:25:10 IST 2014 --- completed setup seed" 
+</code></pre>
+
+<p><strong>Note:</strong> If <code>hp_ced_host_manager.sh</code> fails to start the seed, restart the installation (step 1) and then follow the rest of the steps.</p></li>
+<li><p>To build the cloud, start by logging in to the seed VM. Run the following command from <code>/root</code> using the IP address of seed VM as defined in the <code>esx-custom_ips.json</code> environment variables file:</p>
+
+<pre><code>ssh root@&lt;seed_VM_IP_address&gt;
+</code></pre>
+
+<p><strong>Note</strong>: It might take a few moments for the seed VM to become reachable.</p></li>
+<li><p>When prompted for host authentication, type <code>yes</code> to allow the SSH connection to proceed.</p>
+
+<p>The prompt will change to <code>root@hLinux</code>.</p></li>
+<li><p>Make sure the information in the <a href="../prereqs/index.html#req-info"><code>baremetal.csv</code> configuration file</a> file is correct and upload the file to <code>/root</code>.</p>
+
+<p><strong>Note:</strong> For more information on creating this file, refer to <a href="../prereqs/index.html#req-info">Creating the baremetal.csv file</a> on the <em>Prerequisites</em> page.</p></li>
+<li><p>If you are integrating LDAP into your environment, copy the configuration files, as described in <a href="../ldap/index.html">Integrating LDAP</a>, to the seed cloud host.</p>
+
+<p>a. Copy the <code>tripleo-overcloud-password</code> file to the <code>/root/tripleo</code> folder.</p>
+
+<pre><code>scp tripleo-overcloud-passwords root@192.0.2.1:/root/tripleo/tripleo-overcloud-passwords
+</code></pre>
+
+<p>b. Copy the <code>overcloud_keystone_ldap.json</code> file to the <code>/root/tripleo/hp_passthrough</code> folder.</p>
+
+<pre><code>scp overcloud_keystone_ldap.json root@192.0.2.1:/root/tripleo/hp_passthrough/overcloud_keystone_ldap.json 
+</code></pre></li>
+<li><p><strong>[Optional]</strong> Use IPMItool to verify that network connectivity from the seed VM to the baremetal servers in your <code>baremetal.csv</code> is working.</p></li>
+<li><p>Use the IPMItool to manually power off each baremetal system specified in your <code>baremetal.csv</code> before proceeding with the installation.</p>
+
+<p><strong>IMPORTANT:</strong> Make sure that each system is configured in the BIOS to stay powered off in the event of being shut down rather than automatically restarting.</p></li>
+<li><p>Execute the <code>esx-custom-ips.json</code> file for the undercloud and overcloud nodes using the <code>source</code> command. The <code>source</code> command executes the content of the file passed as argument, in the current shell.</p>
+
+<pre><code>source tripleo/tripleo-incubator/scripts/hp_ced_load_config.sh tripleo/configs/esx-custom-ips.json 
+</code></pre></li>
+<li><p>Install and configure the undercloud and overcloud by running the following command from /root.</p>
+
+<pre><code>bash -x /root/tripleo/tripleo-incubator/scripts/hp_ced_installer.sh |&amp; tee cloud_install.log 
+</code></pre>
+
+<p>Output messages will indicate when the undercloud and overcloud controllers become active, services are created and configured, and other aspects of the installation are executed.</p></li>
+<li><p>When the deployment completes, a message displays asking you to submit information on the install to HP. Enter Y to submit or any other key to not submit.</p>
+
+<p>If your installation is successful, a message similar to the following is displayed:</p>
+
+<pre><code>"HP - completed - Tue Oct 23 16:20:20 UTC 2014"
+</code></pre>
+
+<p><strong>Note:</strong> If the installation does not complete properly, refer to the <a href="../../services/troubleshooting/index.html">Troubleshooting</a> document.</p></li>
+</ol><p>If possible, leave this console display open as you will need the passwords to verify the installation.</p>
+
+<h2 id="verifying-your-installation">Verify your installation</h2>
+
+<p>To verify that the installation is successful, connect to the HP Helion OpenStack dashboard and the undercloud dashboard as shown in <a href="../verify/index.html">Verifying your installation</a>.</p>
+
+<!-- Hiding until I determine if linked doc will work
+### Connect to the undercloud Horizon console {#monitoring}
+
+Make sure you can access the undercloud Horizon dashboard. To do this, follow the steps below:
+
+1. From the seed, run the following command.
+
+        . /root/stackrc
+
+2. Assign the undercloud IP address to a variable.
+
+        UNDERCLOUD_IP=$(nova list | awk '/\| undercloud/{print $12}' | sed 's/ctlplane=//'); echo $UNDERCLOUD_IP
+
+3. Determine the undercloud IP from the output of step 2 using the following command. It is in the last line returned.
+  
+        echo ${UNDERCLOUD_IP}
+
+4. Obtain the undercloud admin password using the following command:
+
+        UNDERCLOUD_ADMIN_PASSWORD=$(grep UNDERCLOUD_ADMIN_PASSWORD /root/tripleo/tripleo-undercloud-passwords | sed 's/UNDERCLOUD_ADMIN_PASSWORD=//'); echo $UNDERCLOUD_ADMIN_PASSWORD
+
+5. From your install system, open a web browser and point to:
+
+        http://<undercloud_IP>
+
+6. Log in as user 'admin' with the admin password from step 4.
+
+### Connect to the overcloud Horizon console {#connectconsole}
+
+Make sure you can access the overcloud Horizon dashboard. To do this, follow the steps below:
+
+1. From the seed, export the overcloud passwords.
+
+        . /root/tripleo/tripleo-overcloud-passwords
+
+2. Export the overcloud users.
+
+        TE_DATAFILE=/root/tripleo/ce_env.json . /root/tripleo/tripleo-incubator/overcloudrc
+
+3. Assign the overcloud IP address to a variable.
+
+        OVERCLOUD_IP=$(jq '.overcloud.endpointhost' /root/tripleo/ce_env.json)
+
+    Remove per Divaker this sub-step
+    4. With the IP address and root password, log in as the main user, root using the following command 
+
+        ssh root@${DEMO_IP}
+
+    If the optional second network was configured, the overcloud controller IP is the value set for `NeutronPublicInterfaceIP`.
+
+4.  Obtain the overcloud admin password using the following command:
+
+        OVERCLOUD_ADMIN_PASSWORD=$(grep OVERCLOUD_ADMIN_PASSWORD /root/tripleo/tripleo-overcloud-passwords | sed 's/OVERCLOUD_ADMIN_PASSWORD=//'); echo $OVERCLOUD_ADMIN_PASSWORD
+
+5. From your install system, open a web browser and point to:
+
+        http://<overcloud_IP>/
+
+6. Log in to the overcloud as user `admin` with the password you obtained in step 4.
+
+    **Note:** If you are unable to connect to the Horizon console, check your proxy settings to ensure that access to the controller VM is successfully redirected through a proxy.
+-->
+
+<h2 id="ldap">Create projects for LDAP users</h2>
+
+<p>If you are integrating LDAP into your environment, you need to configure the Horizon dashboard for users. For more information, see <em>Configure Horizon</em> on the <a href="../ldap/index.html#horizon">Integrating LDAP page</a>.</p>
+
+<h2 id="next-steps">Next Step</h2>
+
+<ul><li><p>Deploy vCenter ESX Compute Proxy <strong>(REQUIRED)</strong></p>
+
+<p>The HP Helion OpenStack vCenter ESX compute proxy is a driver that enables the Compute service to communicate with a VMware vCenter server that manages one or more ESX hosts. The HP Helion OpenStack Compute service (Nova) requires this driver to interface with VMWare ESX hypervisor APIs.</p>
+
+<p>See <a href="proxy/index.html">Deploy vCenter ESX compute proxy</a>.</p></li>
+</ul><p>
+  <a href="#top" style="padding:14px 0px 14px 0px; text-decoration: none;"> Return to Top ↑ </a>
+</p>
+
+<hr />
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using HP Cloud<br>
+			<a href="../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../index.html"><span>HP Helion OpenStack Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../release-notes/101/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../faq/index.html"><span>FAQ</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../technical-overview/index.html"><span>Technical Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../services/overview/index.html"><span>Services Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../support-matrix/index.html"><span>Support Matrix</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../overview/index.html"><span>Installation Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../security/index.html"><span>Network Security</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../backup.restore/index.html"><span>Back Up and Restore</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../services/troubleshooting/index.html"><span>Troubleshooting</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../related-links/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../glossary/index.html"><span>Glossary</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../siteindex/index.html"><span>Site Index</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/helion/openstack/install/esx/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:57:28 GMT -->
+</html>

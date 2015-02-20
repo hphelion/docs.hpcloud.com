@@ -1,0 +1,570 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/user/deploy/app-logs/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:50 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Application Logs</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../../css/combined.css">
+
+	<script src="../../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../../js/metrics.js"></script> 
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" >
+				<a href="../../../../../index.html" class="logo"  ><img src="../../../../../images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>
+        			<ul>
+					
+ 
+
+         
+        				<li><a href="../../../../../../external.html?link=http://www8.hp.com/us/en/cloud/helion-portfolio.html">Helion@HP</a></li>
+						<li><a href="../../../../../../external.html?link=https://h30580.www3.hp.com/">Support</a></li>
+        				<li><a href="mailto:heliondocs@hp.com">Contact</a></li>
+						
+        				 
+        			</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="application-logs">HP Helion 1.0 Development Platform: Application Logs</h1>
+
+<p>Logs for applications running on Application Lifecycle Service are aggregated into streams
+so that data from multiple instances can be viewed together and
+filtered. Application log streams can be accessed via:</p>
+
+<ul><li>the <a href="../../../admin/console/customize/index.html#management-console"><em>Management Console</em></a>
+using the <strong>View Logs</strong> button on the application Details page, or</li>
+<li>the <a href="../../reference/client-ref/index.html#command-logs"><em>helion logs</em></a>
+command</li>
+<li>application log <a href="#application-logs-drain"><em>drains</em></a></li>
+</ul><p>Log streams are tailed output from actual log files in each application
+container, which are generally found in the <em>/home/helion/logs/</em> directory.
+These files can be accessed with the <a href="../../reference/client-ref/index.html#command-files"><em>helion
+files</em></a> command or from the
+Application details page of the <a href="../../../admin/console/customize/index.html#management-console"><em>Management
+Console</em></a>.</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>These files are not automatically rotated. For long-running applications
+or verbose logs, you should <a href="#application-logs-rotate"><em>rotate them</em></a> to
+avoid filling up the application container's filesystem.</p>
+
+<h2 id="helion-logs">helion logs<a href="#helion-logs" title="Permalink to this headline"></a></h2>
+
+<p>To view an application log stream, use the <a href="../../reference/client-ref/index.html#command-logs"><em>helion
+logs</em></a> command:</p>
+
+<pre>
+  <code>$ helion logs myapp
+</code>
+</pre>
+
+<p>To limit the number of lines displayed, use the <code>--num</code> option:</p>
+
+<pre>
+  <code>$ helion logs myapp --num 50
+</code>
+</pre>
+
+<p>To view log stream as it is updated, use the <code>--follow</code> option:</p>
+
+<pre>
+  <code>$ helion logs myapp --follow
+</code>
+</pre>
+
+<p>Log streams can be filtered on a number of parameters:</p>
+
+<ul><li><strong>--text</strong> does a glob pattern match on the log message</li>
+<li><strong>--instance</strong> shows only logs from the specified application
+instances (starting at instance 0).</li>
+<li><strong>--filename</strong> filters based on the log filename (e.g. 'stderr.log')</li>
+<li><strong>--source</strong> shows only logs from the specified source ('app' or
+'staging'). Without a source specified, the log stream includes
+staging and application logs as well as cloud events relevant to
+app.</li>
+</ul><p>The <code>--json</code> flag can be used to return each log
+line as a JSON object.</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p><code>helion logs</code> buffers only 400 lines of the log
+stream history (i.e. lines generated prior to it being run). If you need
+earlier log lines, use the <a href="../../reference/client-ref/index.html#command-files"><em>helion
+files</em></a> command to fetch the
+relevant log file from the <em>logs/</em> directory or create a log
+<a href="#application-logs-drain"><em>drain</em></a> preemptively (where possible).</p>
+
+<h3 id="adding-files-to-the-stream">Adding Files to the Stream<a href="#adding-files-to-the-stream" title="Permalink to this headline"></a></h3>
+
+<p>By default, <code>helion logs</code> streams log data from
+<em>staging_tasks.log</em> (while staging), <em>stdout.log</em> and <em>stderr.log</em>
+(while running).</p>
+
+<p>You can add up to five additional files to the log stream by modifying
+the <strong>HELION_LOG_FILES</strong> environment variable (in
+<a href="../manifestyml/index.html#env"><em>manifest.yml</em></a> or using <a href="../../reference/client-ref/index.html#command-set-env"><em>helion
+set-env</em></a>.</p>
+
+<p>The variable should contain a list of named files separated with ":" in
+the following format:</p>
+
+<pre>
+  <code>name=/path/to/file.log:name=/path/to/another.log
+</code>
+</pre>
+
+<p>The <em>name</em> used in the value or individual variable name becomes part of
+each log line, and can be used for filtering the stream.</p>
+
+<p>For example, to add a specific Tomcat log file to the default
+\$HELION_LOG_FILES variable, you might set the following in
+<em>manifest.yml</em>:</p>
+
+<pre>
+  <code>env:
+  HELION_LOG_FILES: tomcat=/home/helion/tomcat/logs/catalina.2013-11-04.log:$HELION_LOG_FILES
+</code>
+</pre>
+
+<p>Paths can be specified fully or specified relative to \$HELION_APP_ROOT.</p>
+
+<h2 id="helion-drain">helion drain<a href="#helion-drain" title="Permalink to this headline"></a></h2>
+
+<p>The <a href="../../reference/client-ref/index.html#command-drain-add"><em>helion drain
+add</em></a> command is used to
+create a log drain which forwards application logs to external log
+aggregation services, log analysis tools, or Redis databases. For
+example:</p>
+
+<pre>
+  <code>$ helion drain add myapp appdrain udp://logs.loggly.com:12345
+</code>
+</pre>
+
+<p>This creates a UDP drain called "appdrain" for the application "myapp"
+which forwards all log messages and events for that application to
+<a href="../../../../../../external.html?link=http://loggly.com/">Loggly</a> on port 12345.</p>
+
+<p>The log drain URL can contain only:</p>
+
+<ul><li><strong>scheme</strong>: <code>udp://</code> or <code>tcp://</code></li>
+<li><strong>host</strong>: IP address or hostname</li>
+<li><strong>port</strong>: number</li>
+</ul><p>Any additional parameters are discarded.</p>
+
+<p>To delete the drain:</p>
+
+<pre>
+  <code>$ helion drain delete appdrain
+</code>
+</pre>
+
+<p>Use the --json option send the log lines in JSON format:</p>
+
+<pre>
+  <code>$ helion drain add myapp jsondrain --json udp://logs.loggly.com:12346
+</code>
+</pre>
+
+<p>To check the status of your application drains, use the
+<code>helion drain list</code> command.</p>
+
+<p>
+  <strong>Note</strong>
+</p>
+
+<p>If the service at the receiving end of the drain goes offline or becomes
+disconnected, Application Lifecycle Service will retry the connection at increasing
+intervals.
+<!--
+Log Drain Examples[](#log-drain-examples "Permalink to this headline")
+-----------------------------------------------------------------------
+
+Detailed instructions on how to use drains with third party log analysis
+software or services:
+
+-   [*Papertrail*](#app-logging-examples-papertrail)
+-   [*Loggly*](#app-logging-examples-loggly)
+-   [*Splunk*](#app-logging-examples-splunk)
+
+### Papertrail[](#papertrail "Permalink to this headline")
+
+1.  [Create an account for Papertrail](https://papertrailapp.com/plans)
+2.  In the Dashboard screen, click **Add Systems**.
+    <img src="/als/v1/images/ppt11.png">
+    <img src="/als/v1/images/logo.png">
+ 
+3.  In the Setup Systems screen under *Other log methods*, click
+    *Alternatives*.
+    <img src="/als/v1/images/ppt21w.png" />
+ 
+4.  Choose option C: *My system's hostname changes* and give it a
+    suitable name.
+    <img src="/content/documentation/devplatform/stackat0/images/ppt31.png" />
+
+5.  Note the **port number**.
+    <img src="/content/documentation/devplatform/stackat0/images/ppt41.png" />
+
+6.  Enable application logging (via udp) by executing the following client command:
+
+    `helion drain add drain-name udp://logs.papertrailapp.com:port#`
+
+### Loggly[](#app-logging-examples-loggly "Permalink to this headline")
+Loggly supports JSON format with minor configuration changes as shown below.
+
+1. [Create an account for Loggly](https://app.loggly.com/pricing)
+1. Under *Incoming Data* tab, click *Add Input*.
+<image src="..\..\images\loggly11.png">
+1. In the Add Input screen:
+    - Choose *Syslog UDP or TCP*
+    - Choose *Combination Log Type*
+    - [Optional] For JSON Logging, Choose UDP or TCP **with Stripe** and enable **JSON Logging**. (for system logs)
+    <img src="..\..\images\loggly21.png">
+1.  If we want to accept logs from any Application Lifecycle Service nodes or applications, modify the Allowed Devices section:
+    - Click *Add device*
+    <img src="..\..\images\loggly31.png">
+    -   Add IP Address 0.0.0.0/0 when prompted
+    <img src="..\..\images\loggly41.png" />
+1.  Turn off discovery since we allowed all devices. Also note down the **port number**.
+    <img src="..\..\images\loggly51.png" />
+1. Run **one** of the following client commands to create the log drain:
+
+
+    `helion drain add drain-name udp://logs.loggly.com:port#`
+
+    `helion drain add drain-name tcp://logs.loggly.com:port#`
+
+### Splunk[](#splunk "Permalink to this headline")
+Splunk supports JSON format without further configuration.
+
+1.  [Set up Splunk Server](http://www.splunk.com/download).
+2.  In the welcome screen, click *Add data*
+    <img src="/content/documentation/devplatform/stackat0/images/splunk11.png" />
+3.  Under **Choose a Data Source**, click **From a TCP port** (or UDP).
+    <img src="/content/documentation/devplatform/stackat0/images/splunk21.png" />
+4.  In the Add new Source screen:
+    -   Select a TCP/UDP port greater than **9999**
+    -   Give it a suitable **Source name**.
+    -   Set sourcetype to **Manual**
+    -   Leave Source Type **empty**
+    <img src="/content/documentation/devplatform/stackat0/images/splunk31.png" />
+
+5.  Run the following client command to create the log drain: 
+`helion drain add drain-name udp://splunk-server-address:port#`
+OR
+helion drain add drain-name tcp://splunk-server-address:port#
+
+
+
+### Hello World Custom Drain[](#hello-world-custom-drain "Permalink to this headline")
+
+The command below starts a drain target server on a node, piping to a
+local file:
+
+    nc -lk 0.0.0.0 10000 > log-output.txt
+
+As long as that nc command runs, this will funnel logs from all drains
+targeting it into the file *log-output.txt*
+
+Run one of the following client commands to create the log drain:
+
+
+    helion drain add drain-name udp://server-address:port#
+
+OR
+
+    helion drain add drain-name tcp://server-address:port#
+--></p>
+
+<h2 id="rotating-application-log-files">Rotating Application Log Files<a href="#rotating-application-log-files" title="Permalink to this headline"></a></h2>
+
+<p>Application Lifecycle Service does not automatically rotate application log files in
+<em>/home/helion/logs/</em>. However, you can add log rotation for these
+files yourself using <code>cron</code> and
+<code>logrotate</code>. Programming languages, frameworks, and utilities handle logging
+operations in different ways. Check for incompatibilities with
+<code>logrotate</code> before implementing log rotation scheme using it.</p>
+
+<ol><li><p>Add a cron key in <em>manifest.yml</em> to run <code>logrotate</code>. Set HELION_CRON_INSTANCES to "all" to specify that
+the job should be run in all application instances. For example:</p>
+
+<pre><code>env:
+  HELION_CRON_INSTANCES: all
+cron:
+  - 0 1 * * * /usr/sbin/logrotate --state /home/helion/app/logrotate-state /home/helion/app/app-logrotate.conf
+</code></pre>
+
+<p>The <code>--state</code> option must be set because the
+<code>helion</code> user does not have permission to
+update the default state file.</p></li>
+<li><p>Add an <em>app-logrotate.conf</em> file to the base directory of your application to specify which log files to rotate, and which <code>logrotate</code> options to use. For example:</p>
+
+<pre><code>/home/helion/logs/\*.log {
+  daily
+  compress
+  copytruncate
+  dateext
+  missingok
+  notifempty
+  rotate 3
+  maxage 7
+  size 3M
+}
+</code></pre></li>
+</ol>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Download the<br>Development Platform<br>
+			<a href="../../../../../../external.html?link=https://helion.hpwsportal.com/#/Home/Show">DOWNLOAD NOW</a>
+		</p>
+	</aside>
+	
+ 
+	<aside class="signup-box">
+		<p class="align-center">
+			Take the Helion Development Platform for a Free Spin<br>
+			<a href="../../../../../helion/devplatform/ALS-developer-trial-quick-start/index.html">Quick Start Developer Trial</a>
+		</p>
+	</aside>
+<!--	
+	<aside class="signup-box">
+		<p class="align-center">Make sure to check out our Developer Portal
+			<a href="https://dev.hpcloud.com">dev.hpcloud.com
+</a><br>
+ 
+		</p>
+	</aside>
+-->	
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/index.html"><span>HP Helion Development Platform Documentation Home</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/install/index.html"><span>Development Platform Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/install/community/index.html"><span>Development Platform Community Edition Installation & Configuration</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/openstack/update/devplat/101/index.html"><span>Development Platform Commercial 1.0.1 Update</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/appdev/index.html"><span>Application Developer Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/sysadmin/index.html"><span>IT Ops Resources</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/appdev/index.html#sample"><span>Sample Code</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/related-topics/index.html"><span>Related Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/deploy/index.html"><span>Application Lifecycle Service Configuration and Deployment</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../admin/index.html"><span>ALS Admin Guide</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/eula/index.html"><span>End User License Agreement</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../../helion/devplatform/3rd-party-license-agreements/index.html"><span>Open Source and Third-Party Software License Agreements</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+    		<ul class="footer-social">
+    			<li class="twitter"><a href="../../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+    			<li class="youtube"><a href="../../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+    			<li class="rss"><a href="../../../../../../external.html?link=http://h30499.www3.hp.com/hpeb/rss/board?board.id=sws-661"></a></li>
+    			<li class="facebook"><a href="../../../../../../external.html?link=https://www.facebook.com/HPCloud"></a></li>
+    			<li class="linkedin stretch"><a href="../../../../../../external.html?link=https://www.linkedin.com/company/hewlett-packard"></a></li>
+    		</ul>
+    		<ul class="contact-info">
+    			<li>In the U.S.<br />1-855-61CLOUD</li>
+    			<li>Worldwide<br />+1678-745-9010</li>
+    			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> 
+				<!-- comment out per JC
+				or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span>
+				-->
+				</li>
+    		</ul>
+    		<div class="copyright">
+    			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.</p><br />
+    			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../../external.html?link=http://www.hpcloud.com/legal-documents">HP Cloud legal documents and privacy policy</a></p>
+    		</div>
+    	</div>
+    </div>
+  </footer>
+
+	<script src="../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../../js/combined.js"></script>
+  <script>
+      __HP_CHAT_CONF = {};
+      __HP_CHAT_CONF.sales = true;
+      __HP_CHAT_CONF.support = true;
+    </script>
+	
+    <script> //removed per JC
+    //(function($, window) {
+    //    $(window).load(function() {
+    //    var sNew = document.createElement("script");
+    //  sNew.async = true;
+    //sNew.src = 'https://a248.e.akamai.net/cdn.hpcloudsvc.com/gcbb18d905d32174e6eb205943b0dea4a/prodae1/chat.js';
+    //var s0 = document.getElementsByTagName('script')[0];
+    //s0.parentNode.insertBefore(sNew, s0);
+    //});
+    //})(jQuery, this);
+    </script>
+    <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/als/v1/user/deploy/app-logs/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 14:59:50 GMT -->
+</html>

@@ -1,0 +1,743 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/cli/windows/compute/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:27 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion Public Cloud CLI Software for Windows PowerShell Compute Examples</title>
+	
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../../css/combined.css">
+
+	<script src="../../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../../js/metrics.js"></script> 
+	
+	
+	
+	
+	<!--[if IEMobile 7]><html class="iem7"  lang="en" dir="ltr"><![endif]-->
+<!--[if lte IE 6]><html class="lt-ie9 lt-ie8 lt-ie7"  lang="en" dir="ltr"><![endif]-->
+<!--[if (IE 7)&(!IEMobile)]><html class="lt-ie9 lt-ie8"  lang="en" dir="ltr"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9"  lang="en" dir="ltr"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html  lang="en" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"><!--<![endif]-->
+
+<head profile="../../../../../external.html?link=http://www.w3.org/1999/xhtml/vocab">
+  
+  
+  <meta charset="utf-8" />
+<meta name="web_section_id" content="R11646" />
+<meta name="bu" content="corp" />
+<meta name="hp_design_version" content="hpweb.2.0" />
+<meta name="segment" content="Commercial.B2B" />
+<meta name="page_content" content="HP Public Cloud - Enterprise Public Cloud Products &amp;amp; Services" />
+<meta name="content_country_applicability" content="w1" />
+<meta name="target_country" content="US" />
+<meta name="lifecycle" content="presales.awareness" />
+<link rel="shortcut icon" href="../../../../../external.html?link=http://www.hpcloud.com/sites/all/themes/hpcloud/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<meta name="description" content="HP Public Cloud provides on-demand, pay-as-you-go cloud services for computing, storage infrastructure as well as platform services. Explore the cloud." />
+<meta about="/hp-helion-public-cloud" property="sioc:num_replies" content="0" datatype="xsd:integer" />
+<meta content="HP Helion Public Cloud" about="/hp-helion-public-cloud" property="dc:title" />
+<link rel="canonical" href="../../../../../external.html?link=http://www.hpcloud.com/" />
+<link rel="shortlink" href="../../../../../external.html?link=http://www.hpcloud.com/" />
+<meta property="og:url" content="http://www.hpcloud.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="HP Public Cloud" />
+<meta property="og:site_name" content="HP Public Cloud" />
+   
+
+      <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="cleartype" content="on">
+<!--
+  <link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_791YXBaKKm1ORM_7huSKEsIV9tSWq6wmRkERhuXpN6w.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_mGbqk88-VTBvzao9MxjjAm60xrWNV9JbuxL-XsOdBKY.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_UOCsF9jLPA1lMMj-BVVBzE0l5EIeCw_3PDG18zycRw4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_MfNt8ndX5CcdNjNUw-v__mhCPodpzDeR8KuzaXo-yzQ.css" media="all" />
+-->
+  <script src="../../../../../www.hpcloud.com/sites/default/files/js/js__kIQ7mxn9cgBO3AAnwhKUMQqNbqZZQWibQB6EZRy6u0.html"></script>
+<script src="../../../../../www.hpcloud.com/sites/default/files/js/js_CC-zfeuQHcDhFtVRuKW53h30TL7j_105J32Nz8b8R38.js"></script>
+<script>var WRInitTime=(new Date()).getTime(); // ClickTale top part</script>
+<script src="../../../../../www.hpcloud.com/sites/default/files/js/js_mZQzCl35imgkCIIjGS2RPLYDNuLk9ncwZ5c7lh6STTw.js"></script>
+<script>		<!-- Start Visual Website Optimizer Asynchronous Code -->
+		var _vwo_code=(function(){
+		var account_id=37831,
+		settings_tolerance=2000,
+		library_tolerance=2500,
+		use_existing_jquery=false,
+		// DO NOT EDIT BELOW THIS LINE
+		f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('../../../../../external.html?link=http://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+		<!-- End Visual Website Optimizer Asynchronous Code --></script>
+<script src="../../../../../www.hpcloud.com/sites/default/files/js/js_kv2zkR2iCsl2ctlEzg-TiOxz1jEVBjx7VzAR0mTzlew.js"></script>
+<script src="../../../../../www.hpcloud.com/sites/default/files/js/js_qz7rta8c7yTiJLYNkf4WKFMgEeuRUE1AgWXd6NCAQZU.js"></script>
+<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"hpcloud","theme_token":"NwfPTBjz4hDLctcBflIoKqD4J2r3kIAtWobc48FZKTo","js":{"https:\/\/clicktale.pantherssl.com\/WRd.js":1,"0":1,"sites\/all\/modules\/custom\/hpcs_referrer_url\/js\/referrer.min.js":1,"sites\/all\/modules\/custom\/kenshoo\/js\/kenshoo.min.js":1,"1":1,"sites\/all\/themes\/hpcloud\/js\/fastclick.min.js":1,"sites\/all\/themes\/hpcloud\/js\/main.min.js":1,"sites\/all\/modules\/custom\/lp_chat\/js\/le-mtagconfig.js":1,"sites\/all\/modules\/custom\/hpcloud_jquery\/js\/jquery-1.9.0.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"misc\/jquery.cookie.js":1,"2":1,"sites\/all\/modules\/custom\/omniture\/js\/hpcs_metrics.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/tinycon.min.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/color.js":1,"3":1,"sites\/all\/modules\/custom\/lp_chat\/js\/lp-initialize.js":1,"sites\/all\/themes\/hpcloud\/js\/vendor\/modernizr-2.6.2.min.js":1,"sites\/all\/themes\/hpcloud\/js\/respond.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/uif\/uif.css":1,"sites\/all\/modules\/contrib\/field_collection\/field_collection.theme.css":1,"sites\/all\/themes\/zen\/system.menus.css":1,"sites\/all\/themes\/hpcloud\/css\/screen.css":1,"sites\/all\/themes\/hpcloud\/css\/styles.css":1}}});</script>
+      <!--[if lt IE 9]>
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+      <!--[if (lt IE 9) & (!IEMobile)]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie8.css">
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+    
+    <!--[if IE]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie.css">
+    <![endif]-->
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" ><!--
+				<a href="http://docs.hpcloud.com/" class="logo"  ><img src="/images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>-->
+        			<ul class="menu"><li class="first leaf menu-mlid-1845"><a href="../../../../../external.html?link=http://www.hpcloud.com/support">Support</a></li>
+<li class="leaf has-children menu-mlid-1222"><a href="../../../../../external.html?link=http://www.hpcloud.com/partners">Partners</a></li>
+<li class="leaf menu-mlid-1817"><a href="../../../../../external.html?link=http://marketplace.hpcloud.com/" title="">Marketplace</a></li>
+<li class="leaf has-children menu-mlid-1223"><a href="../../../../../external.html?link=http://www.hpcloud.com/about" title="">About</a></li>
+<li class="leaf menu-mlid-1224"><a href="../../../../../external.html?link=http://www.hp.com/" title="">hp.com</a></li>
+<li class="leaf menu-mlid-1225"><a href="../../../../../external.html?link=http://www.hpcloud.com/about/contact">Contact</a></li>
+<li class="last leaf menu-mlid-1226"><a href="../../../../../external.html?link=http://www.hpcloud.com/console">Log In</a></li>
+</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="content" class="grid_10 suffix_1">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="hp-helion-public-cloud-cli-software-for-windows-powershell-compute-examples">HP Helion Public Cloud CLI Software for Windows PowerShell Compute Examples</h1>
+
+<p>This page provides you some examples of how to use the various commands (sometimes called "cmdlets") for HP Helion Public Cloud CLI software for Windows PowerShell implementation of Compute.</p>
+
+<ul><li><a href="#Navigation">Navigation</a></li>
+<li><a href="#ColorManagement">Availability Zone Color Management</a></li>
+<li><a href="#KeyManagement">Key Management</a></li>
+<li><a href="#SecurityGroups">Security Groups</a></li>
+<li><a href="#BasicServerOperations">Basic Server Operations</a></li>
+<li><a href="#AdvancedServerOperations">Advanced Server Operations</a></li>
+<li><a href="#PasswordManagement">Password Management</a></li>
+<li><a href="#IPManagement">Floating IP Management</a></li>
+</ul><p>For complete details on the commands--syntax, descriptions, and so forth--take a look at the <a href="../../../../cli/windows/reference.html">CLI Reference</a> page.</p>
+
+<h2 id="Navigation">Navigation</h2>
+
+<p>To execute commands in Windows PowerShell, first open a Windows PowerShell window; under the Start menu, it is typically under <code>All Programs &gt; Accessories &gt; Windows PowerShell</code>.  Select the shell appropriate to your system, either the 64-bit or 32-bit version.  Enter the HP Helion Public Cloud Services CLI by entering:</p>
+
+<pre>
+  <code>PS C:\&gt; cd HPCS:
+</code>
+</pre>
+
+<p>Once in the HPCS area, you can move around as if you were in a standard directory structure.  For example, entering the <strong>ls</strong> command:</p>
+
+<pre>
+  <code>PS HPCS:\&gt; ls
+</code>
+</pre>
+
+<p>Generates the following output:</p>
+
+<pre>
+  <code>===============================================================
+Account Associations
+===============================================================
+
+Name          Description
+____          __________
+Servers       A place to manage Servers across the Account.
+Flavors       Manage additional hardware configurations for Servers.
+Images        Manage collections of files used to create or rebuild Servers.
+Security      Manage Key Pair and Security Group Rules here.
+Networking    A Place to manage dynamic IP addresses assigned to your Servers.
+</code>
+</pre>
+
+<p>To view objects in each area, just <strong>cd</strong> to the appropriate location and run the command.  For example, if you want to view security objects:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; cd Security
+</code>
+</pre>
+
+<p>An <code>ls</code> command shows further nested objects available.</p>
+
+<pre>
+  <code>PS HPCS:\Security&gt; ls
+==========================================================================================================
+Security Associations
+==========================================================================================================
+
+Name            Description
+----            -----------
+SecurityGroups  Container objects used for security group rules
+KeyPairs        A place to manage public/private keys used to create secure connections to compute instances.
+</code>
+</pre>
+
+<p><strong>Note:</strong> When referencing an argument, like a container name, that has a space, use quotes to access that resource. For example:</p>
+
+<pre>
+  <code> PS: HPCS:\&gt; cd "my container:"
+ PS: HPCS:\&gt; new-container "my new container"
+</code>
+</pre>
+
+<h2 id="ColorManagement">Availability Zone Color Management</h2>
+
+<p>Each availability zone is assigned a color to make it easier for you to recognize which zone you are in.  For example, if availability zone 1 is assigned cyan, whenever you are in that zone, all the command-line text is cyan.  To see what colors are assigned to each zone, use the <code>get-zones</code> command:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; get-zones
+
+Current Availability Zones include
+
+
+Zone Id  Name                 Shell Foreground Color  Is Default
+-------  ----                 ----------------------  ----------
+1        az-1.region-a.geo-1  Green                   True
+2        az-2.region-a.geo-1  White                   False
+3        az-3.region-a.geo-1  Cyan                    False
+4        az-1.region-b.geo-1  Magenta                 False
+5        az-2.region-b.geo-1  Yellow                  False
+
+
+
+PS HPCS:\\&gt;
+</code>
+</pre>
+
+<p>To assign a new color to a particular availability zone, use the <code>set-zonecolor</code> command.</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; set-zonecolor 1 Cyan
+
+az-1.region-a.geo-1 now assigned to Cyan.
+
+PS HPCS:\\&gt;
+</code>
+</pre>
+
+<p>Use the <code>Zone Id</code> value rather than the zone name to set the color.</p>
+
+<p><strong>Note</strong>: The input to the command is case-sensitive; you must use an initial capital letter for the color name.  For example, <code>Cyan</code> rather than <code>cyan</code></p>
+
+<p>After you change the zone color, when you navigate to the zone you see something similar to that shown below:</p>
+
+<p>
+  <img src="../../../../content/documentation/media/wincli_color_change.png" width="580" height="299" alt="" />
+</p>
+
+<h2 id="KeyManagement">Key Mangement</h2>
+
+<p>To create a new keypair:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; New-keypair "MyKey"
+</code>
+</pre>
+
+<p>Created keys are stored in <code>C:\Users\*username*\Documents\HP</code> directory by default. A single key-pair can used to create multiple servers.</p>
+
+<p><strong>Note</strong>: When you generate a private key, be sure to make a note of the keypair as this is the only time it is displayed.  Be sure to store your private keys in a safe location in order to allow ssh connections to that server.</p>
+
+<p>To list keypairs, browse to the KeyPairs directory and perform the <code>ls</code> command:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; cd Security
+PS HPCS:\Security&gt; cd KeyPairs
+PS HPCS:\Security\KeyPairs&gt; ls
+</code>
+</pre>
+
+<p>To remove an existing keypair:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; Remove-keypair "MyKey"
+</code>
+</pre>
+
+<h2 id="SecurityGroups">Security Groups</h2>
+
+<p>To list the currently-available security groups:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; cd Security
+PS HPCS:\Security&gt; cd SecurityGroups
+PS HPCS:\Security\SecurityGroups&gt; ls 
+</code>
+</pre>
+
+<p>This command generates output that looks like:</p>
+
+<pre>
+  <code>============================================
+The following SecurityGroups are available.
+============================================
+
+Id          Name          Description          
+--          ----          -----------          
+111         default       default              
+
+1 SecurityGroup(s) found
+</code>
+</pre>
+
+<p>To list the rules of a security group, using the default security group, first list the available security groups as shown above.</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; cd Security
+PS HPCS:\Security&gt; cd SecurityGroups
+PS HPCS:\Security\SecurityGroups&gt; cd 111
+PS HPCS:\Security\SecurityGroups\111&gt;  ls
+</code>
+</pre>
+
+<p>To create a new security group, where <code>-n</code> is the name of the security group and <code>-d</code> is the description for the security group:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; New-SecurityGroup -n "TestGroup" -d "Test Security Group"
+</code>
+</pre>
+
+<p>To create a new security group rule and assign it to an existing security group:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; Add-Rule -fp "80" -tp "84" -ipp "tcp" -ipr "15.185.118.75/0" -gid "2133"
+</code>
+</pre>
+
+<p><strong>Note</strong>: You have to use the security group ID, rather than the security group name (as set in the previous example).  To determine the security group ID, use the <code>ls</code> command on the SecurityGroups directory.</p>
+
+<p><strong>Note for Windows Images</strong>: A security group requires port 3389 to connect to a Windows instance via the remote desktop protocol (RDP). Windows CLI automatically creates security group <code>rdp_group</code> with port 3389 open when it detects a Windows image type during creation, and automatically applies the <code>rdp_group</code> security group to that Windows instance. Security Group <code>rdp_group</code> is always added as a security group to Windows instances even when you specify other security groups as arguments with the <code>New-Server</code> cmdlet.</p>
+
+<p>For a full description of the options available with the <strong>Add-Rule</strong> command, please see the <a href="../../../../cli/windows/reference.html#Add-Rule">Add-Rule</a> section of the <a href="../../../../cli/windows/reference.html">Windows CLI Reference</a> page.</p>
+
+<p>To delete an existing security group rule:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; Remove-SecurityGroup -id "3244"
+</code>
+</pre>
+
+<h2 id="BasicServerOperations">Basic Server Operations</h2>
+
+<p>To create a new server:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; New-Server -n "TestServer" -i "2111" -f "100" -sg "Security_group1" -md "Namevalue1 | value1" -k "KeyName"
+</code>
+</pre>
+
+<p>Where the new server has name <code>TestSever</code>, image identifier <code>2111</code>, flavor identifier<code>100</code>, security group name <code>Security_group1</code>, name-value pair <code>Namevalue1 | value1</code>, and keypair <code>KeyName</code>.</p>
+
+<p><!--DOUG: rewrite-->
+<strong>Note for Windows Images</strong>: When the Windows CLI detects you are creating a Windows server, it looks for the keypair <em>.pem</em> file in a specific location. The default location for the .pem file is <code>C:\Users\*username*\Documents\HP</code>. When the new-server operation has completed, the output is the Administrator password to be used with an RDP client. Please make note of it. 
+<!-- Hiding; referenced file missing
+For assistance on connecting to a Windows Instance, see [How to Access a Windows Instance via the Remote Desktop](/compute/using#WindowsRDP) or use the [quick connect feature](#QuickConnect). --></p>
+
+<p>For a full description of the options available with the <strong>New-Server</strong> command, please see the <a href="../../../../cli/windows/reference.html#New-Server">New-Server</a> section of the <a href="../../../../cli/windows/reference.html">Windows CLI Reference</a> page.</p>
+
+<p>To list the currently-available servers:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; cd Servers
+PS HPCS:\Servers&gt; ls
+</code>
+</pre>
+
+<!--To reset a password for an existing server:
+
+    PS HPCS:\\> Reset-Password -id "3245" -p "testpassword08"-->
+
+<p>To update the name of an existing server:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; Update-Server -id "2133" -n "NewName"
+</code>
+</pre>
+
+<p><strong>Note</strong>: You have to use the server ID, rather than the server name.</p>
+
+<p>To reboot a server:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; Reboot-Server "4516" "SOFT"
+</code>
+</pre>
+
+<p><strong>Note</strong>: A <em>soft</em> reboot signals the operating system to restart, which allows for a graceful shutdown of all processes. A <em>hard</em> reboot is the equivalent of cycling power on the server.</p>
+
+<p>To delete an existing server:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; Remove-Server "4516"
+</code>
+</pre>
+
+<p><strong>Note</strong>: You have to use the server ID, rather than the server name.  To determine the server ID, use the <code>ls</code> command as shown above.</p>
+
+<h2 id="AdvancedServerOperations">Advanced Server Operations</h2>
+
+<h3 id="CreateanImageofaServer">Create an Image of a Server</h3>
+
+<p>To create an image from an existing server:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; new-image -s 125881 -n "Image01"
+</code>
+</pre>
+
+<p>Where <code>-s</code> designates the server ID, and <code>-n</code> designates the image name. Use the <code>ls</code> command in the Images directory to view your created images.</p>
+
+<p>
+Creating an image of an active server produces a state 'snapshot' of the server and makes it available as an <code>Image</code>. After creation you can use that image to create a new server. You can find the new image id by viewing the <code>Images</code> directory.</p>
+
+<p><strong>Note for Windows Images</strong>: For instances created from snapshots of Windows images, the Administrator password matches the Administrator password of the server the snapshot was taken from, even if you changed it from the original password.</p>
+
+<h3 id="QuickConnectWin">Quick-Connect to an Instance</h3>
+
+<p>To perform a quick-connect to an existing server instance:</p>
+
+<p><strong>Note</strong>: In order for the <code>connect-server</code> command to work, your keypair <em>.pem</em> file needs to be in the appropriate location. The default location is <code>C:\Users\*username*\Documents\HP</code>.</p>
+
+<pre>
+  <code>PS HPCS:\\&gt;  Connect-Server 2111
+</code>
+</pre>
+
+<p>This connects you to the server with the ID <code>2111</code>.  You can also connect to a server by <a href="../../../../cli/windows/2/reference.html#Connect-Server">navigating</a> to a server directory and entering the <code>Connect-Server</code> command with no arguments:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt;  cd Servers
+PS HPCS:\Servers&gt; cd 2111
+PS HPCS:\Servers\2111&gt; Connect-Server
+</code>
+</pre>
+
+<h3 id="QuickConnectNonWin">Quick-Connect to a Non-Windows Instance</h3>
+
+<p>To connect to a non-Windows instance, such as Linux, follow these steps:</p>
+
+<ol><li>Download the latest version of <a href="../../../../../external.html?link=http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">putty.exe</a> and <a href="../../../../../external.html?link=http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">puttygen.exe</a> for Windows.</li>
+<li>Make note of the location of your <em>putty.exe</em> and <em>puttygen.exe</em> files downloaded in step 1.</li>
+<li>Open <em>puttygen.exe</em> and load the .pem key file used to create the non-windows instance. This file is located at <code>C:\Users\*user_name*\Documents\HP</code>.</li>
+<li>Convert the .pem file to the .ppk format by selecting the <em>Save Private Key</em> action.</li>
+<li>Save the .ppk file into the same directory as your orginal .pem file and give it the same name.</li>
+<li>Launch the SSH session with the <code>Connect-Server</code> cmdlet. Example: <code>connect-server 12345</code> where 12345 is your instance ID.</li>
+</ol><p><strong>Note:</strong> If this is the first time to use <code>connect-server</code> with a non-windows instance, the system will prompt for the location of your <em>putty.exe</em> file. Please provide the fully qualified UNC path. For example: <code>C:\Users\*user_name*\Downloads\putty.exe</code>. This location is stored in your config file located at <code>C:\Users\*user_name*\Documents\HP\CLI.config</code>.</p>
+
+<p><strong>Note:</strong> If you use the same keypair name for another instance, you do not need to convert the key from .pem to .ppk again.</p>
+
+<h2 id="PasswordManagement">Password Management</h2>
+
+<h3 id="GetPassword">Get-Password</h3>
+
+<p>To retrieve your password for your Windows instance:</p>
+
+<p><strong>Note:</strong> This cmdlet is currently available for Windows instances only.</p>
+
+<pre>
+  <code> PS C:\Program Files (x86)\HP\HPCS-Powershell&gt; cd HPCS:
+ PS HPCS:\&gt; Get-Password -s 123456 -k "key_1"
+ Log detected!
+ Administrator Password : [+&amp;/}4CF6EJi
+</code>
+</pre>
+
+<p>This retrieves the password for server ID <code>12345</code> that was created with keypair name <code>key_1</code>.</p>
+
+<p><strong>Note</strong>: The WinCLI looks for the keypair <em>.pem</em> file in a specific location. The default location for the .pem file is <code>C:\Users\*username*\Documents\HP</code>.</p>
+
+<p>To use the <code>Get-Password</code> command, all of the following must be true:</p>
+
+<ul><li>The server must appear in the server list </li>
+<li>The listing of the EventLog for the server (<code>PS HPCS:\Servers\server_id\EventLog</code>), must display the encrypted key</li>
+<li>The server has never rebooted after initial creation.</li>
+</ul><h3 id="ResetPassword">Reset-Password</h3>
+
+<p>For Windows Instances only, if you change your Windows password manually via <a href="../../../../../external.html?link=http://msdn.microsoft.com/en-us/library/windows/desktop/aa383015(v=vs.85).aspx">RDP</a>, you need to manually sync the password with the Windows CLI with the <a href="../../../../cli/windows/2/reference.html#reset-password"><code>Reset-Password</code> cmdlet</a> for the <code>connect-server</code> command to work. If you use the <code>get-password</code> cmdlet to fetch your original de-crypted Administrator password, and it's available, it will overwrite the password sync.</p>
+
+<pre>
+  <code>PS HPCS:\&gt; reset-password -id 1234 -p "Thisisalongpassword!"
+</code>
+</pre>
+
+<p>This resets the password for server <code>1234</code> to  <code>Thisisalongpassword!</code>.</p>
+
+<h2 id="IPManagement">Floating IP Management</h2>
+
+<p>Requests a new Floating IP and adds to your IP pool for assignment availability to a server:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; Allocate-IP
+</code>
+</pre>
+
+<p>Performing an <code>ls</code> command on the Networking directory shows your allocated IPs.</p>
+
+<pre>
+  <code>PS HPCS:\Networking&gt; ls
+============================================================
+The following Networking are available.
+============================================================
+Id       Instance Id   Fixed IP        IP
+--       -----------   --------        --
+1391     None          None            15.184.120.110
+
+1 Networking(s) found
+</code>
+</pre>
+
+<p>To assign an allocated IP address to an existing server:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; Assign-IP -s 2344 -ip "192.168.110.45"
+</code>
+</pre>
+
+<p>To unassign an IP address for a particular server:</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; Unassign-IP -s 2344 -ip "192.168.110.45"
+</code>
+</pre>
+
+<p>To de-allocate (release) a previously-allocated IP address out of your IP pool</p>
+
+<pre>
+  <code>PS HPCS:\\&gt; Deallocate-IP -ip 1391
+</code>
+</pre>
+
+<p>Where <code>-ip</code> represents the ID of the allocated IP address.</p>
+
+<p>For a complete list of all the available Compute commands, please see the <a href="../../../../cli/windows/reference.html">CLI reference page</a> and <a href="../../../../cli/windows/help.html">Getting Help</a>.</p>
+	</article>
+</div>
+
+<div id="sidebar" class="grid_5 top-spacer">
+	<aside class="signup-box">
+		<p class="align-center">
+			Start using<br>HP Helion Public Cloud<br>
+			<a href="../../../../../external.html?link=http://www.hpcloud.com/cloud-credit" class="signup-button-orange gutter-top-half">Sign Up Now</a>
+		</p>
+	</aside>
+	<aside class="box section-navigation">
+  
+     
+  
+  <ul>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../index.html"><span>HP Helion Documentation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../cli/windows/2/index.html"><span>Overview</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../cli/windows/2/installation/index.html"><span>Installation</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../cli/windows/2/commands/index.html"><span>Non-Service Specific Commands</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../cli/windows/2/compute/index.html"><span>Compute Examples</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../cli/windows/2/containers-and-folders/index.html"><span>Object Storage Examples</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../cli/windows/2/block-storage/index.html"><span>Block Storage Examples</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../cli/windows/2/reference/index.html"><span>CLI Reference</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../cli/windows/2/help/index.html"><span>Getting Help</span></a>
+      </li>
+    
+      
+      
+      <li>
+        <a class="" href="../../../../cli/windows/2/release-notes/index.html"><span>Release Notes</span></a>
+      </li>
+    
+  </ul>
+</aside>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+		<ul class="footer-social">
+			<li class="twitter"><a href="../../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+			<li class="youtube"><a href="../../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+			<li class="rss"><a href="../../../../../external.html?link=http://h30499.www3.hp.com/t5/Grounded-in-the-Cloud/bg-p/sws-661#.U7qe27Hn-M8"></a></li>
+			<li class="facebook"><a href="../../../../../external.html?link=https://www.facebook.com/HPHelion"></a></li>
+			<li class="linkedin stretch"><a href="../../../../../external.html?link=http://www.linkedin.com/company/3510998"></a></li>
+		</ul>
+		<ul class="contact-info hide-320 show-768">
+			<li>In the U.S.<br />1-855-61CLOUD</li>
+			<li>Worldwide<br />+1678-745-9010</li>
+			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span></li>
+		</ul>
+		<div class="copyright">	
+			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+			</p><br />
+			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../../external.html?link=http://www8.hp.com/us/en/privacy/privacy.html" target="_blank">Privacy</a> | <a href="../../../../../external.html?link=http://www8.hp.com/us/en/privacy/terms-of-use.html" target="_blank">Terms of use</a> | <a href="../../../../../external.html?link=http://www.hpcloud.com/legal-documents" target="_blank">Legal Documents</a></p>
+		</div>
+	</div>
+	</div>
+</footer>
+
+<!-- Load JS -->
+<!--[if lt IE 9]>
+<script src="http://www.hpcloud.com/sites/all/themes/hpcloud/js/svgeezy.js"></script>
+-->
+	<script src="../../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../../js/combined.js"></script>
+
+<div id="ClickTaleDiv" style="display: none;"></div>    <div class="region region-page-bottom">
+    <div id="lpButtonDiv"></div>  </div><!-- /.region -->
+<script src="../../../../../www.hpcloud.com/sites/default/files/js/js_zUhl2jDXgUKVBRVBUeMbuSby0YSCiXHWIAYNbn9ecwc.js"></script>
+<script>ClickTaleSSL=1; // This is intentinally global. 
+			if(typeof ClickTale=='function') 
+				ClickTale(24406,0.05,"www02");</script>
+<script src="../../../../../www.hpcloud.com/sites/default/files/js/js_gPMh2zNJqEE6EkEOKNeOTAet3kwTiahCt35rBAtwqq4.js"></script>
+<script>
+    var _elqQ = _elqQ || [];
+    _elqQ.push(['elqSetSiteId', '521454204']);
+    _elqQ.push(['elqTrackPageView']);
+    
+    (function () {
+        function async_load() {
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+            s.src = '../../../../sites/all/modules/custom/custom_eloqua/elqNow/elqCfg.min.html';
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        }
+        if (window.addEventListener) window.addEventListener('DOMContentLoaded', async_load, false);
+        else if (window.attachEvent) window.attachEvent('onload', async_load); 
+    })();
+    </script>
+<script src="../../../../../www.hpcloud.com/sites/default/files/js/js_lNHbXKW-sJN9oM4eoaw-q0yTco3mOORibOeNn9yzM00.html"></script>
+   <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/cli/windows/compute/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:04:27 GMT -->
+</html>

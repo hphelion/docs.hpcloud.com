@@ -1,0 +1,4362 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/api/dbaas/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:02:10 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>HP Helion Public Cloud Relational Database API Reference</title>
+	
+		<meta name="description" content="HP Helion Public Cloud Relational Database API Documentation.">
+	
+	
+		<meta name="keywords" content="MySQL, RDB, DBaaS">
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="../../../favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="../../../css/combined.css">
+
+	<script src="../../../js/modernizr-2.5.3.min.js"></script>
+	<script src="../../../js/metrics.js"></script> 
+	
+	
+	
+	
+	<!--[if IEMobile 7]><html class="iem7"  lang="en" dir="ltr"><![endif]-->
+<!--[if lte IE 6]><html class="lt-ie9 lt-ie8 lt-ie7"  lang="en" dir="ltr"><![endif]-->
+<!--[if (IE 7)&(!IEMobile)]><html class="lt-ie9 lt-ie8"  lang="en" dir="ltr"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9"  lang="en" dir="ltr"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html  lang="en" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"><!--<![endif]-->
+
+<head profile="../../../../external.html?link=http://www.w3.org/1999/xhtml/vocab">
+  
+  
+  <meta charset="utf-8" />
+<meta name="web_section_id" content="R11646" />
+<meta name="bu" content="corp" />
+<meta name="hp_design_version" content="hpweb.2.0" />
+<meta name="segment" content="Commercial.B2B" />
+<meta name="page_content" content="HP Public Cloud - Enterprise Public Cloud Products &amp;amp; Services" />
+<meta name="content_country_applicability" content="w1" />
+<meta name="target_country" content="US" />
+<meta name="lifecycle" content="presales.awareness" />
+<link rel="shortcut icon" href="../../../../external.html?link=http://www.hpcloud.com/sites/all/themes/hpcloud/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<meta name="description" content="HP Public Cloud provides on-demand, pay-as-you-go cloud services for computing, storage infrastructure as well as platform services. Explore the cloud." />
+<meta about="/hp-helion-public-cloud" property="sioc:num_replies" content="0" datatype="xsd:integer" />
+<meta content="HP Helion Public Cloud" about="/hp-helion-public-cloud" property="dc:title" />
+<link rel="canonical" href="../../../../external.html?link=http://www.hpcloud.com/" />
+<link rel="shortlink" href="../../../../external.html?link=http://www.hpcloud.com/" />
+<meta property="og:url" content="http://www.hpcloud.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="HP Public Cloud" />
+<meta property="og:site_name" content="HP Public Cloud" />
+   
+
+      <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="cleartype" content="on">
+<!--
+  <link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_791YXBaKKm1ORM_7huSKEsIV9tSWq6wmRkERhuXpN6w.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_mGbqk88-VTBvzao9MxjjAm60xrWNV9JbuxL-XsOdBKY.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_UOCsF9jLPA1lMMj-BVVBzE0l5EIeCw_3PDG18zycRw4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.hpcloud.com/sites/default/files/css/css_MfNt8ndX5CcdNjNUw-v__mhCPodpzDeR8KuzaXo-yzQ.css" media="all" />
+-->
+  <script src="../../../../www.hpcloud.com/sites/default/files/js/js__kIQ7mxn9cgBO3AAnwhKUMQqNbqZZQWibQB6EZRy6u0.html"></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_CC-zfeuQHcDhFtVRuKW53h30TL7j_105J32Nz8b8R38.js"></script>
+<script>var WRInitTime=(new Date()).getTime(); // ClickTale top part</script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_mZQzCl35imgkCIIjGS2RPLYDNuLk9ncwZ5c7lh6STTw.js"></script>
+<script>		<!-- Start Visual Website Optimizer Asynchronous Code -->
+		var _vwo_code=(function(){
+		var account_id=37831,
+		settings_tolerance=2000,
+		library_tolerance=2500,
+		use_existing_jquery=false,
+		// DO NOT EDIT BELOW THIS LINE
+		f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('../../../../external.html?link=http://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+		<!-- End Visual Website Optimizer Asynchronous Code --></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_kv2zkR2iCsl2ctlEzg-TiOxz1jEVBjx7VzAR0mTzlew.js"></script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_qz7rta8c7yTiJLYNkf4WKFMgEeuRUE1AgWXd6NCAQZU.js"></script>
+<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"hpcloud","theme_token":"NwfPTBjz4hDLctcBflIoKqD4J2r3kIAtWobc48FZKTo","js":{"https:\/\/clicktale.pantherssl.com\/WRd.js":1,"0":1,"sites\/all\/modules\/custom\/hpcs_referrer_url\/js\/referrer.min.js":1,"sites\/all\/modules\/custom\/kenshoo\/js\/kenshoo.min.js":1,"1":1,"sites\/all\/themes\/hpcloud\/js\/fastclick.min.js":1,"sites\/all\/themes\/hpcloud\/js\/main.min.js":1,"sites\/all\/modules\/custom\/lp_chat\/js\/le-mtagconfig.js":1,"sites\/all\/modules\/custom\/hpcloud_jquery\/js\/jquery-1.9.0.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"misc\/jquery.cookie.js":1,"2":1,"sites\/all\/modules\/custom\/omniture\/js\/hpcs_metrics.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/tinycon.min.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.js":1,"sites\/all\/modules\/contrib\/environment_indicator\/color.js":1,"3":1,"sites\/all\/modules\/custom\/lp_chat\/js\/lp-initialize.js":1,"sites\/all\/themes\/hpcloud\/js\/vendor\/modernizr-2.6.2.min.js":1,"sites\/all\/themes\/hpcloud\/js\/respond.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/contrib\/environment_indicator\/environment_indicator.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/uif\/uif.css":1,"sites\/all\/modules\/contrib\/field_collection\/field_collection.theme.css":1,"sites\/all\/themes\/zen\/system.menus.css":1,"sites\/all\/themes\/hpcloud\/css\/screen.css":1,"sites\/all\/themes\/hpcloud\/css\/styles.css":1}}});</script>
+      <!--[if lt IE 9]>
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+      <!--[if (lt IE 9) & (!IEMobile)]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie8.css">
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+    
+    <!--[if IE]>
+    <link rel="stylesheet" href="http://www.hpcloud.com/sites/all/themes/hpcloud//css/ie.css">
+    <![endif]-->
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</head>
+<body>
+  <div id="wrapper">
+    <!--[if lt IE 7]>
+    	<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="header-container">
+      <header class="header">
+      	<div class="top-bar" style="height: 75px;">
+		
+      		<div class="search-wrapper wrapper container_16">
+			
+      			<a href="#" class="sales-rep show-320 show-480 hide-768"><span aria-hidden="true" class="icon-icon-sales-rep"></span></a>
+      			<nav class="sub-nav" ><!--
+				<a href="http://docs.hpcloud.com/" class="logo"  ><img src="/images/HP_Helion_logo_72.png" style="position: absolute;top: 10px;" alt="HP Helion" /></a>-->
+        			<ul class="menu"><li class="first leaf menu-mlid-1845"><a href="../../../../external.html?link=http://www.hpcloud.com/support">Support</a></li>
+<li class="leaf has-children menu-mlid-1222"><a href="../../../../external.html?link=http://www.hpcloud.com/partners">Partners</a></li>
+<li class="leaf menu-mlid-1817"><a href="../../../../external.html?link=http://marketplace.hpcloud.com/" title="">Marketplace</a></li>
+<li class="leaf has-children menu-mlid-1223"><a href="../../../../external.html?link=http://www.hpcloud.com/about" title="">About</a></li>
+<li class="leaf menu-mlid-1224"><a href="../../../../external.html?link=http://www.hp.com/" title="">hp.com</a></li>
+<li class="leaf menu-mlid-1225"><a href="../../../../external.html?link=http://www.hpcloud.com/about/contact">Contact</a></li>
+<li class="last leaf menu-mlid-1226"><a href="../../../../external.html?link=http://www.hpcloud.com/console">Log In</a></li>
+</ul>
+      			</nav>
+          </div>
+      	</div>
+		<!-- per JC
+      	<div class="nav-wrapper wrapper container_16">
+        	<a href="http://www.hpcloud.com/" class="logo"><img src="/images/HP_Helion_logo_72.png" alt="HP Helion" /></a>
+      		<nav class="nav hide-320 show-768">
+      			<ul>
+      				<li><a href="http://hpcloud.com/products-services">Products <span>& Services</span></a></li>
+      				<li><a href="http://hpcloud.com/solutions">Cloud <span>Solutions</span></a></li>
+      				<li><a href="http://hpcloud.com/why-hp-cloud">Why HP <span>Cloud?</span></a></li>
+      				<li><a href="http://hpcloud.com/learning-center">Learning <span>Center</span></a></li>
+      				<li><a href="http://hpcloud.com/blog">The <span>Blog</span></a></li>
+      				<li><a href="http://hpcloud.com/free-trial">Sign Up <span>Today</span></a></li>
+      			</ul>
+      		</nav>
+      	</div>
+		-->
+      </header>
+    </div>
+		<div id="main-container">
+			<div id="main" class="wrapper clearfix container_16">
+				<div id="sidebar" class="grid_4 suffix_1 top-spacer">
+    <aside>
+      <div id="toc_header">
+          
+             
+              <p class="title"><strong><a href="../../../api/copyright.html#dbaas">Copyright</a></strong></p>
+             
+          
+          <p class="title"><strong><a href="../../../api/index.html">API Overview</a></strong></p>
+          <p class="title"><strong>Table of Contents</strong></p>
+      </div>
+      <div id="toc">
+      </div>
+      <!--<aside class="box section-navigation fixed_menu">
+  <ul>
+    
+  </ul>
+</aside>-->
+      <!--<aside class="block block-boxes box block-boxes-simple fixed">-->
+        <!--<p>Having trouble finding the info you need? Try one of the following helpful links:</p>-->
+            <!--<ul>-->
+                <!--<li><a href="/downloads">Downloads</a></li>-->
+                <!--<li><a href="https://community.hpcloud.com/knowledge-base">Knowledge Base</a></li>-->
+                <!--<li><a href="https://community.hpcloud.com/forum">Forums</a></li>-->
+                <!--<li><a href="/sitemap">Site Map</a></li>-->
+            <!--</ul>-->
+      <!--</aside>-->
+    </aside>
+</div>
+<div id="content" class="grid_11">
+	<article>
+		<!--PUBLISHED-->
+
+<h1 id="hp-helion-public-cloud-relational-database-api">HP Helion Public Cloud Relational Database API</h1>
+
+<p><strong>Date:</strong> June 2014</p>
+
+<p><strong>Document Version:</strong> 1.5</p>
+
+<h2 id="1-overview">1. Overview</h2>
+
+<p>This document describes the HP Helion Public Cloud Relational Database API, which allows you to manage database instances and backups that you can then interact with using your favorite database client.</p>
+
+<p>We will be referring to HP Helion Public Cloud Relational Database in this document as simply Relational Database.</p>
+
+<h3 id="11-api-maturity-level">1.1 API Maturity Level</h3>
+
+<p><strong>Maturity Level</strong>: Public Beta</p>
+
+<p><strong>Version API Status</strong>: The Relational Database API is based on OpenStack Trove v1.0.</p>
+
+<h3 id="12-document-revision-history">1.2 Document Revision History</h3>
+
+<table>
+  <thead>
+    <tr><th align="left">Document Version</th>
+  <th align="left">Date</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">1.0</td>
+  <td align="left">08/01/2013</td>
+  <td align="left">Initial creation</td>
+</tr>
+    <tr><td align="left">1.1</td>
+  <td align="left">03/18/2013</td>
+  <td align="left">Updated backup section to clarify that backups taken persist until deleted (Section 4.5.4)</td>
+</tr>
+    <tr><td align="left">1.2</td>
+  <td align="left">April 2014</td>
+  <td align="left">Added section 4.1.4 for pagination</td>
+</tr>
+    <tr><td align="left">1.3</td>
+  <td align="left">April 2014</td>
+  <td align="left">Added call for List Limits</td>
+</tr>
+    <tr><td align="left">1.4</td>
+  <td align="left">May 2014</td>
+  <td align="left">HP Helion updates</td>
+</tr>
+    <tr><td align="left">1.5</td>
+  <td align="left">June 2014</td>
+  <td align="left">Added sections 4.5.5.9, 4.5.5.10, 4.5.5.11, 4.5.5.12, 4.5.8.4, 4.5.11, 4.5.12 for new functionality</td>
+</tr>
+  </tbody>
+</table><h2 id="2-architecture-view">2. Architecture View</h2>
+
+<h3 id="21-overview">2.1 Overview</h3>
+
+<p>Relational Database (RDB-MySQL) allows users to create database instances on demand. This document is intended for software developers interested in developing applications that utilize the Relational Database API.</p>
+
+<p>This guide assumes the reader is familiar with RESTful web services,
+HTTP/1.1, and JSON serialization formats.</p>
+
+<h3 id="22-concepts">2.2 Concepts</h3>
+
+<p><strong>Database Instance</strong> - A database instance is an isolated MySQL instance in a single project environment on a shared physical host machine.</p>
+
+<p><strong>Database</strong> - A MySQL database contained within a database instance.</p>
+
+<p><strong>Flavor</strong> - A flavor is an available hardware configuration for a database instance. Each flavor has a unique combination of memory capacity, vCPU, and storage.</p>
+
+<p><strong>Backup</strong> - A hot, non-blocking backup of all MySQL databases on a database instance. Backups are securely streamed to and stored in Object Storage in the same region as the database instance.</p>
+
+<hr /><h2 id="3-account-level-view">3. Account-level View</h2>
+
+<p>Like all HP Helion offerings, authentication is achieved through the Identity service, which will return an X-Auth-Token that is used for subsequent requests to individual services.</p>
+
+<h3 id="31-accounts">3.1 Accounts</h3>
+
+<p>For additional details on the Identity service, please refer to https://docs.hpcloud.com/identity</p>
+
+<h3 id="32-regions-and-availability-zones">3.2 Regions and Availability Zones</h3>
+
+<p><strong>Region(s)</strong>: region-a (US West)</p>
+
+<p><strong>Availability Zone(s)</strong>: dbaas-aw2az1-v1, dbaas-aw2az2-v1, dbaas-aw2az3-v1</p>
+
+<p><strong>Future Expansion</strong>: region-b</p>
+
+<h3 id="33-service-catalog">3.3 Service Catalog</h3>
+
+<p>The service is exposed in the service catalog, as shown in the following fragment:</p>
+
+<pre>
+  <code>{
+      "name": "Relational DB MySQL",
+      "type": "hpext:dbaas",
+      "endpoints": [
+        {
+          "tenantId": "29072817266119",
+          "publicURL": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/29072817266119",
+          "publicURL2": "",
+          "region": "region-a.geo-1",
+          "versionId": "v13.6",
+          "versionInfo": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0",
+          "versionList": "https://region-a.geo-1.database.hpcloudsvc.com"
+        },
+      ]
+},
+</code>
+</pre>
+
+<hr /><h2 id="4-rest-api-specifications">4. REST API Specifications</h2>
+
+<p>The Relational Database API is implemented using a RESTful web service interface. All requests to authenticate and operate against the Relational Database API should be performed using SSL over HTTP (HTTPS) on TCP port 443.</p>
+
+<h3 id="41-api-conventions">4.1 API Conventions</h3>
+
+<p>The Relational Database API provides a RESTful JSON interface.</p>
+
+<p>Each REST resource contains a canonically unique identifier (ID) defined by the
+Database service implementation and is provided as the <code>id</code> attribute; Resource
+ID's are strings of non-zero length.</p>
+
+<p>The resource paths of all collections are plural and are represented at the
+root of the API (e.g. <code>/v1/entities</code>).</p>
+
+<h4 id="411-required-attributes">4.1.1 Required Attributes</h4>
+
+<p>Headers:</p>
+
+<ul><li><p><code>X-Auth-Token</code></p>
+
+<p>This header is used to convey the authentication token when accessing
+Database APIs.</p></li>
+</ul><p>For collections:</p>
+
+<ul><li><p><code>links</code> (object)</p>
+
+<p>Specifies a list of relational links to the collection.</p>
+
+<ul><li><code>self</code> (url)</li>
+</ul><p>A self-relational link provided as an absolute URL. This attribute is
+provided by the database service implementation.</p>
+
+<ul><li><code>previous</code> (url)</li>
+</ul><p>A relational link to the previous page of the list, provided as an absolute
+URL. This attribute is provided by the database service implementation. May
+be null.</p>
+
+<ul><li><code>next</code> (url)</li>
+</ul><p>A relational to the next page of the list, provided as an absolute URL.
+This attribute is provided by the database service implementation. May be
+null.</p></li>
+</ul><p>For members:</p>
+
+<ul><li><p><code>id</code> (string)</p>
+
+<p>Globally unique resource identifier. This attribute is provided by the
+database service implementation.</p></li>
+<li><p><code>links</code> (object)</p>
+
+<p>Specifies a set of relational links relative to the collection member.</p>
+
+<ul><li><code>self</code> (url)</li>
+</ul><p>A self-relational link provided as an absolute URL. This attribute is
+provided by the database service implementation.</p></li>
+</ul><h4 id="412-crud-operations">4.1.2 CRUD Operations</h4>
+
+<p>Unless otherwise documented, all resources provided by Relational Database support basic CRUD operations (create, read, update, delete).</p>
+
+<p>The examples in this section utilize a resource collection of Entities on
+<code>/v1/entities</code> which is not actually a part of the Relational Database API, but is used for illustrative purposes only.</p>
+
+<h5 id="4121-create-an-entity">4.1.2.1 Create an Entity</h5>
+
+<p>When creating an entity, you must provide all required attributes (except those
+provided by the Relational Database service implementation, such as the resource ID):</p>
+
+<p>Request:</p>
+
+<pre>
+  <code>POST /entities
+
+{
+    "entity": {
+        "name": string,
+        "description": string,
+        "enabled": boolean
+    }
+}
+</code>
+</pre>
+
+<p>The full entity is returned in a successful response (including the new
+resource's ID and a self-relational link), keyed by the singular form of the
+resource name:</p>
+
+<pre>
+  <code>201 Created
+
+{
+    "entity": {
+        "id": string,
+        "name": string,
+        "description": string,
+        "enabled": boolean,
+        "links": {
+            "self": url
+        }
+    }
+}
+</code>
+</pre>
+
+<h5 id="4122-list-entities">4.1.2.2 List Entities</h5>
+
+<p>Request the entire collection of entities:</p>
+
+<pre>
+  <code>GET /entities
+</code>
+</pre>
+
+<p>A successful response includes a list of anonymous dictionaries, keyed by the
+plural form of the resource name (identical to that found in the resource URL):</p>
+
+<pre>
+  <code>200 OK
+
+{
+    "entities": [
+        {
+            "id": string,
+            "name": string,
+            "description": string,
+            "enabled": boolean,
+            "links": {
+                "self": url
+            }
+        },
+        {
+            "id": string,
+            "name": string,
+            "description": string,
+            "enabled": boolean,
+            "links": {
+                "self": url
+            }
+        }
+    ],
+    "links": {
+        "self": url,
+        "next": url,
+        "previous": url
+    }
+}
+</code>
+</pre>
+
+<h5 id="4123-get-an-entity">4.1.2.3 Get an Entity</h5>
+
+<p>Request a specific entity by ID:</p>
+
+<pre>
+  <code>GET /entities/*entity_id*
+</code>
+</pre>
+
+<p>The full resource is returned in response:</p>
+
+<pre>
+  <code>200 OK
+
+{
+    "entity": {
+        "id": string,
+        "name": string,
+        "description": string,
+        "enabled": boolean,
+        "links": {
+            "self": url
+        }
+    }
+}
+</code>
+</pre>
+
+<h5 id="4124-update-an-entity">4.1.2.4 Update an Entity</h5>
+
+<p>Partially update an entity (unlike a standard <code>PUT</code> operation, only the
+specified attributes are replaced):</p>
+
+<pre>
+  <code>PATCH /entities/*entity_id*
+
+{
+    "entity": {
+        "description": string,
+    }
+}
+</code>
+</pre>
+
+<p>The full entity is returned in response:</p>
+
+<pre>
+  <code>200 OK
+
+{
+    "entity": {
+        "id": string,
+        "name": string,
+        "description": string,
+        "enabled": boolean,
+        "links": {
+            "self": url
+        }
+    }
+}
+</code>
+</pre>
+
+<h5 id="4125-delete-an-entity">4.1.2.5 Delete an Entity</h5>
+
+<p>Delete a specific entity by ID:</p>
+
+<pre>
+  <code>DELETE /entities/*entity_id*
+</code>
+</pre>
+
+<p>A successful response does not include a body:</p>
+
+<pre>
+  <code>204 No Content
+</code>
+</pre>
+
+<h4 id="413-http-status-codes">4.1.3 HTTP Status Codes</h4>
+
+<p>The Database API uses a subset of the available HTTP status codes to
+communicate specific success and failure conditions to the client.</p>
+
+<table>
+  <thead>
+    <tr><th align="left">HTTP Code</th>
+  <th align="left">Name</th>
+  <th align="left">Description</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">200</td>
+  <td align="left">OK</td>
+  <td align="left">Response to successful <code>GET</code> and <code>PATCH</code> operations.</td>
+</tr>
+    <tr><td align="left">201</td>
+  <td align="left">Created</td>
+  <td align="left">Response to successful <code>POST</code> operations.</td>
+</tr>
+    <tr><td align="left">204</td>
+  <td align="left">No Content</td>
+  <td align="left">Response to successful <code>HEAD</code>, <code>PUT</code> and <code>DELETE</code> operations.</td>
+</tr>
+    <tr><td align="left">300</td>
+  <td align="left">Multiple Choices</td>
+  <td align="left">Returned by the root identity endpoint, with references to one or more Database API versions (such as <code>/v1/</code>).</td>
+</tr>
+    <tr><td align="left">400</td>
+  <td align="left">Bad Request</td>
+  <td align="left">The RDB service failed to parse the request as expected. A required attribute is missing, a disallowed attribute is specified (such as an <code>id</code> on <code>POST</code>), or an attribute is provided of an unexpected data type. The client is assumed to be in error.</td>
+</tr>
+    <tr><td align="left">401</td>
+  <td align="left">Unauthorized</td>
+  <td align="left">Either authentication has not been performed, the provided X-Auth-Token is invalid or authentication credentials are invalid.</td>
+</tr>
+    <tr><td align="left">403</td>
+  <td align="left">Forbidden</td>
+  <td align="left">The request is successfully authenticated but not authorized to perform the requested action.</td>
+</tr>
+    <tr><td align="left">404</td>
+  <td align="left">Not Found</td>
+  <td align="left">Returned in response to failed <code>GET</code>, <code>HEAD</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code> and <code>DELETE</code> operations when a referenced entity cannot be found by ID. In the case of a <code>POST</code> request, the referenced entity may be in the request body as opposed to the resource path.</td>
+</tr>
+    <tr><td align="left">500</td>
+  <td align="left">Internal Server Error</td>
+  <td align="left">Returned when an unexpected error has occurred in the Database service implementation.</td>
+</tr>
+    <tr><td align="left">501</td>
+  <td align="left">Not Implemented</td>
+  <td align="left">Returned when the RD-MYSQL implementation is unable to fulfill the request because it is incapable of implementing the entire API as specified.</td>
+</tr>
+    <tr><td align="left">503</td>
+  <td align="left">Service Unavailable</td>
+  <td align="left">Returned when the RD-MYSQL service is unable to communicate with a backend service, or by a proxy in front of it unable to communicate with the service itself.</td>
+</tr>
+  </tbody>
+</table><h4 id="pagination">4.1.4 Pagination</h4>
+
+<p>To reduce load on the service, list operations limit the number of items that can be returned by a single call.</p>
+
+<p>To navigate a collection, the parameters <code>limit</code> and <code>marker</code> can be set in the URI (e.g.?<code>limit</code>=5&amp;<code>marker</code>=1234). The <code>marker</code> parameter is the ID of
+the last item in the previous list. Items are sorted by create time in descending order. When a create time is not available they are sorted by ID. The <code>limit</code> parameter sets the page size. A maximum of 20 items are returned by a single call. Setting <code>limit</code> to a value greater than 20 has no effect.</p>
+
+<h3 id="42-common-request-headers">4.2 Common Request Headers</h3>
+
+<p>Many operations accept request headers. This section provides an overview of each request header. Consult the specific operation to determine if the header applies to the operation and any other notes that are of interest.</p>
+
+<h4 id="accept_request">4.2.1 Accept</h4>
+
+<p>Where applicable, this determines how the response body is formatted. For example, you can use this to list the objects in a container as:
+* text (text/plain)
+* JSON (application/json)</p>
+
+<h4 id="x_auth_token_request">4.2.2 X-Auth-Token</h4>
+
+<p>When specified, this identifies the user making the request. In addition, if this token is being used by a user with Admin privilege level, the token must be scoped to the project associated with the account. If no token is specified, the request will fail unless you have been granted access to the resource by some other mechanism such as ACLs. For more information, see <a href="../../../api/v13/identity/index.html#3.4.3Tokens">Using Authentication Tokens</a>.</p>
+
+<h3 id="43-common-response-headers">4.3 Common Response Headers</h3>
+
+<h4 id="date_response">4.3.1 Date</h4>
+
+<p>When supplied, the Date header is the time of the operation expressed in GMT (effectively UTC) as shown in the following example:</p>
+
+<pre>
+  <code>  HTTP/1.1 200 OK
+  Date: Sun, 06 Nov 1994 08:49:37 GMT
+</code>
+</pre>
+
+<h4 id="last_modified_response">4.3.2 Last-Modified</h4>
+
+<p>This is the date and time that the object was created or the last time that the object was modified.</p>
+
+<h3 id="44-service-api-operations">4.4 Service API Operations</h3>
+
+<p><strong>Host</strong>: https://region-a.geo-1.database.hpcloudsvc.com</p>
+
+<p><strong>BaseUri</strong>: {Host}/v1.0/{project_id}</p>
+
+<p><strong>Admin URI</strong>: N/A</p>
+
+<h4 id="database-instance-operations">Database Instance Operations</h4>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON Support?</th>
+  <th align="left">Privilege Level</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left"><strong>Limits</strong></td>
+  <td align="left"><a href="#list_limits">List limits</a></td>
+  <td align="left">GET</td>
+  <td align="left">/limits</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"><strong>Instance</strong></td>
+  <td align="left"><a href="#instance_list">List all database instances</a></td>
+  <td align="left">GET</td>
+  <td align="left">/instances</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#instance_create">Create a new database instance</a></td>
+  <td align="left">POST</td>
+  <td align="left">/instances</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#instance_get">Get information about a specific database instance</a></td>
+  <td align="left">GET</td>
+  <td align="left">/instances/{instance_id}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#instance_delete">Delete a database instance</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">/instances/{instance_id}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"><strong>Action</strong></td>
+  <td align="left"><a href="#instance_restart">Restart a specific database instance</a></td>
+  <td align="left">POST</td>
+  <td align="left">/instances/{instance_id}/action</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#instance_resize">Resize a specific database instance</a></td>
+  <td align="left">POST</td>
+  <td align="left">/instances/{instance_id}/action</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"><strong>Database</strong></td>
+  <td align="left"><a href="#database_create">Create a new database on an instance</a></td>
+  <td align="left">POST</td>
+  <td align="left">/instances/{instance_id}/databases</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#database_list">List Databases on a instance</a></td>
+  <td align="left">GET</td>
+  <td align="left">/instances/{instance_id}/databases</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#instance_action">Delete a database on an instance</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">/.../databases/<em>database_name</em></td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"><strong>User</strong></td>
+  <td align="left"><a href="#user_create">Create a new user</a></td>
+  <td align="left">POST</td>
+  <td align="left">/instances/{instance_id}/users</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#user_list">List users</a></td>
+  <td align="left">GET</td>
+  <td align="left">/instances/{instance_id}/users</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#user_get">Get details for a user</a></td>
+  <td align="left">GET</td>
+  <td align="left">/.../users/{username}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#user_change_pw">Change user's password</a></td>
+  <td align="left">PUT</td>
+  <td align="left">/instances/{instance_id}/users</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#user_database_list">List users' databases</a></td>
+  <td align="left">GET</td>
+  <td align="left">/.../users/{username}/databases</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#user_add_db">Add database privileges to user</a></td>
+  <td align="left">PUT</td>
+  <td align="left">/.../users/{username}/databases</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#user_remove_db">Remove database privileges for user</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">/.../users/{username}/databases/{databaseName}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#user_delete">Delete user</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">/.../users/{username}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"><strong>Root</strong></td>
+  <td align="left"><a href="#root_create">Enable root user</a></td>
+  <td align="left">POST</td>
+  <td align="left">/instances/{instance_id}/root</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#root_get">Get root enabled status</a></td>
+  <td align="left">GET</td>
+  <td align="left">/instances/{instance_id}/root</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"><strong>Configuration Defaults</strong></td>
+  <td align="left"><a href="#instance_default_params">Show default configuration for Instance</a></td>
+  <td align="left">GET</td>
+  <td align="left">/instances/{instance_id}/configuration</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"><strong>Configuration</strong></td>
+  <td align="left"><a href="#instance_config_attach">Attach configuration to an instance</a></td>
+  <td align="left">PUT</td>
+  <td align="left">/instances/{instance_id}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#instance_config_detach">Detach configuration from an instance</a></td>
+  <td align="left">PUT</td>
+  <td align="left">/instances/{instance_id}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+  </tbody>
+</table><h4 id="flavor-operations">Flavor Operations</h4>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON Support?</th>
+  <th align="left">Privilege Level</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left"><strong>Flavor</strong></td>
+  <td align="left"><a href="#flavor_list">List all flavors</a></td>
+  <td align="left">GET</td>
+  <td align="left">/flavors</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#flavor_get">Get a specific flavor</a></td>
+  <td align="left">GET</td>
+  <td align="left">/flavors/{flavor_id}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+  </tbody>
+</table><h4 id="security-group-operations">Security Group Operations</h4>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON Support?</th>
+  <th align="left">Privilege Level</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left"><strong>Security Group</strong></td>
+  <td align="left"><a href="#sg_list">List all security groups</a></td>
+  <td align="left">GET</td>
+  <td align="left">/security-groups</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#sg_get">Get details for a specific security group</a></td>
+  <td align="left">GET</td>
+  <td align="left">/security-groups/{secgroup_id}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#rule_create">Create a new rule for a security group</a></td>
+  <td align="left">POST</td>
+  <td align="left">/security-group-rules</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#rule_delete">Delete a specific security group rule</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">/security-group-rules/{rule_id}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+  </tbody>
+</table><h4 id="backup-operations">Backup Operations</h4>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON Support?</th>
+  <th align="left">Privilege Level</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left"><strong>Backup</strong></td>
+  <td align="left"><a href="#backup_list">List all backups</a></td>
+  <td align="left">GET</td>
+  <td align="left">/backups</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#backup_get">Get details for a specific backup</a></td>
+  <td align="left">GET</td>
+  <td align="left">/backups/{backup_id}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#backup_create">Create a full backup for an instance</a></td>
+  <td align="left">POST</td>
+  <td align="left">/backups</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#backup_create_incremental">Create an incremental backup for an instance</a></td>
+  <td align="left">POST</td>
+  <td align="left">/backups</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#backup_restore">Restore a backup to an instance</a></td>
+  <td align="left">POST</td>
+  <td align="left">/instances</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#backup_delete">Delete a backup</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">/backups/{backup_id}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+  </tbody>
+</table><h4 id="version-operations">Version Operations</h4>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON Support?</th>
+  <th align="left">Privilege Level</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left"><strong>Version</strong></td>
+  <td align="left"><a href="#version_list">List all API versions</a></td>
+  <td align="left">GET</td>
+  <td align="left">/</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#version_get">Get a specific version specified by version_id</a></td>
+  <td align="left">GET</td>
+  <td align="left">/version_id</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+  </tbody>
+</table><h4 id="datastore-operations">Datastore Operations</h4>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON Support?</th>
+  <th align="left">Privilege Level</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left"><strong>Datastore</strong></td>
+  <td align="left"><a href="#ds_list">List all datastores</a></td>
+  <td align="left">GET</td>
+  <td align="left">/datastores</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#ds_get">Get details for a specific datastore</a></td>
+  <td align="left">GET</td>
+  <td align="left">/datastores/{datastore_id}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#ds_version_list">List all versions for a datastore</a></td>
+  <td align="left">GET</td>
+  <td align="left">/datastores/{datastore_name}/versions</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#ds_version_get">Get details for a datastore version</a></td>
+  <td align="left">GET</td>
+  <td align="left">/datastores/{datastore_name}/versions/{version_id}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+  </tbody>
+</table><h4 id="configuration-operations">Configuration Operations</h4>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON Support?</th>
+  <th align="left">Privilege Level</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left"><strong>Configurations</strong></td>
+  <td align="left"><a href="#cg_list">List all configuration groups</a></td>
+  <td align="left">GET</td>
+  <td align="left">/configurations</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#cg_post">Create configuration group</a></td>
+  <td align="left">POST</td>
+  <td align="left">/configurations</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#cg_get">Get details for a configuration group</a></td>
+  <td align="left">GET</td>
+  <td align="left">/configurations/{configId}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#cg_patch">Update some parameters within a configuration group</a></td>
+  <td align="left">PATCH</td>
+  <td align="left">/configurations/{configId}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#cg_patch">Replace all parameters within a configuration group</a></td>
+  <td align="left">PUT</td>
+  <td align="left">/configurations/{configId}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#cg_delete">Delete a configuration group</a></td>
+  <td align="left">DELETE</td>
+  <td align="left">/configurations/{configId}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#cg_associated">List instances associated with a configuration group</a></td>
+  <td align="left">GET</td>
+  <td align="left">/configurations/{configId}/instances</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+  </tbody>
+</table><h4 id="configuration-parameter-operations">Configuration Parameter Operations</h4>
+
+<table>
+  <thead>
+    <tr><th align="left">Resource</th>
+  <th align="left">Operation</th>
+  <th align="left">HTTP Method</th>
+  <th align="left">Path</th>
+  <th align="left">JSON Support?</th>
+  <th align="left">Privilege Level</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr><td align="left"><strong>Configuration Parameters</strong></td>
+  <td align="left"><a href="#cp_list">List configuration parameters </a></td>
+  <td align="left">GET</td>
+  <td align="left">/datastores/{datastoreId}/versions/{versionId}/parameters</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+    <tr><td align="left"></td>
+  <td align="left"><a href="#cp_get">Show configuration parameter details</a></td>
+  <td align="left">POST</td>
+  <td align="left">/datastores/{datastoreId}/versions/{versionId}/parameters/{parameterId}</td>
+  <td align="left">Y</td>
+  <td align="left"></td>
+</tr>
+  </tbody>
+</table><h3 id="45-service-api-operation-details">4.5 Service API Operation Details</h3>
+
+<h4 id="451-limits">4.5.1 Limits</h4>
+
+<h5 id="list_limits">4.5.1.1 List Limits</h5>
+
+<h5 id="get-limits">GET /limits</h5>
+
+<p>Returns current limits for the project.</p>
+
+<p><strong>Request Data</strong><br />
+This call does not require a request body</p>
+
+<p><strong>URL Parameters</strong><br />
+N/A</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+limits: [5]
+    0:  {
+    max_backups: 50
+    verb: "ABSOLUTE"
+    max_instances: 10
+    }
+    1:  {
+    regex: ".*"
+    nextAvailable: "2014-04-30T18:02:56Z"
+    uri: "*"
+    value: 9
+    verb: "POST"
+    remaining: 9
+    unit: "MINUTE"
+    }
+    2:  {
+    regex: ".*"
+    nextAvailable: "2014-04-30T18:02:56Z"
+    uri: "*"
+    value: 9
+    verb: "PUT"
+    remaining: 9
+    unit: "MINUTE"
+    }
+    3:  {
+    regex: ".*"
+    nextAvailable: "2014-04-30T18:02:56Z"
+    uri: "*"
+    value: 99
+    verb: "DELETE"
+    remaining: 99
+    unit: "MINUTE"
+    }
+    4:  {
+    regex: ".*"
+    nextAvailable: "2014-04-30T18:02:56Z"
+    uri: "*"
+    value: 200
+    verb: "GET"
+    remaining: 199
+    unit: "MINUTE"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/limits
+</code>
+</pre>
+
+<h4 id="instance_resource">4.5.2 Database Instances</h4>
+
+<p>A database instance is an isolated MySQL instance in a single project environment on a shared physical host machine. Also referred to as instance.</p>
+
+<p>Additional required attributes:</p>
+
+<ul><li><p><code>name</code> (string)</p>
+
+<p>Name of the instance to create. The length of the name is limited to 255
+characters and any characters are permitted.</p></li>
+<li><p><code>flavorRef</code> (integer)</p>
+
+<p>Reference (href) to a flavor as specified in the response from the List
+Flavors API call. This is the actual URI as specified by the href field in the link. Refer to the List Flavors response examples that follow for an example of the flavorRef.</p></li>
+</ul><p>Optional attributes:</p>
+
+<ul><li><p><code>databases</code> (list)</p>
+
+<ul><li><p><code>Name</code> (string)</p>
+
+<p>Specifies database names for creating databases on instance creation.</p></li>
+<li><p><code>character_set</code> (string)</p>
+
+<p>Set of symbols and encodings. The default character set is utf8.</p></li>
+<li><p><code>collate</code> (string)</p>
+
+<p>Set of rules for comparing characters in a character set. The default
+value for collate is utf8_general_ci.</p></li>
+</ul></li>
+<li><p><code>users</code> (list)</p>
+
+<ul><li><p><code>Name</code> (string)</p>
+
+<p>Specifies user name for the database on instance creation.</p></li>
+<li><p><code>password</code> (string)</p>
+
+<p>Specifies password for those users on instance creation.</p></li>
+<li><p><code>databases</code> (list)</p>
+
+<ul><li><code>name</code> (string)</li>
+</ul><p>Specifies names of databases that those users can access on instance creation.</p></li>
+</ul></li>
+</ul><p>Example entity:</p>
+
+<pre>
+  <code>{
+    "instance": {
+        "databases": [
+            {
+                "character_set": "utf8",
+                "collate": "utf8_general_ci",
+                "name": "sampledb"
+            },
+            {
+                "name": "nextround"
+            }
+        ],
+        "flavorRef": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/1234/flavors/1001",
+        "name": "json_instance",
+        "users": [
+            {
+                "databases": [
+                    {
+                        "name": "sampledb"
+                    }
+                ],
+                "name": "demouser",
+                "password": "demopassword"
+            }
+        ]
+    }
+}
+</code>
+</pre>
+
+<h5 id="instance_list">4.5.2.1 Returns a list of all database instances</h5>
+
+<h5 id="get-instances">GET /instances</h5>
+
+<p>This operation lists the status and information for all database instances.</p>
+
+<p><strong>Request Data</strong><br />
+This call does not require a request body</p>
+
+<p><strong>URL Parameters</strong><br />
+You can utilize pagination to filter your response.  <em>See: <a href="../../../api/v13/dbaas/index.html#4.1.4Pagination">Pagination</a> for more details</em></p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "instances": [
+        {
+            "flavor": {
+                "id": "1001",
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/1234/flavors/1001",
+                        "rel": "self"
+                    },
+                    {
+                        "href": "https://region-a.geo-1.database.hpcloudsvc.com/flavors/1001",
+                        "rel": "bookmark"
+                    }
+                ]
+            },
+            "id": "28d1b8f3-172a-4f6d-983d-36021508444a",
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/1234/instances/28d1b8f3-172a-4f6d-983d-36021508444a",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/instances/28d1b8f3-172a-4f6d-983d-36021508444a",
+                    "rel": "bookmark"
+                }
+            ],
+            "name": "instance1",
+            "status": "ACTIVE"
+        },
+        {
+            "flavor": {
+                "id": "1002",
+                "links": [
+                    {
+                        "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/1234/flavors/1002",
+                        "rel": "self"
+                    },
+                    {
+                        "href": "https://region-a.geo-1.database.hpcloudsvc.com/flavors/1002",
+                        "rel": "bookmark"
+                    }
+                ]
+            },
+            "id": "8fb081af-f237-44f5-80cc-b46be1840ca9",
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/1234/instances/8fb081af-f237-44f5-80cc-b46be1840ca9",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/instances/8fb081af-f237-44f5-80cc-b46be1840ca9",
+                    "rel": "bookmark"
+                }
+            ],
+            "name": "instance2",
+            "status": "ACTIVE"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances
+</code>
+</pre>
+
+<h5 id="instance_create">4.5.2.2 Create a new database instance</h5>
+
+<h5 id="post-instances">POST /instances</h5>
+
+<p>This operation asynchronously provisions a new database instance. This call
+requires the user to specify a flavor and a volume size. The service then
+provisions the instance with the requested flavor with the needed storage for
+the database instance. You may also optionally specify the databases and users
+to be created on the new instance.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "instance": {
+        "users": [
+            {
+                "password": "password",
+                "name": "sample_user@%",
+                "databases": [
+                    {
+                        "name": "sample_db"
+                    }
+                ]
+            }
+        ],
+        "flavorRef": "1002",
+        "databases": [
+            {
+                "name": "sample_db"
+            }
+        ],
+        "datastore": {
+            "type": "ab9b396f-9095-436f-903d-e302ff1a52f9"
+        },
+        "configuration": "40e0909a-0ca8-4864-952a-109edc886049",
+        "name": "my_instance"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>201 - Created</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "instance": {
+        "status": "BUILD",
+        "updated": "2014-06-21T21:01:41",
+        "name": "my_instance",
+        "links": [
+            {
+                "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/instances/95794609-31cf-4439-ab29-566710b53e75",
+                "rel": "self"
+            },
+            {
+                "href": "https://region-a.geo-1.database.hpcloudsvc.com/instances/95794609-31cf-4439-ab29-566710b53e75",
+                "rel": "bookmark"
+            }
+        ],
+        "created": "2014-06-21T21:01:41",
+        "id": "95794609-31cf-4439-ab29-566710b53e75",
+        "flavor": {
+            "id": "1002",
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/flavors/1002",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/flavors/1002",
+                    "rel": "bookmark"
+                }
+            ]
+        },
+        "configuration": {
+            "id": "40e0909a-0ca8-4864-952a-109edc886049",
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/configurations/40e0909a-0ca8-4864-952a-109edc886049",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/configurations/40e0909a-0ca8-4864-952a-109edc886049",
+                    "rel": "bookmark"
+                }
+            ],
+            "name": "sample_config_group"
+        },
+        "datastore": {
+            "version": "5.5",
+            "type": "mysql"
+        }
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -X POST -H "Content-Type: application/json" -H "X-Auth-Token: {Auth_Token}" -d '{"instance":{"name": "{name}","flavorRef": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/flavors/1002"}}' {BaseURI}/instances
+</code>
+</pre>
+
+<p>
+  <strong>Additional Notes</strong>
+</p>
+
+<p>The hostname/ip of the instance will be populated once the database is in a
+'running' state. To get the hostname, poll the 'Get a database instance'
+operation until the field is not empty and the status is 'ACTIVE'"</p>
+
+<h5 id="instance_get">4.5.2.3 Get information about a specific database instance</h5>
+
+<h5 id="get-instancesinstance-id">GET /instances/{instance_id}</h5>
+
+<p>Returns information about the database instance specified by {instance_id}</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+   "instance":{
+      "status":"ACTIVE",
+      "updated":"2013-08-28T16:33:50",
+      "name":"my_instance",
+      "links":[
+         {
+            "href":"https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/instances/dd745f4a-9333-417e-bb89-9c989c84c068",
+            "rel":"self"
+         },
+         {
+            "href":"https://region-a.geo-1.database.hpcloudsvc.com/instances/dd745f4a-9333-417e-bb89-9c989c84c068",
+            "rel":"bookmark"
+         }
+      ],
+      "created":"2013-08-28T16:33:48",
+      "ip":[
+         "10.9.xx.xxx",
+         "15.125.xx.xxx"
+      ],
+      "local_storage":{
+         "used":1.16
+      },
+      "flavor":{
+         "id":"1003",
+         "links":[
+            {
+               "href":"https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/flavors/1003",
+               "rel":"self"
+            },
+            {
+               "href":"https://region-a.geo-1.database.hpcloudsvc.com/flavors/1003",
+               "rel":"bookmark"
+            }
+         ]
+      },
+      "id":"dd745f4a-9333-417e-bb89-9c989c84c068"
+   }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}
+</code>
+</pre>
+
+<h5 id="instance_delete">4.5.2.4 Delete a database instance</h5>
+
+<h5 id="delete-instancesinstance-id">DELETE /instances/{instance_id}</h5>
+
+<p>Deletes the database instance specified by {instance_id}</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 - Accepted</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Response body will be empty</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}
+</code>
+</pre>
+
+<h4 id="instance_action">4.5.3 Instance Actions</h4>
+
+<h5 id="instance_restart">4.5.3.1 Restart a specific instance</h5>
+
+<h5 id="post-instancesinstance-idaction">POST /instances/{instance_id}/action</h5>
+
+<p>Restarts the database instance specified by {instance_id}
+Restarting MySQL will erase any dynamic configuration settings that you
+have made within MySQL.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "restart": {}
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 - Accepted</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Response body will be empty</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X POST -H "Content-Type: application/json" -H "X-Auth-Token: {Auth_Token}" -d '{"restart":{}}' {BaseURI}/instances/{instance_id}/action
+</code>
+</pre>
+
+<h5 id="instance_resize">4.5.3.2 Resize a specific instance</h5>
+
+<h5 id="post-instancesinstance-idaction">POST /instances/{instance_id}/action</h5>
+
+<p>This operation changes the size of the instance, assuming a valid
+flavorRef is provided. It restarts MySQL in the process.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "resize": {
+        "flavorRef": "https://&lt;TBD&gt;/v1.0/1234/flavors/1002"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 - Accepted</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Response body will be empty</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X POST -H "Content-Type: application/json" -H "X-Auth-Token: {Auth_Tokens}" -d '{"resize": {"flavorRef": "https://&lt;TBD&gt;/v1.0/1234/flavors/1003"}}' {BaseURI}/instances/{instance_id}/action
+</code>
+</pre>
+
+<h4 id="database_resource">4.5.4 Databases</h4>
+
+<h5 id="database_create">4.5.4.1 Create Database</h5>
+
+<h5 id="post-instancesinstance-iddatabases">POST /instances/{instance_id}/databases</h5>
+
+<p>Creates a new database(s)/schema(s) within the specified instance.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "databases": [
+        {
+            "character_set": "utf8",
+            "collate": "utf8_general_ci",
+            "name": "testingdb"
+        },
+        {
+            "name": "sampledb"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 - Accepted</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Response body will be empty</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -X POST -H "Content-Type: application/json" -H "X-Auth-Token: {Auth_Token}" -d '{"databases": [{"name": "mydb"}]}' {BaseURI}/instances/{instance_id}/databases 
+</code>
+</pre>
+
+<h5 id="database_list">4.5.4.2 List Databases</h5>
+
+<h5 id="get-instancesinstance-iddatabases">GET /instances/{instance_id}/databases</h5>
+
+<p>Lists all databases within the specified instance.  The response will be limited to twenty (20) results.  <em>See: <a href="../../../api/v13/dbaas/index.html#4.1.4Pagination">Pagination</a> for more details</em></p>
+
+<p><strong>Request Data</strong><br />
+This call does not require a request body.</p>
+
+<p><strong>URL Parameters</strong><br />
+You can utilize pagination to filter your response.  <em>See: <a href="../../../api/v13/dbaas/index.html#4.1.4Pagination">Pagination</a> for more details</em></p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "databases": [
+        {
+            "name": "anotherexampledb"
+        },
+        {
+            "name": "exampledb"
+        },
+        {
+            "name": "nextround"
+        },
+        {
+            "name": "sampledb"
+        },
+        {
+            "name": "testingdb"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}/databases
+</code>
+</pre>
+
+<h5 id="database_delete">4.5.4.3 Delete Database</h5>
+
+<h5 id="delete-instancesinstance-iddatabasesdatabase-name">DELETE /instances/{instance_id}/databases/{database_name}</h5>
+
+<p>Deletes the requested database within the specified database instance. Note that all data associated with the database is also deleted.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 ACCEPTED</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Response body will be empty</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}/databases/{database_name}
+</code>
+</pre>
+
+<h4 id="user_resource">4.5.5 Users</h4>
+
+<h5 id="user_create">4.5.5.1 Create User</h5>
+
+<h5 id="post-instancesinstance-idusers">POST /instances/{instance_id}/users</h5>
+
+<p>Creates a new user(s) within the specified instance.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "users": [
+        {
+            "databases": [
+                {
+                    "name": "databaseA"
+                }
+            ],
+            "name": "dbuser3",
+            "password": "password"
+        },
+        {
+            "databases": [
+                {
+                    "name": "databaseB"
+                },
+                {
+                    "name": "databaseC"
+                }
+            ],
+            "name": "dbuser4",
+            "password": "password"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 ACCEPTED</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Response body will be empty</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' -d '{"users": [{"databases": [{"name": "databaseA"}],"name": "dbuser3","password": "password"},{"databases": [{"name": "databaseB"},{"name": "databaseC"}],"name": "dbuser4","password": "password"}]}' {BaseURI}/instances/{instance_id}/users
+</code>
+</pre>
+
+<h5 id="user_list">4.5.5.2 List Users</h5>
+
+<h5 id="get-instancesinstance-idusers">GET /instances/{instance_id}/users</h5>
+
+<p>Lists users for the specified instance.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "users": [
+        {
+            "databases": [
+                {
+                    "name": "databaseA"
+                }
+            ],
+            "name": "dbuser3"
+        },
+        {
+            "databases": [
+                {
+                    "name": "databaseB"
+                },
+                {
+                    "name": "databaseC"
+                }
+            ],
+            "name": "dbuser4"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}/users
+</code>
+</pre>
+
+<h5 id="user_get">4.5.5.3 Get User</h5>
+
+<h5 id="get-instancesinstance-idusersusername">GET /instances/{instance_id}/users/{username}</h5>
+
+<p>Show a single user and the databases to which this user has privileges.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "user": {
+        "name": "username",
+        "databases": [
+            {
+                "name": "databaseB"
+
+            },
+            {
+                "name": "databaseC"
+            }
+        ]
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}/users/{username}
+</code>
+</pre>
+
+<h5 id="user_change_pw">4.5.5.4 Modify user password</h5>
+
+<h5 id="put-instancesinstance-idusers">PUT /instances/{instance_id}/users</h5>
+
+<p>Changes the password of the specified user(s).</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "users": [
+        {
+            "name": "dbuser3",
+            "password": "password"
+        },
+        {
+            "name": "dbuser4",
+            "password": "password"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 ACCEPTED</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Response body will be empty</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' -d '{"users": [{"name": "dbuser3","password": "{password}"},{"name": "dbuser4","password": "{password}"}]}' {BaseURI}/instances/{instance_id}/users
+</code>
+</pre>
+
+<h5 id="user_database_list">4.5.5.5 List users' databases</h5>
+
+<h5 id="get-instancesinstance-idusersusernamedatabases">GET /instances/{instance_id}/users/{username}/databases</h5>
+
+<p>Lists databases for which a user has access.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "databases": [
+        {
+            "name": "databaseB"
+        },
+        {
+            "name": "databaseC"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}/users/{username}/databases
+</code>
+</pre>
+
+<h5 id="user_add_db">4.5.5.6 Add database privileges</h5>
+
+<h5 id="put-instancesinstance-idusersusernamedatabases">PUT /instances/{instance_id}/users/{username}/databases</h5>
+
+<p>Grants privileges on the specified database(s) to the user.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+"databases": [
+        {
+            "name": "databaseB"
+        },
+        {
+            "name": "databaseC"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 ACCEPTED</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Response body will be empty</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' -d '{"databases": [{"name": "databaseB"},{"name": "databaseC"}]}' {BaseURI}/instances/{instance_id}/users/{username}/databases
+</code>
+</pre>
+
+<h5 id="user_remove_db">4.5.5.7 Remove database privileges</h5>
+
+<h5 id="delete-instancesinstance-idusersusernamedatabasesdatabasename">DELETE /instances/{instance_id}/users/{username}/databases/{databaseName}</h5>
+
+<p>Removes privileges on the specified database(s) to the user.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 ACCEPTED</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Response body will be empty</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}/users/{username}/databases/{databaseName}
+</code>
+</pre>
+
+<h5 id="user_delete">4.5.5.8 Delete user</h5>
+
+<h5 id="delete-instancesinstance-idusersusername">DELETE /instances/{instance_id}/users/{username}</h5>
+
+<p>Deletes the requested user within the specified instance.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 ACCEPTED</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Response body will be empty</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}/users/{username}
+</code>
+</pre>
+
+<h5 id="root_create">4.5.5.9 Enable root user</h5>
+
+<h5 id="post-instancesinstance-idroot">POST /instances/{instance_id}/root</h5>
+
+<p>Enables the root user for a given instance.</p>
+
+<p><strong>Note:</strong> Changes made against the database instance as a root user could impact your ability to manage the instance via the API.  When enabling the root user, you accept that we may no longer be able to support your database instance.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>201 CREATED</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "user": {
+        "password": "C8whvrWCj8JPcmmQYg6dbuufYkBwash3nhfh",
+        "name": "root"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}/root
+</code>
+</pre>
+
+<h5 id="root_get">4.5.5.10 Get root enabled status</h5>
+
+<h5 id="get-instancesinstance-idroot">GET /instances/{instance_id}/root</h5>
+
+<p>Show the root enabled status on a given instance.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "rootEnabled": true
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}/root
+</code>
+</pre>
+
+<h5 id="instance_default_params">4.5.5.11 Show default configuration parameters for instance</h5>
+
+<h5 id="get-instancesinstance-idparameters">GET /instances/{instance_id}/parameters</h5>
+
+<p>Lists the default configuration parameters on a given instance.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "instance": {
+        "configuration": {
+            "tmp_table_size": "128",
+            "innodb_blocking_buffer_pool_restore": "1",
+            "innodb_write_io_threads": "1",
+            "max_heap_table_size": "128",
+            "max_connections": "1024",
+            "myisam-recover": "BACKUP",
+            "server_id": "333489",
+            "innodb_buffer_pool_size": "2868M",
+            "auto_increment_offset": "1",
+            "innodb_flush_method": "O_DIRECT",
+            "lower_case_table_names": "1",
+            "innodb_flush_log_at_trx_commit": "0",
+            "max_allowed_packet": "64M",
+            "innodb_log_buffer_size": "64M",
+            "innodb_support_xa": "0",
+            "table_open_cache": "1024",
+            "table_definition_cache": "1024",
+            "query_cache_type": "0",
+            "innodb_log_file_size": "512",
+            "auto_increment_increment": "10",
+            "innodb_thread_concurrency": "0",
+            "thread_stack": "256K",
+            "wait_timeout": "300",
+            "thread_cache_size": "1024",
+            "innodb_file_format": "Barracuda",
+            "query_cache_size": "0",
+            "binlog_format": "row",
+            "innodb_data_file_path": "ibdata1:10M:autoextend:max:55296M",
+            "event_scheduler": "ON",
+            "innodb_buffer_pool_instances": "1",
+            "innodb_buffer_pool_restore_at_startup": "1",
+            "innodb_read_io_threads": "2",
+            "innodb_io_capacity": "200",
+            "innodb_file_per_table": "0",
+            "innodb_open_files": "1024",
+            "key_buffer_size": "16M"
+        }
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id}/parameters
+</code>
+</pre>
+
+<h5 id="instance_config_attach">4.5.5.12 Attach configuration to an instance</h5>
+
+<h5 id="put-instancesinstance-id">PUT /instances/{instance_id}</h5>
+
+<p>Attaches a configuration resource to an instance.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "instance": {
+        "configuration": "40e0909a-0ca8-4864-952a-109edc886049"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>None.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id} -d '{"instance": {"configuration": "40e0909a-0ca8-4864-952a-109edc886049"}}'
+</code>
+</pre>
+
+<h5 id="instance_config_detach">4.5.5.13 Detach configuration from an instance</h5>
+
+<h5 id="put-instancesinstance-id">PUT /instances/{instance_id}</h5>
+
+<p>Detaches a configuration resource from an instance.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "instance": {}
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>None.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/instances/{instance_id} -d '{"instance": {}}'
+</code>
+</pre>
+
+<h4 id="flavor_resource">4.5.6 Flavor Operations</h4>
+
+<h5 id="flavor_list">4.5.6.1 List all flavors</h5>
+
+<h5 id="get-flavors">GET /flavors</h5>
+
+<p>Returns a list of all available flavors</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "flavors": [
+        {
+            "id": 1001,
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/flavors/1001",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/flavors/1001",
+                    "rel": "bookmark"
+                }
+            ],
+            "local_storage": 15,
+            "name": "db.xsmall",
+            "ram": 1024
+        },
+        {
+            "id": 1002,
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/flavors/1002",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/flavors/1002",
+                    "rel": "bookmark"
+                }
+            ],
+            "local_storage": 30,
+            "name": "db.small",
+            "ram": 2048
+        },
+        {
+            "id": 1003,
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/flavors/1003",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/flavors/1003",
+                    "rel": "bookmark"
+                }
+            ],
+            "local_storage": 60,
+            "name": "db.medium",
+            "ram": 4096
+        },
+        {
+            "id": 1004,
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/flavors/1004",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/flavors/1004",
+                    "rel": "bookmark"
+                }
+            ],
+            "local_storage": 120,
+            "name": "db.large",
+            "ram": 8192
+        },
+        {
+            "id": 1005,
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/flavors/1005",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/flavors/1005",
+                    "rel": "bookmark"
+                }
+            ],
+            "local_storage": 240,
+            "name": "db.xlarge",
+            "ram": 16384
+        },
+        {
+            "id": 1006,
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/flavors/1006",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/flavors/1006",
+                    "rel": "bookmark"
+                }
+            ],
+            "local_storage": 480,
+            "name": "db.2xlarge",
+            "ram": 32768
+        },
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/flavors
+</code>
+</pre>
+
+<h5 id="flavor_get">4.5.6.2 Get a flavor</h5>
+
+<h5 id="get-flavorsflavor-id">GET /flavors/{flavor_id}</h5>
+
+<p>Gets more detailed information about a given flavor.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "flavor": {
+        "id": 1002,
+        "links": [
+            {
+                "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/flavors/1002",
+                "rel": "self"
+            },
+            {
+                "href": "https://region-a.geo-1.database.hpcloudsvc.com/flavors/1002",
+                "rel": "bookmark"
+            }
+        ],
+        "local_storage": 30,
+        "name": "db.small",
+        "ram": 2048
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/flavors/{flavor_id}
+</code>
+</pre>
+
+<h4 id="sg_resource">4.5.7 Security Group Operations</h4>
+
+<p>A security group is automatically provisioned for each instance, and network access to the database instance can be managed via its rules. Only CRUD operations on security group rules are supported. Security groups themselves cannot be modified or deleted.</p>
+
+<h5 id="sg_list">4.5.7.1 List all security groups</h5>
+
+<h5 id="get-security-groups">GET /security-groups</h5>
+
+<p>Lists all of the Security Groups, with details of which instances they
+are attached to.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "security_groups": [
+        {
+            "created": "2013-08-28T16:33:48",
+            "description": "Security Group for dd745f4a-9333-417e-bb89-9c989c84c068",
+            "id": "111275",
+            "instance_id": "dd745f4a-9333-417e-bb89-9c989c84c068",
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/security-groups/111275",
+                    "rel": "self"
+                }
+            ],
+            "name": "SecGroup_dd745f4a-9333-417e-bb89-9c989c84c068",
+            "rules": [
+                {
+                    "cidr": "0.0.0.0/0",
+                    "from_port": 3306,
+                    "id": "103511",
+                    "protocol": "tcp",
+                    "to_port": 3306
+                }
+            ],
+            "updated": "2013-08-28T16:33:48"
+        },
+        {
+            "created": "2013-09-06T18:03:32",
+            "description": "Security Group for 18eb9700-8015-4b1e-b2cc-cecb84cc1b8e",
+            "id": "235538",
+            "instance_id": "18eb9700-8015-4b1e-b2cc-cecb84cc1b8e",
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/security-groups/235538",
+                    "rel": "self"
+                }
+            ],
+            "name": "SecGroup_18eb9700-8015-4b1e-b2cc-cecb84cc1b8e",
+            "rules": [],
+            "updated": "2013-09-06T18:03:32"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/security-groups
+</code>
+</pre>
+
+<h5 id="sg_get">4.5.7.2 Get a specific security group</h5>
+
+<h5 id="get-security-groupssecurity-group-id">GET /security-groups/{security_group_id}</h5>
+
+<p>Returns a specific security group specified by <em>security_group_id</em></p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "security_group": {
+        "created": "2013-08-28T16:33:48",
+        "description": "Security Group for dd745f4a-9333-417e-bb89-9c989c84c068",
+        "id": "111275",
+        "instance_id": "dd745f4a-9333-417e-bb89-9c989c84c068",
+        "links": [
+            {
+                "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/security-groups/111275",
+                "rel": "self"
+            }
+        ],
+        "name": "SecGroup_dd745f4a-9333-417e-bb89-9c989c84c068",
+        "rules": [
+            {
+                "cidr": "0.0.0.0/0",
+                "from_port": 3306,
+                "id": "103511",
+                "protocol": "tcp",
+                "to_port": 3306
+            }
+        ],
+        "updated": "2013-08-28T16:33:48"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/security-groups/{security_group_id}
+</code>
+</pre>
+
+<h5 id="rule_create">4.5.7.3 Create a security group rule</h5>
+
+<h5 id="post-security-group-rules">POST /security-group-rules</h5>
+
+<p>Create a new security group rule.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "security_group_rule": {
+        "cidr": "0.0.0.0/0",
+        "from_port": "3306",
+        "group_id": "111275",
+        "protocol": "tcp",
+        "to_port": "3306"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 ACCEPTED</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Response body will be empty</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X POST -H "Content-Type: application/json" -H "X-Auth-Token: {Auth_Token}" -d '-d '{"security_group_rule": {"to_port": "3306", "cidr": "0.0.0.0/0", "group_id": "111275", "protocol": "tcp", "from_port": "3306"}}'' {BaseURI}/security-group-rules
+</code>
+</pre>
+
+<h5 id="rule_delete">4.5.7.4 Delete a security group rule</h5>
+
+<h5 id="delete-security-group-rulesrule-id">DELETE /security-group-rules/{rule_id}</h5>
+
+<p>Deletes the security group rule specified by <em>rule_id</em></p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Empty Response Body</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/security-group-rules/{rule_id}
+</code>
+</pre>
+
+<h4 id="backup_resource">4.5.8 Backup Operations</h4>
+
+<p>Database backups operations enable all databases on a database instances to be backed up to Object Storage at standard storage rates. Backups are hot and non-blocking, meaning no downtime will be incurred on the database instance itself during a backup. A backup can then be used to perform a database restore via the instance create command.</p>
+
+<p><strong>Note:</strong> Database backups persist in Object Storage until they are deleted.</p>
+
+<h5 id="backup_list">4.5.8.1 List all Backups</h5>
+
+<h5 id="get-backups">GET /backups</h5>
+
+<p>Shows detailed information about all backups for a project.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "backups":
+    [
+        {
+            "created": "2013-05-01T00:00:00",
+            "description": null,
+            "id": "aeb6fa4c-932d-4acc-a339-cccfb9f300b2",
+            "instance_id": "d6338c9c-3cc8-4313-b98f-13cc0684cf15",
+            "locationRef": null,
+            "name": "testback-backup",
+            "status": "COMPLETED",
+            "updated": "2013-05-01T00:00:00"
+        },
+        {
+            "created": "2013-09-06T18:47:05",
+            "description": null,
+            "id": "8ff8a6f3-1a48-4f9d-a75a-6c5214b0195d",
+            "instance_id": "dd745f4a-9333-417e-bb89-9c989c84c068",
+            "locationRef": "https://region-a.geo-1.objects.hpcloudsvc.com/v1/38728063898723/database_backups/8ff8a6f3-1a48-4f9d-a75a-6c5214b0195d.xbstream.gz.enc",
+            "name": "my_backup",
+            "size": 1.16,
+            "status": "COMPLETED",
+            "updated": "2013-09-06T18:47:09"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/backups
+</code>
+</pre>
+
+<h5 id="backup_get">4.5.8.2 Get details for a specific backup</h5>
+
+<h5 id="get-backupsbackup-id">GET /backups/{backup_id}</h5>
+
+<p>Shows detailed information about the specified backup</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "backup": {
+        "created": "2013-09-06T18:47:05",
+        "description": null,
+        "id": "8ff8a6f3-1a48-4f9d-a75a-6c5214b0195d",
+        "instance_id": "dd745f4a-9333-417e-bb89-9c989c84c068",
+        "locationRef": "https://region-a.geo-1.objects.hpcloudsvc.com/v1/38728063898723/database_backups/8ff8a6f3-1a48-4f9d-a75a-6c5214b0195d.xbstream.gz.enc",
+        "name": "my_backup",
+        "parent_id": null,
+        "size": 1.16,
+        "status": "COMPLETED",
+        "updated": "2013-09-06T18:47:09"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/backups/{backup_id}
+</code>
+</pre>
+
+<h5 id="backup_create">4.5.8.3 Create a full backup for an instance</h5>
+
+<h5 id="post-backups">POST /backups</h5>
+
+<p>Creates a new, full backup of an existing instance. All databases within the instance are backed up.</p>
+
+<p>Backups are stored in your Object Storage account, and the location is available via locationRef.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "backup":
+    {
+        "description": null,
+        "instance": "d6338c9c-3cc8-4313-b98f-13cc0684cf15",
+        "name": "full-backup"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 ACCEPTED</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "backup": {
+        "instance_id": "d6338c9c-3cc8-4313-b98f-13cc0684cf15",
+        "status": "NEW",
+        "updated": "2014-06-21T21:27:15",
+        "locationRef": null,
+        "name": "full_backup",
+        "parent_id": null,
+        "created": "2014-06-21T21:27:15",
+        "size": null,
+        "id": "cccee609-8969-4747-bd55-0bb6b27a6917",
+        "description": null
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X POST -H "Content-Type: application/json" -H "X-Auth-Token: {Auth_Token}" -d '{"backup": {"description": null, "instance": "d6338c9c-3cc8-4313-b98f-13cc0684cf15", "name": "full-backup"}}' {BaseURI}/backups
+</code>
+</pre>
+
+<h5 id="backup_create_incremental">4.5.8.4 Create an incremental backup for an instance</h5>
+
+<h5 id="post-backups">POST /backups</h5>
+
+<p>Creates a new, incremental backup of an existing instance. The incremental backup will be created from the point in time specified by the parent backup.  All databases within the instance are backed up.</p>
+
+<p>Backups are stored in your Object Storage account, and the location is available via locationRef.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "backup": {
+        "instance": "95794609-31cf-4439-ab29-566710b53e75",
+        "name": "incremental_backup",
+        "parent_id": "cccee609-8969-4747-bd55-0bb6b27a6917"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>202 ACCEPTED</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "backup": {
+        "instance_id": "95794609-31cf-4439-ab29-566710b53e75",
+        "status": "NEW",
+        "updated": "2014-06-21T21:31:40",
+        "locationRef": null,
+        "name": "incremental_backup",
+        "parent_id": "cccee609-8969-4747-bd55-0bb6b27a6917",
+        "created": "2014-06-21T21:31:40",
+        "size": null,
+        "id": "85f0b573-7b8c-44a2-83b0-b13b2e730298",
+        "description": null
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X POST -H "Content-Type: application/json" -H "X-Auth-Token: {Auth_Token}" -d '{"backup": {"instance": "95794609-31cf-4439-ab29-566710b53e75", "name": "incremental_backup", "parent_id": "cccee609-8969-4747-bd55-0bb6b27a6917"}}' {BaseURI}/backups
+</code>
+</pre>
+
+<h5 id="backup_restore">4.5.8.5 Restore a backup to an instance</h5>
+
+<h5 id="post-instances">POST /instances</h5>
+
+<p>This operation asynchronously provisions a new database instance. This call
+requires the user to specify a flavor. The service then provisions the
+instance with the requested flavor and sets up a volume of the
+specified size, which is the storage for the database instance.</p>
+
+<p>Finally, this will restore a copy of the database based on the specified
+backup id.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "instance": {
+        "restorePoint": {
+            "backupRef": "85f0b573-7b8c-44a2-83b0-b13b2e730298"
+        },
+        "flavorRef": "1002",
+        "configuration": "40e0909a-0ca8-4864-952a-109edc886049",
+        "name": "restored_from_backup",
+        "datastore": {
+            "type": "ab9b396f-9095-436f-903d-e302ff1a52f9"
+        }
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>201 - Created</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "instance": {
+        "status": "BUILD",
+        "updated": "2014-06-21T21:40:19",
+        "name": "restored_from_backup",
+        "links": [
+            {
+                "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/instances/e3db804d-6727-46b7-aa68-6256ad970890",
+                "rel": "self"
+            },
+            {
+                "href": "https://region-a.geo-1.database.hpcloudsvc.com/instances/e3db804d-6727-46b7-aa68-6256ad970890",
+                "rel": "bookmark"
+            }
+        ],
+        "created": "2014-06-21T21:40:19",
+        "id": "e3db804d-6727-46b7-aa68-6256ad970890",
+        "flavor": {
+            "id": "1002",
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/flavors/1002",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/flavors/1002",
+                    "rel": "bookmark"
+                }
+            ]
+        },
+        "configuration": {
+            "id": "40e0909a-0ca8-4864-952a-109edc886049",
+            "links": [
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0/38728063898723/configurations/40e0909a-0ca8-4864-952a-109edc886049",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://region-a.geo-1.database.hpcloudsvc.com/configurations/40e0909a-0ca8-4864-952a-109edc886049",
+                    "rel": "bookmark"
+                }
+            ],
+            "name": "staging_config_group"
+        },
+        "datastore": {
+            "version": "5.5",
+            "type": "mysql"
+        }
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X POST -H "Content-Type: application/json" -H "X-Auth-Token: {Auth_Token}" -d '{"instance": {"restorePoint": {"backupRef": "85f0b573-7b8c-44a2-83b0-b13b2e730298"}, "flavorRef": "1002", "configuration": "40e0909a-0ca8-4864-952a-109edc886049", "name": "restored_from_backup", "datastore": {"type": "ab9b396f-9095-436f-903d-e302ff1a52f9"}}}' {BaseURI}/instances
+</code>
+</pre>
+
+<h5 id="backup_delete">4.5.8.6 Delete a backup</h5>
+
+<h5 id="delete-backupsbackup-id">DELETE /backups/{backup_id}</h5>
+
+<p>Deletes the backup specified by {backup_id}</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>204 - No Content</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>Empty Response Body</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/backups/{backup_id}
+</code>
+</pre>
+
+<h4 id="version_resource">4.5.9 Version Operations</h4>
+
+<h5 id="version_list">4.5.9.1 List all API versions</h5>
+
+<h5 id="get-">GET /</h5>
+
+<p>Returns a list of all API versions
+This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 or 204</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+   "versions": [
+   {
+      "id": "v1.0",
+      "status": "CURRENT",
+      "updated": "2012-09-25T00:00:00Z",
+      "links" : [
+        {
+          "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0",
+          "rel": "self"
+        }
+       ]
+   }]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}
+</code>
+</pre>
+
+<h5 id="version_get">4.5.9.2 Get a specific version</h5>
+
+<h5 id="get-version-id">GET /{version_id}</h5>
+
+<p>Get a specific version specified by <em>version_id</em></p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+   "version": {
+      "id": "v1.0",
+      "status": "CURRENT",
+      "updated": "2012-09-25T00:00:00Z",
+      "links" : [
+        {
+          "href": "https://region-a.geo-1.database.hpcloudsvc.com/v1.0",
+          "rel": "self"
+        }
+       ]
+   }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/{version_id}
+</code>
+</pre>
+
+<h4 id="ds_resource">4.5.10 Datastore Operations</h4>
+
+<p>Only GET operation is supported at this time. Datastore names, id, version name, version id cannot be modified or deleted.</p>
+
+<h5 id="ds_list">4.5.10.1 List all datastores</h5>
+
+<h5 id="get-datastores">GET /datastores</h5>
+
+<p>List all datastores, with the name and id shown for each datastore</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "datastores": [
+        {
+            "id": "ab02955a-2ae6-42fa-82bd-66f01b9a292c",
+            "links": [
+                {
+                    "href": "https://15.125.4.51:8779/v1.0/38355481723476/datastores/ab02955a-2ae6-42fa-82bd-66f01b9a292c",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://15.125.4.51:8779/datastores/ab02955a-2ae6-42fa-82bd-66f01b9a292c",
+                    "rel": "bookmark"
+                }
+            ],
+            "name": "mysql"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/datastores
+</code>
+</pre>
+
+<h5 id="ds_get">4.5.10.2 Get a specific datastore</h5>
+
+<h5 id="get-datastoresdatastore-id">GET /datastores/{datastore_id}</h5>
+
+<p>Returns a specific datastore speicified by {datastore_id}</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "datastore": {
+        "id": "ab02955a-2ae6-42fa-82bd-66f01b9a292c",
+        "links": [
+            {
+                "href": "https://15.125.4.51:8779/v1.0/38355481723476/datastores/ab02955a-2ae6-42fa-82bd-66f01b9a292c",
+                "rel": "self"
+            },
+            {
+                "href": "https://15.125.4.51:8779/datastores/ab02955a-2ae6-42fa-82bd-66f01b9a292c",
+                "rel": "bookmark"
+            }
+        ],
+        "name": "mysql"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/datastores/{datastore_id}
+</code>
+</pre>
+
+<h5 id="ds_version_list">4.5.10.3 List all version for a datastore</h5>
+
+<h5 id="get-datastoresdatastore-nameversions">GET /datastores/{datastore_name}/versions</h5>
+
+<p>List all versions for a specific datastores, specified by {datastore_name}</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "versions": [
+        {
+            "id": "b94005a7-52e2-4748-860c-3492c233f9a3",
+            "links": [
+                {
+                    "href": "https://15.125.4.51:8779/v1.0/38355481723476/datastores/versions/b94005a7-52e2-4748-860c-3492c233f9a3",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://15.125.4.51:8779/datastores/versions/b94005a7-52e2-4748-860c-3492c233f9a3",
+                    "rel": "bookmark"
+                }
+            ],
+            "name": "5.5"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/datastores/{datastore_name}/versions
+</code>
+</pre>
+
+<h5 id="ds_version_get">4.5.10.4 Get a specific version for a datastore</h5>
+
+<h5 id="get-datastoresdatastore-nameversionsversion-id">GET /datastores/{datastore_name}/versions/{version_id}</h5>
+
+<p>List a specific version for a specific datastores, specified by {datastore_name} and <em>version_id</em></p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>    {
+        "version": {
+            "id": "b94005a7-52e2-4748-860c-3492c233f9a3",
+            "links": [
+                {
+                    "href": "https://15.125.4.51:8779/v1.0/38355481723476/datastores/versions/b94005a7-52e2-4748-860c-3492c233f9a3",
+                    "rel": "self"
+                },
+                {
+                    "href": "https://15.125.4.51:8779/datastores/versions/b94005a7-52e2-4748-860c-3492c233f9a3",
+                    "rel": "bookmark"
+                }
+            ],
+            "name": "5.5"
+        }
+    }
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/datastores/{datastore_name}/versions/{version_id}
+</code>
+</pre>
+
+<h4 id="cg_resource">4.5.11 Configuration Operations</h4>
+
+<p>A configuration group is a collection of settings that can be saved and applied to one or more database instances.</p>
+
+<p>A configuration group consists or one or more configuration parameters, which represent options that can be applied to a datastore (the database running in an instance). For example, a configuration group could have a configuration parameter of <em>max_connections</em> set to 80, or could set the default time zone for the instance with the <em>default_time_zone</em> parameter.</p>
+
+<h5 id="cg_list">4.5.11.1 List all configuration groups</h5>
+
+<h5 id="get-configurations">GET /configurations</h5>
+
+<p>List all configuration groups</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "configurations": [
+        {
+            "description": "sample configuration group",
+            "id": "62303a89-1ad3-493e-9664-5590cd0bd72c",
+            "datastore_version_id": "b94005a7-52e2-4748-860c-3492c233f9a3",
+            "name": "my_config_group_1"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/configurations
+</code>
+</pre>
+
+<h5 id="cg_create">4.5.11.2 Create configuration group</h5>
+
+<h5 id="post-configurations">POST /configurations</h5>
+
+<p>Create a new configuration group</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "configuration": {
+        "datastore": {
+            "type": "a00000a0-00a0-0a00-00a0-000a000000aa", 
+            "version": "b00000b0-00b0-0b00-00b0-000b000000bb"
+        }, 
+        "description": "sample description", 
+        "name": "sample-configuration-name", 
+        "values": {
+            "max_connections": 50, 
+            "connect_timeout": 600
+        }
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>201 - CREATED</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "configuration": {
+        "datastore_version_id": "b00000b0-00b0-0b00-00b0-000b000000bb", 
+        "description": "sample description", 
+        "id": "b01a233a-d17e-4603-ae3b-eb19660dbd2e", 
+        "name": "sample-configuration-name", 
+        "values": {
+            "max_connections": 50, 
+            "connect_timeout": 600
+        }
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/configurations -d '{"configuration": {"datastore": {"type": "ab9b396f-9095-436f-903d-e302ff1a52f9"}, "values": {"connect_timeout": 600, "max_connections": 20}, "name": "sample-configuration"}}'
+</code>
+</pre>
+
+<h5 id="cg_get">4.5.11.3 Get details for a configuration group</h5>
+
+<h5 id="get-configurationsconfigid">GET /configurations/{configId}</h5>
+
+<p>Get details for a specific configuration group.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "configuration": {
+        "description": null,
+        "values": {
+            "connect_timeout": 600,
+            "max_connections": 20
+        },
+        "id": "40e0909a-0ca8-4864-952a-109edc886049",
+        "datastore_version_id": "c77e3e21-29c5-43f8-9abd-caa438ea252b",
+        "name": "sample-configuration"
+    }
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/configurations/{configId}
+</code>
+</pre>
+
+<h5 id="cg_patch">4.5.11.4 Update some parameters within a configuration group</h5>
+
+<h5 id="patch-configurationsconfigid">PATCH /configurations/{configId}</h5>
+
+<p>Updates ome of the parameters in a configuration group.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "configuration": {
+        "values": {
+            "max_connections": 1024
+        }
+    }
+}
+</code>
+</pre>
+
+<p><strong>Success Response</strong>
+200 - OK</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>None.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X PATCH -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/configurations/{configId} -d '{"configuration": {"values": {"max_connections": 1024}}}'
+</code>
+</pre>
+
+<h5 id="cg_put">4.5.11.5 Replace parameters within a configuration group</h5>
+
+<h5 id="put-configurationsconfigid">PUT /configurations/{configId}</h5>
+
+<p>Replaces all parameters within a configuration group.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "configuration": {
+        "values": {
+            "innodb_log_buffer_size": 10485760,
+            "max_connections": 90
+        },
+        "name": "new_name_config_group"
+    }
+}
+</code>
+</pre>
+
+<p><strong>Success Response</strong>
+202 - ACCEPTED</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>None.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/configurations/{configId} -d '{"configuration": {"values": {"innodb_log_buffer_size": 10485760, "max_connections": 90}, "name": "new_name_config_group"}}'
+</code>
+</pre>
+
+<h5 id="cg_delete">4.5.11.6 Delete a configuration group</h5>
+
+<h5 id="delete-configurationsconfigid">DELETE /configurations/{configId}</h5>
+
+<p>Delete a configuration group, that is not currently attached to running database instances.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request data required.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>202 - ACCEPTED</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<p>None.</p>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/configurations/{configId}
+</code>
+</pre>
+
+<h5 id="cg_associated">4.5.11.7 List instances associated with a configuration group</h5>
+
+<h5 id="delete-configurationsconfigidinstances">DELETE /configurations/{configId}/instances</h5>
+
+<p>List all instances that are associated with a specific configuration group.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>No request data required.</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "instances": [
+        {
+            "id": "7810b896-5fe8-406c-8676-e0a7941ec859",
+            "name": "instance-123"
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/configurations/{configId}/instances
+</code>
+</pre>
+
+<h4 id="cp_resource">4.5.12 Configuration Parameter Operations</h4>
+
+<p>Configuration Parameters are settings that can be changed for a datastore.</p>
+
+<p>Configuration parameters should be used to make up the values within Configuration, which can be associated with one or more instances.</p>
+
+<h5 id="cp_list">4.5.12.1 List all configuration parameters</h5>
+
+<h5 id="get-datastoresdatastoreidversionsversionidparameters">GET /datastores/{datastoreId}/versions/{versionId}/parameters</h5>
+
+<p>List all parameters that can be configured for a given datastore version.  These parameters can be toggled within a Configuration resource and attached to an instance.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "configuration-parameters": [
+        {
+            "max": 1,
+            "min": 0,
+            "type": "integer",
+            "name": "autocommit",
+            "restart_required": false
+        },
+        {
+            "max": 4294967296,
+            "min": 0,
+            "type": "integer",
+            "name": "key_buffer_size",
+            "restart_required": false
+        },
+        {
+            "max": 65535,
+            "min": 1,
+            "type": "integer",
+            "name": "connect_timeout",
+            "restart_required": false
+        },
+        {
+            "max": 4294967296,
+            "min": 0,
+            "type": "integer",
+            "name": "join_buffer_size",
+            "restart_required": false
+        },
+        {
+            "max": 18446744073709548000,
+            "min": 32768,
+            "type": "integer",
+            "name": "sort_buffer_size",
+            "restart_required": false
+        },
+        {
+            "max": 68719476736,
+            "min": 0,
+            "type": "integer",
+            "name": "innodb_buffer_pool_size",
+            "restart_required": true
+        },
+        {
+            "max": 2,
+            "min": 0,
+            "type": "integer",
+            "name": "innodb_flush_log_at_trx_commit",
+            "restart_required": false
+        },
+        {
+            "max": 4294967296,
+            "min": 1048576,
+            "type": "integer",
+            "name": "innodb_log_buffer_size",
+            "restart_required": true
+        },
+        {
+            "max": 4294967296,
+            "min": 10,
+            "type": "integer",
+            "name": "innodb_open_files",
+            "restart_required": true
+        },
+        {
+            "max": 1000,
+            "min": 0,
+            "type": "integer",
+            "name": "innodb_thread_concurrency",
+            "restart_required": false
+        },
+        {
+            "max": 65535,
+            "min": 1,
+            "type": "integer",
+            "name": "auto_increment_increment",
+            "restart_required": false
+        },
+        {
+            "max": 65535,
+            "min": 1,
+            "type": "integer",
+            "name": "auto_increment_offset",
+            "restart_required": false
+        },
+        {
+            "max": 18446744073709548000,
+            "min": 0,
+            "type": "integer",
+            "name": "bulk_insert_buffer_size",
+            "restart_required": false
+        },
+        {
+            "max": 65535,
+            "min": 1,
+            "type": "integer",
+            "name": "expire_logs_days",
+            "restart_required": false
+        },
+        {
+            "max": 65535,
+            "min": 1,
+            "type": "integer",
+            "name": "interactive_timeout",
+            "restart_required": false
+        },
+        {
+            "max": 1073741824,
+            "min": 1024,
+            "type": "integer",
+            "name": "max_allowed_packet",
+            "restart_required": false
+        },
+        {
+            "max": 18446744073709548000,
+            "min": 1,
+            "type": "integer",
+            "name": "max_connect_errors",
+            "restart_required": false
+        },
+        {
+            "max": 65535,
+            "min": 1,
+            "type": "integer",
+            "name": "max_connections",
+            "restart_required": false
+        },
+        {
+            "max": 18446744073709548000,
+            "min": 4,
+            "type": "integer",
+            "name": "myisam_sort_buffer_size",
+            "restart_required": false
+        },
+        {
+            "max": 100000,
+            "min": 1,
+            "type": "integer",
+            "name": "max_user_connections",
+            "restart_required": false
+        },
+        {
+            "max": 31536000,
+            "min": 1,
+            "type": "integer",
+            "name": "wait_timeout",
+            "restart_required": false
+        }
+    ]
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/datastores/{datastoreId}/versions/{versionId}/parameters
+</code>
+</pre>
+
+<h5 id="cp_get">4.5.12.1 Get details for a configuration parameter</h5>
+
+<h5 id="get-datastoresdatastoreidversionsversionidparametersparameterid">GET /datastores/{datastoreId}/versions/{versionId}/parameters/{parameterId}</h5>
+
+<p>Get details about configuration parameter</p>
+
+<p><strong>Note:</strong> any configuration parameter with <em>restart_required=true</em> will not be applied until a restart of the instance is performed.</p>
+
+<p>
+  <strong>Request Data</strong>
+</p>
+
+<p>This call does not require a request body</p>
+
+<p>
+  <strong>Success Response</strong>
+</p>
+
+<p>
+  <strong>Status Code</strong>
+</p>
+
+<p>200 - OK</p>
+
+<p>
+  <strong>Response Data</strong>
+</p>
+
+<pre>
+  <code>{
+    "max": 65535,
+    "min": 1,
+    "type": "integer",
+    "name": "auto_increment_increment",
+    "restart_required": false
+}
+</code>
+</pre>
+
+<p>
+  <strong>Curl Example</strong>
+</p>
+
+<pre>
+  <code>curl -i -k -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'X-Auth-Token: {Auth_Token}' {BaseURI}/datastores/{datastoreId}/versions/{versionId}/parameters/auto_increment_increment
+</code>
+</pre>
+
+<hr />
+	</article>
+</div>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+	</div> <!-- #wrapper -->
+
+		
+  <footer class="footer">
+    <div class="container_16">
+    	<div class="wrapper grid_16">
+		<ul class="footer-social">
+			<li class="twitter"><a href="../../../../external.html?link=https://twitter.com/hphelioncloud"></a></li>
+			<li class="youtube"><a href="../../../../external.html?link=http://www.youtube.com/hpcloud"></a></li>
+			<li class="rss"><a href="../../../../external.html?link=http://h30499.www3.hp.com/t5/Grounded-in-the-Cloud/bg-p/sws-661#.U7qe27Hn-M8"></a></li>
+			<li class="facebook"><a href="../../../../external.html?link=https://www.facebook.com/HPHelion"></a></li>
+			<li class="linkedin stretch"><a href="../../../../external.html?link=http://www.linkedin.com/company/3510998"></a></li>
+		</ul>
+		<ul class="contact-info hide-320 show-768">
+			<li>In the U.S.<br />1-855-61CLOUD</li>
+			<li>Worldwide<br />+1678-745-9010</li>
+			<li class="col-3">Online Support<br /><a href="mailto:support@hpcloud.com">Email</a> or <span class="link" onclick="jQuery('#hpcloud-chat-button a').click();">Chat with us</span></li>
+		</ul>
+		<div class="copyright">	
+			<p>The OpenStack&reg; Word Mark and OpenStack Logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+			</p><br />
+			<p>&copy; 2014 Hewlett-Packard Development Company, L.P.<br /><a href="../../../../external.html?link=http://www8.hp.com/us/en/privacy/privacy.html" target="_blank">Privacy</a> | <a href="../../../../external.html?link=http://www8.hp.com/us/en/privacy/terms-of-use.html" target="_blank">Terms of use</a> | <a href="../../../../external.html?link=http://www.hpcloud.com/legal-documents" target="_blank">Legal Documents</a></p>
+		</div>
+	</div>
+	</div>
+</footer>
+
+<!-- Load JS -->
+<!--[if lt IE 9]>
+<script src="http://www.hpcloud.com/sites/all/themes/hpcloud/js/svgeezy.js"></script>
+-->
+	<script src="../../../../ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../../js/jquery-1.8.2f.min.html"><\/script>')</script>
+
+  <script src="../../../js/combined.js"></script>
+
+<div id="ClickTaleDiv" style="display: none;"></div>    <div class="region region-page-bottom">
+    <div id="lpButtonDiv"></div>  </div><!-- /.region -->
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_zUhl2jDXgUKVBRVBUeMbuSby0YSCiXHWIAYNbn9ecwc.js"></script>
+<script>ClickTaleSSL=1; // This is intentinally global. 
+			if(typeof ClickTale=='function') 
+				ClickTale(24406,0.05,"www02");</script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_gPMh2zNJqEE6EkEOKNeOTAet3kwTiahCt35rBAtwqq4.js"></script>
+<script>
+    var _elqQ = _elqQ || [];
+    _elqQ.push(['elqSetSiteId', '521454204']);
+    _elqQ.push(['elqTrackPageView']);
+    
+    (function () {
+        function async_load() {
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+            s.src = '../../../sites/all/modules/custom/custom_eloqua/elqNow/elqCfg.min.html';
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        }
+        if (window.addEventListener) window.addEventListener('DOMContentLoaded', async_load, false);
+        else if (window.attachEvent) window.attachEvent('onload', async_load); 
+    })();
+    </script>
+<script src="../../../../www.hpcloud.com/sites/default/files/js/js_lNHbXKW-sJN9oM4eoaw-q0yTco3mOORibOeNn9yzM00.html"></script>
+   <script>
+        //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+        function styleRestCmds() {
+            $("h5:contains('GET')").addClass('rest_cmd cmd_get');
+            $("h5:contains('POST')").addClass('rest_cmd cmd_post');
+            $("h5:contains('FormPOST')").removeClass('rest_cmd cmd_post');
+            $("h5:contains('PUT')").addClass('rest_cmd cmd_put');
+            $("h5:contains('COPY')").addClass('rest_cmd cmd_copy');
+            $("h5:contains('PATCH')").addClass('rest_cmd cmd_patch');
+            $("h5:contains('HEAD')").addClass('rest_cmd cmd_head');
+            $("h5:contains('DELETE')").addClass('rest_cmd cmd_delete');
+        }
+
+        $(function() {
+            //Calls the tocify method on your HTML div.
+            $("#toc").tocify({
+                'selectors': 'h2,h3,h4',
+                'showAndHideOnScroll': false,
+                'hideEffect': 'slideUp',
+                'scrollTo': 55    // Amount of space between top of page and selected content
+              }
+            );
+            // Style the REST commands
+            styleRestCmds();
+        });
+    </script>
+
+</body>
+
+<!-- Mirrored from docs.hpcloud.com/publiccloud/api/dbaas/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Feb 2015 15:02:14 GMT -->
+</html>
