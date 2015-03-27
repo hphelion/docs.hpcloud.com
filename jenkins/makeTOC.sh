@@ -10,7 +10,7 @@ echo "layout: default" >> master-toc.md
 echo "title: \"Master TOC\"" >> master-toc.md
 echo "permalink: /master-toc/" >> master-toc.md
 echo "---" >> master-toc.md
-echo "<!--$i-->" >> master-toc.md
+echo "<!--$1-->" >> master-toc.md
 echo "#Master TOC#" >> master-toc.md
 echo "Below is a list of all the pages on docs.hpcloud.com"  >> master-toc.md
 echo " " >> master-toc.md
