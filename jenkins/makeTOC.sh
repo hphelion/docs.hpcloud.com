@@ -6,7 +6,7 @@ rm master-toc.md > /dev/null 2>&1
 rm master-toc.tmp > /dev/null 2>&1
  
 echo "---" > master-toc.md
-echo "layout: defaul"t >> master-toc.md
+echo "layout: default" >> master-toc.md
 echo "title: \"Master TOC\"" >> master-toc.md
 echo "permalink: /master-toc/" >> master-toc.md
 echo "---" >> master-toc.md
@@ -16,7 +16,8 @@ echo "This file is rebuilt each time docs-emergency-build is run."  >> master-to
 echo "The file is not copied to the master branch and not pushed to production." >> master-toc.md
 echo " " >> master-toc.md
 
-echo "<script>
+echo "
+<script>
 (function() {
 var cx = '016914425578488494023:saefz1ifgsc';
 var gcse = document.createElement('script');
@@ -28,7 +29,7 @@ var s = document.getElementsByTagName('script')[0];
  s.parentNode.insertBefore(gcse, s);
 })();
 </script>
-<gcse:search></gcse:search>" >> master-toc.md 
+<gcse:search></gcse:search> " >> master-toc.md 
  
 for i in `find . -path ./content/documentation/redirects -prune -o -name "*.md" -print`
  
