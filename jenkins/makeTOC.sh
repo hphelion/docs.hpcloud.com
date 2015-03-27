@@ -17,6 +17,7 @@ echo "The file is not copied to the master branch and not pushed to production."
 echo " " >> master-toc.md
 
 echo "
+<div>
 <script>
 (function() {
 var cx = '016914425578488494023:saefz1ifgsc';
@@ -29,7 +30,8 @@ var s = document.getElementsByTagName('script')[0];
  s.parentNode.insertBefore(gcse, s);
 })();
 </script>
-<gcse:search></gcse:search> " >> master-toc.md 
+<gcse:search></gcse:search> 
+</div>" >> master-toc.md 
  
 for i in `find . -path ./content/documentation/redirects -prune -o -name "*.md" -print`
  
@@ -47,4 +49,4 @@ fi
 
 done
 
-sort -t "(" -k 2 master-toc.tmp | grep -v "\[\]\(\)"  | grep -v "error.html" | grep -v "1.0"  | grep -v "1.01"  >> master-toc.md
+sort -t "(" -k 2 master-toc.tmp | grep -v "\[\]\(\)"  | grep -v "error.html"   >> master-toc.md
