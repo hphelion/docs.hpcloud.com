@@ -13,7 +13,7 @@ BRANCH="${1}"
 mkdir -p content
 cd content
 rm -rf documentation
-git clone git@git.hpcloud.net:DevExDocs/documentation.git
+git clone git@github.com:hphelion/documentation.git
 cd documentation
 git checkout "${BRANCH}"
 git pull origin "${BRANCH}"
