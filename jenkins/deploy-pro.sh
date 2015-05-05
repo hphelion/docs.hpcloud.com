@@ -14,7 +14,7 @@ git pull origin master
 
 echo '=content============================================================='
 
-./jenkins/documentation.sh feb406e1ef2572506213380bdbb7671847c97979
+./jenkins/documentation.sh master_snapshot
 ./jenkins/api.sh 
 
 echo '=build==============================================================='
