@@ -34,6 +34,18 @@ ${LOGIN}
 ${PASSWORD}
 !
 
+git remote set-url origin https://helion-jenkins:D0cuments!@github.com/hphelion/docs.hpcloud.com.git
+git tag -a "$BUILD_TAG" -m "This tag was created by a jenkins build to indicate the fileset used for that build."
+git push --tags
+
+cd content/documentation/
+pwd
+git remote set-url origin https://helion-jenkins:D0cuments!@github.com/hphelion/documentation.git
+git tag -a "$BUILD_TAG" -m "This tag was created by a jenkins build to indicate the fileset used for that build."
+
+git push --tags
+
+
 echo '====================================================================='
 echo 'http://docs.qa1-stackato.cx.hpcloud.net/'
 echo '====================================================================='
