@@ -38,6 +38,7 @@ echo test
 pwd
 cd content/documentation/
 pwd
+git remote set-url origin https://helion-jenkins:D0cuments!@github.com/hphelion/documentation.git
 git tag -a "TEST" -m "testmessage"
 git push
 
