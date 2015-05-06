@@ -34,10 +34,11 @@ ${LOGIN}
 ${PASSWORD}
 !
 
-
-
+echo test
+pwd
 cd content/documentation/
-git tag -a TEST -m "Test Message"
+pwd
+git tag -a "TEST" -m "testmessage"
 git push
 
 
