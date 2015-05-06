@@ -36,7 +36,9 @@ ${PASSWORD}
 
 
 
-
+cd content/documentation/
+git tag -a TEST -m "Test Message"
+git push
 
 
 echo '====================================================================='
