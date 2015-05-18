@@ -24,7 +24,7 @@ for i in `find . -path ./content/documentation/redirects -prune -o -name "*.md" 
 do
 
 
-	if [[ -z $(head $i | grep "published: false") ]];
+	if [[ -z $(head $i | grep "published: *false") ]];
 	then		
 if [[ -z $(grep  redirect $i) ]]
 then
