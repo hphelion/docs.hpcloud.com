@@ -24,11 +24,11 @@ for i in `find . -path ./content/documentation/redirects -prune -o -name "*.md" 
 do
 
 
-	if [[ -z $(head $i | grep "^published.*false") ]];
+	if [[ -z $(head -n30 $i | grep "^published.*false") ]];
 	then		
 if [[ -z $(grep  redirect $i) ]]
 then
-echo "* ["`head -10 $i | grep title | sed 's/title: //'| sed 's/"//g'`"]("`head $i | grep permalink | sed 's/permalink: //'`")" >> master-toc.tmp
+echo "* ["`head $i | grep title | sed 's/title: //'| sed 's/"//g'`"]("`head $i | grep permalink | sed 's/permalink: //'`")" >> master-toc.tmp
 fi
 	fi
 
