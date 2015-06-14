@@ -14,7 +14,7 @@ mkdir -p content
 cd content
 rm -rf documentation
 #git clone git@github.com:hphelion/documentation.git
-git clone https://github.com/hphelion/documentation.orig.git
+git clone https://github.com/hphelion/documentation.orig.git documentation
 cd documentation
 git checkout "${BRANCH}"
 git pull origin "${BRANCH}"
