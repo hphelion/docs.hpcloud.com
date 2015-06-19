@@ -13,6 +13,7 @@ BRANCH="${1}"
 mkdir -p content
 cd content
 rm -rf documentation || true
+rm -rf documentation.orig || true
 #git clone git@github.com:hphelion/documentation.git
 git clone https://github.com/hphelion/documentation.orig.git documentation
 cd documentation
